@@ -141,9 +141,11 @@ angular
                             submenu: [
                                 {
                                     title: 'Employee Admission',
+                                    link: 'restricted.employeemanagement'
                                 },
                                 {
                                     title: 'Employee Details',
+                                    link: 'restricted.employeemanagement'
                                 },
                                 {
                                     title: 'Employee Subject Association',
@@ -338,13 +340,13 @@ angular
                     id: 4,
                     title: 'Student',
                     icon: '&#xE85C;',
-                    // link: 'restricted.pages.scrum_board'
                     submenu:[
                         {
                             title:'Student Details'
                         },
                         {
-                            title:'Student Admission'
+                            title:'Student Admission',
+                            link: 'restricted.student'
                         }
                     ]
                 },

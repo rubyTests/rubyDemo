@@ -1616,5 +1616,59 @@ altairApp
                         pageTitle: 'Blog Article'
                     }
                 })
+
+
+                // Added by Vijayaraj 08-03-17
+
+                .state("restricted.employeemanagement", {
+                    url: "/employeemanagement",
+                    templateUrl: 'app/components/employeemanagement/employee_admission.html',
+                    controller: 'empAdmCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'lazy_wizard',
+                                'app/components/employeemanagement/empAdmissionCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Employee Admission'
+                    }
+                })
+
+
+                //  .state("restricted.kendoui", {
+                //     url: "/kendoui",
+                //     template: '<div ui-view autoscroll="false"/>',
+                //     abstract: true,
+                //     resolve: {
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load('lazy_KendoUI');
+                //         }]
+                //     }
+                // })
+
+                .state("restricted.student", {
+                    url: "/student",
+                    templateUrl: 'app/components/student/student_admisson.html',
+                    controller: 'studentadmisionCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'lazy_wizard',
+                                'lazy_KendoUI',
+                                'assets/js/custom/uikit_fileinput.min.js',
+                                'app/components/student/studentadmisionCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Student Admission'
+                    }
+                })
+
         }
     ]);
