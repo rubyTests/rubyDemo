@@ -1657,5 +1657,95 @@ altairApp
                     }
                 })
 
+                //Added by gnanamani
+                .state("restricted.course", {
+                    url: "/course",
+                    templateUrl: 'app/components/academics/courseBatch/course.html',
+                    controller: 'courseCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/courseBatch/courseCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Course'
+                    }
+                })
+                 .state("restricted.courseBatches", {
+                    url: "/courseBatches",
+                    templateUrl: 'app/components/academics/courseBatch/courseBatch.html',
+                    controller: 'courseBatchCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/courseBatch/courseBatchCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'CourseBatches'
+                    }
+                })
+                .state("restricted.subjects", {
+                    url: "/subjects",
+                    templateUrl: 'app/components/academics/courseBatch/subject.html',
+                    controller: 'subjectCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/courseBatch/subjectCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Subjects'
+                    }
+                })
+                .state("restricted.syllabus", {
+                    url: "/syllabus",
+                    templateUrl: 'app/components/academics/courseBatch/syllabus.html',
+                    controller: 'syllabusCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/courseBatch/syllabusCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Syllabus'
+                    }
+                })
+                .state("restricted.department", {
+                    url: "/department",
+                    templateUrl: 'app/components/academics/courseBatch/department.html',
+                    controller: 'departmentCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'xeditable',
+                                'smart-table',
+                                'app/components/forms/file_inputController.min.js',
+                                'app/components/academics/courseBatch/departmentCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Department'
+                    }
+                })
+
         }
     ]);
