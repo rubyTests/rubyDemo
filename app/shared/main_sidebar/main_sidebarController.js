@@ -161,7 +161,24 @@ angular
                     // link: 'restricted.pages.invoices.list'
                     submenu: [
                         {
-                            title: 'Manage Subject',
+                            title: 'Add Department',
+                            link: 'restricted.department'
+                        },
+                        {
+                            title: 'Add Course',
+                            link: 'restricted.course'
+                        },
+                        {
+                            title: 'Add Batch',
+                            link: 'restricted.courseBatches'
+                        },
+                        {
+                            title: 'Add Subject',
+                            link: 'restricted.subjects'
+                        },
+                        {
+                            title: 'Add Syllabus',
+                            link: 'restricted.syllabus'
                         },
                         {
                             title: 'Attendance',
@@ -204,9 +221,11 @@ angular
                             submenu: [
                                 {
                                     title: 'Course',
+                                    //link: 'restricted.course'
                                 },
                                 {
                                     title: 'Batches',
+                                    //link: 'restricted.courseBatches'
                                 },
                                 {
                                     title: 'Calendar',
