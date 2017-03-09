@@ -1,0 +1,113 @@
+<style type="text/css">
+    .selectize-control.single {
+        margin-top: 15px;
+    }
+</style>
+<div id="page_content" ng-controller="courseCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Course Details</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}">
+                        <i class="uk-icon-plus"></i>  Add Course
+                        </button>
+                    </div>
+                    <thead>
+                        <!-- <tr>
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}">
+                         <i class="uk-icon-plus"></i>  Add Course
+                        </button>
+                        </tr> -->
+                        <tr>
+                            <th>Name</th>
+                            <th>Min Attendance Percentage</th>
+                            <th>Attendance Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Min Attendance Percentage</th>
+                            <th>Attendance Type</th>
+                            
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{row[0]}}</td>
+                            <td>{{row[1]}}</td>
+                            <td>{{row[2]}}</td>
+                            <td class="uk-text-center">
+                                <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-width-medium-1-3">
+    <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h2 class="heading_a">Courses</h2>
+          <div class="uk-overflow-container">
+           
+             <div class="md-card-content">
+                <form class=""><p></p>
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label>Course Name</label>
+                        <input type="text" ng-model="course_name" class="md-input" required md-input>
+                      </div>
+                    </div>
+                  </div>
+                  <p></p>
+                <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label>Min Attendance Percentage</label>
+                        <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
+                      </div>
+                    </div>
+                </div>
+                <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <input type="text" config="selectize_attdncType_config" options="selectize_attdncType_options" ng-model="selectize_attdncType" name="selectize_attdncType" selectize/>
+                      </div>
+                    </div>
+                </div>
+                <!--  <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="selectize_deptId" name="selectize_deptId" selectize/>
+                      </div>
+                    </div>
+                </div>
+                 <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <input type="text" config="selectize_calenId_config" options="selectize_calenId_options" ng-model="selectize_calenId" name="selectize_calenId" selectize/>
+                      </div>
+                    </div>
+                </div> -->
+                </form>
+            </div>
+          </div>
+          <div class="uk-modal-footer uk-text-center">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
+             <!--  <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Close</button> -->
+          </div>
+        
+
+        </div>
+    </div>
+    </div>
+</div>
