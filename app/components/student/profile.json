@@ -1,0 +1,96 @@
+[
+		{
+			"id":1,
+			"firstname":"Vijay",
+			"lastname":"Raj",
+			"admno":"ST001",
+			"website":"ttp://campusenter.com/",
+			"dob":"03-06-2017",
+			"gender":"Male",
+			"doa":"",
+			"photo1_path":"http://usrimgs.broadjam.com/171/171165/171165_263220.png",
+			"photo2_path":"http://campusenter.com/img/photo2.png",
+			"email":"vijayaraj@gmail.com",
+			"email_verify":"N",
+			"phone1":"+965 256 3658 237",
+			"phone1_verify":"N",
+			"phone2":"+971 056 8568 421",
+			"phone2_verify":"N",
+			"facebook":"https://www.facebook.com/profile.php?id=100004597758718",
+			"google":"https://mail.google.com/mail/u/0/#inbox/15aa8643224fe444",
+			"linkedin":"https://www.linkedin.com/feed/",
+			"bloodgroup":"O+ve",
+			"Education_id":1,
+			"Location_id":1,
+			"ProfileExtra_id":1,
+			"Role_id":1,
+			"Dept":"Computer Sceince & Enginerring",
+			"course":"Bachelor of Computer Application",
+			"batch":"BCA - A",
+			"religion":"Hinduism",
+			"nationality":"India",
+			"address":"No:128, Louis Pat Street,",
+			"city":"Newyork",
+			"state":"Cambridge",
+			"pincode":"605005",
+			"country":"USA",
+			"parent_name":"Vijayaraj",
+			"income":"1000",
+			"Occupation":"Farmer",
+			"relation":"Father",
+			"parentCount":[
+	            {
+	                "name": "Personal & Contact Details",
+	                "members": "172"
+	            },
+	            {
+	                "name": "Personal & Contact Details",
+	                "members": "113"
+	            }],
+			"sibling":[
+				{
+					"name": "Brother",
+	                "members": "172"
+				},
+				{
+					"name": "Sister",
+	                "members": "172"
+				}
+			],
+
+			"alerts": [
+            {
+                "title": "Hic expedita eaque.",
+                "content": "Nemo nemo voluptatem officia voluptatum minus.",
+                "type": "warning"
+            },
+            {
+                "title": "Voluptatibus sed eveniet.",
+                "content": "Tempora magnam aut ea.",
+                "type": "success"
+            },
+            {
+                "title": "Perferendis voluptatem explicabo.",
+                "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                "type": "danger"
+            }
+        ],
+        "friends": [
+            {
+                "name": "Jarred Johnson",
+                "status": "Odio quidem consequatur iste ad dolorem.",
+                "avatar": "assets/img/avatars/avatar_05_tn.png"
+            },
+            {
+                "name": "Horace Gislason",
+                "status": "Ea ipsum reiciendis.",
+                "avatar": "assets/img/avatars/avatar_03_tn.png"
+            },
+            {
+                "name": "Verda Mann",
+                "status": "Impedit cum dicta vel ipsa.",
+                "avatar": "assets/img/avatars/avatar_08_tn.png"
+            }
+        ]
+		}
+	]

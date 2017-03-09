@@ -365,7 +365,8 @@ angular
                         },
                         {
                             title:'Student Admission',
-                            link: 'restricted.student'
+                            link: 'restricted.student.admission'
+
                         }
                     ]
                 },

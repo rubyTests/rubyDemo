@@ -1640,6 +1640,11 @@ altairApp
                 })
                 .state("restricted.student", {
                     url: "/student",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+                .state("restricted.student.admission", {
+                    url: "/admission",
                     templateUrl: 'app/components/student/student_admisson.html',
                     controller: 'studentadmisionCtrl',
                     resolve: {
@@ -1656,7 +1661,27 @@ altairApp
                         pageTitle: 'Student Admission'
                     }
                 })
-
+                .state("restricted.student.student_profile", {
+                    url: "/student_profile",
+                    templateUrl: 'app/components/student/student_profile.html',
+                    controller: 'studentprofileCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/student/studentprofileCtrl.js'
+                            ]);
+                        }],
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Student Profile'
+                    }
+                })
                 //Added by gnanamani
                 .state("restricted.course", {
                     url: "/course",
