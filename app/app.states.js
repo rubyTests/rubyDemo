@@ -1638,19 +1638,6 @@ altairApp
                         pageTitle: 'Employee Admission'
                     }
                 })
-
-
-                //  .state("restricted.kendoui", {
-                //     url: "/kendoui",
-                //     template: '<div ui-view autoscroll="false"/>',
-                //     abstract: true,
-                //     resolve: {
-                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                //             return $ocLazyLoad.load('lazy_KendoUI');
-                //         }]
-                //     }
-                // })
-
                 .state("restricted.student", {
                     url: "/student",
                     templateUrl: 'app/components/student/student_admisson.html',
@@ -1660,7 +1647,6 @@ altairApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'lazy_KendoUI',
                                 'assets/js/custom/uikit_fileinput.min.js',
                                 'app/components/student/studentadmisionCtrl.js'
                             ], {serie:true});
