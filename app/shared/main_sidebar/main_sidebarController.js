@@ -204,24 +204,17 @@ angular
                     // link: 'restricted.pages.invoices.list'
                     submenu: [
                         {
-                            title: 'Add Department',
-                            link: 'restricted.department'
-                        },
-                        {
-                            title: 'Add Course',
-                            link: 'restricted.course'
-                        },
-                        {
-                            title: 'Add Batch',
-                            link: 'restricted.courseBatches'
-                        },
-                        {
-                            title: 'Add Subject',
-                            link: 'restricted.subjects'
-                        },
-                        {
-                            title: 'Add Syllabus',
-                            link: 'restricted.syllabus'
+                            title: 'Manage Subjects & Syllabus',
+                            submenu: [
+                                {
+                                    title: 'Add Subject',
+                                    link: 'restricted.subjects'
+                                },
+                                {
+                                    title: 'Add Syllabus',
+                                    link: 'restricted.syllabus'
+                                }
+                            ]
                         },
                         {
                             title: 'Attendance',
@@ -263,12 +256,16 @@ angular
                             title: 'Manage Course & Batch',
                             submenu: [
                                 {
-                                    title: 'Course',
-                                    //link: 'restricted.course'
+                                    title: 'Add Department',
+                                    link: 'restricted.department'
                                 },
                                 {
-                                    title: 'Batches',
-                                    //link: 'restricted.courseBatches'
+                                    title: 'Add Course',
+                                    link: 'restricted.course'
+                                },
+                                {
+                                    title: 'Add Batch',
+                                    link: 'restricted.courseBatches'
                                 },
                                 {
                                     title: 'Calendar',
