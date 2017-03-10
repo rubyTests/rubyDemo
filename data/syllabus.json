@@ -1,0 +1,1256 @@
+ [
+	
+	{
+		"id": "1",
+		"syllabus_name": "Eng-Chapter-1",
+		"Description": " Pre-writing Strokes",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "2",
+		"syllabus_name": "Eng-Chapter-2",
+		"Description": " Capital letters (A-Z)",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "3",
+		"syllabus_name": "Eng-Chapter-3",
+		"Description": "  Small letters (a-z)",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "4",
+		"syllabus_name": "Eng-Chapter-4",
+		"Description": " Opposites (Differentiate between gender and pairing)",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "5",
+		"syllabus_name": "Hindi-Chapter-1",
+		"Description": " Hindi Phonetics",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "6",
+		"syllabus_name": "Hindi-Chapter-2",
+		"Description": " Hindi Alphabet",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "7",
+		"syllabus_name": "Hindi-Chapter-3",
+		"Description": " Read-Write-Speak",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "8",
+		"syllabus_name": "Maths-Chapter-1",
+		"Description": "Name the Shapes",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "9",
+		"syllabus_name": "Maths-Chapter-2",
+		"Description": " Learn to count",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "10",
+		"syllabus_name": "Maths-Chapter-3",
+		"Description": " Arranging Numbers",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "11",
+		"syllabus_name": "Draw-Chapter-1",
+		"Description": " Identifying Colors",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "12",
+		"syllabus_name": "Draw-Chapter-2",
+		"Description": " Learn to draw Shapes",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "13",
+		"syllabus_name": "Draw-Chapter-3",
+		"Description": "Learn how to Colors",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "14",
+		"syllabus_name": "Rhyme-Chapter-1",
+		"Description": " Baa-Baa -Black Sheeps",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "15",
+		"syllabus_name": "Rhyme-Chapter-2",
+		"Description": " Chubby Cheeks",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "16",
+		"syllabus_name": "Rhyme-Chapter-2",
+		"Description": " Counting Rhymes",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "17",
+		"syllabus_name": "Tamil-Chapter-3",
+		"Description": "Introduction of Literature ",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "18",
+		"syllabus_name": "Tamil-Chapter-3",
+		"Description": "Thirukural ",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "19",
+		"syllabus_name": "Vaazhdhu",
+		"Description": "",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "20",
+		"syllabus_name": "Eng-Chapter-1",
+		"Description": "Prose ",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "21",
+		"syllabus_name": "Eng-Chapter-2",
+		"Description": " Poems",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "152",
+		"syllabus_name": "Eng-Chapter-3",
+		"Description": " Supplimentry Reading",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "22",
+		"syllabus_name": "Maths-Chapter-1",
+		"Description": " Relations And Functions",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "23",
+		"syllabus_name": "Maths-Chapter-2",
+		"Description": " Algebra",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "24",
+		"syllabus_name": "Maths-Chapter-3",
+		"Description": " Probability",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "25",
+		"syllabus_name": "Maths-Chapter-4",
+		"Description": " Graphs",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+
+	{
+		"id": "25",
+		"syllabus_name": "Scien-Chapter-1",
+		"Description": "Soil Erosion and Desertification",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "26",
+		"syllabus_name": "Scien-Chapter-2",
+		"Description": " human anatomy",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "27",
+		"syllabus_name": "Scien-Chapter-3",
+		"Description": " Biodiversity in environmental science",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "28",
+		"syllabus_name": "Social-Chapter-1",
+		"Description": " Unitaed Nations Organization",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "29",
+		"syllabus_name": "Social-Chapter-2",
+		"Description": " Role of tamilnadu in freedom movement",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "30",
+		"syllabus_name": "Social-Chapter-3",
+		"Description": " Disaster Risk reduction",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "31",
+		"syllabus_name": "Social-Chapter-4",
+		"Description": " Freedom movement in India",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "32",
+		"syllabus_name": "Bio-Chapter-1",
+		"Description": "Origin of Life",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "33",
+		"syllabus_name": "Bio-Chapter-2",
+		"Description": " Cell Biology",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "34",
+		"syllabus_name": "Bio-Chapter-3",
+		"Description": " Biodiversity",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "35",
+		"syllabus_name": "Physics-Chapter-1",
+		"Description": "Electrostatics",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "36",
+		"syllabus_name": "Physics-Chapter-2",
+		"Description": "Electromagnetic Induction",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "37",
+		"syllabus_name": "Physics-Chapter-3",
+		"Description": "Atoms & nuclei",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "38",
+		"syllabus_name": "Chm-Chapter-1",
+		"Description": "Electrochemistry",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "39",
+		"syllabus_name": "Chm-Chapter-2",
+		"Description": "Chemical Kinetics",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "40",
+		"syllabus_name": "Chm-Chapter-3",
+		"Description": "Surface Chemistry",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "41",
+		"syllabus_name": "Com-Chapter-1",
+		"Description": "Introduction to computers",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "42",
+		"syllabus_name": "Com-Chapter-2",
+		"Description": "Number system",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "43",
+		"syllabus_name": "Com-Chapter-3",
+		"Description": "Working principle of Digital Logic",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	
+	{
+		"id": "44",
+		"syllabus_name": "Account-Chapter-1",
+		"Description": "Basic Accounting Procedures",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "45",
+		"syllabus_name": "Account-Chapter-2",
+		"Description": "Double Entry System of Book-Keeping",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "46",
+		"syllabus_name": "Account-Chapter-3",
+		"Description": "Bank Reconciliation Statement",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "47",
+		"syllabus_name": "Eco-Chapter-1",
+		"Description": "Economics- Consumer behaviour and demand",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "48",
+		"syllabus_name": "Eco-Chapter-2",
+		"Description": "Producer behaviour and supply",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "49",
+		"syllabus_name": "Eco-Chapter-3",
+		"Description": "Forms of market and price determination",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	
+	{
+		"id": "50",
+		"syllabus_name": "oops-Chapter-1",
+		"Description": "Object and Classes",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "51",
+		"syllabus_name": "oops-Chapter-2",
+		"Description": "Operator overloading",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "52",
+		"syllabus_name": "oops-Chapter-3",
+		"Description": "Inheritance",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "53",
+		"syllabus_name": "DS-Chapter-1",
+		"Description": "Algorithm Analysis",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "54",
+		"syllabus_name": "DS-Chapter-2",
+		"Description": "Lists Stacks and Queues",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "55",
+		"syllabus_name": "DS-Chapter-3",
+		"Description": " Hashing",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "56",
+		"syllabus_name": "Dbms-Chapter-1",
+		"Description": "Data Models",
+		"Information2": ""
+		
+	},
+	{
+		"id": "57",
+		"syllabus_name": "Dbms-Chapter-2",
+		"Description": "Constraints, Views and SQL",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "58",
+		"syllabus_name": "Dbms-Chapter-3",
+		"Description": "Relational Algebra and Calculus",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "59",
+		"syllabus_name": "OS-Chapter-1",
+		"Description": "Process Management",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "60",
+		"syllabus_name": "OS-Chapter-2",
+		"Description": "Storage Management",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "61",
+		"syllabus_name": "OS-Chapter-3",
+		"Description": "I/O SYSTEMS",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "62",
+		"syllabus_name": "Java-Chapter-1",
+		"Description": "Inheritance",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "63",
+		"syllabus_name": "Java-Chapter-2",
+		"Description": "Packages",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "64",
+		"syllabus_name": "Java-Chapter-3",
+		"Description": "Applets",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "65",
+		"syllabus_name": "St-Chapter-1",
+		"Description": "Softwre Testing Life Cycle - (STLC)",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "66",
+		"syllabus_name": "St-Chapter-2",
+		"Description": "Automation Testing",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "67",
+		"syllabus_name": "St-Chapter-3",
+		"Description": "Non-Functional Testing",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "68",
+		"syllabus_name": "NA-Chapter-1",
+		"Description": "network Functions & Responses",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "69",
+		"syllabus_name": "NA-Chapter-2",
+		"Description": "Resonant Circuits",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "70",
+		"syllabus_name": "NA-Chapter-3",
+		"Description": "Laplace Transformation & Applications",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "71",
+		"syllabus_name": "SS-Chapter-1",
+		"Description": "Linear Time Invarient",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "72",
+		"syllabus_name": "SS-Chapter-2",
+		"Description": "Analysis of continuous time signals",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "73",
+		"syllabus_name": "SS-Chapter-3",
+		"Description": "LINEAR TIME INVARIANT Linear Time Invariant",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "74",
+		"syllabus_name": "MPC-Chapter-1",
+		"Description": "Digital logic circuits",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "75",
+		"syllabus_name": "MPC-Chapter-2",
+		"Description": "Internal memory organization",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "76",
+		"syllabus_name": "MPC-Chapter-3",
+		"Description": "Operating System Support",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "77",
+		"syllabus_name": "DCN-Chapter-1",
+		"Description": "Network architectures",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "78",
+		"syllabus_name": "DCN-Chapter-2",
+		"Description": "Internet protocols",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "79",
+		"syllabus_name": "DCN-Chapter-3",
+		"Description": "Local area networks",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "80",
+		"syllabus_name": "DSP-Chapter-1",
+		"Description": "Signals and Systems",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "81",
+		"syllabus_name": "DSP-Chapter-2",
+		"Description": "Frequency transformations",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "82",
+		"syllabus_name": "DSP-Chapter-3",
+		"Description": "FIR Filter design",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "83",
+		"syllabus_name": "BSP-Chapter-1",
+		"Description": "Fundamentals of Deterministic Signal and Image Processing",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "84",
+		"syllabus_name": "BSP-Chapter-2",
+		"Description": "Probability and Random Signals",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "85",
+		"syllabus_name": "BSP-Chapter-3",
+		"Description": "Image Segmentation and Registration",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "86",
+		"syllabus_name": "R-Chapter-1",
+		"Description": "Disability and Development",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "87",
+		"syllabus_name": "R-Chapter-2",
+		"Description": "Magnitude and Prevention of Disability",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "88",
+		"syllabus_name": "R-Chapter-3",
+		"Description": " Independent",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "89",
+		"syllabus_name": "MMI-Chapter-1",
+		"Description": " The Modalities",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "90",
+		"syllabus_name": "MMI-Chapter-2",
+		"Description": " Analytical methods",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "91",
+		"syllabus_name": "MMI-Chapter-3",
+		"Description": "Computed Tomography",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "92",
+		"syllabus_name": "MI-Chapter-1",
+		"Description": "Electro-physiology and bio potentical recording",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "93",
+		"syllabus_name": "MI-Chapter-2",
+		"Description": "Assist Devices",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "94",
+		"syllabus_name": "MI-Chapter-3",
+		"Description": "Physical medicine and Biotelemetry",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "95",
+		"syllabus_name": "DESD-Chapter-1",
+		"Description": "Graphics Processing unit",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "96",
+		"syllabus_name": "DESD-Chapter-2",
+		"Description": "Processor/FPGA CO-processor features",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "97",
+		"syllabus_name": "DESD-Chapter-3",
+		"Description": "Hard vs Soft real time applications",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "98",
+		"syllabus_name": "T-Chapter-1",
+		"Description": "Properties of pure substance and steam power cycle",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "99",
+		"syllabus_name": "T-Chapter-2",
+		"Description": "Ideal and Real gases - Thermodynamic relations",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "100",
+		"syllabus_name": "T-Chapter-3",
+		"Description": "Gas mixture and psychrometry",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "101",
+		"syllabus_name": "MT-Chapter-1",
+		"Description": " Multiple Integrals",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "102",
+		"syllabus_name": "MT-Chapter-2",
+		"Description": " Laplace Transform",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "103",
+		"syllabus_name": "MT-Chapter-3",
+		"Description": "Ordinary Differential Equations ",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "104",
+		"syllabus_name": "PE-Chapter-1",
+		"Description": "Nuclear power plants",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "105",
+		"syllabus_name": "PE-Chapter-2",
+		"Description": "power from renewable energy",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "106",
+		"syllabus_name": "PE-Chapter-3",
+		"Description": "Energy, Economic and Environmental issues of pwoer plants",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "107",
+		"syllabus_name": "HMT-Chapter-1",
+		"Description": "Radiation",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "108",
+		"syllabus_name": "HMT-Chapter-2",
+		"Description": "Convection",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "109",
+		"syllabus_name": "HMT-Chapter-3",
+		"Description": "Phase change heat transfer and heat exchangers",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "110",
+		"syllabus_name": "K-Chapter-1",
+		"Description": "kinematics of Linkage mechanisms",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "111",
+		"syllabus_name": "K-Chapter-2",
+		"Description": "gears and gear trains",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "112",
+		"syllabus_name": "K-Chapter-3",
+		"Description": "Friction and Machine elements",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "113",
+		"syllabus_name": "FM-Chapter-1",
+		"Description": "Integral analysis",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "114",
+		"syllabus_name": "FM-Chapter-2",
+		"Description": "Differential analysis",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "115",
+		"syllabus_name": "FM-Chapter-3",
+		"Description": "Inviscid flows",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "116",
+		"syllabus_name": "PNC-Chapter-1",
+		"Description": "Processing of Nanomaterials",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "117",
+		"syllabus_name": "PNC-Chapter-2",
+		"Description": "Flammability",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "118",
+		"syllabus_name": "PNC-Chapter-3",
+		"Description": "Properties of Polymer Nanostructured Materials",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "119",
+		"syllabus_name": "ISM-Chapter-1",
+		"Description": "Modern Steelmaking",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "120",
+		"syllabus_name": "ISM-Chapter-2",
+		"Description": "Electric Arc Furnace Steelmaking (SCK)",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "121",
+		"syllabus_name": "ISM-Chapter-3",
+		"Description": "Deoxidation, Ladle and Tundish Metallurgy Operations",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "122",
+		"syllabus_name": "MP-Chapter-1",
+		"Description": "Nucleation and Growth",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "123",
+		"syllabus_name": "MP-Chapter-2",
+		"Description": "Powder characterization and fabrication",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "124",
+		"syllabus_name": "MP-Chapter-3",
+		"Description": "Sintering, slurry processing",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "125",
+		"syllabus_name": "CM-Chapter-1",
+		"Description": "Thermodynamics and Rate Processes",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "126",
+		"syllabus_name": "CM-Chapter-2",
+		"Description": "polymers and composites",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "127",
+		"syllabus_name": "CM-Chapter-3",
+		"Description": "Metal forming , Metal casting",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "128",
+		"syllabus_name": "SM-Chapter-1",
+		"Description": "Traction and stresses",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "129",
+		"syllabus_name": "SM-Chapter-2",
+		"Description": "End torsion of prismatic beams",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "130",
+		"syllabus_name": "SM-Chapter-3",
+		"Description": "Axial loading",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "131",
+		"syllabus_name": "H-Chapter-1",
+		"Description": "Kinematics of fluid flow",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "132",
+		"syllabus_name": "H-Chapter-2",
+		"Description": "Equation of Motion",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "133",
+		"syllabus_name": "H-Chapter-3",
+		"Description": "Flow Measurement",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "134",
+		"syllabus_name": "WWW-Chapter-1",
+		"Description": "Sludge Treatment",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "135",
+		"syllabus_name": "WWW-Chapter-2",
+		"Description": "Surface and Ground Water Treatment for Potable Water Supply",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "136",
+		"syllabus_name": "WWW-Chapter-3",
+		"Description": "Water/Wastewater Quality Enhancement",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "137",
+		"syllabus_name": "DSS-Chapter-1",
+		"Description": "Compression Members",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "138",
+		"syllabus_name": "DSS-Chapter-2",
+		"Description": "Beams",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "139",
+		"syllabus_name": "DSS-Chapter-3",
+		"Description": "Roof trusses and industrial structures",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "140",
+		"syllabus_name": "SDD-Chapter-1",
+		"Description": "Structural Dynamics",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "141",
+		"syllabus_name": "SDD-Chapter-2",
+		"Description": "Design of RCC Structures",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "142",
+		"syllabus_name": "SDD-Chapter-3",
+		"Description": "Mechanics of Deformable Bodies",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "143",
+		"syllabus_name": "ISM-Chapter-1",
+		"Description": "COMPASS AND PLANE TABLE SURVEYING",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "144",
+		"syllabus_name": "ISM-Chapter-2",
+		"Description": "THEODOLITE SURVEYING",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "145",
+		"syllabus_name": "ISM-Chapter-3",
+		"Description": "LEVELLING",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "146",
+		"syllabus_name": "S-Chapter-1",
+		"Description": "Soils and Paleoclimates",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "147",
+		"syllabus_name": "S-Chapter-2",
+		"Description": "Sequence Stratigraphy",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "148",
+		"syllabus_name": "S-Chapter-3",
+		"Description": "Marine Environments",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "149",
+		"syllabus_name": "SDS-Chapter-1",
+		"Description": "Raster data management",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "150",
+		"syllabus_name": "SDS-Chapter-2",
+		"Description": "Data  modeling  and Database Design",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "151",
+		"syllabus_name": "SDS-Chapter-3",
+		"Description": "Enterprise Geodatabase Administration",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "152",
+		"syllabus_name": "MM-Chapter-1",
+		"Description": "Airport Plaaning, Runway & Taxiway",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "153",
+		"syllabus_name": "MM-Chapter-2",
+		"Description": "Airport, Obstructions, Lightning & Traffic control:",
+		"Information1": "",
+		"Information2": ""
+		
+	},
+	{
+		"id": "154",
+		"syllabus_name": "MM-Chapter-3",
+		"Description": "Microwave Remote Sensing",
+		"Information1": "",
+		"Information2": ""
+		
+	}
+	
+
+	
+] 
