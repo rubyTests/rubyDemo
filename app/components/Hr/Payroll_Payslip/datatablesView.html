@@ -1,0 +1,118 @@
+
+<div id="page_content" ng-controller="dt_default as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Pay Group</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                        <button class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.AddPayCategory">
+                         <i class="uk-icon-plus"></i>  Pay Group
+                        </button>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Extn.</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>Position</th>
+                            <th>Office</th>
+                            <th>Extn.</th>
+                            <th>Start date</th>
+                            <th>Salary</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{row[0]}}</td>
+                            <td>{{row[1]}}</td>
+                            <td>{{row[2]}}</td>
+                            <td>{{row[3]}}</td>
+                            <td>{{row[4]}}</td>
+                            <td>{{row[5]}}</td>
+                            <td class="uk-text-center">
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-width-medium-1-3">
+    <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h2 class="heading_a">Pay Group</h2>
+          <div class="uk-overflow-container">
+             <div class="md-card-content">
+              <form class="uk-form">
+                 <p></p>
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label>Pay Group Name</label>
+                        <input type="text" ng-model="" class="md-input" required md-input>
+                      </div>
+                    </div>
+                  </div>
+                  <p></p> 
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label>Frequency</label>
+                        <input type="text" ng-model="namen" class="md-input" required md-input>
+                      </div>
+                    </div>
+                  </div>                 
+                  <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                          <p></p>
+                        <div class="uk-form-row">
+                            <div class="uk-grid">
+                                <!-- <div class="uk-width-medium-1-2">
+                                    <input type="text" config="selectize_c_config" options="selectize_c_options" ng-model="selectize_c" name="selectize_c" selectize >
+                                </div> -->
+                                <div class="uk-width-medium-1-2 parsley-row">
+                                    <input type="text" config="selectize_n_config" options="selectize_n_options" ng-model="selectize_n" name="selectize_n" selectize/>
+                                </div>
+                                <div class="uk-width-medium-1-2">
+                                    <label>Item Value in %</label>
+                                    <input type="text" class="md-input" md-input />
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="uk-width-1-10 uk-width-medium-1-10 uk-text-center">
+                      <div class="uk-vertical-align uk-height-1-1">
+                        <div class="uk-vertical-align-middle">
+                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>  
+              </form>
+            </div>
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+          </div>
+        </div>
+    </div>
+    </div>
+</div>

@@ -108,16 +108,35 @@ angular
                                     title: 'Employee Grade',
                                 },
                                 {
-                                    title: 'Working Days',
+                                    title: 'Pay Item',
+                                    link : 'restricted.payitem'
                                 },
                                 {
-                                    title: 'Leave Types',
+                                    title: 'Pay Structure',
+                                    link : 'restricted.Structure'
+                                },
+                                {
+                                    title: 'Leave Type',
+                                    link : 'restricted.Leave'
+                                },
+                                {
+                                    title: 'Leave Category',
+                                    link : 'restricted.LeaveCategory'
+                                },
+
+                                {
+                                    title: 'Working Days',
                                 }
                             ]
                         },
                         {
                             title: 'Payroll & Payslip',
+                            // link :'app.hr',
                             submenu: [
+                                {
+                                    title: 'Pay Structure Group',
+                                    link : 'restricted.StructureGroup'
+                                },
                                 {
                                     title: 'Payroll Category',
                                 },
@@ -143,6 +162,10 @@ angular
                                 },
                                 {
                                     title: 'Attendance Report',
+                                },
+                                {
+                                    title: 'Leave Category Type',
+                                    link : 'restricted.LeaveCategoryType'
                                 },
                                 {
                                     title: 'Leave Reset',
@@ -399,6 +422,12 @@ angular
                     id: 7,
                     title: 'Email Template',
                     icon: '&#xE158;',
+                },
+                {
+                    id: 4,
+                    title: 'Library',
+                    icon: '&#xE85C;',
+                    link: 'restricted.Library'
                 },
                 // {
                 //     id: 15,

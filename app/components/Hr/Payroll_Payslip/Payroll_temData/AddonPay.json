@@ -1,0 +1,37 @@
+{
+  "status":true,
+  "message":[
+     {
+      "id":"1",
+      "Name":"Principal",
+      "Pay_item_id":"6",
+      "Amount":"50,000",
+      "Frequency":"Monthly",
+      "Information":"",
+    },
+    {
+      "id":"2",
+      "Name":"Senior Staffs",
+      "Pay_item_id":"2",
+      "Amount":"15,000",
+      "Frequency":"Monthly",
+      "Information":"",
+    },
+    {
+      "id":"3",
+      "Name":"Junior Staffs",
+      "Pay_item_id":"1",
+      "Amount":"10,000",
+      "Frequency":"Monthly",
+      "Information":"",
+    },
+    {
+      "id":"4",
+      "Name":"Physical Trainee Staffs",
+      "Pay_item_id":"2",
+      "Amount":"1000",
+      "Frequency":"Weekly",
+      "Information":"",
+    }
+  ]
+}

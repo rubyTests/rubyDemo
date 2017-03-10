@@ -8,6 +8,22 @@ altairApp
                 debug: false,
                 events: false,
                 modules: [
+                    //smart table
+                    {
+                        name: 'xeditable',
+                        files: [
+                          'assets/js/angular-xeditable/dist/js/xeditable.js',
+                          'assets/js/angular-xeditable/dist/css/xeditable.css'
+                        ],
+                        serie: true
+                    },
+                    {
+                        name: 'smart-table',
+                        files: [
+                            'assets/js/angular-smart-table/dist/smart-table.js'
+                        ],
+                        serie: true
+                     },
                     // ----------- UIKIT ------------------
                     {
                         name: 'lazy_uikit',

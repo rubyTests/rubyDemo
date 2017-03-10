@@ -1,0 +1,77 @@
+[
+       {
+      "id":1,
+      "Name":"Senior Employee",
+      "Information":"-"
+    },
+    {
+      "id":2,
+      "Name":"Principal",
+      "Information":"-"
+    },
+    {
+      "id":3,
+      "Name":"Wise Principal",
+      "Information":"-"
+    },
+    {
+      "id":4,
+      "Name":"HOD",
+      "Information":"-"
+    },
+    {
+      "id":5,
+      "Name":"Guest lecturer",
+      "Information":"-"
+    },
+    {
+      "id":6,
+      "Name":"Part Time lecturer",
+      "Information":"-"
+    },
+    {
+      "id":7,
+      "Name":"Professor",
+      "Information":"-"
+    },
+    {
+      "id":8,
+      "Name":"Lab Assisntant",
+      "Information":"-"
+    },
+    {
+      "id":9,
+      "Name":"Physical Trainer",
+      "Information":"-"
+    },
+    {
+      "id":10,
+      "Name":"Clerk",
+      "Information":"-"
+    },
+    {
+      "id":11,
+      "Name":"Puan",
+      "Information":"-"
+    },
+    {
+      "id":12,
+      "Name":"Administrative Officer",
+      "Information":"-"
+    },
+    {
+      "id":13,
+      "Name":"Placement Officer",
+      "Information":"-"
+    },
+    {
+      "id":14,
+      "Name":"Associative Officer",
+      "Information":"-"
+    },
+    {
+      "id":15,
+      "Name":"Facilities Advisor",
+      "Information":"-"
+    }
+  ]

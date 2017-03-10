@@ -104,6 +104,148 @@ altairApp
                         label: 'Home'
                     }
                 })
+                ///RUBY STATE CAMPUS START///
+                // .state("app.hr", {
+                //     url: "/hr",
+                //     template: '<div ui-view autoscroll="false"/>',
+                //     abstract: true
+                // })
+                .state("restricted.payitem", {
+                    url: "/payitem",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payitem.html',
+                    controller: 'tables_examplesCtrl',
+                    resolve: {
+                        Pay_item: function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable','smart-table',
+                                'app/components/Hr/Payroll_Payslip/payitem.js'
+                            ]);
+                        }]
+                    }
+                })
+                .state("restricted.Structure", {
+                    url: "/pay Structure",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/PayStructure.html',
+                    controller: 'PayStructure',
+                    resolve: {
+                        Pay_item: function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable','smart-table',
+                                'app/components/Hr/Payroll_Payslip/PayStructure.js'
+                            ]);
+                        }]
+                    }
+                })
+                .state("restricted.AddPayCategory",{
+                    url: "/Add-payCategory",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/PayCategory.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/datatablesController.js'
+                            ]);
+                        }]
+                    },
+                    
+                })
+                .state("restricted.StructureGroup", {
+                    url: "/pay Group",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/datatablesView.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/datatablesController.js'
+                            ]);
+                        }]
+                    }
+                })
+                .state("restricted.Leave", {
+                    url: "/Leave type",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveType.html',
+                    controller: 'tables_examplesCtrl',
+                    resolve: {
+                        Leave_Type: function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/Leavetype.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable','smart-table',
+                                'app/components/Hr/Payroll_Payslip/LeaveTypeController.js'
+                            ]);
+                        }]
+                    }
+                })
+                .state("restricted.LeaveCategory", {
+                    url: "/Leave Category",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
+                    controller: 'tables_examplesCtrl',
+                    resolve: {
+                        Leave_Category: function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/LeaveCategory.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable','smart-table',
+                                'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
+                            ]);
+                        }]
+                    }
+                })
+                .state("restricted.Library", {
+                    url: "/Library",
+                    templateUrl: 'app/components/Library/Library_gridView.html',
+                    controller: 'Library_gridController',
+                    resolve: {
+                        products_data: function($http){
+                            return $http({method: 'GET', url: 'app/components/Library/books/book.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('app/components/Library/Library_gridController.js');
+                        }]
+                    }
+                })
+                .state("restricted.BookDetail", {
+                    url: "/Book Detail",
+                    templateUrl: 'app/components/Library/Book_detailsView.html',
+                    controller: 'BookDetailController',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('app/components/Library/BookDetailController.js');
+                        }]
+                    }
+                })
+                ///RUBY STATE CAMPUS END
+
+
                 // -- FORMS --
                 .state("restricted.forms", {
                     url: "/forms",

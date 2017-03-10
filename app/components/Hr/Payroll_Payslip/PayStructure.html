@@ -1,0 +1,90 @@
+<style type="text/css">
+thead th{
+    cursor: pointer;
+}
+.uk-table tfoot td, .uk-table tfoot th{
+    border-top-width:0;
+}
+</style>
+    <div id="page_content">
+        <div id="page_content_inner">
+            <h3 class="heading_b uk-margin-bottom">Pay Strcture</h3>
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container">
+                        <table class="uk-table" st-table="Pay_item">
+                            <thead>
+                            <tr>
+                            <button type="button" ng-click="addNewrow()" class="md-btn md-btn-flat uk-float-right md-btn md-btn-primary md-btn-small uk-modal-close">Add Structure</button>
+                            </tr>
+                            <tr>
+                                <th>
+                                    <label>Show</label>
+                                </th>
+                                <th>
+                                    <div class="uk-width-medium-1-5">
+                                        <selectize class="uk-form-width-mini" ng-required="true" placeholder='Pick some things...' options='selectize_c_options' config="{maxItems: 1}" ng-model="itemsByPage"  name='itemsByPage' required='true'></selectize>
+                                    </div>
+                                </th>
+                                <th></th>
+                                <th colspan="3">
+                                    <input st-search="" class="form-control md-input" placeholder="Search" type="text"/></th>
+                                </tr>
+                            <tr>
+                                <th class="uk-width-1-2 small_col">Id</th>
+                                <th class="uk-width-1-2" st-sort="Name">Name</th>
+                                <th class="uk-width-1-3" st-sort="Frequency">Frequency</th>
+                                <th class="uk-width-1-2">Actions</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        <input st-search="Name" placeholder="Search for Name" class="input-sm md-input form-control" type="search"/>
+                                    </th>
+                                    <th>
+                                        <input st-search="Frequency" placeholder="Search for Frequency" class="input-sm md-input form-control" type="search"/>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="itemsByPage"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <tr ng-repeat="row in Pay_item">
+                                <td class="uk-table-middle small_col">{{row.id }}</td>
+                                <td>
+                                    <span editable-text="row.Name" e-name="Name" e-form="rowform" onbeforesave="checkName($data, row)" e-required>
+                                        {{row.Name}}
+                                    </span>
+                                </td>
+                                <td >
+                                    <span editable-text="row.Frequency" e-name="Type" e-form="rowform" onbeforesave="checkName($data, row)" e-required>
+                                        {{row.Frequency}}
+                                    </span>
+                                </td>
+                                <td >
+                                    <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="md-icon material-icons">
+                                    &#xE161;
+                                    </button>
+                                  <a class="ts_remove_row" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()"><i class="md-icon material-icons">&#xE5CD;</i></a>
+                                </form>
+                                <div class="buttons" ng-show="!rowform.$visible" ng-init="rowform.$cancel()">
+                                    <a class="ts_remove_row" ng-click="rowform.$show()"><i class="md-icon material-icons">&#xE254;</i></a>
+                                    <a class="ts_remove_row" ng-click="removeUser($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                </div> 
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
