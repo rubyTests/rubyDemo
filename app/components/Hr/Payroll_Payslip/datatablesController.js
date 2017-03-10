@@ -1,303 +1,113 @@
 angular
     .module('altairApp')
-    .controller('dt_default',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$window) {
-            var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
-            vm.dt_data = [];
-            vm.dtOptions = DTOptionsBuilder
-                .newOptions()
-                .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
-                    "<'uk-overflow-container'tr>" +
-                    "<'dt-uikit-footer'<'uk-grid'<'uk-width-medium-3-10'i><'uk-width-medium-7-10'p>>>")
-                .withOption('createdRow', function(row, data, dataIndex) {
-                    // Recompiling so we can bind Angular directive to the DT
-                    $compile(angular.element(row).contents())($scope);
-                })
-                .withOption('headerCallback', function(header) {
-                    if (!vm.headerCompiled) {
-                        // Use this headerCompiled field to only compile header once
-                        vm.headerCompiled = true;
-                        $compile(angular.element(header).contents())($scope);
-                    }
-                })
-                .withPaginationType('full_numbers')
-                // Active Buttons extension
-                .withColumnFilter({
-                    aoColumns: [
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        }
-                    ]
-                })
-                .withButtons([
-                    // {
-                    //     extend:    'copyHtml5',
-                    //     text:      '<i class="uk-icon-files-o"></i> Copy',
-                    //     titleAttr: 'Copy'
-                    // },
-                    // {
-                    //     extend:    'print',
-                    //     text:      '<i class="uk-icon-print"></i> Print',
-                    //     titleAttr: 'Print'
-                    // },
-                    // {
-                    //     extend:    'excelHtml5',
-                    //     text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                    //     titleAttr: ''
-                    // },
-                    // {
-                    //     extend:    'csvHtml5',
-                    //     text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                    //     titleAttr: 'CSV'
-                    // },
-                    // {
-                    //     extend:    'pdfHtml5',
-                    //     text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                    //     titleAttr: 'PDF'
-                    // }
-                ]);
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Position'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Office'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Extn.'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('Start date'),
-                DTColumnDefBuilder.newColumnDef(5).withTitle('Salary')
-            ];
-            console.log();
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
+    .controller('tables_examplesCtrl', [
+        '$scope',
+        '$timeout',
+        'editableOptions',
+        'editableThemes',
+        '$filter',
+        function ($scope,$timeout,editableOptions, editableThemes,$filter) {
+            editableThemes.bs3.inputClass = 'md-input';
+            editableThemes.bs3.buttonsClass = 'btn-sm';
+            editableOptions.theme = 'bs3';
+            $scope.groupProperty="status";
+             $scope.users = [
+                {id: 1, name: 'awesome user1', status: 2, group: 4, groupName: 'admin'},
+                {id: 2, name: 'awesome user2', status: 2, group: 3, groupName: 'vip'},
+                {id: 3, name: 'awesome user2', status: 1, group: 3, groupName: 'vip'},
+                {id: 4, name: 'awesome user2', status: 1, group: 3, groupName: 'vip'},
+                {id: 5, name: 'awesome user2', status: undefined, group: 3, groupName: 'vip'},
+                {id: 6, name: 'awesome user2', status: undefined, group: 3, groupName: 'vip'},
+                {id: 7, name: 'awesome user2', status: undefined, group: 3, groupName: 'vip'},
+                {id: 8, name: 'awesome user2', status: undefined, group: 3, groupName: 'vip'},
+                {id: 9, name: 'awesome user3', status: 2, group: null}
+              ]; 
+
+              $scope.statuses = [
+                {value: 1, text: 'status1'},
+                {value: 2, text: 'status2'},
+                {value: 3, text: 'status3'},
+                {value: 4, text: 'status4'}
+              ]; 
+
+              $scope.groups = [];
+              $scope.loadGroups = function() {
+              };
+
+              $scope.showGroup = function(user) {
+                if(user.group && $scope.groups.length) {
+                  var selected = $filter('filter')($scope.groups, {id: user.group});
+                  return selected.length ? selected[0].text : 'Not set';
+                } else {
+                  return user.groupName || 'Not set';
                 }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
+              };
+
+              $scope.showStatus = function(user) {
+                var selected = [];
+                if(user.status) {
+                  selected = $filter('filter')($scope.statuses, {value: user.status});
                 }
-                vm.selectAll = true;
+                return selected.length ? selected[0].text : 'Not set';
+              };
+
+              $scope.checkName = function(data, id) {
+                if (id === 2 && data !== 'awesome') {
+                  return "Username 2 should be `awesome`";
+                }
+              };
+
+              $scope.saveUser = function(data, id) {
+                //$scope.user not updated yet
+                angular.extend(data, {id: id});
+                // return $http.post('/saveUser', data);
+              };
+
+              // remove user
+              $scope.removeUser = function(index) {
+                $scope.users.splice(index, 1);
+              };
+
+              // add user
+              $scope.addUser = function() {
+                $scope.inserted = {
+                  id: $scope.users.length+1,
+                  name: '',
+                  status: null,
+                  group: null 
+                };
+                $scope.users.push($scope.inserted);
+              };
+                $scope.selectize_c_options = ['5','10','15','20','50'];
+                $scope.selectize_c_config = {
+                    plugins: {
+                        'tooltip': ''
+                    },
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select...'
+                };
+            $scope.itemsByPage=5;
+           
+            $scope.table = {
+                'row4': true
+            };
+
+            $scope.table2 = {
+                'row1': true
             }
-            $resource('data/dt_data.json')
-            // $resource('data/temp/PayItemStructure.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                    console.log(vm.dt_data,"vm.dt_data");
-                });
-        // }
-
-        ////Dynamic data functions
-
-            // $scope.selectize_c_options = ["Item A", "Item B", "Item C"];
-
-            // $scope.selectize_c_config = {
-            //     plugins: {
-            //         'tooltip': ''
-            //     },
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select...'
-            // };
-
-            $scope.itemType_options = ["HR", "DA", "TA"];
-            $scope.PayStrcuture_options = ["Principal", "HOD", "Professor"];
-            $scope.PayFrequency_options = ["Monthly", "Weekly", "Daily"];
-            $scope.itemType_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Item'
-            };
-            $scope.PayStrcuture_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select PayStrcuture'
-            };
-            $scope.PayFrequency_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select PayFrequency'
-            };
-
-        $scope.form_template = [
-                [
-                    {
-                        'type': 'text',
-                        'name': 'firstName',
-                        'label': 'First Name'
-                    },
-                    {
-                        'type': 'text',
-                        'name': 'lastName',
-                        'label': 'Last Name'
-                    }
-                ],
-                [
-                    {
-                        'type': 'text',
-                        'name': 'company',
-                        'label': 'Company'
-                    }
-                ],
-                [
-                    {
-                        'type': 'radio',
-                        'label': 'Gender',
-                        'name': 'gender',
-                        'inputs': [
-                            {
-                                'label': 'Man',
-                                'value': 'man'
-                            },
-                            {
-                                'label': 'Woman',
-                                'value': 'woman'
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'switch',
-                        'label': 'Contact',
-                        'inputs': [
-                            {
-                                'label': 'Email',
-                                'name': 'switch_email'
-                            },
-                            {
-                                'label': 'Phone',
-                                'name': 'switch_phone'
-                            }
-                        ]
-                    }
-                ],
-                [
-                    {
-                        'type': 'selectize',
-                        'name': 'city',
-                        'position': 'bottom',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'placeholder': 'City...'
-                        },
-                        'data': [
-                            {
-                                "value": "city_a",
-                                "title": "City A"
-                            },
-                            {
-                                "value": "city_b",
-                                "title": "City B"
-                            },
-                            {
-                                "value": "city_c",
-                                "title": "City C"
-                            },
-                            {
-                                "value": "city_d",
-                                "title": "City D"
-                            },
-                            {
-                                "value": "city_e",
-                                "title": "City E"
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'selectize',
-                        'name': 'country',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'create': false,
-                            'maxItems': 1,
-                            'placeholder': 'Country...'
-                        },
-                        'data': [
-                            {
-                                "value": "country_a",
-                                "title": "Country A"
-                            },
-                            {
-                                "value": "country_b",
-                                "title": "Country B"
-                            },
-                            {
-                                "value": "country_c",
-                                "title": "Country C"
-                            },
-                            {
-                                "value": "country_d",
-                                "title": "Country D"
-                            },
-                            {
-                                "value": "country_e",
-                                "title": "Country E"
-                            }
-                        ]
-                    }
-                ]
-            ];
-
-            $scope.form_dynamic = [];
-            $scope.form_dynamic.push($scope.form_template);
-
-            $scope.form_dynamic_model = [];
-
-            // clone section
-            $scope.cloneSection = function($event,$index) {
-                $event.preventDefault();
-                $scope.form_dynamic.push($scope.form_template);
-            };
-
-            // delete section
-            $scope.deleteSection = function($event,$index) {
-                $event.preventDefault();
-                $scope.form_dynamic_model.splice($index,1);
-                $scope.form_dynamic.splice($index,1);
-            };
-
-            $scope.$on('onLastRepeat', function (scope, element, attrs) {
-                altair_uikit.reinitialize_grid_margin();
-            })
-
         }
-    );
+    ]);
+    angular
+    .module('altairApp')
+    .directive('pageSelect', function() {
+      return {
+        restrict: 'E',
+        template: '<input type="text" class="select-page" ng-model="inputPage" ng-change="selectPage(inputPage)">',
+        link: function(scope, element, attrs) {
+          scope.$watch('currentPage', function(c) {
+            scope.inputPage = c;
+          });
+        }
+      }
+    });

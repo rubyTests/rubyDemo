@@ -143,7 +143,7 @@ angular
                             submenu: [
                                 {
                                     title: 'Pay Structure Group',
-                                    link : 'restricted.StructureGroup'
+                                    link : 'restricted.hr.payrollpayslip.StructureGroup'
                                 },
                                 {
                                     title: 'Payroll Category',

@@ -24,6 +24,13 @@ altairApp
                         ],
                         serie: true
                      },
+                     {
+                        name: 'smart-filter',
+                        files: [
+                            'assets/js/angular-filter.js'
+                        ],
+                        serie: true
+                     },
                     // ----------- UIKIT ------------------
                     {
                         name: 'lazy_uikit',

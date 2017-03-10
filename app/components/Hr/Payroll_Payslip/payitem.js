@@ -5,43 +5,86 @@ angular
         '$timeout',
         'editableOptions',
         'editableThemes',
+        '$filter',
         'Pay_item',
-        function ($scope,$timeout,editableOptions, editableThemes,Pay_item) {
-            editableThemes.bs3.inputClass = 'md-input';
+        function ($scope,$timeout,editableOptions, editableThemes,$filter,Pay_item) {
+            editableThemes.bs3.inputClass = 'form-control md-input md-input-processed selectized';
             editableThemes.bs3.buttonsClass = 'btn-sm';
             editableOptions.theme = 'bs3';
-            $scope.selectize_c_options = ['5','10','15','20','50'];
-            $scope.selectize_c_config = {
-                plugins: {
-                    'tooltip': ''
-                },
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select...'
-            };            
+            $scope.groupProperty="name";
             $scope.Pay_item=Pay_item;
-            $scope.PayItemRepeatData =[].concat($scope.Pay_item);
+            $scope.users=[].concat($scope.Pay_item);
+            $scope.statuses = [
+                {value: 1, text: "Earning"},
+                {value: 2, text: "Deduction"}
+            ]; 
+
+              $scope.groups = [
+                // {id: 1, text: 'admin'},
+                // {id: 2, text: 'user'},
+                // {id: 3, text: 'vip'},
+                // {id: 4, text: 'si'}
+              ];
+              $scope.loadGroups = function() {
+
+              };
+
+              $scope.showGroup = function(user) {
+                if(user.group && $scope.groups.length) {
+                  var selected = $filter('filter')($scope.groups, {id: user.group});
+                  return selected.length ? selected[0].text : 'Not set';
+                } else {
+                  return user.groupName || 'Not set';
+                }
+              };
+
+              $scope.showStatus = function(user) {
+                var selected = [];
+                if(user.Type) {
+                  selected = $filter('filter')($scope.statuses, {value: user.Type});
+                  // console.log(selected,'selected');
+                }
+                return selected.length ? selected[0].text : 'Not set';
+              };
+
+              $scope.checkName = function(data, id) {
+                // if (id === 2 && data !== 'awesome') {
+                //   return "Username 2 should be `awesome`";
+                // }
+              };
+
+              $scope.saveUser = function(data, id) {
+                //$scope.user not updated yet
+                angular.extend(data, {id: id});
+                // return $http.post('/saveUser', data);
+              };
+
+              // remove user
+              $scope.removeUser = function(index) {
+                $scope.users.splice(index, 1);
+              };
+
+              // add user
+              $scope.addUser = function() {
+                $scope.inserted = {
+                  id: $scope.users.length+1,
+                  name: '',
+                  status: null,
+                  group: null 
+                };
+                $scope.users.push($scope.inserted);
+              };
+                $scope.selectize_c_options = ['5','10','15','20','50'];
+                $scope.selectize_c_config = {
+                    plugins: {
+                        'tooltip': ''
+                    },
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select...'
+                };
             $scope.itemsByPage=5;
-            // $scope.rowCollection = [
-            //     {empCateName: "Vijaraj",empCatePrefix:"empCatePrefix",empCateActive:"Y"},
-            //     {empCateName: "Karthik",empCatePrefix:"empCatePrefix",empCateActive:"N"},
-            //     {empCateName: "Senthil",empCatePrefix:"empCatePrefix",empCateActive:"Y"},
-            //     {empCateName: "Manikandan",empCatePrefix:"empCatePrefix",empCateActive:"N"},
-            //     {empCateName: "Guru",empCatePrefix:"empCatePrefix",empCateActive:"Y"},
-            //     {empCateName: "empCateName",empCatePrefix:"empCatePrefix",empCateActive:"N"},
-            //     {empCateName: "empCateName",empCatePrefix:"empCatePrefix",empCateActive:"Y"},
-            //     {empCateName: "empCateName",empCatePrefix:"empCatePrefix",empCateActive:"N"}
-            // ];
-            $scope.addNewrow=function(){
-                // alert();           
-                var newid  =$scope.PayItemRepeatData.length + 1;
-                var newid1  =$scope.Pay_item.length + 1;
-                console.log(newid,'newid');
-                $scope.emptyData={id:newid,Name:""};
-                var data=$scope.Pay_item.push($scope.emptyData);
-                console.log(data,"data");
-                console.log($scope.Pay_item,"$scope.Pay_item");
-            }
+           
             $scope.table = {
                 'row4': true
             };

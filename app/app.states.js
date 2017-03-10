@@ -110,6 +110,15 @@ altairApp
                 //     template: '<div ui-view autoscroll="false"/>',
                 //     abstract: true
                 // })
+
+                .state("restricted.hr", {
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+                .state("restricted.hr.payrollpayslip", {
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
                 .state("restricted.payitem", {
                     url: "/payitem",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/payitem.html',
@@ -124,8 +133,8 @@ altairApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
-                                'xeditable','smart-table',
-                                'app/components/Hr/Payroll_Payslip/payitem.js'
+                                'xeditable','smart-table','smart-filter',
+                                'app/components/Hr/Payroll_Payslip/payitem.js',
                             ]);
                         }]
                     }
@@ -164,7 +173,7 @@ altairApp
                     },
                     
                 })
-                .state("restricted.StructureGroup", {
+                .state("restricted.hr.payrollpayslip.StructureGroup", {
                     url: "/pay Group",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/datatablesView.html',
                     resolve: {

@@ -2,103 +2,103 @@
 		{
 			"id":1,
 			"Name":"HRA",
-			"Type":"Earning",
+			"Type":1,
 			"Information":""
 		},
 		{
 			"id":2,
 			"Name":"DA",
-			"Type":"Earning",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":3,
 			"Name":"TA",
-			"Type":"Earning",
+			"Type":1,
 			"Information":""
 		},
 		{
 			"id":4,
 			"Name":"LOP",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":5,
 			"Name":"ESIC",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":6,
 			"Name":"Medical Allowance",
-			"Type":"Earning",
+			"Type":1,
 			"Information":""
 		},
 		{
 			"id":7,
 			"Name":"Professional Tax",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":8,
 			"Name":"Labour Welfare Fund",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":9,
 			"Name":"Leave Travel Allowance",
-			"Type":"Earning",
+			"Type":1,
 			"Information":""
 		},
 		{
 			"id":10,
 			"Name":"Conveyance Allowance",
-			"Type":"Earning",
+			"Type":1,
 			"Information":""
 		},
 		{
 			"id":11,
 			"Name":"Child Education Allowance",
-			"Type":"Earning",
+			"Type":1,
 			"Information":""
 		},
 		{
 			"id":12,
 			"Name":"Income Tax",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":13,
 			"Name":"State Taxes",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":14,
 			"Name":"FICA Taxes",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":15,
 			"Name":"Federal Tax",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":16,
 			"Name":"NRA Taxes",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		},
 		{
 			"id":17,
 			"Name":"Voluntary Deductions",
-			"Type":"Deduction",
+			"Type":2,
 			"Information":""
 		}
 ]
