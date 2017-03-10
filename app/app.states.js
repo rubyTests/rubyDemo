@@ -1643,6 +1643,27 @@ altairApp
                         pageTitle: 'Employee Admission'
                     }
                 })
+                .state("restricted.employeemanagement.profile", {
+                    url: "/profile",
+                    templateUrl: 'app/components/employeemanagement/employee_profile.html',
+                    controller: 'employee_profileCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/employeemanagement/employee_profileCtrl.js'
+                            ]);
+                        }],
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/employeemanagement/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Employee Profile'
+                    }
+                })
                 .state("restricted.student", {
                     url: "/student",
                     template: '<div ui-view autoscroll="false"/>',

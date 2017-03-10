@@ -144,6 +144,10 @@ angular
                                     link: 'restricted.employeemanagement.admission'
                                 },
                                 {
+                                    title: 'Employee Profile',
+                                    link: 'restricted.employeemanagement.profile'
+                                },
+                                {
                                     title: 'Employee Details',
                                     // link: 'restricted.employeemanagement'
                                 },

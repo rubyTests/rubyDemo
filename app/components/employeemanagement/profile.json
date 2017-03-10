@@ -1,0 +1,100 @@
+[
+		{
+			"id":1,
+			"firstname":"Senthil",
+			"lastname":"Kumar",
+			"emp_no":"Emp001",
+			"jobtitle":"Project Manager",
+			"website":"ttp://campusenter.com/",
+			"dob":"04-06-1993",
+			"gender":"Male",
+			"photo1_path":"http://www.avatars24.de/img/avatars/avatar-5.jpg",
+			"email":"senthilkumar007@gmail.com",
+			"email_verify":"N",
+			"phone1":"+965 256 3658 237",
+			"phone1_verify":"N",
+			"phone2":"+971 056 8568 421",
+			"phone2_verify":"N",
+			"facebook":"https://www.facebook.com/",
+			"google":"https://mail.google.com/",
+			"linkedin":"https://www.linkedin.com",
+			"Role_id":1,
+			"Dept":"Computer Sceince & Enginerring",
+			"course":"Bachelor of Computer Application",
+			"batch":"BCA - A",
+			"religion":"Hinduism",
+			"Marital":"Single",
+			"nationality":"India",
+			"address":"No:128, Louis Pat Street,",
+			"city":"Newyork",
+			"state":"Cambridge",
+			"pincode":"605005",
+			"country":"USA",
+			"parent_name":"Vijayaraj",
+			"income":"1000",
+			"Occupation":"Farmer",
+			"relation":"Father",
+			"parentCount":[
+	            {
+	                "category":"Trainee",
+					"position":"Staff",
+					"role":"Employee",
+					"Qualification":"Bachelor of Engineering",
+					"inst_name":"appnlogic",
+					"period":"2015"
+	            },
+	            {
+	                "category":"Developer",
+					"position":"Staff",
+					"role":"Employee",
+					"Qualification":"Bachelor of Engineering",
+					"inst_name":"webbylogic",
+					"period":"2017"
+	            }],
+			"sibling":[
+				{
+					"name": "Brother",
+	                "members": "172"
+				},
+				{
+					"name": "Sister",
+	                "members": "172"
+				}
+			],
+
+			"alerts": [
+            {
+                "title": "Hic expedita eaque.",
+                "content": "Nemo nemo voluptatem officia voluptatum minus.",
+                "type": "warning"
+            },
+            {
+                "title": "Voluptatibus sed eveniet.",
+                "content": "Tempora magnam aut ea.",
+                "type": "success"
+            },
+            {
+                "title": "Perferendis voluptatem explicabo.",
+                "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                "type": "danger"
+            }
+        ],
+        "friends": [
+            {
+                "name": "Jarred Johnson",
+                "status": "Odio quidem consequatur iste ad dolorem.",
+                "avatar": "assets/img/avatars/avatar_05_tn.png"
+            },
+            {
+                "name": "Horace Gislason",
+                "status": "Ea ipsum reiciendis.",
+                "avatar": "assets/img/avatars/avatar_03_tn.png"
+            },
+            {
+                "name": "Verda Mann",
+                "status": "Impedit cum dicta vel ipsa.",
+                "avatar": "assets/img/avatars/avatar_08_tn.png"
+            }
+        ]
+		}
+	]
