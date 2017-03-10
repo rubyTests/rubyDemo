@@ -91,7 +91,7 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('Name'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('HOD Profile Id'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Hod Profile Id'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Phone 1.'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Phone 2'),
             ];
@@ -189,7 +189,7 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
-            $resource('data/dt_data.json')
+            $resource('data/department.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
@@ -200,7 +200,7 @@ angular
                 $scope.selectize_hodProfieId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'HOD Profile Id ...'
+                    placeholder: 'Hod Profile Id ...'
                 };
        
 

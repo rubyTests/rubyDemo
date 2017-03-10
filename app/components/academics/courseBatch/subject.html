@@ -6,6 +6,11 @@
         height: 65px;
         width: 80%;
     }
+     .uk-modal-dialog {
+      height: 544px;
+      margin: 18px auto;
+      width: 444px;
+    }
 </style>
 <div id="page_content" ng-controller="subjectCtrl as showCase">
     <div id="page_content_inner">
@@ -25,7 +30,7 @@
                         </button>
                         </tr> -->
                         <tr>
-                            <th>Name</th>
+                            <th style="width: 20%;">Name</th>
                             <th>Code</th>
                             <th>Subject Type</th>
                             <th>Min Pass</th>
@@ -35,23 +40,24 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Code</th>
                             <th>Subject Type</th>
                             <th>Min Pass</th>
                             <th>Total Hours</th>
-                            <th>Action</th>
+                           
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row[0]}}</td>
-                            <td>{{row[1]}}</td>
-                            <td>{{row[2]}}</td>
-                            <td>{{row[3]}}</td>
-                            <td>{{row[4]}}</td>
+                            <td>{{row.sub_name}}</td>
+                            <td>{{row.sub_code}}</td>
+                            <td>{{row.sub_type}}</td>
+                            <td>{{row.MinPass}}</td>
+                            <td>{{row.total_hours}}</td>
                             <td class="uk-text-center">
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -60,83 +66,45 @@
             </div>
         </div>
     </div>
-
-    <div class="uk-width-medium-1-3">
-    <div id="modal_overflow" class="uk-modal">
+     <div class="uk-width-medium-1-3">
+      <div id="modal_overflow" class="uk-modal">
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
-          <h2 class="heading_a">Add Subjects</h2>
+          <h3 class="uk-modal-title">Add Subjects &nbsp;<i class="uk-icon-book"></i></h3>
           <div class="uk-overflow-container">
-           
-             <div class="md-card-content">
-                <form class="">
-                  <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Subject Name</label>
-                        <input type="text" ng-model="subject_name" class="md-input" required md-input>
-                      </div>
-                    </div>
-                  </div>
-                 
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Sub Code</label>
-                        <input type="text" ng-model="sub_code" class="md-input" required md-input>
-                      </div>
-                    </div>
+            <div class="md-card-content">
+              <form class=""><p></p>
+                <div class="uk-form-row">
+                  <label>Subject Name</label>
+                  <input type="text" ng-model="subject_name" class="md-input" required md-input>
                 </div>
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" name="selectize_subType" selectize/>
-                      </div>
-                    </div>
+                <div class="uk-form-row">
+                  <label>Sub Code</label>
+                  <input type="text" ng-model="sub_code" class="md-input" required md-input>
                 </div>
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Min Pass</label>
-                        <input type="text" ng-model="min_pass" class="md-input" required md-input>
-                      </div>
-                    </div>
+                 <div class="uk-form-row">
+                   <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" name="selectize_subType" selectize/>
                 </div>
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Total Hours</label>
-                        <input type="text" ng-model="hours" class="md-input" required md-input>
-                      </div>
-                    </div>
+                <div class="uk-form-row">
+                  <label>Min Pass</label>
+                  <input type="text" ng-model="min_pass" class="md-input" required md-input>
                 </div>
-             <!--    <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>information1</label>
-                        <input type="text" ng-model="imfo1" class="md-input" required md-input>
-                      </div>
-                    </div>
+                <div class="uk-form-row">
+                  <label>Total Hours</label>
+                  <input type="text" ng-model="hours" class="md-input" required md-input>
                 </div>
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>information2</label>
-                        <input type="text" ng-model="info2" class="md-input" required md-input>
-                      </div>
-                    </div>
-                </div> -->
-              
               </form>
             </div>
           </div>
-          <div class="uk-modal-footer uk-text-center">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
-              <!-- <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Close</button> -->
+          <div class="uk-modal-footer uk-text-right">
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
+              <!--   <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Close</button> -->
+            </div>
           </div>
-        
+         </div>
+      </div>
+    </div>
 
-        </div>
-    </div>
-    </div>
+   
 </div>

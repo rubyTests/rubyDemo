@@ -189,7 +189,7 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
-            $resource('data/dt_data.json')
+            $resource('data/subject.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
@@ -202,18 +202,7 @@ angular
                     maxItems: 1,
                     placeholder: 'Subject Type...'
                 };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
+               
 
 
 

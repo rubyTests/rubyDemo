@@ -1,10 +1,15 @@
 <style type="text/css">
     .selectize-control.single {
-        margin-top: 5px;
+      margin-top: 0;
     }
     .uk-width-medium-4-5, .uk-width-medium-8-10 {
         height: 65px;
         width: 80%;
+    }
+    .uk-modal-dialog {
+      height: 544px;
+      margin: 18px auto;
+      width: 444px;
     }
 </style>
 <div id="page_content" ng-controller="departmentCtrl as showCase">
@@ -25,7 +30,7 @@
                         </button>
                         </tr> -->
                         <tr>
-                            <th>Name</th>
+                            <th style="width: 20%;">Name</th>
                             <th>Code</th>
                             <th>Image</th>
                             <th>Phone 1</th>
@@ -35,7 +40,7 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Name</th>
+                            <th >Name</th>
                             <th>Code</th>
                             <th>Image</th>
                             <th>Phone 1</th>
@@ -45,11 +50,11 @@
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row[0]}}</td>
-                            <td>{{row[1]}}</td>
-                            <td>{{row[2]}}</td>
-                            <td>{{row[3]}}</td>
-                            <td>{{row[4]}}</td>
+                            <td>{{row.dept_name}}</td>
+                            <td>{{row.dept_code}}</td>
+                            <td>{{row.HOD_profile_id}}</td>
+                            <td>{{row.phone1}}</td>
+                            <td>{{row.phone2}}</td>
                             <td class="uk-text-center">
                                 <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
@@ -60,76 +65,45 @@
             </div>
         </div>
     </div>
-
     <div class="uk-width-medium-1-3">
-    <div id="modal_overflow" class="uk-modal">
+      <div id="modal_overflow" class="uk-modal">
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
-          <h2 class="heading_a">Add Department</h2>
+          <h3 class="uk-modal-title">Add Department &nbsp;<i class="uk-icon-cc-mastercard"></i></h3>
           <div class="uk-overflow-container">
-           
-             <div class="md-card-content">
-                <form class=""><p></p>
-                  <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Department Name</label>
-                        <input type="text" ng-model="course_name" class="md-input" required md-input>
-                      </div>
-                    </div>
-                  </div>
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Dept Code</label>
-                        <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
-                      </div>
-                    </div>
+            <div class="md-card-content">
+              <form class=""><p></p>
+                <div class="uk-form-row">
+                  <label>Department Name</label>
+                  <input type="text" ng-model="course_name" class="md-input" required md-input>
                 </div>
-               <!--  <div class="uk-width-medium-1-2">
-                    <div class="md-card">
-                        <div class="md-card-content">
-                            <h3 class="heading_a uk-margin-small-bottom">
-                                Default value
-                            </h3>
-                            <input type="file" id="input-file-b" class="dropify" data-default-file="assets/img/gallery/Image08.jpg"/>
-                        </div>
-                    </div>
-                </div> -->
-                <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <input type="text" config="selectize_hodProfieId_config" options="selectize_hodProfieId_options" ng-model="selectize_attdncType" name="selectize_hodProfieId" selectize/>
-                      </div>
-                    </div>
+                 <div class="uk-form-row">
+                   <label>Dept Code</label>
+                  <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
                 </div>
-                 <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Phone 1</label>
-                        <input type="text" ng-model="Phone1" class="md-input" required md-input>
-                      </div>
-                    </div>
+                 <div class="uk-form-row">
+                  <input type="text" config="selectize_hodProfieId_config" options="selectize_hodProfieId_options" ng-model="selectize_attdncType" name="selectize_hodProfieId" selectize/>
                 </div>
-                 <div class="uk-width-8-10 uk-width-medium-8-10">
-                    <div class="uk-width-1-1">
-                      <div class="parsley-row">
-                        <label>Phone 2</label>
-                        <input type="text" ng-model="Phone2" class="md-input" required md-input>
-                      </div>
-                    </div>
+                <div class="uk-form-row">
+                  <label>Phone 1</label>
+                  <input type="text" ng-model="Phone1" class="md-input" required md-input>
                 </div>
-                
+                <div class="uk-form-row">
+                  <label>Phone 2</label>
+                  <input type="text" ng-model="Phone2" class="md-input" required md-input>
+                </div>
                 </form>
             </div>
           </div>
           <div class="uk-modal-footer uk-text-right">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
-            <!--   <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Close</button> -->
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
+              <!--   <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Close</button> -->
+            </div>
           </div>
-        
+         </div>
+      </div>
+    </div>
 
-        </div>
-    </div>
-    </div>
+ 
 </div>

@@ -1,220 +1,113 @@
 angular
     .module('altairApp')
-    .controller('courseCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
-            var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
-            vm.dt_data = [];
-            vm.dtOptions = DTOptionsBuilder
-                .newOptions()
-                .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
-                    "<'uk-overflow-container'tr>" +
-                    "<'dt-uikit-footer'<'uk-grid'<'uk-width-medium-3-10'i><'uk-width-medium-7-10'p>>>")
-                .withOption('createdRow', function(row, data, dataIndex) {
-                    // Recompiling so we can bind Angular directive to the DT
-                    $compile(angular.element(row).contents())($scope);
-                })
-                .withOption('headerCallback', function(header) {
-                    if (!vm.headerCompiled) {
-                        // Use this headerCompiled field to only compile header once
-                        vm.headerCompiled = true;
-                        $compile(angular.element(header).contents())($scope);
-                    }
-                })
-                .withPaginationType('full_numbers')
-                // Active Buttons extension
-                .withColumnFilter({
-                    aoColumns: [
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        }
-                    ]
-                })
-                // .withButtons([
-                //     {
-                //         extend:    'copyHtml5',
-                //         text:      '<i class="uk-icon-files-o"></i> Copy',
-                //         titleAttr: 'Copy'
-                //     },
-                //     {
-                //         extend:    'print',
-                //         text:      '<i class="uk-icon-print"></i> Print',
-                //         titleAttr: 'Print'
-                //     },
-                //     {
-                //         extend:    'excelHtml5',
-                //         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                //         titleAttr: ''
-                //     },
-                //     {
-                //         extend:    'csvHtml5',
-                //         text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                //         titleAttr: 'CSV'
-                //     },
-                //     {
-                //         extend:    'pdfHtml5',
-                //         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                //         titleAttr: 'PDF'
-                //     }
-                // ]);
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Min Attendance Percentage'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Attendance Type')
-            ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
+    .controller('courseCtrl', [
+        '$scope',
+        '$timeout',
+        'editableOptions',
+        'editableThemes',
+        '$filter',
+        'cour_data',
+        function ($scope,$timeout,editableOptions, editableThemes,$filter,cour_data) {
+            editableThemes.bs3.inputClass = 'md-input';
+            editableThemes.bs3.buttonsClass = 'btn-sm';
+            editableOptions.theme = 'bs3';
+            $scope.cour_data=cour_data;
+            $scope.users=[].concat($scope.cour_data);
+
+              $scope.statuses = [
+                {value: 1, text: 'status1'},
+                {value: 2, text: 'status2'},
+                {value: 3, text: 'status3'},
+                {value: 4, text: 'status4'}
+              ]; 
+
+              $scope.groups = [];
+              $scope.loadGroups = function() {
+                // return $scope.groups.length ? null : $http.get('/groups').success(function(data) {
+                //   $scope.groups = data;
+                // });
+              };
+
+              $scope.showGroup = function(user) {
+                if(user.group && $scope.groups.length) {
+                  var selected = $filter('filter')($scope.groups, {id: user.group});
+                  return selected.length ? selected[0].text : 'Not set';
+                } else {
+                  return user.groupName || 'Not set';
                 }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
+              };
+
+              $scope.showStatus = function(user) {
+                var selected = [];
+                if(user.status) {
+                  selected = $filter('filter')($scope.statuses, {value: user.status});
                 }
-                vm.selectAll = true;
+                return selected.length ? selected[0].text : 'Not set';
+              };
+
+              $scope.checkName = function(data, id) {
+                if (id === 2 && data !== 'awesome') {
+                  return "Username 2 should be `awesome`";
+                }
+              };
+
+              $scope.saveUser = function(data, id) {
+                //$scope.user not updated yet
+                angular.extend(data, {id: id});
+                // return $http.post('/saveUser', data);
+              };
+
+              // remove user
+              $scope.removeUser = function(index) {
+                $scope.users.splice(index, 1);
+              };
+
+              // add user
+              $scope.addUser = function() {
+                $scope.inserted = {
+                  id: $scope.users.length+1,
+                  name: '',
+                  status: null,
+                  group: null 
+                };
+                $scope.users.push($scope.inserted);
+              };
+            $scope.addRow=function(){
+                console.log("in");
+                $scope.rowCollection.push({empCateName: "",empCatePrefix:"",empCateActive:"Y"});
+                console.log($scope.rowCollection,"in");
             }
-            //     .newOptions()
-            //     // .withDisplayLength(10)
-            //     // .withColumnFilter({
-            //     //     aoColumns: [
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         }
-            //     //     ]
-            //     // })
-            //     .withButtons([
-            //         {
-            //             extend:    'copyHtml5',
-            //             text:      '<i class="uk-icon-files-o"></i> Copy',
-            //             titleAttr: 'Copy'
-            //         },
-            //         {
-            //             extend:    'print',
-            //             text:      '<i class="uk-icon-print"></i> Print',
-            //             titleAttr: 'Print'
-            //         },
-            //         {
-            //             extend:    'excelHtml5',
-            //             text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-            //             titleAttr: ''
-            //         },
-            //         {
-            //             extend:    'csvHtml5',
-            //             text:      '<i class="uk-icon-file-text-o"></i> CSV',
-            //             titleAttr: 'CSV'
-            //         },
-            //         {
-            //             extend:    'pdfHtml5',
-            //             text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-            //             titleAttr: 'PDF'
-            //         }
-            //     ])
-            //     .withOption('initComplete', function() {
-            //         $timeout(function() {
-            //             $compile($('.dt-uikit .md-input'))($scope);
-            //         })
-            //     });
-            // vm.dtColumnDefs = [
-            //     DTColumnDefBuilder.newColumnDef(0),
-            //     DTColumnDefBuilder.newColumnDef(1),
-            //     DTColumnDefBuilder.newColumnDef(2),
-            //     DTColumnDefBuilder.newColumnDef(3),
-            //     DTColumnDefBuilder.newColumnDef(4),
-            //     DTColumnDefBuilder.newColumnDef(5)
-            // ];
-            $resource('data/dt_data.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
+            $scope.selectize_c_options = ['5','10','15','20','50'];
+            $scope.selectize_c_config = {
+                plugins: {
+                    'tooltip': ''
+                },
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select...'
+            };
+            $scope.itemsByPage=5;
+           
+            $scope.table = {
+                'row4': true
+            };
 
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
-
-
-
-
+            $scope.table2 = {
+                'row1': true
+            }
+              
         }
-    );
+    ]);
+    angular
+    .module('altairApp')
+    .directive('pageSelect', function() {
+      return {
+        restrict: 'E',
+        template: '<input type="text" class="select-page" ng-model="inputPage" ng-change="selectPage(inputPage)">',
+        link: function(scope, element, attrs) {
+          scope.$watch('currentPage', function(c) {
+            scope.inputPage = c;
+          });
+        }
+      }
+    });
