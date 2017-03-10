@@ -70,8 +70,24 @@ angular
                 },
                 {
                     id: 1,
+                    title: 'Settings',
+                    icon: '&#xE8B8;',
+                    // link: 'restricted.pages.invoices.list'
+                    submenu: [
+                        {
+                            title: 'Institution Details',
+                            link: 'restricted.setting.institutionDetails'
+                        },
+                        {
+                            title: 'Building',
+                            link: 'restricted.building'
+                        }
+                    ]
+                },
+                {
+                    id: 2,
                     title: 'HR',
-                    icon: '&#xE8F0;',
+                    icon: '&#xE7EF;',
                     submenu: [
                         {
                             title: 'Configuration',
@@ -159,9 +175,9 @@ angular
                     ]
                 },
                 {
-                    id: 2,
+                    id: 3,
                     title: 'Academics',
-                    icon: '&#xE1BD;',
+                    icon: '&#xE02F;',
                     // link: 'restricted.pages.invoices.list'
                     submenu: [
                         {
@@ -277,9 +293,9 @@ angular
                     ]
                 },
                 {
-                    id: 3,
+                    id: 4,
                     title: 'Finance',
-                    icon: '&#xE0B9;',
+                    icon: '&#xE227;',
                     submenu: [
                         {
                             title: 'Asset & Liability Management',
@@ -360,9 +376,9 @@ angular
                     ]
                 },
                 {
-                    id: 4,
+                    id: 5,
                     title: 'Student',
-                    icon: '&#xE85C;',
+                    icon: '&#xE7FD;',
                     submenu:[
                         {
                             title:'Student Details'
@@ -375,12 +391,12 @@ angular
                     ]
                 },
                 {
-                    id: 5,
+                    id: 6,
                     title: 'Repository',
                     icon: '&#xE87B;',
                 },
                 {
-                    id: 6,
+                    id: 7,
                     title: 'Email Template',
                     icon: '&#xE158;',
                 },

@@ -1617,6 +1617,31 @@ altairApp
                     }
                 })
 
+                // Added by Senthil 10-03-17
+                .state("restricted.setting", {
+                    url: "/setting",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.setting.institutionDetails", {
+                    url: "/institutionDetails",
+                    templateUrl: 'app/components/setting/institution_details.html',
+                    controller: 'instDetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'lazy_wizard',
+                                'assets/js/custom/uikit_fileinput.min.js',
+                                'app/components/setting/instDetailCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Institiution Details'
+                    }
+                })
 
                 // Added by Vijayaraj 08-03-17
                 .state("restricted.employeemanagement", {
