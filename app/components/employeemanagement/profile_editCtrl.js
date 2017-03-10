@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('studentprofile_edit', [
+    .controller('employeetprofile_edit', [
         '$rootScope',
         '$scope',
         'user_data',

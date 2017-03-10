@@ -1831,6 +1831,28 @@ altairApp
                         pageTitle: 'Employee Profile'
                     }
                 })
+                .state("restricted.employeemanagement.employee_editprofile", {
+                    url: "/employee_editprofile",
+                    templateUrl: 'app/components/employeemanagement/profile_edit.html',
+                    controller: 'employeetprofile_edit',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'assets/js/custom/uikit_fileinput.min.js',
+                                'app/components/employeemanagement/profile_editCtrl.js'
+                            ],{serie: true});
+                        }],
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/employeemanagement/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Employee Profile'
+                    }
+                })
                 .state("restricted.student", {
                     url: "/student",
                     template: '<div ui-view autoscroll="false"/>',
@@ -1887,13 +1909,7 @@ altairApp
                             ],{serie: true});
                         }],
                         user_data: function($http){
-                            return $http({ method: 'GET', url: 'data/user_data.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        groups_data: function($http){
-                            return $http({ method: 'GET', url: 'data/groups_data.json' })
+                            return $http({ method: 'GET', url: 'app/components/student/profile.json' })
                                 .then(function (data) {
                                     return data.data;
                                 });

@@ -34,22 +34,33 @@
 			"income":"1000",
 			"Occupation":"Farmer",
 			"relation":"Father",
+			"Quali":"Bachelor of Engineering",
+			"position":"Programmer Analyst",
+			"category":"Developer",
 			"parentCount":[
 	            {
-	                "category":"Trainee",
+	                "category":"Teaching",
 					"position":"Staff",
 					"role":"Employee",
 					"Qualification":"Bachelor of Engineering",
-					"inst_name":"appnlogic",
-					"period":"2015"
+					"inst_name":"Anna University Chennai",
+					"period":"2015",
+					"address":"NH - 47 Avinashi Road",
+					"city":"chennai",
+					"state":"Tamilnadu",
+					"country":"India"
 	            },
 	            {
-	                "category":"Developer",
+	                "category":"Teaching",
 					"position":"Staff",
 					"role":"Employee",
 					"Qualification":"Bachelor of Engineering",
-					"inst_name":"webbylogic",
-					"period":"2017"
+					"inst_name":"Agni College of Technology, Chennai",
+					"period":"2017",
+					"address":"No:22-Old Mahabalipuram Road",
+					"city":"chennai",
+					"state":"Tamilnadu",
+					"country":"India"
 	            }],
 			"sibling":[
 				{
