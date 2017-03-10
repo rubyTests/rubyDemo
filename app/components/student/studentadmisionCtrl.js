@@ -93,6 +93,12 @@ angular
                 maxItems: 1,
                 placeholder: 'Select mother tongue...'
             };
+            $scope.selectize_country_options = ["India", "Sri Langa", "America"];
+            $scope.selectize_country_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Country...'
+            };
             $scope.selectize_blood_options = ["O+ve", "A+ve","A+ve","B-ve","B+ve","O-ve"];
             $scope.selectize_blood_config = {
                 create: false,

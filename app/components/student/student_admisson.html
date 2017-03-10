@@ -27,7 +27,7 @@
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="admission_date">Admission Date<span class="req">*</span></label>
-                                    <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.w1_birth_date"/>
+                                    <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.admission_date"/>
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <div class="uk-width-large-1-4 uk-width-medium-1-2">
@@ -113,8 +113,8 @@
                                     <input type="text" config="selectize_a_config" options="selectize_a_data.options" ng-model="selectize_a" name="selectize_a" selectize />
                                 </div>
                                 <div class="uk-width-medium-1-2 parsley-row">
-                                    <label for="wizard_birth_place">Roll No<span class="req"></span></label>
-                                    <input type="text" name="wizard_birth_place" id="wizard_birth_place" required class="md-input" md-input ng-model="wizard.w1_birth_place" />
+                                    <label for="roll_no">Roll No<span class="req"></span></label>
+                                    <input type="text" name="roll_no" id="roll_no" required class="md-input" md-input ng-model="wizard.roll_no" />
                                 </div>
                             </div>
                             <div class="uk-clearfix uk-margin-large-top">
@@ -150,13 +150,9 @@
                             </div>
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-4 parsley-row">
-                                    <label for="Pincode">Country<span class="req">*</span></label>
-                                    <input type="text" name="Pincode" id="Pincode" required class="md-input" md-input ng-model="wizard.Pincode" />
+                                    <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="selectize_country" name="selectize_country" selectize />
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
-                                    <!-- <label for="phone">Phone<span class="req">*</span></label>
-                                    <input type="text" name="phone" id="phone" required class="md-input" md-input ng-model="wizard.phone" /> -->
-
                                     <div class="uk-input-group">
                                         <span class="uk-input-group-addon">
                                             <i class="material-icons">&#xE0CD;</i>
@@ -256,12 +252,11 @@
                                                                 <input type="text" name="pr_state" id="pr_state" required class="md-input" md-input ng-model="wizard.pr_state" />
                                                             </div>
                                                             <div class="uk-width-medium-1-4 parsley-row">
-                                                                <label for="pr_state">Pincode<span class="req"></span></label>
-                                                                <input type="text" name="pr_state" id="pr_state" required class="md-input" md-input ng-model="wizard.pr_state" />
+                                                                <label for="pr_pincode">Pincode<span class="req"></span></label>
+                                                                <input type="text" name="pr_pincode" id="pr_pincode" required class="md-input" md-input ng-model="wizard.pr_pincode" />
                                                             </div>
                                                             <div class="uk-width-medium-1-4 parsley-row">
-                                                                <label for="pr_country">Country<span class="req"></span></label>
-                                                                <input type="text" name="address" id="address" required class="md-input" md-input ng-model="wizard.address" />
+                                                                <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="selectize_country" name="selectize_country" selectize />
                                                             </div>
                                                         </div>
                                                         <div class="uk-grid" data-uk-grid-margin>
@@ -372,8 +367,8 @@
                                 <hr class="md-hr"/>
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-4 parsley-row">
-                                        <label for="institute">Institution Name<span class="req"></span></label>
-                                        <input type="text" name="institute" id="institute" required class="md-input" md-input ng-model="wizard.institute" />
+                                        <label for="Sibling">Sibling<span class="req"></span></label>
+                                        <input type="text" name="Sibling" id="Sibling" required class="md-input" md-input ng-model="wizard.Sibling" />
                                     </div>
                                 </div>
                             </div>
@@ -385,14 +380,12 @@
                                 <hr class="md-hr"/>
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
-                                        <!-- <label for="institute">Facebook<span class="req"></span></label>
-                                        <input type="text" name="institute" id="institute" required class="md-input" md-input ng-model="wizard.institute" /> -->
                                         <div class="uk-input-group">
                                             <span class="uk-input-group-addon">
                                                 <a href="#"><i class="uk-icon-facebook"></i></a>
                                             </span>
-                                            <label for="wizard_twitter">Facebook</label>
-                                            <input type="text" class="md-input" name="wizard_twitter" id="wizard_twitter" md-input ng-model="wizard.w1_twitter" />
+                                            <label for="facebook">Facebook</label>
+                                            <input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="wizard.facebook" />
                                         </div>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
@@ -400,8 +393,8 @@
                                             <span class="uk-input-group-addon">
                                                 <a href="#"><i class="uk-icon-google-plus"></i></a>
                                             </span>
-                                            <label for="wizard_twitter">Google</label>
-                                            <input type="text" class="md-input" name="wizard_twitter" id="wizard_twitter" md-input ng-model="wizard.w1_twitter" />
+                                            <label for="google">Google</label>
+                                            <input type="text" class="md-input" name="google" id="google" md-input ng-model="wizard.google" />
                                         </div>
 
                                     </div>
@@ -410,8 +403,8 @@
                                             <span class="uk-input-group-addon">
                                                 <a href="#"><i class="uk-icon-linkedin"></i></a>
                                             </span>
-                                            <label for="wizard_twitter">Linkedin</label>
-                                            <input type="text" class="md-input" name="wizard_twitter" id="wizard_twitter" md-input ng-model="wizard.w1_twitter" />
+                                            <label for="linkedin">Linkedin</label>
+                                            <input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="wizard.linkedin" />
                                         </div>
                                     </div>
                                 </div>
