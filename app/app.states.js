@@ -1708,6 +1708,34 @@ altairApp
                         pageTitle: 'Student Profile'
                     }
                 })
+                .state("restricted.student.student_editprofile", {
+                    url: "/student_editprofile",
+                    templateUrl: 'app/components/student/profile_edit.html',
+                    controller: 'studentprofile_edit',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'assets/js/custom/uikit_fileinput.min.js',
+                                'app/components/student/profile_editCtrl.js'
+                            ],{serie: true});
+                        }],
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        groups_data: function($http){
+                            return $http({ method: 'GET', url: 'data/groups_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Student Profile'
+                    }
+                })
                 //Added by gnanamani
                 .state("restricted.course", {
                     url: "/course",
