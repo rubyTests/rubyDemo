@@ -141,11 +141,11 @@ angular
                             submenu: [
                                 {
                                     title: 'Employee Admission',
-                                    link: 'restricted.employeemanagement'
+                                    link: 'restricted.employeemanagement.admission'
                                 },
                                 {
                                     title: 'Employee Details',
-                                    link: 'restricted.employeemanagement'
+                                    // link: 'restricted.employeemanagement'
                                 },
                                 {
                                     title: 'Employee Subject Association',

@@ -1619,9 +1619,14 @@ altairApp
 
 
                 // Added by Vijayaraj 08-03-17
-
                 .state("restricted.employeemanagement", {
                     url: "/employeemanagement",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.employeemanagement.admission", {
+                    url: "/admission",
                     templateUrl: 'app/components/employeemanagement/employee_admission.html',
                     controller: 'empAdmCtrl',
                     resolve: {
