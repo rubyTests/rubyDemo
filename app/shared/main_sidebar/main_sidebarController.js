@@ -80,7 +80,15 @@ angular
                         },
                         {
                             title: 'Building',
-                            link: 'restricted.building'
+                            link: 'restricted.setting.building'
+                        },
+                        {
+                            title: 'Building Block',
+                            link: 'restricted.setting.buildingblock'
+                        },
+                        {
+                            title: 'Room',
+                            link: 'restricted.setting.room'
                         }
                     ]
                 },

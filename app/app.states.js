@@ -1784,6 +1784,57 @@ altairApp
                         pageTitle: 'Institiution Details'
                     }
                 })
+                .state("restricted.setting.building", {
+                    url: "/building",
+                    templateUrl: 'app/components/setting/building/buildingview.html',
+                    controller: 'buildingCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/setting/building/buildingCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Building'
+                    }
+                })
+                .state("restricted.setting.buildingblock", {
+                    url: "/buildingblock",
+                    templateUrl: 'app/components/setting/building/buildingblockview.html',
+                    controller: 'buildingblockCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/setting/building/buildingblockCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Building Block'
+                    }
+                })
+                .state("restricted.setting.room", {
+                    url: "/room",
+                    templateUrl: 'app/components/setting/building/roomview.html',
+                    controller: 'roomCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/setting/building/roomCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Room'
+                    }
+                })
 
                 // Added by Vijayaraj 08-03-17
                 .state("restricted.employeemanagement", {

@@ -1,0 +1,32 @@
+[
+    {
+      "id":"1",
+      "Name":"Main",
+      "Number":"1",
+      "Landmark":"Near Canteen"
+    },
+    {
+      "id":"2",
+      "Name":"Mens Hostel",
+      "Number":"2",
+      "Landmark":"Near Canteen"
+    },
+    {
+      "id":"3",
+      "Name":"Ladies Hostel",
+      "Number":"3",
+      "Landmark":"Near Canteen"
+    },
+    {
+      "id":"4",
+      "Name":"Lab",
+      "Number":"4",
+      "Landmark":"Near Canteen"
+    },
+    {
+      "id":"5",
+      "Name":"Canteen",
+      "Number":"5",
+      "Landmark":"Near Playground"
+    }  
+]
