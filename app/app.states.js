@@ -1925,10 +1925,17 @@ altairApp
                     templateUrl: 'app/components/academics/courseBatch/course.html',
                     controller: 'courseCtrl',
                     resolve: {
+                        cour_data: function($http){
+                            return $http({method: 'GET', url: 'data/course.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                            },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable',
+                                'smart-table',
                                 'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
@@ -1942,10 +1949,17 @@ altairApp
                     templateUrl: 'app/components/academics/courseBatch/courseBatch.html',
                     controller: 'courseBatchCtrl',
                     resolve: {
+                          batch_data: function($http){
+                            return $http({method: 'GET', url: 'data/courseBatch.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                            },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable',
+                                'smart-table',
                                 'app/components/academics/courseBatch/courseBatchCtrl.js'
                             ], {serie:true});
                         }]
@@ -1971,15 +1985,23 @@ altairApp
                         pageTitle: 'Subjects'
                     }
                 })
+
                 .state("restricted.syllabus", {
                     url: "/syllabus",
                     templateUrl: 'app/components/academics/courseBatch/syllabus.html',
                     controller: 'syllabusCtrl',
                     resolve: {
+                            syllabus_data: function($http){
+                            return $http({method: 'GET', url: 'data/syllabus.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                            },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                'xeditable',
+                                'smart-table',
                                 'app/components/academics/courseBatch/syllabusCtrl.js'
                             ], {serie:true});
                         }]
@@ -1997,9 +2019,6 @@ altairApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'xeditable',
-                                'smart-table',
-                                'app/components/forms/file_inputController.min.js',
                                 'app/components/academics/courseBatch/departmentCtrl.js'
                             ], {serie:true});
                         }]
