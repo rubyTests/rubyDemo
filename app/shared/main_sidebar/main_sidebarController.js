@@ -409,12 +409,12 @@ angular
                     icon: '&#xE7FD;',
                     submenu:[
                         {
-                            title:'Student Details'
+                            title:'Student Details',
+                            link: 'restricted.student.student_view'
                         },
                         {
                             title:'Student Admission',
                             link: 'restricted.student.admission'
-
                         }
                     ]
                 },
@@ -433,6 +433,12 @@ angular
                     title: 'Library',
                     icon: '&#xE85C;',
                     link: 'restricted.Library'
+                },
+                {
+                    id: 8,
+                    title: 'Calendar',
+                    icon: '&#xE8DF;',
+                    link: 'restricted.calendar'
                 },
                 // {
                 //     id: 15,

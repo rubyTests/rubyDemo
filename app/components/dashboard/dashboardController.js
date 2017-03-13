@@ -14,7 +14,7 @@ angular
             $scope.dynamicStats = [
                 {
                     id: '1',
-                    title: 'Visitors (last 7d)',
+                    title: 'Total Student',
                     count: '0',
                     chart_data: [ 5,3,9,6,5,9,7 ],
                     chart_options: {
@@ -26,7 +26,7 @@ angular
                 },
                 {
                     id: '2',
-                    title: 'Sale',
+                    title: 'Employees',
                     count: '0',
                     chart_data: [ 5,3,9,6,5,9,7,3,5,2 ],
                     chart_options: {
@@ -38,7 +38,7 @@ angular
                 },
                 {
                     id: '3',
-                    title: 'Orders Completed',
+                    title: 'Last Year Result',
                     count: '0',
                     chart_data: [ '64/100' ],
                     chart_options: {
@@ -49,7 +49,7 @@ angular
                 },
                 {
                     id: '4',
-                    title: 'Visitors (live)',
+                    title: 'Admission (live)',
                     count: '1',
                     chart_data: [ 5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2 ],
                     chart_options: {
@@ -63,8 +63,8 @@ angular
 
         // countUp update
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
-                $scope.dynamicStats[0].count = '12456';
-                $scope.dynamicStats[1].count = '142384';
+                $scope.dynamicStats[0].count = '18456';
+                $scope.dynamicStats[1].count = '13238';
                 $scope.dynamicStats[2].count = '64';
 
                 // update live statistics
@@ -159,7 +159,7 @@ angular
 
         // statistics (chartist)
             $scope.chartist_stat_data = {
-                labels: ['Quarter 1', 'Quarter 2', 'Quarter 3', 'Quarter 4'],
+                labels: ['Cse', 'Ece', 'Eee', 'Mech'],
                 series: [
                     [5, 4, 3, 7],
                     [3, 2, 9, 5],

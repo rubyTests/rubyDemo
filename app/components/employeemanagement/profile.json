@@ -48,7 +48,10 @@
 					"address":"NH - 47 Avinashi Road",
 					"city":"chennai",
 					"state":"Tamilnadu",
-					"country":"India"
+					"country":"India",
+					"emprole":"Professor",
+					"period_from":"Mar 2012",
+					"period_to":"Feb 2014"
 	            },
 	            {
 	                "category":"Teaching",
@@ -60,7 +63,10 @@
 					"address":"No:22-Old Mahabalipuram Road",
 					"city":"chennai",
 					"state":"Tamilnadu",
-					"country":"India"
+					"country":"India",
+					"emprole":"Professor",
+					"period_from":"Feb 2014",
+					"period_to":"Mar 2017"
 	            }],
 			"sibling":[
 				{

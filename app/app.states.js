@@ -252,6 +252,22 @@ altairApp
                         }]
                     }
                 })
+                .state("restricted.calendar", {
+                    url: "/calendar",
+                    templateUrl: 'app/components/plugins/calendarView.html',
+                    controller: 'calendarCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'app/components/plugins/calendarController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Calendar'
+                    }
+                })
                 ///RUBY STATE CAMPUS END
 
 
@@ -1977,6 +1993,23 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Student Profile'
+                    }
+                })
+                .state("restricted.student.student_view", {
+                    url: "/student_view",
+                    templateUrl: 'app/components/student/student_view.html',
+                    controller: 'studentviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/student/studentviewCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Student View'
                     }
                 })
                 //Added by gnanamani

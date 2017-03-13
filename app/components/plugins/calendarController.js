@@ -40,9 +40,13 @@ angular
             $scope.uiConfig = {
                 calendar: {
                     header: {
-                        left: 'title today',
+                        left: '',
                         center: '',
-                        right: 'month,agendaWeek,agendaDay,listWeek prev,next'
+                        right: 'agendaWeek,agendaDay,listWeek'
+                    },
+                    viewRender: function(view) {
+                        var title = "<h1 style='font-size:24px;line-height:48px'>Cse First Year</h1>";
+                        $(".fc-left").html(title);
                     },
                     buttonIcons: {
                         prev: 'md-left-single-arrow',
@@ -56,10 +60,28 @@ angular
                         week: ' ',
                         day: ' '
                     },
+                    defaultView:'agendaWeek',
+                    columnFormat:'ddd',
+                    allDaySlot: false,
+                    allDayText: "all-day",
+                    scrollTime: "06:00:00",
+                    slotDuration: "00:30:00",
+                    minTime: "09:00:00",
+                    maxTime: "18:00:00",
+                    slotEventOverlap: !0,
                     aspectRatio: 2.1,
                     defaultDate: moment(),
                     selectable: true,
                     selectHelper: true,
+                    eventRender: function(event, element) {
+                      element.bind('dblclick', function() {
+                         // alert('double click!');
+                         uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
+                      });
+                    },
+                    // eventClick: function(event){
+                    //    uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
+                    // },
                     select: function (start, end) {
                         UIkit.modal.prompt('' +
                             '<h3 class="heading_b uk-margin-medium-bottom">New Event</h3><div class="uk-margin-medium-bottom" id="calendar_colors">' +

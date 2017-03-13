@@ -54,7 +54,7 @@
                         <div class="user_content">
                             <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#user_edit_tabs_content'}">
                                 <li class="uk-active"><a href="#">Personal & Work Details</a></li>
-                                <li><a href="#">Education Details</a></li>
+                                <li><a href="#">Previous Experience</a></li>
                                 <!-- <li><a href="#">Additional Details</a></li> -->
                             </ul>
                             <ul id="user_edit_tabs_content" class="uk-switcher uk-margin">
@@ -166,35 +166,38 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="uk-margin-top">
-                                        <h3 class="full_width_in_card heading_c">
-                                            Work Information
-                                        </h3>
-                                        <div class="uk-grid" data-uk-grid-margin>
-                                            <div class="uk-width-medium-1-1">
-                                                <label for="address">Qualification</label>
-                                                <input class="md-input" type="text" id="address" name="address" ng-model="user_data.Quali" md-input />
-                                            </div>
-                                            <div class="uk-width-medium-1-2">
-                                                <label for="city">Category</label>
-                                                <input class="md-input" type="text" id="category" name="category" ng-model="user_data.category" md-input />
-                                            </div>
-                                            <div class="uk-width-medium-1-2">
-                                                <label for="position">Position</label>
-                                                <input class="md-input" type="text" id="position" name="position" ng-model="user_data.position" md-input />
+                                        <div class="uk-margin-top">
+                                            <h3 class="full_width_in_card heading_c">
+                                                Work Information
+                                            </h3>
+                                            <div class="uk-grid" data-uk-grid-margin>
+                                                <div class="uk-width-medium-1-1">
+                                                    <label for="address">Qualification</label>
+                                                    <input class="md-input" type="text" id="address" name="address" ng-model="user_data.Quali" md-input />
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label for="city">Category</label>
+                                                    <input class="md-input" type="text" id="category" name="category" ng-model="user_data.category" md-input />
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label for="position">Position</label>
+                                                    <input class="md-input" type="text" id="position" name="position" ng-model="user_data.position" md-input />
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <br>
+                                </li>
+                                <li>
                                     <div class="uk-accordion" data-uk-accordion>
-                                        <h3 class="uk-accordion-title" ng-repeat-start="parents in user_data.parentCount">Previous Education Details</h3>
+                                        <h3 class="uk-accordion-title" ng-repeat-start="parents in user_data.parentCount">Previous Work Details</h3>
                                         <div class="uk-accordion-content" ng-repeat-end>
                                             <div class="uk-margin-top">
                                                     <div class="uk-grid" data-uk-grid-margin>
-                                                        <div class="uk-width-medium-1-1">
+                                                        <div class="uk-width-medium-1-2">
+                                                            <label for="emprole">Employee Role</label>
+                                                            <input class="md-input" type="text" id="emprole" name="emprole" ng-model="parents.emprole" md-input />
+                                                        </div>
+                                                        <div class="uk-width-medium-1-2">
                                                             <label for="firstname">Institute Name</label>
                                                             <input class="md-input" type="text" id="firstname" name="firstname" ng-model="parents.inst_name" md-input />
                                                         </div>
@@ -216,23 +219,27 @@
                                                         </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
-                                                        <div class="uk-width-medium-1-2">
+                                                        <div class="uk-width-medium-1-1">
                                                             <label for="education">Country</label>
                                                             <input class="md-input" type="text" id="education" name="education" ng-model="parents.country" md-input />
                                                         </div>
-                                                        <div class="uk-width-medium-1-2">
+                                                        <!-- <div class="uk-width-medium-1-2">
                                                             <label for="Occupation">Position</label>
                                                             <input class="md-input" type="text" id="Occupation" name="Occupation" ng-model="parents.position" md-input />
-                                                        </div>
+                                                        </div> -->
+                                                        <!-- <div class="uk-width-medium-1-3 parsley-row">
+                                                            <label for="period_to">Period <span class="req"></span></label>
+                                                            <input type="text" name="period_to" id="period_to"  class="md-input" md-input ng-model="parents.period_to" />
+                                                        </div> -->
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-2">
-                                                            <label for="income">Duration From</label>
-                                                            <input class="md-input" type="text" id="income" name="income" ng-model="parents.period" md-input />
+                                                            <label for="period_from">Period From</label>
+                                                            <input class="md-input" type="text" id="period_from" name="period_from" ng-model="parents.period_from" md-input />
                                                         </div>
                                                         <div class="uk-width-medium-1-2">
-                                                            <label for="income">Duration To</label>
-                                                            <input class="md-input" type="text" id="income" name="income" ng-model="parents.period" md-input />
+                                                            <label for="period_to">Period To</label>
+                                                            <input class="md-input" type="text" id="period_to" name="period_to" ng-model="parents.period_to" md-input />
                                                         </div>
                                                     </div>
                                                 </div>
