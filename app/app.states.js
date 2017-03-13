@@ -1887,7 +1887,7 @@ altairApp
                     }
                 })
                 .state("restricted.employeemanagement.profile", {
-                    url: "/profile",
+                    url: "/profile/{emp_id}",
                     templateUrl: 'app/components/employeemanagement/employee_profile.html',
                     controller: 'employee_profileCtrl',
                     resolve: {
@@ -1905,10 +1905,11 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Employee Profile'
-                    }
+                    },
+                    params:{emp_id:null}
                 })
                 .state("restricted.employeemanagement.employee_editprofile", {
-                    url: "/employee_editprofile",
+                    url: "/employee_editprofile/{emp_id}",
                     templateUrl: 'app/components/employeemanagement/profile_edit.html',
                     controller: 'employeetprofile_edit',
                     resolve: {
@@ -1927,7 +1928,8 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Employee Profile'
-                    }
+                    },
+                    params:{emp_id:null}
                 })
                 .state("restricted.employeemanagement.employee_view", {
                     url: "/employee_view",
@@ -1948,6 +1950,23 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Employee View'
+                    }
+                })
+                .state("restricted.employeemanagement.employee_profile_tableview", {
+                    url: "/employee_profile_tableview",
+                    templateUrl: 'app/components/employeemanagement/employee_table_view.html',
+                    controller: 'employeetable_viewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/employeemanagement/employeetable_viewCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Employee List'
                     }
                 })
                 .state("restricted.student", {

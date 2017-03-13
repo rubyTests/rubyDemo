@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('studentviewCtrl',
+    .controller('employeetable_viewCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.dt_data = [];
@@ -43,20 +43,10 @@ angular
                             type: 'number',
                             bRegex: true,
                             bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
                         }
                     ]
                 })
                 .withButtons([
-                    // {
-                    //     extend:    'copyHtml5',
-                    //     text:      '<i class="uk-icon-files-o"></i> Copy',
-                    //     titleAttr: 'Copy'
-                    // },
                     {
                         extend:    'print',
                         text:      '<i class="uk-icon-print"></i> Print',
@@ -67,11 +57,6 @@ angular
                         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
                         titleAttr: ''
                     },
-                    // {
-                    //     extend:    'csvHtml5',
-                    //     text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                    //     titleAttr: 'CSV'
-                    // },
                     {
                         extend:    'pdfHtml5',
                         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
@@ -83,7 +68,7 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/student/student_profile_view.json')
+            $resource('app/components/employeemanagement/employee_list.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {

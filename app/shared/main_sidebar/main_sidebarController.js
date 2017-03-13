@@ -190,10 +190,10 @@ angular
                                     title: 'Employee Admission',
                                     link: 'restricted.employeemanagement.admission'
                                 },
-                                {
-                                    title: 'Employee Profile',
-                                    link: 'restricted.employeemanagement.profile'
-                                },
+                                // {
+                                //     title: 'Employee Profile',
+                                //     link: 'restricted.employeemanagement.profile'
+                                // },
                                 {
                                     title: 'Employee Details',
                                     link: 'restricted.employeemanagement.employee_view'

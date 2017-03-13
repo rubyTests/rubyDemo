@@ -4,10 +4,13 @@ angular
         '$rootScope',
         '$scope',
         'user_data',
+        '$stateParams',
+        '$filter',
         // 'groups_data',
-        function ($rootScope,$scope,user_data) {
-
-            $scope.user_data = user_data[0];
+        function ($rootScope,$scope,user_data,$stateParams,$filter) {
+            // console.log($stateParams.emp_id,'$stateParams');
+            var paramsData=$filter('filter')(user_data, {id : $stateParams.emp_id});
+            $scope.user_data = paramsData[0];
             $scope.user_data_contacts = user_data[0].contact;
             // languages
             var langData = $scope.user_languages_options = [

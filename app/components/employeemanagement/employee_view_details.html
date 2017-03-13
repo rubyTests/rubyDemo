@@ -1,6 +1,9 @@
 <div id="page_content">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Contact List</h3>
+        <h3 class="heading_b uk-margin-bottom">Employee List 
+
+        <span style="float: right;"><a ui-sref="restricted.employeemanagement.employee_profile_tableview"><i class="uk-icon-list"></i> List</a></span>
+        </h3>
 
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content">
@@ -33,16 +36,16 @@
                             <i class="md-icon material-icons" ng-class="{'md-icon-light' : user.featured}">&#xE5D4;</i>
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav">
-                                    <li><a ui-sref="restricted.employeemanagement.employee_editprofile">Edit</a></li>
+                                    <li><a ui-sref="restricted.employeemanagement.employee_editprofile({emp_id:user.id})">Edit</a></li>
                                     <!-- <li><a href="#">Remove</a></li> -->
                                 </ul>
                             </div>
                         </div>
                         <div class="uk-text-center">
-                            <a ui-sref="restricted.employeemanagement.profile"><img class="md-card-head-avatar" ng-src="{{user.photo1_path}}" alt=""/></a>
+                            <a ui-sref="restricted.employeemanagement.profile({emp_id:user.id})"><img class="md-card-head-avatar" ng-src="{{user.photo1_path}}" alt=""/></a>
                         </div>
                         <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.featured}">
-                            <a ui-sref="restricted.employeemanagement.profile" style="color:rgb(33,33,70);">{{user.firstname}} {{user.lastname}}</a>
+                            <a ui-sref="restricted.employeemanagement.profile({emp_id:user.id})" style="color:rgb(33,33,70);">{{user.firstname}} {{user.lastname}}</a>
                             <span class="uk-text-truncate">{{user.jobtitle}}</span>
                         </h3>
                     </div>

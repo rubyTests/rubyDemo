@@ -13,7 +13,7 @@ angular
             var all_companies = contact_list.map(function(a) {
 
                 a.fullname=a.firstname+" "+a.lastname;
-                console.log(a.fullname,'aaaaaaaa');
+                // console.log(a.fullname,'aaaaaaaa');
                 return a.company;
             });
 
