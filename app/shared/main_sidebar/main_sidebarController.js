@@ -196,7 +196,7 @@ angular
                                 },
                                 {
                                     title: 'Employee Details',
-                                    // link: 'restricted.employeemanagement'
+                                    link: 'restricted.employeemanagement.employee_view'
                                 },
                                 {
                                     title: 'Employee Subject Association',

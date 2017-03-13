@@ -1929,6 +1929,27 @@ altairApp
                         pageTitle: 'Employee Profile'
                     }
                 })
+                .state("restricted.employeemanagement.employee_view", {
+                    url: "/employee_view",
+                    templateUrl: 'app/components/employeemanagement/employee_view_details.html',
+                    controller: 'employee_viewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/employeemanagement/employee_viewCtrl.js'
+                            ],{serie: true});
+                        }],
+                        contact_list: function($http){
+                            return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Employee View'
+                    }
+                })
                 .state("restricted.student", {
                     url: "/student",
                     template: '<div ui-view autoscroll="false"/>',

@@ -13,7 +13,7 @@
                 <div class="uk-width-large-7-10">
                     <div class="md-card">
                         <div class="user_heading">
-                            <div class="user_heading_menu" data-uk-dropdown="{pos:'bottom-right'}">
+                            <!-- <div class="user_heading_menu" data-uk-dropdown="{pos:'bottom-right'}">
                                 <i class="md-icon material-icons md-icon-light">&#xE5D4;</i>
                                 <div class="uk-dropdown uk-dropdown-small">
                                     <ul class="uk-nav">
@@ -21,7 +21,7 @@
                                         <li><a href="#">Action 2</a></li>
                                     </ul>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="user_heading_avatar">
                                 <div class="thumbnail">
                                     <img ng-src="{{user_data.photo1_path}}" alt="user avatar"/>
@@ -82,7 +82,7 @@
                                                         <span class="uk-text-small uk-text-muted">Marital Status</span>
                                                     </div>
                                                 </li>
-                                                <li >
+                                                <!-- <li >
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">
                                                             <a href="{{user_data.facebook}}"><i class="md-list-addon-icon uk-icon-facebook setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -91,7 +91,7 @@
                                                         </span>
                                                         <span class="uk-text-small uk-text-muted">Social Profile</span>
                                                     </div>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
 
@@ -134,6 +134,38 @@
                                                 
                                             </ul>
                                         </div>
+
+                                        <div class="uk-width-large-1-2">
+                                            <h4 class="heading_c uk-margin-small-bottom">Work Info</h4>
+                                            <ul class="md-list">
+                                                <li >
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading">Bachelor of Engineering</span>
+                                                        <span class="uk-text-small uk-text-muted">Qualification</span>
+                                                    </div>
+                                                </li>
+                                                <li >
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading">Teacher</span>
+                                                        <span class="uk-text-small uk-text-muted">Category</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-large-1-2">
+                                            <h4 class="heading_c uk-margin-small-bottom">Social Profile</h4>
+                                            <ul class="md-list">
+                                                <li >
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading">
+                                                            <a href="{{user_data.facebook}}"><i class="md-list-addon-icon uk-icon-facebook setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a href="{{user_data.google}}"><i class="md-list-addon-icon uk-icon-google-plus setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a href="{{user_data.linkedin}}"><i class="md-list-addon-icon uk-icon-linkedin setWidth"></i></a>
+                                                        </span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </li>
                                 <li>
@@ -158,9 +190,13 @@
                                                             </div>
                                                         </li>
                                                         <li >
-                                                            <div class="md-list-content">
+                                                            <!-- <div class="md-list-content">
                                                                 <span class="md-list-heading">{{previous.position}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Position</span>
+                                                            </div> -->
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">{{previous.period_from}}</span>
+                                                                <span class="uk-text-small uk-text-muted">Peroid From</span>
                                                             </div>
                                                         </li>
                                                     </ul>
@@ -183,8 +219,8 @@
                                                         </li>
                                                         <li>
                                                             <div class="md-list-content">
-                                                                <span class="md-list-heading">{{previous.period}}</span>
-                                                                <span class="uk-text-small uk-text-muted">Period</span>
+                                                                <span class="md-list-heading">{{previous.period_to}}</span>
+                                                                <span class="uk-text-small uk-text-muted">Period To</span>
                                                             </div>
                                                         </li>
                                                     </ul>

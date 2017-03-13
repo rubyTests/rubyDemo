@@ -46,11 +46,13 @@
 			"parentCount":[
 	            {
 	                "name": "Personal & Contact Details",
-	                "members": "172"
+	                "members": "172",
+	                "relation":"Father"
 	            },
 	            {
 	                "name": "Personal & Contact Details",
-	                "members": "113"
+	                "members": "113",
+	                "relation":"Mother"
 	            }],
 			"sibling":[
 				{

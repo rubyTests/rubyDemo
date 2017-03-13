@@ -18,7 +18,7 @@ angular
                 maxItems: 1,
                 placeholder: 'Select Marital Status...'
             };
-            $scope.selectize_d_options = ["CSE", "EEE", "ECE ","MECH"];
+            $scope.selectize_d_options = ["Computer Science & Engineering", "Electrical and Electronics Engineering", "Electronic Communication Engineering","Information Technology"];
             $scope.selectize_d_config = {
                 create: false,
                 maxItems: 1,
@@ -48,7 +48,7 @@ angular
                 maxItems: 1,
                 placeholder: 'Select Blood Group...'
             };
-            $scope.selectize_cat_options = ["Category 1", "Category 2","Category 3"];
+            $scope.selectize_cat_options = ["Teaching", "Non-Teaching"];
             $scope.selectize_cat_config = {
                 create: false,
                 maxItems: 1,
