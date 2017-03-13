@@ -25,22 +25,27 @@ angular
                 .withColumnFilter({
                     aoColumns: [
                         {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
                             type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         }

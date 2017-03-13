@@ -2052,6 +2052,28 @@ altairApp
                         pageTitle: 'Student View'
                     }
                 })
+
+                .state("restricted.student.student_list", {
+                    url: "/student_list",
+                    templateUrl: 'app/components/student/student_view_details.html',
+                    controller: 'studentlistCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/student/studentlistCtrl.js'
+                            ],{serie: true});
+                        }],
+                        contact_list: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/student_details.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Employee View'
+                    }
+                })
                 //Added by gnanamani
                 .state("restricted.course", {
                     url: "/course",

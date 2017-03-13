@@ -410,7 +410,7 @@ angular
                     submenu:[
                         {
                             title:'Student Details',
-                            link: 'restricted.student.student_view'
+                            link: 'restricted.student.student_list'
                         },
                         {
                             title:'Student Admission',
