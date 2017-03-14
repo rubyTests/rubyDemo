@@ -26,16 +26,16 @@
                             <i class="md-icon material-icons" ng-class="{'md-icon-light' : user.featured}">&#xE5D4;</i>
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav">
-                                    <li><a ui-sref="restricted.employeemanagement.employee_editprofile({emp_id:user.id})">Edit</a></li>
+                                    <li><a ui-sref="restricted.student.student_editprofile({stu_id:user.id})">Edit</a></li>
                                     <!-- <li><a href="#">Remove</a></li> -->
                                 </ul>
                             </div>
                         </div>
                         <div class="uk-text-center">
-                            <a ui-sref="restricted.employeemanagement.profile({emp_id:user.id})"><img class="md-card-head-avatar" ng-src="{{user.photo1_path}}" alt=""/></a>
+                            <a ui-sref="restricted.student.student_profile({stu_id:user.id})"><img class="md-card-head-avatar" ng-src="{{user.photo1_path}}" alt=""/></a>
                         </div>
                         <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.featured}">
-                            <a ui-sref="restricted.employeemanagement.profile({emp_id:user.id})" style="color:rgb(33,33,70);">{{user.firstname}} {{user.lastname}}</a>
+                            <a ui-sref="restricted.student.student_profile({stu_id:user.id})" style="color:rgb(33,33,70);">{{user.firstname}} {{user.lastname}}</a>
                             <span class="uk-text-truncate">{{user.Admission_No}}</span>
                         </h3>
                     </div>

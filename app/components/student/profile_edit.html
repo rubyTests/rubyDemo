@@ -145,7 +145,7 @@
                                 </li>
                                 <li>
                                     <div class="uk-accordion" data-uk-accordion>
-                                        <h3 class="uk-accordion-title" ng-repeat-start="parentsss in user_data.parentCount">{{parentsss.name}}</h3>
+                                        <h3 class="uk-accordion-title" ng-repeat-start="parentsss in user_data.parentCount">{{parentsss.relation}} Personal & Contact details</h3>
                                         <div class="uk-accordion-content" ng-repeat-end>
                                             <div class="uk-margin-top">
                                                     <div class="uk-grid" data-uk-grid-margin>
@@ -165,13 +165,13 @@
                                                         </div>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="relation">relation</label>
-                                                            <input class="md-input" type="text" id="relation" name="relation" ng-model="user_data.relation" md-input />
+                                                            <input class="md-input" type="text" id="relation" name="relation" ng-model="parentsss.relation" md-input />
                                                         </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="education">Education</label>
-                                                            <input class="md-input" type="text" id="education" name="education" ng-model="user_data.education" md-input />
+                                                            <input class="md-input" type="text" id="education" name="education" ng-model="parentsss.education" md-input />
                                                         </div>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="Occupation">Occupation</label>
@@ -243,8 +243,8 @@
                                         </h3>
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
-                                                <label for="user_edit_position_control">Institute Name</label>
-                                                <input class="md-input" type="text" id="user_edit_position_control" name="user_edit_position_control" ng-model="user_data.inst_name" md-input />
+                                                <label for="inst_name">Institute Name</label>
+                                                <input class="md-input" type="text" id="inst_name" name="inst_name" ng-model="user_data.inst_name" md-input />
                                             </div>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_position_control">Course Name</label>
@@ -253,12 +253,12 @@
                                         </div>
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
-                                                <label for="user_edit_position_control">Year of Completion</label>
-                                                <input class="md-input" type="text" id="user_edit_position_control" name="user_edit_position_control" ng-model="user_data.completion" md-input />
+                                                <label for="completion">Year of Completion</label>
+                                                <input class="md-input" type="text" id="completion" name="completion" ng-model="user_data.completion" md-input />
                                             </div>
                                             <div class="uk-width-medium-1-2">
-                                                <label for="user_edit_position_control">Total Marks</label>
-                                                <input class="md-input" type="text" id="user_edit_position_control" name="user_edit_position_control" ng-model="user_data.total_mark" md-input />
+                                                <label for="total_mark">Total Marks</label>
+                                                <input class="md-input" type="text" id="total_mark" name="total_mark" ng-model="user_data.total_mark" md-input />
                                             </div>
                                         </div>
                                         <h3 class="full_width_in_card heading_c">

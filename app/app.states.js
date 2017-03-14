@@ -1993,7 +1993,7 @@ altairApp
                     }
                 })
                 .state("restricted.student.student_profile", {
-                    url: "/student_profile",
+                    url: "/student_profile/{stu_id}",
                     templateUrl: 'app/components/student/student_profile.html',
                     controller: 'studentprofileCtrl',
                     resolve: {
@@ -2011,10 +2011,11 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Student Profile'
-                    }
+                    },
+                    params:{stu_id:null}
                 })
                 .state("restricted.student.student_editprofile", {
-                    url: "/student_editprofile",
+                    url: "/student_editprofile/{stu_id}",
                     templateUrl: 'app/components/student/profile_edit.html',
                     controller: 'studentprofile_edit',
                     resolve: {
@@ -2033,7 +2034,8 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Student Profile'
-                    }
+                    },
+                    params:{stu_id:null}
                 })
                 .state("restricted.student.student_view", {
                     url: "/student_view",
