@@ -61,6 +61,11 @@ angular
                         }
                     ]
                 })
+                .withOption('initComplete', function() {
+                    $timeout(function() {
+                        $compile($('.dt-uikit .md-input'))($scope);
+                    })
+                });
                 // .withButtons([
                 //     {
                 //         extend:    'copyHtml5',
@@ -89,11 +94,10 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Hod Profile Id'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Phone 1.'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('Phone 2'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Department Name'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Dept Code'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Head Of Department'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Phone'),
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {
@@ -189,7 +193,7 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
-            $resource('data/department.json')
+            $resource('app/components/academics/courseBatch/department.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
@@ -200,7 +204,7 @@ angular
                 $scope.selectize_hodProfieId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Hod Profile Id ...'
+                    placeholder: 'Head Of Department ...'
                 };
        
 

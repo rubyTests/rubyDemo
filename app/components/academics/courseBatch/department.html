@@ -1,16 +1,16 @@
 <style type="text/css">
-    .selectize-control.single {
-      margin-top: 0;
-    }
-    .uk-width-medium-4-5, .uk-width-medium-8-10 {
-        height: 65px;
-        width: 80%;
-    }
-    .uk-modal-dialog {
-      height: 544px;
-      margin: 18px auto;
-      width: 444px;
-    }
+  .selectize-control.single {
+    margin-top: 0;
+  }
+  .uk-width-medium-4-5, .uk-width-medium-8-10 {
+    height: 65px;
+    width: 80%;
+  }
+  .uk-modal-dialog {
+    height: 454px;
+    margin: 18px auto;
+    width: 417px;
+  }
 </style>
 <div id="page_content" ng-controller="departmentCtrl as showCase">
     <div id="page_content_inner">
@@ -30,36 +30,32 @@
                         </button>
                         </tr> -->
                         <tr>
-                            <th style="width: 20%;">Name</th>
-                            <th>Code</th>
-                            <th>Image</th>
-                            <th>Phone 1</th>
-                            <th>Phone 2</th>
+                            <th style="width: 20%;">Department Name</th>
+                            <th>Dept Code</th>
+                            <th>Head Of Department</th>
+                            <th>Phone</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th >Name</th>
-                            <th>Code</th>
-                            <th>Image</th>
-                            <th>Phone 1</th>
-                            <th>Phone 2</th>
-                            <th>Action</th>
+                            <th>Department Name</th>
+                            <th>Dept Code</th>
+                            <th>Head Of Department</th>
+                            <th>Phone</th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row.dept_name}}</td>
-                            <td>{{row.dept_code}}</td>
-                            <td>{{row.HOD_profile_id}}</td>
-                            <td>{{row.phone1}}</td>
-                            <td>{{row.phone2}}</td>
-                            <td class="uk-text-center">
-                                <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
-                            </td>
-                        </tr>
+                      <tr ng-repeat="row in showCase.dt_data">
+                        <td>{{row.dept_name}}</td>
+                        <td>{{row.dept_code}}</td>
+                        <td>{{row.HOD_profile_id}}</td>
+                        <td>{{row.phone1}}</td>
+                        <td class="uk-text-center">
+                            <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                        </td>
+                      </tr>
                     </tbody>
                 </table>
             </div>
@@ -69,8 +65,8 @@
       <div id="modal_overflow" class="uk-modal">
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title">Add Department &nbsp;<i class="uk-icon-cc-mastercard"></i></h3>
-          <div class="uk-overflow-container">
+          <h3 class="uk-modal-title"><i class="uk-icon-cc-mastercard"></i>&nbsp; Add Department </h3>
+         <!--  <div class="uk-overflow-container"> -->
             <div class="md-card-content">
               <form class=""><p></p>
                 <div class="uk-form-row">
@@ -78,23 +74,23 @@
                   <input type="text" ng-model="course_name" class="md-input" required md-input>
                 </div>
                  <div class="uk-form-row">
-                   <label>Dept Code</label>
+                   <label>Department Code</label>
                   <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
                 </div>
                  <div class="uk-form-row">
                   <input type="text" config="selectize_hodProfieId_config" options="selectize_hodProfieId_options" ng-model="selectize_attdncType" name="selectize_hodProfieId" selectize/>
                 </div>
                 <div class="uk-form-row">
-                  <label>Phone 1</label>
+                  <label>Phone</label>
                   <input type="text" ng-model="Phone1" class="md-input" required md-input>
                 </div>
-                <div class="uk-form-row">
-                  <label>Phone 2</label>
-                  <input type="text" ng-model="Phone2" class="md-input" required md-input>
-                </div>
+               <!--  <div class="uk-form-row">
+                  <label>Mobile</label>
+                  <input type="text" ng-model="Mobile" class="md-input" required md-input>
+                </div> -->
                 </form>
             </div>
-          </div>
+        <!--   </div> -->
           <div class="uk-modal-footer uk-text-right">
             <div class="uk-modal-footer uk-text-right">
                 <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>

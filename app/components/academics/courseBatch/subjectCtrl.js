@@ -89,10 +89,10 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Subject Name'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Sub Code'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Subject Type'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Min Pass'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Course Name'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Total Hours')
             ];
             function toggleAll (selectAll, selectedItems) {
@@ -189,7 +189,7 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
-            $resource('data/subject.json')
+            $resource('app/components/academics/courseBatch/subject.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
@@ -202,6 +202,33 @@ angular
                     maxItems: 1,
                     placeholder: 'Subject Type...'
                 };
+                $scope.selectize_courseName_options = ["Computer Science", "Information Technology"];
+                $scope.selectize_courseName_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Course Name'
+                };
+           
+          
+
+                    //$scope.dt_data=[];
+                   
+                    $scope.saveSubjects=function(){
+                        var data = {
+                            sub_name:$scope.subject_name,
+                            sub_code:$scope.sub_code,
+                            min_pass:$scope.min_pass,
+                            total_hours:$scope.total_hours
+                        };   
+                        console.log(data);
+                       var res = $scope.dt_data.push(data);
+                       console.log(res);
+                    };
+
+                // $scope.EditClass = function(data) {
+                //     console.log(data.sub_code);
+                // }
+    
                
 
 
