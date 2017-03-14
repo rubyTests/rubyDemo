@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('courseCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
             var vm = this;
             vm.selected = {};
             vm.selectAll = false;
@@ -94,8 +94,8 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Course Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Department Name'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Department'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Attendance Type'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Min Attendance %'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('GradingType'),
@@ -194,14 +194,33 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
+             $scope.get_name = [];
+             $resource('app/components/academics/courseBatch/department.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.get_data = [];
+                    $scope.get_data =  dt_data;
+                     angular.forEach($scope.get_data, function(value, key){
+                        $scope.name=  value.dept_name;
+                        $scope.get_name.push($scope.name);
+                    });
+                });
             $resource('app/components/academics/courseBatch/course.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
+                    angular.forEach(vm.dt_data, function(value, key){
+                        value.departmentName=$scope.departmentName(value.id);
+                    });
                 });
+                $scope.departmentName = function(id){
+                    var getName=$filter('filter')($scope.get_data,{id : id },true);
+                    if (getName[0]) return getName[0].dept_name;
+                }
 
-                $scope.selectize_deptId_options = ["D1", "D2"];
+                $scope.selectize_deptId_options = $scope.get_name;
                 $scope.selectize_deptId_config = {
                     create: false,
                     maxItems: 1,

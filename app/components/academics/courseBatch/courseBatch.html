@@ -30,8 +30,8 @@
                         </button>
                         </tr> -->
                         <tr>
-                            <th style="width: 20%;">Batch Name</th>
-                            <th>Course Name</th>
+                            <th style="width: 20%;">Batch</th>
+                            <th>Course</th>
                             <th>Period From</th>
                             <th>Period To</th>
                             <th>Action</th>
@@ -39,8 +39,8 @@
                     </thead>
                     <tfoot>
                         <tr>
-                          <th>Batch Name</th>
-                          <th>Course Name</th>
+                          <th>Batch</th>
+                          <th>Course</th>
                           <th>Period From</th>
                           <th>Period To</th>
                         </tr>
@@ -48,7 +48,7 @@
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
                             <td>{{row.cBatch_name}}</td>
-                            <td>{{row.course_name}}</td>
+                            <td>{{row.courseName}}</td>
                             <td>{{row.period_from}}</td>
                             <td>{{row.period_to}}</td>
                             <td class="uk-text-center">

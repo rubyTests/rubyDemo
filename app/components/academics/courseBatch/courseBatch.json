@@ -1,19 +1,19 @@
  [
 	{
-		"id": "1",
-		"course_id": "1",
+		"id":1,
+		"course_id": 1,
 		"course_name": "LKG",
 		"cBatch_name": "Class-A",
 		"period_from":"01-02-2017",
 		"period_to":"02-03-2017",
 		"information1":"",
 		"information2":"",
-		"feeStructure_id":"1",
-		"courseSubject_id":"1"
+		"feeStructure_id":1,
+		"courseSubject_id":1
 	},
 	{
-		"id": "2",
-		"course_id": "2",
+		"id": 2,
+		"course_id": 2,
 		"course_name": "UKG",
 		"cBatch_name": "Class-B",
 		"period_from":"03-02-2017",

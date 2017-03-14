@@ -94,8 +94,8 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Department Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Dept Code'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Department'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Head Of Department'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Phone'),
             ];
@@ -193,18 +193,22 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
+            $scope.get_id = [];
             $resource('app/components/academics/courseBatch/department.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
+                     angular.forEach( vm.dt_data, function(value, key){
+                        $scope.hod_id=  value.HOD_profile_id;
+                        $scope.get_id.push($scope.hod_id);
+                    });
                 });
-
-                $scope.selectize_hodProfieId_options = ["h1", "h2"];
+                $scope.selectize_hodProfieId_options = $scope.get_id;
                 $scope.selectize_hodProfieId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Head Of Department ...'
+                    placeholder: 'Head Of Department'
                 };
        
 

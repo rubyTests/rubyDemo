@@ -1,13 +1,8 @@
 angular
     .module('altairApp')
     .controller('subjectCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -89,30 +84,12 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Subject Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Sub Code'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Subject'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Subject Type'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Course Name'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Total Hours')
             ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }
             //     .newOptions()
             //     // .withDisplayLength(10)
             //     // .withColumnFilter({
@@ -189,41 +166,64 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
+             $scope.get_name = [];
+             $resource('app/components/academics/courseBatch/course.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.get_data = [];
+                    $scope.get_data =  dt_data;
+                     angular.forEach($scope.get_data, function(value, key){
+                        $scope.name=  value.course_name;
+                        $scope.get_name.push($scope.name);
+                    });
+                });
+               
             $resource('app/components/academics/courseBatch/subject.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
-                });
+                    angular.forEach(vm.dt_data, function(value, key){
+                        value.course_name=$scope.courseName(value.course_id);
+                    });
+                    // console.log(vm.dt_data,"vm.dt_data");
 
+                });
+           
+           
+                $scope.courseName = function(id){
+                    var getName=$filter('filter')($scope.get_data,{id : id },true);
+                    if (getName[0]) return getName[0].course_name;
+                }
                 $scope.selectize_subType_options = ["Regular", "Daily"];
                 $scope.selectize_subType_config = {
                     create: false,
                     maxItems: 1,
                     placeholder: 'Subject Type...'
                 };
-                $scope.selectize_courseName_options = ["Computer Science", "Information Technology"];
+
+                //console.log($scope.get_name,"checkkkkkkkkkkk");
+                $scope.selectize_courseName_options = $scope.get_name;
+                //$scope.selectize_courseName_options.push($scope.get_data);
                 $scope.selectize_courseName_config = {
                     create: false,
                     maxItems: 1,
                     placeholder: 'Course Name'
                 };
-           
-          
-
-                    //$scope.dt_data=[];
-                   
+                    $scope.save_data = [];
                     $scope.saveSubjects=function(){
                         var data = {
                             sub_name:$scope.subject_name,
                             sub_code:$scope.sub_code,
-                            min_pass:$scope.min_pass,
+                            sub_type:$scope.selectize_subType,
+                            course_name:$scope.selectize_courseName,
                             total_hours:$scope.total_hours
                         };   
                         console.log(data);
-                       var res = $scope.dt_data.push(data);
-                       console.log(res);
+                        $scope.save_data.push(data);  
                     };
+                    $scope.displayedCollection = [].concat($scope.save_data);
 
                 // $scope.EditClass = function(data) {
                 //     console.log(data.sub_code);

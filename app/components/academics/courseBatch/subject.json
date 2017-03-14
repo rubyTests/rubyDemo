@@ -1,776 +1,776 @@
  [
 	
 	{
-		"id": "1",
+		"id": 1,
 		"sub_name": "English",
 		"sub_code": "E001",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 1
 		
 	},
 	{
-		"id": "2",
+		"id": 2,
 		"sub_name": "Hindi",
 		"sub_code": "H002",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 2
 		
 	},
 	{
-		"id": "3",
+		"id": 3,
 		"sub_name": "Mathematics",
 		"sub_code": "M003",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 3
 		
 	},
 	{
-		"id": "4",
+		"id": 4,
 		"sub_name": "Drawing & Painting",
 		"sub_code": "DP04",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 4
 		
 	},
 	{
-		"id": "5",
+		"id": 5,
 		"sub_name": "Rhyme Book ",
 		"sub_code": "RB05",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 5
 		
 	},
 	{
-		"id": "6",
+		"id": 6,
 		"sub_name": "Tamil",
 		"sub_code": "T001",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 6
 		
 	},
 	{
-		"id": "7",
+		"id": 7,
 		"sub_name": "English",
 		"sub_code": "E002",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 7
 		
 	},
 	{
-		"id": "8",
+		"id": 8,
 		"sub_name": "Mathematics",
 		"sub_code": "M003",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 8
 		
 	},
 	{
-		"id": "9",
+		"id": 9,
 		"sub_name": "Science",
 		"sub_code": "S004",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 9
 		
 	},
 	{
-		"id": "10",
+		"id": 10,
 		"sub_name": "Social",
 		"sub_code": "SS05",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "25"
+		"course_id": 10
 		
 	},
 	{
-		"id": "11",
+		"id": 11,
 		"sub_name": "Tamil",
 		"sub_code": "T011",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 11
 		
 	},
 	{
-		"id": "12",
+		"id": 12,
 		"sub_name": "English",
 		"sub_code": "E012",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 12
 		
 	},
 	{
-		"id": "13",
+		"id": 13,
 		"sub_name": "Maths",
 		"sub_code": "M013",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 13
 		
 	},
 	{
-		"id": "14",
+		"id": 14,
 		"sub_name": "Chemistry",
 		"sub_code": "C014",
 		"sub_type": "Regular",
 		"total_hours": "12",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 14
 		
 	},
 	{
-		"id": "15",
+		"id": 15,
 		"sub_name": "Physics",
 		"sub_code": "P015",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 15
 		
 	},
 	{
-		"id": "16",
+		"id": 16,
 		"sub_name": "Biology",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 16
 		
 	},
 
 	{
-		"id": "17",
+		"id": 17,
 		"sub_name": "Biochemistry",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 17
 		
 	},
 	{
-		"id": "18",
+		"id": 18,
 		"sub_name": "Microbiology",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "6",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 18
 		
 	},
 	{
-		"id": "19",
+		"id": 19,
 		"sub_name": "Ethics",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 19
 		
 	},
 	{
-		"id": "20",
+		"id": 20,
 		"sub_name": "Ecommerce",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 20
 		
 	},
 	{
-		"id": "21",
+		"id": 21,
 		"sub_name": "Auditing",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 21
 		
 	},
 	{
-		"id": "22",
+		"id": 22,
 		"sub_name": "Income Tax and Central Sales Tax",
 		"sub_code": "B016",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 22
 		
 	},
 
 
 	{
-		"id": "23",
+		"id": 23,
 		"sub_name": "Computer Science",
 		"sub_code": "CS017",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 23
 		
 	},
 	{
-		"id": "24",
+		"id": 24,
 		"sub_name": "Economics",
 		"sub_code": "E018",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 24
 		
 	},
 	{
-		"id": "25",
+		"id": 25,
 		"sub_name": "Accountancy",
 		"sub_code": "A019",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 25
 		
 	},
 	{
-		"id": "25",
+		"id": 25,
 		"sub_name": "Oops",
 		"sub_code": "OP020",
 		"sub_type": "Regular",
 		"total_hours": "10",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 26
 		
 	},
 	{
-		"id": "26",
+		"id": 26,
 		"sub_name": "Data Structure",
 		"sub_code": "DS021",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 27
 		
 	},
 	{
-		"id": "27",
+		"id": 27,
 		"sub_name": "Dbms",
 		"sub_code": "DB022",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 28
 		
 	},
 	{
-		"id": "28",
+		"id": 28,
 		"sub_name": "Operating system",
 		"sub_code": "OS023",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 29
 		
 	},
 	{
-		"id": "29",
+		"id": 29,
 		"sub_name": "Java Technology",
 		"sub_code": "JT024",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 30
 		
 	},
 	{
-		"id": "30",
+		"id": 30,
 		"sub_name": "Software Testing",
 		"sub_code": "St025",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 31
 		
 	},
 	{
-		"id": "31",
+		"id": 31,
 		"sub_name": "Network Analysis ",
 		"sub_code": "NA026",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 32
 		
 	},
 	{
-		"id": "32",
+		"id": 32,
 		"sub_name": "Signals and Systems",
 		"sub_code": "SS027",
 		"sub_type": "Regular",
 		"total_hours": "8",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 33
 		
 	},
 	{
-		"id": "33",
+		"id": 33,
 		"sub_name": "Microprocessor and computer architecture",
 		"sub_code": "MCA28",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 34
 		
 	},
 	{
-		"id": "34",
+		"id": 34,
 		"sub_name": "Data Communication and Networking",
 		"sub_code": "DCN29",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 35
 		
 	},
 	{
-		"id": "35",
+		"id": 35,
 		"sub_name": "Digital signal processing",
 		"sub_code": "DCN29",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 36
 		
 	},
 	{
-		"id": "36",
+		"id": 36,
 		"sub_name": "Networking",
 		"sub_code": "DCN29",
 		"sub_type": "Regular",
 		"total_hours": "11",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 37
 		
 	},
 	{
-		"id": "37",
+		"id": 37,
 		"sub_name": "Biomedical Signal Processing",
 		"sub_code": "BSP30",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 38
 		
 	},
 	{
-		"id": "38",
+		"id": 38,
 		"sub_name": "Rehabilitation",
 		"sub_code": "R0031",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 39
 		
 	},
 	{
-		"id": "39",
+		"id": 39,
 		"sub_name": "Mathematics for medical imaging",
 		"sub_code": "MMI32",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 40
 		
 	},
 	{
-		"id": "40",
+		"id": 40,
 		"sub_name": "Medical Instrumentation",
 		"sub_code": "MI033",
 		"sub_type": "Regular",
 		"total_hours": "20",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 41
 		
 	},
 	{
-		"id": "41",
+		"id": 41,
 		"sub_name": "Digital Electronics system design",
 		"sub_code": "DE034",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 42
 		
 	},
 	{
-		"id": "42",
+		"id": 42,
 		"sub_name": "Digital signal processing",
 		"sub_code": "DE034",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 43
 		
 	},
 	{
-		"id": "43",
+		"id": 43,
 		"sub_name": "Thermodynamics",
 		"sub_code": "TH035",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 44
 		
 	},
 	{
-		"id": "44",
+		"id": 44,
 		"sub_name": "Material Technology",
 		"sub_code": "MT036",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 45
 		
 	},
 	{
-		"id": "45",
+		"id": 45,
 		"sub_name": "Powerplant Engineering",
 		"sub_code": "PE037",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 46
 		
 	},
 	{
-		"id": "46",
+		"id": 46,
 		"sub_name": "Heat and Mass Transfer",
 		"sub_code": "HMT038",
 		"sub_type": "Regular",
 		"total_hours": "7",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 47
 		
 	},
 	{
-		"id": "47",
+		"id": 47,
 		"sub_name": "Kinematics",
 		"sub_code": "K0039",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 48
 		
 	},
 	{
-		"id": "48",
+		"id": 48,
 		"sub_name": "Fluid Mechanics",
 		"sub_code": "FM040",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 49
 		
 	},
 	{
-		"id": "49",
+		"id": 49,
 		"sub_name": "Thermodynamics",
 		"sub_code": "TH041",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 50
 		
 	},
 	{
-		"id": "50",
+		"id": 50,
 		"sub_name": "Polymers and Nano Composites",
 		"sub_code": "PNC42",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 51
 		
 	},
 	{
-		"id": "51",
+		"id": 51,
 		"sub_name": "Iron and steel making",
 		"sub_code": "ISM043",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 52
 		
 	},
 	{
-		"id": "52",
+		"id": 52,
 		"sub_name": "Material Processing",
 		"sub_code": "MP044",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 53
 		
 	},
 	{
-		"id": "53",
+		"id": 53,
 		"sub_name": "Chemical Metallurgy",
 		"sub_code": "CM045",
 		"sub_type": "Regular",
 		"total_hours": "15",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 54
 		
 	},
 	{
-		"id": "54",
+		"id": 54,
 		"sub_name": "Solid Mechanics",
 		"sub_code": "SM046",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 55
 		
 	},
 	{
-		"id": "55",
+		"id": 55,
 		"sub_name": "Hydraulics",
 		"sub_code": "H0047",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 56
 		
 	},
 	{
-		"id": "56",
+		"id": 56,
 		"sub_name": "Water and Waste Water",
 		"sub_code": "WWW48",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 57
 		
 	},
 	{
-		"id": "57",
+		"id": 57,
 		"sub_name": "Design of steel structure",
 		"sub_code": "DSS49",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 58
 		
 	},
 	{
-		"id": "58",
+		"id": 58,
 		"sub_name": "Structural design and detailing",
 		"sub_code": "SDD50",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 59
 		
 	},
 	{
-		"id": "59",
+		"id": 59,
 		"sub_name": "Surveying",
 		"sub_code": "S0051",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id":60
 		
 	},
 	{
-		"id": "60",
+		"id": 60,
 		"sub_name": "Fluid Mechanics",
 		"sub_code": "FM052",
 		"sub_type": "Elective",
 		"total_hours": "13",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 61
 		
 	},
 	{
-		"id": "61",
+		"id": 61,
 		"sub_name": "Surveying",
 		"sub_code": "S0053",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 62
 		
 	},
 	{
-		"id": "62",
+		"id": 62,
 		"sub_name": "Thermodynamics",
 		"sub_code": "TH054",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 63
 		
 	},
 	{
-		"id": "63",
+		"id": 63,
 		"sub_name": "Sedimentlogy",
 		"sub_code": "S0055",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 64
 		
 	},
 	{
-		"id": "64",
+		"id": 64,
 		"sub_name": "Spatial database system",
 		"sub_code": "SDS56",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 65
 		
 	},
 	{
-		"id": "65",
+		"id": 65,
 		"sub_name": "Mobile Mapping",
 		"sub_code": "MM057",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 66
 		
 	},
 	{
-		"id": "66",
+		"id": 66,
 		"sub_name": "Software Engineering",
 		"sub_code": "SDS56",
 		"sub_type": "Elective",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 67
 		
 	},
 	{
-		"id": "67",
+		"id": 67,
 		"sub_name": "Computer Network",
 		"sub_code": "MM057",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 68
 		
 	},
 	{
-		"id": "68",
+		"id": 68,
 		"sub_name": "Web Technology",
 		"sub_code": "SDS56",
 		"sub_type": "Elective",
 		"total_hours": "10",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 69
 		
 	},
 	{
-		"id": "69",
+		"id": 69,
 		"sub_name": "Mobile Computing",
 		"sub_code": "MM057",
 		"sub_type": "Regular",
 		"total_hours": "4",
 		"information1": "",
 		"information2": "",
-		"MinPass": "50"
+		"course_id": 70
 		
 	}
 

@@ -2,17 +2,8 @@ angular
     .module('altairApp')
     .controller('courseBatchCtrl',
        
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
-            //console.log(user_data);
-            // $scope.user_data = user_data[0];
-            // $scope.user_data = user_data[0].course_name;
-            // console.log($scope.get_data);
-            var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter) {
+            var vm = this;  
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -99,29 +90,12 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Batch Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Course Name'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Batch'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Course'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Period From'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Period To'),
             ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }
+          
             //     .newOptions()
             //     // .withDisplayLength(10)
             //     // .withColumnFilter({
@@ -198,12 +172,31 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
+            $scope.get_name = [];
+            $resource('app/components/academics/courseBatch/course.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.get_data = [];
+                    $scope.get_data =  dt_data;
+                     angular.forEach($scope.get_data, function(value, key){
+                        $scope.name=  value.course_name;
+                        $scope.get_name.push($scope.name);
+                    });
+                });
             $resource('app/components/academics/courseBatch/courseBatch.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
+                    angular.forEach(vm.dt_data, function(value, key){
+                        value.courseName=$scope.courseName(value.course_id);
+                    });
                 });
+                $scope.courseName = function(id){
+                    var getName=$filter('filter')($scope.get_data,{id : id },true);
+                    if (getName[0]) return getName[0].course_name;
+                }
 
                 $scope.selectize_courseId_options = ["C1", "C2"];
                 $scope.selectize_courseId_config = {
