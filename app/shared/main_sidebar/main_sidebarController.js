@@ -211,16 +211,39 @@ angular
                     icon: '&#xE02F;',
                     // link: 'restricted.pages.invoices.list'
                     submenu: [
+                         {
+                            title: 'Manage Course & Batch',
+                            submenu: [
+                                {
+                                    title: 'Department',
+                                    link: 'restricted.academics.department'
+                                },
+                                {
+                                    title: 'Course',
+                                    link: 'restricted.academics.course'
+                                },
+                                {
+                                    title: 'Batch',
+                                    link: 'restricted.academics.courseBatches'
+                                },
+                                {
+                                    title: 'Calendar',
+                                },
+                                {
+                                    title: 'Assign Class Teacher',
+                                }
+                            ]
+                        },
                         {
                             title: 'Manage Subjects & Syllabus',
                             submenu: [
                                 {
-                                    title: 'Add Subject',
-                                    link: 'restricted.subjects'
+                                    title: 'Subjects',
+                                    link: 'restricted.academics.subjects'
                                 },
                                 {
-                                    title: 'Add Syllabus',
-                                    link: 'restricted.syllabus'
+                                    title: 'Syllabus',
+                                    link: 'restricted.academics.syllabus'
                                 }
                             ]
                         },
@@ -260,29 +283,7 @@ angular
                                 }
                             ]
                         },
-                        {
-                            title: 'Manage Course & Batch',
-                            submenu: [
-                                {
-                                    title: 'Add Department',
-                                    link: 'restricted.department'
-                                },
-                                {
-                                    title: 'Add Course',
-                                    link: 'restricted.course'
-                                },
-                                {
-                                    title: 'Add Batch',
-                                    link: 'restricted.courseBatches'
-                                },
-                                {
-                                    title: 'Calendar',
-                                },
-                                {
-                                    title: 'Assign Class Teacher',
-                                }
-                            ]
-                        },
+                       
                         {
                             title: 'Discipline',
                             submenu: [
