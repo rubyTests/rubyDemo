@@ -241,9 +241,13 @@ angular
                                     title: 'Subjects',
                                     link: 'restricted.academics.subjects'
                                 },
+                                // {
+                                //     title: 'Syllabus',
+                                //     link: 'restricted.academics.syllabus'
+                                // },
                                 {
                                     title: 'Syllabus',
-                                    link: 'restricted.academics.syllabus'
+                                    link: 'restricted.academics.syllabus_view'
                                 }
                             ]
                         },

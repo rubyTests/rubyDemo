@@ -14,7 +14,7 @@ angular
 
                 a.fullname=a.firstname+" "+a.lastname;
                 // console.log(a.fullname,'aaaaaaaa');
-                return a.company;
+                return a;
             });
 
             // remove duplicate companies

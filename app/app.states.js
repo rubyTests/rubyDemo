@@ -2076,6 +2076,71 @@ altairApp
                         pageTitle: 'Employee View'
                     }
                 })
+
+
+                // Academics added by vijayaraj
+                .state("restricted.academics", {
+                    url: "/academics",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.academics.syllabus_view", {
+                    url: "/syllabus_view",
+                    templateUrl: 'app/components/academics/syllabus_view.html',
+                    controller: 'syllabusviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/syllabusviewCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Syllabus View'
+                    }
+                })
+                .state("restricted.academics.syllabus_add", {
+                    url: "/syllabus_add",
+                    templateUrl: 'app/components/academics/syllabus_add.html',
+                    controller: 'syllabusaddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_tinymce',
+                                'app/components/academics/syllabusaddCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Syllabus Add'
+                    }
+                })
+                .state("restricted.academics.syllabus_viewlist", {
+                    url: "/syllabus_viewlist",
+                    templateUrl: 'app/components/academics/syllabus_details_view.html',
+                    controller: 'syllabusdetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/academics/syllabusdetailCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/academics/subject_notes.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Syllabus View'
+                    }
+                })
                 //Added by gnanamani
                  .state("restricted.academics", {
                     url: "/academics",
