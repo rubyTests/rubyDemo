@@ -2077,22 +2077,26 @@ altairApp
                     }
                 })
                 //Added by gnanamani
-                .state("restricted.course", {
+                 .state("restricted.academics", {
+                    url: "/academics",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+                .state("restricted.academics.course", {
                     url: "/course",
                     templateUrl: 'app/components/academics/courseBatch/course.html',
                     controller: 'courseCtrl',
                     resolve: {
-                        cour_data: function($http){
-                            return $http({method: 'GET', url: 'data/course.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                            },
+                        // cour_data: function($http){
+                        //     return $http({method: 'GET', url: 'data/course.json'})
+                        //         .then(function (data) {
+                        //             return data.data;
+                        //         });
+                        //     },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                // 'bower_components/angular-resource/angular-resource.min.js',
-                                'xeditable',
-                                'smart-table',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
                                 'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
@@ -2101,22 +2105,19 @@ altairApp
                         pageTitle: 'Course'
                     }
                 })
-                 .state("restricted.courseBatches", {
+                 .state("restricted.academics.courseBatches", {
                     url: "/courseBatches",
                     templateUrl: 'app/components/academics/courseBatch/courseBatch.html',
                     controller: 'courseBatchCtrl',
                     resolve: {
-                          batch_data: function($http){
-                            return $http({method: 'GET', url: 'data/courseBatch.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                            },
+                           
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 // 'bower_components/angular-resource/angular-resource.min.js',
-                                'xeditable',
-                                'smart-table',
+                                //'xeditable',
+                                //'smart-table',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
                                 'app/components/academics/courseBatch/courseBatchCtrl.js'
                             ], {serie:true});
                         }]
@@ -2125,7 +2126,7 @@ altairApp
                         pageTitle: 'CourseBatches'
                     }
                 })
-                .state("restricted.subjects", {
+                .state("restricted.academics.subjects", {
                     url: "/subjects",
                     templateUrl: 'app/components/academics/courseBatch/subject.html',
                     controller: 'subjectCtrl',
@@ -2136,29 +2137,28 @@ altairApp
                                 'lazy_datatables',
                                 'app/components/academics/courseBatch/subjectCtrl.js'
                             ], {serie:true});
-                        }]
+                        }],
+                        // user_data: function($http){
+                        //     return $http({ method: 'GET', url: 'app/components/academics/courseBatch/course.json' })
+                        //         .then(function (data) {
+                        //             return data.data;
+                        //         });
+                        // },
                     },
                     data: {
                         pageTitle: 'Subjects'
                     }
                 })
-
-                .state("restricted.syllabus", {
+                .state("restricted.academics.syllabus", {
                     url: "/syllabus",
                     templateUrl: 'app/components/academics/courseBatch/syllabus.html',
                     controller: 'syllabusCtrl',
                     resolve: {
-                            syllabus_data: function($http){
-                            return $http({method: 'GET', url: 'data/syllabus.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                            },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                // 'bower_components/angular-resource/angular-resource.min.js',
-                                'xeditable',
-                                'smart-table',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                //'app/components/academics/forms/wysiwyg_ckeditorController.min.js',
+                                'lazy_datatables',
                                 'app/components/academics/courseBatch/syllabusCtrl.js'
                             ], {serie:true});
                         }]
@@ -2167,7 +2167,23 @@ altairApp
                         pageTitle: 'Syllabus'
                     }
                 })
-                .state("restricted.department", {
+                .state("restricted.academics.addSyllabus", {
+                    url: "/addSyllabus",
+                    templateUrl: 'app/components/academics/courseBatch/addSyllabus.html',
+                    // controller: 'syllabusCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_ckeditor',
+                                'app/components/academics/courseBatch/addSyllabus.js'
+                            ], {serie:true});
+                        }]
+                    }
+                    // data: {
+                    //     pageTitle: 'Add Syllabus'
+                    // }
+                })
+                .state("restricted.academics.department", {
                     url: "/department",
                     templateUrl: 'app/components/academics/courseBatch/department.html',
                     controller: 'departmentCtrl',
