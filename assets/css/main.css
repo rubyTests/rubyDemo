@@ -13830,3 +13830,8 @@ body.pace-done > .page_preloader {
 .wizard > .content > .body pre[class*="language-"] {
   max-height: inherit;
 }
+
+/*Added by Vijayaraj*/
+.selectize-dropdown{
+    margin-top: 0px !important;
+}
