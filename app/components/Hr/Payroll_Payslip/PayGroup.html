@@ -28,12 +28,13 @@
                     <tbody>
                         <tr ng-repeat="row in CreateNewData">
                             <td>{{row.ps_name}}</td>
+                            <td>{{row.Assemp_count}}</td>
                             <td>{{row.ps_item_count}}</td>
                             <td>{{row.ps_freq}}</td>
-                            <td>{{row.ps_freq}}</td>
                             <td class="uk-text-center">
-                                <a href="#" ui-sref="restricted.ViewPayGroup({id:{{row.pis_id}}})"  class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons md-24">&#xE417;</i></a>
-                                <a href="#" ui-sref="restricted.ViewGroupEmployee" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
+                                <a href="#" ui-sref="restricted.ViewPayGroup({id:{{row.pis_id}}})"  class="ts_remove_row" ><i class="md-icon material-icons md-24">&#xE417;</i></a>
+                                <a href="#" ui-sref="restricted.ViewGroupEmployee({id:{{row.pis_id}}})"  class="ts_remove_row" ><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
+                                <!-- <a href="#" ui-sref="restricted.ViewGroupEmployee({id:{{row.pis_id}}})" class="ts_remove_row"><i class="md-icon material-icons md-24">&#xE8D3;</i></a> -->
                             </td>
                         </tr>
                     </tbody>

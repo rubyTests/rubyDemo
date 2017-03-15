@@ -171,7 +171,7 @@ altairApp
                 .state("restricted.ViewPayGroup",{
                     url: "/View-PayGroup/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/ViewPayGroup.html',
-                    // controller : 'ViewPayGroupCtrl',
+                    controller : 'ViewPayGroupCtrl',
                     parmas :{'id' :{value:null}},
                     resolve: {
                         Pay_item : function($http){
@@ -192,23 +192,6 @@ altairApp
                                     return data.data;
                                 });
                         },
-                        // Pay_item: function($http){
-                        //     return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
-                        //         .then(function (data) {
-                        //             return data.data;
-                        //         });
-                        // },
-                        // Pay_Structure: function($http){
-                        //     return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
-                        //         .then(function (data) {
-                        //             return data.data;
-                        //         });
-                        // },
-                        // pay_Group: function($http){
-                        //     return $http({method:'GET',url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json'}).then(function(data){
-                        //         return data.data;
-                        //     });
-                        // },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'app/components/Hr/Payroll_Payslip/ViewPayGroupCtrl.js'
@@ -218,9 +201,12 @@ altairApp
                     
                 })
                 .state("restricted.ViewGroupEmployee",{
-                    url: "/View-Group Employee",
+                    url: "/ViewGroup Employee/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroupEmployee.html',
+                    controller : 'PayGroupEmployeeCtrl',
+                    parmas :{'id' :{value:null}},
                     resolve: {
+                        // params:{'id': {value:null}},
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
@@ -228,7 +214,7 @@ altairApp
                                 'app/components/Hr/Payroll_Payslip/PayGroupEmployeeCtrl.js'
                             ]);
                         }]
-                    },
+                    }
                     
                 })
                 // .state("restricted.StructureGroup", {

@@ -1,7 +1,6 @@
 angular
     .module('altairApp')
-    .controller('PayGroupEmployeeCtrl',
-        function($compile, $scope, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder) {
+    .controller('PayGroupEmployeeCtrl',['$scope','$compile','$stateParams', '$timeout', '$resource', '$filter', 'DTOptionsBuilder', 'DTColumnDefBuilder',function( $scope, $compile, $stateParams, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.selected = {};
             vm.selectAll = false;
@@ -90,42 +89,23 @@ angular
                 }
                 vm.selectAll = true;
             }             
-            $scope.CreateNewData=[];
+            $scope.EmployeeDetail=[];
             console.log($scope.CreateNewData,'$scope.CreateNewData');
-            $scope.PayItemStructureFn=function(){
-                $scope.PayStructure.forEach(function(value,key){
-                    $scope.CreateNewData.push({ ps_name : value.Name ,ps_item_count : $scope.GetPayItemCount(value.id) , ps_freq : value.Frequency  });
-                    // console.log($scope.CreateNewData,'$scope.CreateNewData');
+            // alert($stateParams.id);
+            $scope.EmployeeProfileFn=function(){                       
+                $scope.gropEmployeeProfile=$filter('filter')($scope.EmployeeProfile,{ PayStructure_id : parseInt($stateParams.id)},true);
+                console.log($scope.gropEmployeeProfile,'$scope.gropEmployeeProfile  1');
+                angular.forEach($scope.gropEmployeeProfile,function(value,key){
+                    // console.log(value,'value');
+                     $scope.EmployeeDetail.push({empFirstName : value.firstname,empLastName : value.lastname,empdet:value.Dept,empcat:value.category});
+                     // console.log($scope.EmployeeDetail,'$scope.EmployeeDetail');
                     });
             }
-            $scope.GetPayItemCount=function(str_id){
-                var getPaySN=$filter('filter')($scope.PayItemStructure,{ PayStructure_id : str_id}, true);
-                return getPaySN.length;
-            }
-            // $resource('data/dt_data.json')
-            //     .query()
-            //     .$promise
-            //     .then(function(dt_data) {
-            //         vm.dt_data = dt_data;
-            // });
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json')
+            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json')
                 .query()
                 .$promise
                 .then(function(data) {
-                    $scope.PayItem = data;
-                });
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.PayStructure = data;
-                });
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.PayItemStructure = data;
-                    $scope.PayItemStructureFn();
+                    $scope.EmployeeProfile = data;
+                    $scope.EmployeeProfileFn();
                 }); 
-        }
-    );
+        }]);

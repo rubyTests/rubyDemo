@@ -1,0 +1,167 @@
+<!--     <div id="page_content" ng-controller="ViewPayGroupCtrl">
+        <div id="page_content_inner">
+            <h3 class="heading_b uk-margin-bottom">Payroll Group</h3>
+            <div class="md-card uk-margin-medium-bottom uk-grid1">
+                <div class="md-card-content uk-width-medium-1-1">
+                <p></p>
+                <div class="uk-grid  uk-grid-medium">
+                    <div class="uk-width-large-1-2">
+                        <div class="uk-grid uk-grid-small">
+                            <div class="uk-width-large-1-3">
+                                <span class="uk-text-muted uk-text-middle">Payroll Group Name </span>
+                            </div>
+                            <div class="uk-width-large-1-3">
+                                <span class="uk-text-large uk-text-middle">HOD</span>
+                            </div>
+                        </div>
+                        <hr class="uk-grid-divider uk-hidden-large">
+                    </div>
+                    <div class="uk-width-large-1-2">
+                        <div class="uk-grid uk-grid-small">
+                            <div class="uk-width-large-1-3">
+                                <span class="uk-text-muted uk-text-middle">Payment Frequency</span>
+                            </div>
+                            <div class="uk-width-large-2-3">
+                                <span class="uk-text-large uk-text-middle">Monthly</span>
+                            </div>
+                        </div>
+                        <hr class="uk-grid-divider uk-hidden-large">
+                    </div>
+                </div>
+                <hr class="uk-grid-divider">
+                 <div class="uk-grid uk-grid-divider uk-grid-medium">
+                    <div class="uk-width-large-1-2">
+                        <div class="uk-overflow-container">
+                            <table class="uk-table">
+                                <h4>Earnings</h4>
+                                <thead>
+                                <tr>
+                                    <th>Pay Item Name</th>
+                                    <th>Pay Item Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>Travel Allowances</td>
+                                    <td>Acommodation Allowances</td>
+                                </tr>
+                                <tr>
+                                    <td>DA</td>
+                                    <td>15%</td>
+                                </tr>
+                                <tr>
+                                    <td>TA</td>
+                                    <td>10%</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="uk-width-large-1-2">
+                        <div class="uk-overflow-container">
+                            <table class="uk-table">
+                                <h4>Deductions</h4>
+                                <thead>
+                                <tr>
+                                    <th>Pay Item Name</th>
+                                    <th>Pay Item Value</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>LOP</td>
+                                    <td>15%</td>
+                                </tr>
+                                <tr>
+                                    <td>ESI</td>
+                                    <td>1.75%</td>
+                                </tr>
+                                <tr>
+                                    <td>PF</td>
+                                    <td>12%</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+<div id="page_content">
+    <div id="page_content_inner">
+    <h3 class="heading_b uk-margin-bottom">Payroll Structure</h3>
+    <div class="md-card uk-margin-medium-bottom">
+        <div class="md-card-content uk-width-medium-1-1 large-padding">
+            <div class="uk-grid  uk-grid-medium" ng-repeat="row in UserDatas">
+                <div class="uk-width-large-1-2">
+                    <div class="uk-grid uk-grid-small">
+                        <div class="uk-width-large-1-3">
+                            <span class="uk-text-muted uk-text-middle">Payroll Structure Name</span>
+                        </div>
+                        <div class="uk-width-large-1-3">
+                            <span class="uk-text-large uk-text-middle">{{row.Name}}</span>
+                        </div>
+                    </div>
+                    <hr class="uk-grid-divider uk-hidden-large">
+                </div>
+                <div class="uk-width-large-1-2">
+                    <div class="uk-grid uk-grid-small">
+                        <div class="uk-width-large-1-3">
+                            <span class="uk-text-muted uk-text-middle">Payment Frequency</span>
+                        </div>
+                        <div class="uk-width-large-2-3">
+                            <span class="uk-text-large uk-text-middle">{{row.Frequency}}</span>
+                        </div>
+                    </div>
+                    <hr class="uk-grid-divider uk-hidden-large">
+                </div>
+            </div>
+            <hr class="uk-grid-divider" ng-if="EarningsDiv && DeductionDiv">
+            <div class="uk-grid uk-grid-divider uk-grid-medium" ng-if="EarningsDiv">
+                <div class="uk-width-medium-8-10">
+                    <div class="uk-overflow-container">
+                        <h2 class="heading_a ng-scope">Earnings</h2><table class="uk-table uk-table-striped">
+                            <thead>
+                            <tr>
+                                <th>Pay Item Name</th>
+                                <th>Pay Item Value </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="row in EarningsData">
+                                <!-- <td>{{row | json}}</td> -->
+                                <td>{{row.Name}}</td>
+                                <td>{{row.Amount}}</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid uk-grid-divider uk-grid-medium" ng-if="DeductionDiv">
+                <div class="uk-width-medium-8-10">
+                    <div class="uk-overflow-container">
+                    <h4>Deductions</h4>
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                        <tr>
+                            <th>Pay Item Name</th>
+                            <th>Pay Item Value</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="row in DeductionData">
+                            <td>{{row.Name}}</td>
+                            <td>{{row.Amount}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </div>
+                
+            </div>
+        </div>
+    </div>
+</div>    
