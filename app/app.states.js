@@ -2295,7 +2295,7 @@ altairApp
                     }
                 })
                 .state("restricted.academics.syllabus_viewlist", {
-                    url: "/syllabus_viewlist",
+                    url: "/syllabus_viewlist/{syllabus_id}",
                     templateUrl: 'app/components/academics/syllabus_details_view.html',
                     controller: 'syllabusdetailCtrl',
                     resolve: {
@@ -2313,7 +2313,8 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Syllabus View'
-                    }
+                    },
+                    params:{syllabus_id:null}
                 })
                 //Added by gnanamani
                 //  .state("restricted.academics", {

@@ -1,36 +1,148 @@
 [
     {
-        "group_name": "Subjects",
-        "notes": [
+        "id": 1,
+        "sub_title": "Data Structure",
+        "name": "Subjects",
+        "chapter": [
             {
-                "id": 1,
-                "title": "Data Structure",
-                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam.",
-                "date": "Wed 30.09.2015"
+                "syllabus_title": "Chapter 1",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
             },
             {
-                "id": 2,
-                "title": "Mobile Computing",
-                "content": "Quis expedita omnis saepe qui tempore suscipit adipisci totam est non porro iure velit earum eveniet eius amet ut assumenda aliquam dolor.",
-                "date": "Tue 29.09.2015"
+                "syllabus_title": "Chapter 2",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
             },
             {
-                "id": 3,
-                "title": "Computer Graphics",
-                "content": "Totam optio qui sunt repudiandae ut aut ut nihil nobis ratione mollitia et tenetur rerum molestiae explicabo aut sit alias et.",
-                "date": "Mon 28.09.2015"
+                "syllabus_title": "Chapter 3",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
             },
             {
-                "id": 4,
-                "title": "Unix Internal",
-                "content": "Aspernatur qui voluptatibus et iure sit cum corporis ad a sunt error cum eius molestiae tenetur et inventore maxime dolorem et est beatae beatae accusantium quia.",
-                "date": "Sun 27.09.2015"
+                "syllabus_title": "Chapter 4",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
             },
             {
-                "id": 5,
-                "title": "Computer Networks",
-                "content": "Distinctio est ducimus ut ratione ut et non cum qui in quod tempora officia ullam quia vel et.",
-                "date": "Sat 26.09.2015"
+                "syllabus_title": "Chapter 5",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "sub_title": "Mobile Computing",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "Chapter 1",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 2",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 3",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 4",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 5",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 6",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 7",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "sub_title": "Computer Networks",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "Chapter 1",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 2",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 3",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 4",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 5",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 6",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "sub_title": "Computer Graphics",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "Chapter 1",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 2",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 3",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 4",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 5",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "sub_title": "Syatem Software",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "Chapter 1",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 2",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 3",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 4",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
+            },
+            {
+                "syllabus_title": "Chapter 5",
+                "content": "Et aut et deleniti doloribus ut eligendi modi iusto odit dolorem magni quisquam."
             }
         ]
     }

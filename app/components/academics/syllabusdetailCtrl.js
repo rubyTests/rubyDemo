@@ -5,7 +5,14 @@ angular
         '$scope',
         '$window',
         'notes_data',
-        function ($rootScope,$scope,$window,notes_data) {
+        '$timeout',
+        'variables',
+        '$stateParams',
+        '$filter',
+        function ($rootScope,$scope,$window,notes_data,$timeout,variables,$stateParams,$filter) {
+            console.log($stateParams,'stateParams');
+            var paramsData=$filter('filter')(notes_data, {id : $stateParams.syllabus_id});
+            // $scope.user_data = paramsData[0];
 
             $rootScope.page_full_height = true;
             $rootScope.headerDoubleHeightActive = true;
@@ -16,7 +23,7 @@ angular
             });
             
             // get note data
-            $scope.notes_data = notes_data;
+            $scope.notes_data = paramsData;
 
             // hide note form
             $scope.noteActive = false;
@@ -81,5 +88,64 @@ angular
                 angular.element($window).resize();
             }
 
+
+            // Help Notes
+            $rootScope.page_full_height = true;
+            $rootScope.headerDoubleHeightActive = true;
+
+            $scope.$on('$destroy', function() {
+                $rootScope.page_full_height = false;
+                $rootScope.headerDoubleHeightActive = false;
+            });
+            
+            // $scope.help_data = help_data;
+
+            var $toggleAll_btn = $('#toggleAll'),
+                $help_accordion = $('.help_accordion');
+
+            $scope.$on('onLastRepeat', function (scope, element, attrs) {
+                UIkit.accordion($help_accordion, {
+                    collapse: false,
+                    showfirst: false
+                });
+            });
+
+            $scope.toggleAll = function($event) {
+                $event.preventDefault();
+                $toggleAll_btn.velocity("transition.expandOut", {
+                    duration: 280,
+                    easing: variables.easing_swiftOut,
+                    begin: function() {
+                        if(!$help_accordion.hasClass('all_expanded')) {
+                            $help_accordion.addClass('all_expanded').find('.uk-accordion-title').not('.uk-active').each(function() {
+                                var $this = $(this);
+                                $timeout(function() {
+                                    $this.click()
+                                },10);
+                            });
+                        } else {
+                            $help_accordion.removeClass('all_expanded').find('.uk-accordion-title.uk-active').each(function() {
+                                var $this = $(this);
+                                $timeout(function() {
+                                    $this.click()
+                                },10);
+                            });
+                        }
+                    },
+                    complete: function() {
+                        $toggleAll_btn.velocity("transition.expandIn", {
+                            duration: 280,
+                            easing: variables.easing_swiftOut,
+                            begin: function() {
+                                if(!$help_accordion.hasClass('all_expanded')) {
+                                    $toggleAll_btn.html('&#xe8f2;');
+                                } else {
+                                    $toggleAll_btn.html('&#xe8ee;');
+                                }
+                            }
+                        })
+                    }
+                });
+            };
         }
     ]);
