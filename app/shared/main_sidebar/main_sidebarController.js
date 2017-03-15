@@ -330,40 +330,38 @@ angular
                     title: 'Finance',
                     icon: '&#xE227;',
                     submenu: [
-                        {
-                            title: 'Asset & Liability Management',
-                            // link: 'restricted.pages.chat'
-                            submenu: [
-                                {
-                                    title:'Asset'
-                                },
-                                {
-                                    title:'Liability'
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Finance Category',
-                            // link: 'restricted.pages.chatboxes'
-                        },
-                        {
-                            title: 'Transactions',
-                            // link: 'restricted.pages.chat'
-                            submenu: [
-                                {
-                                    title:'Add Expanse'
-                                },
-                                {
-                                    title:'Add Income'
-                                },
-                                {
-                                    title:'Reverted Transactions'
-                                },
-                            ]
-                        },
-                        {
-                            title:'Donations'
-                        },
+                        // {
+                        //     title: 'Asset & Liability Management',
+                        //     // link: 'restricted.pages.chat'
+                        //     submenu: [
+                        //         {
+                        //             title:'Asset'
+                        //         },
+                        //         {
+                        //             title:'Liability'
+                        //         }
+                        //     ]
+                        // },
+                        // {
+                        //     title: 'Finance Category',
+                        // },
+                        // {
+                        //     title: 'Transactions',
+                        //     submenu: [
+                        //         {
+                        //             title:'Add Expanse'
+                        //         },
+                        //         {
+                        //             title:'Add Income'
+                        //         },
+                        //         {
+                        //             title:'Reverted Transactions'
+                        //         },
+                        //     ]
+                        // },
+                        // {
+                        //     title:'Donations'
+                        // },
                         {
                             title:'Fees',
                             submenu:[
@@ -371,39 +369,36 @@ angular
                                     title:'Configuration',
                                     submenu:[
                                         {
-                                            title:'Category'
+                                            title:'Fee Item',
+                                            link: 'restricted.finance.fee.config.feeitemDetails'
                                         },
                                         {
-                                            title:'Particular'
-                                        },
-                                        {
-                                            title:'Fee Discount'
-                                        },
-                                        {
-                                            title:'Fine'
+                                            title:'Fine',
+                                            link: 'restricted.finance.fee.config.fineDetails'
                                         }
                                     ]
                                 },
                                 {
-                                    title:'Schedule Fee Collection'
-                                },
-                                {
-                                    title:'Fee Defaulters'
-                                },
-                                {
-                                    title:'Fee Refund',
-                                    submenu:[
-                                        {
-                                            title:'Create Refund Rule'
-                                        },
-                                        {
-                                            title:'View Refund'
-                                        },
-                                        {
-                                            title:'Apply Refund'
-                                        }
-                                    ]
+                                    title:'Fee Structure',
+                                    link: 'restricted.finance.fee.feeStructureDetails'
                                 }
+                                // {
+                                //     title:'Fee Defaulters'
+                                // },
+                                // {
+                                //     title:'Fee Refund',
+                                //     submenu:[
+                                //         {
+                                //             title:'Create Refund Rule'
+                                //         },
+                                //         {
+                                //             title:'View Refund'
+                                //         },
+                                //         {
+                                //             title:'Apply Refund'
+                                //         }
+                                //     ]
+                                // }
                             ]
                         }
                     ]

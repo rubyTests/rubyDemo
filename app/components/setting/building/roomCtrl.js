@@ -61,6 +61,12 @@ angular
                         }
                     ]
                 })
+
+                .withOption('initComplete', function() {
+                    $timeout(function() {
+                        $compile($('.dt-uikit .md-input'))($scope);
+                    })
+                });
                 // .withButtons([
                 //     {
                 //         extend:    'copyHtml5',

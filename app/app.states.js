@@ -1861,6 +1861,113 @@ altairApp
                     }
                 })
 
+                // Added by Senthil 13-03-17
+                .state("restricted.finance", {
+                    url: "/finance",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.finance.fee", {
+                    url: "/fee",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.finance.fee.feeStructureDetails", {
+                    url: "/feeStructureDetails",
+                    templateUrl: 'app/components/finance/feeStructureDetails.html',
+                    controller: 'feeStructureCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/feeStructureCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Structure Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.feeStructureAdd", {
+                    url: "/feeStructureAdd",
+                    templateUrl: 'app/components/finance/feeStructureAdd.html',
+                    controller: 'feeStructureAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/finance/feeStructureAddCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Dynamic Elements'
+                    }
+                })
+
+                .state("restricted.finance.fee.config", {
+                    url: "/config",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.finance.fee.config.feeitemDetails", {
+                    url: "/feeitemDetails",
+                    templateUrl: 'app/components/finance/feeitemDetails.html',
+                    controller: 'feeitemCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/feeitemCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Item Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.config.fineDetails", {
+                    url: "/fineDetails",
+                    templateUrl: 'app/components/finance/fineDetails.html',
+                    controller: 'fineCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/fineCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fine Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.config.fineAdd", {
+                    url: "/addFine",
+                    templateUrl: 'app/components/finance/fineAdd.html',
+                    controller: 'fineAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/fineAddCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fine Details'
+                    }
+                })
+
                 // Added by Vijayaraj 08-03-17
                 .state("restricted.employeemanagement", {
                     url: "/employeemanagement",

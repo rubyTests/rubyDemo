@@ -1,0 +1,79 @@
+<style type="text/css">
+    .selectize-control.single {
+        margin-top: 15px;
+    }
+</style>
+<div id="page_content" ng-controller="feeStructureCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Fee Structure Details</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <a ui-sref="restricted.finance.fee.feeStructureAdd"><button  class="md-btn md-btn-primary md-btn-small"><i class="uk-icon-plus"></i>  Add Fee Structure
+                        </button></a>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>Fee Structure Name</th>
+                            <th>No.of Fee Items</th>
+                            <th>Frequency</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Fee Structure Name</th>
+                            <th>No.of Fee Items</th>
+                            <th>Frequency</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{row.FeeStructure_id}}</td>
+                            <td>{{row.FeeItem_id}}</td>
+                            <td>{{row.Frequency}}</td>
+                            <td>
+                                <a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructureAdd"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-modal" id="modal_header_footer">
+      <div class="uk-modal-dialog">
+      <button type="button" class="uk-modal-close uk-close"></button>
+          <div class="uk-modal-header">
+              <h3 class="uk-modal-title">Add Fee Structure</h3>
+          </div>
+          <div class="md-card-content">
+            <form class=""><p></p>
+              <div class="uk-width-10-10 uk-width-medium-10-10">
+                <div class="uk-width-1-1">
+                  <div class="parsley-row">
+                    <label>Fine Name</label>
+                    <input type="text" ng-model="course_name" class="md-input" required md-input>
+                  </div>
+                </div>
+              </div>
+              <p></p>
+              <div class="uk-width-10-10 uk-width-medium-10-10">
+                  <div class="uk-width-1-1">
+                    <div class="parsley-row">
+                      <label>Fine Description</label>
+                      <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
+                    </div>
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
+          </div>
+      </div>
+    </div>
+</div>

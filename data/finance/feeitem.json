@@ -1,0 +1,32 @@
+[
+    {
+      "id":"1",
+      "Name":"Tution Fee",
+      "Desc":"Tution Fee"
+    },
+    {
+      "id":"2",
+      "Name":"Book Fee",
+      "Desc":"Book Fee"
+    },
+    {
+      "id":"3",
+      "Name":"Mess Fee",
+      "Desc":"Mess Fee"
+    },
+    {
+      "id":"4",
+      "Name":"Bus Fee",
+      "Desc":"Bus Fee"
+    },
+    {
+      "id":"5",
+      "Name":"Uniform Fee",
+      "Desc":"Uniform Fee"
+    },
+    {
+      "id":"6",
+      "Name":"Hostel Fee",
+      "Desc":"Hostel Fee"
+    }
+]
