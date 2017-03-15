@@ -1,350 +1,350 @@
 [
     {
-      "id":1,
+      "id":"1",
       "Name":"Principal",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
      {
-      "id":2,
+      "id":"2",
       "Name":"Wise Principal",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":3,
-      "Name":"Professor",
-      "Frequency":"Monthly",
+      "id":"3",
+      "Name":"Profesor",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":4,
-      "Name":"Assistant Professor",
-      "Frequency":"Monthly",
+      "id":"4",
+      "Name":"Assistant Profesor",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":5,
-      "Name":"Senior Professor",
-      "Frequency":"Monthly",
+      "id":"5",
+      "Name":"Senior Profesor",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":6,
-      "Name":"Junior Professor",
-      "Frequency":"Monthly",
+      "id":"6",
+      "Name":"Junior Profesor",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":7,
-      "Name":"Trainee Professor",
-      "Frequency":"Monthly",
+      "id":"7",
+      "Name":"Trainee Profesor",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":8,
+      "id":"8",
       "Name":"Part-time Lecturer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":9,
+      "id":"9",
       "Name":"Guest Lecturer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":10,
+      "id":"10",
       "Name":"Lab Assistant",
-      "Frequency":"Weekly",
+      "Frequency":2,
       "Information":""
     },
     {
-      "id":11,
+      "id":"11",
       "Name":"HOD",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":12,
+      "id":"12",
       "Name":"Assistant HOD",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":13,
+      "id":"13",
       "Name":"Administrative Officer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
      {
-      "id":14,
+      "id":"14",
       "Name":"Assistant Administrative",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":15,
+      "id":"15",
       "Name":"Senior Director of Administration",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
      {
-      "id":16,
+      "id":"16",
       "Name":"Director of Facilities",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":17,
+      "id":"17",
       "Name":"Facilities Coordinator",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":18,
+      "id":"18",
       "Name":"Facilities Advisor",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":19,
+      "id":"19",
       "Name":"Mailroom Supervisor",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":20,
+      "id":"20",
       "Name":"Placement Officer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":21,
+      "id":"21",
       "Name":"Hostal Warden",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":22,
+      "id":"22",
       "Name":"Hostal Supervisor",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":23,
+      "id":"23",
       "Name":"Exam Cell Officer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":24,
+      "id":"24",
       "Name":"Security",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":25,
+      "id":"25",
       "Name":"Library Officer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":26,
+      "id":"26",
       "Name":"Assistant librarian",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":27,
+      "id":"27",
       "Name":"CEO's Secretariat",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":28,
+      "id":"28",
       "Name":"Technician for IT",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":29,
+      "id":"29",
       "Name":"Assistant Technician for IT",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":30,
+      "id":"30",
       "Name":"Technician for Electrical",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":31,
+      "id":"31",
       "Name":"Assistant Technician for Electrical",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":32,
+      "id":"32",
       "Name":"Senior Director of Facilities and Maintenance",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":33,
+      "id":"33",
       "Name":"Accountant for Finance",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":34,
+      "id":"34",
       "Name":"Senior Accountant for Finance",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":35,
+      "id":"35",
       "Name":"Junior Accountant for Finance",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":36,
+      "id":"36",
       "Name":"Clerk",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":37,
+      "id":"37",
       "Name":"Maintenance Manager",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":38,
-      "Name":"Associate Professor",
-      "Frequency":"Monthly",
+      "id":"38",
+      "Name":"Associate Profesor",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":39,
+      "id":"39",
       "Name":"House Keeping",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":40,
+      "id":"40",
       "Name":"Physical Director",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":41,
+      "id":"41",
       "Name":"Head Master",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":42,
+      "id":"42",
       "Name":"Drawing Teacher",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":43,
+      "id":"43",
       "Name":"Music Teacher",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":44,
+      "id":"44",
       "Name":"Health & Wellness Teacher",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":45,
+      "id":"45",
       "Name":"Trainee Teacher",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":46,
+      "id":"46",
       "Name":"Assistant Head Master",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":47,
+      "id":"47",
       "Name":"PET Master",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":48,
+      "id":"48",
       "Name":"NCC Master",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":49,
+      "id":"49",
       "Name":"Pre-Primary Coordinator",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":50,
+      "id":"50",
       "Name":"Event Organizer",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":51,
+      "id":"51",
       "Name":"Peon",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":52,
+      "id":"52",
       "Name":"Pre-Primary Consultant",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":53,
+      "id":"53",
       "Name":"Resource Teacher Learning Behaviour",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":54,
+      "id":"54",
       "Name":"Guidance Counsellor",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":55,
+      "id":"55",
       "Name":"Guidance Counsellor Trainee",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":56,
+      "id":"56",
       "Name":"Student Advisers",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":57,
+      "id":"57",
       "Name":"Support Teacher",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     },
     {
-      "id":58,
+      "id":"58",
       "Name":"Support Teacher",
-      "Frequency":"Monthly",
+      "Frequency":1,
       "Information":""
     }
   ]

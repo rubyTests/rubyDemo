@@ -3,8 +3,13 @@
         width: 220px !important;
     }
     .md-card .md-card-head{
-        height: 210px !important;
+        min-height: 210px !important;
+        max-height: 210px !important;
     }
+    .md-card .md-card-content{
+        min-height:142px !important;
+    }
+
     #page_content_inner{
         padding-left: 50px !important;
     }
@@ -27,15 +32,16 @@
             <div ng-repeat="product in products_data" data-product-name="{{ product.BookName }}">
                 <div class="md-card md-card-hover-img">
                     <div class="md-card-head uk-text-center uk-position-relative">
-                        <!-- <div class="uk-badge uk-badge-danger uk-position-absolute uk-position-top-left uk-margin-left uk-margin-top">{{ product.Price | currency : "$" : 2}}</div> -->
                         <img class="md-card-head-img" ng-src="{{ product.CoverImage }}" alt=""/>
                     </div>
                     <div class="md-card-content">
+                        <!-- <h2>Hai{{$index}}</h2> -->
                         <h2 class="heading_a  uk-margin-bottom">
                             {{ product.BookName | limitTo: 30  }} {{ product.BookName.length > 30 ? '...' : '' }}
                         </h2>
                         <p><span class="sub-heading"><b>Author : </b>{{ product.Author }}</span></p>
-                        <a class="md-btn md-btn-mini btn btn-primary" ui-sref="restricted.BookDetail">View</a>
+                        <!-- <p>{{$index}} index</p> -->
+                        <a class="md-btn md-btn-mini btn btn-primary" ui-sref="restricted.BookDetail({id: product.id,indexId:$index})">View</a>
                     </div>
                 </div>
             </div>

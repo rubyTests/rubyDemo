@@ -104,12 +104,7 @@ altairApp
                         label: 'Home'
                     }
                 })
-                ///RUBY STATE CAMPUS START///
-                // .state("app.hr", {
-                //     url: "/hr",
-                //     template: '<div ui-view autoscroll="false"/>',
-                //     abstract: true
-                // })
+                ///RUBY STATE CAMPUS START by Manikandan///
 
                 .state("restricted.hr", {
                     template: '<div ui-view autoscroll="false"/>',
@@ -167,21 +162,116 @@ altairApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/Hr/Payroll_Payslip/datatablesController.js'
+                                'app/components/Hr/Payroll_Payslip/PayCategoryController.js'
                             ]);
                         }]
                     },
                     
                 })
-                .state("restricted.hr.payrollpayslip.StructureGroup", {
-                    url: "/pay Group",
-                    templateUrl: 'app/components/Hr/Payroll_Payslip/datatablesView.html',
+                .state("restricted.ViewPayGroup",{
+                    url: "/View-PayGroup/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/ViewPayGroup.html',
+                    // controller : 'ViewPayGroupCtrl',
+                    parmas :{'id' :{value:null}},
+                    resolve: {
+                        Pay_item : function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        Pay_Structure : function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        Pay_Group: function($http){
+                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        // Pay_item: function($http){
+                        //     return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
+                        //         .then(function (data) {
+                        //             return data.data;
+                        //         });
+                        // },
+                        // Pay_Structure: function($http){
+                        //     return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
+                        //         .then(function (data) {
+                        //             return data.data;
+                        //         });
+                        // },
+                        // pay_Group: function($http){
+                        //     return $http({method:'GET',url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json'}).then(function(data){
+                        //         return data.data;
+                        //     });
+                        // },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/Hr/Payroll_Payslip/ViewPayGroupCtrl.js'
+                            ]);
+                        }]
+                    }
+                    
+                })
+                .state("restricted.ViewGroupEmployee",{
+                    url: "/View-Group Employee",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroupEmployee.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'app/components/Hr/Payroll_Payslip/datatablesController.js'
+                                'lazy_datatables','smart-filter',
+                                'app/components/Hr/Payroll_Payslip/PayGroupEmployeeCtrl.js'
+                            ]);
+                        }]
+                    },
+                    
+                })
+                // .state("restricted.StructureGroup", {
+                //     url: "/pay Group",
+                //     templateUrl: 'app/components/Hr/Payroll_Payslip/datatablesView.html',
+                //     controller :'tables_examplesCtrl',
+                //     resolve: {
+                //         Pay_item: function($http){
+                //             return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
+                //                 .then(function (data) {
+                //                     return data.data;
+                //                 });
+                //         },
+                //         Pay_Structure: function($http){
+                //             return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
+                //                 .then(function (data) {
+                //                     return data.data;
+                //                 });
+                //         },
+                //         pay_Group:function($http){
+                //             return $http({method:'GET',url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json'}).then(function(data){
+                //                 return data.data;
+                //             });
+                //         },
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'bower_components/angular-resource/angular-resource.min.js',
+                //                 'xeditable','smart-table','smart-filter',
+                //                 'app/components/Hr/Payroll_Payslip/datatablesController.js'
+                //             ]);
+                //         }]
+                //     }
+                // })
+                .state("restricted.StructureGroup", {
+                    url: "/pay Group",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroup.html',
+                    controller :'dt_default',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables','smart-filter',
+                                'app/components/Hr/Payroll_Payslip/PayGroupController.js'
                             ]);
                         }]
                     }
@@ -243,32 +333,26 @@ altairApp
                     }
                 })
                 .state("restricted.BookDetail", {
-                    url: "/Book Detail",
+                    url: "/Book Detail/{id}/{indexId}",
                     templateUrl: 'app/components/Library/Book_detailsView.html',
                     controller: 'BookDetailController',
+                    parmas:{
+                    'id': {value: null},
+                    'indexId':{value:null}
+                    },
                     resolve: {
+                        Book_Details: function($http){
+                            return $http({method: 'GET', url: 'app/components/Library/books/book.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load('app/components/Library/BookDetailController.js');
                         }]
                     }
                 })
-                .state("restricted.calendar", {
-                    url: "/calendar",
-                    templateUrl: 'app/components/plugins/calendarView.html',
-                    controller: 'calendarCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'lazy_fullcalendar',
-                                'app/components/plugins/calendarController.js'
-                            ]);
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Calendar'
-                    }
-                })
-                ///RUBY STATE CAMPUS END
+                ///RUBY STATE CAMPUS END by Manikandan//
 
 
                 // -- FORMS --
@@ -1145,7 +1229,7 @@ altairApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/plugins/datatablesController.js'
+                                'app/components/pluginatatablesController.js'
                             ]);
                         }]
                     },
@@ -2143,23 +2227,6 @@ altairApp
                         pageTitle: 'Student Profile'
                     },
                     params:{stu_id:null}
-                })
-                .state("restricted.student.student_view", {
-                    url: "/student_view",
-                    templateUrl: 'app/components/student/student_view.html',
-                    controller: 'studentviewCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'app/components/student/studentviewCtrl.js'
-                            ],{serie: true});
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Student View'
-                    }
                 })
 
                 .state("restricted.student.student_list", {

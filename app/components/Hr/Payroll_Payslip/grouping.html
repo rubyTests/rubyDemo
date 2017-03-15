@@ -1,0 +1,226 @@
+
+<!-- <div id="page_content" ng-controller="dt_default as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Pay Group</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <tr>
+                        <button class="uk-float-right md-btn md-btn-primary md-btn-small" ui-sref="restricted.AddPayCategory">
+                         <i class="uk-icon-plus"></i>  Pay Group
+                        </button>
+                        </tr>
+                    <thead>                        
+                        <tr>
+                            <th>Name</th>
+                            <th>PayStructure_id</th>
+                            <th>Pay_item_id</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Name</th>
+                            <th>PayStructure_id</th>
+                            <th>Pay_item_id</th>
+                            <th>Amount</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{row.id}}</td>
+                            <td>{{row.PayStructure_id}}</td>
+                            <td>{{row.Pay_item_id}}</td>
+                            <td>{{row.Amount}}</td>
+                            <td class="uk-text-center">
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-width-medium-1-3">
+    <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h2 class="heading_a">Pay Group</h2>
+          <div class="uk-overflow-container">
+             <div class="md-card-content">
+              <form class="uk-form">
+                 <p></p>
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label>Pay Group Name</label>
+                        <input type="text" ng-model="" class="md-input" required md-input>
+                      </div>
+                    </div>
+                  </div>
+                  <p></p> 
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label>Frequency</label>
+                        <input type="text" ng-model="namen" class="md-input" required md-input>
+                      </div>
+                    </div>
+                  </div>                 
+                  <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
+                  <div class="uk-width-8-10 uk-width-medium-8-10">
+                          <p></p>
+                        <div class="uk-form-row">
+                            <div class="uk-grid">
+                                <div class="uk-width-medium-1-2 parsley-row">
+                                    <input type="text" config="selectize_n_config" options="selectize_n_options" ng-model="selectize_n" name="selectize_n" selectize/>
+                                </div>
+                                <div class="uk-width-medium-1-2">
+                                    <label>Item Value in %</label>
+                                    <input type="text" class="md-input" md-input />
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                    </div>
+                    <div class="uk-width-1-10 uk-width-medium-1-10 uk-text-center">
+                      <div class="uk-vertical-align uk-height-1-1">
+                        <div class="uk-vertical-align-middle">
+                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <br>  
+              </form>
+            </div>
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+          </div>
+        </div>
+    </div>
+    </div>
+</div> -->
+
+<style type="text/css">
+thead th{
+    cursor: pointer;
+}
+.uk-table tfoot td, .uk-table tfoot th, .uk-table thead tr.indexHeader th{
+    border-top-width:0;
+    border-bottom-width:0;
+}
+.GroupTitle{
+    background-color: #DDDDDD;
+}
+.TitleStyle{
+    vertical-align: -moz-middle-with-baseline;
+}
+</style>
+    <div id="page_content">
+        <div id="page_content_inner">
+            <h3 class="heading_b uk-margin-bottom">Pay Group</h3>
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container">
+                        <table class="uk-table" st-table="users">
+                        <tr>
+                            <button class="uk-float-right md-btn md-btn-primary md-btn-small" ui-sref="restricted.AddPayCategory">
+                             <i class="uk-icon-plus"></i>  Pay Group
+                            </button>
+                        </tr>
+                            <thead class="dt-uikit-header">
+                            <tr class="indexHeader">
+                                <th colspan="5">
+                                    <div class="dt-uikit-header">
+                                        <div class="uk-grid">
+                                            <div class="uk-width-medium-2-3">
+                                                <div class="dataTables_length" id="DataTables_Table_3_length">
+                                                    <label> 
+                                                        <selectize class="dt-selectize selectized uk-width-medium-1-10" ng-required="true" placeholder='Pick some things...' options='selectize_c_options' config="{maxItems: 1}" ng-model="itemsByPage"  name='itemsByPage' required='true'></selectize></label>
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-medium-1-3">
+                                                <div id="DataTables_Table_3_filter" class="dataTables_filter">
+                                                    <div class="md-input-wrapper">
+                                                        <input st-search="" class="form-control md-input md-input-processed" placeholder="Search" type="search" md-input=""/><span class="md-input-bar "></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                            <thead>
+                            <tr class="test">
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                                <!-- <th></th> -->
+                            </tr>
+                            <tr>
+                                <th class="uk-width-1-10 small_col">Id</th>
+                                <th class="uk-width-1-10" st-sort="name">Pay Item</th>
+                                <th class="uk-width-1-10" st-sort="status">Amount in Percentage</th>
+                            </tr>
+                            </thead>
+                            <tfoot>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        <div class="md-input-wrapper">
+                                            <input st-search="Pay_item_id" placeholder="search for firstname" class="form-control md-input md-input-processed" type="search" md-input=""/><span class="md-input-bar "></span>
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div class="md-input-wrapper">
+                                            <input st-search="Amount" placeholder="search for firstname" class="form-control md-input md-input-processed" type="search" md-input=""/><span class="md-input-bar "></span>
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="itemsByPage"></div>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                            <tbody>
+                            <tbody ng-repeat="(key, value) in users | groupBy: groupProperty">
+                            <tr ng-if="key !== 'undefined'" class="text-center GroupTitle text-uppercase text-danger">
+                            <td colspan="6">
+                                <span class="TitleStyle">{{getStructureName(key) | uppercase }} - ({{getStrFrequence(key)}})</span>
+                                <button type="button" class="md-icon material-icons uk-float-right">&#xE872;</button>
+                                <button type="button" class="md-icon material-icons uk-float-right">&#xE161;</button>
+                            </td>
+                            </tr>
+                            <tr ng-repeat="user in value">
+                              <td>{{$index+1}}</td>
+                              <td>{{getItemName(user.Pay_item_id)}}</td>
+                              <td>{{user.Amount}}</td>
+                              <!-- <td >
+                                <form editable-form name="rowform" onbeforesave="saveUser($data, user.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == user">
+                                    <button type="submit" ng-disabled="rowform.$waiting" class="md-icon material-icons">
+                                    &#xE161;
+                                    </button>
+                                  <a class="ts_remove_row" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()"><i class="md-icon material-icons">&#xE5CD;</i></a>
+                                </form>
+                                <div class="buttons" ng-show="!rowform.$visible">
+                                    <a class="ts_remove_row" ng-click="rowform.$show()"><i class="md-icon material-icons">&#xE254;</i></a>
+                                    <a class="ts_remove_row" ng-click="removeUser($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                </div> 
+                                </td> -->
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
