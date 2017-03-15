@@ -2142,11 +2142,11 @@ altairApp
                     }
                 })
                 //Added by gnanamani
-                 .state("restricted.academics", {
-                    url: "/academics",
-                    template: '<div ui-view autoscroll="false"/>',
-                    abstract: true
-                })
+                //  .state("restricted.academics", {
+                //     url: "/academics",
+                //     template: '<div ui-view autoscroll="false"/>',
+                //     abstract: true
+                // })
                 .state("restricted.academics.course", {
                     url: "/course",
                     templateUrl: 'app/components/academics/courseBatch/course.html',
