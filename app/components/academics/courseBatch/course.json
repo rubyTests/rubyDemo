@@ -1,8 +1,8 @@
  [
 	{
 		"id": 1,
+		"course_name": "LKG",
 		"dept_id":1,
-		"dept_name": "Pre-Primary",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"S",
