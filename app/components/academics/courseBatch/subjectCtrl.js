@@ -56,6 +56,11 @@ angular
                         }
                     ]
                 })
+                .withOption('initComplete', function() {
+                    $timeout(function() {
+                        $compile($('.dt-uikit .md-input'))($scope);
+                    })
+                });
                 // .withButtons([
                 //     {
                 //         extend:    'copyHtml5',
@@ -166,6 +171,21 @@ angular
             //     DTColumnDefBuilder.newColumnDef(4),
             //     DTColumnDefBuilder.newColumnDef(5)
             // ];
+
+            //Validation 
+             var $formValidate = $('#form_validation');
+
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+            //End Validation
              $scope.get_name = [];
              $resource('app/components/academics/courseBatch/course.json')
                 .query()
@@ -205,29 +225,74 @@ angular
 
                 //console.log($scope.get_name,"checkkkkkkkkkkk");
                 $scope.selectize_courseName_options = $scope.get_name;
-                //$scope.selectize_courseName_options.push($scope.get_data);
+               // $scope.selectize_courseName_options = ["cs", "mech"];
+              
                 $scope.selectize_courseName_config = {
                     create: false,
                     maxItems: 1,
                     placeholder: 'Course Name'
                 };
-                    $scope.save_data = [];
+                $scope.openModel = function() {
+                    //$scope.buttonStatus='Save';
+                    $scope.Savebutton=true;
+                    $scope.Updatebutton=false;
+                    // $scope.subject_name=null;
+                    // $scope.sub_code=null;
+                    // $scope.selectize_subType=null;
+                    // $scope.selectize_courseName=null;
+                    // $scope.total_hours=null;
+                  };
+                    //vm.dt_data = [];
                     $scope.saveSubjects=function(){
+
                         var data = {
                             sub_name:$scope.subject_name,
                             sub_code:$scope.sub_code,
                             sub_type:$scope.selectize_subType,
                             course_name:$scope.selectize_courseName,
                             total_hours:$scope.total_hours
-                        };   
-                        console.log(data);
-                        $scope.save_data.push(data);  
+                        };  
+                        vm.dt_data.push(data);
+                        //clearFunction();  
                     };
-                    $scope.displayedCollection = [].concat($scope.save_data);
+                    // function clearFunction(){
+                    //     $scope.subject_name="",
+                    //     $scope.sub_code="",
+                    //     $scope.selectize_subType="",
+                    //     $scope.selectize_courseName="",
+                    //     $scope.total_hours=""
+                    // }
+                    //vm.dt_data = [].concat($scope.save_data);
+                    $scope.remove_data = function (data) {
+                      var index = vm.dt_data.indexOf(data );
+                      vm.dt_data.splice(index, 1);  
+                    }
+                    $scope.edit_data= function(res){
+                        console.log(res,"messsssssssssss");
+                        //$scope.buttonStatus='Update';
+                        $scope.Updatebutton=true;
+                        $scope.Savebutton=false;
+                        $scope.subject_name=res.sub_name;
+                        $scope.sub_code=res.sub_code;
+                        $scope.selectize_subType=res.sub_type;
+                        $scope.selectize_courseName=res.course_name;
+                        $scope.total_hours=res.total_hours;
+                        $scope.id=vm.dt_data.indexOf(res);
+                        //console.log($scope.id);
+                    }
+                    $scope.Update_data= function () {
+                        //alert('in');
+                        console.log(vm.dt_data[$scope.id].sub_name);
+                        vm.dt_data[$scope.id].sub_name=$scope.subject_name;
+                        vm.dt_data[$scope.id].sub_code=$scope.sub_code;
+                        vm.dt_data[$scope.id].sub_type=$scope.selectize_subType;
+                        vm.dt_data[$scope.id].course_name=$scope.selectize_courseName;
+                        vm.dt_data[$scope.id].total_hours=$scope.total_hours;
+                       // clearFunction();  
+                        
+                    }
 
-                // $scope.EditClass = function(data) {
-                //     console.log(data.sub_code);
-                // }
+               
     
                
 

@@ -1,25 +1,24 @@
 <style type="text/css">
-    .selectize-control.single {
-        margin-top: 5px;
+   .uk-modal-dialog .uk-modal-footer {
+      margin:-16px;
     }
-    .uk-width-medium-4-5, .uk-width-medium-8-10 {
-        height: 65px;
-        width: 80%;
+    .uk-width-medium-1-1 {
+      height: 72px;
+      width: 100%;
     }
-     .uk-modal-dialog {
-      height: 544px;
-      margin: 18px auto;
-      width: 444px;
+    .uk-modal-dialog {
+      height: 507px;
+      width: 430px;
     }
 </style>
 <div id="page_content" ng-controller="subjectCtrl as showCase">
     <div id="page_content_inner">
         <h3 class="heading_b uk-margin-bottom">Subject Details</h3>
         <div class="md-card uk-margin-medium-bottom">
-            <div class="md-card-content">
+            <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}" ng-click="openModel()">
                         <i class="uk-icon-plus"></i>  Add Subjects
                         </button>
                     </div>
@@ -56,8 +55,8 @@
                             <td>{{row.course_name}}</td>
                             <td>{{row.total_hours}}</td>
                             <td class="uk-text-center">
-                                <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}"  ng-click="EditClass(row)"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a data-uk-modal="{target:'#modal_overflow'}" ng-click="edit_data(row);"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="remove_data(row)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -71,34 +70,47 @@
           <button type="button" class="uk-modal-close uk-close"></button>
           <h3 class="uk-modal-title"><i class="uk-icon-book"></i>&nbsp; Add Subjects </h3>
             <div class="md-card-content">
-              <form class=""><p></p>
-                <div class="uk-form-row">
-                  <label>Subject Name</label>
-                  <input type="text" ng-model="subject_name" class="md-input" required md-input>
+              <form id="form_validation" class="uk-form-stacked" ng-submit="saveSubjects()"><p></p>
+                <div class="uk-width-medium-1-1">
+                  <div class="parsley-row">
+                    <input type="hidden" name="id" ng-model="id">
+                    <label for="subjectname">Subject Name</label>
+                    <input type="text" ng-model="subject_name" required class="md-input" md-input />
+                  </div>
                 </div>
-                <div class="uk-form-row">
-                  <label>Subject Code</label>
-                  <input type="text" ng-model="sub_code" class="md-input" required md-input>
+                <div class="uk-width-medium-1-1">
+                  <div class="parsley-row">
+                    <label for="subcode">Subject Code</label>
+                    <input type="text" ng-model="sub_code" required class="md-input" md-input>
+                  </div>
                 </div>
-                 <div class="uk-form-row">
-                   <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" name="selectize_subType" selectize/>
+                <div class="uk-width-medium-1-1">
+                  <div class="parsley-row">
+                    <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" required name="selectize_subType" selectize/>
+                  </div>
                 </div>
-                 <div class="uk-form-row">
-                   <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="selectize_courseName" name="selectize_courseName" selectize/>
+                <div class="uk-width-medium-1-1">
+                  <div class="parsley-row">
+                    <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="selectize_courseName" required name="selectize_courseName" selectize/>
+                  </div>
                 </div>
-                <div class="uk-form-row">
-                  <label>Total Hours</label>
-                  <input type="text" ng-model="total_hours" class="md-input" required md-input>
+                <div class="uk-width-medium-1-1">
+                  <div class="parsley-row">
+                    <label>Total Hours</label>
+                    <input type="text" ng-model="total_hours" class="md-input" required md-input>
+                  </div>
                 </div>
+               
+                <div class="uk-text-right">
+                  <button type="submit" class="md-btn md-btn-primary md-btn-small" >Save
+                 </button>
+                  <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" 
+                  ng-if="Updatebutton" ng-click="Update_data()">Update</button>
+                </div>
+                
               </form>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-            <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close"  ng-click="saveSubjects()">Save</button>
-              <!--   <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Close</button> -->
             </div>
-          </div>
-         </div>
+        </div>
       </div>
     </div>
 

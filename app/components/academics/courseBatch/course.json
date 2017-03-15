@@ -3,7 +3,6 @@
 		"id": 1,
 		"dept_id":1,
 		"dept_name": "Pre-Primary",
-		"course_name": "LKG",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"S",
@@ -13,7 +12,6 @@
 		"id": 2,
 		"course_name": "UKG",
 		"dept_id":2,
-		"dept_name": "Primary",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"B",
@@ -23,7 +21,6 @@
 		"id": 3,
 		"course_name": "I-Standard",
 		"dept_id":"3",
-		"dept_name": "Secondary",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"A",
@@ -33,8 +30,6 @@
 		"id": 4,
 		"course_name": "II-Standard",
 		"dept_id":"4",
-		"dept_name": "Department of Mechanical Engineering",
-		"dept_name": "Department of Civil Engineering",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"C",
@@ -44,7 +39,6 @@
 		"id": 5,
 		"course_name": "III-Standard",
 		"dept_id":"5",
-		"dept_name": "Department of Computer Science and Engineering",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"S",
@@ -54,7 +48,6 @@
 		"id": 6,
 		"course_name": "IV-Standard",
 		"dept_id":"6",
-		"dept_name": "Department of Information Technology",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"A",
@@ -64,7 +57,6 @@
 		"id": 7,
 		"course_name": "V-Standard",
 		"dept_id":"7",
-		"dept_name": "Department of Electronics Engineering",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"B",
@@ -74,8 +66,6 @@
 		"id": 8,
 		"course_name": "XI-Standard",
 		"dept_id":"8",
-		"dept_name": "Department of Chemical Engineering",
-		"dept_name": "Department of Electrical & Electronics Engineering",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"A",
@@ -85,7 +75,6 @@
 		"id": 9,
 		"course_name": "XII-Standard",
 		"dept_id":"9",
-		"dept_name": "Department of Aerospace Enginnering",
 		"min_attndc_perctg": "84%",
 		"attendance_type":"Daily",
 		"grading_type":"D",
@@ -95,7 +84,6 @@
 		"id": 10,
 		"course_name": "XIII-Standard",
 		"dept_id":"10",
-		"dept_name": "Department of Production Technology",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
 		"grading_type":"S",
@@ -106,6 +94,7 @@
 		"course_name": "IX-Standard",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"11"
 	},
 	{
@@ -113,6 +102,7 @@
 		"course_name": "x-Standard",
 		"min_attndc_perctg": "80%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"12"
 	},
 	{
@@ -120,6 +110,7 @@
 		"course_name": "HSC-Bio Nursing",
 		"min_attndc_perctg": "80%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"13"
 	},
 	{
@@ -127,6 +118,7 @@
 		"course_name": "HSC-Home Science",
 		"min_attndc_perctg": "80%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"14"
 	},
 	{
@@ -134,6 +126,7 @@
 		"course_name": "HSC-Economics",
 		"min_attndc_perctg": "80%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"15"
 	},
 	{
@@ -141,6 +134,7 @@
 		"course_name": "HSC-Accountancy",
 		"min_attndc_perctg": "80%",
 		"attendance_type":"Daily",
+		"grading_type":"E",
 		"calendar_id":"16"
 	},
 	{
@@ -148,6 +142,7 @@
 		"course_name": "HSC-Biology",
 		"min_attndc_perctg": "80%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"17"
 	},
 	{
@@ -162,6 +157,7 @@
 		"course_name": "B.E- Computer Science and Engineering",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"19"
 	},
 	{
@@ -169,6 +165,7 @@
 		"course_name": "B.E-Electronics and Communication Engineering",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"A",
 		"calendar_id":"20"
 	},
 	{
@@ -176,6 +173,7 @@
 		"course_name": "B.E-Biomedical Engineering ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"21"
 	},
 	{
@@ -183,6 +181,7 @@
 		"course_name": "B.E-Mechanical Engineering ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"S",
 		"calendar_id":"22"
 	},
 	{
@@ -190,6 +189,7 @@
 		"course_name": "B.E-Material Science and Engineering  ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"23"
 	},
 	{
@@ -197,6 +197,7 @@
 		"course_name": "B.E-Civil Engineering ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"A",
 		"calendar_id":"24"
 	},
 	{
@@ -204,6 +205,7 @@
 		"course_name": "B.E-Geo Informatics  ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"25"
 	},
 	{
@@ -211,6 +213,7 @@
 		"course_name": "B.Tech-Information Technology",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"B",
 		"calendar_id":"26"
 	},
 	{
@@ -218,6 +221,7 @@
 		"course_name": "B.Tech-Industrial Bio-Technology ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"B",
 		"calendar_id":"27"
 	},
 	{
@@ -225,6 +229,7 @@
 		"course_name": "B.Tech-Food Technology",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"28"
 	},
 	{
@@ -232,6 +237,7 @@
 		"course_name": "B.Tech-Pharmaceutical Technology ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"E",
 		"calendar_id":"29"
 	},
 
@@ -240,6 +246,7 @@
 		"course_name": "B.E-Mining Engineering ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"U",
 		"calendar_id":"30"
 	},
 	{
@@ -247,6 +254,7 @@
 		"course_name": "B.E-Biomedical Engineering ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-wise",
+		"grading_type":"D",
 		"calendar_id":"1"
 	},
 	{
@@ -254,6 +262,7 @@
 		"course_name": "B.E-Production Engineering",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"F",
 		"calendar_id":"1"
 	},
 	{
@@ -261,6 +270,7 @@
 		"course_name": "B.Arch-Engineering",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"1"
 	},
 	{
@@ -268,6 +278,7 @@
 		"course_name": "B.Sc-Computer Science",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"34"
 	},
 	{
@@ -275,6 +286,7 @@
 		"course_name": "B.C.A-Bachelor of Computer Application ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"S",
 		"calendar_id":"35"
 	},
 	{
@@ -282,6 +294,7 @@
 		"course_name": "B.Sc-Microbiology ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"36"
 	},
 	{
@@ -289,6 +302,7 @@
 		"course_name": "B.Sc-Biochemistry",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"37"
 	},
 	{
@@ -296,6 +310,7 @@
 		"course_name": "B.Sc-Biotechnology ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"38"
 	},
 	{
@@ -303,6 +318,7 @@
 		"course_name": "B.Sc-Hotel and Catering Management ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"E",
 		"calendar_id":"39"
 	},
 	{
@@ -310,6 +326,7 @@
 		"course_name": "B.Sc-Electronics and Communication Science ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"40"
 	},
 	{
@@ -317,6 +334,7 @@
 		"course_name": "B.Sc-Mathematics ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"41"
 	},
 	{
@@ -324,6 +342,7 @@
 		"course_name": "B.Com-Bachelor of Commerce (General) ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"A",
 		"calendar_id":"42"
 	},
 	{
@@ -331,6 +350,7 @@
 		"course_name": "B.Com-Accounting and Finance ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"43"
 	},
 	{
@@ -338,6 +358,7 @@
 		"course_name": "B.Com-Information System Management",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"44"
 	},
 	{
@@ -345,6 +366,7 @@
 		"course_name": "B.Com-Computer Application ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"45"
 	},
 		{
@@ -352,6 +374,7 @@
 		"course_name": "BBA-Bachelor of Business Administration     ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"46"
 	},
 	{
@@ -359,6 +382,7 @@
 		"course_name": "B.Com-Banking Management",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"D",
 		"calendar_id":"47"
 	},
 	{
@@ -366,6 +390,7 @@
 		"course_name": "M.C.A-Master of Computer Application",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"D",
 		"calendar_id":"48"
 	},
 	{
@@ -373,6 +398,7 @@
 		"course_name": "M.C.A-Lateral Entry",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Daily",
+		"grading_type":"b",
 		"calendar_id":"49"
 	},
 	{
@@ -380,6 +406,7 @@
 		"course_name": "M.Sc-Computer Science ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"u",
 		"calendar_id":"50"
 	},
 	{
@@ -387,6 +414,7 @@
 		"course_name": "M.Sc-Information Technology ",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"a",
 		"calendar_id":"51"
 	},
 	{
@@ -394,6 +422,7 @@
 		"course_name": "M.B.A-Master of Business Administration",
 		"min_attndc_perctg": "75%",
 		"attendance_type":"Subject-Wise",
+		"grading_type":"s",
 		"calendar_id":"52"
 	}
 ] 
