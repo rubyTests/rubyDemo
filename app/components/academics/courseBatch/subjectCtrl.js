@@ -242,7 +242,7 @@ angular
                     // $scope.selectize_courseName=null;
                     // $scope.total_hours=null;
                   };
-                    //vm.dt_data = [];
+                    vm.dt_data = [];
                     $scope.saveSubjects=function(){
 
                         var data = {
@@ -263,9 +263,11 @@ angular
                     //     $scope.total_hours=""
                     // }
                     //vm.dt_data = [].concat($scope.save_data);
-                    $scope.remove_data = function (data) {
-                      var index = vm.dt_data.indexOf(data );
-                      vm.dt_data.splice(index, 1);  
+                    $scope.remove_data = function(index) {
+
+                       var index = vm.dt_data.indexOf(index);
+                       console.log(index);
+                       vm.dt_data.splice(index, 1);  
                     }
                     $scope.edit_data= function(res){
                         console.log(res,"messsssssssssss");
