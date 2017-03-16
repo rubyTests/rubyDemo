@@ -2244,7 +2244,6 @@ altairApp
                     template: '<div ui-view autoscroll="false"/>',
                     abstract: true
                 })
-
                 .state("restricted.academics.syllabus_view", {
                     url: "/syllabus_view",
                     templateUrl: 'app/components/academics/syllabus_view.html',
@@ -2360,12 +2359,6 @@ altairApp
                     templateUrl: 'app/components/academics/courseBatch/course.html',
                     controller: 'courseCtrl',
                     resolve: {
-                        // cour_data: function($http){
-                        //     return $http({method: 'GET', url: 'data/course.json'})
-                        //         .then(function (data) {
-                        //             return data.data;
-                        //         });
-                        //     },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
@@ -2381,7 +2374,7 @@ altairApp
                  .state("restricted.academics.courseBatches", {
                     url: "/courseBatches",
                     templateUrl: 'app/components/academics/courseBatch/courseBatch.html',
-                    controller: 'courseBatchCtrl',
+                    //controller: 'courseBatchCtrl',
                     resolve: {
                            
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -2402,7 +2395,7 @@ altairApp
                 .state("restricted.academics.subjects", {
                     url: "/subjects",
                     templateUrl: 'app/components/academics/courseBatch/subject.html',
-                    controller: 'subjectCtrl',
+                    //controller: 'subjectCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2412,12 +2405,6 @@ altairApp
                                 'app/components/academics/courseBatch/subjectCtrl.js'
                             ], {serie:true});
                         }],
-                        // user_data: function($http){
-                        //     return $http({ method: 'GET', url: 'app/components/academics/courseBatch/course.json' })
-                        //         .then(function (data) {
-                        //             return data.data;
-                        //         });
-                        // },
                     },
                     data: {
                         pageTitle: 'Subjects'
@@ -2460,7 +2447,7 @@ altairApp
                 .state("restricted.academics.department", {
                     url: "/department",
                     templateUrl: 'app/components/academics/courseBatch/department.html',
-                    controller: 'departmentCtrl',
+                    // controller: 'departmentCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2472,6 +2459,23 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Department'
+                    }
+                })
+                .state("restricted.academics.assignClassTeacher", {
+                    url: "/assignClassTeacher",
+                    templateUrl: 'app/components/academics/courseBatch/assignTeacher.html',
+                    //controller: 'assignTeacherCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/courseBatch/assignTeacherCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'AssignClassTeacher'
                     }
                 })
 
