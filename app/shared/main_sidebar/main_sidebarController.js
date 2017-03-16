@@ -231,6 +231,7 @@ angular
                                 },
                                 {
                                     title: 'Assign Class Teacher',
+                                    link: 'restricted.academics.assignClassTeacher'
                                 }
                             ]
                         },
