@@ -2360,6 +2360,7 @@ altairApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'lazy_datatables',
                                 'app/components/academics/courseBatch/subjectCtrl.js'
                             ], {serie:true});
