@@ -248,7 +248,8 @@ angular
                                 },
                                 {
                                     title: 'Syllabus Details',
-                                    link: 'restricted.academics.view_syllabus_details'
+                                    // link: 'restricted.academics.view_syllabus_details'
+                                    link: 'restricted.academics.view_syllabusDetails'
                                 }
                             ]
                         },

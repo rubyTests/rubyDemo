@@ -11,7 +11,7 @@
     },
     {
         "id":2,
-        "dept_name": "Electronics and Communication Engineering",
+        "dept_name": "Electrical and Electronics Engineering",
         "code": "",
         "Building_id":2,
         "hod": 2,
@@ -21,7 +21,7 @@
     },
     {
         "id":3,
-        "dept_name": "Electrical and Electronics Engineering",
+        "dept_name": "Electronics Communication Engineering",
         "code": "",
         "Building_id":3,
         "hod": 3,

@@ -11,6 +11,8 @@ angular
             $rootScope.page_full_height = true;
             $rootScope.headerDoubleHeightActive = true;
 
+            
+
             $scope.$on('$destroy', function() {
                 $rootScope.page_full_height = false;
                 $rootScope.headerDoubleHeightActive = false;
@@ -18,6 +20,11 @@ angular
             
             // get note data
             $scope.notes_data = notes_data;
+            
+            $scope.notes_preview=$scope.notes_data[0];
+            $scope.change_notes_preview=function(note){
+                $scope.notes_preview=note;
+            }
 
             // hide note form
             $scope.noteActive = false;
@@ -25,21 +32,19 @@ angular
             // open a note
             $scope.openNote = function($event,$parentIndex,$index,note) {
                 $event.preventDefault();
-
-                $scope.noteActive = true;
-
+                $scope.notes_preview=note;
+                $('.hierarchical_slide').addClass('hierarchical_slide_inView');
                 $('.notes_list').children('li').removeClass('md-list-item-active');
 
                 $($event.currentTarget).parent('li').addClass('md-list-item-active');
-
-                $scope.note_form = {
-                    parentIndex: $parentIndex,
-                    index: $index,
-                    title: note.sub_title,
-                    content: note.content
-                };
-
-                angular.element($window).resize();
+                // $scope.note_form = {
+                //     parentIndex: $parentIndex,
+                //     index: $index,
+                //     title: note.syllabus_title,
+                //     content: note.content
+                // };
+                $scope.noteActive = true;
+                angular.element($window).resize();  
             };
 
             // create a note

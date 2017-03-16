@@ -198,7 +198,7 @@ angular
                         $scope.selectize_course_data = $scope.courseArray;
                         $timeout(function() {
                             $('#page_content_inner').trigger('click');
-                        }, 700);
+                        }, 200);
                     });
                 }
             };
@@ -223,7 +223,7 @@ angular
                             }
                             $timeout(function() {
                                 $('#page_content_inner').trigger('click');
-                            }, 700);
+                            }, 200);
                         });
                     }
                 };
@@ -247,7 +247,7 @@ angular
                         }
                         $timeout(function() {
                             $('#page_content_inner').trigger('click');
-                        }, 700);
+                        }, 200);
 
                     });
                 }
