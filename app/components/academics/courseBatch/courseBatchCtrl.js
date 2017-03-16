@@ -90,8 +90,8 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Batch'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Batch'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Period From'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Period To'),
             ];
@@ -198,26 +198,12 @@ angular
                     if (getName[0]) return getName[0].course_name;
                 }
 
-                $scope.selectize_courseId_options = ["C1", "C2"];
+                $scope.selectize_courseId_options = $scope.get_name;
                 $scope.selectize_courseId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Course Name ...'
+                    placeholder: 'Course Name'
                 };
-                $scope.selectize_attdnceType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdnceType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type ...'
-                };
-                $scope.selectize_gradingType_options = ["A", "S"];
-                $scope.selectize_gradingType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Grading Type ...'
-                };
-
-
 
         }
     );

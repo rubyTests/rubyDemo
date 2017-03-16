@@ -206,11 +206,17 @@ angular
                         $scope.get_name.push($scope.name);
                     });
                 });
-            $resource('app/components/academics/courseBatch/course.json')
+                $scope.grading = [];
+                $resource('app/components/academics/courseBatch/course.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
+                    angular.forEach(vm.dt_data, function(value, key){
+                        $scope.gradingType=  value.grading_type;
+                        console.log($scope.gradingType);
+                        $scope.grading.push($scope.gradingType);
+                    });
                     angular.forEach(vm.dt_data, function(value, key){
                         value.departmentName=$scope.departmentName(value.id);
                     });
@@ -230,13 +236,13 @@ angular
                 $scope.selectize_attdnceType_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Attendance Type ...'
+                    placeholder: 'Attendance Type'
                 };
-                $scope.selectize_gradingType_options = ["A", "S"];
+                $scope.selectize_gradingType_options = $scope.grading;
                 $scope.selectize_gradingType_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Grading Type ...'
+                    placeholder: 'Grading Type'
                 };
 
 
