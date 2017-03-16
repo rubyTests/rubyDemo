@@ -204,6 +204,25 @@ angular
                     maxItems: 1,
                     placeholder: 'Course Name'
                 };
+                 $scope.openModel = function() {
+                    $scope.Savebutton=true;
+                    $scope.Updatebutton=false;
+                    $scope.selectize_courseId=null;
+                    $scope.batch_name=null;
+                    $scope.period_from=null;
+                    $scope.period_to=null;
+                    $('.uk-modal').find('input').trigger('blur');
+                };
+                $scope.edit_data= function(res){
+                    //console.log(res,"messsssssssssss");
+                    $scope.Updatebutton=true;
+                    $scope.Savebutton=false;
+                    $scope.selectize_courseId=res.courseName;
+                    $scope.batch_name=res.cBatch_name;
+                    $scope.period_from=res.period_from;
+                    $scope.period_to=res.period_to;
+                    $scope.id=vm.dt_data.indexOf(res);
+                }
 
         }
     );

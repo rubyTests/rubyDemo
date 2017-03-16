@@ -244,6 +244,27 @@ angular
                     maxItems: 1,
                     placeholder: 'Grading Type'
                 };
+                $scope.openModel = function() {
+                    $scope.Savebutton=true;
+                    $scope.Updatebutton=false;
+                    $scope.course_name=null;
+                    $scope.selectize_deptId=null;
+                    $scope.selectize_attdnceType=null;
+                    $scope.min_attndc=null;
+                    $scope.selectize_gradingType=null;
+                    $('.uk-modal').find('input').trigger('blur');
+                };
+                $scope.edit_data= function(res){
+                    //console.log(res,"messsssssssssss");
+                    $scope.Updatebutton=true;
+                    $scope.Savebutton=false;
+                    $scope.course_name=res.course_name;
+                    $scope.selectize_deptId=res.departmentName;
+                    $scope.selectize_attdnceType=res.attendance_type;
+                    $scope.min_attndc=res.min_attndc_perctg;
+                    $scope.selectize_gradingType=res.grading_type;
+                    $scope.id=vm.dt_data.indexOf(res);
+                }
 
 
 

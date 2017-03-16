@@ -201,6 +201,7 @@ angular
                     vm.dt_data = dt_data;
                      angular.forEach( vm.dt_data, function(value, key){
                         $scope.hod_id=  value.HOD_profile_id;
+                        //console.log($scope.hod_id);
                         $scope.get_id.push($scope.hod_id);
                     });
                 });
@@ -210,6 +211,26 @@ angular
                     maxItems: 1,
                     placeholder: 'Head Of Department'
                 };
+                 $scope.openModel = function() {
+                    //$scope.buttonStatus='Save';
+                    $scope.Savebutton=true;
+                    $scope.Updatebutton=false;
+                    $scope.dept_name=null;
+                    $scope.dept_code=null;
+                    $scope.selectize_hodProfieId=null;
+                    $scope.Phone=null;
+                    $('.uk-modal').find('input').trigger('blur');
+                };
+                $scope.edit_data= function(res){
+                    console.log(res,"messsssssssssss");
+                    $scope.Updatebutton=true;
+                    $scope.Savebutton=false;
+                    $scope.dept_name=res.dept_name;
+                    $scope.dept_code=res.dept_code;
+                    $scope.selectize_hodProfieId=res.HOD_profile_id;
+                    $scope.Phone=res.phone1;
+                    $scope.id=vm.dt_data.indexOf(res);
+                }
        
 
 

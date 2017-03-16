@@ -236,11 +236,12 @@ angular
                     //$scope.buttonStatus='Save';
                     $scope.Savebutton=true;
                     $scope.Updatebutton=false;
-                    // $scope.subject_name=null;
-                    // $scope.sub_code=null;
-                    // $scope.selectize_subType=null;
-                    // $scope.selectize_courseName=null;
-                    // $scope.total_hours=null;
+                    $scope.subject_name=null;
+                    $scope.sub_code=null;
+                    $scope.selectize_subType=null;
+                    $scope.selectize_courseName=null;
+                    $scope.total_hours=null;
+                    $('.uk-modal').find('input').trigger('blur');
                   };
                     vm.dt_data = [];
                     $scope.saveSubjects=function(){
@@ -283,7 +284,6 @@ angular
                         //console.log($scope.id);
                     }
                     $scope.Update_data= function () {
-                        //alert('in');
                         console.log(vm.dt_data[$scope.id].sub_name);
                         vm.dt_data[$scope.id].sub_name=$scope.subject_name;
                         vm.dt_data[$scope.id].sub_code=$scope.sub_code;
