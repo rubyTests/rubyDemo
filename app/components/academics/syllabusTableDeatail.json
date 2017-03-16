@@ -1,0 +1,62 @@
+ [
+	{
+		"id": 1,
+		"dept_id":1,
+		"dept_name": "Pre-Primary",
+		"course_name": "Computer Science and Engineering",
+		"subject_name":"Database Management Systems",
+		"min_attndc_perctg": "60%",
+		"attendance_type":"Daily",
+		"grading_type":"S",
+		"sub_id":1,
+		"syllabus_id":1
+	},
+	{
+		"id": 2,
+		"course_name": "Electrical and Electronics Engineering",
+		"subject_name":"Mobile Computing",
+		"dept_id":"2",
+		"dept_name": "Primary",
+		"min_attndc_perctg": "60%",
+		"attendance_type":"Daily",
+		"grading_type":"B",
+		"syllabus_id":2,
+		"sub_id":2
+	},
+	{
+		"id": 3,
+		"course_name": "Electronics and Communication Engineering",
+		"subject_name":"Computer Networks",
+		"dept_id":"3",
+		"dept_name": "Secondary",
+		"min_attndc_perctg": "60%",
+		"attendance_type":"Daily",
+		"grading_type":"A",
+		"syllabus_id":3,
+		"sub_id":3
+	},
+	{
+		"id": 4,
+		"course_name": "Information Technology",
+		"dept_id":"4",
+		"subject_name":"Software Engineering",
+		"dept_name": "Information Technology",
+		"min_attndc_perctg": "60%",
+		"attendance_type":"Daily",
+		"grading_type":"C",
+		"syllabus_id":4,
+		"sub_id":4
+	},
+	{
+		"id": 5,
+		"course_name": "Mechanical Engineering",
+		"subject_name":"Power Plant Engineering",
+		"dept_id":"5",
+		"dept_name": "",
+		"min_attndc_perctg": "60%",
+		"attendance_type":"Daily",
+		"grading_type":"S",
+		"syllabus_id":5,
+		"sub_id":5
+	}
+] 

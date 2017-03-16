@@ -1,0 +1,27 @@
+ [
+    {
+        "id": 1,
+        "course_id":1,
+        "subject_name":"Database Management Systems"
+    },
+    {
+        "id": 2,
+        "subject_name":"Mobile Computing",
+        "course_id":2
+    },
+    {
+        "id": 3,
+        "subject_name":"Computer Networks",
+        "course_id":3
+    },
+    {
+        "id": 4,
+        "course_id":4,
+        "subject_name":"Software Engineering"
+    },
+    {
+        "id": 5,
+        "subject_name":"Power Plant Engineering",
+        "course_id":5
+    }
+] 

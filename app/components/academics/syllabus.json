@@ -1,133 +1,142 @@
- [
-	{
-		"id": 1,
-		"dept_id":1,
-		"dept_name": "Pre-Primary",
-		"course_name": "Computer Science and Engineering",
-		"subject_name":"Data Structure and Algorithms",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"S",
-		"sub_id":1,
-		"syllabus_id":"1"
-	},
-	{
-		"id": 2,
-		"course_name": "Electrical and Electronics Engineering",
-		"subject_name":"Electrical Machines and Drives",
-		"dept_id":"2",
-		"dept_name": "Primary",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"B",
-		"syllabus_id":2,
-		"sub_id":2
-	},
-	{
-		"id": 3,
-		"course_name": "Electronics and Communication Engineering",
-		"subject_name":"Signals and Systems",
-		"dept_id":"3",
-		"dept_name": "Secondary",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"A",
-		"syllabus_id":3,
-		"sub_id":3
-	},
-	{
-		"id": 4,
-		"course_name": "Information Technology",
-		"dept_id":"4",
-		"subject_name":"Software Engineering",
-		"dept_name": "Department of Mechanical Engineering",
-		"dept_name": "Department of Civil Engineering",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"C",
-		"syllabus_id":4,
-		"sub_id":4
-	},
-	{
-		"id": 5,
-		"course_name": "Mechanical Engineering",
-		"subject_name":"Strength of materials and solid mechanics",
-		"dept_id":"5",
-		"dept_name": "Department of Computer Science and Engineering",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"S",
-		"syllabus_id":5,
-		"sub_id":5
-	},
-	{
-		"id": 6,
-		"course_name": "Marine Engineering",
-		"subject_name":"Fire Control & Life Saving Appliances Laboratary",
-		"dept_id":"6",
-		"dept_name": "Department of Information Technology",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"A",
-		"syllabus_id":6,
-		"sub_id":6
-	},
-	{
-		"id": 7,
-		"course_name": "Civil Engineering",
-		"subject_name":"Geology and Geotechnical Engineering",
-		"dept_id":"7",
-		"dept_name": "Department of Electronics Engineering",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"B",
-		"syllabus_id":7,
-		"sub_id":7
-	},
-	{
-		"id": 8,
-		"course_name": "Chemical Engineering",
-		"subject_name":"Chemical Process Industries",
-		"dept_id":"8",
-		"dept_name": "Department of Chemical Engineering",
-		"dept_name": "Department of Electrical & Electronics Engineering",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"A",
-		"syllabus_id":8,
-		"sub_id":8
-	},
-	{
-		"id":9,
-		"course_name": "Computer Science and Engineering",
-		"subject_name":"Computer Architecture",
-		"dept_id":"9",
-		"dept_name": "Department of Aerospace Enginnering",
-		"min_attndc_perctg": "84%",
-		"attendance_type":"Daily",
-		"grading_type":"D",
-		"syllabus_id":9,
-		"sub_id":9
-	},
-	{
-		"id": 10,
-		"course_name": "Instrumentation Technology",
-		"subject_name":"Chemical Process Industries",
-		"dept_id":"10",
-		"dept_name": "Department of Production Technology",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"grading_type":"S",
-		"syllabus_id":10,
-		"sub_id":10
-	},
-	{
-		"id": 11,
-		"course_name": "Information Technology",
-		"subject_name":"System Software",
-		"min_attndc_perctg": "60%",
-		"attendance_type":"Daily",
-		"syllabus_id":11,
-		"sub_id":11
-	}
-] 
+[
+    {
+        "id": 1,
+        "sub_id":1,
+        "sub_title": "Database Management Systems",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "UNIT I  INTRODUCTION TO DBMS",
+                "content": "File Systems Organization-Sequential,Pointer,Indexed,Direct-Purpose of Database System-Database  System Terminologies-Database characteristics-Data models–Types of data models–Components of DBMS-Relational Algebra.LOGICAL DATABASE DESIGN: Relational DBMS-Codd's Rule-Entity-Relationship model-Extended ER Normalization –Functional Dependencies, Anomaly-1NF to 5NF-Domain Key Normal Form –Denormalization."
+            },
+            {
+                "syllabus_title": "UNIT II  SQL & QUERY OPTIMIZATION",
+                "content": "SQL Standards - Data types -Database Objects - DDL - DML - DCL - TCL - Embedded SQL - Static Vs Dynamic SQL - QUERY OPTIMIZATION:  Query  Processing  and  Optimization - Heuristics and Cost Estimates in Query Optimization."
+            },
+            {
+                "syllabus_title": "UNIT III  TRANSACTION PROCESSING",
+                "content": "Introduction - Properties of Transaction - Serializability - Concurrency Control - Locking Mechanisms - Two Phase Commit Protocol - Dead lock."
+            },
+            {
+                "syllabus_title": "UNIT IV  TRENDS IN DATABASE TECHNOLOGY",
+                "content": "Overview of Physical Storage Media - Magnetic Disks - RAID - Tertiary storage - File Organization - Organization of Records in Files - Indexing and Hashing - Ordered Indices - B+ tree Index Files –B tree Index Files – Static Hashing – Dynamic Hashing - Introduction to Distributed Databases - Client server  technology - Multidimensional  and  Parallel  databases - Spatial  and  multimedia  databases - Mobile and web databases - Data Warehouse - Mining - Data marts."
+            },
+            {
+                "syllabus_title": "UNIT V  ADVANCED TOPICS",
+                "content": "Data Classification - Threats and risks Database access Control –Types of Privileges –Cryptography-Statistical Databases.-Distributed Databases-Architecture-Transaction Processing-Data Warehousing and Mining-Classification-Association rules-Clustering-Information Retrieval-Relevance  ranking-Crawling  and  Indexing  the  Web-Object  Oriented  Databases-XML Databases."
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "sub_id":2,
+        "sub_title": "Mobile Computing",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "UNIT I  INTRODUCTION",
+                "content": "Mobile  Computing –Mobile  Computing  Vs  wireless  Networking –Mobile  Computing  Applications –Characteristics  of  Mobile  computing –Structure  of  Mobile  Computing  Application.  MAC  Protocols –Wireless MAC Issues –Fixed Assignment Schemes –Random Assignment Schemes –Reservation Based Schemes."
+            },
+            {
+                "syllabus_title": "UNIT II  MOBILE INTERNET PROTOCOL",
+                "content": "Overview  of  Mobile  IP –Features  of  Mobile  IP –Key  Mechanism  in  Mobile  IP –route  Optimization. Overview  of  TCP/IP –Architecture  of  TCP/IP-Adaptation  of TCP Window –Improvement  in  TCP Performance."
+            },
+            {
+                "syllabus_title": "UNIT III  MOBILE TELECOMMUNICATION SYSTEM",
+                "content": "Global  System  for  Mobile  Communication  (GSM) –General  Packet  Radio  Service  (GPRS) –Universal Mobile Telecommunication System (UMTS)."
+            },
+            {
+                "syllabus_title": "UNIT IV  MOBILE AD-HOC NETWORKS",
+                "content": "Ad-Hoc  Basic  Concepts –Characteristics –Applications –Design  Issues –Routing –Essential  of Traditional  Routing  Protocols –Popular  Routing  Protocols –Vehicular  Ad  Hoc  networks  (  VANET) –MANET Vs VANET –Security."
+            },
+            {
+                "syllabus_title": "UNIT V  MOBILE PLATFORMS AND APPLICATIONS",
+                "content": "Mobile  Device  Operating  Systems –Special  Constrains  &  Requirements –Commercial  Mobile Operating  Systems –Software  Development  Kit:  iOS,  Android,  BlackBerry,  Windows  Phone –M-Commerce –Structure –Pros & Cons –Mobile Payment System –Security Issues."
+            }
+        ]
+    },
+    {
+        "id": 3,
+        "sub_id":3,
+        "sub_title": "Computer Networks",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "UNIT I  FUNDAMENTALS & LINK LAYER",
+                "content": "Building  a  network –Requirements -Layering  and  protocols -Internet  Architecture –Network software –Performance ; Link layer Services  -Framing -Error Detection -Flow control."
+            },
+            {
+                "syllabus_title": "UNIT II  MEDIA ACCESS & INTERNETWORKING",
+                "content": "Media  access  control -Ethernet  (802.3) -Wireless  LANs –802.11 –Bluetooth -Switching  and bridging –Basic Internetworking (IP, CIDR, ARP, DHCP,ICMP)."
+            },
+            {
+                "syllabus_title": "UNIT III  ROUTING",
+                "content": "Routing  (RIP,  OSPF,  metrics) –Switch  basics –Global  Internet  (Areas,  BGP,  IPv6),  Multicast –addresses –multicast routing (DVMRP, PIM)."
+            },
+            {
+                "syllabus_title": "UNIT IV  TRANSPORT LAYER",
+                "content": "Overview  of  Transport  layer -UDP -Reliable  byte  stream  (TCP) -Connection  management -Flow control -Retransmission –TCP Congestion control -Congestion avoidance (DECbit, RED) –QoS –Application requirements."
+            },
+            {
+                "syllabus_title": "UNIT V  APPLICATION LAYER",
+                "content": "Traditional applications -Electronic Mail (SMTP, POP3, IMAP, MIME) –HTTP –Web Services –DNS -SNMP."
+            }
+        ]
+    },
+    {
+        "id": 4,
+        "sub_id":4,
+        "sub_title": "Software Engineering",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "UNIT I  SOFTWAREPROCESS",
+                "content": "Introductionto  Software  Engineering,  Software  Process,  Perspective  and Specialized  Process Models –Software  ProjectManagement:  Estimation –LOC  and  FP  Based  Estimation,  COCOMOModel –Project Scheduling –Scheduling, Earned Value Analysis -Risk Management."
+            },
+            {
+                "syllabus_title": "UNIT II REQUIREMENTSANALYSIS",
+                "content": "Software  Requirements:Functional and  Non-Functional,  Userrequirements,  System  requirements, Software   RequirementsDocument –Requirement."
+            },
+            {
+                "syllabus_title": "UNIT III SOFTWARE DESIGN",
+                "content": "Design  process –DesignConcepts-Design  Model–Design  Heuristic –Architectural Design –Architectural styles,  Architectural  Design,  Architectural  Mapping  using  Data  Flow-User Interface Design:  Interface  analysis, Interface  Design –Component  level  Design:  Designing  Classbased components, traditional Components."
+            },
+            {
+                "syllabus_title": "UNIT IV  TESTING AND IMPLEMENTATION",
+                "content": "Software  testing fundamentals-Internal  and  external  views  ofTesting-white  box  testing-basis  path testing-controls tructure testing-black box  testing-RegressionTesting –Unit  Testing –Integration Testing –Validation   Testing –System Testing And Debugging –Software Implementation Techniques: Coding practices-Refactoring."
+            },
+            {
+                "syllabus_title": "UNIT V  PROJECT MANAGEMENT",
+                "content": "Estimation –FP  Based,  LOC  Based,  Make/Buy  Decision,  COCOMO  II -Planning –Project  Plan, Planning  Process,  RFP Risk  Management –Identification,  Projection,  RMMM -Scheduling  and Tracking –Relationship  between  people  and  effort, Task  Set  &  Network,  Scheduling, EVA -Process and Project Metrics."
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "sub_id":5,
+        "sub_title": "Power Plant Engineering",
+        "name": "Subjects",
+        "chapter": [
+            {
+                "syllabus_title": "UNIT I COAL BASED THERMAL POWER PLANTS",
+                "content": "Rankine  cycle-improvisations,  Layout  of  modern  coal  power  plant,  Super  Critical  Boilers,  FBCBoilers, Turbines,  Condensers,  Steam  &  Heat  rate,  Subsystems  of thermal  power  plants–Fuel  andash handling, Draught system, Feed water treatment. Binary Cycles and Cogeneration systems."
+            },
+            {
+                "syllabus_title": "UNIT II DIESEL, GAS TURBINE",
+                "content": "Otto, Diesel, Dual & Brayton Cycle-Analysis & Optimisation. Components of Diesel and Gas Turbinepower plants. Combined Cycle Power Plants. Integrated Gasifier based Combined Cycle systems."
+            },
+            {
+                "syllabus_title": "UNIT III NUCLEAR POWER PLANTS",
+                "content": "Basics of Nuclear Engineering, Layout and subsystems of Nuclear Power Plants, Working of NuclearReactors  :  Boiling  Water  Reactor(BWR),  Pressurized  Water  Reactor(PWR),  CANada  Deuterium-Uranium reactor (CANDU), Breeder, Gas Cooled and Liquid Metal Cooled Reactors. Safety measuresfor Nuclear Power plants."
+            },
+            {
+                "syllabus_title": "UNIT IV POWER FROM RENEWABLE ENERGY",
+                "content": "Hydro  Electric  Power  Plants–Classification,  Typical  Layout  and  associated  components  includingTurbines.  Principle,  Construction  and  working  of  Wind,  Tidal,SolarPhoto  Voltaic  (SPV),  SolarThermal, Geo Thermal, Biogas and Fuel Cell power systems."
+            },
+            {
+                "syllabus_title": "UNIT V ENVIRONMENTAL ISSUES OF POWER PLANTS",
+                "content": "Power  tariff  types,  Load  distribution  parameters,  load  curve,  Comparison  of  site  selection  criteria,relative  merits  &demerits,  Capital  &  Operating  Cost  of  different  power  plants.  Pollution  controltechnologies including Waste Disposal Options for Coal and Nuclear Power Plants."
+            }
+        ]
+    }
+]

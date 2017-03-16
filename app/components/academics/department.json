@@ -1,0 +1,52 @@
+ [
+    {
+        "id":1,
+        "dept_name": "Computer Science & Engineering",
+        "code": "",
+        "Building_id":1,
+        "hod": 1,
+        "infromation":"",
+        "images":"",
+        "phone":"+01 9895874125"
+    },
+    {
+        "id":2,
+        "dept_name": "Electronics and Communication Engineering",
+        "code": "",
+        "Building_id":2,
+        "hod": 2,
+        "infromation":"",
+        "images":"",
+        "phone":"+01 9895874125"
+    },
+    {
+        "id":3,
+        "dept_name": "Electrical and Electronics Engineering",
+        "code": "",
+        "Building_id":3,
+        "hod": 3,
+        "infromation":"",
+        "images":"",
+        "phone":"+91 9895874125"
+    },
+    {
+        "id":4,
+        "dept_name": "Computer Science & Engineering",
+        "code": "",
+        "Building_id":4,
+        "hod": 4,
+        "infromation":"",
+        "images":"",
+        "phone":"+01 9895874125"
+    },
+    {
+        "id":5,
+        "dept_name": "Information Technology",
+        "code": "",
+        "Building_id":5,
+        "hod": 5,
+        "infromation":"",
+        "images":"",
+        "phone":"+01 9895874125"
+    }
+] 

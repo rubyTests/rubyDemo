@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('syllabusviewCtrl',
+    .controller('student_syllabusCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.dt_data = [];

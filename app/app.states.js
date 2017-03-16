@@ -2287,11 +2287,12 @@ altairApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
                                 'app/components/academics/syllabusdetailCtrl.js'
                             ]);
                         }],
                         notes_data: function($http){
-                            return $http({ method: 'GET', url: 'app/components/academics/subject_notes.json' })
+                            return $http({ method: 'GET', url: 'app/components/academics/syllabus.json' })
                                 .then(function (data) {
                                     return data.data;
                                 });
@@ -2302,6 +2303,52 @@ altairApp
                     },
                     params:{syllabus_id:null}
                 })
+
+                .state("restricted.academics.view_syllabus_details", {
+                    url: "/view_syllabus_details",
+                    templateUrl: 'app/components/academics/student_syllabus_view.html',
+                    controller: 'student_syllabusCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/student_syllabusCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Syllabus View'
+                    }
+                })
+                .state("restricted.academics.view_syllabusDetails", {
+                    url: "/view_syllabusDetails",
+                    templateUrl: 'app/components/academics/student_syllabus_viewlist.html',
+                    controller: 'studentsyllabusdetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/academics/studentsyllabusdetailCtrl.js'
+                            ]);
+                        }],
+                        // notes_data: function($http){
+                        //     return $http({ method: 'GET', url: 'app/components/academics/subject_notes.json' })
+                        //         .then(function (data) {
+                        //             return data.data;
+                        //         });
+                        // }
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/academics/syllabus.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Syllabus View'
+                    }
+                })
+
                 //Added by gnanamani
                 //  .state("restricted.academics", {
                 //     url: "/academics",
