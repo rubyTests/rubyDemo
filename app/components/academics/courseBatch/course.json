@@ -64,7 +64,7 @@
 	},
 	{
 		"id": 8,
-		"course_name": "XI-Standard",
+		"course_name": "VI-Standard",
 		"dept_id":"8",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
@@ -73,7 +73,7 @@
 	},
 	{
 		"id": 9,
-		"course_name": "XII-Standard",
+		"course_name": "VII-Standard",
 		"dept_id":"9",
 		"min_attndc_perctg": "84%",
 		"attendance_type":"Daily",
@@ -82,7 +82,7 @@
 	},
 	{
 		"id": 10,
-		"course_name": "XIII-Standard",
+		"course_name": "VIII-Standard",
 		"dept_id":"10",
 		"min_attndc_perctg": "60%",
 		"attendance_type":"Daily",
