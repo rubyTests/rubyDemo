@@ -78,9 +78,8 @@ altairApp
                                 'lazy_charts_easypiechart',
                                 'lazy_charts_metricsgraphics',
                                 'lazy_charts_chartist',
-                                'lazy_weathericons',
                                 'lazy_clndr',
-                                'lazy_google_maps',
+                                'lazy_charts_c3',
                                 'app/components/dashboard/dashboardController.js'
                             ], {serie: true} );
                         }],
@@ -2213,6 +2212,23 @@ altairApp
                         pageTitle: 'Student Profile'
                     },
                     params:{stu_id:null}
+                })
+                .state("restricted.student.student_view", {
+                    url: "/student_view",
+                    templateUrl: 'app/components/student/student_view.html',
+                    controller: 'studentviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/student/studentviewCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Student View'
+                    }
                 })
 
                 .state("restricted.student.student_list", {
