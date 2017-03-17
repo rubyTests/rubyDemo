@@ -2522,5 +2522,47 @@ altairApp
                     }
                 })
 
+                // HR Module Added by Vijayaraj 17-03-17
+
+                .state("restricted.hr.config", {
+                    template: '<div ui-view autoscroll="false"/>',
+                    url :"/config",
+                    abstract: true
+                })
+
+                .state("restricted.hr.config.category", {
+                    url: "/category",
+                    templateUrl: 'app/components/Hr/configuration/category.html',
+                    // controller: 'employeecategoryCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/configuration/categoryCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Employee category'
+                    }
+                })
+                .state("restricted.hr.config.position", {
+                    url: "/position",
+                    templateUrl: 'app/components/Hr/configuration/position.html',
+                    // controller: 'employeecategoryCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/configuration/positionCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Employee position'
+                    }
+                })
         }
     ]);
