@@ -2,26 +2,26 @@
     {
       "id":"1",
       "Name":"Fine1",
-      "Desc":"Fine1"
+      "Desc":"Annually"
     },
     {
       "id":"2",
       "Name":"Fine2",
-      "Desc":"Fine2"
+      "Desc":"Monthly"
     },
     {
       "id":"3",
       "Name":"Fine3",
-      "Desc":"Fine3"
+      "Desc":"Weekly"
     },
     {
       "id":"4",
       "Name":"Fine4",
-      "Desc":"Fine4"
+      "Desc":"Annually"
     },
     {
       "id":"5",
       "Name":"Fine5",
-      "Desc":"Fine5"
+      "Desc":"Weekly"
     }
 ]

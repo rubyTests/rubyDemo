@@ -1,0 +1,138 @@
+    <style type="text/css">
+        .uk-grid.AdjPad {
+            padding-left: 20px;
+        }
+        .md-list-content.AdjListCon {
+            padding-top: 10px;
+        }
+        #page_content_inner {
+            padding: 24px 24px 0;
+        }
+    </style>
+    <div id="page_content">
+        <div id="page_content_inner">
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+                        <form class="uk-form" >
+                        <h2 class="heading_a">
+                                Fee Collection
+                                <span class="sub-heading">Fee Collection Informations</span>
+                            </h2>
+                            <hr class="md-hr"/>
+                            <div class="uk-grid uk-grid-medium form_hr">
+                                <div class="uk-width-8-10 uk-width-medium-9-10">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >import_contacts</i>
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Course</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-6 parsley-row">
+                                            <input type="text" config="selectize_courseNew_config" options="selectize_courseNew_options" ng-model="selectize_courseNew" name="selectize_courseNew" selectize />
+                                        </div>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >contacts</i>
+                                                        <!-- <i class="material-icons">developer_board</i> -->
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Batch</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-6 parsley-row">
+                                            <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="selectize_batch" name="selectize_batch" selectize />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-grid uk-grid-medium">
+                                <div class="uk-width-8-10 uk-width-medium-9-10">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >person</i>
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Search</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-3-6 parsley-row">
+                                            <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page_content_inner" ng-controller="feeCollectionCtrl as showCase">
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <!-- <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
+                        <i class="uk-icon-plus"></i>  Add Block
+                        </button>
+                    </div> -->
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Admission Number</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th>Fee Due</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Admission Number</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th>Fee Due</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{row.id}}</td>
+                            <td>{{row.Name}}</td>
+                            <td>{{row.Admission_No}}</td>
+                            <td>{{row.Course}}</td>
+                            <td>{{row.Batch}}</td>
+                            <td>{{row.Fee_Due}}</td>
+                            <td>
+                                <a class="md-btn md-btn-warning md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.feeCollectView">
+                                <i class="uk-icon-money"></i>
+                                Pay
+                                </a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

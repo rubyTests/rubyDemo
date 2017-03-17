@@ -7,6 +7,9 @@
 .md-hr{
          margin: 24px 0 !important;
     }
+    /*.selectize-control.single {
+    margin-top: 0px !important;
+}*/
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -27,7 +30,8 @@
                                     <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="Fee_Structure_Name" />
                                 </div>
                                 <div class="uk-width-medium-1-2 parsley-row">
-                                <p></p>
+                                <label>Assign To:</label>
+                                <div class="dynamic_radio uk-margin-small-top">
                                     <span class="icheck-inline">
                                         <input type="radio" name="radio_demo_inline" id="radio_demo_inline_1" icheck ng-model="radio_BatchStu" value="Batch" ng-checked="true" />
                                         <label for="radio_demo_inline_1" class="inline-label">Course</label>
@@ -36,6 +40,7 @@
                                         <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="radio_BatchStu" value="Student" />
                                         <label for="radio_demo_inline_2" class="inline-label">Student</label>
                                     </span>
+                                </div>
                                 </div>
                             </div>
                             <p></p>

@@ -383,6 +383,10 @@ angular
                                 {
                                     title:'Fee Structure',
                                     link: 'restricted.finance.fee.feeStructureDetails'
+                                },
+                                {
+                                    title:'Fee Collection',
+                                    link: 'restricted.finance.fee.feeCollectionDetails'
                                 }
                                 // {
                                 //     title:'Fee Defaulters'

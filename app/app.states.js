@@ -1952,6 +1952,58 @@ altairApp
                     }
                 })
 
+                .state("restricted.finance.fee.feeStructureView", {
+                    url: "/feeStructureView",
+                    templateUrl: 'app/components/finance/feeStructureView.html',
+                    controller: 'feeStructureViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/finance/feeStructureViewCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Dynamic Elements'
+                    }
+                })
+
+                .state("restricted.finance.fee.feeCollectionDetails", {
+                    url: "/feeCollectionDetails",
+                    templateUrl: 'app/components/finance/feeCollectionDetails.html',
+                    controller: 'feeCollectionCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/feeCollectionCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Structure Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.feeCollectView", {
+                    url: "/feeCollectView",
+                    templateUrl: 'app/components/finance/feeCollectView.html',
+                    controller: 'feeCollectViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/feeCollectViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Structure Details'
+                    }
+                })
+
                 .state("restricted.finance.fee.config", {
                     url: "/config",
                     template: '<div ui-view autoscroll="false"/>',

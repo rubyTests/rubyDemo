@@ -70,7 +70,7 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('Fee Structure Name'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('No.of Fee Items'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Course / Student')
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Frequency')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

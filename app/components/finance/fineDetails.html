@@ -18,7 +18,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Mode</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -26,7 +26,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
-                            <th>Description</th>
+                            <th>Mode</th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -35,7 +35,7 @@
                             <td>{{row.Name}}</td>
                             <td>{{row.Desc}}</td>
                             <td>
-                                <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.config.fineAdd"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -43,87 +43,5 @@
                 </table>
             </div>
         </div>
-    </div>
-
-    <div class="uk-modal" id="modal_header_footer">
-      <div class="uk-modal-dialog">
-      <button type="button" class="uk-modal-close uk-close"></button>
-          <div class="uk-modal-header">
-              <h3 class="uk-modal-title">Add Fine</h3>
-          </div>
-          <div class="md-card-content">
-            <form class=""><p></p>
-              <div class="uk-width-10-10 uk-width-medium-10-10">
-                <div class="uk-width-1-1">
-                  <div class="parsley-row">
-                    <label>Fine Name</label>
-                    <input type="text" ng-model="course_name" class="md-input" required md-input>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <!-- <div class="uk-width-10-10 uk-width-medium-10-10">
-                  <div class="uk-width-1-1">
-                    <div class="parsley-row">
-                      <label>Fine Description</label>
-                      <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
-                    </div>
-                  </div>
-              </div> -->
-              <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
-                <div class="uk-width-8-10 uk-width-medium-9-10">
-                    <div class="uk-grid" ng-repeat="fields in section" on-last-repeat>
-                        <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="prev_state">Days After Due Date<span class="req"></span></label>
-                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="prev_state">Fine Value<span class="req"></span></label>
-                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="prev_state">Fine Value<span class="req"></span></label>
-                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
-                                </div>
-                            </div>
-                            <!-- <div class="uk-grid" data-uk-grid-margin>
-                            <div class="uk-width-medium-1-2 parsley-row">
-                                    <label for="from_date">Due Date<span class="req"></span></label>
-                                    <input type="text" name="join_date" id="join_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.join_date"/>
-                                </div>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="">
-                      <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center" style="float: right !important;">
-                          <div class="uk-vertical-align uk-height-1-1">
-                              <div class="uk-vertical-align-middle">
-                                  <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
-                                  <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
-                              </div>
-                          </div>
-                      </div>
-                      <div style="float: right;">
-                          <span class="uk-alert uk-alert-success" ng-if="$last">Add Previous Work Details</span>
-                      </div>
-                  </div>
-                </div>
-                <!-- <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center">
-                    <div class="uk-vertical-align uk-height-1-1">
-                        <div class="uk-vertical-align-middle">
-                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
-                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
-                        </div>
-                    </div>
-                </div> -->
-              </div>
-            </form>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-success md-btn-small uk-modal-close">Save</button>
-          </div>
-      </div>
     </div>
 </div>

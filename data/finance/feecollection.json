@@ -1,0 +1,50 @@
+[
+    {
+      "id":"1",
+      "Name":"Nitheesh",
+      "Admission_No":"82310132052",
+      "Course":"Cse",
+      "Batch":"Cse - B",
+      "Fee_Due":"75400"
+    },
+    {
+      "id":"2",
+      "Name":"PremKumar",
+      "Admission_No":"82310132059",
+      "Course":"Cse",
+      "Batch":"Cse - B",
+      "Fee_Due":"24800"
+    },
+    {
+      "id":"3",
+      "Name":"Rajkumar",
+      "Admission_No":"82310132063",
+      "Course":"Cse",
+      "Batch":"Cse - B",
+      "Fee_Due":"5000"
+    },
+    {
+      "id":"4",
+      "Name":"Rajesh",
+      "Admission_No":"82310132064",
+      "Course":"Cse",
+      "Batch":"Cse - B",
+      "Fee_Due":"19650"
+    },
+    {
+      "id":"5",
+      "Name":"Rijil",
+      "Admission_No":"82310132069",
+      "Course":"Cse",
+      "Batch":"Cse - B",
+      "Fee_Due":"14500"
+    },
+    {
+      "id":"6",
+      "Name":"Senthil",
+      "Admission_No":"82310132075",
+      "Course":"Cse",
+      "Batch":"Cse - B",
+      "Fee_Due":"18000"
+    }
+]

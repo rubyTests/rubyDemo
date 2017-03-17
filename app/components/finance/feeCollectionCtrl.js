@@ -1,7 +1,15 @@
 angular
     .module('altairApp')
-    .controller('fineAddCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+    .controller('feeCollectionCtrl', [
+        '$compile',
+        '$scope',
+        '$window',
+        '$timeout',
+        '$resource',
+        'DTOptionsBuilder',
+        'DTColumnDefBuilder',
+        function ($compile,$scope,$window,$timeout,$resource, DTOptionsBuilder, DTColumnDefBuilder) {
+
             var vm = this;
             vm.selected = {};
             vm.selectAll = false;
@@ -68,9 +76,12 @@ angular
                 });
 
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Sl.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Description')
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Admission Number'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Batch'),
+                DTColumnDefBuilder.newColumnDef(5).withTitle('Fee Due')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {
@@ -91,40 +102,12 @@ angular
                 vm.selectAll = true;
             }
 
-            $resource('data/finance/fine.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
-
-                $scope.selectize_buildingId_options = ["1", "2", "3"];
-                $scope.selectize_buildingId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Building Id...'
-                };
-
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
-
-                // Clone functionality
+            $resource('data/finance/feecollection.json')
+            .query()
+            .$promise
+            .then(function(dt_data) {
+                vm.dt_data = dt_data;
+            });
 
             $scope.form_template = [
                 [
@@ -245,17 +228,7 @@ angular
                     }
                 ]
             ];
-            $scope.mode = [
-                            {
-                                'label': 'Man',
-                                'value': 'man'
-                            },
-                            {
-                                'label': 'Woman',
-                                'value': 'woman'
-                            }
-                    ];
-                    console.log($scope.mode);
+
             $scope.form_dynamic = [];
             $scope.form_dynamic.push($scope.form_template);
 
@@ -264,8 +237,7 @@ angular
             // clone section
             $scope.cloneSection = function($event,$index) {
                 $event.preventDefault();
-                var ss = $scope.form_dynamic.push($scope.form_template);
-                console.log($scope.form_template);
+                $scope.form_dynamic.push($scope.form_template);
             };
 
             // delete section
@@ -278,5 +250,119 @@ angular
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 altair_uikit.reinitialize_grid_margin();
             });
+
+            $scope.selectize_feeItem_options = ["Tution Fee", "Book Fee", "Mess Fee", "Transport Fee", "Uniform Fee"];
+            $scope.selectize_feeItem_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Fee Item'
+            };
+
+            $scope.selectize_freq_options = ["Annualy", "Monthly", "Weekly"];
+            $scope.selectize_freq_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Frequency'
+            };
+
+            $scope.selectize_fine_options = ["Tution Fee Fine", "Book Fee Fine", "Hostel Fine"];
+            $scope.selectize_fine_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Fine'
+            };
+
+            $scope.selectize_courseNew_options = ["Computer Science and Engineering", "Mechanical Engineering", "Electrical Communication Engineering", "Electrical and Electronics Engineering", "Aeronautical Engineering"];
+            $scope.selectize_courseNew_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Course'
+            };
+
+            $scope.selectize_batch_options = ["Batch 1", "Batch 2", "Batch 3", "Batch 4", "Batch 5"];
+            $scope.selectize_batch_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Batch'
+            };
+
+
+            // Advanced selects
+
+            var course_data = $scope.selectize_course_options = [
+                {id: 1, title: 'Computer Science and Engineering', url: '444'},
+                {id: 2, title: 'Mechanical Engineering', url: '222'},
+                {id: 3, title: 'Electrical Communication Engineering', url: '222'},
+                {id: 4, title: 'Electrical and Electronics Engineering', url: '222'},
+                {id: 5, title: 'Aeronautical Engineering', url: '222'},
+                {id: 6, title: 'Information Technology Engineering', url: '222'},
+                {id: 7, title: 'Civil Engineering', url: '222'},
+                {id: 8, title: 'Marine Engineering', url: '222'}
+            ];
+
+            $scope.selectize_course_config = {
+                plugins: {
+                    'remove_button': {
+                        label     : ''
+                    }
+                },
+                maxItems: 1,
+                valueField: 'id',
+                labelField: 'title',
+                searchField: 'title',
+                create: false,
+                placeholder: 'Course Name',
+                render: {
+                    option: function(course_data, escape) {
+                        return  '<div class="option">' +
+                            '<span class="title">' + escape(course_data.title) + '</span><br>' +
+                            '</div>';
+                    }
+                    // item: function(planets_data, escape) {
+                    //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
+                    // }
+                }
+            };
+
+            // Advanced selects
+
+            var planets_data = $scope.selectize_planets_options = [
+                {id: 1, title: 'Rafeeq', url: '444'},
+                {id: 2, title: 'Saravanan', url: '222'},
+                {id: 3, title: 'Gopi', url: '222'},
+                {id: 4, title: 'Senthil', url: '222'},
+                {id: 5, title: 'Mani', url: '222'},
+                {id: 6, title: 'Vijay', url: '222'},
+                {id: 7, title: 'Karthil', url: '222'},
+                {id: 8, title: 'Selva', url: '222'}
+            ];
+
+            $scope.selectize_planets_config = {
+                plugins: {
+                    'remove_button': {
+                        label     : ''
+                    }
+                },
+                maxItems: 1,
+                valueField: 'id',
+                labelField: 'title',
+                searchField: 'title',
+                create: false,
+                placeholder: 'Student Name / Admission No',
+                render: {
+                    option: function(planets_data, escape) {
+                        return  '<div class="option">' +
+                            '<span class="title">' + escape(planets_data.title) + '</span><br>' +
+                            '<span class="title Addition uk-text-muted uk-text-small">' + escape(planets_data.url) + '</span>' +
+                            '</div>';
+                    }
+                    // item: function(planets_data, escape) {
+                    //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
+                    // }
+                }
+            };
+
+            $scope.checkbox_demo_1 = true;
+
         }
-    );
+    ]);
