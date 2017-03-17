@@ -123,7 +123,8 @@ angular
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.edit_data= function(res){
-                    console.log(res,"messsssssssssss");
+                    if (typeof res=="undefined") return false;
+                    //console.log(res,"messsssssssssss");
                     $scope.Updatebutton=true;
                     $scope.Savebutton=false;
                     $scope.dept_name=res.dept_name;

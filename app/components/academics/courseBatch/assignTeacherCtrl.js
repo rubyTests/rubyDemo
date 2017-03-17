@@ -89,10 +89,10 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle(' Course'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('Course'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Batch '),
-                // DTColumnDefBuilder.newColumnDef(2).withTitle('Department'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Employee Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Department'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Employee Name'),
             ];
            
             //     .newOptions()
@@ -183,6 +183,18 @@ angular
                         $scope.get_name.push($scope.name);
                     });
                 });
+                 $scope.dept_name = [];
+                $resource('app/components/academics/courseBatch/department.json')
+                    .query()
+                    .$promise
+                    .then(function(dt_data) {
+                        $scope.dept_data = [];
+                        $scope.dept_data =  dt_data;
+                         angular.forEach($scope.dept_data, function(value, key){
+                            $scope.name=  value.dept_name;
+                            $scope.dept_name.push($scope.name);
+                        });
+                    });
                 $scope.emp_name = [];
                 $resource('app/components/academics/courseBatch/employee.json')
                     .query()
@@ -192,7 +204,6 @@ angular
                         $scope.emp_data =  dt_data;
                          angular.forEach($scope.emp_data, function(value, key){
                             $scope.name=  value.employee_name;
-                            console.log($scope.name,"$scope.name");
                             $scope.emp_name.push($scope.name);
                         });
                     });
@@ -209,7 +220,6 @@ angular
                         // });
                         angular.forEach(vm.dt_data, function(value, key){
                             $scope.batchName=  value.cBatch_name;
-                            //console.log($scope.batchName,"$scope.batchName");
                             $scope.batch_name.push($scope.batchName);
                         });
                         angular.forEach(vm.dt_data, function(value, key){
@@ -217,6 +227,9 @@ angular
                         });
                         angular.forEach(vm.dt_data, function(value, key){
                             value.employeeName=$scope.employeeName(value.id);
+                        });
+                        angular.forEach(vm.dt_data, function(value, key){
+                            value.departmentName=$scope.departmentName(value.id);
                         });
                     });
                     $scope.courseName = function(id){
@@ -227,9 +240,13 @@ angular
                         var getName=$filter('filter')($scope.emp_data,{id : id },true);
                         if (getName[0]) return getName[0].employee_name;
                     }
+                    $scope.departmentName = function(id){
+                        var getName=$filter('filter')($scope.dept_data,{id : id },true);
+                        if (getName[0]) return getName[0].dept_name;
+                    }
 
 
-                $scope.selectize_deptId_options = ["Cse","Mech","Civil","Auro","It"];
+                $scope.selectize_deptId_options = $scope.dept_name;
                 $scope.selectize_deptId_config = {
                     create: false,
                     maxItems: 1,
@@ -253,6 +270,27 @@ angular
                     maxItems: 1,
                     placeholder: 'Batch Name'
                 };
+                $scope.openModel = function() {
+                    $scope.Savebutton=true;
+                    $scope.Updatebutton=false;
+                    $scope.selectize_courseName=null;
+                    $scope.selectize_batchName=null;
+                    $scope.selectize_deptId=null;
+                    $scope.selectize_empName=null;
+                    $('.uk-modal').find('input').trigger('blur');
+                };
+                $scope.edit_data= function(res){
+                    if (typeof res=="undefined") return false;
+                    //console.log(res,"resres");
+                    $scope.Updatebutton=true;
+                    $scope.Savebutton=false;
+                    $scope.selectize_courseName=res.courseName;
+                    $scope.selectize_batchName=res.cBatch_name;
+                    $scope.selectize_deptId=res.departmentName;
+                    $scope.selectize_empName=res.employeeName;
+                    $scope.id=vm.dt_data.indexOf(res);
+                }
+
 
 
 

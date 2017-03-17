@@ -267,11 +267,12 @@ angular
                     $scope.remove_data = function(index) {
 
                        var index = vm.dt_data.indexOf(index);
-                       console.log(index);
+                       //console.log(index);
                        vm.dt_data.splice(index, 1);  
                     }
                     $scope.edit_data= function(res){
-                        console.log(res,"messsssssssssss");
+                        if (typeof res=="undefined") return false;
+                       // console.log(res,"messsssssssssss");
                         //$scope.buttonStatus='Update';
                         $scope.Updatebutton=true;
                         $scope.Savebutton=false;
@@ -281,16 +282,14 @@ angular
                         $scope.selectize_courseName=res.course_name;
                         $scope.total_hours=res.total_hours;
                         $scope.id=vm.dt_data.indexOf(res);
-                        //console.log($scope.id);
                     }
                     $scope.Update_data= function () {
-                        console.log(vm.dt_data[$scope.id].sub_name);
+                       // console.log(vm.dt_data[$scope.id].sub_name);
                         vm.dt_data[$scope.id].sub_name=$scope.subject_name;
                         vm.dt_data[$scope.id].sub_code=$scope.sub_code;
                         vm.dt_data[$scope.id].sub_type=$scope.selectize_subType;
                         vm.dt_data[$scope.id].course_name=$scope.selectize_courseName;
                         vm.dt_data[$scope.id].total_hours=$scope.total_hours;
-                       // clearFunction();  
                         
                     }
 

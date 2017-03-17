@@ -215,6 +215,7 @@ angular
                 };
                 $scope.edit_data= function(res){
                     //console.log(res,"messsssssssssss");
+                    if (typeof res=="undefined") return false;
                     $scope.Updatebutton=true;
                     $scope.Savebutton=false;
                     $scope.selectize_courseId=res.courseName;

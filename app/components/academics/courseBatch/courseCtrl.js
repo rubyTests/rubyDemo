@@ -214,7 +214,7 @@ angular
                     vm.dt_data = dt_data;
                     angular.forEach(vm.dt_data, function(value, key){
                         $scope.gradingType=  value.grading_type;
-                        console.log($scope.gradingType);
+                        //console.log($scope.gradingType);
                         $scope.grading.push($scope.gradingType);
                     });
                     angular.forEach(vm.dt_data, function(value, key){
@@ -255,7 +255,8 @@ angular
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.edit_data= function(res){
-                    //console.log(res,"messsssssssssss");
+                    if (typeof res=="undefined") return false;
+                    //console.log(res,"resres");
                     $scope.Updatebutton=true;
                     $scope.Savebutton=false;
                     $scope.course_name=res.course_name;
