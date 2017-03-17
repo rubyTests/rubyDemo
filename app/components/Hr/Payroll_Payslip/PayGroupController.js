@@ -53,11 +53,6 @@ angular
                             type: 'number',
                             bRegex: true,
                             bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
                         }
                     ]
                 })
@@ -67,10 +62,11 @@ angular
                     })
             });
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Group Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Assigned Employee'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Pay Items'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Frequence')
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Group Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Assigned Employee'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Pay Items'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Frequence')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

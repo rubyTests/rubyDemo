@@ -274,14 +274,14 @@ angular
                                     link : 'restricted.hr.StructureGroup'
                                 },
                                 {
-                                    title: 'Pay Category',
-                                    link : 'restricted.hr.StructureGroup'
+                                    title: 'Pay Category'
+                                    // link : 'restricted.hr.StructureGroup'
                                 },
                                 {
-                                    title: 'Payslip',
+                                    title: 'Payslip'
                                 },
                                 {
-                                    title: 'Paslip Report',
+                                    title: 'Paslip Report'
                                 }
                             ]
                         }

@@ -10,7 +10,8 @@
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
-                            <th>Name</th>
+                            <th>S.No</th>
+                            <th>Group Name</th>
                             <th>Assigned Employee</th>
                             <th>Pay Items</th>
                             <th>Frequence</th>
@@ -19,22 +20,24 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>S.No</th>
                             <th>Group Name</th>
                             <th>Assigned Employee</th>
                             <th>Pay Items</th>
                             <th>Frequence</th>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in CreateNewData">
+                            <td>{{$index+1}}</td>
                             <td>{{row.ps_name}}</td>
                             <td>{{row.Assemp_count}}</td>
                             <td>{{row.ps_item_count}}</td>
                             <td>{{row.ps_freq}}</td>
                             <td class="uk-text-center">
-                                <a href="#" ui-sref="restricted.hr.ViewPayGroup({id:{{row.pis_id}}})" data-uk-tooltip="{pos:'bottom'}" title="View Group" ><i class="md-icon material-icons md-24">&#xE417;</i></a>
-                                <a href="#" ui-sref="restricted.hr.ViewGroupEmployee({id:{{row.pis_id}}})" data-uk-tooltip="{pos:'bottom'}" title="View Employees"><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
-                                <!-- <a href="#" ui-sref="restricted.ViewGroupEmployee({id:{{row.pis_id}}})" class="ts_remove_row"><i class="md-icon material-icons md-24">&#xE8D3;</i></a> -->
+                                <a href="#" ui-sref="restricted.hr.ViewPayGroup({id:{{row.pis_id}}})" ><i class="md-icon material-icons md-24">&#xE417;</i></a>
+                                <a href="#" ui-sref="restricted.hr.ViewGroupEmployee({id:{{row.pis_id}}})"><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
                             </td>
                         </tr>
                     </tbody>

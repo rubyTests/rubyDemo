@@ -208,7 +208,7 @@ altairApp
                 .state("restricted.hr.ViewGroupEmployee",{
                     url: "/ViewGroup Employee/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroupEmployee.html',
-                    controller : 'PayGroupEmployeeCtrl',
+                    // controller : 'PayGroupEmployeeCtrl',
                     parmas :{'id' :{value:null}},
                     resolve: {
                         // params:{'id': {value:null}},
@@ -2563,6 +2563,22 @@ altairApp
                     data: {
                         pageTitle: 'Employee position'
                     }
+                })
+
+                .state("restricted.hr.assign_employee",{
+                    url: "/assign_employee",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/assignEmployee.html',
+                    controller : 'assignEmployeeCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/Hr/Payroll_Payslip/assignEmployeeCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign Employee'
+                    }                  
                 })
         }
     ]);

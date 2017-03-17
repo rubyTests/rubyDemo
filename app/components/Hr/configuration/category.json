@@ -1,0 +1,12 @@
+ [
+    {
+        "id": 1,
+        "name": "Teaching",
+        "desc": ""
+    },
+    {
+        "id": 2,
+        "name": "Non-Teaching",
+        "desc": ""
+    }
+] 

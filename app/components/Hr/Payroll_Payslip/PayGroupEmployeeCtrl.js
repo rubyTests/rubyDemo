@@ -52,11 +52,6 @@ angular
                             type: 'number',
                             bRegex: true,
                             bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
                         }
                     ]
                 })
@@ -66,10 +61,11 @@ angular
                     })
             });
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Employee Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Department'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Employee Category'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Recent Payslip')
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Employee Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Department'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Employee Category'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Recent Payslip')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {
