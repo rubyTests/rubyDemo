@@ -131,12 +131,12 @@ angular
                                 {
                                     title: 'Syllabus',
                                     link: 'restricted.academics.syllabus_view'
-                                },
-                                {
-                                    title: 'Syllabus Details',
-                                    // link: 'restricted.academics.view_syllabus_details'
-                                    link: 'restricted.academics.view_syllabusDetails'
                                 }
+                                // {
+                                //     title: 'Syllabus Details',
+                                //     // link: 'restricted.academics.view_syllabus_details'
+                                //     link: 'restricted.academics.view_syllabusDetails'
+                                // }
                             ]
                         },
                         {
