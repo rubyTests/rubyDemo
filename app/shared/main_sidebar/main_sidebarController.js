@@ -95,7 +95,6 @@ angular
                     id: 2,
                     title: 'Academics',
                     icon: 'school',
-                    // link: 'restricted.pages.invoices.list'
                     submenu: [
                          {
                             title: 'Course & Batch',
@@ -132,11 +131,6 @@ angular
                                     title: 'Syllabus',
                                     link: 'restricted.academics.syllabus_view'
                                 }
-                                // {
-                                //     title: 'Syllabus Details',
-                                //     // link: 'restricted.academics.view_syllabus_details'
-                                //     link: 'restricted.academics.view_syllabusDetails'
-                                // }
                             ]
                         },
                         {
@@ -274,7 +268,6 @@ angular
                         },
                         {
                             title: 'Payroll & Payslip',
-                            // link :'app.hr',
                             submenu: [
                                 {
                                     title: 'Pay Item',
@@ -345,25 +338,25 @@ angular
                     link: 'restricted.Library'
                 },
                 {
-                    id: 8,
+                    id: 9,
                     title: 'Transport',
                     icon: '&#xE530;',
                     link: 'restricted.Library'
                 },
                 {
-                    id: 8,
+                    id: 10,
                     title: 'Hostel',
                     icon: '&#xE88A;',
                     link: 'restricted.Library'
                 },
                 {
-                    id: 8,
+                    id: 11,
                     title: 'Inventory',
                     icon: '&#xE8D1;',
                     link: 'restricted.Library'
                 },
                 {
-                    id: 8,
+                    id: 12,
                     title: 'Calendar',
                     icon: '&#xE8DF;',
                     link: 'restricted.calendar'
