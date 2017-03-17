@@ -4,7 +4,7 @@
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-7-10">
                     <div class="md-card">
-                        <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }">
+                        <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }" style="background-color: rgb(231,231,231);padding: 20px !important;">
                             <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
                                     <img ng-src="{{user_data.photo1_path}}" alt="user avatar"/>
@@ -26,16 +26,16 @@
                                 </h2>
                             </div> -->
                             <div class="user_heading_content">
-                                <h2 class="heading_b uk-margin-bottom">
+                                <h2 class="heading_b uk-margin-bottom" style="color: #444;">
                                     <span class="uk-text-truncate">{{user_data.firstname}}{{user_data.lastname}}</span>
                                     <span class="sub-heading">{{user_data.admno}}</span>
                                 </h2>
                                 <ul class="user_stats">
                                     <li>
-                                        <h4 class="heading_a">{{user_data.course}}<span class="sub-heading">Course</span></h4>
+                                        <h4 class="heading_a" style="color: #444;">{{user_data.course}}</h4>
                                     </li>
                                     <li>
-                                        <h4 class="heading_a">{{user_data.batch}}<span class="sub-heading">Batch</span></h4>
+                                        <h4 class="heading_a" style="color: #444;">{{user_data.batch}}</h4>
                                     </li>
                                 </ul>
                             </div>

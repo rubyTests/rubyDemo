@@ -70,9 +70,8 @@ angular
                 },
                 {
                     id: 1,
-                    title: 'Settings',
-                    icon: '&#xE8B8;',
-                    // link: 'restricted.pages.invoices.list'
+                    title: 'Institution',
+                    icon: '&#xE84F;',
                     submenu: [
                         {
                             title: 'Institution Details',
@@ -94,125 +93,12 @@ angular
                 },
                 {
                     id: 2,
-                    title: 'HR',
-                    icon: '&#xE7EF;',
-                    submenu: [
-                        {
-                            title: 'Configuration',
-                            submenu: [
-                                {
-                                    title: 'Employee Category',
-                                    // link: 'restricted.pages.mailbox'
-                                },
-                                {
-                                    title: 'Employee Department',
-                                    // link: 'restricted.pages.mailbox'
-                                },
-                                {
-                                    title: 'Employee Position',
-                                    // link: 'restricted.pages.mailbox'
-                                },
-                                {
-                                    title: 'Employee Grade',
-                                },
-                                {
-                                    title: 'Pay Item',
-                                    link : 'restricted.hr.payitem'
-                                },
-                                {
-                                    title: 'Pay Structure',
-                                    link : 'restricted.hr.Structure'
-                                },
-                                {
-                                    title: 'Leave Type',
-                                    link : 'restricted.hr.Leave'
-                                },
-                                {
-                                    title: 'Leave Category',
-                                    link : 'restricted.hr.LeaveCategory'
-                                },
-
-                                {
-                                    title: 'Working Days',
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Payroll & Payslip',
-                            // link :'app.hr',
-                            submenu: [
-                                {
-                                    title: 'Pay Structure Group',
-                                    link : 'restricted.hr.StructureGroup'
-                                },
-                                {
-                                    title: 'Payroll Category',
-                                },
-                                {
-                                    title: 'Payroll Group',
-                                },
-                                {
-                                    title: 'Paslip Report',
-                                },
-                                {
-                                    title: 'Payslip for Payroll Group',
-                                },
-                                {
-                                    title: 'Payslip for Employee',
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Employee Leave Management',
-                            submenu: [
-                                {
-                                    title: 'Attendance Register',
-                                },
-                                {
-                                    title: 'Attendance Report',
-                                },
-                                {
-                                    title: 'Leave Category Type',
-                                    link : 'restricted.LeaveCategoryType'
-                                },
-                                {
-                                    title: 'Leave Reset',
-                                },
-                                {
-                                    title: 'Leave Application',
-                                },
-                            ]
-                        },
-                        {
-                            title: 'Employee Management',
-                            submenu: [
-                                {
-                                    title: 'Employee Admission',
-                                    link: 'restricted.employeemanagement.admission'
-                                },
-                                // {
-                                //     title: 'Employee Profile',
-                                //     link: 'restricted.employeemanagement.profile'
-                                // },
-                                {
-                                    title: 'Employee Details',
-                                    link: 'restricted.employeemanagement.employee_view'
-                                },
-                                {
-                                    title: 'Employee Subject Association',
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    id: 3,
                     title: 'Academics',
-                    icon: '&#xE02F;',
+                    icon: 'school',
                     // link: 'restricted.pages.invoices.list'
                     submenu: [
                          {
-                            title: 'Manage Course & Batch',
+                            title: 'Course & Batch',
                             submenu: [
                                 {
                                     title: 'Department',
@@ -236,7 +122,7 @@ angular
                             ]
                         },
                         {
-                            title: 'Manage Subjects & Syllabus',
+                            title: 'Subjects & Syllabus',
                             submenu: [
                                 {
                                     title: 'Subjects',
@@ -283,9 +169,6 @@ angular
                                 },
                                 {
                                     title: 'Manage Time Table',
-                                },
-                                {
-                                    title: 'View Time Table',
                                 }
                             ]
                         },
@@ -295,14 +178,6 @@ angular
                             submenu: [
                                 {
                                     title: 'Add Compliant',
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Leaves',
-                            submenu: [
-                                {
-                                    title: 'Apply Leaves',
                                 }
                             ]
                         },
@@ -328,42 +203,102 @@ angular
                     ]
                 },
                 {
+                    id: 3,
+                    title: 'Student',
+                    icon: '&#xE7FD;',
+                    submenu:[
+                        {
+                            title:'Student Admission',
+                            link: 'restricted.student.admission'
+                        },
+                        {
+                            title:'Student Details',
+                            link: 'restricted.student.student_list'
+                        },
+                        {
+                            title: 'Leaves',
+                            submenu: [
+                                {
+                                    title: 'Apply Leaves',
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
                     id: 4,
-                    title: 'Finance',
-                    icon: '&#xE227;',
+                    title: 'HR',
+                    icon: '&#xE7EF;',
                     submenu: [
-                        // {
-                        //     title: 'Asset & Liability Management',
-                        //     // link: 'restricted.pages.chat'
-                        //     submenu: [
-                        //         {
-                        //             title:'Asset'
-                        //         },
-                        //         {
-                        //             title:'Liability'
-                        //         }
-                        //     ]
-                        // },
-                        // {
-                        //     title: 'Finance Category',
-                        // },
-                        // {
-                        //     title: 'Transactions',
-                        //     submenu: [
-                        //         {
-                        //             title:'Add Expanse'
-                        //         },
-                        //         {
-                        //             title:'Add Income'
-                        //         },
-                        //         {
-                        //             title:'Reverted Transactions'
-                        //         },
-                        //     ]
-                        // },
-                        // {
-                        //     title:'Donations'
-                        // },
+                        {
+                            title: 'Employee Management',
+                            submenu: [
+                                {
+                                    title: 'Employee Category',
+                                    link: 'restricted.hr.config.category'
+                                },
+                                {
+                                    title: 'Employee Position',
+                                    link: 'restricted.hr.config.position'
+                                },
+                                {
+                                    title: 'Employee Admission',
+                                    link: 'restricted.employeemanagement.admission'
+                                },
+                                {
+                                    title: 'Employee Details',
+                                    link: 'restricted.employeemanagement.employee_view'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Leave Management',
+                            submenu: [
+                                {
+                                    title: 'Leave Type',
+                                },
+                                {
+                                    title: 'Leave Category',
+                                },
+                                {
+                                    title: 'Leave Applications',
+                                    link : 'restricted.LeaveCategoryType'
+                                },
+                                {
+                                    title: 'Attendance Register',
+                                },
+                                {
+                                    title: 'Attendance Report',
+                                },
+                            ]
+                        },
+                        {
+                            title: 'Payroll & Payslip',
+                            // link :'app.hr',
+                            submenu: [
+                                {
+                                    title: 'Pay Item',
+                                    link : 'restricted.hr.StructureGroup'
+                                },
+                                {
+                                    title: 'Pay Category',
+                                    link : 'restricted.hr.StructureGroup'
+                                },
+                                {
+                                    title: 'Payslip',
+                                },
+                                {
+                                    title: 'Paslip Report',
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 5,
+                    title: 'Finance',
+                    icon: '&#xE263;',
+                    submenu: [
                         {
                             title:'Fees',
                             submenu:[
@@ -388,46 +323,15 @@ angular
                                     title:'Fee Collection',
                                     link: 'restricted.finance.fee.feeCollectionDetails'
                                 }
-                                // {
-                                //     title:'Fee Defaulters'
-                                // },
-                                // {
-                                //     title:'Fee Refund',
-                                //     submenu:[
-                                //         {
-                                //             title:'Create Refund Rule'
-                                //         },
-                                //         {
-                                //             title:'View Refund'
-                                //         },
-                                //         {
-                                //             title:'Apply Refund'
-                                //         }
-                                //     ]
-                                // }
                             ]
                         }
                     ]
                 },
-                {
-                    id: 5,
-                    title: 'Student',
-                    icon: '&#xE7FD;',
-                    submenu:[
-                        {
-                            title:'Student Details',
-                            link: 'restricted.student.student_list'
-                        },
-                        {
-                            title:'Student Admission',
-                            link: 'restricted.student.admission'
-                        }
-                    ]
-                },
+
                 {
                     id: 6,
                     title: 'Repository',
-                    icon: '&#xE87B;',
+                    icon: '&#xE2CC;',
                 },
                 {
                     id: 7,
@@ -435,9 +339,27 @@ angular
                     icon: '&#xE158;',
                 },
                 {
-                    id: 4,
+                    id: 8,
                     title: 'Library',
-                    icon: '&#xE85C;',
+                    icon: '&#xE02F;',
+                    link: 'restricted.Library'
+                },
+                {
+                    id: 8,
+                    title: 'Transport',
+                    icon: '&#xE530;',
+                    link: 'restricted.Library'
+                },
+                {
+                    id: 8,
+                    title: 'Hostel',
+                    icon: '&#xE88A;',
+                    link: 'restricted.Library'
+                },
+                {
+                    id: 8,
+                    title: 'Inventory',
+                    icon: '&#xE8D1;',
                     link: 'restricted.Library'
                 },
                 {
