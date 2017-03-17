@@ -5,8 +5,8 @@
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <div class="uk-width-10-10 uk-width-medium-10-10 uk-margin-medium-bottom">
-                  <button type="button" ui-sref="restricted.AddPayCategory" class="md-btn md-btn-primary md-btn-small uk-float-right">
-                  <i class="uk-icon-plus"></i> Add Group</button>
+                  <button type="button"  class="md-btn md-btn-primary md-btn-small uk-float-right">
+                  <i class="uk-icon-plus"></i> Assign Employees</button>
                 </div>
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <thead>
@@ -31,10 +31,10 @@
                             <td>{{row.empFirstName}}{{row.empLastName}}</td>
                             <td>{{row.empdet}}</td>
                             <td>{{row.empcat}}</td>
-                            <td>{{row.empdet}}</td>
+                            <td>-</td>
                             <td class="uk-text-center">
-                                <a href="#" ui-sref="restricted.ViewPayGroup"  class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons md-24 ">&#xE417;</i></a>
-                                <a href="#" ui-sref="restricted.ViewGroupEmployee" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
+                                <a href="#"  data-uk-tooltip="{pos:'bottom'}" title="View Payroll" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons md-24">&#xE417;</i></a>
+                                <a href="#"  data-uk-tooltip="{pos:'bottom'}" title="Delete from Group" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons md-24">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

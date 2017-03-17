@@ -117,19 +117,19 @@ angular
                                 },
                                 {
                                     title: 'Pay Item',
-                                    link : 'restricted.payitem'
+                                    link : 'restricted.hr.payitem'
                                 },
                                 {
                                     title: 'Pay Structure',
-                                    link : 'restricted.Structure'
+                                    link : 'restricted.hr.Structure'
                                 },
                                 {
                                     title: 'Leave Type',
-                                    link : 'restricted.Leave'
+                                    link : 'restricted.hr.Leave'
                                 },
                                 {
                                     title: 'Leave Category',
-                                    link : 'restricted.LeaveCategory'
+                                    link : 'restricted.hr.LeaveCategory'
                                 },
 
                                 {
@@ -143,7 +143,7 @@ angular
                             submenu: [
                                 {
                                     title: 'Pay Structure Group',
-                                    link : 'restricted.StructureGroup'
+                                    link : 'restricted.hr.StructureGroup'
                                 },
                                 {
                                     title: 'Payroll Category',

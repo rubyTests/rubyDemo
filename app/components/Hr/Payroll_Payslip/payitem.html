@@ -96,8 +96,8 @@ thead th{
                                   <a class="ts_remove_row" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()"><i class="md-icon material-icons">&#xE5CD;</i></a>
                                 </form>
                                 <div class="buttons" ng-show="!rowform.$visible">
-                                    <a class="ts_remove_row" ng-click="rowform.$show()"><i class="md-icon material-icons">&#xE254;</i></a>
-                                    <a class="ts_remove_row" ng-click="removeUser($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                    <a class="ts_remove_row" data-uk-tooltip="{pos:'bottom'}" title="Edit"  ng-click="rowform.$show()"><i class="md-icon material-icons">&#xE254;</i></a>
+                                    <a class="ts_remove_row" data-uk-tooltip="{pos:'bottom'}" title="Delete"  ng-click="removeUser($index)"><i class="md-icon material-icons">&#xE872;</i></a>
                                 </div> 
                                 </td>
                             </tr>

@@ -103,17 +103,17 @@ altairApp
                         label: 'Home'
                     }
                 })
-                ///RUBY STATE CAMPUS START by Manikandan///
-
+                ///RUBY CAMPUS Hr payroll and paygroup state  by Manikandan///
                 .state("restricted.hr", {
                     template: '<div ui-view autoscroll="false"/>',
+                    url :"/hr",
                     abstract: true
                 })
-                .state("restricted.hr.payrollpayslip", {
-                    template: '<div ui-view autoscroll="false"/>',
-                    abstract: true
-                })
-                .state("restricted.payitem", {
+                // .state("restricted.hr.payrollpayslip", {
+                //     template: '<div ui-view autoscroll="false"/>',
+                //     abstract: true
+                // })
+                .state("restricted.hr.payitem", {
                     url: "/payitem",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/payitem.html',
                     controller: 'tables_examplesCtrl',
@@ -133,8 +133,8 @@ altairApp
                         }]
                     }
                 })
-                .state("restricted.Structure", {
-                    url: "/pay Structure",
+                .state("restricted.hr.Structure", {
+                    url: "/payStructure",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayStructure.html',
                     controller: 'PayStructure',
                     resolve: {
@@ -153,21 +153,27 @@ altairApp
                         }]
                     }
                 })
-                .state("restricted.AddPayCategory",{
-                    url: "/Add-payCategory",
+                .state("restricted.hr.AddPayCategory",{
+                    url: "/AddpayCategory",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayCategory.html',
                     resolve: {
+                        get_Payitem : function($http){
+                           return $http({
+                                method:'GET',
+                                url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json',
+                            }).then(function(data){
+                                return data.data;
+                            });
+                        },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
                                 'app/components/Hr/Payroll_Payslip/PayCategoryController.js'
                             ]);
                         }]
                     },
                     
                 })
-                .state("restricted.ViewPayGroup",{
+                .state("restricted.hr.ViewPayGroup",{
                     url: "/View-PayGroup/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/ViewPayGroup.html',
                     controller : 'ViewPayGroupCtrl',
@@ -199,7 +205,7 @@ altairApp
                     }
                     
                 })
-                .state("restricted.ViewGroupEmployee",{
+                .state("restricted.hr.ViewGroupEmployee",{
                     url: "/ViewGroup Employee/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroupEmployee.html',
                     controller : 'PayGroupEmployeeCtrl',
@@ -216,39 +222,8 @@ altairApp
                     }
                     
                 })
-                // .state("restricted.StructureGroup", {
-                //     url: "/pay Group",
-                //     templateUrl: 'app/components/Hr/Payroll_Payslip/datatablesView.html',
-                //     controller :'tables_examplesCtrl',
-                //     resolve: {
-                //         Pay_item: function($http){
-                //             return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
-                //                 .then(function (data) {
-                //                     return data.data;
-                //                 });
-                //         },
-                //         Pay_Structure: function($http){
-                //             return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
-                //                 .then(function (data) {
-                //                     return data.data;
-                //                 });
-                //         },
-                //         pay_Group:function($http){
-                //             return $http({method:'GET',url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json'}).then(function(data){
-                //                 return data.data;
-                //             });
-                //         },
-                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                //             return $ocLazyLoad.load([
-                //                 'bower_components/angular-resource/angular-resource.min.js',
-                //                 'xeditable','smart-table','smart-filter',
-                //                 'app/components/Hr/Payroll_Payslip/datatablesController.js'
-                //             ]);
-                //         }]
-                //     }
-                // })
-                .state("restricted.StructureGroup", {
-                    url: "/pay Group",
+                .state("restricted.hr.StructureGroup", {
+                    url: "/payGroup",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroup.html',
                     controller :'dt_default',
                     resolve: {
@@ -261,8 +236,8 @@ altairApp
                         }]
                     }
                 })
-                .state("restricted.Leave", {
-                    url: "/Leave type",
+                .state("restricted.hr.Leave", {
+                    url: "/Leavetype",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveType.html',
                     controller: 'tables_examplesCtrl',
                     resolve: {
@@ -281,7 +256,7 @@ altairApp
                         }]
                     }
                 })
-                .state("restricted.LeaveCategory", {
+                .state("restricted.hr.LeaveCategory", {
                     url: "/Leave Category",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
                     controller: 'tables_examplesCtrl',
