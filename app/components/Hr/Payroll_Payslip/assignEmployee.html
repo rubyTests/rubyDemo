@@ -4,9 +4,73 @@
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <!-- <input type="text" config="selectize_dept_config" options="selectize_dept_data" ng-model="selectize_dept" selectize /> -->
+                        <input type="text" config="selectize_dept_config" options="selectize_dept_data" ng-model="selectize_dept" selectize />
                     </div>
                 </div>
+            </div>
+        </div>
+        <!-- <div class="md-card uk-margin-medium-bottom" ng-if="tableView_data.length > 0">
+            <div class="md-card-content">
+                <div class="uk-overflow-container">
+                    <table class="uk-table uk-table-striped">
+                        <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th><i class="material-icons">person</i>Employee Name</th>
+                            <th><i class="material-icons">book</i>Employee category</th>
+                            <th><i class="material-icons">group_work</i>Payroll group</th>
+                            <th><i class="material-icons">open_in_new</i>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in tableView_data">
+                                <td>{{$index+1}}</td>
+                                <td>{{row.firstname}} {{row.lastname}}({{row.Admission_No}})</td>
+                                <td>{{row.category}}</td>
+                                <td>Not assigned</td>
+                                <td><a ui-sref="restricted.hr.add_employee_details({id:{{row.id}}})">Add to this group</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+        <div class="md-card uk-margin-medium-bottom" ng-if="tableView_data.length > 0">
+            <div class="md-card-content" ng-controller="assignEmployeeCtrl as showCase">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Employee Name</th>
+                            <th>Employee Number</th>
+                            <th>Position</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Employee Name</th>
+                            <th>Employee Number</th>
+                            <th>Position</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in tableView_data">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.firstname}} {{row.lastname}}</td>
+                            <td>{{row.Admission_No}}</td>
+                            <td>{{row.position}}</td>
+                            <td>{{row.category}}</td>
+                            <!-- <td><a ui-sref="restricted.hr.add_employee_details({id:{{row.id}}})">Add to this group</a></td> -->
+                            <td ng-show="row.payitem_id != null"><a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.id}}})">Change Pay Group</a></td>
+                             <td ng-show="row.payitem_id == null"><a ui-sref="restricted.hr.add_employee_details({id:{{row.id}}})">Add to this Group</a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

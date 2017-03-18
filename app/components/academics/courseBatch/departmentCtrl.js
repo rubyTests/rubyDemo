@@ -89,10 +89,12 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Department'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Head Of Department'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Phone'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Department'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Code'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Head Of Department'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Phone'),
+
             ];
             $scope.get_id = [];
             $resource('app/components/academics/courseBatch/department.json')

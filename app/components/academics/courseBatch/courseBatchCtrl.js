@@ -90,10 +90,11 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Course'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Batch'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Period From'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Period To'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Batch'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Period From'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Period To'),
             ];
           
             //     .newOptions()

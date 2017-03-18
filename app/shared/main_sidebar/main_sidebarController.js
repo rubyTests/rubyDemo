@@ -270,12 +270,12 @@ angular
                             title: 'Payroll & Payslip',
                             submenu: [
                                 {
-                                    title: 'Pay Item',
-                                    link : 'restricted.hr.StructureGroup'
+                                    title: 'Pay Item'
+                                    // link : 'restricted.hr.StructureGroup'
                                 },
                                 {
-                                    title: 'Pay Category'
-                                    // link : 'restricted.hr.StructureGroup'
+                                    title: 'Pay Category',
+                                    link : 'restricted.hr.StructureGroup'
                                 },
                                 {
                                     title: 'Payslip'
@@ -348,20 +348,20 @@ angular
                 {
                     id: 9,
                     title: 'Transport',
-                    icon: '&#xE530;',
-                    link: 'restricted.Library'
+                    icon: '&#xE530;'
+                    // link: 'restricted.Library'
                 },
                 {
                     id: 10,
                     title: 'Hostel',
-                    icon: '&#xE88A;',
-                    link: 'restricted.Library'
+                    icon: '&#xE88A;'
+                    // link: 'restricted.Library'
                 },
                 {
                     id: 11,
                     title: 'Inventory',
-                    icon: '&#xE8D1;',
-                    link: 'restricted.Library'
+                    icon: '&#xE8D1;'
+                    // link: 'restricted.Library'
                 },
                 {
                     id: 12,

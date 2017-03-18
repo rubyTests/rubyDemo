@@ -93,7 +93,7 @@ angular
                 console.log($scope.gropEmployeeProfile,'$scope.gropEmployeeProfile  1');
                 angular.forEach($scope.gropEmployeeProfile,function(value,key){
                     // console.log(value,'value');
-                     $scope.EmployeeDetail.push({empFirstName : value.firstname,empLastName : value.lastname,empdet:value.Dept,empcat:value.category});
+                     $scope.EmployeeDetail.push({emp_id : value.id,empFirstName : value.firstname,empLastName : value.lastname,empdet:value.Dept,empcat:value.category});
                      // console.log($scope.EmployeeDetail,'$scope.EmployeeDetail');
                     });
             }

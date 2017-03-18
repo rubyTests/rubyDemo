@@ -8,7 +8,7 @@
                         <ul class="md-list md-list-addon">
                             <li>
                                 <div class="md-list-addon-element">
-                                    <i class="md-list-addon-icon material-icons uk-text-primary" >assignment</i>
+                                    <i class="md-list-addon-icon material-icons uk-text-primary" >assignment_ind</i>
                                 </div>
                                 <div class="md-list-content">
                                     <span class="md-list-heading">{{row.Name}}</span>
@@ -32,42 +32,51 @@
                     </div>
                 </div>
                 <hr class="uk-grid-divider" ng-if="EarningsDiv && DeductionDiv">
-                <h4>Pay Item Details</h4>
-                <div class="md-card uk-margin-medium-bottom">
-                    <div class="md-card-content">
-                        <div class="uk-overflow-container">
-                            <h4>Earning</h4>
-                            <table class="uk-table uk-table-striped">
-                                <thead>
-                                <tr>
-                                    <th><i class="md-list-addon-icon material-icons">school</i>  Pay Item Name</th>
-                                    <th><i class="md-list-addon-icon material-icons">attach_money</i>
-                                    Pay Item Value</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="row in EarningsData">
-                                        <td>{{row.Name}}</td>
-                                        <td>{{row.Amount}}</td>
+                <h4>Pay Details</h4>
+                <div ng-if="EarningsData.length > 0">
+                    <h4>Earning</h4>
+                    <div class="md-card uk-margin-medium-bottom">
+                        <div class="md-card-content">
+                            <div class="uk-overflow-container">
+                                <table class="uk-table uk-table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th><i class="md-list-addon-icon material-icons">school</i>  Pay Item Name</th>
+                                        <th><i class="md-list-addon-icon material-icons">attach_money</i>
+                                        Pay Item Value</th>
                                     </tr>
-                                </tbody>
-                            </table>
-
-                            <h4>Deduction</h4>
-                            <table class="uk-table uk-table-striped">
-                                <thead>
-                                <tr>
-                                    <th><i class="md-list-addon-icon material-icons">school</i>  Pay Item Name</th>
-                                    <th><i class="md-list-addon-icon material-icons">attach_money</i>Pay Item Value</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr ng-repeat="row in DeductionData">
-                                        <td>{{row.Name}}</td>
-                                        <td>{{row.Amount}}</td>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in EarningsData">
+                                            <td>{{row.Name}}</td>
+                                            <td>{{row.Amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="DeductionData.length > 0">
+                    <h4>Deduction</h4>
+                    <div class="md-card uk-margin-medium-bottom">
+                        <div class="md-card-content">
+                            <div class="uk-overflow-container">
+                                <table class="uk-table uk-table-striped">
+                                    <thead>
+                                    <tr>
+                                        <th><i class="md-list-addon-icon material-icons">school</i>  Pay Item Name</th>
+                                        <th><i class="md-list-addon-icon material-icons">attach_money</i>Pay Item Value</th>
                                     </tr>
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in DeductionData">
+                                            <td>{{row.Name}}</td>
+                                            <td>{{row.Amount}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

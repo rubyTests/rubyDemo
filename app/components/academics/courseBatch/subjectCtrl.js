@@ -89,11 +89,12 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Subject'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Code'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Subject Type'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('Total Hours')
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Subject'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Code'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Subject Type'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(5).withTitle('Total Hours')
             ];
             //     .newOptions()
             //     // .withDisplayLength(10)

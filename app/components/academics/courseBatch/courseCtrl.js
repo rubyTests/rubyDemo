@@ -94,11 +94,12 @@ angular
                 //     }
                 // ]);
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Course'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Department'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Attendance Type'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Min Attendance %'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('GradingType'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Department'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Attendance Type'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Min Attendance %'),
+                DTColumnDefBuilder.newColumnDef(5).withTitle('GradingType'),
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

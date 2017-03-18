@@ -99,8 +99,8 @@ angular
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Floor'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('BlockId'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('BuildingId'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Block'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Building'),
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

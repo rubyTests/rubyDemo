@@ -2640,6 +2640,8 @@ altairApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
                                 'app/components/Hr/Payroll_Payslip/assignEmployeeCtrl.js'
                             ]);
                         }]
@@ -2647,6 +2649,41 @@ altairApp
                     data: {
                         pageTitle: 'Assign Employee'
                     }                  
+                })
+                .state("restricted.hr.add_employee_details",{
+                    url: "/add_employee_details/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/addEmployee_data.html',
+                    controller : 'addassignemployeeCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/addassignemployeeCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign Employee'
+                    },
+                    params:{id:null}                
+                })
+
+                .state("restricted.hr.view_employee_paydetails",{
+                    url: "/view_employee_paydetails/{assign_id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/viewemployee_paydetails.html',
+                    controller : 'viewemployee_PaydetailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/viewemployee_PaydetailsCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view Employee Pay details'
+                    },
+                    params:{assign_id:null}                
                 })
         }
     ]);

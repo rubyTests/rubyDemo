@@ -29,8 +29,9 @@
                          <i class="uk-icon-plus"></i>  Add Course
                         </button>
                         </tr> -->
-                        <tr>
-                            <th style="width: 20%;">Course</th>
+                        <tr>  
+                            <th>S.No</th>
+                            <th>Course</th>
                             <th>Department</th>
                             <th>Attendance Type</th>
                             <th>Min Attendance %</th>
@@ -40,6 +41,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th>S.No</th>
                             <th>Course</th>
                             <th>Department</th>
                             <th>Attendance Type</th>
@@ -49,6 +51,7 @@
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{$index+1}}</td>
                             <td>{{row.course_name}}</td>
                             <td>{{row.departmentName}}</td>
                             <td>{{row.attendance_type}}</td>

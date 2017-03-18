@@ -1,0 +1,141 @@
+<style type="text/css">
+    .tdStyle {
+        width:50%;
+        padding: 10px !important;
+        border-bottom:none !important;
+    }
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Employee Payroll</h3>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info">person</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].firstname}} {{tableArray[0].lastname}}</span>
+                                    <span class="uk-text-small uk-text-muted">Employee Name</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >assignment_ind</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].Admission_No}}</span>
+                                    <span class="uk-text-small uk-text-muted">Employee Number</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >import_contacts</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].Dept}}</span>
+                                    <span class="uk-text-small uk-text-muted">Department</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >school</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].position}}</span>
+                                    <span class="uk-text-small uk-text-muted">Position</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 class="heading_b uk-margin-bottom">Payroll Details
+        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayDetails()">Edit</button>
+        </h3>
+         <div class="md-card-content uk-width-medium-1-1 large-padding">
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container">
+                        <table class="uk-table">
+                            <thead>
+                                <th><i class="material-icons">add_box</i> <b>Earninng</b></th>
+                                <th><i class="material-icons">indeterminate_check_box</i> <b>Deduction</b></th>
+                            </thead>
+                            <tbody id="tblBody">
+                                <tr>
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="tdStyle">Basic</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="basic_val" ng-change="earningCalculation()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle">Housing Allowance</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="housing_allow" ng-change="earningCalculation()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle">Human Resource Allowance</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="hr_allowance" ng-change="earningCalculation()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle">Transport Allowance</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="transport" ng-change="earningCalculation()"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle">Total Earnings</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="Total_Earning" ng-blur="getTotalNetPay()" id="earningTotal">
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td class="tdStyle">Income Tax</td>
+                                                    <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="income_deduction"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle">Provident Fund</td>
+                                                    <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="fund_deduction"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle">Total Deduction</td>
+                                                    <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="toatl_deduction"></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ {{grasspayTotal}}</span></td>
+                                    <td class="tdStyle"><span style="margin-left: 95px;"><b>Net Pay</b> <input type="text" id="netValue" ng-model="showTotalNetpay" style="margin-left: 60px;"></span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

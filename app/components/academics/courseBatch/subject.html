@@ -29,7 +29,8 @@
                         </button>
                         </tr> -->
                         <tr>
-                            <th style="width: 19%;">Subject</th>
+                            <th>S.No</th>
+                            <th>Subject</th>
                             <th>Code</th>
                             <th>Subject Type</th>
                             <th>Course</th>
@@ -39,6 +40,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                          <th>S.No</th>
                             <th>Subject</th>
                             <th>Code</th>
                             <th>Subject Type</th>
@@ -49,6 +51,7 @@
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{$index+1}}</td>
                             <td>{{row.sub_name}}</td>
                             <td>{{row.sub_code}}</td>
                             <td>{{row.sub_type}}</td>

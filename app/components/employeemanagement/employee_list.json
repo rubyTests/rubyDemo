@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": 1,
         "Admission_No": "EMP01",
         "AdmissionDate": "03.16.2014",
         "firstname": "Vijay",
@@ -36,17 +36,17 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":1,
         "category":"Teaching",
         "parentCount":[
             {
                 "category":"Teaching",
-                "position":"Staff",
+                "position":"Senior Lecturer",
                 "role":"Employee",
                 "Qualification":"Bachelor of Engineering",
                 "inst_name":"Anna University Chennai",
@@ -61,7 +61,7 @@
             },
             {
                 "category":"Teaching",
-                "position":"Staff",
+                "position":"Senior Lecturer",
                 "role":"Employee",
                 "Qualification":"Bachelor of Engineering",
                 "inst_name":"Agni College of Technology, Chennai",
@@ -122,7 +122,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -146,7 +146,7 @@
             },
             {
                 "category":"Teaching",
-                "position":"Staff",
+                "position":"Senior Lecturer",
                 "role":"Employee",
                 "Qualification":"Bachelor of Engineering",
                 "inst_name":"Agni College of Technology, Chennai",
@@ -206,7 +206,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -291,17 +291,17 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":2,
         "category":"Teaching",
         "parentCount":[
             {
                 "category":"Teaching",
-                "position":"Staff",
+                "position":"Senior Lecturer",
                 "role":"Employee",
                 "Qualification":"Bachelor of Engineering",
                 "inst_name":"Anna University Chennai",
@@ -377,12 +377,13 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
         "category":"Teaching",
+        "payitem_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -462,7 +463,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -548,7 +549,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -634,7 +635,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -720,7 +721,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -806,7 +807,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -892,7 +893,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -978,7 +979,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -1064,13 +1065,13 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
         
-        "category":"Teaching",
+        "category":"Non-Teaching",
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1150,7 +1151,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -1236,7 +1237,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -1322,7 +1323,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -1408,12 +1409,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":4,
         "category":"Teaching",
         "parentCount":[
             {
@@ -1494,12 +1495,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":5,
         "category":"Teaching",
         "parentCount":[
             {
@@ -1580,7 +1581,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -1666,7 +1667,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -1752,12 +1753,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":6,
         "category":"Teaching",
         "parentCount":[
             {
@@ -1838,12 +1839,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":7,
         "category":"Teaching",
         "parentCount":[
             {
@@ -1924,13 +1925,13 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
-        "category":"Teaching",
+        "payitem_id":8,
+        "category":"Non-Teaching",
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2010,12 +2011,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":9,
         "category":"Teaching",
         "parentCount":[
             {
@@ -2096,7 +2097,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2182,7 +2183,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2268,7 +2269,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2354,7 +2355,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2440,7 +2441,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2526,7 +2527,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2612,7 +2613,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2662,7 +2663,7 @@
         ]
     },
     {
-        "id": "22",
+        "id": "32",
         "Admission_No": "EMP32",
         "AdmissionDate": "06.24.2013",
         "firstname": "Mirza",
@@ -2784,7 +2785,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2870,7 +2871,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -2956,7 +2957,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3042,7 +3043,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3128,13 +3129,13 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
         
-        "category":"Teaching",
+        "category":"Non-Teaching",
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3214,7 +3215,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3300,7 +3301,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3386,7 +3387,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3477,7 +3478,7 @@
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "position":"Senior Lecturer",
         "category":"Teaching",
         "parentCount":[
             {
@@ -3558,7 +3559,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3644,7 +3645,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3730,7 +3731,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3816,7 +3817,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -3902,12 +3903,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":13,
         "category":"Teaching",
         "parentCount":[
             {
@@ -3988,7 +3989,7 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
@@ -4074,12 +4075,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":12,
         "category":"Teaching",
         "parentCount":[
             {
@@ -4160,12 +4161,12 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Senior Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "payitem_id":11,
         "category":"Teaching",
         "parentCount":[
             {
@@ -4246,13 +4247,13 @@
         "state":"Cambridge",
         "pincode":"605005",
         "country":"USA",
-        
+        "position":"Lecturer",
         "income":"1000",
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
         
-        "category":"Teaching",
+        "category":"Non-Teaching",
         "parentCount":[
             {
                 "category":"Teaching",
