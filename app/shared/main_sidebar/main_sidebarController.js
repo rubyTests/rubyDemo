@@ -319,6 +319,10 @@ angular
                                 {
                                     title:'Fee Report',
                                     link: 'restricted.finance.fee.feeReport'
+                                },
+                                {
+                                    title:'Parent Receipt View',
+                                    link: 'restricted.finance.fee.parentReceiptView'
                                 }
                             ]
                         }

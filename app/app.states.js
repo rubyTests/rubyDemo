@@ -2056,6 +2056,22 @@ altairApp
                     }
                 })
 
+                .state("restricted.finance.fee.parentReceiptView", {
+                    url: "/parentReceiptView",
+                    templateUrl: 'app/components/finance/parentReceiptView.html',
+                    controller: 'parentReceiptViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/finance/parentReceiptViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
                 .state("restricted.finance.fee.config", {
                     url: "/config",
                     template: '<div ui-view autoscroll="false"/>',
