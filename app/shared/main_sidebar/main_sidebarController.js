@@ -315,6 +315,10 @@ angular
                                 {
                                     title:'Fee Collection',
                                     link: 'restricted.finance.fee.feeCollectionDetails'
+                                },
+                                {
+                                    title:'Fee Report',
+                                    link: 'restricted.finance.fee.feeReport'
                                 }
                             ]
                         }

@@ -2004,6 +2004,58 @@ altairApp
                     }
                 })
 
+                .state("restricted.finance.fee.feeReport", {
+                    url: "/feeReport",
+                    templateUrl: 'app/components/finance/feeReport.html',
+                    controller: 'feeReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/feeReportCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Report'
+                    }
+                })
+
+                .state("restricted.finance.fee.totalFeeView", {
+                    url: "/totalFeeView",
+                    templateUrl: 'app/components/finance/totalFeeView.html',
+                    controller: 'totalFeeViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/totalFeeViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Total Fee Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.receiptView", {
+                    url: "/receiptView",
+                    templateUrl: 'app/components/finance/receiptView.html',
+                    controller: 'receiptViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/finance/receiptViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
                 .state("restricted.finance.fee.config", {
                     url: "/config",
                     template: '<div ui-view autoscroll="false"/>',

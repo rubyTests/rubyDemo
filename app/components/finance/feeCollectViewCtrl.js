@@ -256,15 +256,20 @@ angular
             };
 
 
-            $timeout(function() {
-                var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-                $scope.forms_advanced.datepicker = utc;
-            }, 1000);
+            // $timeout(function() {
+            //     var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            //     $scope.forms_advanced.datepicker = utc;
+            // }, 1000);
 
             var $maskedInput = $('.masked_input');
             if($maskedInput.length) {
                 $maskedInput.inputmask();
             }
+
+            $scope.total = function () {
+                console.log($scope);
+                return parseInt($scope.fee_1 || 0) + parseInt($scope.fee_2 || 0) + parseInt($scope.fee_3 || 0) + parseInt($scope.fee_4 || 0) + parseInt($scope.fee_5 || 0);
+            };
 
         }
     ]);

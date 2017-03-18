@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('feeStructureAddCtrl', [
+    .controller('totalFeeViewCtrl', [
         '$scope',
         '$window',
         '$timeout',
@@ -148,18 +148,11 @@ angular
                 altair_uikit.reinitialize_grid_margin();
             });
 
-            $scope.selectize_feeItem_options = ["Tution Fee", "Book Fee", "Mess Fee", "Transport Fee", "Uniform Fee"];
-            $scope.selectize_feeItem_config = {
+            $scope.selectize_paymode_options = ["Cash", "Cheque", "Online_Payment","DD","Others"];
+            $scope.selectize_paymode_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Fee Item'
-            };
-
-            $scope.selectize_freq_options = ["Annualy", "Monthly", "Weekly"];
-            $scope.selectize_freq_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Frequency'
+                placeholder: 'Payment Mode'
             };
 
             $scope.selectize_fine_options = ["Tution Fee Fine", "Book Fee Fine", "Hostel Fine"];
@@ -168,7 +161,6 @@ angular
                 maxItems: 1,
                 placeholder: 'Fine'
             };
-
 
             // Advanced selects
 
@@ -189,7 +181,7 @@ angular
                         label     : ''
                     }
                 },
-                maxItems: null,
+                maxItems: 1,
                 valueField: 'id',
                 labelField: 'title',
                 searchField: 'title',
@@ -230,7 +222,6 @@ angular
                 valueField: 'id',
                 labelField: 'title',
                 searchField: 'title',
-                searchField: 'url',
                 create: false,
                 placeholder: 'Student Name / Admission No',
                 render: {
@@ -246,8 +237,33 @@ angular
                 }
             };
 
-            $scope.initradioVal = function(){
-                return $scope.radio_BatchStu == 'Batch';
+            $scope.checkbox_demo_1 = true;
+
+            $scope.forms_advanced = {
+                "input_error": "Something wrong",
+                "input_ok": "All ok",
+                "ionslider_1": 23,
+                "ionslider_2": {
+                    "from": 160,
+                    "to": 592
+                },
+                "ionslider_3": 40,
+                "ionslider_4": {
+                    "from": 20,
+                    "to": 80
+                },
+                selectize_planets: ["2", "3"]
+            };
+
+
+            // $timeout(function() {
+            //     var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
+            //     $scope.forms_advanced.datepicker = utc;
+            // }, 1000);
+
+            var $maskedInput = $('.masked_input');
+            if($maskedInput.length) {
+                $maskedInput.inputmask();
             }
 
         }

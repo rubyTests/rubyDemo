@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                 <label>Assign To:</label>
-                                <div class="dynamic_radio uk-margin-small-top">
+                                <div class="dynamic_radio uk-margin-small-top" ng-init="radio_BatchStu == 'Batch'" >
                                     <span class="icheck-inline">
                                         <input type="radio" name="radio_demo_inline" id="radio_demo_inline_1" icheck ng-model="radio_BatchStu" value="Batch" ng-checked="true" />
                                         <label for="radio_demo_inline_1" class="inline-label">Course</label>
@@ -44,7 +44,7 @@
                                 </div>
                             </div>
                             <p></p>
-                            <div class="uk-width-1-1" ng-show="radio_BatchStu == 'Batch'">
+                            <div class="uk-width-1-1" ng-show="radio_BatchStu != 'Student'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                     <p></p>

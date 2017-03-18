@@ -8,6 +8,9 @@
         #page_content_inner {
             padding: 24px 24px 0;
         }
+        .uk-width-medium-1-4 {
+            width: 24% !important;
+        }
     </style>
     <div id="page_content">
         <div id="page_content_inner">
@@ -114,38 +117,38 @@
                     <table class="uk-table">
                         <thead>
                         <tr>
-                            <th style="width:40%;"><i class="md-list-addon-icon material-icons">school</i> Fee Item Name</th>
+                            <th style="width:40%;"><i class="md-list-addon-icon material-icons">school</i> FEE ITEM NAME</th>
                             <th style="width:40%;"><i class="md-list-addon-icon material-icons">attach_money</i>
-                            Amount</th>
+                            AMOUNT</th>
                             <th style="width:15%;"><i class="md-list-addon-icon material-icons">date_range</i>
-                            Pay Fees</th>
+                            PAY FEES</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
                             <td>Tution Fee</td>
-                            <td>10000</td>
-                            <td><input type="text" name="pay_Fee" id="pay_Fee" ng-model="pay_Fee" /></td>
+                            <td>35250</td>
+                            <td><input type="text" name="fee_1" id="fee_1" ng-model="fee_1" /></td>
                         </tr>
                         <tr>
-                            <td>Tution Fee</td>
-                            <td>10000</td>
-                            <td><input type="text" name="pay_Fee" id="pay_Fee" ng-model="pay_Fee" /></td>
+                            <td>Additional Fee</td>
+                            <td>10300</td>
+                            <td><input type="text" name="fee_2" id="fee_2" ng-model="fee_2" /></td>
                         </tr>
                         <tr>
-                            <td>Tution Fee</td>
-                            <td>10000</td>
-                            <td><input type="text" name="pay_Fee" id="pay_Fee" ng-model="pay_Fee" /></td>
+                            <td>Bus Fee</td>
+                            <td>1500</td>
+                            <td><input type="text" name="fee_3" id="fee_3" ng-model="fee_3" /></td>
                         </tr>
                         <tr>
-                            <td>Tution Fee</td>
-                            <td>10000</td>
-                            <td><input type="text" name="pay_Fee" id="pay_Fee" ng-model="pay_Fee" /></td>
+                            <td>Mess Fee</td>
+                            <td>19050</td>
+                            <td><input type="text" name="fee_4" id="fee_4" ng-model="fee_4" /></td>
                         </tr>
                         <tr>
-                            <td>Tution Fee</td>
-                            <td>10000</td>
-                            <td><input type="text" name="pay_Fee" id="pay_Fee" ng-model="pay_Fee" /></td>
+                            <td>Book Fee</td>
+                            <td>25000</td>
+                            <td><input type="text" name="fee_5" id="fee_5" ng-model="fee_5" /></td>
                         </tr>
                         <!-- <tr>
                             <td colspan="2" style="text-align: right;font-weight: bold;">Total Amount</td>
@@ -159,15 +162,15 @@
                         <div class="uk-width-medium-1-4">
                         
                         </div>
-                        <div class="uk-width-medium-1-4" style="width:24% !important;">
+                        <div class="uk-width-medium-1-4">
                         <b>Total Amount :</b>
-                        <span style="float:right;margin-left: 10px;">50000</span>
+                        <span style="float:right;margin-left: 10px;">45121</span>
                         </div>
                         <div class="uk-width-medium-1-4">
                         </div>
                         <div class="uk-width-medium-1-4">
-                        <b>Total Payed Amount :</b>
-                        <span style="float:right;margin-left: 10px;">50000</span>
+                        <b>Payed Amount :</b>
+                        <span style="padding:10px">{{total()}}</span>
                         </div>
                     </div>
                     <div class="uk-grid" data-uk-grid-margin>
@@ -178,7 +181,7 @@
                         <div class="uk-width-medium-2-6 parsley-row">
                         </div>
                         <div class="uk-width-medium-1-6 parsley-row">
-                            <a class="md-btn md-btn-primary md-btn-wave-light" href="javascript:void(0)" style="float: right;margin-top: 25px;">Pay Fee</a>
+                            <a class="md-btn md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="float: right;margin-top: 25px;">Pay Fee</a>
                         </div>
                     </div>
                     </div>

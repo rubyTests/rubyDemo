@@ -17,8 +17,8 @@
                     <div class="md-card-content large-padding">
                         <form class="uk-form" >
                         <h2 class="heading_a">
-                                Fee Collection
-                                <span class="sub-heading">Fee Collection Informations</span>
+                                Fee Report
+                                <span class="sub-heading">Fee Collection Report</span>
                             </h2>
                             <hr class="md-hr"/>
                             <div class="uk-grid uk-grid-medium form_hr">
@@ -85,7 +85,7 @@
             </div>
         </div>
     </div>
-    <div id="page_content_inner" ng-controller="feeCollectionCtrl as showCase">
+    <div id="page_content_inner" ng-controller="feeReportCtrl as showCase">
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -101,6 +101,7 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
+                            <th>Total Fee</th>
                             <th>Fee Due</th>
                             <th>Action</th>
                         </tr>
@@ -112,6 +113,7 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
+                            <th>Total Fee</th>
                             <th>Fee Due</th>
                         </tr>
                     </tfoot>
@@ -122,11 +124,12 @@
                             <td>{{row.Admission_No}}</td>
                             <td>{{row.Course}}</td>
                             <td>{{row.Batch}}</td>
+                            <td>{{row.Total_Fee}}</td>
                             <td>{{row.Fee_Due}}</td>
                             <td>
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.feeCollectView">
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.totalFeeView">
                                 <i class="uk-icon-money"></i>
-                                Pay
+                                Fee Details
                                 </a>
                             </td>
                         </tr>

@@ -5,6 +5,7 @@
       "Admission_No":"82310132052",
       "Course":"Computer Science and Engineering",
       "Batch":"Cse - B",
+      "Total_Fee":"85400",
       "Fee_Due":"75400"
     },
     {
@@ -13,6 +14,7 @@
       "Admission_No":"82310132059",
       "Course":"Computer Science and Engineering",
       "Batch":"Cse - B",
+      "Total_Fee":"55400",
       "Fee_Due":"24800"
     },
     {
@@ -21,6 +23,7 @@
       "Admission_No":"82310132063",
       "Course":"Computer Science and Engineering",
       "Batch":"Cse - B",
+      "Total_Fee":"8000",
       "Fee_Due":"5000"
     },
     {
@@ -29,6 +32,7 @@
       "Admission_No":"82310132064",
       "Course":"Computer Science and Engineering",
       "Batch":"Cse - B",
+      "Total_Fee":"85400",
       "Fee_Due":"19650"
     },
     {
@@ -37,6 +41,7 @@
       "Admission_No":"82310132069",
       "Course":"Computer Science and Engineering",
       "Batch":"Cse - B",
+      "Total_Fee":"17400",
       "Fee_Due":"14500"
     },
     {
@@ -45,6 +50,7 @@
       "Admission_No":"82310132075",
       "Course":"Computer Science and Engineering",
       "Batch":"Cse - B",
+      "Total_Fee":"57400",
       "Fee_Due":"18000"
     }
 ]
