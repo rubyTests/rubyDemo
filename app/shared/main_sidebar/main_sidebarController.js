@@ -363,11 +363,30 @@ angular
                     icon: '&#xE8D1;'
                     // link: 'restricted.Library'
                 },
+                // {
+                //     id: 12,
+                //     title: 'Calendar',
+                //     icon: '&#xE8DF;',
+                //     link: 'restricted.calendar'
+                // },
                 {
                     id: 12,
                     title: 'Calendar',
                     icon: '&#xE8DF;',
-                    link: 'restricted.calendar'
+                    submenu: [
+                        {
+                            title: 'Calendar',
+                            link: 'restricted.plugins.calendar'
+                        },
+                        {
+                            title: 'Exam Calendar',
+                            link: 'restricted.plugins.examination'
+                        },
+                        {
+                            title: 'Events Calendar',
+                            link: 'restricted.plugins.events'
+                        }
+                    ]
                 },
                 // {
                 //     id: 15,

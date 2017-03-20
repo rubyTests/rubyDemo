@@ -312,6 +312,68 @@ altairApp
                         }]
                     }
                 })
+
+                // calendar state added by manikandan on 20/03/2017 
+                .state("restricted.plugins.calendar", {
+                    url: "/calendar",
+                    templateUrl: 'app/components/calender/calendarView.html',
+                    controller: 'calendarCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/calender/calendarController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Calendar'
+                    }
+                })
+                .state("restricted.plugins.examination", {
+                    url: "/examination",
+                    templateUrl: 'app/components/calender/calendarExamination.html',
+                    controller: 'examination',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_parsleyjs',
+                                'lazy_character_counter',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/calender/calendarExamination.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Calendar'
+                    }
+                })
+                .state("restricted.plugins.events", {
+                    url: "/events",
+                    templateUrl: 'app/components/calender/calendarNewEventsView.html',
+                    controller: 'calendareventsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_character_counter',
+                                'lazy_parsleyjs',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/calender/calendarNewEventsView.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Calendar'
+                    }
+                })
+
+
                 ///RUBY STATE CAMPUS END by Manikandan//
 
 
@@ -1075,22 +1137,22 @@ altairApp
                     template: '<div ui-view autoscroll="false"/>',
                     abstract: true
                 })
-                .state("restricted.plugins.calendar", {
-                    url: "/calendar",
-                    templateUrl: 'app/components/plugins/calendarView.html',
-                    controller: 'calendarCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'lazy_fullcalendar',
-                                'app/components/plugins/calendarController.js'
-                            ]);
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Calendar'
-                    }
-                })
+                // .state("restricted.plugins.calendar", {
+                //     url: "/calendar",
+                //     templateUrl: 'app/components/plugins/calendarView.html',
+                //     controller: 'calendarCtrl',
+                //     resolve: {
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'lazy_fullcalendar',
+                //                 'app/components/plugins/calendarController.js'
+                //             ]);
+                //         }]
+                //     },
+                //     data: {
+                //         pageTitle: 'Calendar'
+                //     }
+                // })
                 .state("restricted.plugins.code_editor", {
                     url: "/code_editor",
                     templateUrl: 'app/components/plugins/code_editorView.html',
