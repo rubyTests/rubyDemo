@@ -68,7 +68,6 @@
         </div>
         <br>
         <h3 class="heading_b uk-margin-bottom">Payroll Details
-        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayDetails()">Edit</button>
         </h3>
          <div class="md-card-content uk-width-medium-1-1 large-padding">
             <div class="md-card uk-margin-medium-bottom">
@@ -86,23 +85,23 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="tdStyle">Basic</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="basic_val" ng-change="earningCalculation()"></td>
+                                                    <td class="tdStyle">{{basic_val}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle">Housing Allowance</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="housing_allow" ng-change="earningCalculation()"></td>
+                                                    <td class="tdStyle">{{housing_allow}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle">Human Resource Allowance</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="hr_allowance" ng-change="earningCalculation()"></td>
+                                                    <td class="tdStyle">{{hr_allowance}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle">Transport Allowance</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="transport" ng-change="earningCalculation()"></td>
+                                                    <td class="tdStyle">{{transport}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle">Total Earnings</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="Total_Earning" ng-blur="getTotalNetPay()" id="earningTotal">
+                                                    <td class="tdStyle">{{Total_Earning}}
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -113,29 +112,29 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="tdStyle">Income Tax</td>
-                                                    <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="income_deduction"></td>
+                                                    <td class="tdStyle">{{income_deduction}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle">Provident Fund</td>
-                                                    <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="fund_deduction"></td>
+                                                    <td class="tdStyle">{{fund_deduction}}</td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle">Total Deduction</td>
-                                                    <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="toatl_deduction"></td>
+                                                    <td class="tdStyle">{{toatl_deduction}}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 40px;">{{grasspayTotal}}</span></span></td>
-                                    <td class="tdStyle"><span style="margin-left: 60px;"><b>Net Pay</b> <span style="margin-left: 95px;">{{showTotalNetpay}}</span></span></td>
+                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 38px;">{{grasspayTotal}}</span></span></td>
+                                    <td class="tdStyle"><span style="margin-left: 15px;"><b>Net Pay</b> <span style="margin-left: 65px;">{{showTotalNetpay}}</span></span></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="" style="float: right;">
-                            <a ui-sref="" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</a>
-                             <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Assign Payroll</button>
+                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Delete  Payslip</button>
+                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Pdf Report</button>
                         </div>
                     </div>
                 </div>

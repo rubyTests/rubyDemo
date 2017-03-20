@@ -271,14 +271,14 @@ angular
                             submenu: [
                                 {
                                     title: 'Pay Item'
-                                    // link : 'restricted.hr.StructureGroup'
                                 },
                                 {
                                     title: 'Pay Category',
                                     link : 'restricted.hr.StructureGroup'
                                 },
                                 {
-                                    title: 'Payslip'
+                                    title: 'Payslip',
+                                    link : 'restricted.hr.payslipGenaration_view'
                                 },
                                 {
                                     title: 'Paslip Report'
@@ -323,6 +323,17 @@ angular
                                 {
                                     title:'Parent Receipt View',
                                     link: 'restricted.finance.fee.parentReceiptView'
+                                }
+                            ]
+                        },
+                        {
+                            title:'Payslip Management',
+                            submenu:[
+                                {
+                                    title:'Payslip'
+                                },
+                                {
+                                    title:'Payslip Report'
                                 }
                             ]
                         }

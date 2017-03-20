@@ -4,6 +4,9 @@
         padding: 10px !important;
         border-bottom:none !important;
     }
+    .uk-modal-dialog {
+        width: 450px !important;
+    }
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -64,11 +67,39 @@
                         </ul>
                     </div>
                 </div>
+                <!-- <h3 class="heading_c uk-margin-bottom">Payroll Details</h3> -->
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info">payment</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">20000</span>
+                                    <span class="uk-text-small uk-text-muted">Payroll Group</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >monetization_on</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">Monthly</span>
+                                    <span class="uk-text-small uk-text-muted">Payment frequency</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
         <br>
         <h3 class="heading_b uk-margin-bottom">Payroll Details
-        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayDetails()">Edit</button>
         </h3>
          <div class="md-card-content uk-width-medium-1-1 large-padding">
             <div class="md-card uk-margin-medium-bottom">
@@ -84,6 +115,23 @@
                                     <td>
                                         <table>
                                             <tbody>
+                                                <tr>
+                                                    <td class="tdStyle">Date</td>
+                                                    <td class="tdStyle">
+                                                        <!-- <input kendo-date-picker
+                                                               k-options="monthSelectorOptions"
+                                                               k-format="'MMMM yyyy'"
+                                                               style="width: 87%;"
+                                                               id="kUI_datepicker_b"
+                                                        /> -->
+                                                        <input kendo-date-picker
+                                       ng-model="dateString"
+                                       k-ng-model="dateObject"
+                                       style="width: 87%;"
+                                       id="kUI_datepicker_a"
+                                />
+                                                    </td>
+                                                </tr>
                                                 <tr>
                                                     <td class="tdStyle">Basic</td>
                                                     <td class="tdStyle"><input type="text" ng-model="basic_val" ng-change="earningCalculation()"></td>
@@ -105,6 +153,10 @@
                                                     <td class="tdStyle"><input type="text" ng-model="Total_Earning" ng-blur="getTotalNetPay()" id="earningTotal">
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td style="border-bottom: none;">&nbsp;</td>
+                                                    <td class="tdStyle"><a data-uk-modal="{target:'#open_Model'}" ng-click="addEarning()"><i class="md-list-addon-icon material-icons uk-text-info">add_circle</i> Add Earning</a></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </td>
@@ -123,23 +175,51 @@
                                                     <td class="tdStyle">Total Deduction</td>
                                                     <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="toatl_deduction"></td>
                                                 </tr>
+                                                <tr>
+                                                    <td style="border-bottom: none;">&nbsp;</td>
+                                                    <td class="tdStyle"><a data-uk-modal="{target:'#open_Model'}" ng-click="addDeduction()"><i class="md-list-addon-icon material-icons uk-text-info">add_circle</i> Add Deduction</a></td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 40px;">{{grasspayTotal}}</span></span></td>
-                                    <td class="tdStyle"><span style="margin-left: 60px;"><b>Net Pay</b> <span style="margin-left: 95px;">{{showTotalNetpay}}</span></span></td>
+                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 20px;">{{grasspayTotal}}</span></span></td>
+                                    <td class="tdStyle"><span style="margin-left: 20px;"><b>Net Pay</b>  <span style="margin-left: 115px;">{{showTotalNetpay}}</span></span></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="" style="float: right;">
-                            <a ui-sref="" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</a>
-                             <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Assign Payroll</button>
+                            <a ui-sref="restricted.hr.payslipGenaration_view" class="md-btn md-btn-danger md-btn-small">Cancel</a>
+                            <button  class="md-btn md-btn-primary md-btn-small">Generate Payslip</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="open_Model" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h3 class="uk-modal-title">{{tit_caption}} </h3>
+        <div class="md-card-content">
+            <form>
+                <div class="uk-form-row">
+                    <label>Name</label>
+                    <input type="text" ng-model="category_name" class="md-input" md-input>
+                    <input type="hidden" ng-model="category_id">
+                </div>
+                <div class="uk-form-row">
+                    <label>Amount</label>
+                    <input type="text" ng-model="category_desc" class="md-input" md-input>
+                </div>
+            </form>
+        </div>
+        <div class="uk-modal-footer uk-text-right">
+            <button type="button" class="md-btn md-btn-primary md-btntn-small uk-modal-close">Add</button>
         </div>
     </div>
 </div>

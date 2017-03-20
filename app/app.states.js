@@ -2765,7 +2765,59 @@ altairApp
                         pageTitle: 'Payslip Generation View'
                     }
                 })
-
+                .state("restricted.hr.payslipgeneration_viewdetails",{
+                    url: "/payslipgeneration_viewdetails/{gen_id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/viewpayslip_generation.html',
+                    controller : 'viewpayslip_genetationCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_KendoUI',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/viewpayslip_genetationCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'View Payslip Generation'
+                    },
+                    params:{gen_id:null}        
+                })
+                .state("restricted.hr.showpayslipdetails",{
+                    url: "/showpayslipdetails/{pay_id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipgeneration_table.html',
+                    controller : 'payslipgen_tableCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/payslipgen_tableCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'View Payslip Generation'
+                    },
+                    params:{pay_id:null}        
+                })
+                .state("restricted.hr.payslipdetails_view",{
+                    url: "/payslipdetails_view/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipdetails_view_for_pdf.html',
+                    controller : 'payslipview_for_pdfCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/payslipview_for_pdfCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view Employee Pay details'
+                    },
+                    params:{id:null}                
+                })
                 // Calendar
                 .state("restricted.calendar", {
                     url: "/calendar",
