@@ -2685,5 +2685,41 @@ altairApp
                     },
                     params:{assign_id:null}                
                 })
+
+                .state("restricted.hr.payslipGenaration_view", {
+                    url: "/payslipGenaration_view",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslip_generation.html',
+                    // controller: 'payslipGenerationCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/payslipGenerationCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Payslip Generation View'
+                    }
+                })
+
+                // Calendar
+                .state("restricted.calendar", {
+                    url: "/calendar",
+                    templateUrl: 'app/components/plugins/calendarView.html',
+                    controller: 'calendarCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'app/components/plugins/calendarController.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Calendar'
+                    }
+                })
         }
     ]);
