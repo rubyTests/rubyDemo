@@ -270,7 +270,8 @@ angular
                             title: 'Payroll & Payslip',
                             submenu: [
                                 {
-                                    title: 'Pay Item'
+                                    title: 'Pay Item',
+                                    link : 'restricted.hr.payitem_details'
                                 },
                                 {
                                     title: 'Pay Category',
@@ -281,7 +282,12 @@ angular
                                     link : 'restricted.hr.payslipGenaration_view'
                                 },
                                 {
-                                    title: 'Paslip Report'
+                                    title: 'Payslip Report',
+                                    link : 'restricted.hr.payslipReport'
+                                },
+                                {
+                                    title:'Rejected Payslips',
+                                    link : 'restricted.hr.rejectpayslip'  
                                 }
                             ]
                         }
@@ -334,7 +340,12 @@ angular
                                     link: 'restricted.finance.payslipGenaration_view'
                                 },
                                 {
-                                    title:'Payslip Report'
+                                    title:'Approve Payslips',
+                                    link: 'restricted.hr.approvepayslip'
+                                },
+                                {
+                                    title:'Payslip Report',
+                                    link: 'restricted.finance.payslipReport'
                                 }
                             ]
                         }

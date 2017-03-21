@@ -2818,6 +2818,40 @@ altairApp
                     },
                     params:{id:null}                
                 })
+                .state("restricted.hr.rejectpayslip", {
+                    url: "/rejectpayslip",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/rejectPayslip.html',
+                    controller: 'rejectPayslipCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/rejectPayslipCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'reject payslip'
+                    }
+                })
+                .state("restricted.hr.approvepayslip", {
+                    url: "/approvepayslip",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/approvePayslip.html',
+                    controller: 'approvePayslipCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/approvePayslipCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Approve payslip'
+                    }
+                })
                 // Calendar
                 .state("restricted.calendar", {
                     url: "/calendar",
@@ -2836,7 +2870,7 @@ altairApp
                     }
                 })
 
-                // Finance payslip
+                // Finance payslip modified 21-03-17 by vijayaraj
                 .state("restricted.finance.payslipGenaration_view", {
                     url: "/payslipGenaration_view",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/payslip_generation.html',
@@ -2889,22 +2923,59 @@ altairApp
                     params:{id:null}                
                 })
 
-                // .state("restricted.hr.view_employee_paydetails",{
-                //     url: "/view_employee_paydetails/{assign_id}",
-                //     templateUrl: 'app/components/Hr/Payroll_Payslip/viewemployee_paydetails.html',
-                //     controller : 'viewemployee_PaydetailsCtrl',
-                //     resolve: {
-                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                //             return $ocLazyLoad.load([
-                //                 'bower_components/angular-resource/angular-resource.min.js',
-                //                 'app/components/Hr/Payroll_Payslip/viewemployee_PaydetailsCtrl.js'
-                //             ]);
-                //         }]
-                //     },
-                //     data: {
-                //         pageTitle: 'view Employee Pay details'
-                //     },
-                //     params:{assign_id:null}                
-                // })
+                // payslip Report Added by Vijayaraj 21-03-17
+
+                .state("restricted.finance.payslipReport",{
+                    url: "/payslipReport",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipReport.html',
+                    controller : 'payslipReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/payslipReportCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Payslip Report'
+                    }                  
+                })
+
+                .state("restricted.hr.payslipReport",{
+                    url: "/payslipReport",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipReport.html',
+                    controller : 'payslipReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/payslipReportCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Payslip Report'
+                    }                  
+                })
+                .state("restricted.hr.payitem_details", {
+                    url: "/payitem_details",
+                    templateUrl: 'app/components/Hr/configuration/payItem.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/configuration/payItemCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Pay Item'
+                    }
+                })
+
         }
     ]);

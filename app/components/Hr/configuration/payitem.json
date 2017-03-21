@@ -1,0 +1,27 @@
+ [
+    {
+        "id": 1,
+        "name": "Housing Allowance",
+        "type": "Earnings"
+    },
+    {
+        "id": 2,
+        "name": "Transport Allowance",
+        "type": "Earnings"
+    },
+    {
+        "id": 3,
+        "name": "Lop",
+        "type": "Deductions"
+    },
+    {
+        "id": 4,
+        "name": "Income Tax",
+        "type": "Deductions"
+    },
+    {
+        "id": 5,
+        "name": "Provident Fund",
+        "type": "Earnings"
+    }
+] 
