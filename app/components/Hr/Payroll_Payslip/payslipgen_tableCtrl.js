@@ -10,14 +10,18 @@ angular
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
         '$compile',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile) {
+        '$location',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile,$location) {
             $resource('app/components/employeemanagement/employee_list.json')
                 .query()
                 .$promise
                 .then(function(return_data) {
-                    var paramsData=$filter('filter')(return_data, {id : $stateParams.gen_id});
+                    var paramsData=$filter('filter')(return_data, {id : $stateParams.pay_id});
                     $scope.tableArray=paramsData;
                 });
+
+                var path=$location.path().split( '/' );
+                $scope.urlname=path[1];
 
                 $scope.monthSelectorOptions = {
                     start: "year",

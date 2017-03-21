@@ -129,13 +129,13 @@
                                 </tr>
                                 <tr>
                                     <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 40px;">{{grasspayTotal}}</span></span></td>
-                                    <td class="tdStyle"><span style="margin-left: 60px;"><b>Net Pay</b> <span style="margin-left: 95px;">{{showTotalNetpay}}</span></span></td>
+                                    <td class="tdStyle"><span style="margin-left: 60px;"><b>Net Pay</b> <span style="margin-left: 70px;">{{showTotalNetpay}}</span></span></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="" style="float: right;">
-                            <a ui-sref="" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</a>
-                             <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Assign Payroll</button>
+                            <a class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</a>
+                             <button ng-show="btnStatus" type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Assign Payroll</button>
                         </div>
                     </div>
                 </div>

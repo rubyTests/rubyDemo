@@ -30,8 +30,10 @@ angular
 
 
                 $('#tblBody').find('input').attr('disabled',true);
+                $scope.btnStatus=false;
                 $scope.editPayDetails=function(){
                     $('#tblBody').find('input').attr('disabled',false);
+                    $scope.btnStatus=true;
                 }
             $scope.earningCalculation=function(){
                 var basic_val=$scope.basic_val || 0;

@@ -1,7 +1,9 @@
 angular
     .module('altairApp')
     .controller('payslipGenerationCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$location) {
+            var path=$location.path().split( '/' );
+            $scope.urlname=path[1];
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder

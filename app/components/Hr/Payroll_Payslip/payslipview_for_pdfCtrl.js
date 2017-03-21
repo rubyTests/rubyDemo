@@ -7,7 +7,8 @@ angular
         '$resource',
         '$stateParams',
         '$filter',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter) {
+        '$location',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$location) {
             $resource('app/components/employeemanagement/employee_list.json')
                 .query()
                 .$promise
@@ -15,6 +16,9 @@ angular
                     var paramsData=$filter('filter')(return_data, {id : $stateParams.id});
                     $scope.tableArray=paramsData;
                 });
+
+                var path=$location.path().split( '/' );
+                $scope.urlname=path[1];
 
                 $scope.basic_val=5000;
                 $scope.housing_allow=1000;

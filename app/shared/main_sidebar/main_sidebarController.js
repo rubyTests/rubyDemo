@@ -330,7 +330,8 @@ angular
                             title:'Payslip Management',
                             submenu:[
                                 {
-                                    title:'Payslip'
+                                    title:'Payslip',
+                                    link: 'restricted.finance.payslipGenaration_view'
                                 },
                                 {
                                     title:'Payslip Report'
