@@ -2651,6 +2651,121 @@ altairApp
                         pageTitle: 'AssignClassTeacher'
                     }
                 })
+				
+				// Academics Examination by karthik @ 21.03.2017 3.12 PM
+				.state("restricted.academics.examination", {
+                    url: "/examination",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+				
+				.state("restricted.academics.examination.setgrading", {
+                    url: "/setgrading",
+                    templateUrl: 'app/components/academics/examination/setgrading.html',
+                    controller: 'setgradingCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setgrading.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set Grading'
+                    }
+                })
+				
+				.state("restricted.academics.examination.setexam", {
+                    url: "/setexam",
+                    templateUrl: 'app/components/academics/examination/setexam.html',
+                    controller: 'setexamCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setexam.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set Exam'
+                    }
+                })
+				
+				.state("restricted.academics.examination.setassessment", {
+                    url: "/setassessment",
+                    templateUrl: 'app/components/academics/examination/setassessment.html',
+                    controller: 'setassessmentCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setassessment.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set Assessment'
+                    }
+                })
+				
+				.state("restricted.academics.examination.setweightage", {
+                    url: "/setweightage",
+                    templateUrl: 'app/components/academics/examination/setweightage.html',
+                    controller: 'setweightageCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setweightage.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set Weightages'
+                    }
+                })
+				
+				.state("restricted.academics.examination.setgpa", {
+                    url: "/setgpa",
+                    templateUrl: 'app/components/academics/examination/setgpa.html',
+                    //controller: 'setgpaCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setgpa.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set GPA'
+                    }
+                })
+				
+				.state("restricted.academics.examination.assign", {
+                    url: "/assign",
+                    templateUrl: 'app/components/academics/examination/assign.html',
+                    //controller: 'assignCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/assign.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign'
+                    }
+                })
 
                 // HR Module Added by Vijayaraj 17-03-17
 
