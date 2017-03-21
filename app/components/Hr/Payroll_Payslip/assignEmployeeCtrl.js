@@ -30,7 +30,6 @@ angular
                             $scope.tableView_data = deptReturn_Data;
                             $('#page_content_inner').trigger('click');
                         }
-                        
                     });
                 }
             };
@@ -56,11 +55,6 @@ angular
                 // Active Buttons extension
                 .withColumnFilter({
                     aoColumns: [
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
                         {
                             type: 'text',
                             bRegex: true,
