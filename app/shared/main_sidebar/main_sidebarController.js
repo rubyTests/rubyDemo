@@ -178,8 +178,29 @@ angular
                         {
                             title: 'Examination',
                             submenu: [
+								{
+                                    title: 'Set Grading',
+                                    link: 'restricted.academics.examination.setgrading'
+                                },
                                 {
-                                    title: 'Grade Leaves',
+                                    title: 'Set Exam',
+                                    link: 'restricted.academics.examination.setexam'
+                                },
+                                {
+                                    title: 'Set Assessment',
+									link: 'restricted.academics.examination.setassessment'
+                                },
+								{
+                                    title: 'Set Weightages',
+                                    link: 'restricted.academics.examination.setweightage'
+                                },
+                                {
+                                    title: 'Set GPA',
+                                    link: 'restricted.academics.examination.setgpa'
+                                },
+                                {
+                                    title: 'Assign',
+									link: 'restricted.academics.examination.assign'
                                 },
                                 {
                                     title:'Online Exam',
