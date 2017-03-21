@@ -1,0 +1,22 @@
+ [
+    {
+        "id": 1,
+        "name": "FA-1",
+        "type":"FA"
+    },
+    {
+        "id": 2,
+        "name": "SA-1",
+        "type":"SA"
+    },
+    {
+        "id": 3,
+        "name": "FA-2",
+        "type":"FA"
+    },
+    {
+        "id": 4,
+        "name": "SA-2",
+        "type":"SA"
+    }
+] 

@@ -1,0 +1,50 @@
+ [
+    {
+        "id": 1,
+        "name": "A",
+        "marks": "90",
+        "credit_points":9,
+        "description":""
+    },
+    {
+        "id": 2,
+        "name": "B",
+        "marks": "80",
+        "credit_points":8,
+        "description":""
+    },
+    {
+        "id": 3,
+        "name": "C",
+        "marks": "70",
+        "credit_points":7,
+        "description":""
+    },
+    {
+        "id": 4,
+        "name": "D",
+        "marks": "60",
+        "credit_points":6,
+        "description":""
+    },
+    {
+        "id": 5,
+        "name": "E",
+        "marks": "50",
+        "credit_points":5,
+        "description":""
+    },
+    {
+        "id": 6,
+        "name": "F",
+        "marks": "40",
+        "credit_points":4,
+        "description":""
+    },{
+        "id": 7,
+        "name": "G",
+        "marks": "30",
+        "credit_points":3,
+        "description":""
+    }
+] 

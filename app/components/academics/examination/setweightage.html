@@ -1,0 +1,88 @@
+<style type="text/css">
+  .selectize-control.single {
+    margin-top: 0;
+  }
+  .uk-width-medium-4-5, .uk-width-medium-8-10 {
+    height: 65px;
+    width: 80%;
+  }
+  .uk-modal-dialog {
+    height: 430px;
+    margin: 18px auto;
+    width: 417px;
+  }
+</style>
+<div id="page_content" ng-controller="setweightageCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Weightage Details</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" ng-click="openModel()" data-uk-modal="{target:'#modal_overflow'}">
+                        <i class="uk-icon-plus"></i>  Add Weightage
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Select Assessment</th>
+                            <th>Weightage</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+							<th>S.No</th>
+                            <th>Name</th>
+                            <th>Select Assessment</th>
+                            <th>Weightage</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr ng-repeat="row in showCase.dt_data">
+                        <td>{{$index+1}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.assessment}}</td>
+                        <td>{{row.weightage}}</td>
+                        <td class="uk-text-center">
+                            <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-medium-1-3">
+      <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h3 class="uk-modal-title"><i class="uk-icon-institution"></i>&nbsp; Add Weightage </h3>
+            <div class="md-card-content">
+              <form class=""><p></p>
+                <div class="uk-form-row">
+                  <input type="hidden" name="id" ng-model="id">
+                  <label>Name</label>
+                  <input type="text" ng-model="name" class="md-input" required md-input>
+                </div>
+                <div class="uk-form-row">
+                   <label>Select Assessment</label>
+                  <input type="text" ng-model="marks" class="md-input" required md-input>
+                </div>
+                <div class="uk-form-row">
+                   <label>Weightage</label>
+                  <input type="text" ng-model="credit" class="md-input" required md-input>
+                </div>
+                </form>
+            </div>
+          <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Update</button>
+          </div>
+         </div>
+      </div>
+    </div>
+</div>

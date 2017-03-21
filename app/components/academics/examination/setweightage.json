@@ -1,0 +1,27 @@
+ [
+    {
+        "id": 1,
+        "name": "Fa-1",
+        "assesment": "FA",
+        "weightage":10
+    },
+    {
+        "id": 2,
+        "name": "Sa-1",
+        "assesment": "SA",
+        "weightage":10
+    },
+    {
+        "id": 3,
+        "name": "Fa-2",
+        "assesment": "FA",
+        "weightage":20
+    },
+    {
+        "id": 4,
+        "name": "Sa-2",
+        "assesment": "SA",
+        "weightage":20
+    }
+
+] 
