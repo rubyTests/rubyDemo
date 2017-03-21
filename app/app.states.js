@@ -2475,7 +2475,6 @@ altairApp
                     },
                     params:{syllabus_id:null}
                 })
-
                 .state("restricted.academics.view_syllabus_details", {
                     url: "/view_syllabus_details",
                     templateUrl: 'app/components/academics/student_syllabus_view.html',
@@ -2520,7 +2519,29 @@ altairApp
                         pageTitle: 'Syllabus View'
                     }
                 })
-
+                .state("restricted.academics.markattendance", {
+                    url: "/attendance",
+                    templateUrl: 'app/components/plugins/tablesorterView.html',
+                    controller: 'tablesorterCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/plugins/tablesorterController.js'
+                            ],{serie:true});
+                        }],
+                        ts_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Tablesorter'
+                    }
+                })
                 //Added by gnanamani
                 //  .state("restricted.academics", {
                 //     url: "/academics",

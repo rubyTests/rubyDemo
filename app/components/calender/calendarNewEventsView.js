@@ -225,15 +225,33 @@ angular
                     selectHelper: true,
                     eventRender: function(event, element) {
                         element.bind('dblclick', function() {
-                             UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                                // console.log("true");
-                                uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
-                            },function(){
-                            }, {
-                                labels: {
-                                    'Ok': 'Ok'
-                                }
-                            });     
+                             var message;
+                            if(!$scope.department1){
+                                message="department";
+                            }else if(!$scope.course1){
+                                message="course";
+                            }else if(!$scope.batch1){
+                                message="batch";
+                            }
+                            if (!message){
+                                 UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                    // console.log("true");
+                                    uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
+                                },function(){
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
+                            }else{
+                                UIkit.modal.confirm('Please select '+message+' ?', function(e) {
+                                },function(){
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
+                            }   
                         });
                       // element.bind('dblclick', function() {
                       //    // alert('double click!');
@@ -244,30 +262,67 @@ angular
                     //    uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
                     // },
                     select: function (start, end) {
-                        // console.log(start);
-                        var modal = UIkit.modal("#modal_header_footer");
-                        if ( modal.isActive() ) {
-                            modal.hide();
-                        } else {
-                            $scope.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
-                            // console.log($scope.dp_start);
-                            end_date.options.minDate = $scope.dp_start;
-                            $scope.dp_end=end._d.getDate()+"."+eval(end._d.getMonth()+1)+"."+end._d.getFullYear();
-                            $scope.addEvents={};
-                            $scope.addEvents={start_date : start, end : end};
-                            modal.show();
+                        var message;
+                        if(!$scope.department1){
+                            message="department";
+                        }else if(!$scope.course1){
+                            message="course";
+                        }else if(!$scope.batch1){
+                            message="batch";
+                        }
+                        if (!message) {
+                            var modal = UIkit.modal("#modal_header_footer");
+                            if ( modal.isActive() ) {
+                                modal.hide();
+                            } else {
+                                $scope.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
+                                // console.log($scope.dp_start);
+                                end_date.options.minDate = $scope.dp_start;
+                                $scope.dp_end=end._d.getDate()+"."+eval(end._d.getMonth()+1)+"."+end._d.getFullYear();
+                                $scope.addEvents={};
+                                $scope.addEvents={start_date : start, end : end};
+                                modal.show();
+                            }
+                        }else{
+                            UIkit.modal.confirm('Please select '+message+' ?', function(e) {
+                            },function(){
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
                         }
                     },
                     eventDrop:function( event, delta, revertFunc, jsEvent, ui, view ) {
-                        UIkit.modal.confirm('Are you sure?', function(e) {
-                            // console.log("true");
-                        },function(){
-                            revertFunc();
-                        }, {
-                            labels: {
-                                'Ok': 'Ok'
-                            }
-                        });
+                        var message;
+                        if(!$scope.department1){
+                            message="department";
+                        }else if(!$scope.course1){
+                            message="course";
+                        }else if(!$scope.batch1){
+                            message="batch";
+                        }
+                        if (!message) {
+                            UIkit.modal.confirm('Are you sure?', function(e) {
+                                // console.log("true");
+                            },function(){
+                                revertFunc();
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
+                        }else{
+                            UIkit.modal.confirm('Please select '+message+' ?', function(e) {
+                                 revertFunc();
+                            },function(){
+                                revertFunc();
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
+                        }
                     },
                     editable: true,
                     eventLimit: true,

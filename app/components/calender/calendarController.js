@@ -3,8 +3,99 @@ angular
     .controller('calendarCtrl', [
         '$scope',
         'uiCalendarConfig',
-        function ($scope,uiCalendarConfig) {
+        '$resource',
+        '$filter',
+        function ($scope, uiCalendarConfig, $resource, $filter) {
+            var weeks = $scope.selectize_options = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            $scope.staffData = ['Staff1', 'Staff2', 'Staff3', 'Staff4', 'Staff5', 'Staff6', 'Staff7'];
+            
+            // masked inputs
 
+            var $maskedInput = $('.masked_input');
+            if($maskedInput.length) {
+                $maskedInput.inputmask();
+            }
+
+            //modal
+
+            var modal = UIkit.modal("#modal_header_footer");
+
+            $scope.department=[];
+            $scope.course = [];
+            $scope.batch = [];
+            
+            $scope.selectize_config = {
+                create: false,
+                maxItems: 1
+            };
+            $resource('data/calendar/department.json')
+            .query()
+            .$promise
+            .then(function(response) {
+                $scope.department = response;
+            });
+            $resource('data/calendar/course.json')
+            .query()
+            .$promise
+            .then(function(response) {
+                $scope.courseArray = response;
+            });
+            $resource('data/calendar/courseBatch.json')
+            .query()
+            .$promise
+            .then(function(response) {
+                $scope.batchArray = response;
+            });
+            $scope.department_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Department...',
+                valueField: 'id',
+                labelField: 'dept_name',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        if(value==''){
+                            $scope.course=[]
+                        }else{
+                            $scope.course=[]
+                            var data=$filter('filter')($scope.courseArray, {dept_id: value});
+                            if (data.length > 0)
+                                $scope.course.push(data);
+                        }
+                    });
+                }
+            };
+            $scope.course_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Course...',
+                valueField: 'id',
+                labelField: 'course_name',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                            if(value==''){
+                                $scope.batch=[]
+                            }else {
+                               var data=$filter('filter')($scope.batchArray, {course_id : value});
+                               if (data.length > 0)
+                                
+                                $scope.batch.push(data);
+                            }
+                        });
+                    
+                }
+            };
+            $scope.batch_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Batch...',
+                valueField: 'id',
+                labelField: 'cBatch_name',
+            };
+            $scope.forms_advanced={
+                startTime:"00:00",
+                endTime:"00:00"
+            }
             $scope.randID_generator = function() {
                 var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
                 return randLetter + Date.now();
@@ -23,7 +114,7 @@ angular
 
                     cp_wrapper.append('<input type="hidden">');
 
-                    $('body').on('click', '#'+cp_id+' span',function() {
+                    $('body').on('click', '#T1489421677871 span',function() {
                         $(this)
                             .addClass('active_color')
                             .siblings().removeClass('active_color')
@@ -34,7 +125,63 @@ angular
 
                 }
             };
+            // date range
+            var $dp_start = $('#uk_dp_start'),
+                $dp_end = $('#uk_dp_end');
 
+            var start_date = UIkit.datepicker($dp_start, {
+                format:'DD.MM.YYYY'
+            });
+
+            var end_date = UIkit.datepicker($dp_end, {
+                format:'DD.MM.YYYY'
+            });
+
+            $dp_start.on('change',function() {
+                end_date.options.minDate = $dp_start.val();
+                console.log($dp_start.val(),"$dp_start.val()")
+            });
+
+            $dp_end.on('change',function() {
+                start_date.options.maxDate = $dp_end.val();
+            });
+            $scope.modelhide=function(){
+                modal.hide();
+                $scope.forms_advanced={
+                    startTime:"00:00",
+                    endTime:"00:00"
+                };
+                $scope.input_default="";
+                $scope.forms_advanced.day="";
+                $('#calendar_colors_wrapper').find('input').val("")
+            }
+            $scope.addEvent=function(){
+                var eventData,eventColor = $('#calendar_colors_wrapper').find('input').val();
+                // var temp_start_date=$scope.dp_start.split(".");
+                // var temp_end_date=$scope.dp_end.split(".");
+                // var start_date=temp_start_date[2]+"-"+eval(temp_start_date[1])+"-"+ temp_start_date[0];
+                // var end_date=temp_end_date[2]+"-"+eval(temp_end_date[1])+"-"+ temp_end_date[0];
+                // var startTime=$scope.forms_advanced.startTime.split(":")[0]+"."+parseInt($scope.forms_advanced.startTime.split(":")[1])+12;
+                // var endTime=$scope.forms_advanced.endTime.split(":")[0]+"."+parseInt($scope.forms_advanced.endTime.split(":")[1])+12;
+                // var startTime=$scope.forms_advanced.startTime;
+                // var endTime=$scope.forms_advanced.endTime;
+                // console.log(parseInt($scope.forms_advanced.startTime.split(":")[1])+12);
+                var day=$scope.forms_advanced.day;
+                var weeks1 = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                eventData = {
+                    title : $scope.input_default,
+                    start : $scope.forms_advanced.startTime,
+                    end : $scope.forms_advanced.endTime,
+                    dow : [weeks1.indexOf(day)],
+                    color: eventColor ? eventColor : ''
+
+                };
+                uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', eventData, true); // stick? = true
+                $scope.modelhide();
+                // uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
+                // $scope.calendar_events.push(eventData);
+                // console.log($scope.calendar_events,"$scope.calendar_events");
+            }
             $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
 
             $scope.uiConfig = {
@@ -73,40 +220,104 @@ angular
                     defaultDate: moment(),
                     selectable: true,
                     selectHelper: true,
+                    theme:false,
                     eventRender: function(event, element) {
-                      element.bind('dblclick', function() {
-                         // alert('double click!');
-                         uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
-                      });
+                        element.bind('dblclick', function() {
+                            var message;
+                            if(!$scope.department1){
+                                message="department";
+                            }else if(!$scope.course1){
+                                message="course";
+                            }else if(!$scope.batch1){
+                                message="batch";
+                            }
+                            if (!message){
+                                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                    // console.log("true");
+                                    uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
+                                },function(){
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
+                            }else{
+                                UIkit.modal.confirm('Please select '+message+' ?', function(e) {
+                                },function(){
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
+                            }
+                        });
                     },
                     // eventClick: function(event){
                     //    uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEvents',event._id);
                     // },
                     select: function (start, end) {
-                        UIkit.modal.prompt('' +
-                            '<h3 class="heading_b uk-margin-medium-bottom">New Event</h3><div class="uk-margin-medium-bottom" id="calendar_colors">' +
-                            'Event Color:' +
-                            $scope.calendarColorPicker +
-                            '</div>' +
-                            'Event Title:',
-                            '', function (newvalue) {
-                                if ($.trim(newvalue) !== '') {
-                                    var eventData,
-                                        eventColor = $('#calendar_colors_wrapper').find('input').val();
-                                    eventData = {
-                                        title: newvalue,
-                                        start: start,
-                                        end: end,
-                                        color: eventColor ? eventColor : ''
-                                    };
-                                    uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', eventData, true); // stick? = true
-                                    uiCalendarConfig.calendars.myCalendar.fullCalendar('unselect');
-                                }
+                        var message;
+                        if(!$scope.department1){
+                            message="department";
+                        }else if(!$scope.course1){
+                            message="course";
+                        }else if(!$scope.batch1){
+                            message="batch";
+                        }
+                        if (!message) {
+                            var modal = UIkit.modal("#modal_header_footer");
+                            if ( modal.isActive() ) {
+                                modal.hide();
+                            } else {
+                                $scope.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
+                                // console.log($scope.dp_start);
+                                end_date.options.minDate = $scope.dp_start;
+                                $scope.dp_end=end._d.getDate()+"."+eval(end._d.getMonth()+1)+"."+end._d.getFullYear();
+                                $scope.addEvents={};
+                                $scope.addEvents={start_date : start, end : end};
+                                modal.show();
+                            }    
+                        }else{
+                            UIkit.modal.confirm('Please select '+message+' ?', function(e) {
+                            },function(){
                             }, {
                                 labels: {
-                                    Ok: 'Add Event'
+                                    'Ok': 'Ok'
                                 }
                             });
+                        }
+                        
+                    },
+                    eventDrop:function( event, delta, revertFunc, jsEvent, ui, view ) {
+                        var message;
+                        if(!$scope.department1){
+                            message="department";
+                        }else if(!$scope.course1){
+                            message="course";
+                        }else if(!$scope.batch1){
+                            message="batch";
+                        }
+                        if (!message) {
+                            UIkit.modal.confirm('Are you sure?', function(e) {
+                                // console.log("true");
+                            },function(){
+                                revertFunc();
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
+                        }else{
+                            UIkit.modal.confirm('Please select '+message+' ?', function(e) {
+                                 revertFunc();
+                            },function(){
+                                revertFunc();
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
+                        }
                     },
                     editable: true,
                     eventLimit: true,
@@ -116,63 +327,11 @@ angular
 
             $scope.calendar_events = [
                 {
-                    title: 'All Day Event',
-                    start: moment().startOf('month').add(25, 'days').format('YYYY-MM-DD')
-                },
-                {
-                    title: 'Long Event',
-                    start: moment().startOf('month').add(3, 'days').format('YYYY-MM-DD'),
-                    end: moment().startOf('month').add(7, 'days').format('YYYY-MM-DD')
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: moment().startOf('month').add(8, 'days').format('YYYY-MM-DD'),
-                    color: '#689f38'
-                },
-                {
-                    id: 999,
-                    title: 'Repeating Event',
-                    start: moment().startOf('month').add(15, 'days').format('YYYY-MM-DD'),
-                    color: '#689f38'
-                },
-                {
-                    title: 'Conference',
-                    start: moment().startOf('day').add(14, 'hours').format('YYYY-MM-DD HH:mm'),
-                    end: moment().startOf('day').add(15, 'hours').format('YYYY-MM-DD HH:mm')
-                },
-                {
-                    title: 'Meeting',
-                    start: moment().startOf('month').add(14, 'days').add(10, 'hours').format('YYYY-MM-DD HH:mm'),
-                    color: '#7b1fa2'
-                },
-                {
                     title: 'Lunch',
-                    start: moment().startOf('day').add(11, 'hours').format('YYYY-MM-DD HH:mm'),
-                    color: '#d84315'
-                },
-                {
-                    title: 'Meeting',
-                    start: moment().startOf('day').add(8, 'hours').format('YYYY-MM-DD HH:mm'),
-                    color: '#7b1fa2'
-                },
-                {
-                    title: 'Happy Hour',
-                    start: moment().startOf('month').add(1, 'days').format('YYYY-MM-DD')
-                },
-                {
-                    title: 'Dinner',
-                    start: moment().startOf('day').add(19, 'hours').format('YYYY-MM-DD HH:mm')
-                },
-                {
-                    title: 'Birthday Party',
-                    start: moment().startOf('month').add(23, 'days').format('YYYY-MM-DD')
-                },
-                {
-                    title: 'NEW RELEASE (link)',
-                    url: 'http://google.com',
-                    start: moment().startOf('month').add(10, 'days').format('YYYY-MM-DD'),
-                    color: '#0097a7'
+                    start: moment().startOf('day').add(09, 'hours').format('YYYY-MM-DD HH:mm'),
+                    start: moment().startOf('day').add(12, 'hours').format('YYYY-MM-DD HH:mm'),
+                    color: '#d84315',
+                    dow: [1,4] 
                 }
             ];
 

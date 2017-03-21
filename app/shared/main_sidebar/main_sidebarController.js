@@ -141,6 +141,10 @@ angular
                                 },
                                 {
                                     title: 'Attendance Report',
+                                },
+                                {
+                                    title: 'Attendance Marking',
+                                    link: 'restricted.academics.markattendance'
                                 }
                             ]
                         },

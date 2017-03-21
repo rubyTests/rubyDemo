@@ -10,32 +10,71 @@ angular
         function ($scope,$rootScope,$timeout,$compile,variables,ts_data) {
 
             $scope.table_data = ts_data;
+            $scope.markedStudent=[];
+            $scope.getData=function(item){
+                console.log(item.row_select,"item.row_select")
+                item.remark= item.remark || '';
+                item.duration=item.duration || '';
+                $scope.modalData=item;
+                var modal = UIkit.modal("#modal_header_footer");
+                if ( modal.isActive() ) {
+                    modal.hide();
+                } else {
+                    if(item.row_select==true){
+                        modal.show();
+                    }else{
+                        UIkit.modal.confirm('Are you sure remove this student?', function(e) {
+                            var indexof=$scope.markedStudent.indexOf(item);
+                            $scope.markedStudent.splice(indexof,1);
+                            console.log($scope.markedStudent,"removed");
+                        },function(){
+                            item.row_select=true;
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    }
+                }
+                // $scope.row_select=false;
+            }
+            $scope.addstudent=function(){
+                $scope.markedStudent.push($scope.modalData);
+                console.log($scope.markedStudent,"added");
+            }
+            $scope.showConfimation=function(){
+                
+            }
+            $scope.duration_config = {
+                create: false,
+                maxItems: 1
+            };
+            $scope.durationsdata=['Full Day', 'Half Day', 'One Hour'];
+            // $scope.alignChar_table_data = [
+            //     [ "abc 123", ".423475", "Koala = cute = cudley", "search.google.com" ],
+            //     [ "abc 1", "23.4", "Ox = stinky", "mail.yahoo.com" ],
+            //     [ "bc 9", "1.0", "Girafee = tall", "http://www.facebook.com" ],
+            //     [ "zyx 24", "7.67", "Bison = burger", "http://internship.whitehouse.gov/" ],
+            //     [ "abc 11", "3000", "Chimp = banana lover", "about.ucla.edu" ],
+            //     [ "abc 2", "56.5", "Elephant = unforgetable", "http://www.wikipedia.org/" ],
+            //     [ "abc 9", "15.5", "Lion = rawr", "rental.nytimes.com/index.html" ],
+            //     [ "ABC 10", "87.20000", "Zebra = stripey", "http://android.google.com" ],
+            //     [ "zyx 1", "999.1", "Koala = cute, again!", "http://irsmrt.mit.edu/" ],
+            //     [ "zyx 12", "0.2", "Llama = llove it", "http://aliens.nasa.gov/" ]
+            // ];
 
-            $scope.alignChar_table_data = [
-                [ "abc 123", ".423475", "Koala = cute = cudley", "search.google.com" ],
-                [ "abc 1", "23.4", "Ox = stinky", "mail.yahoo.com" ],
-                [ "bc 9", "1.0", "Girafee = tall", "http://www.facebook.com" ],
-                [ "zyx 24", "7.67", "Bison = burger", "http://internship.whitehouse.gov/" ],
-                [ "abc 11", "3000", "Chimp = banana lover", "about.ucla.edu" ],
-                [ "abc 2", "56.5", "Elephant = unforgetable", "http://www.wikipedia.org/" ],
-                [ "abc 9", "15.5", "Lion = rawr", "rental.nytimes.com/index.html" ],
-                [ "ABC 10", "87.20000", "Zebra = stripey", "http://android.google.com" ],
-                [ "zyx 1", "999.1", "Koala = cute, again!", "http://irsmrt.mit.edu/" ],
-                [ "zyx 12", "0.2", "Llama = llove it", "http://aliens.nasa.gov/" ]
-            ];
-
-            $scope.customFilters_table_data = [
-                ['abc 123','10','Koala','Mar 5, 2014'],
-                ['abc 1','234','Ox','Jan 2, 2014'],
-                ['abc 9','10','Girafee','Sep 20, 2013'],
-                ['zyx 24','767','Bison','Apr 8, 2014'],
-                ['abc 11','3','Chimp','Feb 5, 2014'],
-                ['abc 2','56','Elephant','Dec 18, 2013'],
-                ['abc 9','155','Lion','Mar 18, 2014'],
-                ['ABC 10','87','Zebra','Jul 1, 2014'],
-                ['zyx 1','999','Koala','Jan 18, 2014'],
-                ['zyx 12','0','Llama','Jan 20, 2015']
-            ];
+            // $scope.customFilters_table_data = [
+            //     ['abc 123','10','Koala','Mar 5, 2014'],
+            //     ['abc 1','234','Ox','Jan 2, 2014'],
+            //     ['abc 9','10','Girafee','Sep 20, 2013'],
+            //     ['zyx 24','767','Bison','Apr 8, 2014'],
+            //     ['abc 11','3','Chimp','Feb 5, 2014'],
+            //     ['abc 2','56','Elephant','Dec 18, 2013'],
+            //     ['abc 9','155','Lion','Mar 18, 2014'],
+            //     ['ABC 10','87','Zebra','Jul 1, 2014'],
+            //     ['zyx 1','999','Koala','Jan 18, 2014'],
+            //     ['zyx 12','0','Llama','Jan 20, 2015']
+            // ];
 
             // initialize tables
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
