@@ -137,14 +137,18 @@ angular
                             title: 'Attendance',
                             submenu: [
                                 {
-                                    title: 'Attendance Register',
+                                    title: 'Student Attendance Register',
                                 },
                                 {
-                                    title: 'Attendance Report',
+                                    title: 'Student Attendance Report',
                                 },
                                 {
-                                    title: 'Attendance Marking',
+                                    title: 'Student Attendance Marking',
                                     link: 'restricted.academics.markattendance'
+                                },
+                                {
+                                    title: 'Employee Attendance Marking',
+                                    link: 'restricted.academics.empattendancemark'
                                 }
                             ]
                         },

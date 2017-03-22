@@ -2521,18 +2521,43 @@ altairApp
                 })
                 .state("restricted.academics.markattendance", {
                     url: "/attendance",
-                    templateUrl: 'app/components/plugins/tablesorterView.html',
+                    templateUrl: 'app/components/plugins/studentAttendanceView.html',
                     controller: 'tablesorterCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_ionRangeSlider',
                                 'lazy_tablesorter',
-                                'app/components/plugins/tablesorterController.js'
+                                'app/components/plugins/studentAttendanceController.js'
                             ],{serie:true});
                         }],
                         ts_data: function($http){
                             return $http({ method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Tablesorter'
+                    }
+                })
+                .state("restricted.academics.empattendancemark", {
+                    url: "/empolyee-attendance",
+                    templateUrl: 'app/components/plugins/employeeAttendance.html',
+                    controller: 'tablesorterCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/plugins/employeeAttendanceController.js'
+                            ],{serie:true});
+                        }],
+                        ts_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
                                 .then(function (data) {
                                     return data.data;
                                 });
