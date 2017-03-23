@@ -226,7 +226,12 @@ angular
                     placeholder: 'Calendar Id...'
                 };
 
-
+                $scope.addBuilding=function(){
+                    $scope.titleCaption="Add";
+                }
+                $scope.editBuilding=function(){
+                    $scope.titleCaption="Edit";
+                }
 
 
         }

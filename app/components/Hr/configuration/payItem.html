@@ -2,13 +2,18 @@
     <div id="page_content_inner">
 
         <h3 class="heading_b uk-margin-bottom">Pay Item
-            <span style="float: right;font-size:18px;">
+            <!-- <span style="float: right;font-size:18px;">
                 <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_payitem'}" ng-click="addItem()">Add PayItem</button>
-            </span>
+            </span> -->
         </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+
+                <div class="uk-text-right">
+                        <button class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_payitem'}" ng-click="addItem()"><i class="uk-icon-plus"></i> Add PayItem</button>
+                    </div>
+
                     <thead>
                         <tr>
                             <th>S.No</th>
@@ -37,11 +42,14 @@
                         </tr>
                     </tbody>
                 </table>
-                <!-- Model Window -->
+            </div>
+        </div>
+    </div>
+    <!-- Model Window -->
                 <div id="open_payitem" class="uk-modal">
                     <div class="uk-modal-dialog">
                         <button type="button" class="uk-modal-close uk-close"></button>
-                        <h3 class="uk-modal-title">{{tit_caption}} Item </h3>
+                        <h3 class="uk-modal-title">{{tit_caption}} Item </h3><br>
                         <div class="md-card-content">
                             <form>
                                 <div class="uk-form-row">
@@ -60,9 +68,6 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 

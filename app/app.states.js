@@ -3224,5 +3224,40 @@ altairApp
                         pageTitle: 'Assign Category'
                     }
                 })
+                .state("restricted.hr.showleavecategory", {
+                    url: "/showleavecategory/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/leavecategory_related_employee_details.html',
+                    // controller: 'leaveCatRelatedEmpCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/leaveCatRelatedEmpCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'leave Category'
+                    },
+                    params:{id:null}   
+                })
+                .state("restricted.finance.assignleavevategory_viewDetails", {
+                    url: "/assignleavevategory_viewDetails/{empid}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/viewassignleavecategory_for_employee.html',
+                    controller: 'feeStructureViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/viewassignLeaveCategory_for_empCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Dynamic Elements'
+                    },
+                    params:{empid:null}
+                })
         }
     ]);

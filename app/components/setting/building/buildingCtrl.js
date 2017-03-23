@@ -66,33 +66,7 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                // .withButtons([
-                //     {
-                //         extend:    'copyHtml5',
-                //         text:      '<i class="uk-icon-files-o"></i> Copy',
-                //         titleAttr: 'Copy'
-                //     },
-                //     {
-                //         extend:    'print',
-                //         text:      '<i class="uk-icon-print"></i> Print',
-                //         titleAttr: 'Print'
-                //     },
-                //     {
-                //         extend:    'excelHtml5',
-                //         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                //         titleAttr: ''
-                //     },
-                //     {
-                //         extend:    'csvHtml5',
-                //         text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                //         titleAttr: 'CSV'
-                //     },
-                //     {
-                //         extend:    'pdfHtml5',
-                //         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                //         titleAttr: 'PDF'
-                //     }
-                // ]);
+                
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
@@ -117,82 +91,7 @@ angular
                 }
                 vm.selectAll = true;
             }
-            //     .newOptions()
-            //     // .withDisplayLength(10)
-            //     // .withColumnFilter({
-            //     //     aoColumns: [
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         }
-            //     //     ]
-            //     // })
-            //     .withButtons([
-            //         {
-            //             extend:    'copyHtml5',
-            //             text:      '<i class="uk-icon-files-o"></i> Copy',
-            //             titleAttr: 'Copy'
-            //         },
-            //         {
-            //             extend:    'print',
-            //             text:      '<i class="uk-icon-print"></i> Print',
-            //             titleAttr: 'Print'
-            //         },
-            //         {
-            //             extend:    'excelHtml5',
-            //             text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-            //             titleAttr: ''
-            //         },
-            //         {
-            //             extend:    'csvHtml5',
-            //             text:      '<i class="uk-icon-file-text-o"></i> CSV',
-            //             titleAttr: 'CSV'
-            //         },
-            //         {
-            //             extend:    'pdfHtml5',
-            //             text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-            //             titleAttr: 'PDF'
-            //         }
-            //     ])
-            //     .withOption('initComplete', function() {
-            //         $timeout(function() {
-            //             $compile($('.dt-uikit .md-input'))($scope);
-            //         })
-            //     });
-            // vm.dtColumnDefs = [
-            //     DTColumnDefBuilder.newColumnDef(0),
-            //     DTColumnDefBuilder.newColumnDef(1),
-            //     DTColumnDefBuilder.newColumnDef(2),
-            //     DTColumnDefBuilder.newColumnDef(3),
-            //     DTColumnDefBuilder.newColumnDef(4),
-            //     DTColumnDefBuilder.newColumnDef(5)
-            // ];
+            
             $resource('data/building/building.json')
                 .query()
                 .$promise
@@ -219,8 +118,11 @@ angular
                     placeholder: 'Calendar Id...'
                 };
 
-
-
-
+                $scope.addBuilding=function(){
+                    $scope.titleCaption="Add";
+                }
+                $scope.editBuilding=function(){
+                    $scope.titleCaption="Edit";
+                }
         }
     );

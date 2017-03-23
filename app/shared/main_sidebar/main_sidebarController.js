@@ -235,7 +235,7 @@ angular
                             link: 'restricted.student.admission'
                         },
                         {
-                            title:'Student Details',
+                            title:'Students',
                             link: 'restricted.student.student_list'
                         },
                         {
@@ -286,7 +286,7 @@ angular
                                     link:'restricted.hr.leave_category'
                                 },
                                 {
-                                    title: 'Assign Leave Category',
+                                    title: 'Leave Entitlement',
                                     link : 'restricted.hr.assignleave_categoryView'
                                 },
                                 {

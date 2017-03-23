@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('departmentCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -61,33 +61,6 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                // .withButtons([
-                //     {
-                //         extend:    'copyHtml5',
-                //         text:      '<i class="uk-icon-files-o"></i> Copy',
-                //         titleAttr: 'Copy'
-                //     },
-                //     {
-                //         extend:    'print',
-                //         text:      '<i class="uk-icon-print"></i> Print',
-                //         titleAttr: 'Print'
-                //     },
-                //     {
-                //         extend:    'excelHtml5',
-                //         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                //         titleAttr: ''
-                //     },
-                //     {
-                //         extend:    'csvHtml5',
-                //         text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                //         titleAttr: 'CSV'
-                //     },
-                //     {
-                //         extend:    'pdfHtml5',
-                //         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                //         titleAttr: 'PDF'
-                //     }
-                // ]);
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Department'),
@@ -97,6 +70,15 @@ angular
 
             ];
             $scope.get_id = [];
+            $scope.empArray = [];
+            $resource('app/components/employeemanagement/employee_list.json')
+                .query()
+                .$promise
+                .then(function(emp_data) {
+                    // console.log(emp_data,'emp_data');
+                    $scope.empArray=emp_data;
+                });
+
             $resource('app/components/academics/courseBatch/department.json')
                 .query()
                 .$promise
@@ -104,9 +86,15 @@ angular
                     vm.dt_data = dt_data;
                      angular.forEach( vm.dt_data, function(value, key){
                         $scope.hod_id=  value.HOD_profile_id;
-                        //console.log($scope.hod_id);
-                        $scope.get_id.push($scope.hod_id);
+                        // $scope.get_id.push($scope.hod_id);
+                        value.empName=getEmployeeName(value.HOD_profile_id);
+                        $scope.get_id.push(value.empName);
                     });
+
+                     function getEmployeeName(id){
+                            var data=$filter('filter')($scope.empArray,{id : id}, true);
+                            if(data[0]) return data[0].firstname+' '+data[0].lastname;
+                        }
                 });
                 $scope.selectize_hodProfieId_options = $scope.get_id;
                 $scope.selectize_hodProfieId_config = {
@@ -115,7 +103,7 @@ angular
                     placeholder: 'Head Of Department'
                 };
                  $scope.openModel = function() {
-                    //$scope.buttonStatus='Save';
+                    $scope.titCaption="Add";
                     $scope.Savebutton=true;
                     $scope.Updatebutton=false;
                     $scope.dept_name=null;
@@ -125,19 +113,15 @@ angular
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.edit_data= function(res){
+                    $scope.titCaption="Edit";
                     if (typeof res=="undefined") return false;
-                    //console.log(res,"messsssssssssss");
                     $scope.Updatebutton=true;
                     $scope.Savebutton=false;
                     $scope.dept_name=res.dept_name;
                     $scope.dept_code=res.dept_code;
-                    $scope.selectize_hodProfieId=res.HOD_profile_id;
+                    $scope.selectize_hodProfieId=res.empName;
                     $scope.Phone=res.phone1;
                     $scope.id=vm.dt_data.indexOf(res);
                 }
-       
-
-
-
         }
     );

@@ -72,7 +72,8 @@ angular
                 $scope.selectize_item_options = ['Earnings','Deductions'];
                 $scope.selectize_item_config = {
                     create: false,
-                    maxItems: 1
+                    maxItems: 1,
+                    placeholder: 'Select Type',
                 };
         }
     );

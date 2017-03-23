@@ -1,6 +1,6 @@
 <div id="page_content">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Student List 
+        <h3 class="heading_b uk-margin-bottom">Students 
 
         <span style="float: right;font-size:18px;"><a ui-sref="restricted.student.student_view"><i class="uk-icon-list"></i></a></span>
         </h3>
@@ -11,7 +11,7 @@
                     <div class="uk-width-medium-1-2">
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <label for="contact_list_search">Find user</label>
+                        <label for="contact_list_search">Find Student</label>
                         <input class="md-input" type="text" id="contact_list_search" ng-model="searchName" md-input />
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                             <li>
                                 <div class="md-list-content">
                                     <span class="md-list-heading">Course</span>
-                                    <span class="uk-text-small uk-text-muted">{{user.course}}</span>
+                                    <span class="uk-text-small uk-text-muted" style="height: 32px !important;">{{user.course}}</span>
                                     <span class="md-list-heading">Batch</span>
                                     <span class="uk-text-small uk-text-muted">{{user.batch}}</span>
                                 </div>

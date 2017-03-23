@@ -99,6 +99,7 @@ angular
 
                 $scope.Fee_Item_Name = null;
                 $scope.Fee_Item_Desc = null;
+                $('.uk-modal').find('input').trigger('blur');
             }
 
             $scope.addFeeItem = function(){

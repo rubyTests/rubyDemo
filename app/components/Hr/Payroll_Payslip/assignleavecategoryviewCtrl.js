@@ -93,8 +93,9 @@ angular
                 $scope.addAssignCategory=function(){
                     $scope.tit_caption="Add";
                     $scope.status="Save";
-                    $scope.leave_category='';
-                    $scope.leave_code='';
+                    $scope.selectize_employee='';
+                    $scope.selectize_dept='';
+                    $scope.selectize_leaveCat='';
                     $scope.leave_count='';
                     $scope.valid_from='';
                     $('.uk-modal').find('input').trigger('blur');
@@ -104,11 +105,11 @@ angular
                     $scope.tit_caption="Edit";
                     $scope.status="update";
                     if (data) {
-                        $scope.leavecat_id=data.id;
-                        $scope.leave_category=data.Name;
-                        $scope.leave_code=data.code;
-                        $scope.leave_count=data.count;
-                        $scope.valid_from=data.valid_from;
+                        $scope.selectize_employee=data.id;
+                        $scope.selectize_dept=data.Dept;
+                        $scope.selectize_leaveCat="Principal";
+                        $scope.leave_count=4;
+                        $scope.valid_from='03.23.2017';
                     }
                 }
 
@@ -149,7 +150,7 @@ angular
             $scope.selectize_employee_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Employee...',
+                placeholder: 'Select Employee',
                 valueField: 'id',
                 labelField: 'firstname',
                 onInitialize: function(selectize){
@@ -159,27 +160,27 @@ angular
                 }
             };
 
-            $scope.selectize_position_option = $scope.positionData;
-            $scope.selectize_position_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Position...',
-                valueField: 'id',
-                labelField: 'name',
-                onInitialize: function(selectize){
-                    selectize.on('change', function() {
-                        console.log('on "change" event fired');
-                    });
-                }
-            };
+            // $scope.selectize_position_option = $scope.positionData;
+            // $scope.selectize_position_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Select Position...',
+            //     valueField: 'id',
+            //     labelField: 'name',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function() {
+            //             console.log('on "change" event fired');
+            //         });
+            //     }
+            // };
 
-            $scope.selectize_category_option = $scope.categoryArray;
-            $scope.selectize_category_config = {
+            $scope.selectize_dept_option = $scope.employeeData;
+            $scope.selectize_dept_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Category...',
+                placeholder: 'Select Department',
                 valueField: 'id',
-                labelField: 'name',
+                labelField: 'Dept',
                 onInitialize: function(selectize){
                     selectize.on('change', function() {
                         console.log('on "change" event fired');
@@ -191,7 +192,7 @@ angular
             $scope.selectize_leaveCat_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Leave Category...',
+                placeholder: 'Select Leave Category',
                 valueField: 'id',
                 labelField: 'Name',
                 onInitialize: function(selectize){

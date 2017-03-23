@@ -1,5 +1,5 @@
 <style type="text/css">
-   .uk-modal-dialog .uk-modal-footer {
+   /*.uk-modal-dialog .uk-modal-footer {
       margin:-16px;
     }
     .uk-width-medium-1-1 {
@@ -9,7 +9,7 @@
     .uk-modal-dialog {
       height: 507px;
       width: 430px;
-    }
+    }*/
 </style>
 <div id="page_content" ng-controller="subjectCtrl as showCase">
     <div id="page_content_inner">
@@ -67,55 +67,67 @@
             </div>
         </div>
     </div>
-     <div class="uk-width-medium-1-3">
-      <div id="modal_overflow" class="uk-modal">
-        <div class="uk-modal-dialog">
-          <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title"><i class="uk-icon-book"></i>&nbsp; Add Subjects </h3>
-            <div class="md-card-content">
-              <form id="form_validation" class="uk-form-stacked" ng-submit="saveSubjects()" name="myForm"><p></p>
-                <div class="uk-width-medium-1-1">
-                  <div class="parsley-row">
-                    <input type="hidden" name="id" ng-model="id">
-                    <label for="subjectname">Subject Name</label>
-                    <input type="text" ng-model="subject_name" required class="md-input" md-input />
-                  </div>
+     
+
+     <div id="modal_overflow" class="uk-modal">
+                    <div class="uk-modal-dialog">
+                        <button type="button" class="uk-modal-close uk-close"></button>
+                        <h3 class="uk-modal-title"> {{titCaption}} Subjects </h3><br>
+                        <div class="md-card-content">
+                            <form>
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-1">
+                                            <label for="subjectname">Subject Name</label>
+                                            <input type="text" ng-model="subject_name" class="md-input" md-input />
+                                        </div>
+                                    </div>          
+                                </div>
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-1">
+                                            <label for="subcode">Subject Code</label>
+                                            <input type="text" ng-model="sub_code" class="md-input" md-input>
+                                        </div>
+                                    </div>          
+                                </div>
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-1">
+                                            <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" name="selectize_subType" selectize/>
+                                        </div>
+                                    </div>          
+                                </div>
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-1">
+                                            <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="selectize_courseName" name="selectize_courseName" selectize/>
+                                        </div>
+                                    </div>          
+                                </div>
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-2">
+                                            <label>Total Hours</label>
+                                            <input type="text" class="md-input" ng-model="total_hours" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-2">
+                                            <label>Credit Hours</label>
+                                            <input type="text" class="md-input label-fixed" ng-model="credit_hours" md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="uk-modal-footer uk-text-right">
+                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                            <button type="submit" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save
+                                 </button>
+                                  <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" 
+                                  ng-if="Updatebutton" ng-click="Update_data()">Update</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="uk-width-medium-1-1">
-                  <div class="parsley-row">
-                    <label for="subcode">Subject Code</label>
-                    <input type="text" ng-model="sub_code" required class="md-input" md-input>
-                  </div>
-                </div>
-                <div class="uk-width-medium-1-1">
-                  <div class="parsley-row">
-                    <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" required name="selectize_subType" selectize/>
-                  </div>
-                </div>
-                <div class="uk-width-medium-1-1">
-                  <div class="parsley-row">
-                    <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="selectize_courseName" required name="selectize_courseName" selectize/>
-                  </div>
-                </div>
-                <div class="uk-width-medium-1-1">
-                  <div class="parsley-row">
-                    <label>Total Hours</label>
-                    <input type="text" ng-model="total_hours" class="md-input" required md-input>
-                  </div>
-                </div>
-               
-                <div class="uk-text-right">
-                  <button type="submit" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save
-                 </button>
-                  <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" 
-                  ng-if="Updatebutton" ng-click="Update_data()">Update</button>
-                </div>
-                
-              </form>
-            </div>
-        </div>
-      </div>
-    </div>
 
    
 </div>

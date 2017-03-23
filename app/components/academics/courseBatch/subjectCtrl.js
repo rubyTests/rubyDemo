@@ -61,33 +61,7 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                // .withButtons([
-                //     {
-                //         extend:    'copyHtml5',
-                //         text:      '<i class="uk-icon-files-o"></i> Copy',
-                //         titleAttr: 'Copy'
-                //     },
-                //     {
-                //         extend:    'print',
-                //         text:      '<i class="uk-icon-print"></i> Print',
-                //         titleAttr: 'Print'
-                //     },
-                //     {
-                //         extend:    'excelHtml5',
-                //         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                //         titleAttr: ''
-                //     },
-                //     {
-                //         extend:    'csvHtml5',
-                //         text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                //         titleAttr: 'CSV'
-                //     },
-                //     {
-                //         extend:    'pdfHtml5',
-                //         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                //         titleAttr: 'PDF'
-                //     }
-                // ]);
+                
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Subject'),
@@ -96,96 +70,21 @@ angular
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Course'),
                 DTColumnDefBuilder.newColumnDef(5).withTitle('Total Hours')
             ];
-            //     .newOptions()
-            //     // .withDisplayLength(10)
-            //     // .withColumnFilter({
-            //     //     aoColumns: [
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         }
-            //     //     ]
-            //     // })
-            //     .withButtons([
-            //         {
-            //             extend:    'copyHtml5',
-            //             text:      '<i class="uk-icon-files-o"></i> Copy',
-            //             titleAttr: 'Copy'
-            //         },
-            //         {
-            //             extend:    'print',
-            //             text:      '<i class="uk-icon-print"></i> Print',
-            //             titleAttr: 'Print'
-            //         },
-            //         {
-            //             extend:    'excelHtml5',
-            //             text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-            //             titleAttr: ''
-            //         },
-            //         {
-            //             extend:    'csvHtml5',
-            //             text:      '<i class="uk-icon-file-text-o"></i> CSV',
-            //             titleAttr: 'CSV'
-            //         },
-            //         {
-            //             extend:    'pdfHtml5',
-            //             text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-            //             titleAttr: 'PDF'
-            //         }
-            //     ])
-            //     .withOption('initComplete', function() {
-            //         $timeout(function() {
-            //             $compile($('.dt-uikit .md-input'))($scope);
-            //         })
-            //     });
-            // vm.dtColumnDefs = [
-            //     DTColumnDefBuilder.newColumnDef(0),
-            //     DTColumnDefBuilder.newColumnDef(1),
-            //     DTColumnDefBuilder.newColumnDef(2),
-            //     DTColumnDefBuilder.newColumnDef(3),
-            //     DTColumnDefBuilder.newColumnDef(4),
-            //     DTColumnDefBuilder.newColumnDef(5)
-            // ];
+            
 
             //Validation 
-             var $formValidate = $('#form_validation');
+             // var $formValidate = $('#form_validation');
 
-            $formValidate
-                .parsley()
-                .on('form:validated',function() {
-                    $scope.$apply();
-                })
-                .on('field:validated',function(parsleyField) {
-                    if($(parsleyField.$element).hasClass('md-input')) {
-                        $scope.$apply();
-                    }
-                });
+            // $formValidate
+            //     .parsley()
+            //     .on('form:validated',function() {
+            //         $scope.$apply();
+            //     })
+            //     .on('field:validated',function(parsleyField) {
+            //         if($(parsleyField.$element).hasClass('md-input')) {
+            //             $scope.$apply();
+            //         }
+            //     });
             //End Validation
              $scope.get_name = [];
              $resource('app/components/academics/courseBatch/course.json')
@@ -234,7 +133,7 @@ angular
                     placeholder: 'Course Name'
                 };
                 $scope.openModel = function() {
-                    //$scope.buttonStatus='Save';
+                    $scope.titCaption="Add";
                     $scope.Savebutton=true;
                     $scope.Updatebutton=false;
                     $scope.subject_name=null;
@@ -242,6 +141,7 @@ angular
                     $scope.selectize_subType=null;
                     $scope.selectize_courseName=null;
                     $scope.total_hours=null;
+                    $scope.credit_hours=null;
                     $('.uk-modal').find('input').trigger('blur');
                   };
                     vm.dt_data = [];
@@ -272,6 +172,7 @@ angular
                        vm.dt_data.splice(index, 1);  
                     }
                     $scope.edit_data= function(res){
+                        $scope.titCaption="Edit";
                         if (typeof res=="undefined") return false;
                        // console.log(res,"messsssssssssss");
                         //$scope.buttonStatus='Update';
@@ -282,6 +183,7 @@ angular
                         $scope.selectize_subType=res.sub_type;
                         $scope.selectize_courseName=res.course_name;
                         $scope.total_hours=res.total_hours;
+                        $scope.credit_hours=10;
                         $scope.id=vm.dt_data.indexOf(res);
                     }
                     $scope.Update_data= function () {

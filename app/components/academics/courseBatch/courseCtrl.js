@@ -119,82 +119,6 @@ angular
                 }
                 vm.selectAll = true;
             }
-            //     .newOptions()
-            //     // .withDisplayLength(10)
-            //     // .withColumnFilter({
-            //     //     aoColumns: [
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         }
-            //     //     ]
-            //     // })
-            //     .withButtons([
-            //         {
-            //             extend:    'copyHtml5',
-            //             text:      '<i class="uk-icon-files-o"></i> Copy',
-            //             titleAttr: 'Copy'
-            //         },
-            //         {
-            //             extend:    'print',
-            //             text:      '<i class="uk-icon-print"></i> Print',
-            //             titleAttr: 'Print'
-            //         },
-            //         {
-            //             extend:    'excelHtml5',
-            //             text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-            //             titleAttr: ''
-            //         },
-            //         {
-            //             extend:    'csvHtml5',
-            //             text:      '<i class="uk-icon-file-text-o"></i> CSV',
-            //             titleAttr: 'CSV'
-            //         },
-            //         {
-            //             extend:    'pdfHtml5',
-            //             text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-            //             titleAttr: 'PDF'
-            //         }
-            //     ])
-            //     .withOption('initComplete', function() {
-            //         $timeout(function() {
-            //             $compile($('.dt-uikit .md-input'))($scope);
-            //         })
-            //     });
-            // vm.dtColumnDefs = [
-            //     DTColumnDefBuilder.newColumnDef(0),
-            //     DTColumnDefBuilder.newColumnDef(1),
-            //     DTColumnDefBuilder.newColumnDef(2),
-            //     DTColumnDefBuilder.newColumnDef(3),
-            //     DTColumnDefBuilder.newColumnDef(4),
-            //     DTColumnDefBuilder.newColumnDef(5)
-            // ];
              $scope.get_name = [];
              $resource('app/components/academics/courseBatch/department.json')
                 .query()
@@ -246,6 +170,7 @@ angular
                     placeholder: 'Grading Type'
                 };
                 $scope.openModel = function() {
+                    $scope.titCaption="Add";
                     $scope.Savebutton=true;
                     $scope.Updatebutton=false;
                     $scope.course_name=null;
@@ -256,6 +181,7 @@ angular
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.edit_data= function(res){
+                    $scope.titCaption="Edit";
                     if (typeof res=="undefined") return false;
                     //console.log(res,"resres");
                     $scope.Updatebutton=true;

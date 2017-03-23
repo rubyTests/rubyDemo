@@ -29,14 +29,25 @@ td.editable_updated {
                             <selectize id="selec_adv_2" config="department_config" options="department" position="bottom" ng-model="department1" name="department" required placeholder='Select Department'></selectize>
                         </div>
                     </div> -->
-                    <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                    <div class="uk-width-large-1-3 uk-width-medium-1-3">
                         <div class="parsley-row">
                             <selectize id="selec_adv_2" config="course_config" options="course" position="bottom" ng-model="course1" name="course" required placeholder='Select Course'></selectize>
                         </div>
                     </div>
-                    <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                    <div class="uk-width-large-1-3 uk-width-medium-1-3">
                         <div class="parsley-row">
                             <selectize id="selec_adv_2" config="batch_config" options="batch" position="bottom" ng-model="batch1" name="batch" required placeholder='Select Batch'></selectize>
+                        </div>
+                    </div>
+                    <div class="uk-width-large-1-3 uk-width-medium-1-3">
+                        <div class="uk-grid">
+                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                    <label for="uk_dp_1">Select date</label>
+                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

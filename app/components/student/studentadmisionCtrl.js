@@ -62,18 +62,25 @@ angular
                 }
             };
 
+            $scope.selectize_stuType_data =['Day-scholar','Hostel']
+            $scope.selectize_styType_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Student Type'
+            };
+
             $scope.selectize_c_options = ["Course A", "Course B", "Course C"];
             $scope.selectize_c_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course...'
+                placeholder: 'Select Course'
             };
 
             $scope.selectize_b_options = ["Hinduism", "Buddhism", "Jainism ","Sikhism"];
             $scope.selectize_b_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Religion...'
+                placeholder: 'Select Religion'
             };
             $scope.selectize_d_options = ["CSE", "EEE", "ECE ","MECH"];
             $scope.selectize_d_config = {
@@ -85,37 +92,37 @@ angular
             $scope.selectize_n_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select natioanality...'
+                placeholder: 'Select natioanality'
             };
             $scope.selectize_m_options = ["Tamil", "English"];
             $scope.selectize_m_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select mother tongue...'
+                placeholder: 'Select mother tongue'
             };
             $scope.selectize_country_options = ["India", "Sri Langa", "America"];
             $scope.selectize_country_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Country...'
+                placeholder: 'Select Country'
             };
             $scope.selectize_blood_options = ["O+ve", "A+ve","A+ve","B-ve","B+ve","O-ve"];
             $scope.selectize_blood_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Blood Group...'
+                placeholder: 'Select Blood Group'
             };
             $scope.selectize_cat_options = ["Category 1", "Category 2","Category 3"];
             $scope.selectize_cat_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Category...'
+                placeholder: 'Select Category'
             };
             $scope.selectize_city_options = ["Cuddalore", "Villupuram","Puducherry","Chennai"];
             $scope.selectize_city_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select City...'
+                placeholder: 'Select City'
             };
             $scope.selectize_state_options = ["Tamilnadu", "Andhra Pradesh","Assam","Bihar"];
             $scope.selectize_state_config = {
