@@ -90,42 +90,56 @@ angular
                 }
                 vm.selectAll = true;
             }
+            
+            $scope.openModal = function(){
+                $scope.addLabel = true;
+                $scope.updateLabel = false;
+                $scope.addButton = true;
+                $scope.updateButton = false;
+
+                $scope.Fee_Item_Name = null;
+                $scope.Fee_Item_Desc = null;
+            }
+
+            $scope.addFeeItem = function(){
+
+                var data = {
+                    id : vm.dt_data.length+1,
+                    Fee_Item_Name : $scope.Fee_Item_Name,
+                    Fee_Item_Desc : $scope.Fee_Item_Desc
+                };
+                vm.dt_data.push(data);
+            }
+
+            $scope.updateModal = function(data){
+                if (typeof data=="undefined") return false;
+                $scope.addLabel = false;
+                $scope.updateLabel = true;
+                $scope.addButton = false;
+                $scope.updateButton = true;
+
+                $scope.Fee_Item_Name = data.Fee_Item_Name;
+                $scope.Fee_Item_Desc = data.Fee_Item_Desc;
+                $scope.id = vm.dt_data.indexOf(data);
+            }
+
+            $scope.updateFeeItem = function() {
+                vm.dt_data[$scope.id].Fee_Item_Name = $scope.Fee_Item_Name;
+                vm.dt_data[$scope.id].Fee_Item_Desc = $scope.Fee_Item_Desc;
+            }
 
             $resource('data/finance/feeitem.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
+            .query()
+            .$promise
+            .then(function(dt_data) {
+                vm.dt_data = dt_data;
+            });
 
-                $scope.selectize_buildingId_options = ["1", "2", "3"];
-                $scope.selectize_buildingId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Building Id...'
-                };
-
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
-
-
-
-
+            $scope.remove_item = function(data) {
+                // var index = vm.dt_data.indexOf(data);
+                if (typeof data=="undefined") return false;
+                console.log(data);
+                vm.dt_data.splice(data,1);
+            }
         }
     );

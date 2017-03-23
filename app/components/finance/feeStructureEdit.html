@@ -5,14 +5,18 @@
     padding-top: 11px;
 }
 .md-hr{
-         margin: 24px 0 !important;
-    }
+     margin: 24px 0 !important;
+}
+.uk-grid-medium {
+    margin-left: -25px;
+    margin-top: 50px !important;
+}
     /*.selectize-control.single {
     margin-top: 0px !important;
 }*/
 </style>
 <div id="page_content">
-    <div id="page_content_inner">
+    <div id="page_content_inner" ng-controller="feeStructureEditCtrl">
 
         <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-large-1-1">
@@ -27,62 +31,62 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                     <label for="Fee_Structure">Fee Structure Name<span class="req"></span></label>
-                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="Fee_Structure_Name" />
+                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="EditableData.FeeStructure_Name" />
                                 </div>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                 <label>Assign To:</label>
-                                <div class="dynamic_radio uk-margin-small-top" ng-init="radio_BatchStu == 'Batch'" >
+                                <div class="uk-margin-small-top">
                                     <span class="icheck-inline">
-                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_1" icheck ng-model="radio_BatchStu" value="Batch" ng-checked="true" />
+                                        <input type="radio" icheck ng-value="Batch" ng-model="EditableData.AssignTo" ng-checked="EditableData.AssignTo == 'Course'" ng-change="EditableData.AssignTo = 'Course'"/>
                                         <label for="radio_demo_inline_1" class="inline-label">Course</label>
                                     </span>
                                     <span class="icheck-inline">
-                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="radio_BatchStu" value="Student" />
+                                        <input type="radio" icheck ng-value="Student" ng-model="EditableData.AssignTo" ng-checked="EditableData.AssignTo == 'Student'" ng-change="EditableData.AssignTo = 'Student'"/>
                                         <label for="radio_demo_inline_2" class="inline-label">Student</label>
                                     </span>
                                 </div>
                                 </div>
                             </div>
                             <p></p>
-                            <div class="uk-width-1-1" ng-show="radio_BatchStu != 'Student'">
+                            <div class="uk-width-1-1" ng-show="EditableData.AssignTo == 'Course'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                     <p></p>
-                                        <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="forms_advanced.selectize_course"></selectize>
+                                        <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="EditableData.CourseName.course"></selectize>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-width-1-1" ng-show="radio_BatchStu == 'Student'">
+                            <div class="uk-width-1-1" ng-show="EditableData.AssignTo == 'Student'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
-                                        <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
+                                        <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="EditableData.StudentName"></selectize>
                                     </div>
                                 </div>
                             </div>
                                     
-                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
+                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in EditableData.FeeItemCount track by $index">
                                 <div class="uk-width-8-10 uk-width-medium-9-10">
-                                    <div class="uk-grid" ng-repeat="fields in section" on-last-repeat>
-                                        <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
+                                    <div class="uk-grid" >
+                                        <div class="uk-width-1-1">
                                             <div class="uk-grid" data-uk-grid-margin>
                                                 <div class="uk-width-medium-1-2 parsley-row">
-                                                    <input type="text" config="selectize_feeItem_config" options="selectize_feeItem_options" ng-model="selectize_feeItem" name="selectize_feeItem" selectize />
+                                                    <input type="text" config="selectize_feeItem_config" options="selectize_feeItem_options" ng-model="section.Fee_Item_Name" name="selectize_feeItem" selectize />
                                                 </div>
                                                 <div class="uk-width-medium-1-2 parsley-row">
                                                     <label for="prev_state">Amount<span class="req"></span></label>
-                                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="section.Amount" />
                                                 </div>
                                             </div>
                                             <div class="uk-grid" data-uk-grid-margin>
                                                 <div class="uk-width-medium-1-3 parsley-row">
                                                     <label for="from_date">Due Date<span class="req"></span></label>
-                                                    <input type="text" name="join_date" id="join_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.join_date"/>
+                                                    <input type="text" name="join_date" id="join_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="section.DueDate"/>
                                                 </div>
                                                 <div class="uk-width-medium-1-3 parsley-row">
-                                                    <input type="text" config="selectize_freq_config" options="selectize_freq_options" ng-model="selectize_freq" name="selectize_freq" selectize />
+                                                    <input type="text" config="selectize_freq_config" options="selectize_freq_options" ng-model="section.Frequency" name="selectize_freq" selectize />
                                                 </div>
                                                 <div class="uk-width-medium-1-3 parsley-row">
-                                                    <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="selectize_fine" name="selectize_freq" selectize />
+                                                    <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="section.Fine" name="selectize_freq" selectize />
                                                 </div>
                                             </div>
                                         </div>

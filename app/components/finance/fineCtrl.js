@@ -70,7 +70,8 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Mode')
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Desc'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('No.Of Fine Slabs')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

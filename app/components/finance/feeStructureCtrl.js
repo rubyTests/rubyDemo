@@ -70,7 +70,7 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('Fee Structure Name'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('No.of Fee Items'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Frequency')
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Assigned To')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {
@@ -91,7 +91,7 @@ angular
                 vm.selectAll = true;
             }
 
-            $resource('data/finance/feestructure.json')
+            $resource('data/finance/feestructureNew.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {

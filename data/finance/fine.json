@@ -1,27 +1,112 @@
 [
     {
       "id":"1",
-      "Name":"Fine1",
-      "Desc":"Annually"
+      "Fine_Name":"Tution Fee Fine",
+      "Fine_Desc":"Tution Fee Fine",
+      "Fine_Slab":[
+        {
+          "Days_After_Due":"5",
+          "Fine_Value":"700",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"10",
+          "Fine_Value":"1400",
+          "Fine_Mode":"Persentage"
+        },
+        {
+          "Days_After_Due":"15",
+          "Fine_Value":"2000",
+          "Fine_Mode":"Amount"
+        }
+      ]
     },
     {
       "id":"2",
-      "Name":"Fine2",
-      "Desc":"Monthly"
+      "Fine_Name":"Book Fee Fine",
+      "Fine_Desc":"Book Fee Fine",
+      "Fine_Slab":[
+        {
+          "Days_After_Due":"5",
+          "Fine_Value":"100",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"10",
+          "Fine_Value":"200",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"15",
+          "Fine_Value":"300",
+          "Fine_Mode":"Amount"
+        }
+      ]
     },
     {
       "id":"3",
-      "Name":"Fine3",
-      "Desc":"Weekly"
+      "Fine_Name":"Exam Fee Fine",
+      "Fine_Desc":"Exam Fee Fine",
+      "Fine_Slab":[
+        {
+          "Days_After_Due":"5",
+          "Fine_Value":"200",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"10",
+          "Fine_Value":"400",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"15",
+          "Fine_Value":"750",
+          "Fine_Mode":"Amount"
+        }
+      ]
     },
     {
       "id":"4",
-      "Name":"Fine4",
-      "Desc":"Annually"
+      "Fine_Name":"Mess Fee Fine",
+      "Fine_Desc":"Mess Fee Fine",
+      "Fine_Slab":[
+        {
+          "Days_After_Due":"15",
+          "Fine_Value":"1200",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"20",
+          "Fine_Value":"1400",
+          "Fine_Mode":"Persentage"
+        },
+        {
+          "Days_After_Due":"30",
+          "Fine_Value":"1750",
+          "Fine_Mode":"Amount"
+        }
+      ]
     },
     {
       "id":"5",
-      "Name":"Fine5",
-      "Desc":"Weekly"
+      "Fine_Name":"Uniform Fee Fine",
+      "Fine_Desc":"Uniform Fee Fine",
+      "Fine_Slab":[
+        {
+          "Days_After_Due":"5",
+          "Fine_Value":"100",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"10",
+          "Fine_Value":"200",
+          "Fine_Mode":"Amount"
+        },
+        {
+          "Days_After_Due":"15",
+          "Fine_Value":"350",
+          "Fine_Mode":"Amount"
+        }
+      ]
     }
 ]

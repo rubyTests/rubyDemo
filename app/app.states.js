@@ -1931,7 +1931,19 @@ altairApp
                 .state("restricted.finance", {
                     url: "/finance",
                     template: '<div ui-view autoscroll="false"/>',
-                    abstract: true
+                    controller: 'financeCtrl',
+                    abstract: true,
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/finance/financeCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Finance'
+                    }
                 })
 
                 .state("restricted.finance.fee", {
@@ -1970,7 +1982,23 @@ altairApp
                         }]
                     },
                     data: {
-                        pageTitle: 'Dynamic Elements'
+                        pageTitle: 'Fee Structure Add'
+                    }
+                })
+
+                .state("restricted.finance.fee.feeStructureEdit", {
+                    url: "/feeStructureEdit/{Assign_Id}",
+                    templateUrl: 'app/components/finance/feeStructureEdit.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/finance/feeStructureEditCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Structure Edit'
                     }
                 })
 
@@ -2150,7 +2178,23 @@ altairApp
                         }]
                     },
                     data: {
-                        pageTitle: 'Fine Details'
+                        pageTitle: 'Fine Add Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.config.fineEdit", {
+                    url: "/EditFine/{Row_Id}",
+                    templateUrl: 'app/components/finance/fineEdit.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/finance/fineEditCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fine Edit Details'
                     }
                 })
 

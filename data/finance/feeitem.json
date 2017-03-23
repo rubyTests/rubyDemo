@@ -1,32 +1,32 @@
 [
     {
       "id":"1",
-      "Name":"Tution Fee",
-      "Desc":"Tution Fee"
+      "Fee_Item_Name":"Tution Fee",
+      "Fee_Item_Desc":"Tution Fee"
     },
     {
       "id":"2",
-      "Name":"Book Fee",
-      "Desc":"Book Fee"
+      "Fee_Item_Name":"Book Fee",
+      "Fee_Item_Desc":"Book Fee"
     },
     {
       "id":"3",
-      "Name":"Mess Fee",
-      "Desc":"Mess Fee"
+      "Fee_Item_Name":"Mess Fee",
+      "Fee_Item_Desc":"Mess Fee"
     },
     {
       "id":"4",
-      "Name":"Bus Fee",
-      "Desc":"Bus Fee"
+      "Fee_Item_Name":"Bus Fee",
+      "Fee_Item_Desc":"Bus Fee"
     },
     {
       "id":"5",
-      "Name":"Uniform Fee",
-      "Desc":"Uniform Fee"
+      "Fee_Item_Name":"Uniform Fee",
+      "Fee_Item_Desc":"Uniform Fee"
     },
     {
       "id":"6",
-      "Name":"Hostel Fee",
-      "Desc":"Hostel Fee"
+      "Fee_Item_Name":"Hostel Fee",
+      "Fee_Item_Desc":"Hostel Fee"
     }
 ]

@@ -56,11 +56,11 @@
                                                 <label>Mode:</label>
                                                 <div class="dynamic_radio uk-margin-small-top">
                                                     <span class="icheck-inline">
-                                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_1" icheck ng-model="radio_BatchStu" value="Batch" ng-checked="true" />
+                                                        <input type="radio" icheck ng-model="form_dynamic_model[topParent].radio_BatchStu" value="Batch" ng-checked="true" />
                                                         <label for="radio_demo_inline_1" class="inline-label">Percentage</label>
                                                     </span>
                                                     <span class="icheck-inline">
-                                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="radio_BatchStu" value="Student" />
+                                                        <input type="radio" icheck ng-model="form_dynamic_model[topParent].radio_BatchStu" value="Student" />
                                                         <label for="radio_demo_inline_2" class="inline-label">Amount</label>
                                                     </span>
                                                 </div>
@@ -96,6 +96,9 @@
                                       </div>
                                   </div>
                               </div>
+                            </div>
+                            <div class="uk-text-right">
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
                             </div>
                         </form>
                     </div>

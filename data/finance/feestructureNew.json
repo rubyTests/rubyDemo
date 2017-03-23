@@ -1,0 +1,124 @@
+[
+    {
+      "id":"1",
+      "FeeStructure_Name":"Term1",
+      "AssignTo":"Course",
+      "StudentAdmNo":"",
+      "StudentName":"",
+      "CourseName":{
+        "course": [1,2,3,4]
+      },
+      "FeeItemCount":[
+              {
+                "Fee_Item_Name":"Tution Fee",
+                "Amount":"35000",
+                "DueDate":"17.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Tution Fee Fine"
+              },
+              {
+                "Fee_Item_Name":"Book Fee",
+                "Amount":"5000",
+                "DueDate":"27.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Book Fee Fine"
+              },
+              {
+                "Fee_Item_Name":"Other Fee",
+                "Amount":"35000",
+                "DueDate":"11.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Other Fee Fine"
+              }
+      ]
+    },
+    {
+      "id":"2",
+      "FeeStructure_Name":"Term2",
+      "AssignTo":"Student",
+      "StudentAdmNo":"82310132052",
+      "StudentName":"Rafeeq",
+      "CourseName":"",
+      "FeeItemCount":[
+              {
+                "Fee_Item_Name":"Tution Fee",
+                "Amount":"35000",
+                "DueDate":"17.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Tution Fee Fine"
+              },
+              {
+                "Fee_Item_Name":"Book Fee",
+                "Amount":"5000",
+                "DueDate":"27.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Book Fee Fine"
+              },
+              {
+                "Fee_Item_Name":"Other Fee",
+                "Amount":"35000",
+                "DueDate":"11.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Other Fee Fine"
+              }
+      ]
+    },
+    {
+      "id":"3",
+      "FeeStructure_Name":"Term3",
+      "AssignTo":"Course",
+      "StudentAdmNo":"",
+      "StudentName":"",
+      "CourseName":"Computer Science and Engineering,Mechanical Engineering,Electrical and Electronics Engineering,Electronic Communication Engineering",
+      "FeeItemCount":[
+              {
+                "Fee_Item_Name":"Tution Fee",
+                "Amount":"35000",
+                "DueDate":"17.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Tution Fee Fine"
+              }
+      ]
+    },
+    {
+      "id":"4",
+      "FeeStructure_Name":"Term4",
+      "AssignTo":"Student",
+      "StudentAdmNo":"82310132059",
+      "StudentName":"Gopi",
+      "CourseName":"",
+      "FeeItemCount":[
+              {
+                "Fee_Item_Name":"Tution Fee",
+                "Amount":"35000",
+                "DueDate":"17.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Tution Fee Fine"
+              },
+              {
+                "Fee_Item_Name":"Book Fee",
+                "Amount":"5000",
+                "DueDate":"27.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Book Fee Fine"
+              }
+      ]
+    },
+    {
+      "id":"5",
+      "FeeStructure_Name":"Term5",
+      "AssignTo":"Student",
+      "StudentAdmNo":"82310132063",
+      "StudentName":"Saravanan",
+      "CourseName":"",
+      "FeeItemCount":[
+              {
+                "Fee_Item_Name":"Tution Fee",
+                "Amount":"35000",
+                "DueDate":"17.07.2017",
+                "Frequency":"Annually",
+                "Fine":"Tution Fee Fine"
+              }
+      ]
+    }
+]

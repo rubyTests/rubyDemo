@@ -10,7 +10,7 @@
             <div class="md-card-content">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}" ng-click="openModal();">
                         <i class="uk-icon-plus"></i>  Add Fee Item
                         </button>
                     </div>
@@ -32,11 +32,11 @@
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
                             <td>{{row.id}}</td>
-                            <td>{{row.Name}}</td>
-                            <td>{{row.Desc}}</td>
+                            <td>{{row.Fee_Item_Name}}</td>
+                            <td>{{row.Fee_Item_Desc}}</td>
                             <td>
-                                <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="updateModal(row)" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="remove_item($index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -49,7 +49,8 @@
       <div class="uk-modal-dialog">
       <button type="button" class="uk-modal-close uk-close"></button>
           <div class="uk-modal-header">
-              <h3 class="uk-modal-title">Add Fee Item</h3>
+              <h3 class="uk-modal-title" ng-if="addLabel">Add Fee Item</h3>
+              <h3 class="uk-modal-title" ng-if="updateLabel">Edit Fee Item</h3>
           </div>
           <div class="md-card-content">
             <form class=""><p></p>
@@ -57,7 +58,7 @@
                 <div class="uk-width-1-1">
                   <div class="parsley-row">
                     <label>Fee Item Name</label>
-                    <input type="text" ng-model="course_name" class="md-input" required md-input>
+                    <input type="text" ng-model="Fee_Item_Name" class="md-input" required md-input>
                   </div>
                 </div>
               </div>
@@ -66,14 +67,15 @@
                   <div class="uk-width-1-1">
                     <div class="parsley-row">
                       <label>Description</label>
-                      <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
+                      <input type="text" ng-model="Fee_Item_Desc" class="md-input" required md-input>
                     </div>
                   </div>
               </div>
             </form>
           </div>
           <div class="uk-modal-footer uk-text-right">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="addFeeItem()" ng-if="addButton">Save</button>
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="updateFeeItem()" ng-if="updateButton">Update</button>
           </div>
       </div>
     </div>
