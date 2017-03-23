@@ -31,32 +31,32 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                     <label for="Fee_Structure">Fee Structure Name<span class="req"></span></label>
-                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="EditableData.FeeStructure_Name" />
+                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="EditableData[0].FeeStructure_Name" />
                                 </div>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                 <label>Assign To:</label>
                                 <div class="uk-margin-small-top">
                                     <span class="icheck-inline">
-                                        <input type="radio" icheck ng-value="Batch" ng-model="EditableData.AssignTo" ng-checked="EditableData.AssignTo == 'Course'" ng-change="EditableData.AssignTo = 'Course'"/>
+                                        <input type="radio" icheck ng-value="Batch" ng-model="EditableData[0].AssignTo" ng-checked="EditableData[0].AssignTo == 'Course'" ng-change="EditableData[0].AssignTo = 'Course'"/>
                                         <label for="radio_demo_inline_1" class="inline-label">Course</label>
                                     </span>
                                     <span class="icheck-inline">
-                                        <input type="radio" icheck ng-value="Student" ng-model="EditableData.AssignTo" ng-checked="EditableData.AssignTo == 'Student'" ng-change="EditableData.AssignTo = 'Student'"/>
+                                        <input type="radio" icheck ng-value="Student" ng-model="EditableData[0].AssignTo" ng-checked="EditableData[0].AssignTo == 'Student'" ng-change="EditableData[0].AssignTo = 'Student'"/>
                                         <label for="radio_demo_inline_2" class="inline-label">Student</label>
                                     </span>
                                 </div>
                                 </div>
                             </div>
                             <p></p>
-                            <div class="uk-width-1-1" ng-show="EditableData.AssignTo == 'Course'">
+                            <div class="uk-width-1-1" ng-show="EditableData[0].AssignTo == 'Course'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                     <p></p>
-                                        <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="EditableData.CourseName.course"></selectize>
+                                        <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="EditableData[0].CourseName.course"></selectize>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-width-1-1" ng-show="EditableData.AssignTo == 'Student'">
+                            <div class="uk-width-1-1" ng-show="EditableData[0].AssignTo == 'Student'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
                                         <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="EditableData.StudentName"></selectize>
@@ -64,7 +64,7 @@
                                 </div>
                             </div>
                                     
-                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in EditableData.FeeItemCount track by $index">
+                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in EditableData[0].FeeItemCount track by $index">
                                 <div class="uk-width-8-10 uk-width-medium-9-10">
                                     <div class="uk-grid" >
                                         <div class="uk-width-1-1">

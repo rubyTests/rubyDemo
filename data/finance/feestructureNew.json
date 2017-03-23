@@ -1,7 +1,7 @@
 [
     {
       "id":"1",
-      "FeeStructure_Name":"Term1",
+      "FeeStructure_Name":"TermOne",
       "AssignTo":"Course",
       "StudentAdmNo":"",
       "StudentName":"",

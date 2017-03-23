@@ -144,6 +144,8 @@ altairApp
             // wave effects
             $window.Waves.init();
 
+            // $rootScope.menuAccordionMode = true;
+
         }
     ])
     .run(['PrintToConsole', function(PrintToConsole) {

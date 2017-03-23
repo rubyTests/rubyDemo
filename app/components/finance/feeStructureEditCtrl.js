@@ -22,9 +22,15 @@ angular
             .$promise
             .then(function(return_data) {
                 var paramsData=$filter('filter')(return_data, {id : $stateParams.Assign_Id});
-                $scope.EditableData=paramsData[0];
+                $scope.EditableData.push(paramsData[0]);
                  console.log($scope.EditableData,'TestData');
             });
+            
+            $scope.dataVal = { "Fee_Item_Name": "", "Amount": "", "DueDate": "", "Frequency": "", "Fine": "" };
+            $scope.cloneSection = function($event,$index) {
+                $event.preventDefault();
+                $scope.EditableData[0].FeeItemCount.push($scope.dataVal);
+            };
 
         }
     ]);

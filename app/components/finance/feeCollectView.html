@@ -11,6 +11,9 @@
         .uk-width-medium-1-4 {
             width: 24% !important;
         }
+        .material-icons.AdjIcon {
+            font-size: 30px !important;
+        }
     </style>
     <div id="page_content">
         <div id="page_content_inner">
@@ -88,10 +91,10 @@
                                 <label for="prev_state">Reference Number<span class="req"></span></label>
                                 <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
                             </div>
-                            <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Online_Payment'">
+                            <!-- <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Online_Payment'">
                                 <label for="prev_state">Transaction Id<span class="req"></span></label>
                                 <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
-                            </div>
+                            </div> -->
                             <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Cheque'">
                                 <label for="prev_state">Cheque No.<span class="req"></span></label>
                                 <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
@@ -105,6 +108,16 @@
                                 <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
                             </div>
                         </div>
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-2-3 uk-margin-top">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <i class="material-icons AdjIcon">view_list</i>
+                                </span>
+                                <selectize id="selec_adv_1" config="selectize_feeStruct_config" options="selectize_feeStruct_options" position="bottom" ng-model="forms_advanced.selectize_feeStruct"></selectize>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -112,7 +125,7 @@
     </div>
     <div id="page_content_inner">
         <div class="md-card uk-margin-medium-bottom">
-            <div class="md-card-content">
+            <div class="md-card-content large-padding">
                 <div class="uk-overflow-container">
                     <table class="uk-table">
                         <thead>

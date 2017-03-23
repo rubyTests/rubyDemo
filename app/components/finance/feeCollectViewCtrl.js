@@ -148,7 +148,7 @@ angular
                 altair_uikit.reinitialize_grid_margin();
             });
 
-            $scope.selectize_paymode_options = ["Cash", "Cheque", "Online_Payment","DD","Others"];
+            $scope.selectize_paymode_options = ["Cash", "Cheque", "DD","Others"];
             $scope.selectize_paymode_config = {
                 create: false,
                 maxItems: 1,
@@ -164,33 +164,33 @@ angular
 
             // Advanced selects
 
-            var course_data = $scope.selectize_course_options = [
-                {id: 1, title: 'Computer Science and Engineering', url: '444'},
-                {id: 2, title: 'Mechanical Engineering', url: '222'},
-                {id: 3, title: 'Electrical Communication Engineering', url: '222'},
-                {id: 4, title: 'Electrical and Electronics Engineering', url: '222'},
-                {id: 5, title: 'Aeronautical Engineering', url: '222'},
-                {id: 6, title: 'Information Technology Engineering', url: '222'},
-                {id: 7, title: 'Civil Engineering', url: '222'},
-                {id: 8, title: 'Marine Engineering', url: '222'}
+            var feeStruct_data = $scope.selectize_feeStruct_options = [
+                {id: 1, title: 'Fee Structure 1'},
+                {id: 2, title: 'Fee Structure 2'},
+                {id: 3, title: 'Fee Structure 3'},
+                {id: 4, title: 'Fee Structure 4'},
+                {id: 5, title: 'Fee Structure 5'},
+                {id: 6, title: 'Fee Structure 6'},
+                {id: 7, title: 'Fee Structure 7'},
+                {id: 8, title: 'Fee Structure 8'}
             ];
 
-            $scope.selectize_course_config = {
+            $scope.selectize_feeStruct_config = {
                 plugins: {
                     'remove_button': {
                         label     : ''
                     }
                 },
-                maxItems: 1,
+                maxItems: null,
                 valueField: 'id',
                 labelField: 'title',
                 searchField: 'title',
                 create: false,
-                placeholder: 'Course Name',
+                placeholder: 'Select Fee Structure...',
                 render: {
-                    option: function(course_data, escape) {
+                    option: function(feeStruct_data, escape) {
                         return  '<div class="option">' +
-                            '<span class="title">' + escape(course_data.title) + '</span><br>' +
+                            '<span class="title">' + escape(feeStruct_data.title) + '</span><br>' +
                             '</div>';
                     }
                     // item: function(planets_data, escape) {

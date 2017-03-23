@@ -14,29 +14,44 @@
                             <ul class="md-list md-list-addon">
                                 <li>
                                     <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons uk-text-primary" >assignment</i>
+                                        <i class="md-list-addon-icon material-icons" >assignment</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">Term 1</span>
+                                        <span class="md-list-heading">{{ViewData.FeeStructure_Name}}</span>
                                         <span class="uk-text-small uk-text-muted">Fee Structure Name</span>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <!-- <div class="uk-width-medium-1-4">
+                        <div class="uk-width-medium-1-4" ng-if="ViewData.AssignTo == 'Student'">
                             <ul class="md-list md-list-addon">
                                 <li>
                                     <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons uk-text-primary">school</i>
+                                        <i class="md-list-addon-icon material-icons" >person</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">Course</span>
-                                        <span class="uk-text-small uk-text-muted">Assign To</span>
+                                        <span class="md-list-heading">{{ViewData.StudentName}}</span>
+                                        <span class="uk-text-small uk-text-muted">Student Name</span>
                                     </div>
                                 </li>
                             </ul>
-                        </div> -->
+                        </div>
+                        <div class="uk-width-medium-1-4" ng-if="ViewData.AssignTo == 'Student'">
+                            <ul class="md-list md-list-addon">
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon material-icons" >format_list_numbered</i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">{{ViewData.StudentAdmNo}}</span>
+                                        <span class="uk-text-small uk-text-muted">Admission Number</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
+                    <div ng-if="ViewData.AssignTo == 'Course'">
+                    <p></p>
                     <h5>Assigned Courses</h5>
                     <div class="uk-grid AdjPad" data-uk-grid-margin>
                         <div class="uk-width-medium-1-3">
@@ -94,6 +109,7 @@
                             </p>
                         </div>
                     </div>
+                    </div>
                     <!-- <hr class="uk-grid-divider"> -->
                     <h4>Fee Item Details</h4>
                     <div class="md-card uk-margin-medium-bottom">
@@ -113,329 +129,18 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td>Tution Fee</td>
-                                        <td>10000</td>
-                                        <td>12.05.2017</td>
-                                        <td>Annually</td>
-                                        <td>Tution fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Mess Fee</td>
-                                        <td>10000</td>
-                                        <td>17.05.2017</td>
-                                        <td>Annually</td>
-                                        <td>Mess fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Bus Fee</td>
-                                        <td>10000</td>
-                                        <td>21.05.2017</td>
-                                        <td>Annually</td>
-                                        <td>Bus fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Hostel Fee</td>
-                                        <td>10000</td>
-                                        <td>12.03.2017</td>
-                                        <td>Annually</td>
-                                        <td>Hostel fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Uniform Fee</td>
-                                        <td>10000</td>
-                                        <td>24.09.2017</td>
-                                        <td>Annually</td>
-                                        <td>Uniform fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Transport Fee</td>
-                                        <td>10000</td>
-                                        <td>30.05.2017</td>
-                                        <td>Annually</td>
-                                        <td>Transport fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Additional Fee</td>
-                                        <td>58800</td>
-                                        <td>01.07.2017</td>
-                                        <td>Annually</td>
-                                        <td>Additional fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tution Fee</td>
-                                        <td>12200</td>
-                                        <td>27.05.2017</td>
-                                        <td>Annually</td>
-                                        <td>Tution fee fine</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Tution Fee</td>
-                                        <td>15000</td>
-                                        <td>25.07.2017</td>
-                                        <td>Weekly</td>
-                                        <td>Tution fee fine</td>
+                                    <tr ng-repeat="feeItem in ViewData.FeeItemCount">
+                                        <td>{{feeItem.Fee_Item_Name}}</td>
+                                        <td>{{feeItem.Amount}}</td>
+                                        <td>{{feeItem.DueDate}}</td>
+                                        <td>{{feeItem.Frequency}}</td>
+                                        <td>{{feeItem.Fine}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
-<!--                     <h3 class="heading_a">Fee Item Details</h3>
-                    <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-2">
-                            <ul class="md-list">
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee</span>
-                                        <span class="uk-text-small uk-text-muted">Fee Item Name</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">10000</span>
-                                        <span class="uk-text-small uk-text-muted">Amount</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">12.05.2017</span>
-                                        <span class="uk-text-small uk-text-muted">Due Date</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Annually</span>
-                                        <span class="uk-text-small uk-text-muted">Frequency</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee Fine</span>
-                                        <span class="uk-text-small uk-text-muted">Fine</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-2">
-                            <ul class="md-list ">
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee</span>
-                                        <span class="uk-text-small uk-text-muted">Fee Item Name</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">10000</span>
-                                        <span class="uk-text-small uk-text-muted">Amount</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">12.05.2017</span>
-                                        <span class="uk-text-small uk-text-muted">Due Date</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Annually</span>
-                                        <span class="uk-text-small uk-text-muted">Frequency</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee Fine</span>
-                                        <span class="uk-text-small uk-text-muted">Fine</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-2">
-                            <ul class="md-list">
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee</span>
-                                        <span class="uk-text-small uk-text-muted">Fee Item Name</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">10000</span>
-                                        <span class="uk-text-small uk-text-muted">Amount</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">12.05.2017</span>
-                                        <span class="uk-text-small uk-text-muted">Due Date</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Annually</span>
-                                        <span class="uk-text-small uk-text-muted">Frequency</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee Fine</span>
-                                        <span class="uk-text-small uk-text-muted">Fine</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <hr class="uk-grid-divider">
-                    <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-2">
-                            <ul class="md-list md-list-addon">
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">&#xE0B9;</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee</span>
-                                        <span class="uk-text-small uk-text-muted">Fee Item Name</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">attach_money</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">10000</span>
-                                        <span class="uk-text-small uk-text-muted">Amount</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">date_range</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">12.05.2017</span>
-                                        <span class="uk-text-small uk-text-muted">Due Date</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">av_timer</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Annually</span>
-                                        <span class="uk-text-small uk-text-muted">Frequency</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">monetization_on</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee Fine</span>
-                                        <span class="uk-text-small uk-text-muted">Fine</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-2">
-                            <ul class="md-list md-list-addon">
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">&#xE0B9;</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee</span>
-                                        <span class="uk-text-small uk-text-muted">Fee Item Name</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">attach_money</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">10000</span>
-                                        <span class="uk-text-small uk-text-muted">Amount</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">date_range</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">12.05.2017</span>
-                                        <span class="uk-text-small uk-text-muted">Due Date</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">av_timer</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Annually</span>
-                                        <span class="uk-text-small uk-text-muted">Frequency</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">monetization_on</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee Fine</span>
-                                        <span class="uk-text-small uk-text-muted">Fine</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-2">
-                            <ul class="md-list md-list-addon">
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">&#xE0B9;</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee</span>
-                                        <span class="uk-text-small uk-text-muted">Fee Item Name</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">attach_money</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">10000</span>
-                                        <span class="uk-text-small uk-text-muted">Amount</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">date_range</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">12.05.2017</span>
-                                        <span class="uk-text-small uk-text-muted">Due Date</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">av_timer</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Annually</span>
-                                        <span class="uk-text-small uk-text-muted">Frequency</span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">monetization_on</i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">Tution Fee Fine</span>
-                                        <span class="uk-text-small uk-text-muted">Fine</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>

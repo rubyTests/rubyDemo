@@ -2003,7 +2003,7 @@ altairApp
                 })
 
                 .state("restricted.finance.fee.feeStructureView", {
-                    url: "/feeStructureView",
+                    url: "/feeStructureView/{Assign_Id}",
                     templateUrl: 'app/components/finance/feeStructureView.html',
                     controller: 'feeStructureViewCtrl',
                     resolve: {
@@ -2087,6 +2087,22 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Total Fee Details'
+                    }
+                })
+
+                .state("restricted.finance.fee.feeStructView", {
+                    url: "/feeStructView",
+                    templateUrl: 'app/components/finance/feeStructView.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/finance/feeStructViewCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Structure View'
                     }
                 })
 

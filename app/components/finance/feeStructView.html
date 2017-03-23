@@ -15,7 +15,7 @@
             <div class="uk-width-large-1-1">
                 <div class="md-card">
                     <div class="md-card-content large-padding">
-                        <h3 class="heading_a">Fee Report</h3>
+                        <h3 class="heading_a">Fee Structure View</h3>
                         <div class="uk-grid" data-uk-grid-margin>
                             <div class="uk-width-medium-1-4">
                                 <ul class="md-list md-list-addon">
@@ -70,6 +70,60 @@
                                 </ul>
                             </div>
                         </div>
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-4">
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >date_range</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">03.01.2017</span>
+                                            <span class="uk-text-small uk-text-muted">Payment Date</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >receipt</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">RE1000</span>
+                                            <span class="uk-text-small uk-text-muted">Receipt Number</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >attach_money</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">15000</span>
+                                            <span class="uk-text-small uk-text-muted">Total Amount</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >monetization_on</i>
+                                        </div>
+                                        <div class="md-list-content">
+                                            <span class="md-list-heading">500</span>
+                                            <span class="uk-text-small uk-text-muted">Due Amount</span>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -78,77 +132,52 @@
     <div id="page_content_inner">
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
-                <div class="uk-margin-bottom" data-uk-margin>
-                    <a href="#" class="md-btn"><i class="material-icons">print</i> Print</a>
-                </div>
                 <div class="uk-overflow-container">
                     <table class="uk-table">
                         <thead>
                         <tr>
-                            <th><i class="md-list-addon-icon material-icons">list</i> Fee Structure Name</th>
-                            <th><i class="md-list-addon-icon material-icons">date_range</i>
-                            Payment Date</th>
-                            <th><i class="md-list-addon-icon material-icons">list</i> Receipt Number</th>
+                            <th><i class="md-list-addon-icon material-icons">list</i> Fee Item Name</th>
                             <th><i class="md-list-addon-icon material-icons">attach_money</i>
                             Actual Amount</th>
                             <th><i class="md-list-addon-icon material-icons">monetization_on</i>
                             Paid Amount</th>
                             <th><i class="md-list-addon-icon material-icons">date_range</i>
                             Due Amount</th>
-                            <th><i class="md-list-addon-icon material-icons">autorenew</i>
-                            Action</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr>
-                            <td>Fee Structure 1</td>
-                            <td>03/05/2016</td>
-                            <td class="uk-text-center">RE001</td>
-                            <td class="uk-text-center">15000</td>
-                            <td class="uk-text-center">13500</td>
-                            <td class="uk-text-center">1500</td>
-                            <td><a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructView"><i class="md-icon material-icons">&#xE8F4;</i></a>
-                            <a href="#" class="ts_remove_row" ui-sref="#"><i class="md-icon material-icons">&#xE8AD;</i></a></td>
+                            <td>Tution Fee</td>
+                            <td>15000</td>
+                            <td>13500</td>
+                            <td>1500</td>
                         </tr>
                         <tr>
-                            <td>Fee Structure 2</td>
-                            <td>13/02/2016</td>
-                            <td class="uk-text-center">RE002</td>
-                            <td class="uk-text-center">14852</td>
-                            <td class="uk-text-center">14500</td>
-                            <td class="uk-text-center">352</td>
-                            <td><a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructView"><i class="md-icon material-icons">&#xE8F4;</i></a>
-                            <a href="#" class="ts_remove_row" ui-sref="#"><i class="md-icon material-icons">&#xE8AD;</i></a></td>
+                            <td>Book Fee</td>
+                            <td>14852</td>
+                            <td>14500</td>
+                            <td>352</td>
                         </tr>
                         <tr>
-                            <td>Fee Structure 3</td>
-                            <td>20/10/2016</td>
-                            <td class="uk-text-center">RE003</td>
-                            <td class="uk-text-center">84200</td>
-                            <td class="uk-text-center">75000</td>
-                            <td class="uk-text-center">1800</td>
-                            <td><a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructView"><i class="md-icon material-icons">&#xE8F4;</i></a>
-                            <a href="#" class="ts_remove_row" ui-sref="#"><i class="md-icon material-icons">&#xE8AD;</i></a></td>
+                            <td>Bus Fee</td>
+                            <td>84200</td>
+                            <td>75000</td>
+                            <td>1800</td>
+                            
                         </tr>
                         <tr>
-                            <td>Fee Structure 4</td>
-                            <td>14/11/2016</td>
-                            <td class="uk-text-center">RE004</td>
-                            <td class="uk-text-center">65420</td>
-                            <td class="uk-text-center">65000</td>
-                            <td class="uk-text-center">420</td>
-                            <td><a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructView"><i class="md-icon material-icons">&#xE8F4;</i></a>
-                            <a href="#" class="ts_remove_row" ui-sref="#"><i class="md-icon material-icons">&#xE8AD;</i></a></td>
+                            <td>Hostel Fee</td>
+                            <td>65420</td>
+                            <td>65000</td>
+                            <td>420</td>
+                            
                         </tr>
                         <tr>
-                            <td>Fee Structure 5</td>
-                            <td>31/12/2016</td>
-                            <td class="uk-text-center">RE004</td>
-                            <td class="uk-text-center">35420</td>
-                            <td class="uk-text-center">35420</td>
-                            <td class="uk-text-center">0</td>
-                            <td><a href="#" class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructView"><i class="md-icon material-icons">&#xE8F4;</i></a>
-                            <a href="#" class="ts_remove_row" ui-sref="#"><i class="md-icon material-icons">&#xE8AD;</i></a></td>
+                            <td>Exam Fee</td>
+                            <td>35420</td>
+                            <td>35420</td>
+                            <td>0</td>
+                           
                         </tr>
                         <!-- <tr>
                             <td colspan="2" style="text-align: right;font-weight: bold;">Total Amount</td>
