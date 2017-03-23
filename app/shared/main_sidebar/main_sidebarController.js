@@ -277,16 +277,23 @@ angular
                         {
                             title: 'Leave Management',
                             submenu: [
-                                {
-                                    title: 'Leave Type',
-                                },
+                                // {
+                                //     title: 'Leave Type',
+                                //     link:'restricted.hr.leavetype'
+                                // },
                                 {
                                     title: 'Leave Category',
+                                    link:'restricted.hr.leave_category'
+                                },
+                                {
+                                    title: 'Assign Leave Category',
+                                    link : 'restricted.hr.assignleave_categoryView'
                                 },
                                 {
                                     title: 'Leave Applications',
-                                    link : 'restricted.LeaveCategoryType'
+                                    link : 'restricted.hr.leave_application'
                                 },
+
                                 {
                                     title: 'Attendance Register',
                                 },

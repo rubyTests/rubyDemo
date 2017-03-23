@@ -1,51 +1,50 @@
-
-	[
-		{
-			"id":1,
-			"Name":"Casual Leave",
-			"Code":"L001",
-			"Information":"-"
-		},
-		{
-			"id":2,
-			"Name":"Sick Leave",
-			"Code":"L002",
-			"Information":"-"
-		},
-		{
-			"id":3,
-			"Name":"Earned Leave",
-			"Code":"L003",
-			"Information":"-"
-		},
-		{
-			"id":4,
-			"Name":"Sectional / National Leave",
-			"Code":"L004",
-			"Information":"-"
-		},
-		{
-			"id":5,
-			"Name":"Maternity Leave",
-			"Code":"L005",
-			"Information":"-"
-		},
-		{
-			"id":6,
-			"Name":"Paternity Leave",
-			"Code":"L006",
-			"Information":"-"
-		},
-		{
-			"id":7,
-			"Name":"Transfer Leave",
-			"Code":"L007",
-			"Information":"-"
-		},
-		{
-			"id":8,
-			"Name":"Study Leave",
-			"Code":"L008",
-			"Information":"-"
-		}
+[
+	{
+		"id":1,
+		"Name":"Casual Leave",
+		"Code":"L001",
+		"Information":"-"
+	},
+	{
+		"id":2,
+		"Name":"Sick Leave",
+		"Code":"L002",
+		"Information":"-"
+	},
+	{
+		"id":3,
+		"Name":"Earned Leave",
+		"Code":"L003",
+		"Information":"-"
+	},
+	{
+		"id":4,
+		"Name":"Sectional / National Leave",
+		"Code":"L004",
+		"Information":"-"
+	},
+	{
+		"id":5,
+		"Name":"Maternity Leave",
+		"Code":"L005",
+		"Information":"-"
+	},
+	{
+		"id":6,
+		"Name":"Paternity Leave",
+		"Code":"L006",
+		"Information":"-"
+	},
+	{
+		"id":7,
+		"Name":"Transfer Leave",
+		"Code":"L007",
+		"Information":"-"
+	},
+	{
+		"id":8,
+		"Name":"Study Leave",
+		"Code":"L008",
+		"Information":"-"
+	}
 ]

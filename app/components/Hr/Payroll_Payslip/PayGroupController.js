@@ -87,29 +87,17 @@ angular
                 vm.selectAll = true;
             }             
             $scope.CreateNewData=[];
-            console.log($scope.CreateNewData,'$scope.CreateNewData');
             $scope.PayItemStructureFn=function(){
                 $scope.PayStructure.forEach(function(value,key){
-                    // console.log(value,'value of Pay_Structure');
                     $scope.CreateNewData.push({ ps_name : value.Name ,ps_item_count : $scope.GetPayItemCount(value.id) , ps_freq : value.Frequency ,pis_id : value.id ,Assemp_count : $scope.GetEmpCount(value.id) });
                     });
-                // console.log($scope.CreateNewData,'$scope.CreateNewData');
             }
             $scope.GetPayItemCount=function(str_id){
                 var getPaySN=$filter('filter')($scope.PayItemStructure,{ PayStructure_id : str_id}, true);
-                // console.log(getPaySN,'getPaySN');
                 return getPaySN.length;
 
             }
-            // $scope.GetPayItemStrID=function(psi_id){
-            //     var getPaystrid=$filter('filter')($scope.PayItemStructure,{PayStructure_id : psi_id}, true);
-            //     console.log(getPaystrid,'getPaystrid');
-            //     console.log(getPaystrid[0].id,'getPaystrid');
-            //     return getPaystrid[0].id;
-            // }
             $scope.GetEmpCount=function(id){
-                // console.log($scope.EmployeeProfile,'$scope.EmployeeProfile');
-                // console.log(typeof(id),'assssa');
                 var getEmployeeCount=$filter('filter')($scope.EmployeeProfile,{PayStructure_id : id}, true);
                 console.log(getEmployeeCount,'getEmployeeCount');
                 return getEmployeeCount.length;
@@ -131,7 +119,6 @@ angular
                 .$promise
                 .then(function(data) {
                     $scope.EmployeeProfile = data;
-                    // console.log($scope.EmployeeProfile,'$scope.EmployeeProfile');
                 });
             $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json')
                 .query()

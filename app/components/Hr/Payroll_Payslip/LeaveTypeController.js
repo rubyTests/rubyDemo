@@ -1,102 +1,90 @@
 angular
     .module('altairApp')
-    .controller('tables_examplesCtrl', [
-        '$scope',
-        '$timeout',
-        'editableOptions',
-        'editableThemes',
-        '$filter',
-        'Leave_Type',
-        function ($scope,$timeout,editableOptions, editableThemes,$filter,Leave_Type) {
-            editableThemes.bs3.inputClass = 'form-control md-input md-input-processed selectized';
-            editableThemes.bs3.buttonsClass = 'btn-sm';
-            editableOptions.theme = 'bs3';
-            $scope.groupProperty="name";
-            $scope.Leave_Type=Leave_Type;
-            $scope.users=[].concat($scope.Leave_Type);
-            console.log($scope.users,'$scope.users');
-
-              $scope.groups = [
-              ];
-              $scope.loadGroups = function() {
-
-              };
-
-              $scope.showGroup = function(user) {
-                if(user.group && $scope.groups.length) {
-                  var selected = $filter('filter')($scope.groups, {id: user.group});
-                  return selected.length ? selected[0].text : 'Not set';
-                } else {
-                  return user.groupName || 'Not set';
-                }
-              };
-
-              $scope.showStatus = function(user) {
-                var selected = [];
-                if(user.Frequency) {
-                  selected = $filter('filter')($scope.statuses, {value: user.Frequency});
-                  // console.log(selected,'selected');
-                }
-                return selected.length ? selected[0].text : 'Not set';
-              };
-
-              $scope.checkName = function(data, id) {
-                // if (id === 2 && data !== 'awesome') {
-                //   return "Username 2 should be `awesome`";
-                // }
-              };
-
-              $scope.saveUser = function(data, id) {
-                //$scope.user not updated yet
-                angular.extend(data, {id: id});
-                // return $http.post('/saveUser', data);
-              };
-
-              // remove user
-              $scope.removeUser = function(index) {
-                $scope.users.splice(index, 1);
-              };
-
-              // add user
-              $scope.addUser = function() {
-                $scope.inserted = {
-                  id: $scope.users.length+1,
-                  name: '',
-                  status: null,
-                  group: null 
-                };
-                $scope.users.push($scope.inserted);
-              };
-                $scope.selectize_c_options = ['5','10','15','20','50'];
-                $scope.selectize_c_config = {
-                    plugins: {
-                        'tooltip': ''
+    .controller('leavetypeCtrl',
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+            var vm = this;
+            vm.dt_data = [];
+            vm.dtOptions = DTOptionsBuilder
+                .newOptions()
+                .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
+                    "<'uk-overflow-container'tr>" +
+                    "<'dt-uikit-footer'<'uk-grid'<'uk-width-medium-3-10'i><'uk-width-medium-7-10'p>>>")
+                .withOption('createdRow', function(row, data, dataIndex) {
+                    // Recompiling so we can bind Angular directive to the DT
+                    $compile(angular.element(row).contents())($scope);
+                })
+                .withOption('headerCallback', function(header) {
+                    if (!vm.headerCompiled) {
+                        // Use this headerCompiled field to only compile header once
+                        vm.headerCompiled = true;
+                        $compile(angular.element(header).contents())($scope);
+                    }
+                })
+                .withPaginationType('full_numbers')
+                // Active Buttons extension
+                .withColumnFilter({
+                    aoColumns: [
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        }
+                    ]
+                })
+                .withButtons([
+                    {
+                        extend:    'print',
+                        text:      '<i class="uk-icon-print"></i> Print',
+                        titleAttr: 'Print'
                     },
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select...'
-                };
-            $scope.itemsByPage=5;
-           
-            $scope.table = {
-                'row4': true
-            };
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
+                        titleAttr: ''
+                    },
+                    {
+                        extend:    'pdfHtml5',
+                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF'
+                    }
+                ])
+                 .withOption('initComplete', function() {
+                    $timeout(function() {
+                        $compile($('.dt-uikit .md-input'))($scope);
+                    })
+                });
+            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/Leavetype.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    vm.dt_data = dt_data;
+                });
 
-            $scope.table2 = {
-                'row1': true
-            }
+                $scope.addleavetype=function(){
+                    $scope.tit_caption="Add";
+                    $scope.status="Save";
+                    $scope.leave_type='';
+                    $scope.leave_code='';
+                    $('.uk-modal').find('input').trigger('blur');
+                }
+                $scope.editLeaveType=function(data){
+                    $scope.tit_caption="Edit";
+                    $scope.status="update";
+                    if (data) {
+                        $scope.leavetype_id=data.id;
+                        $scope.leave_type=data.Name;
+                        $scope.leave_code=data.Code;
+                    }
+                }
         }
-    ]);
-    angular
-    .module('altairApp')
-    .directive('pageSelect', function() {
-      return {
-        restrict: 'E',
-        template: '<input type="text" class="select-page" ng-model="inputPage" ng-change="selectPage(inputPage)">',
-        link: function(scope, element, attrs) {
-          scope.$watch('currentPage', function(c) {
-            scope.inputPage = c;
-          });
-        }
-      }
-    });
+    );

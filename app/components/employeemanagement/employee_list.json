@@ -43,6 +43,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":1,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -86,7 +87,7 @@
         ]
     },
     {
-        "id": "2",
+        "id": 2,
         "Admission_No": "EMP02",
         "AdmissionDate": "04.27.2015",
         "firstname": "Karthik",
@@ -129,6 +130,7 @@
         "Quali":"Bachelor of Engineering",
         "category":"Teaching",
         "payitem_id":36,
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -172,7 +174,7 @@
         ]
     },
     {
-        "id": "3",
+        "id": 3,
         "Admission_No": "EMP03",
         "AdmissionDate": "05.19.2012",
         "firstname": "Mani",
@@ -214,6 +216,7 @@
         "Quali":"Bachelor of Engineering",
         "category":"Teaching",
         "payitem_id":37,
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -257,7 +260,7 @@
         ]
     },
     {
-        "id": "4",
+        "id": 4,
         "Admission_No": "EMP04",
         "AdmissionDate": "03.16.2014",
         "firstname": "Senthil",
@@ -343,7 +346,7 @@
         ]
     },
     {
-        "id": "5",
+        "id": 5,
         "Admission_No": "EMP05",
         "AdmissionDate": "03.16.2014",
         "firstname": "Manikandan",
@@ -386,6 +389,7 @@
         "Quali":"Bachelor of Engineering",
         "category":"Teaching",
         "payitem_id":3,
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -429,7 +433,7 @@
         ]
     },
     {
-        "id": "6",
+        "id": 6,
         "Admission_No": "EMP06",
         "AdmissionDate": "03.16.2014",
         "firstname": "Mani",
@@ -472,6 +476,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":38,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -515,7 +520,7 @@
         ]
     },
     {
-        "id": "7",
+        "id": 7,
         "Admission_No": "EMP07",
         "AdmissionDate": "03.16.2016",
         "firstname": "Raffeq",
@@ -558,6 +563,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":39,
         "category":"Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -601,7 +607,7 @@
         ]
     },
     {
-        "id": "8",
+        "id": 8,
         "Admission_No": "EMP08",
         "AdmissionDate": "03.16.2016",
         "firstname": "Mani",
@@ -644,6 +650,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":40,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -687,7 +694,7 @@
         ]
     },
     {
-        "id": "9",
+        "id": 9,
         "Admission_No": "EMP09",
         "AdmissionDate": "07.22.2013",
         "firstname": "Vijay",
@@ -730,6 +737,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":41,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -773,7 +781,7 @@
         ]
     },
     {
-        "id": "10",
+        "id": 10,
         "Admission_No": "EMP10",
         "AdmissionDate": "03.16.2016",
         "firstname": "Naveen",
@@ -816,6 +824,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":42,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -859,7 +868,7 @@
         ]
     },
     {
-        "id": "11",
+        "id": 11,
         "Admission_No": "EMP11",
         "AdmissionDate": "03.16.2016",
         "firstname": "Arun",
@@ -902,6 +911,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":43,
         "category":"Teaching",
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -945,7 +955,7 @@
         ]
     },
     {
-        "id": "12",
+        "id": 12,
         "Admission_No": "EMP12",
         "AdmissionDate": "03.16.2016",
         "firstname": "Jaya",
@@ -988,6 +998,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":44,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1031,7 +1042,7 @@
         ]
     },
     {
-        "id": "13",
+        "id": 13,
         "Admission_No": "EMP13",
         "AdmissionDate": "03.16.2016",
         "firstname": "Senthil",
@@ -1074,6 +1085,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":45,
         "category":"Non-Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1117,7 +1129,7 @@
         ]
     },
     {
-        "id": "14",
+        "id": 14,
         "Admission_No": "EMP14",
         "AdmissionDate": "03.16.2016",
         "firstname": "Ajay",
@@ -1160,6 +1172,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":46,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1203,7 +1216,7 @@
         ]
     },
     {
-        "id": "15",
+        "id": 15,
         "Admission_No": "EMP15",
         "AdmissionDate": "03.16.2016",
         "firstname": "Durga",
@@ -1246,6 +1259,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":47,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1289,7 +1303,7 @@
         ]
     },
     {
-        "id": "16",
+        "id": 16,
         "Admission_No": "EMP16",
         "AdmissionDate": "03.16.2016",
         "firstname": "Devi",
@@ -1332,6 +1346,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":48,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1375,7 +1390,7 @@
         ]
     },
     {
-        "id": "17",
+        "id": 17,
         "Admission_No": "EMP17",
         "AdmissionDate": "03.16.2016",
         "firstname": "Raja",
@@ -1418,6 +1433,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":4,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1461,7 +1477,7 @@
         ]
     },
     {
-        "id": "18",
+        "id": 18,
         "Admission_No": "EMP18",
         "AdmissionDate": "03.16.2016",
         "firstname": "Kumar",
@@ -1504,6 +1520,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":5,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1547,7 +1564,7 @@
         ]
     },
     {
-        "id": "19",
+        "id": 19,
         "Admission_No": "EMP19",
         "AdmissionDate": "03.16.2016",
         "firstname": "Viji",
@@ -1590,6 +1607,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":49,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1633,7 +1651,7 @@
         ]
     },
     {
-        "id": "20",
+        "id": 20,
         "Admission_No": "EMP20",
         "AdmissionDate": "03.16.2016",
         "firstname": "Priya",
@@ -1676,6 +1694,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":50,
         "category":"Teaching",
+        "leave_cat_id":1,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1719,7 +1738,7 @@
         ]
     },
     {
-        "id": "21",
+        "id": 21,
         "Admission_No": "EMP21",
         "AdmissionDate": "03.16.2014",
         "firstname": "Santhiya",
@@ -1762,6 +1781,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":6,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1805,7 +1825,7 @@
         ]
     },
     {
-        "id": "22",
+        "id": 22,
         "Admission_No": "EMP22",
         "AdmissionDate": "03.16.2014",
         "firstname": "Ajith",
@@ -1848,6 +1868,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":7,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1891,7 +1912,7 @@
         ]
     },
     {
-        "id": "23",
+        "id": 23,
         "Admission_No": "EMP23",
         "AdmissionDate": "03.16.2015",
         "firstname": "Selvi",
@@ -1934,6 +1955,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":8,
         "category":"Non-Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -1977,7 +1999,7 @@
         ]
     },
     {
-        "id": "24",
+        "id": 24,
         "Admission_No": "EMP24",
         "AdmissionDate": "03.16.2016",
         "firstname": "Jothi",
@@ -2020,6 +2042,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":9,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2063,7 +2086,7 @@
         ]
     },
     {
-        "id": "25",
+        "id": 25,
         "Admission_No": "EMP25",
         "AdmissionDate": "03.16.2013",
         "firstname": "Dhoni",
@@ -2106,6 +2129,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":10,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2149,7 +2173,7 @@
         ]
     },
     {
-        "id": "26",
+        "id": 26,
         "Admission_No": "EMP26",
         "AdmissionDate": "03.16.2013",
         "firstname": "Anu",
@@ -2192,6 +2216,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":11,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2235,7 +2260,7 @@
         ]
     },
     {
-        "id": "27",
+        "id": 27,
         "Admission_No": "EMP27",
         "AdmissionDate": "03.16.2013",
         "firstname": "Rohit",
@@ -2278,6 +2303,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":12,
         "category":"Teaching",
+        "leave_cat_id":2,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2321,7 +2347,7 @@
         ]
     },
     {
-        "id": "28",
+        "id": 28,
         "Admission_No": "EMP28",
         "AdmissionDate": "03.16.2013",
         "firstname": "Suresh",
@@ -2364,6 +2390,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":13,
         "category":"Teaching",
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2407,7 +2434,7 @@
         ]
     },
     {
-        "id": "29",
+        "id": 29,
         "Admission_No": "EMP29",
         "AdmissionDate": "03.16.2013",
         "firstname": "Ravi",
@@ -2450,6 +2477,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":14,
         "category":"Teaching",
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2493,7 +2521,7 @@
         ]
     },
     {
-        "id": "30",
+        "id": 30,
         "Admission_No": "EMP30",
         "AdmissionDate": "06.24.2013",
         "firstname": "Mithali",
@@ -2536,6 +2564,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":15,
         "category":"Teaching",
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2579,7 +2608,7 @@
         ]
     },
     {
-        "id": "31",
+        "id": 31,
         "Admission_No": "EMP31",
         "AdmissionDate": "06.24.2013",
         "firstname": "Saniya",
@@ -2622,6 +2651,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":16,
         "category":"Teaching",
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2665,7 +2695,7 @@
         ]
     },
     {
-        "id": "32",
+        "id": 32,
         "Admission_No": "EMP32",
         "AdmissionDate": "06.24.2013",
         "firstname": "Mirza",
@@ -2706,7 +2736,7 @@
         "Occupation":"Farmer",
         "relation":"Father",
         "Quali":"Bachelor of Engineering",
-        
+        "leave_cat_id":3,
         "category":"Teaching",
         "parentCount":[
             {
@@ -2751,7 +2781,7 @@
         ]
     },
     {
-        "id": "33",
+        "id": 33,
         "Admission_No": "EMP33",
         "AdmissionDate": "06.24.2013",
         "firstname": "Shasha",
@@ -2794,6 +2824,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":18,
         "category":"Teaching",
+        "leave_cat_id":3,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2837,7 +2868,7 @@
         ]
     },
     {
-        "id": "34",
+        "id": 34,
         "Admission_No": "EMP34",
         "AdmissionDate": "06.24.2013",
         "firstname": "Sathiya",
@@ -2880,6 +2911,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":19,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -2923,7 +2955,7 @@
         ]
     },
     {
-        "id": "35",
+        "id": 35,
         "Admission_No": "EMP35",
         "AdmissionDate": "06.24.2013",
         "firstname": "Guna",
@@ -2966,6 +2998,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":20,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3009,7 +3042,7 @@
         ]
     },
     {
-        "id": "36",
+        "id": 36,
         "Admission_No": "EMP36",
         "AdmissionDate": "06.24.2013",
         "firstname": "Saravanan",
@@ -3052,6 +3085,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":21,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3095,7 +3129,7 @@
         ]
     },
     {
-        "id": "37",
+        "id": 37,
         "Admission_No": "EMP37",
         "AdmissionDate": "06.24.2013",
         "firstname": "Ram",
@@ -3138,6 +3172,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":22,
         "category":"Non-Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3181,7 +3216,7 @@
         ]
     },
     {
-        "id": "38",
+        "id": 38,
         "Admission_No": "EMP38",
         "AdmissionDate": "06.24.2013",
         "firstname": "Ragul",
@@ -3224,6 +3259,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":23,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3267,7 +3303,7 @@
         ]
     },
     {
-        "id": "39",
+        "id": 39,
         "Admission_No": "EMP39",
         "AdmissionDate": "06.24.2013",
         "firstname": "Aarthi",
@@ -3310,6 +3346,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":24,
         "category":"Teaching",
+        "leave_cat_id":4,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3353,7 +3390,7 @@
         ]
     },
     {
-        "id": "40",
+        "id": 40,
         "Admission_No": "EMP40",
         "AdmissionDate": "06.24.2013",
         "firstname": "Aakash",
@@ -3396,6 +3433,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":25,
         "category":"Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3439,7 +3477,7 @@
         ]
     },
     {
-        "id": "41",
+        "id": 41,
         "Admission_No": "EMP41",
         "AdmissionDate": "06.24.2015",
         "firstname": "Mohammad",
@@ -3482,6 +3520,7 @@
         "Quali":"Bachelor of Engineering",
         "position":"Senior Lecturer",
         "category":"Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3525,7 +3564,7 @@
         ]
     },
     {
-        "id": "42",
+        "id": 42,
         "Admission_No": "EMP42",
         "AdmissionDate": "07.11.2015",
         "firstname": "Lakshmi",
@@ -3568,6 +3607,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":27,
         "category":"Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3611,7 +3651,7 @@
         ]
     },
     {
-        "id": "43",
+        "id": 43,
         "Admission_No": "EMP43",
         "AdmissionDate": "07.11.2015",
         "firstname": "Ramya",
@@ -3654,6 +3694,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":28,
         "category":"Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3697,7 +3738,7 @@
         ]
     },
     {
-        "id": "44",
+        "id": 44,
         "Admission_No": "EMP44",
         "AdmissionDate": "07.11.2015",
         "firstname": "Dravid",
@@ -3740,6 +3781,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":29,
         "category":"Teaching",
+        "leave_cat_id":5,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3783,7 +3825,7 @@
         ]
     },
     {
-        "id": "45",
+        "id": 45,
         "Admission_No": "EMP45",
         "AdmissionDate": "07.11.2015",
         "firstname": "Pujara",
@@ -3826,6 +3868,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":30,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3869,7 +3912,7 @@
         ]
     },
     {
-        "id": "46",
+        "id": 46,
         "Admission_No": "EMP46",
         "AdmissionDate": "07.11.2015",
         "firstname": "Saha",
@@ -3912,6 +3955,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":31,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -3955,7 +3999,7 @@
         ]
     },
     {
-        "id": "47",
+        "id": 47,
         "Admission_No": "EMP47",
         "AdmissionDate": "07.11.2015",
         "firstname": "Hakkim",
@@ -3998,6 +4042,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":32,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -4041,7 +4086,7 @@
         ]
     },
     {
-        "id": "48",
+        "id": 48,
         "Admission_No": "EMP48",
         "AdmissionDate": "07.11.2015",
         "firstname": "Sinthu",
@@ -4084,6 +4129,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":33,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -4127,7 +4173,7 @@
         ]
     },
     {
-        "id": "49",
+        "id": 49,
         "Admission_No": "EMP49",
         "AdmissionDate": "07.11.2015",
         "firstname": "Samson",
@@ -4170,6 +4216,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":34,
         "category":"Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",
@@ -4213,7 +4260,7 @@
         ]
     },
     {
-        "id": "50",
+        "id": 50,
         "Admission_No": "EMP50",
         "AdmissionDate": "07.11.2015",
         "firstname": "Sachin",
@@ -4256,6 +4303,7 @@
         "Quali":"Bachelor of Engineering",
         "payitem_id":35,
         "category":"Non-Teaching",
+        "leave_cat_id":6,
         "parentCount":[
             {
                 "category":"Teaching",

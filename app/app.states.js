@@ -236,46 +236,6 @@ altairApp
                         }]
                     }
                 })
-                .state("restricted.hr.Leave", {
-                    url: "/Leavetype",
-                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveType.html',
-                    controller: 'tables_examplesCtrl',
-                    resolve: {
-                        Leave_Type: function($http){
-                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/Leavetype.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'xeditable','smart-table',
-                                'app/components/Hr/Payroll_Payslip/LeaveTypeController.js'
-                            ]);
-                        }]
-                    }
-                })
-                .state("restricted.hr.LeaveCategory", {
-                    url: "/Leave Category",
-                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
-                    controller: 'tables_examplesCtrl',
-                    resolve: {
-                        Leave_Category: function($http){
-                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/LeaveCategory.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'xeditable','smart-table',
-                                'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
-                            ]);
-                        }]
-                    }
-                })
                 .state("restricted.Library", {
                     url: "/Library",
                     templateUrl: 'app/components/Library/Library_gridView.html',
@@ -3138,5 +3098,87 @@ altairApp
                     }
                 })
 
+                // Leave management started 22-03-17
+                .state("restricted.hr.leavetype", {
+                    url: "/leavetype",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveType.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/LeaveTypeController.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Leave Types'
+                    }
+                })
+                .state("restricted.hr.leave_category", {
+                    url: "/leave_category",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Leave Category'
+                    }
+                })
+                .state("restricted.hr.leave_application", {
+                    url: "/leave_application",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/leaveapplication.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/leaveapplicationCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Leave Application'
+                    }
+                })
+                .state("restricted.hr.assignleave_categoryView", {
+                    url: "/assignleave_category",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/assign_leave_category_view.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/assignleavecategoryviewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign leave Category'
+                    }
+                })
+                .state("restricted.hr.assignleavecategory", {
+                    url: "/assignleavecategory",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/assignleaveCategory.html',
+                    controller: 'assignleaveCategoryCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/assignleaveCategoryCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign Category'
+                    }
+                })
         }
     ]);

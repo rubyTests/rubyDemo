@@ -1,77 +1,44 @@
 [
-       {
+    {
       "id":1,
       "Name":"Senior Employee",
-      "Information":"-"
+      "code":"CL001",
+      "count":3,
+      "valid_from":"03-11-2017"
     },
     {
       "id":2,
       "Name":"Principal",
-      "Information":"-"
+      "code":"CL001",
+      "count":2,
+      "valid_from":"05-30-2017"
     },
     {
       "id":3,
       "Name":"Wise Principal",
-      "Information":"-"
+      "code":"TL001",
+      "count":6,
+      "valid_from":"03-31-2017"
     },
     {
       "id":4,
       "Name":"HOD",
-      "Information":"-"
+      "code":"SL001",
+      "count":1,
+      "valid_from":"04-01-2017"
     },
     {
       "id":5,
       "Name":"Guest lecturer",
-      "Information":"-"
+      "code":"EL001",
+      "count":4,
+      "valid_from":"07-28-2017"
     },
     {
       "id":6,
       "Name":"Part Time lecturer",
-      "Information":"-"
-    },
-    {
-      "id":7,
-      "Name":"Professor",
-      "Information":"-"
-    },
-    {
-      "id":8,
-      "Name":"Lab Assisntant",
-      "Information":"-"
-    },
-    {
-      "id":9,
-      "Name":"Physical Trainer",
-      "Information":"-"
-    },
-    {
-      "id":10,
-      "Name":"Clerk",
-      "Information":"-"
-    },
-    {
-      "id":11,
-      "Name":"Puan",
-      "Information":"-"
-    },
-    {
-      "id":12,
-      "Name":"Administrative Officer",
-      "Information":"-"
-    },
-    {
-      "id":13,
-      "Name":"Placement Officer",
-      "Information":"-"
-    },
-    {
-      "id":14,
-      "Name":"Associative Officer",
-      "Information":"-"
-    },
-    {
-      "id":15,
-      "Name":"Facilities Advisor",
-      "Information":"-"
+      "code":"SEL001",
+      "count":7,
+      "valid_from":"03-11-2017"
     }
   ]
