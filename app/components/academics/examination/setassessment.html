@@ -7,7 +7,6 @@
     width: 80%;
   }
   .uk-modal-dialog {
-    height: 430px;
     margin: 18px auto;
     width: 417px;
   }
@@ -48,7 +47,7 @@
                         <td>{{$index+1}}</td>
                         <td>{{row.name}}</td>
                         <td>{{row.type}}</td>
-                        <td class="uk-text-center">
+                        <td>
                             <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
                             <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                         </td>
@@ -70,9 +69,8 @@
                   <label>Name</label>
                   <input type="text" ng-model="name" class="md-input" required md-input>
                 </div>
-                 <div class="uk-form-row">
-                   <label>Type</label>
-                  <input type="text" ng-model="description" class="md-input" required md-input>
+                <div class="uk-form-row">
+                  <input type="text" config="selectize_exam_config" options="selectize_exam_options" ng-model="selectize_exam" selectize/>
                 </div>
                 </form>
             </div>

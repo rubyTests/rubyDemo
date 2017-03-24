@@ -25,11 +25,16 @@ angular
                 .withColumnFilter({
                     aoColumns: [
                         {
-                            type: 'text',
+                            type: 'number',
                             bRegex: true,
                             bSmart: true
                         },
                         {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
                             type: 'text',
                             bRegex: true,
                             bSmart: true
@@ -53,17 +58,23 @@ angular
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
-                     angular.forEach( vm.dt_data, function(value, key){
-                        $scope.hod_id=  value.HOD_profile_id;
-                        //console.log($scope.hod_id);
-                        $scope.get_id.push($scope.hod_id);
-                    });
                 });
-                $scope.selectize_hodProfieId_options = $scope.get_id;
-                $scope.selectize_hodProfieId_config = {
+			$resource('app/components/academics/examination/setexam.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.get_id.push(dt_data);
+                });
+                $scope.selectize_exam_options = $scope.get_id;
+                $scope.selectize_exam_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Head Of Department'
+                    placeholder: 'Select Exam',
+					valueField: 'id',
+                    labelField: 'name',
+					onInitialize: function(val){
+                        console.log(val);
+                    }
                 };
                  $scope.openModel = function() {
                     //$scope.buttonStatus='Save';

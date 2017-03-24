@@ -1,0 +1,62 @@
+<style type="text/css">
+  .selectize-control.single {
+    margin-top: 0;
+  }
+  .uk-width-medium-4-5, .uk-width-medium-8-10 {
+    height: 65px;
+    width: 80%;
+  }
+  .uk-modal-dialog {
+    height: 430px;
+    margin: 18px auto;
+    width: 417px;
+  }
+</style>
+<div id="page_content" ng-controller="marksCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Student Marks Details</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" ng-click="openModel()">
+                        <i class="uk-icon-plus"></i>  Add Marks
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Term-1</th>
+                            <th>Term-2</th>
+                            <th>OverAll</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+							<th>S.No</th>
+                            <th>Name</th>
+                            <th>Term-1</th>
+                            <th>Term-2</th>
+                            <th>OverAll</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr ng-repeat="row in showCase.dt_data">
+                        <td>{{$index+1}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.term1}}</td>
+                        <td>{{row.term2}}</td>
+                        <td>{{row.overall}}</td>
+                        <td>
+                            <a ng-click="edit_data(row)" ><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a href="#" class="ts_remove_row" ><i class="md-icon material-icons">&#xE872;</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

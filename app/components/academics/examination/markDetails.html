@@ -1,0 +1,117 @@
+    <style type="text/css">
+        .uk-grid.AdjPad {
+            padding-left: 20px;
+        }
+        .md-list-content.AdjListCon {
+            padding-top: 10px;
+        }
+        #page_content_inner {
+            padding: 24px 24px 0;
+        }
+    </style>
+    <div id="page_content">
+        <div id="page_content_inner">
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+                        <form class="uk-form" >
+                        <h2 class="heading_a">
+                                Mark Details
+                                <span class="sub-heading">Student mark details</span>
+                            </h2>
+							<div class="uk-text-right">
+								<button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.AddMarkDetails">
+								<i class="uk-icon-plus"></i>  Add Marks
+								</button>
+							</div>
+                            <hr class="md-hr"/>
+                            <div class="uk-grid uk-grid-medium form_hr">
+                                <div class="uk-width-8-10 uk-width-medium-9-10">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >import_contacts</i>
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Course</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-6 parsley-row">
+                                            <input type="text" config="selectize_courseNew_config" options="selectize_courseNew_options" ng-model="selectize_courseNew" name="selectize_courseNew" selectize />
+                                        </div>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >contacts</i>
+                                                        <!-- <i class="material-icons">developer_board</i> -->
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Batch</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-6 parsley-row">
+                                            <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="selectize_batch" name="selectize_batch" selectize />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page_content_inner" ng-controller="markDetailsCtrl as showCase">
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <!-- <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
+                        <i class="uk-icon-plus"></i>  Add Block
+                        </button>
+                    </div> -->
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Term-1</th>
+                            <th>Term-2</th>
+                            <th>OverAll</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Term-1</th>
+                            <th>Term-2</th>
+                            <th>OverAll</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{$index+1}}</td>
+							<td>{{row.name}}</td>
+							<td>{{row.term1}}</td>
+							<td>{{row.term2}}</td>
+							<td>{{row.overall}}</td>
+							<td>
+								<a ng-click="edit_data(row)" ><i class="md-icon material-icons">&#xE254;</i></a>
+								<a href="#" class="ts_remove_row" ><i class="md-icon material-icons">&#xE872;</i></a>
+							</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

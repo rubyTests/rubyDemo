@@ -1,0 +1,30 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+
+            <h3 class="heading_b uk-margin-bottom">Add Student marks</h3>
+            <div class="md-card uk-margin-medium-bottom" ng-controller="addMarkDetailsCtrl">
+                <div class="md-card-content">
+                    <div class="uk-overflow-container">
+                        <table class="uk-table uk-table-hover">
+                            <thead>
+                            <tr>
+                                <th>Student Name</th>
+                                <th>Enter Marks</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+							<tr ng-repeat="title in dt_data">
+								<td>{{title.name}}</td>
+								<td><input type="text"></td>
+							</tr>
+                            </tbody>
+                        </table>
+						<div class="uk-text-center">
+                            <a href="javascript:void(0)" class="md-btn md-btn-success md-btn-wave-light waves-effect waves-button waves-light">Submit</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

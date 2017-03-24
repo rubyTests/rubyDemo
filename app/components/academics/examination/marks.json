@@ -1,0 +1,72 @@
+ [
+    {
+        "id": 1,
+        "name": "karthik",
+        "term1": "A",
+        "term2": "A",
+        "overall":"A"
+    },
+    {
+        "id": 2,
+        "name": "Balu",
+        "term1": "B",
+        "term2": "B",
+        "overall":"B"
+    },
+    {
+        "id": 3,
+        "name": "Chandru",
+        "term1": "B",
+        "term2": "A",
+        "overall":"A"
+    },
+    {
+        "id": 4,
+        "name": "Deepa",
+        "term1": "B",
+        "term2": "C",
+        "overall":"C"
+    },
+    {
+        "id": 5,
+        "name": "Elankadhir",
+        "term1": "B",
+        "term2": "B",
+        "overall":"B"
+    },
+    {
+        "id": 6,
+        "name": "Ferin",
+        "term1": "A",
+        "term2": "A",
+        "overall":"A"
+    },
+    {
+        "id": 7,
+        "name": "Gomathi",
+        "term1": "A",
+        "term2": "C",
+        "overall":"B"
+    },
+    {
+        "id": 8,
+        "name": "Elango",
+        "term1": "B",
+        "term2": "B",
+        "overall":"B"
+    },
+    {
+        "id": 9,
+        "name": "kadhir",
+        "term1": "A",
+        "term2": "A",
+        "overall":"A"
+    },
+    {
+        "id": 10,
+        "name": "Gopal",
+        "term1": "A",
+        "term2": "C",
+        "overall":"B"
+    }
+] 

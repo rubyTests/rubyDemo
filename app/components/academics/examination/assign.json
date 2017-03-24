@@ -2,26 +2,26 @@
     {
         "id": 1,
         "name": "Unit-1",
-        "assessment": "FA-1",
-        "weightage":10
+        "weightage": "FA-1",
+        "course_name": "LKG"
     },
     {
         "id": 2,
         "name": "Internal-1",
-        "assessment": "SA-1",
-        "weightage":10
+        "weightage": "SA-1",
+        "course_name": "UKG"
     },
     {
         "id": 3,
         "name": "Unit-2",
-        "assessment": "FA-2",
-        "weightage":20
+        "weightage": "FA-2",
+        "course_name": "I-Standard"
     },
     {
         "id": 4,
         "name": "Internal-2",
-        "assessment": "SA-2",
-        "weightage":20
+        "weightage": "SA-2",
+        "course_name": "II-Standard"
     }
 
 ] 
