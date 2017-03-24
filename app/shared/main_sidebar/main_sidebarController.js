@@ -141,15 +141,12 @@ angular
                                 },
                                 {
                                     title: 'Student Attendance Report',
+									link: 'restricted.plugins.studentreport'
                                 },
                                 {
                                     title: 'Student Attendance Marking',
                                     link: 'restricted.academics.markattendance'
                                 },
-                                {
-                                    title: 'Employee Attendance Marking',
-                                    link: 'restricted.academics.empattendancemark'
-                                }
                             ]
                         },
                         {
@@ -203,12 +200,12 @@ angular
                                     link: 'restricted.academics.examination.setweightage'
                                 },
                                 {
-                                    title: 'Set GPA',
-                                    link: 'restricted.academics.examination.setgpa'
-                                },
-                                {
-                                    title: 'Assign',
+                                    title: 'Assign Exam',
 									link: 'restricted.academics.examination.assign'
+                                },
+								{
+                                    title: 'Mark List',
+									link: 'restricted.academics.examination.markDetails'
                                 },
                                 {
                                     title:'Online Exam',
@@ -296,9 +293,11 @@ angular
 
                                 {
                                     title: 'Attendance Register',
+									link : 'restricted.academics.empattendancemark'
                                 },
                                 {
                                     title: 'Attendance Report',
+									link: 'restricted.plugins.employeereport'
                                 },
                             ]
                         },
