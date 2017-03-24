@@ -32,19 +32,33 @@ altairApp
                 })
             // -- LOGIN PAGE --
                 .state("login", {
-                    url: "/login",
-                    templateUrl: 'app/components/pages/loginView.html',
-                    controller: 'loginCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'lazy_uikit',
-                                'lazy_iCheck',
-                                'app/components/pages/loginController.js'
-                            ]);
-                        }]
-                    }
-                })
+					url: "/login",
+					templateUrl: 'app/components/pages/customeloginView.html',
+					controller: 'loginCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {   
+							return $ocLazyLoad.load([
+								'lazy_uikit',
+								'lazy_iCheck',
+								'app/components/pages/loginController.js'
+							]);
+						}]
+					}
+				})
+				.state("forgotpassword", {
+					url: "/forgotpassword",
+					templateUrl: 'app/components/pages/forgotpassword.html',
+					controller: 'loginCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {   
+							return $ocLazyLoad.load([
+								'lazy_uikit',
+								'lazy_iCheck',
+								'app/components/pages/loginController.js'
+							]);
+						}]
+					}
+				})
             // -- RESTRICTED --
                 .state("restricted", {
                     abstract: true,
@@ -2797,24 +2811,6 @@ altairApp
                     }
                 })
 				
-				.state("restricted.academics.examination.setgpa", {
-                    url: "/setgpa",
-                    templateUrl: 'app/components/academics/examination/setgpa.html',
-                    //controller: 'setgpaCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'app/components/academics/examination/setgpa.js'
-                            ], {serie:true});
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Set GPA'
-                    }
-                })
-				
 				.state("restricted.academics.examination.assign", {
                     url: "/assign",
                     templateUrl: 'app/components/academics/examination/assign.html',
@@ -2829,7 +2825,43 @@ altairApp
                         }]
                     },
                     data: {
-                        pageTitle: 'Assign'
+                        pageTitle: 'Assign Exam'
+                    }
+                })
+				
+				.state("restricted.academics.examination.markDetails", {
+                    url: "/markDetails",
+                    templateUrl: 'app/components/academics/examination/markDetails.html',
+                    controller: 'markDetailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/markDetails.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Student Mark Details'
+                    }
+                })
+				
+				.state("restricted.academics.examination.AddMarkDetails", {
+                    url: "/AddMarkDetails",
+                    templateUrl: 'app/components/academics/examination/AddMarkDetails.html',
+                    controller: 'addMarkDetailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/AddMarkDetails.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Enter Student Marks'
                     }
                 })
 
@@ -3275,5 +3307,103 @@ altairApp
                     },
                     params:{empid:null}
                 })
+				
+			// Added by manivannan @ 24.03.2017 8.16PM
+			.state("restricted.plugins.employeereport", {
+				url: "/employee-report",
+				templateUrl: 'app/components/plugins/Report/employeeReportView.html',
+				controller: 'tablesorterCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_ionRangeSlider',
+							'lazy_tablesorter',
+							'app/components/plugins/Report/employeeReportController.js'
+						],{serie:true});
+					}],
+					ts_data: function($http){
+						return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+							.then(function (data) {
+								return data.data;
+							});
+					}
+				},
+				data: {
+					pageTitle: 'Tablesorter'
+				}
+			})
+			.state("restricted.plugins.reportforemployee", {
+				url: "/reportforemployee/{id:[0-9]{1,4}}",
+				templateUrl: 'app/components/plugins/Report/singleemployeeReport.html',
+				controller: 'tablesorterCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_ionRangeSlider',
+							'lazy_tablesorter',
+							'app/components/plugins/Report/singleemployeeReportController.js'
+						],{serie:true});
+					}],
+					ts_data: function($http){
+						return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+							.then(function (data) {
+								return data.data;
+							});
+					}
+				},
+				data: {
+					pageTitle: 'Tablesorter'
+				}
+			})
+			.state("restricted.plugins.studentreport", {
+				url: "/student-report",
+				templateUrl: 'app/components/plugins/Report/studentReportView.html',
+				controller: 'tablesorterCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_ionRangeSlider',
+							'lazy_tablesorter',
+							'app/components/plugins/Report/studentReportController.js'
+						],{serie:true});
+					}],
+					ts_data: function($http){
+						return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+							.then(function (data) {
+								return data.data;
+							});
+					}
+				},
+				data: {
+					pageTitle: 'Tablesorter'
+				}
+			})
+			.state("restricted.plugins.reportforstudent", {
+				url: "/reportforstudent/{id:[0-9]{1,4}}",
+				templateUrl: 'app/components/plugins/Report/singlestudentReport.html',
+				controller: 'tablesorterCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_ionRangeSlider',
+							'lazy_tablesorter',
+							'app/components/plugins/Report/singlestudentReportController.js'
+						],{serie:true});
+					}],
+					ts_data: function($http){
+						return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+							.then(function (data) {
+								return data.data;
+							});
+					}
+				},
+				data: {
+					pageTitle: 'Tablesorter'
+				}
+			})
         }
     ]);
