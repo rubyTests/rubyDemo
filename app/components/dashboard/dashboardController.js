@@ -8,7 +8,8 @@ angular
         '$timeout',
         'user_data',
         'variables',
-        function ($rootScope,$scope,$interval,$window,$timeout,user_data,variables) {
+        'todo_data',
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,variables,todo_data) {
 
         // statistics
             $scope.dynamicStats = [
@@ -38,7 +39,7 @@ angular
                 },
                 {
                     id: '3',
-                    title: 'Last Year Result',
+                    title: 'Courses',
                     count: '0',
                     chart_data: [ '64/100' ],
                     chart_options: {
@@ -63,29 +64,30 @@ angular
 
         // countUp update
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
-                $scope.dynamicStats[0].count = '18456';
-                $scope.dynamicStats[1].count = '13238';
-                $scope.dynamicStats[2].count = '64';
+                $scope.dynamicStats[0].count = '1500';
+                $scope.dynamicStats[1].count = '85';
+                $scope.dynamicStats[2].count = '10';
+                $scope.dynamicStats[3].count = '1501';
 
                 // update live statistics
-                function getRandomVal(min, max) {
-                    return Math.floor(Math.random() * (max - min + 1)) + min;
-                }
+                // function getRandomVal(min, max) {
+                //     return Math.floor(Math.random() * (max - min + 1)) + min;
+                // }
 
-                $interval(function () {
-                    var random = Math.round(Math.random() * 10);
-                    var live_values = $scope.dynamicStats[3].chart_data.toString().split(",");
+                // $interval(function () {
+                //     var random = Math.round(Math.random() * 10);
+                //     var live_values = $scope.dynamicStats[3].chart_data.toString().split(",");
 
-                    live_values.shift();
-                    live_values.push(random);
-                    live_values.join(",");
+                //     live_values.shift();
+                //     live_values.push(random);
+                //     live_values.join(",");
 
-                    var countTo = getRandomVal(20, 100);
+                //     var countTo = getRandomVal(20, 100);
 
-                    $scope.dynamicStats[3].chart_data = live_values;
-                    $scope.dynamicStats[3].count = ($scope.dynamicStats[3].count == countTo) ? countTo : getRandomVal(20, 120);
+                //     $scope.dynamicStats[3].chart_data = live_values;
+                //     $scope.dynamicStats[3].count = ($scope.dynamicStats[3].count == countTo) ? countTo : getRandomVal(20, 120);
 
-                }, 2000)
+                // }, 2000)
             });
 
        
@@ -371,6 +373,46 @@ angular
                     }
                 ]
             };
+
+            //todo list added by senthil
+
+            $scope.todo_data = todo_data;
+            console.log($scope.todo_data);
+            $scope.todo_length = $scope.todo_data.length;
+
+            // add todo list modal
+            $scope.todolist_modal = UIkit.modal("#new_todolist", {
+                target: '#new_todolist'
+            });
+            $scope.addTodoForm = function($event) {
+                if ( $scope.todolist_modal.isActive() ) {
+                    todolist_modal.hide();
+                } else {
+                    $scope.todolist_modal.show();
+                    $scope.todoTitle = null;
+                    $scope.todoDesc = null;
+                    // hide events panel
+                    // $clndr_todolist.removeClass('events_visible');
+                }
+            };
+
+            // $scope.todo_data.tasks=[];
+            $scope.addTodo = function($event){                
+                var todoDataVal = {
+                    title: $scope.todoTitle,
+                    description: $scope.todoDesc,
+                    closed: false,
+                    important: false
+                }
+                todo_data.push(todoDataVal);
+                $scope.todolist_modal.hide();
+            }
+
+            $scope.removeTodo = function(index){
+                console.log($scope.todo_data);
+                $scope.todo_data.splice(index,1);
+            }
+
         }
     ])
 ;

@@ -108,6 +108,12 @@ altairApp
                                 .then(function (data) {
                                     return data.data;
                                 });
+                        },
+                        todo_data: function($http){
+                            return $http({ method: 'GET', url: 'data/todo_datanew.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
                         }
                     },
                     data: {
