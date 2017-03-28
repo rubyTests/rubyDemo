@@ -173,11 +173,11 @@
                 </div>
             </div>
 
-            <div class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-5 uk-text-center     uk-sortable sortable-handler" id="dashboard_sortable_cards" data-uk-sortable data-uk-grid-margin>
+            <!-- <div class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-5 uk-text-center     uk-sortable sortable-handler" id="dashboard_sortable_cards" data-uk-sortable data-uk-grid-margin>
                 <div>
                     <div class="md-card md-card-hover md-card-overlay">
                         <div class="md-card-content">
-                            <div class="epc_chart" easypiechart options="epc_user_messages" percent="76">
+                            <div class="epc_chart" easypiechart options="epc_user_messages" percent="100">
                                 <span class="epc_chart_icon"><i class="material-icons">&#xE0BE;</i></span>
                             </div>
                         </div>
@@ -263,10 +263,128 @@
                         </div>
                     </div>
                 </div>
+            </div> -->
+
+            <!-- info cards -->
+            <div class="uk-grid uk-grid-medium uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
+                <div>
+                    <div class="md-card">
+                        <div class="md-card-head md-bg-light-blue-600">
+                            <div class="md-card-head-menu" data-uk-dropdown="{pos:'bottom-right'}">
+                                <i class="md-icon material-icons md-icon-light">&#xE5D4;</i>
+                                <div class="uk-dropdown uk-dropdown-small">
+                                    <ul class="uk-nav">
+                                        <li><a href="#">User profile</a></li>
+                                        <li><a href="#">User permissions</a></li>
+                                        <li><a href="#" class="uk-text-danger">Delete user</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="uk-text-center">
+                                <img class="md-card-head-avatar" src="assets/img/avatars/avatar_11.png" alt=""/>
+                            </div>
+                            <h3 class="md-card-head-text uk-text-center md-color-white">
+                                Stella Fay
+                                <span>akreiger@yahoo.com</span>
+                            </h3>
+                        </div>
+                        <div class="md-card-content">
+                            <ul class="md-list md-list-addon">
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon material-icons">&#xE158;</i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">ufay@terrymueller.org</span>
+                                        <span class="uk-text-small uk-text-muted">Email</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">1-972-176-0641x0298</span>
+                                        <span class="uk-text-small uk-text-muted">Phone</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon uk-icon-facebook-official"></i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">facebook.com/envato</span>
+                                        <span class="uk-text-small uk-text-muted">Facebook</span>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon uk-icon-twitter"></i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">twitter.com/envato</span>
+                                        <span class="uk-text-small uk-text-muted">Twitter</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="md-card">
+                        <div class="md-card-head">
+                            <div class="uk-cover uk-position-relative uk-height-1-1 transform-origin-50" id="video_player">
+                                <iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/-CYs99M7hzA?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe>
+                            </div>
+                        </div>
+                        <div class="md-card-content">
+                            <ul class="md-list md-list-addon md-list-interactive" id="video_player_playlist">
+                                <li ng-click="videoChange($event,video.id)" ng-repeat="video in video_data" ng-class="{'md-list-item-active': $index == 0 }">
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon material-icons">&#xE037;</i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">{{video.name}}</span>
+                                        <span class="uk-text-small uk-text-muted">{{video.source}}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="md-card">
+                        <div class="md-card-head head_background" style="background-image: url({{ weatherToday.backgroundImg }})">
+                            <div class="md-card-head-menu">
+                                <i class="md-icon material-icons md-icon-light">&#xE5D5;</i>
+                            </div>
+                            <h3 class="md-card-head-text">
+                                {{ weatherToday.city }}
+                            </h3>
+                            <div class="md-card-head-subtext">
+                                <i class="md-card-head-icon wi {{ weatherToday.icon }} uk-margin-right"></i>
+                                <span>{{ weatherToday.temperature }}&deg;</span>
+                            </div>
+                        </div>
+                        <div class="md-card-content">
+                            <ul class="md-list md-list-addon">
+                                <li ng-repeat="weather in weatherData">
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon wi {{weather.icon}}"></i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">{{ weather.temperature }}&deg; {{ weather.description }}</span>
+                                        <span class="uk-text-small uk-text-muted">{{ weather.date }}</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
-                <div class="uk-width-large-1-2">
+                <div class="uk-width-large-1-1">
                     <div class="md-card">
                         <div class="md-card-content">
                             <h4 class="heading_c uk-margin-bottom">Attendance</h4>
@@ -274,7 +392,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="uk-width-large-1-2">
+                <!-- <div class="uk-width-large-1-2">
                     <div class="md-card">
                         <div class="md-card-content" style="padding: 2px !important;">
                             <ul class="uk-tab uk-tab-grid" data-uk-tab="{connect:'#header_alerts',animation:'slide-horizontal'}">
@@ -301,7 +419,7 @@
                             </ul>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
 
             <!-- <div class="uk-grid uk-grid-medium" data-uk-grid-margin>

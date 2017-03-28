@@ -7,9 +7,55 @@ angular
         '$window',
         '$timeout',
         'user_data',
+        'sale_chart_data',
         'variables',
         'todo_data',
-        function ($rootScope,$scope,$interval,$window,$timeout,user_data,variables,todo_data) {
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables,todo_data) {
+
+        // circular statistics
+            $scope.stat_conversions_data = [5,3,9,6,5,9,7];
+            $scope.stat_conversions_options = {
+                height: 64,
+                width: 96,
+                fill: ["#d84315"],
+                padding: 0.2
+            };
+
+            $scope.epc_user_messages = {
+                barColor:'#03a9f4',
+                scaleColor: false,
+                trackColor: '#f5f5f5',
+                lineWidth: 5,
+                size: 110,
+                easing: variables.bez_easing_swiftOut
+            };
+
+            $scope.epc_tasks_list = {
+                barColor:'#9c27b0',
+                scaleColor: false,
+                trackColor: '#f5f5f5',
+                lineWidth: 5,
+                size: 110,
+                easing: variables.bez_easing_swiftOut
+            };
+
+            $scope.epc_orders = {
+                barColor:'#009688',
+                scaleColor: false,
+                trackColor: '#f5f5f5',
+                lineWidth: 5,
+                size: 110,
+                easing: variables.bez_easing_swiftOut
+            };
+
+            $scope.epc_user_registrations = {
+                barColor:'#607d8b',
+                scaleColor: false,
+                trackColor: '#f5f5f5',
+                lineWidth: 5,
+                size: 110,
+                easing: variables.bez_easing_swiftOut
+            };
 
         // statistics
             $scope.dynamicStats = [
@@ -412,6 +458,100 @@ angular
                 console.log($scope.todo_data);
                 $scope.todo_data.splice(index,1);
             }
+
+
+                    // video player
+            $scope.video_data = [
+                {
+                    id: '-CYs99M7hzA',
+                    name: 'Unboxing the HERO4',
+                    source: 'Mashable'
+                },
+                {
+                    id: 'te689fEo2pY',
+                    name: 'Apple Watch Unboxing & Setup',
+                    source: 'Unbox Therapy'
+                },
+                {
+                    id: '7AFJeaYojhU',
+                    name: 'Energous WattUp Power Transmitter',
+                    source: 'TechCrunch'
+                },
+                {
+                    id: 'hajnEpCq5SE',
+                    name: 'The new MacBook - Design',
+                    source: 'Apple'
+                }
+            ];
+
+            var $video_player = $('#video_player'),
+                $video_playlist = $('#video_player_playlist'),
+                active_class = 'md-list-item-active';
+
+            $scope.videoChange = function($event,videoID) {
+
+                var $this = $($event.currentTarget);
+                if(!$this.hasClass(active_class)) {
+                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/' + videoID + '?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
+
+                    $video_playlist.children('li').removeClass(active_class);
+                    $this.addClass(active_class);
+
+                    $video_player.velocity({
+                            translateZ: 0,
+                            scale: 0,
+                            opacity: 0
+                        },
+                        {
+                            duration: 280,
+                            easing: variables.easing_swiftOut,
+                            complete: function() {
+                                $video_player.html(iframe_embed);
+                                setTimeout(function() {
+                                    $video_player.velocity('reverse');
+                                },280)
+                            }
+                        }
+                    );
+
+                }
+
+            };
+
+        // weather
+            $scope.weatherToday = {
+                city: 'Some City',
+                backgroundImg: 'assets/img/gallery/Image17.jpg',
+                icon: 'wi-day-sunny-overcast',
+                temperature: '14'
+            };
+            $scope.weatherData = [
+                {
+                    icon: 'wi-day-sunny-overcast',
+                    temperature: '22',
+                    description: 'Mostly Sunny',
+                    date: moment().add(1,'days').format('DD MMM (dddd)')
+                },
+                {
+                    icon: 'wi-cloudy',
+                    temperature: '19',
+                    description: 'Partly Cloudy',
+                    date: moment().add(2,'days').format('DD MMM (dddd)')
+                },
+                {
+                    icon: 'wi-day-rain',
+                    temperature: '16',
+                    description: 'Rainy',
+                    date: moment().add(3,'days').format('DD MMM (dddd)')
+                },
+                {
+                    icon: 'wi-day-sunny uk-text-warning',
+                    temperature: '24',
+                    description: 'Sunny',
+                    date: moment().add(4,'days').format('DD MMM (dddd)')
+                }
+            ];
+
 
         }
     ])

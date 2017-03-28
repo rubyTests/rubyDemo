@@ -2067,7 +2067,13 @@ altairApp
                                 'lazy_datatables',
                                 'app/components/finance/feeCollectViewCtrl.js'
                             ], {serie:true});
-                        }]
+                        }],
+                        struct_data: function($http){
+                            return $http({ method: 'GET', url: 'data/finance/feestructureNew.json' })
+                                .then(function (getdata) {
+                                    return getdata.data;
+                                });
+                        },
                     },
                     data: {
                         pageTitle: 'Fee Structure Details'

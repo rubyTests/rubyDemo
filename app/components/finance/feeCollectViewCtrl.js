@@ -4,8 +4,15 @@ angular
         '$scope',
         '$window',
         '$timeout',
-        function ($scope,$window,$timeout) {
-
+        'struct_data',
+        '$filter',
+        function ($scope,$window,$timeout,struct_data,$filter) {
+            $scope.totalAmount = 0;
+            $scope.newData = [
+                        // {FeeStructure_Name:'',FeeItemCount:[{Fee_Item_Name:''},{Fee_Item_Name:''}]}
+                        // {FeeStructure_Name:'Fee Structure 2',FeeItemCount:[{Fee_Item_Name:'Tution Fee'},{Fee_Item_Name:'Tution Fee1'}]},
+                        // {FeeStructure_Name:'Fee Structure 3',FeeItemCount:[{Fee_Item_Name:'Tution Fee'},{Fee_Item_Name:'Tution Fee1'}]}
+                        ];
             $scope.form_template = [
                 [
                     {
@@ -164,16 +171,9 @@ angular
 
             // Advanced selects
 
-            var feeStruct_data = $scope.selectize_feeStruct_options = [
-                {id: 1, title: 'Fee Structure 1'},
-                {id: 2, title: 'Fee Structure 2'},
-                {id: 3, title: 'Fee Structure 3'},
-                {id: 4, title: 'Fee Structure 4'},
-                {id: 5, title: 'Fee Structure 5'},
-                {id: 6, title: 'Fee Structure 6'},
-                {id: 7, title: 'Fee Structure 7'},
-                {id: 8, title: 'Fee Structure 8'}
-            ];
+            $scope.struct_data = struct_data;
+
+            var feeStruct_data = $scope.selectize_feeStruct_options = struct_data;
 
             $scope.selectize_feeStruct_config = {
                 plugins: {
@@ -183,19 +183,45 @@ angular
                 },
                 maxItems: null,
                 valueField: 'id',
-                labelField: 'title',
-                searchField: 'title',
+                labelField: 'FeeStructure_Name',
+                searchField: 'FeeStructure_Name',
                 create: false,
                 placeholder: 'Select Fee Structure...',
                 render: {
                     option: function(feeStruct_data, escape) {
                         return  '<div class="option">' +
-                            '<span class="title">' + escape(feeStruct_data.title) + '</span><br>' +
+                            '<span class="title">' + escape(feeStruct_data.FeeStructure_Name) + '</span><br>' +
                             '</div>';
                     }
                     // item: function(planets_data, escape) {
                     //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
                     // }
+                },
+                onDelete:function(values){
+                    console.log(values,'val');
+                    console.log($scope.newData);
+                    console.log(parseInt(values)-1,'data');
+                    $scope.newData.splice(parseInt(values)-1,1);
+                },
+                onInitialize: function(selectize){
+                    selectize.on('change', function(selectize) {
+                        var splitVal = selectize.split(',');
+                        var total = 0;
+                        $scope.feesItem=[];
+                        var indexDa=0;
+                        for($i=0;$i<splitVal.length;$i++){
+                            var selectizeData = $filter('filter')($scope.struct_data, {id : splitVal[$i]});
+                            angular.forEach(selectizeData[0].FeeItemCount, function(value,keys){
+                                total+=parseInt(value.Amount);
+                                $scope.feesItem.keys['fees']=value.Amount;
+                            });
+                            if ($scope.newData.indexOf(selectizeData[0])==-1) $scope.newData.push(selectizeData[0]);
+                            indexDa++;
+                        }
+                        $scope.totalAmount = total;
+                        $scope.totalPaid = total;
+                        
+                    });
                 }
             };
 
@@ -266,9 +292,17 @@ angular
                 $maskedInput.inputmask();
             }
 
-            $scope.total = function () {
-                console.log($scope);
-                return parseInt($scope.fee_1 || 0) + parseInt($scope.fee_2 || 0) + parseInt($scope.fee_3 || 0) + parseInt($scope.fee_4 || 0) + parseInt($scope.fee_5 || 0);
+            $scope.changePaid = function () {
+                var total = 0;
+                console.log($scope.feesItem);
+                angular.forEach($scope.feesItem, function(value,keys){
+                    console.log(value.fees);
+                    total+=parseInt(value.fees);
+                });
+                $scope.totalPaid=total;
+                // console.log(total);
+                //return parseInt($scope.fee_1 || 0);
+                // return parseInt($scope.fee_1 || 0) + parseInt($scope.fee_2 || 0) + parseInt($scope.fee_3 || 0) + parseInt($scope.fee_4 || 0) + parseInt($scope.fee_5 || 0);
             };
 
         }

@@ -1,7 +1,7 @@
 [
     {
       "id":"1",
-      "FeeStructure_Name":"TermOne",
+      "FeeStructure_Name":"Fee Structure1",
       "AssignTo":"Course",
       "StudentAdmNo":"",
       "StudentName":"",
@@ -25,7 +25,7 @@
               },
               {
                 "Fee_Item_Name":"Other Fee",
-                "Amount":"35000",
+                "Amount":"23000",
                 "DueDate":"11.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Other Fee Fine"
@@ -34,7 +34,7 @@
     },
     {
       "id":"2",
-      "FeeStructure_Name":"Term2",
+      "FeeStructure_Name":"Fee Structure2",
       "AssignTo":"Student",
       "StudentAdmNo":"82310132052",
       "StudentName":"Rafeeq",
@@ -42,21 +42,21 @@
       "FeeItemCount":[
               {
                 "Fee_Item_Name":"Tution Fee",
-                "Amount":"35000",
+                "Amount":"17000",
                 "DueDate":"17.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Tution Fee Fine"
               },
               {
                 "Fee_Item_Name":"Book Fee",
-                "Amount":"5000",
+                "Amount":"1900",
                 "DueDate":"27.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Book Fee Fine"
               },
               {
                 "Fee_Item_Name":"Other Fee",
-                "Amount":"35000",
+                "Amount":"48000",
                 "DueDate":"11.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Other Fee Fine"
@@ -65,7 +65,7 @@
     },
     {
       "id":"3",
-      "FeeStructure_Name":"Term3",
+      "FeeStructure_Name":"Fee Structure3",
       "AssignTo":"Course",
       "StudentAdmNo":"",
       "StudentName":"",
@@ -82,7 +82,7 @@
     },
     {
       "id":"4",
-      "FeeStructure_Name":"Term4",
+      "FeeStructure_Name":"Fee Structure4",
       "AssignTo":"Student",
       "StudentAdmNo":"82310132059",
       "StudentName":"Gopi",
@@ -90,14 +90,14 @@
       "FeeItemCount":[
               {
                 "Fee_Item_Name":"Tution Fee",
-                "Amount":"35000",
+                "Amount":"31000",
                 "DueDate":"17.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Tution Fee Fine"
               },
               {
                 "Fee_Item_Name":"Book Fee",
-                "Amount":"5000",
+                "Amount":"15400",
                 "DueDate":"27.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Book Fee Fine"
@@ -106,7 +106,7 @@
     },
     {
       "id":"5",
-      "FeeStructure_Name":"Term5",
+      "FeeStructure_Name":"Fee Structure5",
       "AssignTo":"Student",
       "StudentAdmNo":"82310132063",
       "StudentName":"Saravanan",
@@ -114,7 +114,7 @@
       "FeeItemCount":[
               {
                 "Fee_Item_Name":"Tution Fee",
-                "Amount":"35000",
+                "Amount":"65000",
                 "DueDate":"17.07.2017",
                 "Frequency":"Annually",
                 "Fine":"Tution Fee Fine"

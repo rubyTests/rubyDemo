@@ -14,6 +14,7 @@
         .material-icons.AdjIcon {
             font-size: 30px !important;
         }
+        input[type=text] { text-align:right }
     </style>
     <div id="page_content">
         <div id="page_content_inner">
@@ -118,6 +119,9 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- <pre>
+                            {{forms_advanced.selectize_feeStruct | json}}
+                        </pre> -->
                     </div>
                 </div>
             </div>
@@ -130,60 +134,36 @@
                     <table class="uk-table">
                         <thead>
                         <tr>
-                            <th style="width:40%;"><i class="md-list-addon-icon material-icons">school</i> FEE ITEM NAME</th>
-                            <th style="width:40%;"><i class="md-list-addon-icon material-icons">attach_money</i>
+                            <th><i class="md-list-addon-icon material-icons">school</i> FEE ITEM NAME</th>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
                             AMOUNT</th>
-                            <th style="width:15%;"><i class="md-list-addon-icon material-icons">date_range</i>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
                             PAY FEES</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>Tution Fee</td>
-                            <td>35250</td>
-                            <td><input type="text" name="fee_1" id="fee_1" ng-model="fee_1" /></td>
-                        </tr>
-                        <tr>
-                            <td>Additional Fee</td>
-                            <td>10300</td>
-                            <td><input type="text" name="fee_2" id="fee_2" ng-model="fee_2" /></td>
-                        </tr>
-                        <tr>
-                            <td>Bus Fee</td>
-                            <td>1500</td>
-                            <td><input type="text" name="fee_3" id="fee_3" ng-model="fee_3" /></td>
-                        </tr>
-                        <tr>
-                            <td>Mess Fee</td>
-                            <td>19050</td>
-                            <td><input type="text" name="fee_4" id="fee_4" ng-model="fee_4" /></td>
-                        </tr>
-                        <tr>
-                            <td>Book Fee</td>
-                            <td>25000</td>
-                            <td><input type="text" name="fee_5" id="fee_5" ng-model="fee_5" /></td>
-                        </tr>
-                        <!-- <tr>
-                            <td colspan="2" style="text-align: right;font-weight: bold;">Total Amount</td>
-                            <td>50000</td>
-                        </tr> -->
+                        <tbody ng-repeat="(keys, fee) in newData track by $index">
+                            <tr>
+                            <td colspan="3" style="background-color: rgb(233,233,233)">{{fee.FeeStructure_Name}}</td>
+                            </tr>
+                            <tr ng-repeat="(key, feeItem) in fee.FeeItemCount track by $index">
+                                <td>{{feeItem.Fee_Item_Name}}</td>
+                                <td class="uk-text-right">{{feeItem.Amount | currency:""}}</td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePaid()" name="fee_1" id="fee_1" ng-model="feesItem[keys][key].fees" ng-value="feeItem.Amount" /></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="md-card-content">
-                    <div class="uk-grid" data-uk-grid-margin>
-                        <div class="uk-width-medium-1-4">
-                        
+                    <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
+                        <div class="uk-width-medium-1-5">
                         </div>
-                        <div class="uk-width-medium-1-4">
+                        <div class="uk-width-medium-2-5">
                         <b>Total Amount :</b>
-                        <span style="float:right;margin-left: 10px;">45121</span>
+                        <span style="float:right;margin-left: 10px;">{{totalAmount | currency:""}}</span>
                         </div>
-                        <div class="uk-width-medium-1-4">
-                        </div>
-                        <div class="uk-width-medium-1-4">
-                        <b>Payed Amount :</b>
-                        <span style="padding:10px">{{total()}}</span>
+                        <div class="uk-width-medium-2-5">
+                        <b>Paid Amount :</b>
+                        <span style="float:right;margin-left: 10px;">{{totalPaid | currency:""}}</span>
                         </div>
                     </div>
                     <div class="uk-grid" data-uk-grid-margin>
