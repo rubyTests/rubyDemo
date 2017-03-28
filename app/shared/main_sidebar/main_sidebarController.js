@@ -401,7 +401,25 @@ angular
                     id: 8,
                     title: 'Library',
                     icon: '&#xE02F;',
-                    link: 'restricted.Library'
+                    // link: 'restricted.Library'
+                    submenu: [
+                        {
+                            title: 'Category',
+                            link: 'restricted.library.category'
+                        },
+                        {
+                            title: 'Book Details',
+                            // link: ''
+                        },
+                        {
+                            title: 'Book Issue',
+                            // link: ''
+                        },
+                        {
+                            title: 'Book Returns',
+                            // link: ''
+                        }
+                    ]
                 },
                 {
                     id: 9,
@@ -412,8 +430,29 @@ angular
                 {
                     id: 10,
                     title: 'Hostel',
-                    icon: '&#xE88A;'
-                    // link: 'restricted.Library'
+                    icon: '&#xE88A;',
+                    submenu: [
+                        {
+                            title: 'Allocation',
+                            link: 'restricted.hostel.allocation'
+                        },
+                        {
+                            title: 'Transfer',
+                            link: 'restricted.hostel.transfer'
+                        },
+                        {
+                            title: 'Vacate',
+                            link: 'restricted.hostel.vacate'
+                        },
+                        {
+                            title: 'Visitors',
+                            link: 'restricted.hostel.visitors'
+                        }
+                        // {
+                        //     title: 'Reports',
+                        //     link: 'restricted.hostel.feereport'
+                        // }
+                    ]
                 },
                 {
                     id: 11,

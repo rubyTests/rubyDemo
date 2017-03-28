@@ -1,0 +1,110 @@
+ <div id="page_content"  ng-controller="transferCtrl as tblData">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Transfer
+        </h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <!-- <a ui-sref="restricted.hostel.allocationregister"  class="md-btn md-btn-primary md-btn-small"> -->
+                        <button data-uk-modal="{target:'#modal_overflow'}" ng-click="addAllocation()"  class="md-btn md-btn-primary md-btn-small">
+                        <i class="uk-icon-plus"></i> Transfer
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px !important;">S.No</th>
+                            <th>User Name</th>
+                            <th>From Hostel</th>
+                            <th>To Hostel</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="width: 50px !important;">S.No</th>
+                            <th>User Name</th>
+                            <th>From Hostel</th>
+                            <th>To Hostel</th>
+                            <th>Date</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.name}}</td>
+                            <td>{{row.h_name}} - {{row.hostel_form}}</td>
+                            <td>{{row.h_name}} - {{row.hostel_to}}</td>
+                            <td>{{row.reg_date}}</td>
+                            <td class="">
+                                <a class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}" ng-click="editAllocation(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a ><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Model Window start-->
+    <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h3 class="uk-modal-title"> Room Transfer</h3><br>
+            <div class="md-card-content">
+                <form>
+                    <!-- <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <input type="text" config="selectize_usertype_config" options="selectize_usertype_options" ng-model="selectize_usertype" selectize />
+                            </div>
+                        </div>          
+                    </div> -->
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <input type="text" config="selectize_employee_config" options="selectize_employee_options" ng-model="selectize_employee" selectize />
+                            </div>
+                        </div>          
+                    </div>
+                    <!-- <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <input type="text" config="selectize_tran_config" options="selectize_tran_options" ng-model="selectize_tran" selectize />
+                            </div>
+                        </div>          
+                    </div> -->
+                    <div class="uk-form-row" >
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <input type="text" config="selectize_hname_config" options="selectize_hname_options" ng-model="selectize_hname" selectize />
+                            </div>
+                        </div>          
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <input type="text" config="selectize_room_config" options="selectize_room_options" ng-model="selectize_room" selectize />
+                            </div>
+                        </div>          
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <label>Transfer Date</label>
+                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="transfer_date"/>
+                            </div>
+                        </div>          
+                    </div>
+                </form>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                <button type="submit" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{btnStatus}}</button>
+            </div>
+        </div>
+    </div>
+    <!-- Model Window End-->
+</div>

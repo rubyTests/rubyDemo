@@ -3417,5 +3417,116 @@ altairApp
 					pageTitle: 'Tablesorter'
 				}
 			})
+
+            // Hostel Module Started on 28-03-17 by Vijayarj
+            .state("restricted.hostel", {
+                template: '<div ui-view autoscroll="false"/>',
+                url :"/hostel",
+                abstract: true
+            })
+
+            .state("restricted.hostel.allocation", {
+                url: "/allocation",
+                templateUrl: 'app/components/hostel/allocation_view.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/allocationviewCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Allocation View'
+                }
+            })
+            .state("restricted.hostel.transfer", {
+                url: "/transfer",
+                templateUrl: 'app/components/hostel/transfer.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/transferCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Tranfer Details'
+                }
+            })
+            .state("restricted.hostel.vacate", {
+                url: "/vacate",
+                templateUrl: 'app/components/hostel/vacate.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/vacateCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Tranfer Details'
+                }
+            })
+            .state("restricted.hostel.visitors", {
+                url: "/visitors",
+                templateUrl: 'app/components/hostel/visitors.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/visitorCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Visitors'
+                }
+            })
+            .state("restricted.hostel.feereport", {
+                url: "/feereport",
+                templateUrl: 'app/components/hostel/report.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/reportCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Reports'
+                }
+            })
+
+            // Library
+            .state("restricted.library", {
+                template: '<div ui-view autoscroll="false"/>',
+                url :"/library",
+                abstract: true
+            })
+            .state("restricted.library.category", {
+                url: "/category",
+                templateUrl: 'app/components/Library/category_view.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/categoryviewCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Category View'
+                }
+            })
         }
     ]);
