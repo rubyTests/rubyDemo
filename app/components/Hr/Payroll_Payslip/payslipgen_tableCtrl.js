@@ -11,7 +11,9 @@ angular
         'DTColumnDefBuilder',
         '$compile',
         '$location',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile,$location) {
+        '$window',
+        '$http',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile,$location,$window,$http) {
             $resource('app/components/employeemanagement/employee_list.json')
                 .query()
                 .$promise
@@ -110,5 +112,26 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
+
+                $scope.generatePDF = function(id) {
+                  $http({
+                    url : 'http://localhost/ruby/Rubyctrl/index',
+                    method : 'POST',
+                    data : { 'id':id},
+                    responseType : 'arraybuffer',
+                    headers: {
+                     'Content-type' : 'application/pdf'
+                    },
+                    cache: true,
+                   }).success(function(data) {
+                    var blob = new Blob([data], { type: 'application/pdf' });
+                    var fileURL = URL.createObjectURL(blob);
+                    var fileName = "1099.pdf";
+                    var contentFile = blob;
+                    $window.open(fileURL, "_blank");
+                   }).error(function(data){
+                    console.log('error');
+                   });
+                }
         }
     ]);

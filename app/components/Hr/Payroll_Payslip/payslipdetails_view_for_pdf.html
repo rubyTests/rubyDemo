@@ -167,7 +167,7 @@
                         <div class="" style="float: right;">
                             <button type="button" class="md-btn md-btn-success md-btn-small uk-modal-close" ng-if="urlname=='finance'">Approve</button>
                             <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-if="urlname=='finance'">Revert</button>
-                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Pdf Report</button>
+                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="generatePdf(tableArray[0].id)">Pdf Report</button>
                         </div>
                     </div>
                 </div>

@@ -116,7 +116,7 @@
                                     <td>{{data.status}}</td>
                                     <td ng-if="urlname=='hr'">
                                         <a ui-sref="restricted.hr.payslipdetails_view({id:{{data.id}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
-                                        <a class="ts_remove_row"><i class="md-icon material-icons">&#xE415;</i></a>
+                                        <a class="ts_remove_row" ng-click="generatePDF(tableArray[0].id)"><i class="md-icon material-icons">&#xE415;</i></a>
                                         <a ng-hide="{{data.status=='Approved'}}" class="ts_remove_row"><i class="md-icon material-icons">&#xE872;</i></a>
                                     </td>
                                     <td ng-if="urlname=='finance'">

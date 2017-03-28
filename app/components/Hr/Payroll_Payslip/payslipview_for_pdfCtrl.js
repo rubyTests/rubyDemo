@@ -8,7 +8,9 @@ angular
         '$stateParams',
         '$filter',
         '$location',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$location) {
+        '$http',
+        '$window',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$location,$http,$window) {
             $resource('app/components/employeemanagement/employee_list.json')
                 .query()
                 .$promise
@@ -66,5 +68,26 @@ angular
             // $('input').focusout(function(){
             //   $(this).css({"border": "1px solid #b3b3b3"});
             // });
+
+            $scope.generatePdf = function(id) {
+              $http({
+                url : 'http://localhost/ruby/Rubyctrl/index',
+                method : 'POST',
+                data : { 'id':id},
+                responseType : 'arraybuffer',
+                headers: {
+                 'Content-type' : 'application/pdf'
+                },
+                cache: true,
+               }).success(function(data) {
+                var blob = new Blob([data], { type: 'application/pdf' });
+                var fileURL = URL.createObjectURL(blob);
+                var fileName = "1099.pdf";
+                var contentFile = blob;
+                $window.open(fileURL, "_blank");
+               }).error(function(data){
+                console.log('error');
+               });
+            }
         }
     ]);

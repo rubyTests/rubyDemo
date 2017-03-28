@@ -4,7 +4,8 @@ angular
         '$scope',
         '$window',
         '$timeout',
-        function ($scope,$window,$timeout) {
+        '$http',
+        function ($scope,$window,$timeout,$http) {
 
             $scope.form_template = [
                 [
@@ -266,5 +267,47 @@ angular
                 $maskedInput.inputmask();
             }
 
+            // pdf generation start on 27-03-17 by vijayaraj
+            $scope.singlePdfGeneartion = function() {
+              $http({
+                url : 'http://localhost/ruby/Rubyctrl/singlePDFGeneration',
+                method : 'POST',
+                data : { 'id':1},
+                responseType : 'arraybuffer',
+                headers: {
+                 'Content-type' : 'application/pdf'
+                },
+                cache: true,
+               }).success(function(data) {
+                var blob = new Blob([data], { type: 'application/pdf' });
+                var fileURL = URL.createObjectURL(blob);
+                var fileName = "1099.pdf";
+                var contentFile = blob;
+                $window.open(fileURL, "_blank");
+               }).error(function(data){
+                console.log('error');
+               });
+            }
+
+            $scope.showMultiplePDFGeneration=function(){
+                $http({
+                url : 'http://localhost/ruby/Rubyctrl/multiplePDFGeneration',
+                method : 'POST',
+                data : { 'id':1},
+                responseType : 'arraybuffer',
+                headers: {
+                 'Content-type' : 'application/pdf'
+                },
+                cache: true,
+               }).success(function(data) {
+                var blob = new Blob([data], { type: 'application/pdf' });
+                var fileURL = URL.createObjectURL(blob);
+                var fileName = "1099.pdf";
+                var contentFile = blob;
+                $window.open(fileURL, "_blank");
+               }).error(function(data){
+                console.log('error');
+               });
+            }
         }
     ]);
