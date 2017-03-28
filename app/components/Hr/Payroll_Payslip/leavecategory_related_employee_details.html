@@ -1,0 +1,47 @@
+ <div id="page_content"  ng-controller="leaveCatRelatedEmpCtrl as tblData">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Leave Category
+        </h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+               <!--  <button  style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Leave Category</button> -->
+                <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th style="width: 50px !important;">S.No</th>
+                            <th>Employee Name</th>
+                            <th>Employee Number</th>
+                            <th>Department</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="width: 50px !important;">S.No</th>
+                            <th>Employee Name</th>
+                            <th>Employee Number</th>
+                            <th>Department</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in ReturnData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.firstname}} {{row.lastname}}</td>
+                            <td>{{row.Admission_No}}</td>
+                            <td>{{row.Dept}}</td>
+                            <td>{{row.Category}}</td>
+                            <td class="">
+                                <a ui-sref="restricted.hr.showleavecategory({id:{{row.id}}})" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="material-icons md-icon">remove_red_eye</i></a>
+                                <a ng-click="editLeaveCategory(row)" data-uk-modal="{target:'#open_leavecategory'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
