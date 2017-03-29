@@ -3892,7 +3892,9 @@ altairApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'lazy_datatables',
                                 'lazy_tinymce',
+                                'lazy_dropify',
                                 'app/components/emailTemplate/create.js'
                             ], {serie:true});
                         }]
@@ -3901,6 +3903,6 @@ altairApp
                         pageTitle: 'Create Template'
                     }
                 })
-			
+				
         }
     ]);
