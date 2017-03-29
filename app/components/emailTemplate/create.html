@@ -1,21 +1,61 @@
-<div id="page_content">
+<style>
+.selectize-dropdown [data-selectable] {
+    font-size: 13px !important;
+    padding-bottom: 10px;
+    padding-top: 11px;
+}
+.md-list-content.AdjListCon {
+            padding-top: 10px;
+        }
+.md-hr{
+         margin: 24px 0 !important;
+    }
+.mce-menubar.mce-toolbar{
+    display: none !important;
+}
+.dropify-wrapper {
+    height: 100px !important;
+}
+    /*.selectize-control.single {
+    margin-top: 0px !important;
+}*/
+</style>
+<div id="page_content" ng-controller="createCtrl as showCase">
     <div id="page_content_inner">
-		
-        <form method="post">
-			<div class="uk-grid" data-uk-grid-margin>
-				<div class="uk-width-medium-1-2 parsley-row">
-					<label for="admission_no">Template Name<span class="req">*</span></label>
-					<input type="text" name="name" required class="md-input" md-input ng-model="name" />
-				</div>
-			</div>
-			<div class="uk-grid" data-uk-grid-margin>
-				 <div class="uk-width-medium-1-2 parsley-row">
-					<label for="admission_date">Subject<span class="req">*</span></label>
-					<input type="text" name="subject" required class="md-input" md-input ng-model="type" />
-				</div>
-			</div>
-			<br>
-            <textarea ui-tinymce="tinymce_options" ng-model="tinymce_content" cols="30" rows="24"></textarea>
-        </form>
+    <h2 class="heading_a">
+        Add Template
+    </h2>
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+                        <form class="uk-form" >
+                            <h2 class="heading_a">
+                            <br>
+                                Template Details
+                            </h2>
+                            <hr class="md-hr"/>
+                            <div class="uk-grid" data-uk-grid-margin>
+                                <div class="uk-width-medium-5-10 parsley-row">
+                                    <label for="Fee_Structure"> Name<span class="req"></span></label>
+                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="Fee_Structure_Name" />
+                                </div>
+								<div class="uk-width-medium-5-10 parsley-row">
+                                    <label for="Fee_Structure">Subject<span class="req"></span></label>
+                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="Fee_Structure_Name" />
+                                </div>
+                                <div class="uk-width-medium-1-1 parsley-row">
+                                    <textarea ui-tinymce="tinymce_options" ng-model="tinymce_content" cols="4" rows="6"></textarea>
+                                </div>
+                            </div>
+                            <p></p>
+                            <div class="uk-text-right">
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
