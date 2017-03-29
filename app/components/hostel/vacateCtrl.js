@@ -68,35 +68,20 @@ angular
                 $scope.selectize_usertype_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Type'
+                    placeholder: 'Select Resident'
                 };
 
                 $scope.selectize_employee_options = ['Vijay Raj','Karthik Selvam','Mani Vannan','Senthil Kumar','Mani Kandan','Junaid Muhammed'];
                 $scope.selectize_employee_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select User'
+                    placeholder: 'Select Employee'
                 };
-
-                $scope.selectize_hname_options = ['Mens Hostel','Ladies Hostel'];
-                $scope.selectize_hname_config = {
+                $scope.selectize_student_options = ['Vijay Raj','Karthik Selvam','Mani Vannan','Senthil Kumar','Mani Kandan','Junaid Muhammed'];
+                $scope.selectize_student_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Hostel'
-                };
-
-                $scope.selectize_room_options = ['Room 1','Room 2','Room 3','Room 4','Room 5','Room 6','Room 7'];
-                $scope.selectize_room_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Room'
-                };
-
-                $scope.selectize_tran_options = ['Transfer','Vacate'];
-                $scope.selectize_tran_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select'
+                    placeholder: 'Select Student'
                 };
 
                  $resource('app/components/hostel/alloacation.json')
@@ -108,14 +93,18 @@ angular
 
                 $scope.addAllocation=function(){
                     $scope.btnStatus="Save";
+                    $scope.selectize_usertype='';
                     $scope.selectize_employee='';
+                    $scope.selectize_student='';
                     $scope.vacate_date='';
                     $('.uk-modal').find('input').trigger('blur');
                 }
                 $scope.editAllocation=function(data){
                     $scope.btnStatus="Update";
                     if (data) {
+                        $scope.selectize_usertype=data.type;
                         $scope.selectize_employee=data.name;
+                        $scope.selectize_student=data.name;
                         $scope.vacate_date=data.reg_date;
                     }
                 }

@@ -12,10 +12,12 @@
 		"status":"Transfer",
 		"relation":"Father",
 		"visitor_name":"Ram",
-		"time":"10.30",
+		"time":"10.30 AM",
 		"feetype":"Annual",
 		"amount":"8,500",
-		"fee_status":"Paid"
+		"fee_status":"Paid",
+		"building":"Building 1",
+		"block":"Block A"
 	},
 	{
 		"id": 2,
@@ -30,10 +32,12 @@
 		"status":"Transfer",
 		"relation":"Father",
 		"visitor_name":"Selvam",
-		"time":"12.30",
+		"time":"12.30 PM",
 		"feetype":"Annual",
 		"amount":"12,500",
-		"fee_status":"Paid"
+		"fee_status":"Paid",
+		"building":"Building 2",
+		"block":"Block B"
 	},
 	{
 		"id": 3,
@@ -48,10 +52,12 @@
 		"status":"Transfer",
 		"relation":"Sister",
 		"visitor_name":"Durga",
-		"time":"09.30",
+		"time":"09.30 AM",
 		"feetype":"Annual",
 		"amount":"10,500",
-		"fee_status":"Pending"
+		"fee_status":"Pending",
+		"building":"Building 3",
+		"block":"Block C"
 	},
 	{
 		"id": 4,
@@ -66,10 +72,12 @@
 		"status":"Transfer",
 		"relation":"Father",
 		"visitor_name":"Murugan",
-		"time":"11.00",
+		"time":"11.00 AM",
 		"feetype":"Annual",
 		"amount":"8,000",
-		"fee_status":"Pending"
+		"fee_status":"Pending",
+		"building":"Building 4",
+		"block":"Block D"
 	},
 	{
 		"id": 5,
@@ -84,10 +92,12 @@
 		"status":"Transfer",
 		"relation":"Father",
 		"visitor_name":"Ramamoorthy",
-		"time":"10.30",
+		"time":"10.30 AM",
 		"feetype":"Annual",
 		"amount":"11,500",
-		"fee_status":"Paid"
+		"fee_status":"Paid",
+		"building":"Building 5",
+		"block":"Block E"
 	},
 	{
 		"id": 6,
@@ -102,9 +112,11 @@
 		"status":"Transfer",
 		"relation":"Mother",
 		"visitor_name":"Durga",
-		"time":"04.30",
+		"time":"04.30 PM",
 		"feetype":"Annual",
 		"amount":"9,000",
-		"fee_status":"Pending"
+		"fee_status":"Pending",
+		"building":"Building 6",
+		"block":"Block A"
 	}
 ] 
