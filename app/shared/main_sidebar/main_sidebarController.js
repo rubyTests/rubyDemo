@@ -408,17 +408,25 @@ angular
                             link: 'restricted.library.category'
                         },
                         {
-                            title: 'Book Details',
+                            title: 'Books',
+                            link: 'restricted.library.bookviewdetails'
+                        },
+                        {
+                            title: 'Issue Books',
+                            link: 'restricted.library.bookissue_view'
+                        },
+                        {
+                            title: 'Return Books',
                             // link: ''
                         },
                         {
-                            title: 'Book Issue',
+                            title: 'Report',
                             // link: ''
                         },
-                        {
-                            title: 'Book Returns',
-                            // link: ''
-                        }
+                        // {
+                        //     title:"Library View",
+                        //     link: 'restricted.Library'
+                        // }
                     ]
                 },
                 {

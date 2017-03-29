@@ -1,0 +1,38 @@
+[
+  {
+      "id":1,
+      "category":"Science",
+      "cat_code":"CT001"
+    },
+    {
+      "id":2,
+      "category":"History",
+      "cat_code":"CT002"
+    },
+    {
+      "id":3,
+      "category":"Dictionaries",
+      "cat_code":"CT003"
+    },
+    {
+      "id":4,
+      "category":"Journals",
+      "cat_code":"CT004"
+    },
+    {
+      "id":5,
+      "category":"Math",
+      "cat_code":"CT005"
+    },
+    {
+      "id":6,
+      "category":"Health",
+      "cat_code":"CT006"
+    },
+    {
+      "id":7,
+      "category":"Technology",
+      "cat_code":"CT007"
+    }
+]
+

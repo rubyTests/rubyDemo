@@ -3528,5 +3528,73 @@ altairApp
                     pageTitle: 'Category View'
                 }
             })
+            .state("restricted.library.bookviewdetails", {
+                url: "/bookviewdetails",
+                templateUrl: 'app/components/Library/bookdetails_tableview.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/booktableviewCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book View Details'
+                }
+            })
+            .state("restricted.library.addbooks", {
+                url: "/addbooks",
+                templateUrl: 'app/components/Library/addbook_details.html',
+                controller: 'addBookCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_dropify',
+                            'lazy_parsleyjs',
+                            'app/components/Library/addBookCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Add Books'
+                }
+            })
+            
+            .state("restricted.library.bookissue_view", {
+                url: "/bookissue_view",
+                templateUrl: 'app/components/Library/bookissue_view.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/bookissueCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book Issue'
+                }
+            })
+            .state("restricted.library.addbookissue", {
+                url: "/addbookissue",
+                templateUrl: 'app/components/Library/addbook_issue.html',
+                controller: 'addbookissueCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/addbookissueCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book Issue'
+                }
+            })
         }
     ]);
