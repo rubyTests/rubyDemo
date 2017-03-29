@@ -1,0 +1,51 @@
+ [
+    {
+        "id": 1,
+        "name": "Route1",
+        "destination":"Villupuram",
+        "via":"Villianur",
+        "vehicleName":"Bus1"
+    },
+    {
+        "id": 2,
+        "name": "Route2",
+        "destination":"Tindivanam",
+        "via":"Kiliyanur",
+        "vehicleName":"Bus2"
+    },
+    {
+        "id": 3,
+        "name": "Route3",
+        "destination":"Karaikal",
+        "via":"Cuddalore",
+        "vehicleName":"Bus3"
+    },
+    {
+        "id": 4,
+        "name": "Route4",
+        "destination":"Chidambaram",
+        "via":"Cuddalore",
+        "vehicleName":"Bus4"
+    },
+    {
+        "id": 5,
+        "name": "Route5",
+        "destination":"Tindivanam",
+        "via":"Mailam",
+        "vehicleName":"Bus5"
+    },
+    {
+        "id": 6,
+        "name": "Route6",
+        "destination":"Chennai",
+        "via":"Tindivanam",
+        "vehicleName":"Bus6"
+    },
+    {
+        "id": 7,
+        "name": "Route7",
+        "destination":"Chennai",
+        "via":"Kalpakkam",
+        "vehicleName":"Bus7"
+    }
+] 

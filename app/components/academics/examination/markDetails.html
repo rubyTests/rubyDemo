@@ -16,11 +16,14 @@
                 <div class="md-card">
                     <div class="md-card-content large-padding">
                         <form class="uk-form" >
-                        <h2 class="heading_a">
+							
+							<div class="uk-text-left">
+							<h2 class="heading_a">
                                 Mark Details
                                 <span class="sub-heading">Student mark details</span>
                             </h2>
-							<div class="uk-text-right">
+							</div>
+							<div class="uk-text-right" style="margin-top:-30px">
 								<button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.AddMarkDetails">
 								<i class="uk-icon-plus"></i>  Add Marks
 								</button>
@@ -100,7 +103,7 @@
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
                             <td>{{$index+1}}</td>
-							<td>{{row.name}}</td>
+							<td><a ui-sref="restricted.academics.examination.individualMarkReport({id:{{row.id}}})">{{row.name}}</a></td>
 							<td>{{row.term1}}</td>
 							<td>{{row.term2}}</td>
 							<td>{{row.overall}}</td>

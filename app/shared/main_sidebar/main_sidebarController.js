@@ -409,6 +409,7 @@ angular
                     id: 7,
                     title: 'Email Template',
                     icon: '&#xE158;',
+					link : 'restricted.emailTemplate.template'
                 },
                 {
                     id: 8,
@@ -445,8 +446,29 @@ angular
                 {
                     id: 9,
                     title: 'Transport',
-                    icon: '&#xE530;'
-                    // link: 'restricted.Library'
+                    icon: '&#xE530;',
+                    submenu: [
+						{
+							title: 'Vehicle Detail',
+							link : 'restricted.transport.vehicleDetail'
+						},
+						{
+							title: 'Route Detail',
+							link : 'restricted.transport.routeDetail'
+						},
+						{
+							title: 'Route Timing',
+							link : 'restricted.transport.routeTiming'
+						},
+						{
+							title: 'Route Stops',
+							link : 'restricted.transport.routeStops'
+						},
+						{
+							title: 'Route Allocation',
+							link : 'restricted.transport.routeAllocation'
+						}
+					]
                 },
                 {
                     id: 10,

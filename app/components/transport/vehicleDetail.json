@@ -1,0 +1,72 @@
+ [
+    {
+        "id": 1,
+        "name": "Bus1",
+        "type":"bus",
+        "capacity":55,
+        "regno":"TN 01 A 1000",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"Vijay Raj"
+    },
+    {
+        "id": 2,
+        "name": "Bus2",
+        "type":"bus",
+        "capacity":55,
+        "regno":"TN 01 A 1001",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"Karthik Selvam"
+    },
+    {
+        "id": 3,
+        "name": "Bus3",
+        "type":"van",
+        "capacity":25,
+        "regno":"TN 01 AA 1003",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"Mani vannan"
+    },
+    {
+        "id": 4,
+        "name": "Bus4",
+        "type":"van",
+        "capacity":25,
+        "regno":"TN 01 AA 1004",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"Senthil kumar"
+    },
+    {
+        "id": 5,
+        "name": "Bus5",
+        "type":"bus",
+        "capacity":55,
+        "regno":"TN 01 A 1005",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"manikandan Ram"
+    },
+    {
+        "id": 6,
+        "name": "Bus6",
+        "type":"bus",
+        "capacity":55,
+        "regno":"TN 01 A 1006",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"manikandan"
+    },
+    {
+        "id": 7,
+        "name": "Bus7",
+        "type":"van",
+        "capacity":25,
+        "regno":"TN 01 AA 1010",
+        "image1":"img.png",
+        "image2":"img1.png",
+        "responsible":"Rafeeq"
+    }
+] 

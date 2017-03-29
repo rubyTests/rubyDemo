@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('setweightageCtrl',
+    .controller('vehicleDetailCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.dt_data = [];
@@ -25,7 +25,7 @@ angular
                 .withColumnFilter({
                     aoColumns: [
                         {
-                            type: 'number',
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
@@ -34,8 +34,18 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-                        {
-                            type: 'number',
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         }
@@ -48,12 +58,14 @@ angular
                 });
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Assessment'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Weightage'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Type'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Capacity'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Reg No'),
 
             ];
             $scope.get_id = [];
-            $resource('app/components/academics/examination/setweightage.json')
+            $resource('app/components/transport/vehicleDetail.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
@@ -64,25 +76,12 @@ angular
                         $scope.get_id.push($scope.hod_id);
                     });
                 });
-                
-			$resource('app/components/academics/examination/setassessment.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.get_id.push(dt_data);
-                });
-                $scope.selectize_assessment_options = $scope.get_id;
-                $scope.selectize_assessment_config = {
+                $scope.selectize_hodProfieId_options = $scope.get_id;
+                $scope.selectize_hodProfieId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select assessment',
-					valueField: 'id',
-                    labelField: 'name',
-					onInitialize: function(val){
-                        console.log(val);
-                    }
+                    placeholder: 'Head Of Department'
                 };
-				
                  $scope.openModel = function() {
                     //$scope.buttonStatus='Save';
                     $scope.Savebutton=true;

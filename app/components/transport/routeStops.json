@@ -1,0 +1,65 @@
+ [
+    {
+        "id": 1,
+        "stopName":"Villianur",
+        "routeName": "Route1",
+        "morningTime":"9:20 AM",
+        "eveningTime":"5:00 PM",
+        "fare":2000,
+        "vehicleName":"Bus1"
+    },
+    {
+        "id": 2,
+        "stopName":"kandamangalm",
+        "routeName": "Route1",
+        "morningTime":"9:15 AM",
+        "eveningTime":"5:10 PM",
+        "fare":4000,
+        "vehicleName":"Bus2"
+    },
+    {
+        "id": 3,
+        "stopName":"Kiliyanur",
+        "routeName": "Route2",
+        "morningTime":"9:10 AM",
+        "eveningTime":"5:15 PM",
+        "fare":4000,
+        "vehicleName":"Bus3"
+    },
+    {
+        "id": 4,
+        "stopName":"Cuddalore",
+        "routeName": "Route3",
+        "morningTime":"9:00 AM",
+        "eveningTime":"5:10 PM",
+        "fare":5000,
+        "vehicleName":"Bus4"
+    },
+    {
+        "id": 5,
+        "stopName":"Chidambaram",
+        "routeName": "Route4",
+        "morningTime":"8:55 AM",
+        "eveningTime":"5:30 PM",
+        "fare":8000,
+        "vehicleName":"Bus5"
+    },
+    {
+        "id": 6,
+        "stopName":"Kalpakkam",
+        "routeName": "Route7",
+        "morningTime":"8:35 AM",
+        "eveningTime":"5:40 PM",
+        "fare":10000,
+        "vehicleName":"Bus6"
+    },
+    {
+        "id": 7,
+        "stopName":"Villianur",
+        "routeName": "Route1",
+        "morningTime":"9:15 AM",
+        "eveningTime":"5:00 PM",
+        "fare":2000,
+        "vehicleName":"Bus7"
+    }
+] 

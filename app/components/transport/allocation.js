@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('setweightageCtrl',
+    .controller('routeAllocationCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.dt_data = [];
@@ -25,7 +25,7 @@ angular
                 .withColumnFilter({
                     aoColumns: [
                         {
-                            type: 'number',
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
@@ -34,11 +34,27 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-                        {
-                            type: 'number',
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         }
+						
                     ]
                 })
                 .withOption('initComplete', function() {
@@ -48,40 +64,75 @@ angular
                 });
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Assessment'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Weightage'),
-
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Stop Name'),
+				DTColumnDefBuilder.newColumnDef(3).withTitle('Fare'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Vehicle Name'),
+                DTColumnDefBuilder.newColumnDef(5).withTitle('Joining Date'),
             ];
-            $scope.get_id = [];
-            $resource('app/components/academics/examination/setweightage.json')
+            $scope.vehicle_name = [];
+            $resource('app/components/transport/allocation.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
-                     angular.forEach( vm.dt_data, function(value, key){
-                        $scope.hod_id=  value.HOD_profile_id;
-                        //console.log($scope.hod_id);
-                        $scope.get_id.push($scope.hod_id);
-                    });
                 });
-                
-			$resource('app/components/academics/examination/setassessment.json')
+            $resource('app/components/transport/vehicleDetail.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
-                    $scope.get_id.push(dt_data);
-                });
-                $scope.selectize_assessment_options = $scope.get_id;
-                $scope.selectize_assessment_config = {
+                    $scope.vehicle_name.push(dt_data);
+                });    
+				$scope.selectize_vehicleName_options = $scope.vehicle_name;
+                $scope.selectize_vehicleName_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select assessment',
+                    placeholder: 'Vehicle Name',
 					valueField: 'id',
                     labelField: 'name',
 					onInitialize: function(val){
                         console.log(val);
                     }
                 };
+			
+			$scope.stop_name=[];
+			$resource('app/components/transport/routeStops.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.stop_name.push(dt_data);
+                });    
+				$scope.selectize_stopsName_options = $scope.stop_name;
+                $scope.selectize_stopsName_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Stop Name',
+					valueField: 'id',
+                    labelField: 'stopName',
+					onInitialize: function(val){
+                        console.log(val);
+                    }
+                };
+				
+			$scope.student_name=[];
+			$resource('app/components/student/profile.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.student_name.push(dt_data);
+                });    
+				$scope.selectize_stdName_options = $scope.student_name;
+                $scope.selectize_stdName_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Student Name',
+					valueField: 'id',
+                    labelField: 'firstname',
+					onInitialize: function(val){
+                        console.log(val);
+                    }
+                };
+				
 				
                  $scope.openModel = function() {
                     //$scope.buttonStatus='Save';

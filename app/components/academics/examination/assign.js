@@ -59,6 +59,7 @@ angular
 
             ];
             $scope.get_id = [];
+            $scope.course_data = [];
             $resource('app/components/academics/examination/assign.json')
                 .query()
                 .$promise
@@ -83,11 +84,66 @@ angular
                     maxItems: 1,
                     placeholder: 'Select Weightage',
 					valueField: 'id',
-                    labelField: 'name',
+                    labelField: 'assessment',
 					onInitialize: function(val){
                         console.log(val);
                     }
                 };
+				
+			$resource('app/components/academics/courseBatch/course.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.course_data.push(dt_data);
+                });
+                $scope.selectize_course_options = $scope.course_data;
+                $scope.selectize_course_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Course',
+					valueField: 'id',
+                    labelField: 'course_name',
+					onInitialize: function(val){
+                        console.log(val);
+                    }
+                };
+				
+			// Advanced selects
+
+            var course_data = $scope.selectize_course_options = [
+                {id: 1, title: 'Computer Science and Engineering'},
+                {id: 2, title: 'Mechanical Engineering'},
+                {id: 3, title: 'Electrical Communication Engineering'},
+                {id: 4, title: 'Electrical and Electronics Engineering'},
+                {id: 5, title: 'Aeronautical Engineering'},
+                {id: 6, title: 'Information Technology Engineering'},
+                {id: 7, title: 'Civil Engineering'},
+                {id: 8, title: 'Marine Engineering'}
+            ];
+
+            $scope.selectize_course_config = {
+                plugins: {
+                    'remove_button': {
+                        label     : ''
+                    }
+                },
+                maxItems: null,
+                valueField: 'id',
+                labelField: 'title',
+                searchField: 'title',
+                create: false,
+                placeholder: 'Course Name',
+                render: {
+                    option: function(course_data, escape) {
+                        return  '<div class="option">' +
+                            '<span class="title">' + escape(course_data.title) + '</span><br>' +
+                            '</div>';
+                    }
+                    // item: function(planets_data, escape) {
+                    //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
+                    // }
+                }
+            };
 				
                  $scope.openModel = function() {
                     //$scope.buttonStatus='Save';
@@ -112,7 +168,7 @@ angular
                 }
        
 
-
+			//$scope.name=$scope.selectize_weightage+" "+$scope.selectize_course;
 
         }
     );

@@ -1,0 +1,34 @@
+ [
+    {
+        "id": 1,
+        "subject": "English",
+        "term1": "A",
+        "term2": "B",
+        "term3": "A",
+        "overall":"A"
+    },
+    {
+        "id": 2,
+        "subject": "Maths",
+        "term1": "B",
+        "term2": "B",
+        "term3": "A",
+        "overall":"B"
+    },
+    {
+        "id": 3,
+        "subject": "Science",
+        "term1": "B",
+        "term2": "A",
+        "term3": "B",
+        "overall":"A"
+    },
+    {
+        "id": 4,
+        "subject": "Social Science",
+        "term1": "B",
+        "term2": "C",
+        "term3": "A",
+        "overall":"C"
+    }
+] 

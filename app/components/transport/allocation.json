@@ -1,0 +1,66 @@
+ [
+    {
+        "id": 1,
+        "studentName":"Vijay Raj",
+        "stopName":"Villianur",
+        "fare":2000,
+        "startDate": "01-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus1"      
+    },
+    {
+        "id": 2,
+        "studentName":"Karthik Selvam",
+        "stopName":"kandamangalm",
+        "fare":4000,
+        "startDate": "15-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus2"
+        
+    },
+    {
+        "id": 3,
+        "studentName":"Mani Vannan",
+        "stopName":"Kiliyanur",
+        "fare":4000,
+        "startDate": "01-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus3"
+    },
+    {
+        "id": 4,
+        "studentName":"Senthil Kumar",
+        "stopName":"Cuddalore",
+        "fare":5000,
+        "startDate": "01-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus4"
+    },
+    {
+        "id": 5,
+        "studentName":"Manikandan Ram",
+        "stopName":"Chidambaram",
+        "fare":8000,
+        "startDate": "01-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus5"
+    },
+    {
+        "id": 6,
+        "studentName":"Manikandan",
+        "stopName":"Kalpakkam",
+        "fare":10000,
+        "startDate": "01-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus6"
+    },
+    {
+        "id": 7,
+        "studentName":"Rafeeq",
+        "stopName":"Villianur",
+        "fare":2000,
+        "startDate": "01-06-2016",
+        "endDate":"30-04-2017",
+        "vehicleName":"bus7"
+    }
+] 

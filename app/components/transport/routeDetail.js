@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('setweightageCtrl',
+    .controller('routeDetailCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.dt_data = [];
@@ -25,7 +25,7 @@ angular
                 .withColumnFilter({
                     aoColumns: [
                         {
-                            type: 'number',
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
@@ -34,11 +34,22 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-                        {
-                            type: 'number',
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         }
+						
                     ]
                 })
                 .withOption('initComplete', function() {
@@ -48,34 +59,29 @@ angular
                 });
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Assessment'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Weightage'),
-
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Destination'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Via'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Vehicle Name'),
             ];
-            $scope.get_id = [];
-            $resource('app/components/academics/examination/setweightage.json')
+            $scope.vehicle_name = [];
+            $resource('app/components/transport/routeDetail.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
-                     angular.forEach( vm.dt_data, function(value, key){
-                        $scope.hod_id=  value.HOD_profile_id;
-                        //console.log($scope.hod_id);
-                        $scope.get_id.push($scope.hod_id);
-                    });
                 });
-                
-			$resource('app/components/academics/examination/setassessment.json')
+            $resource('app/components/transport/vehicleDetail.json')
                 .query()
                 .$promise
                 .then(function(dt_data) {
-                    $scope.get_id.push(dt_data);
-                });
-                $scope.selectize_assessment_options = $scope.get_id;
-                $scope.selectize_assessment_config = {
+                    $scope.vehicle_name.push(dt_data);
+                });    
+				$scope.selectize_vehicleName_options = $scope.vehicle_name;
+                $scope.selectize_vehicleName_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select assessment',
+                    placeholder: 'Select Vehicle Name',
 					valueField: 'id',
                     labelField: 'name',
 					onInitialize: function(val){

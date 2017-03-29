@@ -1,0 +1,50 @@
+ [
+    {
+        "id": 1,
+        "routeName": "Route1",
+        "vehicleName":"Bus1",
+        "startTime":"9:00 AM",
+        "endTime":"9:30 AM"
+    },
+    {
+        "id": 2,
+        "routeName": "Route2",
+        "vehicleName":"Bus2",
+        "startTime":"4:50 PM",
+        "endTime":"5:20 PM"
+    },
+    {
+        "id": 3,
+        "routeName": "Route3",
+        "vehicleName":"Bus3",
+        "startTime":"8:30 AM",
+        "endTime":"9:25 AM"
+    },
+    {
+        "id": 4,
+        "routeName": "Route4",
+        "vehicleName":"Bus4",
+        "startTime":"4:50 PM",
+        "endTime":"5:40 PM"
+    },
+    {
+        "id": 5,
+        "routeName": "Route5",
+        "vehicleName":"Bus5",
+        "startTime":"8:45 AM",
+        "endTime":"9:30 AM"
+    },
+    {
+        "routeName": "Route6",
+        "vehicleName":"Bus6",
+        "startTime":"4:50 PM",
+        "endTime":"5:50 PM"
+    },
+    {
+        "id": 7,
+       "routeName": "Route7",
+        "vehicleName":"Bus7",
+        "startTime":"8:30 AM",
+        "endTime":"9:20 AM"
+    }
+] 

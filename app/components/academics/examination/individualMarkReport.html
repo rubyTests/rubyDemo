@@ -1,0 +1,105 @@
+<style type="text/css">
+
+
+.tablesorter tbody > tr > td[contenteditable=true]:focus {
+  outline: #08f 1px solid;
+  background: #eee;
+  resize: none;
+}
+td.no-edit, span.no-edit {
+  background-color: rgba(230,191,153,0.5);
+}
+.focused {
+  color: blue;
+}
+td.editable_updated {
+  background-color: green;
+  color: white;
+}
+.user_heading_avatar .thumbnail {
+    border-radius: 0px;
+    height: 150px;
+    width: 150px;
+}
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-2">
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                                <div class="user_heading_avatar">
+                                    <div class="thumbnail">
+                                        <img ng-src="{{currentUser.photo1_path}}" alt=""/>
+                                    </div>
+                                </div>
+                        </div>
+                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Student Name : </span>
+                            <span class="uk-text-small uk-text-muted">{{currentUser.firstname+" "+currentUser.lastname}}</span>
+                        </div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center"></div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Department : </span>
+                            <span class="uk-text-small uk-text-muted">{{currentUser.Dept}}</span>
+                        </div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Course : </span>
+                            <span class="uk-text-small uk-text-muted">{{currentUser.course}}</span>
+                        </div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Batch : </span>
+                            <span class="uk-text-small uk-text-muted">{{currentUser.batch}}</span>
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center"></div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Adminssion No : </span>
+                            <span class="uk-text-small uk-text-muted">{{currentUser.Admission_No}}</span>
+                        </div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Ranking : </span>
+                            <span class="uk-text-small uk-text-muted">{{currentUser.id}}</span>
+                        </div>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Attendance : </span>
+                            <span class="uk-text-small uk-text-muted">89%</span>
+                        </div>
+                        <!-- <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center"> -->
+                            <!-- <span class="md-list-heading">Category : </span> -->
+                            <!-- <span class="uk-text-small uk-text-muted">{{currentUser.category}}</span> -->
+                        <!-- </div> -->
+                    </div>
+                </div>
+                <div class="uk-overflow-container uk-margin-bottom">
+                     <div class="uk-width-medium-1-1">
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                        </div>
+                    </div>
+					<table class="uk-table uk-table-hover">
+                            <thead>
+                            <tr>
+								<th>Subject</th>
+                                <th>Term I</th>
+                                <th>Term II</th>
+                                <th>Term III</th>
+                                <th>Overall</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+							<tr ng-repeat="item in table_data">
+								<td>{{item.subject}}</td>
+								<td>{{item.term1}}</td>
+                                <td>{{item.term2}}</td>
+                                <td>{{item.term3}}</td>
+                                <td>{{item.overall}}</td>
+							</tr>
+                            </tbody>
+                        </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

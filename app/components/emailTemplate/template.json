@@ -1,0 +1,20 @@
+ [
+    {
+        "id": 1,
+        "name":"Welcome",
+        "subject":"Welcome Template",
+        "content":"<p>Hello Sir/Madam,</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome to rubycamps application.</p><p>&nbsp;</p><p><strong>Thanks,</strong></p><p><strong>Admin</strong></p>"
+    },
+    {
+        "id": 2,
+        "name":"Template",
+        "subject":"Welcome Template",
+        "content":"<p>Hello Sir/Madam,</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome to rubycamps application.</p><p>&nbsp;</p><p><strong>Thanks,</strong></p><p><strong>Admin</strong></p>"
+    },
+    {
+        "id": 3,
+        "name":"Test",
+        "subject":"Email Testing Template",
+        "content":"<p>Hello Sir/Madam,</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Welcome to rubycamps application.</p><p>&nbsp;</p><p><strong>Thanks,</strong></p><p><strong>Admin</strong></p>"
+    }
+] 

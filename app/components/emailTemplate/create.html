@@ -1,0 +1,21 @@
+<div id="page_content">
+    <div id="page_content_inner">
+		
+        <form method="post">
+			<div class="uk-grid" data-uk-grid-margin>
+				<div class="uk-width-medium-1-2 parsley-row">
+					<label for="admission_no">Template Name<span class="req">*</span></label>
+					<input type="text" name="name" required class="md-input" md-input ng-model="name" />
+				</div>
+			</div>
+			<div class="uk-grid" data-uk-grid-margin>
+				 <div class="uk-width-medium-1-2 parsley-row">
+					<label for="admission_date">Subject<span class="req">*</span></label>
+					<input type="text" name="subject" required class="md-input" md-input ng-model="type" />
+				</div>
+			</div>
+			<br>
+            <textarea ui-tinymce="tinymce_options" ng-model="tinymce_content" cols="30" rows="24"></textarea>
+        </form>
+    </div>
+</div>

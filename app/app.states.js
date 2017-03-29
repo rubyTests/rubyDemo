@@ -6,7 +6,7 @@ altairApp
 
             // Use $urlRouterProvider to configure any redirects (when) and invalid urls (otherwise).
             $urlRouterProvider
-                .when('/dashboard', '/')
+                .when('/login', '/')
                 .otherwise('/');
 
             $stateProvider
@@ -32,7 +32,7 @@ altairApp
                 })
             // -- LOGIN PAGE --
                 .state("login", {
-					url: "/login",
+					url: "/",
 					templateUrl: 'app/components/pages/customeloginView.html',
 					controller: 'loginCtrl',
 					resolve: {
@@ -43,7 +43,10 @@ altairApp
 								'app/components/pages/loginController.js'
 							]);
 						}]
-					}
+					},
+					data: {
+                        pageTitle: 'Login'
+                    }
 				})
 				.state("forgotpassword", {
 					url: "/forgotpassword",
@@ -80,7 +83,7 @@ altairApp
                 })
             // -- DASHBOARD --
                 .state("restricted.dashboard", {
-                    url: "/",
+                    url: "/dashboard",
                     templateUrl: 'app/components/dashboard/dashboardView.html',
                     controller: 'dashboardCtrl',
                     resolve: {
@@ -2992,6 +2995,31 @@ altairApp
                         pageTitle: 'Enter Student Marks'
                     }
                 })
+				
+				.state("restricted.academics.examination.individualMarkReport", {
+					url: "/individualMarkReport/{id:[0-9]{1,4}}",
+					templateUrl: 'app/components/academics/examination/individualMarkReport.html',
+					controller: 'individualMarkReportCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {
+							return $ocLazyLoad.load([
+								'bower_components/angular-resource/angular-resource.min.js',
+								'lazy_ionRangeSlider',
+								'lazy_tablesorter',
+								'app/components/academics/examination/individualMarkReport.js'
+							],{serie:true});
+						}],
+						ts_data: function($http){
+							return $http({ method: 'GET', url: 'app/components/student/profile.json' })
+								.then(function (data) {
+									return data.data;
+								});
+						}
+					},
+					data: {
+						pageTitle: 'individual Mark Report'
+					}
+				})
 
                 // HR Module Added by Vijayaraj 17-03-17
 
@@ -3712,5 +3740,167 @@ altairApp
                     pageTitle: 'Book Issue'
                 }
             })
+			
+			// Transport module created by karthik @ 27.03.2017 9.13 pm
+			.state("restricted.transport", {
+				url: "/transport",
+				template: '<div ui-view autoscroll="false"/>',
+				abstract: true
+			})
+				
+			.state("restricted.transport.vehicleDetail", {
+				url: "/vehicleDetail",
+				templateUrl: 'app/components/transport/vehicleDetail.html',
+				controller: 'vehicleDetailCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_datatables',
+							'app/components/transport/vehicleDetail.js'
+						], {serie:true});
+					}]
+				},
+				data: {
+					pageTitle: 'Vehicle Details'
+				}
+			})
+			
+			.state("restricted.transport.vehicleDetailAdd", {
+				url: "/vehicleDetailAdd",
+				templateUrl: 'app/components/transport/vehicleDetailAdd.html',
+				controller: 'vehicleDetailAddCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_datatables',
+							'lazy_dropify',
+							'app/components/transport/vehicleDetailAdd.js'
+						], {serie:true});
+					}]
+				},
+				data: {
+					pageTitle: 'Add Vehicle Details'
+				}
+			})
+			
+			.state("restricted.transport.routeDetail", {
+				url: "/routeDetail",
+				templateUrl: 'app/components/transport/routeDetail.html',
+				controller: 'routeDetailCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_datatables',
+							'app/components/transport/routeDetail.js'
+						], {serie:true});
+					}]
+				},
+				data: {
+					pageTitle: 'Route Details'
+				}
+			})
+			
+			.state("restricted.transport.routeTiming", {
+				url: "/routeTiming",
+				templateUrl: 'app/components/transport/routeTiming.html',
+				controller: 'routeTimingCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_datatables',
+							'app/components/transport/routeTiming.js'
+						], {serie:true});
+					}]
+				},
+				data: {
+					pageTitle: 'Route Timing'
+				}
+			})
+			
+			.state("restricted.transport.routeStops", {
+				url: "/routeStops",
+				templateUrl: 'app/components/transport/routeStops.html',
+				controller: 'routeStopsCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_datatables',
+							'app/components/transport/routeStops.js'
+						], {serie:true});
+					}]
+				},
+				data: {
+					pageTitle: 'Route Stops'
+				}
+			})
+			
+			.state("restricted.transport.routeAllocation", {
+				url: "/routeAllocation",
+				templateUrl: 'app/components/transport/allocation.html',
+				controller: 'routeAllocationCtrl',
+				resolve: {
+					deps: ['$ocLazyLoad', function($ocLazyLoad) {
+						return $ocLazyLoad.load([
+							'bower_components/angular-resource/angular-resource.min.js',
+							'lazy_datatables',
+							'app/components/transport/allocation.js'
+						], {serie:true});
+					}]
+				},
+				data: {
+					pageTitle: 'Route Allocation'
+				}
+			})
+			
+			
+			// Email Template 
+				.state("restricted.emailTemplate", {
+                    url: "/emailTemplate",
+                    template: '<div ui-view autoscroll="false" ng-class="{ \'uk-height-1-1\': page_full_height }"/>',
+                    abstract: true,
+                    ncyBreadcrumb: {
+                        label: 'Email Template'
+                    }
+                })
+				
+				.state("restricted.emailTemplate.template", {
+                    url: "/template",
+                    templateUrl: 'app/components/emailTemplate/templateview.html',
+                    controller: 'templateCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/emailTemplate/templateCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Email Template'
+                    }
+                })
+				.state("restricted.emailTemplate.create", {
+                    url: "/create",
+                    templateUrl: 'app/components/emailTemplate/create.html',
+                    controller: 'createCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_tinymce',
+                                'app/components/emailTemplate/create.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Create Template'
+                    }
+                })
+			
         }
     ]);
