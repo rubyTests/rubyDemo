@@ -31,7 +31,7 @@ angular
             $scope.selectize_dept_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Department...'
+                placeholder: 'Select Department'
             };
             $scope.selectize_category_options = ["Student","Employee"];
             $scope.selectize_category_config = {
@@ -43,7 +43,7 @@ angular
             $scope.selectize_subject_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Subject...'
+                placeholder: 'Select Batch'
             };
 
             $scope.selectize_employee_option = $scope.bookDetails;
@@ -59,7 +59,7 @@ angular
                         // console.log(empReturndata,'fsdfsd');
                         if(empReturndata[0]){
                          $scope.selectize_dept=[empReturndata[0].Dept];
-                         $scope.selectize_dept=[empReturndata[0].Dept];
+                         $scope.selectize_subject=[empReturndata[0].batch];
                         }
                         $('#page_content_inner').trigger('click');
                     });
