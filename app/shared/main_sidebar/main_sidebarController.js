@@ -391,6 +391,19 @@ angular
                     id: 6,
                     title: 'Repository',
                     icon: '&#xE2CC;',
+                    submenu:[
+                        {
+                            title:'Category',
+                            link: 'restricted.repository.categoryView'
+                        },
+                        {
+                            title:'Post',
+                            link: 'restricted.repository.postView'
+                        },{
+                            title:'Repository View',
+                            link: 'restricted.repository.repositoryView'
+                        }
+                    ]
                 },
                 {
                     id: 7,

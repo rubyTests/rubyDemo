@@ -1,0 +1,82 @@
+<style type="text/css">
+    .selectize-control.single {
+        margin-top: 15px;
+    }
+</style>
+<div id="page_content" ng-controller="categoryViewCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_b uk-margin-bottom">Category Details</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}" ng-click="openModal();">
+                        <i class="uk-icon-plus"></i>  Add Category
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Category Name</th>
+                            <th>Category Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Id</th>
+                            <th>Category Name</th>
+                            <th>Category Description</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.category_data">
+                            <td>{{row.id}}</td>
+                            <td>{{row.Category_Name}}</td>
+                            <td>{{row.Category_Desc}}</td>
+                            <td>
+                                <a href="#" class="ts_remove_row" ng-click="updateModal(row)" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="remove_Category($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="uk-modal" id="modal_header_footer">
+      <div class="uk-modal-dialog">
+      <button type="button" class="uk-modal-close uk-close"></button>
+          <div class="uk-modal-header">
+              <h3 class="uk-modal-title" ng-if="addLabel">Add Category</h3>
+              <h3 class="uk-modal-title" ng-if="updateLabel">Edit Category</h3><br>
+          </div>
+          <div class="md-card-content">
+            <form class=""><p></p>
+              <div class="uk-width-10-10 uk-width-medium-10-10">
+                <div class="uk-width-1-1">
+                  <div class="parsley-row">
+                    <label>Category Name</label>
+                    <input type="text" ng-model="Category_Name" class="md-input" required md-input>
+                  </div>
+                </div>
+              </div>
+              <p></p>
+              <div class="uk-width-10-10 uk-width-medium-10-10">
+                  <div class="uk-width-1-1">
+                    <div class="parsley-row">
+                      <label>Category Description</label>
+                      <input type="text" ng-model="Category_Desc" class="md-input" required md-input>
+                    </div>
+                  </div>
+              </div>
+            </form>
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="addCategory()" ng-if="addButton">Save</button>
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="updateCategory()" ng-if="updateButton">Update</button>
+          </div>
+      </div>
+    </div>
+</div>

@@ -148,7 +148,7 @@
                             <tr ng-repeat="(key, feeItem) in fee.FeeItemCount track by $index">
                                 <td>{{feeItem.Fee_Item_Name}}</td>
                                 <td class="uk-text-right">{{feeItem.Amount | currency:""}}</td>
-                                <td class="uk-text-right"><input type="text" ng-change="changePaid()" name="fee_1" id="fee_1" ng-model="feesItem[keys][key].fees" ng-value="feeItem.Amount" /></td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePaid()" name="fee_1" id="fee_1" ng-model="feesItem[keys][key].fees"/></td>
                             </tr>
                         </tbody>
                     </table>

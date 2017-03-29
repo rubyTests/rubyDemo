@@ -2240,6 +2240,122 @@ altairApp
                     }
                 })
 
+                //Added By senthil 28/03/2017
+
+                .state("restricted.repository", {
+                    url: "/repository",
+                    template: '<div ui-view autoscroll="false"/>',
+                    controller: 'repositoryCtrl',
+                    abstract: true,
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/repository/repositoryCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Repository'
+                    }
+                })
+
+                .state("restricted.repository.categoryView", {
+                    url: "/categoryView",
+                    templateUrl: 'app/components/repository/categoryView.html',
+                    // controller: 'categoryViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/repository/categoryViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Repository Category View'
+                    }
+                })
+
+                .state("restricted.repository.postView", {
+                    url: "/postView",
+                    templateUrl: 'app/components/repository/postView.html',
+                    // controller: 'postViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/repository/postViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Repository Post View'
+                    }
+                })
+
+                .state("restricted.repository.postAdd", {
+                    url: "/postAdd",
+                    templateUrl: 'app/components/repository/postAdd.html',
+                    // controller: 'postViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_tinymce',
+                                'lazy_dropify',
+                                'app/components/repository/postAddCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Repository Post View'
+                    }
+                })
+
+                .state("restricted.repository.repositoryView", {
+                    url: "/repositoryView",
+                    templateUrl: 'app/components/repository/repositoryView.html',
+                    controller: 'repositoryViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/repository/repositoryViewCtrl.js'
+                            ], {serie:true});
+                        }],
+                        repository_articles: function($http){
+                            return $http({ method: 'GET', url: 'data/repository/post.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Repository View'
+                    }
+                })
+
+                .state("restricted.repository.repositoryDetail", {
+                    url: "/repositoryDetail/{ReposId}",
+                    controller: 'repositoryDetailCtrl',
+                    templateUrl: 'app/components/repository/repositoryDetail.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/repository/repositoryDetailCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Repository Detail'
+                    }
+                })
+
                 // Added by Vijayaraj 08-03-17
                 .state("restricted.employeemanagement", {
                     url: "/employeemanagement",

@@ -1,0 +1,79 @@
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_b uk-margin-bottom">Repositories</h3>
+
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-2">
+                        <!-- <div class="uk-vertical-align">
+                            <div class="uk-vertical-align-middle">
+                                <ul id="contact_list_filter" class="uk-subnav uk-subnav-pill uk-margin-remove">
+                                    <li class="uk-active" data-uk-filter=""><a href="#">All</a></li>
+                                    <li ng-repeat="company in contact_list_companies" data-uk-filter="{{company}}">
+                                        <a href="#">{{company}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div> -->
+                    </div>
+                    <div class="uk-width-medium-1-2">
+                        <!-- <label for="contact_list_search">Find category</label> -->
+                        <!-- <input class="md-input" type="text" id="contact_list_search" ng-model="q.Repository_Category" md-input /> -->
+                        <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="q.Repository_Category" name="selectize_category" selectize />
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="uk-grid-width-medium-1-3 uk-grid-width-large-1-4 hierarchical-show" data-uk-grid="{gutter: 24}" hierarchical-show>
+            <div ng-repeat="teaser in repository_articles | filter: q">
+                <div class="md-card md-card-hover-img">
+                    <div class="md-card-head uk-text-center uk-position-relative">
+                        <img class="md-card-head-img" ng-src="{{teaser.Repository_File}}" alt=""/>
+                    </div>
+                    <div class="md-card-content small-padding">
+                        <!-- <img ng-if="teaser.Repository_File" ng-src="{{teaser.Repository_File}}" alt=""> -->
+                        <div class="uk-cover blog_list_teaser_video" ng-if="teaser.teaser_yt">
+                            <iframe height="150" width="300" data-uk-cover ng-src="{{getYTSrc(teaser.teaser_yt)}}" frameborder="0" allowfullscreen style="max-width: 100%"></iframe>
+                        </div>
+                        <div class="uk-margin-bottom" ng-if="teaser.teaser_soundcloud">
+                            <iframe width="100%" height="300" scrolling="no" frameborder="no" ng-src="{{getSoundCloudSrc(teaser.teaser_soundcloud)}}"></iframe>
+                        </div>
+                        <div class="blog_list_teaser">
+                            <h2 class="blog_list_teaser_title uk-text-truncate">{{teaser.Repository_Title | limitTo: 30}} {{ teaser.Repository_Title.length > 30 ? '...' : '' }}</h2>
+                            <p>{{teaser.Repository_Content | limitTo: 60}} {{ teaser.Repository_Content.length > 60 ? '...' : '' }}</p>
+                            <span class="uk-text-muted uk-text-small">{{teaser.Date}}</span>
+                        </div>
+                        <div class="blog_list_footer">
+                            <!-- <div class="blog_list_footer_info">
+                                <span class="uk-margin-right"><i class="material-icons">&#xE87D;</i> <small>{{teaser.fav}}</small></span>
+                                <span><i class="material-icons">&#xE0B9;</i> <small>{{teaser.comments}}</small></span>
+                            </div> -->
+                            <a ui-sref="restricted.repository.repositoryDetail({ ReposId:{{teaser.id}} })" class="md-btn md-btn-small md-btn-flat md-btn-flat-primary uk-float-right">Read more</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4 hierarchical_show" data-uk-grid="{gutter: 20}" hierarchical-show>
+            <div ng-repeat="repData in repository_articles">
+                <div class="md-card md-card-hover-img">
+                    <div class="md-card-head uk-text-center uk-position-relative">
+                        <img class="md-card-head-img" ng-src="{{ repData.Repository_File }}" alt=""/>
+                    </div>
+                    <div class="md-card-content">
+                        <h2 class="heading_a  uk-margin-bottom">
+                            {{ repData.Repository_Title | limitTo: 30  }} {{ repData.Repository_Title.length > 30 ? '...' : '' }}
+                        </h2>
+                        <p><span class="sub-heading">{{ repData.Repository_Content | limitTo: 75 }} {{ repData.Repository_Content.length > 75 ? '...' : '' }}</span></p>
+                        <a class="md-btn md-btn-mini btn btn-primary" ui-sref="restricted.BookDetail({id: product.id,indexId:$index})">View</a>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+</div>

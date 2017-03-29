@@ -198,28 +198,32 @@ angular
                     // }
                 },
                 onDelete:function(values){
-                    console.log(values,'val');
-                    console.log($scope.newData);
-                    console.log(parseInt(values)-1,'data');
-                    $scope.newData.splice(parseInt(values)-1,1);
+                    var data = $filter('filter')($scope.struct_data, {id : values[0]}, true);
+                    var Dataindex=$scope.newData.indexOf(data[0]);
+                    // console.log(Dataindex,"Dataindex");
+                    $scope.newData.splice(Dataindex,1);
+                    // console.log($scope.newData,"newData");
                 },
                 onInitialize: function(selectize){
                     selectize.on('change', function(selectize) {
-                        var splitVal = selectize.split(',');
-                        var total = 0;
-                        $scope.feesItem=[];
-                        var indexDa=0;
-                        for($i=0;$i<splitVal.length;$i++){
-                            var selectizeData = $filter('filter')($scope.struct_data, {id : splitVal[$i]});
-                            angular.forEach(selectizeData[0].FeeItemCount, function(value,keys){
-                                total+=parseInt(value.Amount);
-                                $scope.feesItem.keys['fees']=value.Amount;
-                            });
-                            if ($scope.newData.indexOf(selectizeData[0])==-1) $scope.newData.push(selectizeData[0]);
-                            indexDa++;
+                        if(selectize){
+                            var splitVal = selectize.split(',');
+                            var total = 0;
+                            $scope.feesItem=[];
+                            for($i=0;$i<splitVal.length;$i++){
+                                var selectizeData = $filter('filter')($scope.struct_data, {id : splitVal[$i]});
+                                var temparray=[];
+                                angular.forEach(selectizeData[0].FeeItemCount, function(value,keys){
+                                    temparray[keys]={fees:value.Amount};
+                                    total+=parseInt(value.Amount);
+                                    $scope.feesItem[$i]=temparray;
+                                });
+                                if ($scope.newData.indexOf(selectizeData[0])==-1) $scope.newData.push(selectizeData[0]);
+                            }                        
+                            $scope.totalAmount = total;
+                            $scope.totalPaid = total;    
                         }
-                        $scope.totalAmount = total;
-                        $scope.totalPaid = total;
+                        
                         
                     });
                 }
@@ -294,15 +298,12 @@ angular
 
             $scope.changePaid = function () {
                 var total = 0;
-                console.log($scope.feesItem);
                 angular.forEach($scope.feesItem, function(value,keys){
-                    console.log(value.fees);
-                    total+=parseInt(value.fees);
+                    angular.forEach(value, function(value1,keys1){
+                        total+=parseInt(value1.fees);
+                    });
                 });
                 $scope.totalPaid=total;
-                // console.log(total);
-                //return parseInt($scope.fee_1 || 0);
-                // return parseInt($scope.fee_1 || 0) + parseInt($scope.fee_2 || 0) + parseInt($scope.fee_3 || 0) + parseInt($scope.fee_4 || 0) + parseInt($scope.fee_5 || 0);
             };
 
         }

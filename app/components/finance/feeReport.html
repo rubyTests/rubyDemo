@@ -22,7 +22,7 @@
                             </h2>
                             <hr class="md-hr"/>
                             <div class="uk-grid uk-grid-medium form_hr">
-                                <div class="uk-width-8-10 uk-width-medium-9-10">
+                                <div class="uk-width-10-10 uk-width-medium-10-10">
                                     <div class="uk-grid" data-uk-grid-margin>
                                         <div class="uk-width-medium-1-6 parsley-row">
                                             <ul class="md-list md-list-addon">
@@ -59,9 +59,9 @@
                                 </div>
                             </div>
                             <div class="uk-grid uk-grid-medium">
-                                <div class="uk-width-8-10 uk-width-medium-9-10">
+                                <div class="uk-width-10-10 uk-width-medium-10-10">
                                     <div class="uk-grid" data-uk-grid-margin>
-                                        <div class="uk-width-medium-1-6 parsley-row">
+                                        <div class="uk-width-medium-1-10 parsley-row">
                                             <ul class="md-list md-list-addon">
                                                 <li>
                                                     <div class="md-list-addon-element">
@@ -73,8 +73,22 @@
                                                 </li>
                                             </ul>
                                         </div>
-                                        <div class="uk-width-medium-3-6 parsley-row">
+                                        <div class="uk-width-medium-3-10 parsley-row">
                                             <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
+                                        </div>
+                                        <div class="uk-width-medium-3-10">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                                <label for="uk_dp_1">From Date</label>
+                                                <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-medium-3-10">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                                <label for="uk_dp_1">To Date</label>
+                                                <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker1">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
