@@ -399,10 +399,11 @@ angular
                         {
                             title:'Post',
                             link: 'restricted.repository.postView'
-                        },{
-                            title:'Repository View',
-                            link: 'restricted.repository.repositoryView'
                         }
+                        // ,{
+                        //     title:'Repository View',
+                        //     link: 'restricted.repository.repositoryView'
+                        // }
                     ]
                 },
                 {

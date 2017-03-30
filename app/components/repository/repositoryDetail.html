@@ -57,7 +57,7 @@ function genFx( type, includeWidth ) {
             <div class="uk-width-medium-1-4">
                 <h5 class="uk-margin-small-bottom uk-text-upper">Recent Posts</h5>
                 <ul class="md-list uk-margin-remove">
-                    <li ng-repeat="postVal in recentpost | limitTo:5 ">
+                    <li ng-repeat="postVal in recentpost | limitTo:8 ">
                         <div class="md-list-content">
                             <span class="md-list-heading uk-text-truncate"><a ui-sref="restricted.repository.repositoryDetail({ ReposId:{{postVal.id}} })">{{postVal.Repository_Title}}</a></span>
                             <span class="uk-text-small uk-text-muted">April 16, 2016</span>
@@ -65,7 +65,7 @@ function genFx( type, includeWidth ) {
                     </li>
                 </ul>
                 
-                <h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Categories</h5>
+                <!-- <h5 class="uk-margin-small-bottom uk-text-upper uk-margin-large">Categories</h5>
                 <ul class="md-list uk-margin-remove">
                     <li>
                         <div class="md-list-content">
@@ -91,7 +91,7 @@ function genFx( type, includeWidth ) {
                             <span class="uk-text-small uk-text-muted">4 posts</span>
                         </div>
                     </li>
-                </ul>
+                </ul> -->
             </div>
         </div>
 

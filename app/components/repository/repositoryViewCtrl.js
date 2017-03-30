@@ -3,9 +3,14 @@ angular
     .controller('repositoryViewCtrl', [
         '$stateParams',
         '$scope',
+        '$rootScope',
         'utils',
         'repository_articles',
-        function ($stateParams,$scope,utils,repository_articles) {
+        function ($stateParams,$scope,$rootScope,utils,repository_articles) {
+            $rootScope.toBarActive = true;
+            $scope.$on('$destroy', function() {
+                $rootScope.toBarActive = false;
+            });
 
             $scope.repository_articles = repository_articles;
 

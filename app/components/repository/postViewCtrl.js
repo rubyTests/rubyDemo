@@ -12,6 +12,10 @@ angular
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
         function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$compile,DTOptionsBuilder, DTColumnDefBuilder) {
+            $rootScope.toBarActive = true;
+            $scope.$on('$destroy', function() {
+                $rootScope.toBarActive = false;
+            });
             var vm = this;
             vm.post_data = [];
             vm.selected = {};
