@@ -60,6 +60,7 @@ angular
                         if(empReturndata[0]){
                          $scope.selectize_dept=[empReturndata[0].Dept];
                          $scope.selectize_subject=[empReturndata[0].batch];
+                         $scope.book_taken=0;
                         }
                         $('#page_content_inner').trigger('click');
                     });

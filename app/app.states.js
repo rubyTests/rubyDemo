@@ -3706,7 +3706,31 @@ altairApp
                     pageTitle: 'Add Books'
                 }
             })
-            
+            .state("restricted.library.editbooks", {
+                url: "/editbooks/{id}",
+                templateUrl: 'app/components/Library/editbook_details.html',
+                controller: 'editbookDetailCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_dropify',
+                            'lazy_parsleyjs',
+                            'app/components/Library/editbookDetailCtrl.js'
+                        ], {serie:true});
+                    }],
+                    notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/Library/book_details.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                },
+                data: {
+                    pageTitle: 'Add Books'
+                },
+                params:{id:null}
+            })
             .state("restricted.library.bookissue_view", {
                 url: "/bookissue_view",
                 templateUrl: 'app/components/Library/bookissue_view.html',
