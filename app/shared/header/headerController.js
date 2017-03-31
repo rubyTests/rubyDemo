@@ -5,7 +5,9 @@ angular
         '$scope',
         '$window',
         '$state',
-        function ($timeout,$scope,$window,$state) {
+		'$location',
+		'$localStorage',
+        function ($timeout,$scope,$window,$state,$location,$localStorage) {
 
             $scope.user_data = {
                 name: "Lue Feest",
@@ -68,6 +70,13 @@ angular
                     }
                 ]
             };
+			
+			// LogOut function
+			$scope.logOut=function(){
+				$localStorage.user_id='';
+				$localStorage.access_token='';
+				$location.path('/');
+			}
 
             $scope.alerts_length = $scope.user_data.alerts.length;
             $scope.messages_length = $scope.user_data.messages.length;
