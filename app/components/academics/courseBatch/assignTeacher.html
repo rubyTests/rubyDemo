@@ -1,5 +1,5 @@
 <style type="text/css">
-    .selectize-control.single {
+    /*.selectize-control.single {
       margin-top: 0;
     }
     .uk-width-medium-4-5, .uk-width-medium-8-10 {
@@ -10,11 +10,11 @@
       height: 405px;
       margin: 18px auto;
       width: 426px;
-    }
+    }*/
 </style>
 <div id="page_content" ng-controller="assignTeacherCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Assign Class Teacher Details</h3>
+        <h3 class="heading_a uk-margin-bottom">Assign Class Teacher</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -35,11 +35,12 @@
                     </thead>
                     <tfoot>
                       <tr>
-                        <th>S.No</th>
+                        <th></th>
                         <th>Course</th>
                         <th>Batch</th>
                         <th hidden="true">Department</th>
                         <th>Assign Employee</th>
+                        <th></th>
                       </tr>
                     </tfoot>
                     <tbody>
@@ -64,10 +65,10 @@
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
           <h3 class="uk-modal-title">
-            <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
+            <!-- <svg fill="#000000" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 0h24v24H0z" fill="none"/>
               <path d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm-9-2V7H4v3H1v2h3v3h2v-3h3v-2H6zm9 4c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-            </svg>&nbsp; Assign Class Teacher 
+            </svg>&nbsp;  -->Assign Class Teacher 
           </h3>
          <!--  <div class="uk-container"> -->
             <div class="md-card-content">
@@ -89,8 +90,9 @@
             </div>
           <!-- </div> -->
           <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
                 <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Close</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Update</button>
           </div>
          </div>
       </div>

@@ -7,6 +7,11 @@ angular
         'contact_list',
         function ($rootScope,$scope,$window,contact_list) {
 
+            $rootScope.toBarActive = true;
+            $scope.$on('$destroy', function() {
+                $rootScope.toBarActive = false;
+            });
+
             $scope.contact_list = contact_list;
 
             // get all companies from array

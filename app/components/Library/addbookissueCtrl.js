@@ -37,7 +37,7 @@ angular
             $scope.selectize_category_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Resident'
+                placeholder: 'Student / Employee'
             };
             $scope.selectize_subject_options = ["Data Structures and Algorithms", "Computer Networking","Laws Of Thermodynamics","Electronic Circuits","Computer Programming","Basic civil and mechanical engineering"];
             $scope.selectize_subject_config = {
@@ -79,6 +79,10 @@ angular
                     });
                 }
             };
+
+            $scope.backBtn=function(){
+                window.history.back();
+            }
         }
     ]);
 

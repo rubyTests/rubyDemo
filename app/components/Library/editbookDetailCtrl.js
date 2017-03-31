@@ -55,5 +55,9 @@ angular
                 maxItems: 1,
                 placeholder: 'Select Subject...'
             };
+
+            $scope.backBtn=function(){
+                window.history.back();
+            }
         }
     ]);

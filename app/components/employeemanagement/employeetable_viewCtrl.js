@@ -1,7 +1,13 @@
 angular
     .module('altairApp')
     .controller('employeetable_viewCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+
+            $rootScope.toBarActive = true;
+            $scope.$on('$destroy', function() {
+                $rootScope.toBarActive = false;
+            });
+
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -24,11 +30,7 @@ angular
                 // Active Buttons extension
                 .withColumnFilter({
                     aoColumns: [
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
+                        null,
                         {
                             type: 'text',
                             bRegex: true,

@@ -43,6 +43,7 @@ angular
                 // Active Buttons extension
                 .withColumnFilter({
                     aoColumns: [
+                        null,
                         {
                             type: 'text',
                             bRegex: true,
@@ -50,26 +51,6 @@ angular
                         },
                         {
                             type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
                             bRegex: true,
                             bSmart: true
                         }
@@ -82,7 +63,7 @@ angular
                 });
 
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Post Title'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Category')
             ];

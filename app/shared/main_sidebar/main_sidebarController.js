@@ -111,9 +111,9 @@ angular
                                     title: 'Batch',
                                     link: 'restricted.academics.courseBatches'
                                 },
-                                {
-                                    title: 'Calendar',
-                                },
+                                // {
+                                //     title: 'Calendar',
+                                // },
                                 {
                                     title: 'Assign Class Teacher',
                                     link: 'restricted.academics.assignClassTeacher'
@@ -150,26 +150,26 @@ angular
                             ]
                         },
                         {
-                            title: 'Time Table',
-                            submenu: [
-                                {
-                                    title: 'Configuration',
-                                    submenu: [
-                                    {
-                                        title: 'Class Room Allocation',
-                                    },
-                                    {
-                                        title: 'Create Week Days',
-                                    },
-                                    {
-                                        title: 'Set Class Timing',
-                                    },
-                                ]
-                                },
-                                {
-                                    title: 'Manage Time Table',
-                                }
-                            ]
+                            title: 'Timetable'
+                            // submenu: [
+                            //     {
+                            //         title: 'Configuration',
+                            //         submenu: [
+                            //         {
+                            //             title: 'Class Room Allocation',
+                            //         },
+                            //         {
+                            //             title: 'Create Week Days',
+                            //         },
+                            //         {
+                            //             title: 'Set Class Timing',
+                            //         },
+                            //     ]
+                            //     },
+                            //     {
+                            //         title: 'Manage Time Table',
+                            //     }
+                            // ]
                         },
                        
                         {
@@ -450,11 +450,11 @@ angular
                     icon: '&#xE530;',
                     submenu: [
 						{
-							title: 'Vehicle Detail',
+							title: 'Vehicle',
 							link : 'restricted.transport.vehicleDetail'
 						},
 						{
-							title: 'Route Detail',
+							title: 'Route',
 							link : 'restricted.transport.routeDetail'
 						},
 						{

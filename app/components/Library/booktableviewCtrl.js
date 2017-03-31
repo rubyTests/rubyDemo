@@ -1,7 +1,13 @@
 angular
     .module('altairApp')
     .controller('booktableviewCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $rootScope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+
+            $rootScope.toBarActive = true;
+            $scope.$on('$destroy', function() {
+                $rootScope.toBarActive = false;
+            });
+
             var vm = this;
             $scope.viewData=[];
             vm.dtOptions = DTOptionsBuilder
@@ -24,11 +30,7 @@ angular
                 // Active Buttons extension
                 .withColumnFilter({
                     aoColumns: [
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
+                        null,
                         {
                             type: 'text',
                             bRegex: true,

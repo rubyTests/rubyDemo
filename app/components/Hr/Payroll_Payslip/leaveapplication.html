@@ -1,13 +1,13 @@
 <div id="page_content"  ng-controller="leaveapplicationCtrl as tblData">
     <div id="page_content_inner">
 
-        <h3 class="heading_b uk-margin-bottom">Leave Application
+        <h3 class="heading_a uk-margin-bottom">Leave Application
             <!-- <span style="float: right;font-size:18px;">
                 <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_category'}" ng-click="addCategory()">Add Category</button>
             </span> -->
         </h3>
         <div class="md-card uk-margin-medium-bottom">
-            <div class="md-card-content">
+            <div class="md-card-content large-padding">
                 <!-- <button  style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Application</button> -->
                 <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <thead>
@@ -24,14 +24,14 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th style="width: 50px !important;">S.No</th>
+                            <th style="width: 50px !important;"></th>
                             <th>Employee Name</th>
                             <th>Leave Type</th>
                             <th>From Date</th>
                             <th>Upto Date</th>
                             <th>Total Leave</th>
                             <th>Status</th>
-                            <th>Action</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>

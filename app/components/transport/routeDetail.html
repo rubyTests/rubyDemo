@@ -1,5 +1,5 @@
 <style type="text/css">
-  .selectize-control.single {
+  /*.selectize-control.single {
     margin-top: 0;
   }
   .uk-width-medium-4-5, .uk-width-medium-8-10 {
@@ -9,11 +9,11 @@
   .uk-modal-dialog {
     margin: 18px auto;
     width: 417px;
-  }
+  }*/
 </style>
 <div id="page_content" ng-controller="routeDetailCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Route Details</h3>
+        <h3 class="heading_a uk-margin-bottom">Route</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -28,17 +28,18 @@
                             <th>Route Name</th>
                             <th>Destination</th>
                             <th>Via</th>
-							<th>Vehicle Name</th>
-							<th>Action</th>
+							              <th>Vehicle Name</th>
+							              <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-							<th>S.No</th>
+							              <th></th>
                             <th>Route Name</th>
                             <th>Destination</th>
                             <th>Via</th>
                             <th>Vehicle Name</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -62,7 +63,7 @@
       <div id="modal_overflow" class="uk-modal">
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title"><i class="uk-icon-institution"></i>&nbsp; Add Route </h3>
+          <h3 class="uk-modal-title"> Add Route </h3>
             <div class="md-card-content">
               <form class=""><p></p>
                 <div class="uk-form-row">
@@ -84,6 +85,7 @@
                 </form>
             </div>
           <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
                 <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save</button>
                 <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Update</button>
           </div>

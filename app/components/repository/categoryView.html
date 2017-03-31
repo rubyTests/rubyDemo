@@ -5,7 +5,7 @@
 </style>
 <div id="page_content" ng-controller="categoryViewCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Category Details</h3>
+        <h3 class="heading_a uk-margin-bottom">Category</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -16,7 +16,7 @@
                     </div>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>S.No</th>
                             <th>Category Name</th>
                             <th>Category Description</th>
                             <th>Action</th>
@@ -24,9 +24,10 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Id</th>
+                            <th></th>
                             <th>Category Name</th>
                             <th>Category Description</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -74,6 +75,7 @@
             </form>
           </div>
           <div class="uk-modal-footer uk-text-right">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
               <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="addCategory()" ng-if="addButton">Save</button>
               <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="updateCategory()" ng-if="updateButton">Update</button>
           </div>

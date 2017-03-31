@@ -13,7 +13,7 @@
 </style>
 <div id="page_content" ng-controller="vehicleDetailCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Vehicle Details</h3>
+        <h3 class="heading_a uk-margin-bottom">Vehicles</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -29,16 +29,17 @@
                             <th>Type</th>
                             <th>Capacity</th>
                             <th>Reg No</th>
-							<th>Action</th>
+							              <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-							<th>S.No</th>
+							              <th></th>
                             <th>Vehicle Name</th>
                             <th>Type</th>
                             <th>Capacity</th>
                             <th>Reg No</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>

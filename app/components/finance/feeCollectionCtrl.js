@@ -37,11 +37,7 @@ angular
                 // Active Buttons extension
                 .withColumnFilter({
                     aoColumns: [
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
+                        null,
                         {
                             type: 'text',
                             bRegex: true,

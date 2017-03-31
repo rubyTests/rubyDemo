@@ -1,5 +1,5 @@
 <style type="text/css">
-  .selectize-control.single {
+  /*.selectize-control.single {
     margin-top: 0;
   }
   .uk-width-medium-4-5, .uk-width-medium-8-10 {
@@ -9,11 +9,11 @@
   .uk-modal-dialog {
     margin: 18px auto;
     width: 417px;
-  }
+  }*/
 </style>
 <div id="page_content" ng-controller="assignCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_b uk-margin-bottom">Exam Assign Details</h3>
+        <h3 class="heading_a uk-margin-bottom">Exam Assign</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -33,10 +33,11 @@
                     </thead>
                     <tfoot>
                         <tr>
-							<th>S.No</th>
+							              <th></th>
                             <th>Name</th>
                             <th>Weightage</th>
-							<th>Course</th>
+							              <th>Course</th>
+                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
@@ -59,7 +60,7 @@
       <div id="modal_overflow" class="uk-modal">
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title"><i class="uk-icon-institution"></i>&nbsp; Add Exam </h3>
+          <h3 class="uk-modal-title"> Add Exam </h3>
             <div class="md-card-content">
               <form class=""><p></p>
                 <div class="uk-form-row">
@@ -71,12 +72,14 @@
                   <input type="text" config="selectize_weightage_config" options="selectize_weightage_options" ng-model="selectize_weightage" selectize/>
                 </div>
 				<div class="uk-form-row">
+        <br>
                   <!-- <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="selectize_course" selectize/> -->
 				  <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="forms_advanced.selectize_course"></selectize>
                 </div>
                 </form>
             </div>
           <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
                 <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save</button>
                 <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Update</button>
           </div>
