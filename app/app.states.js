@@ -67,6 +67,7 @@ altairApp
                     abstract: true,
                     url: "",
                     templateUrl: 'app/views/restricted.html',
+					controller: 'mainCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
