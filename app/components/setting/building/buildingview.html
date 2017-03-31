@@ -15,11 +15,6 @@
                         </button>
                     </div>
                     <thead>
-                        <!-- <tr>
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}">
-                         <i class="uk-icon-plus"></i>  Add Course
-                        </button>
-                        </tr> -->
                         <tr>
                             <th>Id</th>
                             <th>Name</th>
@@ -38,14 +33,14 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row.id}}</td>
-                            <td>{{row.Name}}</td>
-                            <td>{{row.Number}}</td>
-                            <td>{{row.Landmark}}</td>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{row.ID}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.NUMBER}}</td>
+                            <td>{{row.LANDMARK}}</td>
                             <td>
                                 <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_header_footer'}" ng-click="editBuilding(row)"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteBuildingData(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -61,21 +56,22 @@
             <form class="">
                   <div class="uk-form-row">
                     <label>Building Name</label>
-                    <input type="text" ng-model="course_name" class="md-input" required md-input>
+                    <input type="text" ng-model="building_name" class="md-input" required md-input>
+                    <input type="hidden" ng-model="building_id">
                   </div>
                     <div class="uk-form-row">
                       <label>Building Number</label>
-                      <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
+                      <input type="text" ng-model="build_no" class="md-input" required md-input>
                     </div>
                     <div class="uk-form-row">
                       <label>Landmark</label>
-                      <input type="text" ng-model="attndc_Percen" class="md-input" required md-input>
+                      <input type="text" ng-model="landmark" class="md-input" required md-input>
                     </div>
             </form>
           </div>
           <div class="uk-modal-footer uk-text-right">
               <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveBuildingData()">{{btnStatus}}</button>
           </div>
       </div>
     </div>

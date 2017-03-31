@@ -1,13 +1,8 @@
 angular
     .module('altairApp')
     .controller('buildingCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -41,7 +36,17 @@ angular
                             bSmart: true
                         },
                         {
-                            type: 'text',
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
                             bRegex: true,
                             bSmart: true
                         }
@@ -60,56 +65,82 @@ angular
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Landmark')
             ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
+
+            $scope.addBuilding=function(){
+                $scope.titleCaption="Add";
+                $scope.btnStatus="Save";
+                $scope.building_id='';
+                $scope.building_name='';
+                $scope.build_no='';
+                $scope.landmark='';
+                $('.uk-modal').find('input').trigger('blur');
             }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
+            $scope.editBuilding=function(res){
+                $scope.titleCaption="Edit";
+                $scope.btnStatus="Update";
+                if(res){
+                    $scope.building_id=res.ID;
+                    $scope.building_name=res.NAME;
+                    $scope.build_no=res.NUMBER;
+                    $scope.landmark=res.LANDMARK;
                 }
-                vm.selectAll = true;
             }
             
-            $resource('data/building/building.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
+            // Save Data
+            $scope.saveBuildingData=function(){
+                $http({
+                method:'POST',
+                url: 'http://localhost/smartedu/test/institutionApi/building',
+                //url: 'http://192.168.1.136/rubycampusApi/institutionApi/building',
+                data: {
+                    'build_id' : $scope.building_id,
+                    'build_name' : $scope.building_name,
+                    'bulid_no' : $scope.build_no,
+                    'landmark' : $scope.landmark
+                }
+                }).then(function(return_data){
+                    // console.log($scope.building_id)
+                    if($scope.building_id){
+                        var data=$filter('filter')($scope.viewData,{ID:$scope.building_id},true);
+                        data[0].NAME=$scope.building_name;
+                        data[0].NUMBER=$scope.build_no;
+                        data[0].LANDMARK=$scope.landmark;
+                        // console.log(data);
+                    }else{
+                        $scope.viewData.push({ID:return_data.data.BUILDING_ID,NAME:$scope.building_name,NUMBER:$scope.build_no,LANDMARK:$scope.landmark});
+                    }
                 });
+            }
 
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
+            $scope.viewData=[];
+            $http.get('http://localhost/smartedu/test/institutionApi/building')
+            .success(function(response){
+                $scope.viewData=response.data;
+            });
 
-                $scope.addBuilding=function(){
-                    $scope.titleCaption="Add";
+            $scope.deleteBuildingData=function(id, $index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : "http://localhost/smartedu/test/institutionApi/building",
+                            params : {id : id}
+                            }).then(function mySucces(response) {
+                                var data=response.data.message.message;
+                                $scope.viewData.splice($index, 1);
+                            },function myError(response) {
+                              // console.log(response,'response');
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
                 }
-                $scope.editBuilding=function(){
-                    $scope.titleCaption="Edit";
-                }
+            }
         }
     );

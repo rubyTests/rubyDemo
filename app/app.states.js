@@ -1901,7 +1901,7 @@ altairApp
                 .state("restricted.setting.building", {
                     url: "/building",
                     templateUrl: 'app/components/setting/building/buildingview.html',
-                    controller: 'buildingCtrl',
+                    // controller: 'buildingCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -1918,7 +1918,7 @@ altairApp
                 .state("restricted.setting.buildingblock", {
                     url: "/buildingblock",
                     templateUrl: 'app/components/setting/building/buildingblockview.html',
-                    controller: 'buildingblockCtrl',
+                    // controller: 'buildingblockCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -1935,7 +1935,7 @@ altairApp
                 .state("restricted.setting.room", {
                     url: "/room",
                     templateUrl: 'app/components/setting/building/roomview.html',
-                    controller: 'roomCtrl',
+                    // controller: 'roomCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([

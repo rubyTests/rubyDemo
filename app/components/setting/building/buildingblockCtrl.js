@@ -1,13 +1,8 @@
 angular
     .module('altairApp')
     .controller('buildingblockCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -52,173 +47,110 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                // .withButtons([
-                //     {
-                //         extend:    'copyHtml5',
-                //         text:      '<i class="uk-icon-files-o"></i> Copy',
-                //         titleAttr: 'Copy'
-                //     },
-                //     {
-                //         extend:    'print',
-                //         text:      '<i class="uk-icon-print"></i> Print',
-                //         titleAttr: 'Print'
-                //     },
-                //     {
-                //         extend:    'excelHtml5',
-                //         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                //         titleAttr: ''
-                //     },
-                //     {
-                //         extend:    'csvHtml5',
-                //         text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                //         titleAttr: 'CSV'
-                //     },
-                //     {
-                //         extend:    'pdfHtml5',
-                //         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                //         titleAttr: 'PDF'
-                //     }
-                // ]);
+                
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Building')
             ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
+
+            $scope.addBlock=function(){
+                $scope.titleCaption="Add";
+                $scope.btnStatus="Save";
+                $scope.block_id='';
+                $scope.block_name='';
+                $scope.block_no='';
+                $scope.selectize_buildingId='';
+                $('.uk-modal').find('input').trigger('blur');
+            }
+            $scope.editBlock=function(result){
+                // console.log(result,'result');
+                $scope.titleCaption="Edit";
+                $scope.btnStatus="Update";
+                if(result){
+                    $scope.block_id=result.ID;
+                    $scope.block_name=result.NAME;
+                    $scope.block_no=result.NUMBER;
+                    $scope.selectize_buildingId=result.BUILDING_ID;
                 }
             }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
+            $scope.viewData=[];
+            $http.get('http://localhost/smartedu/test/institutionApi/block')
+            .success(function(response){
+                console.log(response.data,"response.data");
+                $scope.viewData=response.data;
+            });
+
+            // Get building data
+            $scope.buildingList=[];
+            $http.get('http://localhost/smartedu/test/institutionApi/building')
+            .success(function(building_data){
+                $scope.buildingList.push(building_data.data);
+            });
+            $scope.selectize_buildingId_options =$scope.buildingList;
+            $scope.selectize_buildingId_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Building',
+                valueField: 'ID',
+                labelField: 'NAME',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        console.log(value);
+                    });
                 }
-                vm.selectAll = true;
-            }
-            //     .newOptions()
-            //     // .withDisplayLength(10)
-            //     // .withColumnFilter({
-            //     //     aoColumns: [
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'text',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         },
-            //     //         {
-            //     //             type: 'number',
-            //     //             bRegex: true,
-            //     //             bSmart: true
-            //     //         }
-            //     //     ]
-            //     // })
-            //     .withButtons([
-            //         {
-            //             extend:    'copyHtml5',
-            //             text:      '<i class="uk-icon-files-o"></i> Copy',
-            //             titleAttr: 'Copy'
-            //         },
-            //         {
-            //             extend:    'print',
-            //             text:      '<i class="uk-icon-print"></i> Print',
-            //             titleAttr: 'Print'
-            //         },
-            //         {
-            //             extend:    'excelHtml5',
-            //             text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-            //             titleAttr: ''
-            //         },
-            //         {
-            //             extend:    'csvHtml5',
-            //             text:      '<i class="uk-icon-file-text-o"></i> CSV',
-            //             titleAttr: 'CSV'
-            //         },
-            //         {
-            //             extend:    'pdfHtml5',
-            //             text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-            //             titleAttr: 'PDF'
-            //         }
-            //     ])
-            //     .withOption('initComplete', function() {
-            //         $timeout(function() {
-            //             $compile($('.dt-uikit .md-input'))($scope);
-            //         })
-            //     });
-            // vm.dtColumnDefs = [
-            //     DTColumnDefBuilder.newColumnDef(0),
-            //     DTColumnDefBuilder.newColumnDef(1),
-            //     DTColumnDefBuilder.newColumnDef(2),
-            //     DTColumnDefBuilder.newColumnDef(3),
-            //     DTColumnDefBuilder.newColumnDef(4),
-            //     DTColumnDefBuilder.newColumnDef(5)
-            // ];
-            $resource('data/building/block.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
+            };
+
+            // Save Data
+            $scope.saveBlockData=function(){
+                $http({
+                method:'POST',
+                url: 'http://localhost/smartedu/test/institutionApi/block',
+                data: {
+                    'block_id' : $scope.block_id,
+                    'block_name' : $scope.block_name,
+                    'block_no' : $scope.block_no,
+                    'building_id' : $scope.selectize_buildingId
+                }
+                }).then(function(return_data){
+                    // console.log(return_data.data.message);
+                    var data=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
+                    if($scope.block_id){
+                        var data1=$filter('filter')($scope.viewData,{ID:$scope.block_id},true);
+                        data1[0].NAME=$scope.block_name;
+                        data1[0].NUMBER=$scope.block_no;
+                        data1[0].BUILDING_ID=$scope.selectize_buildingId;
+                        data1[0].BUILDING_NAME=data[0].NAME;
+                    }else{
+                        $scope.viewData.push({ID:return_data.data.BLOCK_ID,NAME:$scope.block_name,NUMBER:$scope.block_no,BUILDING_NAME:data[0].NAME,BUILDING_ID:$scope.selectize_buildingId});
+                    }
                 });
+            }
 
-                $scope.selectize_buildingId_options = ["1", "2", "3"];
-                $scope.selectize_buildingId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Building Id...'
-                };
-
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
-
-                $scope.addBuilding=function(){
-                    $scope.titleCaption="Add";
+            // delete block
+            $scope.deleteBlock=function(id, $index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : "http://localhost/smartedu/test/institutionApi/block",
+                            params : {id : id}
+                            }).then(function mySucces(response) {
+                                var data=response.data.message.message;
+                                $scope.viewData.splice($index, 1);
+                            },function myError(response) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
                 }
-                $scope.editBuilding=function(){
-                    $scope.titleCaption="Edit";
-                }
-
-
+            }
         }
     );
