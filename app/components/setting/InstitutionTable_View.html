@@ -1,0 +1,44 @@
+<div id="page_content" ng-controller="institution_tableViewCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Institution</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <a ui-sref="restricted.setting.institutionDetails"  class="md-btn md-btn-primary md-btn-small"><i class="uk-icon-plus"></i>  Add Institution</a>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Type</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Type</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.CODE}}</td>
+                            <td>{{row.INST_TYPE}}</td>
+                            <td>
+                                <a class="ts_remove_row" ui-sref="restricted.setting.institutionEdit({id:{{row.ID}}})"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteInstitute(row.ID,row.PROFILE_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

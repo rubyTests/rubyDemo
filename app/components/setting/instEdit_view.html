@@ -2,9 +2,6 @@
     .md-hr{
          margin: 24px 0 !important;
     }
-    .selectize-dropdown-content {
-        max-height: 153px !important;
-    }
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -19,15 +16,17 @@
                                 <span class="sub-heading">Institution Basic Details</span>
                             </h2>
                             <hr class="md-hr"/>
-
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <label>Institution Name</label>
                                     <input type="text" class="md-input" md-input ng-model="Basic.institute_name">
+                                    <input type="hidden" ng-model="Basic.instID">
+                                    <input type="hidden" ng-model="Basic.profileID">
+                                    <input type="hidden" ng-model="contact.locationID">
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <label>Institution Code</label>
-                                    <input type="text" class="md-input" md-input ng-model="Basic.institute_code" />
+                                    <input type="text" class="md-input" md-input ng-model="Basic.code" />
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <div class="uk-width-large-1-4 uk-width-medium-1-2">
@@ -37,7 +36,7 @@
                                                 <div class="uk-width-medium-1-2">
                                                     <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                                         <div class="fileinput-new thumbnail">
-                                                            <img ng-src="assets/img/avatars/logo-tv-logo.png" alt="user avatar"/>
+                                                            <img ng-src="http://localhost/smartedu/upload/{{imageSet}}" alt="user avatar"/>
                                                         </div>
                                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                                         <div class="user_avatar_controls">
@@ -71,11 +70,9 @@
                                     <input type="text" class="md-input" md-input ng-model="Basic.fax" />
                                 </div>
                             </div>
-                            <br>
                             <div class="uk-clearfix uk-margin-large-top">
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" ng-click="saveInstitutionData()" wz-next>Save & Continue</button>
+                                <button class="md-btn md-btn-primary uk-float-right" type="submit" ng-click="updateInstitutionData()" wz-next>Save & Continue</button>
                             </div>
-                            <br>
                         </wz-step>
                         <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
@@ -158,7 +155,7 @@
                             
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next ng-click="saveInstitutionData();reLoadView();">Finish</button>
+                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next ng-click="updateInstitutionData();reLoadView()">Finish</button>
                             </div>
                         </wz-step>
                         

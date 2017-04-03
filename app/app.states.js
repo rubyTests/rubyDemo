@@ -1880,7 +1880,22 @@ altairApp
                     template: '<div ui-view autoscroll="false"/>',
                     abstract: true
                 })
-
+                .state("restricted.setting.institution_view", {
+                    url: "/institution_view",
+                    templateUrl: 'app/components/setting/InstitutionTable_View.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/setting/institution_tableViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Building'
+                    }
+                })
                 .state("restricted.setting.institutionDetails", {
                     url: "/institutionDetails",
                     templateUrl: 'app/components/setting/institution_details.html',
@@ -1890,7 +1905,7 @@ altairApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.min.js',
+                                'assets/js/custom/uikit_fileinput.js',
                                 'app/components/setting/instDetailCtrl.js'
                             ], {serie:true});
                         }]
@@ -1899,6 +1914,28 @@ altairApp
                         pageTitle: 'Institiution Details'
                     }
                 })
+
+                .state("restricted.setting.institutionEdit", {
+                    url: "/institutionEdit/{id}",
+                    templateUrl: 'app/components/setting/instEdit_view.html',
+                    controller: 'insteditCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'lazy_wizard',
+                                'assets/js/custom/uikit_fileinput.js',
+                                'app/components/setting/insteditCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Institiution Eidt'
+                    },
+                    params:{id:null}
+                })
+
+
                 .state("restricted.setting.building", {
                     url: "/building",
                     templateUrl: 'app/components/setting/building/buildingview.html',
@@ -2742,7 +2779,7 @@ altairApp
                 .state("restricted.academics.course", {
                     url: "/course",
                     templateUrl: 'app/components/academics/courseBatch/course.html',
-                    controller: 'courseCtrl',
+                    // controller: 'courseCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([

@@ -1,13 +1,8 @@
 angular
     .module('altairApp')
     .controller('courseCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -62,135 +57,124 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                // .withButtons([
-                //     {
-                //         extend:    'copyHtml5',
-                //         text:      '<i class="uk-icon-files-o"></i> Copy',
-                //         titleAttr: 'Copy'
-                //     },
-                //     {
-                //         extend:    'print',
-                //         text:      '<i class="uk-icon-print"></i> Print',
-                //         titleAttr: 'Print'
-                //     },
-                //     {
-                //         extend:    'excelHtml5',
-                //         text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                //         titleAttr: ''
-                //     },
-                //     {
-                //         extend:    'csvHtml5',
-                //         text:      '<i class="uk-icon-file-text-o"></i> CSV',
-                //         titleAttr: 'CSV'
-                //     },
-                //     {
-                //         extend:    'pdfHtml5',
-                //         text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                //         titleAttr: 'PDF'
-                //     }
-                // ]);
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Course'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Department'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Attendance Type'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('Min Attendance %'),
-                DTColumnDefBuilder.newColumnDef(5).withTitle('GradingType'),
-            ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }
-             $scope.get_name = [];
-             $resource('app/components/academics/courseBatch/department.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.get_data = [];
-                    $scope.get_data =  dt_data;
-                     angular.forEach($scope.get_data, function(value, key){
-                        $scope.name=  value.dept_name;
-                        $scope.get_name.push($scope.name);
-                    });
+                $scope.deptData=[];
+                $scope.viewData=[];
+                $http.get($localStorage.service+'AcademicsAPI/courseDetail',headers:{'access_token':$localStorage.access_token})
+                .success(function(course_data){
+                    $scope.viewData=course_data.message;
                 });
-                $scope.grading = [];
-                $resource('app/components/academics/courseBatch/course.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                    angular.forEach(vm.dt_data, function(value, key){
-                        $scope.gradingType=  value.grading_type;
-                        //console.log($scope.gradingType);
-                        $scope.grading.push($scope.gradingType);
-                    });
-                    angular.forEach(vm.dt_data, function(value, key){
-                        value.departmentName=$scope.departmentName(value.id);
-                    });
-                });
-                $scope.departmentName = function(id){
-                    var getName=$filter('filter')($scope.get_data,{id : id },true);
-                    if (getName[0]) return getName[0].dept_name;
-                }
 
-                $scope.selectize_deptId_options = $scope.get_name;
-                $scope.selectize_deptId_config = {
+                $http.get($localStorage.service+'AcademicsAPI/departmentlist',headers:{'access_token':$localStorage.access_token})
+                .success(function(dept_data){
+                    $scope.deptData.push(dept_data.message);
+                });
+
+
+                $scope.selectize_gradingType_options = ['Weighted','UnWeighted'];
+                $scope.selectize_gradingType_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Department Name'
+                    placeholder: 'Select Grade'
                 };
                 $scope.selectize_attdnceType_options = ["Subject-Wise", "Daily"];
                 $scope.selectize_attdnceType_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Attendance Type'
+                    placeholder: 'Select Type'
                 };
-                $scope.selectize_gradingType_options = $scope.grading;
-                $scope.selectize_gradingType_config = {
+
+                $scope.selectize_deptId_options =$scope.deptData;
+                $scope.selectize_deptId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Grading Type'
+                    placeholder: 'Select Department',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    onInitialize: function(selectize){
+                        selectize.on('change', function(value) {
+                            console.log(value);
+                        });
+                    }
                 };
-                $scope.openModel = function() {
+
+                $scope.addCourse = function() {
                     $scope.titCaption="Add";
-                    $scope.Savebutton=true;
-                    $scope.Updatebutton=false;
-                    $scope.course_name=null;
-                    $scope.selectize_deptId=null;
-                    $scope.selectize_attdnceType=null;
-                    $scope.min_attndc=null;
-                    $scope.selectize_gradingType=null;
+                    $scope.btnStatus='Save';
+                    $scope.course_id='';
+                    $scope.course_name='';
+                    $scope.dept_id='';
+                    $scope.attendance_type='';
+                    $scope.percentage='';
+                    $scope.grade_type='';
                     $('.uk-modal').find('input').trigger('blur');
                 };
-                $scope.edit_data= function(res){
+                $scope.editCourse= function(res){
                     $scope.titCaption="Edit";
-                    if (typeof res=="undefined") return false;
-                    //console.log(res,"resres");
-                    $scope.Updatebutton=true;
-                    $scope.Savebutton=false;
-                    $scope.course_name=res.course_name;
-                    $scope.selectize_deptId=res.departmentName;
-                    $scope.selectize_attdnceType=res.attendance_type;
-                    $scope.min_attndc=res.min_attndc_perctg;
-                    $scope.selectize_gradingType=res.grading_type;
-                    $scope.id=vm.dt_data.indexOf(res);
+                    $scope.btnStatus='Update';
+                    if(res){
+                        $scope.course_id=res.ID;
+                        $scope.course_name=res.NAME;
+                        $scope.dept_id=res.DEPT_ID;
+                        $scope.attendance_type=res.ATTENDANCE_TYPE;
+                        $scope.percentage=res.PERCENTAGE;
+                        $scope.grade_type=res.GARDE_TYPE;
+                    }
                 }
 
+                // Save Data
+            $scope.saveCourse=function(){
+                $http({
+                method:'POST',
+                url: $localStorage.service+'AcademicsAPI/courseDetail',
+                data: {
+                    'COURSE_ID' : $scope.course_id,
+                    'COURSE_NAME' : $scope.course_name,
+                    'COURSE_DEPT_ID' : $scope.dept_id,
+                    'COURSE_ATTENDANCE_TYPE' : $scope.attendance_type,
+                    'COURSE_PERCENTAGE' : $scope.percentage,
+                    'COURSE_GARDE_TYPE' : $scope.grade_type
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message.message);
+                    var dept=$filter('filter')($scope.deptData,{ID:$scope.dept_id},true);
+                    if($scope.course_id){
+                        var data1=$filter('filter')($scope.viewData,{ID:$scope.course_id},true);
+                        data1[0].NAME=$scope.course_name;
+                        data1[0].ATTENDANCE_TYPE=$scope.attendance_type;
+                        data1[0].PERCENTAGE=$scope.percentage;
+                        data1[0].GARDE_TYPE=$scope.grade_type;
+                        data1[0].DEPT_ID=$scope.dept_id;
+                        data1[0].DEPT_NAME=dept[0].NAME;
+                    }else{
+                        $scope.viewData.push({ID:return_data.data.message.COURSE_ID,NAME:$scope.course_name,ATTENDANCE_TYPE:$scope.attendance_type,PERCENTAGE:$scope.percentage,GARDE_TYPE:$scope.grade_type,DEPT_ID:$scope.dept_id,DEPT_NAME:dept[0].NAME});
+                    }
+                });
+            }
 
-
+            $scope.deleteCourse=function(id,$index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"AcademicsAPI/courseDetail",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    var data=response.data.message.message;
+                                    $scope.viewData.splice($index, 1);
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    }
+                }
         }
     );

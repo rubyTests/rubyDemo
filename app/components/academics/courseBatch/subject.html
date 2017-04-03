@@ -1,16 +1,3 @@
-<style type="text/css">
-   /*.uk-modal-dialog .uk-modal-footer {
-      margin:-16px;
-    }
-    .uk-width-medium-1-1 {
-      height: 72px;
-      width: 100%;
-    }
-    .uk-modal-dialog {
-      height: 507px;
-      width: 430px;
-    }*/
-</style>
 <div id="page_content" ng-controller="subjectCtrl as showCase">
     <div id="page_content_inner">
         <h3 class="heading_a uk-margin-bottom">Subject</h3>
@@ -18,16 +5,11 @@
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}" ng-click="openModel()">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}" ng-click="addSubject()">
                         <i class="uk-icon-plus"></i>  Add Subjects
                         </button>
                     </div>
                     <thead>
-                        <!-- <tr>
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}">
-                         <i class="uk-icon-plus"></i>  Add Course
-                        </button>
-                        </tr> -->
                         <tr>
                             <th>S.No</th>
                             <th>Subject</th>
@@ -35,6 +17,7 @@
                             <th>Subject Type</th>
                             <th>Course</th>
                             <th>Total Hours</th>
+                            <th>Credit Hours</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -46,20 +29,22 @@
                             <th>Subject Type</th>
                             <th>Course</th>
                             <th>Total Hours</th>
+                            <th>Credit Hours</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
+                        <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.sub_name}}</td>
-                            <td>{{row.sub_code}}</td>
-                            <td>{{row.sub_type}}</td>
-                            <td>{{row.course_name}}</td>
-                            <td>{{row.total_hours}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.CODE}}</td>
+                            <td>{{row.TYPE}}</td>
+                            <td>{{row.COURSE_NAME}}</td>
+                            <td>{{row.TOTAL_HOURS}}</td>
+                            <td>{{row.CREDIT_HOURS}}</td>
                             <td class="uk-text-center">
-                                <a data-uk-modal="{target:'#modal_overflow'}" ng-click="edit_data(row)"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="remove_data($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a data-uk-modal="{target:'#modal_overflow'}" ng-click="editSubject(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteSubject(row.ID,row.SUB_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -80,6 +65,8 @@
                                         <div class="uk-width-medium-1-1">
                                             <label for="subjectname">Subject Name</label>
                                             <input type="text" ng-model="subject_name" class="md-input" md-input />
+                                            <input type="hidden" ng-model="sub_id">
+                                            <input type="hidden" ng-model="cou_sub_id">
                                         </div>
                                     </div>          
                                 </div>
@@ -94,14 +81,14 @@
                                 <div class="uk-form-row">
                                     <div class="uk-grid">
                                         <div class="uk-width-medium-1-1">
-                                            <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="selectize_subType" name="selectize_subType" selectize/>
+                                            <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="sub_type" selectize/>
                                         </div>
                                     </div>          
                                 </div>
                                 <div class="uk-form-row">
                                     <div class="uk-grid">
                                         <div class="uk-width-medium-1-1">
-                                            <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="selectize_courseName" name="selectize_courseName" selectize/>
+                                            <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="course_id" selectize/>
                                         </div>
                                     </div>          
                                 </div>
@@ -121,10 +108,7 @@
                         </div>
                         <div class="uk-modal-footer uk-text-right">
                             <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                            <button type="submit" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save
-                                 </button>
-                                  <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" 
-                                  ng-if="Updatebutton" ng-click="Update_data()">Update</button>
+                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveSubjectData()">{{btnStatus}}</button>
                         </div>
                     </div>
                 </div>

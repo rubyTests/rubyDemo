@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('roomCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -58,7 +58,7 @@ angular
                 })
             });
             $scope.viewData=[];
-            $http.get('http://localhost/smartedu/test/institutionApi/room')
+            $http.get($localStorage.service+'institutionApi/room',headers:{'access_token':$localStorage.access_token})
             .success(function(response){
                 $scope.viewData=response.data;
             });
@@ -67,11 +67,11 @@ angular
             $scope.buildingList=[];
             $scope.blockList=[];
 
-            $http.get('http://localhost/smartedu/test/institutionApi/building')
+            $http.get($localStorage.service+'institutionApi/building',headers:{'access_token':$localStorage.access_token})
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
-            $http.get('http://localhost/smartedu/test/institutionApi/block')
+            $http.get($localStorage.service+'institutionApi/block',headers:{'access_token':$localStorage.access_token})
             .success(function(block_data){
                 $scope.blockList.push(block_data.data);
             });
@@ -106,6 +106,13 @@ angular
             $scope.addRoom=function(){
                 $scope.btnStatus="Save";
                 $scope.titleCaption="Add";
+                $scope.room_id='';
+                $scope.room_name='';
+                $scope.room_no='';
+                $scope.floor='';
+                $scope.selectize_buildingId='';
+                $scope.selectize_blockId='';
+                $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editRoom=function(result){
                 $scope.btnStatus="Update";
@@ -124,7 +131,7 @@ angular
             $scope.saveRoomData=function(){
                 $http({
                 method:'POST',
-                url: 'http://localhost/smartedu/test/institutionApi/room',
+                url: $localStorage.service+'institutionApi/room',
                 data: {
                     'room_id' : $scope.room_id,
                     'room_name' : $scope.room_name,
@@ -132,7 +139,8 @@ angular
                     'floor' : $scope.floor,
                     'building_id' : $scope.selectize_buildingId,
                     'block_id' : $scope.selectize_blockId
-                }
+                },
+                headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     // console.log(return_data.data.message);
                     var build=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
@@ -160,8 +168,9 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/smartedu/test/institutionApi/room",
-                            params : {id : id}
+                            url : $localStorage.service+"institutionApi/room",
+                            params : {id : id},
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);

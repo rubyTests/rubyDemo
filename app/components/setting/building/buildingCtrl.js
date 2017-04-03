@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('buildingCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -90,14 +90,15 @@ angular
             $scope.saveBuildingData=function(){
                 $http({
                 method:'POST',
-                url: 'http://localhost/smartedu/test/institutionApi/building',
-                //url: 'http://192.168.1.136/rubycampusApi/institutionApi/building',
+                // url: 'http://localhost/smartedu/test/institutionApi/building',
+                url: $localStorage.service+'institutionApi/building',
                 data: {
                     'build_id' : $scope.building_id,
                     'build_name' : $scope.building_name,
                     'bulid_no' : $scope.build_no,
                     'landmark' : $scope.landmark
-                }
+                },
+                headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     // console.log($scope.building_id)
                     if($scope.building_id){
@@ -113,7 +114,7 @@ angular
             }
 
             $scope.viewData=[];
-            $http.get('http://localhost/smartedu/test/institutionApi/building')
+            $http.get($localStorage.service+'institutionApi/building')
             .success(function(response){
                 $scope.viewData=response.data;
             });
@@ -124,8 +125,9 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/smartedu/test/institutionApi/building",
-                            params : {id : id}
+                            url : "$localStorage.service+'institutionApi/building'",
+                            params : {id : id},
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);

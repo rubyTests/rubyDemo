@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('departmentCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -52,67 +52,133 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Department'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Code'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Head Of Department'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('Phone'),
+                 $scope.addDepartment = function() {
+                    $scope.titCaption="Add";
+                    $scope.btnStatus="Save";
+                    $scope.dept_id='';
+                    $scope.dept_name='';
+                    $scope.dept_code='';
+                    $scope.hod_prof_id='';
+                    $scope.room_id='';
+                    $scope.phone_no='';
+                    $('.uk-modal').find('input').trigger('blur');
+                };
+                $scope.editDepartment= function(res){
+                    $scope.titCaption="Edit";
+                    $scope.btnStatus="Update";
+                    if(res){
+                        $scope.dept_id=res.ID;
+                        $scope.dept_name=res.NAME;
+                        $scope.dept_code=res.CODE;
+                        $scope.hod_prof_id=res.EMP_ID;
+                        $scope.room_id=res.ROOM_ID;
+                        $scope.phone_no=res.PHONE;
+                    }
+                }
 
-            ];
-            $scope.get_id = [];
-            $scope.empArray = [];
-            $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(emp_data) {
-                    // console.log(emp_data,'emp_data');
-                    $scope.empArray=emp_data;
+                $scope.viewData=[];
+                $scope.empList=[];
+                $scope.roomList=[];
+                $http.get($localStorage.service+'AcademicsAPI/departmentDetail',headers:{'access_token':$localStorage.access_token})
+                .success(function(return_data){
+                    $scope.viewData=return_data.message;
+                    console.log(return_data,'return_data');
                 });
 
-            $resource('app/components/academics/courseBatch/department.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                     angular.forEach( vm.dt_data, function(value, key){
-                        $scope.hod_id=  value.HOD_profile_id;
-                        // $scope.get_id.push($scope.hod_id);
-                        value.empName=getEmployeeName(value.HOD_profile_id);
-                        $scope.get_id.push(value.empName);
-                    });
-
-                     function getEmployeeName(id){
-                            var data=$filter('filter')($scope.empArray,{id : id}, true);
-                            if(data[0]) return data[0].firstname+' '+data[0].lastname;
-                        }
+                $http.get($localStorage.service+'institutionApi/room',headers:{'access_token':$localStorage.access_token})
+                .success(function(return_data){
+                    $scope.roomList.push(return_data.data);
                 });
-                $scope.selectize_hodProfieId_options = $scope.get_id;
+
+                $http.get($localStorage.service+'AcademicsAPI/profile',headers:{'access_token':$localStorage.access_token})
+                .success(function(return_data){
+                    $scope.empList.push(return_data.message);
+                });
+
+                $scope.selectize_hodProfieId_options =$scope.empList;
                 $scope.selectize_hodProfieId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Head Of Department'
+                    placeholder: 'Select HOD',
+                    valueField: 'ID',
+                    labelField: 'EMP_NAME',
+                    onInitialize: function(selectize){
+                        selectize.on('change', function(value) {
+                            console.log(value);
+                        });
+                    }
                 };
-                 $scope.openModel = function() {
-                    $scope.titCaption="Add";
-                    $scope.Savebutton=true;
-                    $scope.Updatebutton=false;
-                    $scope.dept_name=null;
-                    $scope.dept_code=null;
-                    $scope.selectize_hodProfieId=null;
-                    $scope.Phone=null;
-                    $('.uk-modal').find('input').trigger('blur');
+
+                $scope.selectize_roomid_options =$scope.roomList;
+                $scope.selectize_roomid_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Room',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    onInitialize: function(selectize){
+                        selectize.on('change', function(value) {
+                            console.log(value);
+                        });
+                    }
                 };
-                $scope.edit_data= function(res){
-                    $scope.titCaption="Edit";
-                    if (typeof res=="undefined") return false;
-                    $scope.Updatebutton=true;
-                    $scope.Savebutton=false;
-                    $scope.dept_name=res.dept_name;
-                    $scope.dept_code=res.dept_code;
-                    $scope.selectize_hodProfieId=res.empName;
-                    $scope.Phone=res.phone1;
-                    $scope.id=vm.dt_data.indexOf(res);
+
+                $scope.saveDeaprtment=function(){
+                    $http({
+                    method:'POST',
+                    url: $localStorage.service+'AcademicsAPI/departmentDetail',
+                    data: {
+                        'DEPT_ID' : $scope.dept_id,
+                        'DEPT_NAME' : $scope.dept_name,
+                        'DEPT_CODE' : $scope.dept_code,
+                        'DEPT_ROOM_ID' : $scope.room_id,
+                        'DEPT_HOD' : $scope.hod_prof_id,
+                        'DEPT_PHONE' : $scope.phone_no
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function(return_data){
+                        console.log(return_data.data.message.message);
+                        var employee=$filter('filter')($scope.empList,{ID:$scope.hod_prof_id},true);
+                        var room=$filter('filter')($scope.roomList,{ID:$scope.room_id},true);
+                        if($scope.dept_id){
+                            var data1=$filter('filter')($scope.viewData,{ID:$scope.dept_id},true);
+                            data1[0].NAME=$scope.dept_name;
+                            data1[0].CODE=$scope.dept_code;
+                            data1[0].PHONE=$scope.phone_no;
+                            data1[0].EMP_ID=$scope.hod_prof_id;
+                            data1[0].EMPLOYEE_NAME=employee[0].EMP_NAME;
+                            data1[0].ROOM_ID=$scope.room_id;
+                            data1[0].ROOM_NAME=room[0].NAME;
+                        }else{
+                            $scope.viewData.push({ID:return_data.data.message.DEPT_ID,NAME:$scope.dept_name,CODE:$scope.dept_code,PHONE:$scope.phone_no,EMPLOYEE_NAME:employee[0].EMP_NAME,EMP_ID:$scope.hod_prof_id,
+                            ROOM_NAME:room[0].NAME,ROOM_ID:$scope.room_id});
+                        }
+                    });
+                }
+
+                $scope.deleteDepartment=function(id,$index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"AcademicsAPI/departmentDetail",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    var data=response.data.message.message;
+                                    $scope.viewData.splice($index, 1);
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    }
                 }
         }
     );

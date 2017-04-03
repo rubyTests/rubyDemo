@@ -75,7 +75,8 @@ angular
                     submenu: [
                         {
                             title: 'Institution Details',
-                            link: 'restricted.setting.institutionDetails'
+                            // link: 'restricted.setting.institutionDetails'
+                            link:'restricted.setting.institution_view'
                         },
                         {
                             title: 'Building',

@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('buildingblockCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -76,7 +76,7 @@ angular
                 }
             }
             $scope.viewData=[];
-            $http.get('http://localhost/smartedu/test/institutionApi/block')
+            $http.get($localStorage.service+'institutionApi/block',headers:{'access_token':$localStorage.access_token})
             .success(function(response){
                 console.log(response.data,"response.data");
                 $scope.viewData=response.data;
@@ -84,7 +84,7 @@ angular
 
             // Get building data
             $scope.buildingList=[];
-            $http.get('http://localhost/smartedu/test/institutionApi/building')
+            $http.get($localStorage.service+'institutionApi/building',headers:{'access_token':$localStorage.access_token})
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
@@ -106,13 +106,14 @@ angular
             $scope.saveBlockData=function(){
                 $http({
                 method:'POST',
-                url: 'http://localhost/smartedu/test/institutionApi/block',
+                url: $localStorage.service+'institutionApi/block',
                 data: {
                     'block_id' : $scope.block_id,
                     'block_name' : $scope.block_name,
                     'block_no' : $scope.block_no,
                     'building_id' : $scope.selectize_buildingId
-                }
+                },
+                headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     // console.log(return_data.data.message);
                     var data=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
@@ -135,8 +136,9 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/smartedu/test/institutionApi/block",
-                            params : {id : id}
+                            url : $localStorage.service+"institutionApi/block",
+                            params : {id : id},
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);
