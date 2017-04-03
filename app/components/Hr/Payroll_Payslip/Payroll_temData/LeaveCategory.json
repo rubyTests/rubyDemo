@@ -1,43 +1,43 @@
 [
     {
       "id":1,
-      "Name":"Senior Employee",
-      "code":"CL001",
+      "Name":"Casual leave",
+      "code":"CL",
       "count":3,
       "valid_from":"03-11-2017"
     },
     {
       "id":2,
-      "Name":"Principal",
-      "code":"CL001",
+      "Name":"Privilege Leave",
+      "code":"PL",
       "count":2,
       "valid_from":"05-30-2017"
     },
     {
       "id":3,
-      "Name":"Wise Principal",
-      "code":"TL001",
+      "Name":"Sick Leave",
+      "code":"SL",
       "count":6,
       "valid_from":"03-31-2017"
     },
     {
       "id":4,
-      "Name":"HOD",
-      "code":"SL001",
+      "Name":"Medical Leave",
+      "code":"ML",
       "count":1,
       "valid_from":"04-01-2017"
     },
     {
       "id":5,
-      "Name":"Guest lecturer",
-      "code":"EL001",
+      "Name":"Annual Leave",
+      "code":"AL",
       "count":4,
       "valid_from":"07-28-2017"
     },
     {
       "id":6,
-      "Name":"Part Time lecturer",
-      "code":"SEL001",
+      "Name":"Conference leave",
+      "code":"CFL",
       "count":7,
       "valid_from":"03-11-2017"
     }

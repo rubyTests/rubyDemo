@@ -37,7 +37,7 @@
 <div id="page_content">
     <div id="page_content_inner">
     <h3 class="heading_a uk-margin-bottom">Syllabus</h3>
-        <div class="md-card" style="width: 89.55%">
+        <div class="md-card">
             <div class="md-card-content">
                 
                 <div class="uk-grid" data-uk-grid-margin>
@@ -58,31 +58,39 @@
             </div>
             <textarea ui-tinymce="tinymce_options" ng-model="tinymce_content" cols="15" rows="12"></textarea>
         </form> -->
-        <form class="uk-form" method="post">
-            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
-                <div class="uk-width-9-10 uk-width-medium-9-10 uk-width-small-5">
-                    <div class="uk-grid" ng-repeat="fields in section" on-last-repeat>
-                        <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
-                            <div class="md-card" style="99.99%">
-                                <div class="md-card-content" style="height: 26px !important;">
-                                    <textarea  style="line-height: 0px !important;" class="md-input" ng-model="form.input_k" md-input textarea-autosize placeholder="Title"></textarea>
-                                </div>
-                            </div>
-                            <textarea ui-tinymce="tinymce_options" ng-model="tinymce_content" cols="4" rows="6"></textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="uk-width-small-6" style="margin-left: 0px;margin-top: -80px;" id="addButton">
-                        <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center" style="float: right !important;">
-                            <div class="uk-vertical-align uk-height-1-1">
-                                <div class="uk-vertical-align-middle">
-                                    <a href="javascript:void(0)" config="selectize_clone_config" data-uk-tooltip="{pos:'top'}" ng-click="cloneSection($event,$index)" ng-if="$last" title="add row"><i class="material-icons md-36">&#xE146;</i></a>
-                                    <a href="javascript:void(0)" data-uk-tooltip="{pos:'top'}" ng-click="deleteSection($event,$index)" title="Remove row" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+        <div class="md-card">
+            <div class="md-card-content large-padding">
+                <form class="uk-form" method="post">
+                    <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
+                        <div class="uk-width-9-10 uk-width-medium-9-10 uk-width-small-5">
+                            <div class="uk-grid" ng-repeat="fields in section" on-last-repeat>
+                                <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
+                                    <div class="md-card" style="99.99%">
+                                        <div class="md-card-content" style="height: 26px !important;">
+                                            <textarea  style="line-height: 0px !important;" class="md-input" ng-model="form.input_k" md-input textarea-autosize placeholder="Title"></textarea>
+                                        </div>
+                                    </div>
+                                    <textarea ui-tinymce="tinymce_options" ng-model="tinymce_content" cols="4" rows="6"></textarea>
                                 </div>
                             </div>
                         </div>
+                        <div class="uk-width-small-6" style="margin-left: 0px;margin-top: -80px;" id="addButton">
+                            <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center" style="float: right !important;">
+                                <div class="uk-vertical-align uk-height-1-1">
+                                    <div class="uk-vertical-align-middle">
+                                        <a href="javascript:void(0)" config="selectize_clone_config" data-uk-tooltip="{pos:'top'}" ng-click="cloneSection($event,$index)" ng-if="$last" title="add row"><i class="material-icons md-36">&#xE146;</i></a>
+                                        <a href="javascript:void(0)" data-uk-tooltip="{pos:'top'}" ng-click="deleteSection($event,$index)" title="Remove row" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="uk-text-right">
+                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small">Cancel</button>
+                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Save</button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>

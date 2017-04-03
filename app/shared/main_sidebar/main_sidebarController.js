@@ -266,7 +266,7 @@ angular
                                     link: 'restricted.employeemanagement.admission'
                                 },
                                 {
-                                    title: 'Employee Details',
+                                    title: 'Employees',
                                     link: 'restricted.employeemanagement.employee_view'
                                 }
                             ]
@@ -279,7 +279,11 @@ angular
                                 //     link:'restricted.hr.leavetype'
                                 // },
                                 {
-                                    title: 'Leave Category',
+                                    title: 'Apply Leave',
+                                    link:'restricted.hr.applyLeave'
+                                },
+                                {
+                                    title: 'Leave Type',
                                     link:'restricted.hr.leave_category'
                                 },
                                 {
@@ -309,7 +313,7 @@ angular
                                     link : 'restricted.hr.payitem_details'
                                 },
                                 {
-                                    title: 'Pay Category',
+                                    title: 'Pay Structure',
                                     link : 'restricted.hr.StructureGroup'
                                 },
                                 {

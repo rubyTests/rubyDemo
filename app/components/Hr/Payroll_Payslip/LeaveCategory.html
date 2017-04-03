@@ -1,15 +1,15 @@
  <div id="page_content"  ng-controller="LeaveCategoryCtrl as tblData">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Leave Category
+        <h3 class="heading_a uk-margin-bottom">Leave Type
         </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
-                <button  style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Leave Category</button>
+                <button  style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Leave Type</button>
                 <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th style="width: 50px !important;">S.No</th>
-                            <th>Name</th>
+                            <th>Leave Type Name</th>
                             <th>Code</th>
                             <!-- <th>Leave Count</th>
                             <th>Valid From</th> -->
@@ -19,7 +19,7 @@
                     <tfoot>
                         <tr>
                             <th style="width: 50px !important;"></th>
-                            <th>Name</th>
+                            <th>Leave Type Name</th>
                             <th>Code</th>
                             <!-- <th>Leave Count</th>
                             <th>Valid From</th> -->
@@ -48,13 +48,13 @@
     <div id="open_leavecategory" class="uk-modal">
         <div class="uk-modal-dialog">
             <button type="button" class="uk-modal-close uk-close"></button>
-            <h3 class="uk-modal-title">{{tit_caption}} Leave Category </h3><br>
+            <h3 class="uk-modal-title">{{tit_caption}} Leave Type </h3><br>
             <div class="md-card-content">
                 <form>
                     <div class="uk-form-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-                                <label>Category</label>
+                                <label>Leave Type Name</label>
                                 <input type="text" ng-model="leave_category" class="md-input" md-input>
                                 <input type="hidden" ng-model="leavecat_id">
                             </div>

@@ -16,41 +16,103 @@
                             <div class="uk-grid uk-dropdown-grid" data-uk-grid-margin>
                                 <div class="uk-width-2-3">
                                     <div class="uk-grid uk-grid-width-medium-1-3 uk-margin-bottom uk-text-center">
-                                        <a ui-sref="restricted.pages.mailbox" class="uk-margin-top">
-                                            <i class="material-icons md-36">&#xE158;</i>
-                                            <span class="uk-text-muted uk-display-block">Mailbox</span>
+                                        <!-- <a ui-sref="restricted.pages.mailbox" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE84F;</i>
+                                            <span class="uk-text-muted uk-display-block">Institution</span>
+                                        </a> -->
+                                        <a ui-sref="restricted.pages.chat" class="uk-margin-top ">
+                                            <i class="material-icons md-36 md-color-red-600">&#xE7FD;</i>
+                                            <span class="uk-text-muted uk-display-block">Student</span>
                                         </a>
-                                        <a ui-sref="restricted.pages.invoices" class="uk-margin-top">
-                                            <i class="material-icons md-36">&#xE53E;</i>
-                                            <span class="uk-text-muted uk-display-block">Invoices</span>
+                                        <a ui-sref="restricted.pages.invoices" class="uk-margin-top ">
+                                            <i class="material-icons md-36">school</i>
+                                            <span class="uk-text-muted uk-display-block">Academics</span>
                                         </a>
-                                        <a ui-sref="restricted.pages.chat" class="uk-margin-top">
-                                            <i class="material-icons md-36 md-color-red-600">&#xE0B9;</i>
-                                            <span class="uk-text-muted uk-display-block">Chat</span>
+                                        <a ui-sref="restricted.pages.scrum_board" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE7EF;</i>
+                                            <span class="uk-text-muted uk-display-block">HR</span>
                                         </a>
-                                        <a ui-sref="restricted.pages.scrum_board" class="uk-margin-top">
-                                            <i class="material-icons md-36">&#xE85C;</i>
-                                            <span class="uk-text-muted uk-display-block">Scrum Board</span>
+                                        <a ui-sref="restricted.pages.snippets" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE263;</i>
+                                            <span class="uk-text-muted uk-display-block">Finance</span>
                                         </a>
-                                        <a ui-sref="restricted.pages.snippets" class="uk-margin-top">
-                                            <i class="material-icons md-36">&#xE86F;</i>
-                                            <span class="uk-text-muted uk-display-block">Snippets</span>
+                                        <a ui-sref="restricted.pages.user_profile" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE02F;</i>
+                                            <span class="uk-text-muted uk-display-block">Library</span>
+                                        </a>
+                                        <a ui-sref="restricted.pages.user_profile" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE530;</i>
+                                            <span class="uk-text-muted uk-display-block">Transport</span>
+                                        </a>
+                                        <a ui-sref="restricted.pages.user_profile" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE88A;</i>
+                                            <span class="uk-text-muted uk-display-block">Hostel</span>
+                                        </a>
+                                        <a ui-sref="restricted.pages.user_profile" class="uk-margin-top ">
+                                            <i class="material-icons md-36">&#xE8D1;</i>
+                                            <span class="uk-text-muted uk-display-block">Inventory</span>
                                         </a>
                                         <a ui-sref="restricted.pages.user_profile" class="uk-margin-top">
-                                            <i class="material-icons md-36">&#xE87C;</i>
-                                            <span class="uk-text-muted uk-display-block">User profile</span>
+                                            <i class="material-icons md-36">&#xE2CC;</i>
+                                            <span class="uk-text-muted uk-display-block">Repository</span>
                                         </a>
+                                       <!--  <a ui-sref="restricted.pages.user_profile" class="uk-margin-top uk-margin-bottom">
+                                            <i class="material-icons md-36">&#xE2CC;</i>
+                                            <span class="uk-text-muted uk-display-block">Repository</span>
+                                        </a>
+                                        <a ui-sref="restricted.pages.user_profile" class="uk-margin-top uk-margin-bottom">
+                                            <i class="material-icons md-36">&#xE8DF;</i>
+                                            <span class="uk-text-muted uk-display-block">Calendar</span>
+                                        </a>
+                                        <a ui-sref="restricted.pages.user_profile" class="uk-margin-top uk-margin-bottom">
+                                            <i class="material-icons md-36">&#xE158;</i>
+                                            <span class="uk-text-muted uk-display-block">Email Template</span>
+                                        </a> -->
                                     </div>
                                 </div>
                                 <div class="uk-width-1-3">
-                                    <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                            <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                                <li class="uk-nav-header">Course & batch</li>
+                                                <li><a ui-sref="restricted.components.accordion">Department</a></li>
+                                                <li><a ui-sref="restricted.components.buttons">Course</a></li>
+                                                <li><a ui-sref="restricted.components.notifications">Batch</a></li>
+                                                <li><a ui-sref="restricted.components.notifications">Batch</a></li>
+                                                <li><a ui-sref="restricted.components.notifications">Batch</a></li>
+                                                <li><a ui-sref="restricted.components.sortable">Assign Teacher</a></li>
+                                                <!-- <li class="uk-nav-header">Subject & Syllabus</li>
+                                                <li><a ui-sref="restricted.components.accordion">Subject</a></li>
+                                                <li><a ui-sref="restricted.components.buttons">Syllabus</a></li> -->
+                                            </ul>
+                                        <!-- <div class="uk-width-medium-1-2">
+                                            <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                                <li class="uk-nav-header">Components</li>
+                                                <li><a ui-sref="restricted.components.accordion">Institution Details</a></li>
+                                                <li><a ui-sref="restricted.components.buttons">Buttons</a></li>
+                                                <li><a ui-sref="restricted.components.notifications">Notifications</a></li>
+                                                <li><a ui-sref="restricted.components.sortable">Sortable</a></li>
+                                                <li><a ui-sref="restricted.components.tabs">Tabs</a></li>
+                                            </ul>
+                                        </div> -->
+                                        <!-- <div class="uk-width-medium-1-3">
+                                            <ul class="uk-nav uk-nav-dropdown uk-panel">
+                                                <li class="uk-nav-header">Components</li>
+                                                <li><a ui-sref="restricted.components.accordion">Accordions</a></li>
+                                                <li><a ui-sref="restricted.components.buttons">Buttons</a></li>
+                                                <li><a ui-sref="restricted.components.notifications">Notifications</a></li>
+                                                <li><a ui-sref="restricted.components.sortable">Sortable</a></li>
+                                                <li><a ui-sref="restricted.components.tabs">Tabs</a></li>
+                                            </ul>
+                                        </div> -->
+                                    </div>
+                                    <!-- <ul class="uk-nav uk-nav-dropdown uk-panel">
                                         <li class="uk-nav-header">Components</li>
                                         <li><a ui-sref="restricted.components.accordion">Accordions</a></li>
                                         <li><a ui-sref="restricted.components.buttons">Buttons</a></li>
                                         <li><a ui-sref="restricted.components.notifications">Notifications</a></li>
                                         <li><a ui-sref="restricted.components.sortable">Sortable</a></li>
                                         <li><a ui-sref="restricted.components.tabs">Tabs</a></li>
-                                    </ul>
+                                    </ul> -->
                                 </div>
                             </div>
                         </div>

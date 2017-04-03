@@ -15,24 +15,24 @@
                     <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Course</th>
                             <th>Subject</th>
+                            <th>Course</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th></th>
-                            <th>Course</th>
                             <th>Subject</th>
+                            <th>Course</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
                             <td>{{$index+1}}</td>
-                            <td>{{row.course_name}}</td>
                             <td>{{row.subject_name}}</td>
+                            <td>{{row.course_name}}</td>
                             <td class="uk-text-center">
                                 <!-- <a ui-sref="restricted.academics.syllabus_viewlist({syllabus_id:{{row.syllabus_id}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a> -->
                             <a ui-sref="restricted.academics.view_syllabusDetails" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>

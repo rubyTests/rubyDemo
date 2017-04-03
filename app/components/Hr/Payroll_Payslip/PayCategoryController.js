@@ -53,5 +53,9 @@ angular
                 altair_uikit.reinitialize_grid_margin();
             })
 
+            $scope.backbtn = function(){
+                window.history.back();
+            }
+
         }
     );

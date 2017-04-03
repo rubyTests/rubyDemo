@@ -10,9 +10,9 @@
     vertical-align: bottom !important;
 }
 </style>
-<div id="page_content" ng-controller="paycategoryCtrl as showCase">
+<div id="page_content" ng-controller="LeaveEntitleAddCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Pay Category</h3>
+        <h3 class="heading_a uk-margin-bottom">Add Leave EntitleMent</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
               <!-- <form class="uk-form"> -->
@@ -20,27 +20,26 @@
                 <div class="uk-width-9-10 uk-width-medium-9-10">
                   <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <!-- <label>Pay Group Name</label>
-                        <input type="text" class="md-input" md-input /> -->
-                        <label>Paystructure Name</label>
-                        <input type="text" class="md-input" md-input />
+                        <input type="text" config="selectize_dept_config" options="selectize_dept_option" ng-model="selectize_dept" selectize />
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <!-- <label>Frequency</label>
-                        <input type="text" class="md-input" md-input /> -->
-                        <input type="text" config="PayFrequency_config" options="PayFrequency_options" ng-model="PayFrequency" name="selectize_n" selectize/>
+                        <input type="text" config="selectize_employee_config" options="selectize_employee_option" ng-model="selectize_employee" selectize />
                     </div>
                   </div>
                   </div>               
                   <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
                   <div class="uk-width-9-10 uk-width-medium-9-10">
                   <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                        <input type="text" config="itemType_config" options="itemType_options" ng-model="itemType" name="selectize_n" selectize/>
+                    <div class="uk-width-medium-1-3">
+                        <input type="text" config="selectize_leaveCat_config" options="selectize_leaveCat_option" ng-model="selectize_leaveCat" selectize />
                     </div>
-                    <div class="uk-width-medium-1-2">
-                        <label>Percentage of Basic Pay</label>
-                        <input type="text" class="md-input" md-input />
+                    <div class="uk-width-medium-1-3">
+                        <label>Leave Count</label>
+                        <input type="text" class="md-input" ng-model="leave_count" md-input />
+                    </div>
+                    <div class="uk-width-medium-1-3">
+                        <label>Valid From</label>
+                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="valid_from"/>
                     </div>
                   </div>
                   </div>
@@ -54,11 +53,11 @@
                     </div>
                   </div>
                   <div class="uk-grid uk-grid-medium  ng-scope">
-                  <div  class="uk-width-10-10 uk-width-medium-10-10 uk-text-right">
-                  <p></p>
-                    <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backbtn()">Cancel</button>
-                    <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
-                </div>
+                    <div  class="uk-width-10-10 uk-width-medium-10-10 uk-text-right">
+                    <p></p>
+                    <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn();">Cancel</button>
+                     <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                  </div>
                 </div>
                   
               <!-- </form> -->

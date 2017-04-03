@@ -71,7 +71,7 @@ angular
                 $scope.selectize_assessment_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select assessment',
+                    placeholder: 'Select Assessment',
 					valueField: 'id',
                     labelField: 'name',
 					onInitialize: function(val){

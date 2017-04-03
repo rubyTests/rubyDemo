@@ -27,16 +27,16 @@ angular
                 .withColumnFilter({
                     aoColumns: [
                         null,
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
+                        // {
+                        //     type: 'text',
+                        //     bRegex: true,
+                        //     bSmart: true
+                        // },
+                        // {
+                        //     type: 'text',
+                        //     bRegex: true,
+                        //     bSmart: true
+                        // },
                         {
                             type: 'text',
                             bRegex: true,
@@ -139,6 +139,22 @@ angular
                     valueField: 'id',
                     labelField: 'firstname'
                 };
+
+                $scope.selectize_status_option = ['Approved','Pending','Rejected'];
+                $scope.selectize_status_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Status...',
+                    valueField: 'id',
+                    labelField: 'firstname'
+                };
+
+                $scope.status= "Status";
+
+                $scope.changeStatus = function(){
+                    var ss = $scope.selectize_status;
+                    vm.apllicationData = ss;
+                }
 
                 $scope.addleavecategory=function(){
                     $scope.tit_caption="Add";

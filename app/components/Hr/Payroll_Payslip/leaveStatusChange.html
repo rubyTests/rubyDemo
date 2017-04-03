@@ -1,0 +1,125 @@
+<style type="text/css">
+    .tdStyle {
+        width:50%;
+        padding: 10px !important;
+        border-bottom:none !important;
+    }
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom"> Leave Application View</h3>
+        <div class="md-card">
+            <div class="md-card-content large-padding">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info">person</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].firstname}} {{tableArray[0].lastname}}</span>
+                                    <span class="uk-text-small uk-text-muted">Employee Name</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >assignment_ind</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].Admission_No}}</span>
+                                    <span class="uk-text-small uk-text-muted">Employee Number</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >import_contacts</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].Dept}}</span>
+                                    <span class="uk-text-small uk-text-muted">Department</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-4">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >school</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{tableArray[0].AdmissionDate}}</span>
+                                    <span class="uk-text-small uk-text-muted">Date</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <h3 class="heading_a uk-margin-bottom">Leave Application Details
+        </h3>
+         <div class="md-card-content uk-width-medium-1-1 large-padding">
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content large-padding">
+                    <div class="uk-overflow-container">
+                        <div class="uk-width-large-1-1">
+                            <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-large-1-6">
+                                    <span class="uk-text-muted uk-text-small">Leave Type</span>
+                                </div>
+                                <div class="uk-width-large-5-6">
+                                    <span class="uk-text-large uk-text-middle">Casual leave</span>
+                                </div>
+                            </div>
+                            <hr class="uk-grid-divider">
+                            <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-large-1-6">
+                                    <span class="uk-text-muted uk-text-small">From Date</span>
+                                </div>
+                                <div class="uk-width-large-5-6">
+                                    10.03.2017
+                                </div>
+                            </div>
+                            <hr class="uk-grid-divider">
+                            <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-large-1-6">
+                                    <span class="uk-text-muted uk-text-small">To Date</span>
+                                </div>
+                                <div class="uk-width-large-5-6">
+                                    15.10.2017
+                                </div>
+                            </div>
+                            <hr class="uk-grid-divider">
+                            <div class="uk-grid uk-grid-small">
+                                <div class="uk-width-large-1-6">
+                                    <span class="uk-text-muted uk-text-small">Message</span>
+                                </div>
+                                <div class="uk-width-large-5-6">
+                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam necessitatibus suscipit velit voluptatibus! Ab accusamus ad adipisci alias aliquid at atque consectetur, dicta dignissimos, distinctio dolores esse fugiat iste laborum libero magni maiores maxime modi nemo neque, nesciunt nisi nulla optio placeat quas quia quibusdam quis saepe sit ullam! 
+                                </div>
+                            </div>
+                            <hr class="uk-grid-divider uk-hidden-large">
+                        </div>
+                        <div class="uk-text-right">
+                        <br>
+                            <button type="button" class="md-btn md-btn-success md-btn-small uk-modal-close">Approve</button>
+                            <button type="button" class="md-btn md-btn-warning md-btn-small uk-modal-close">Reject</button>
+                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

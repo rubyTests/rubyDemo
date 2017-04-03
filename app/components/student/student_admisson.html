@@ -5,6 +5,9 @@
     .selectize-dropdown{
         margin-top: 0px;
     }
+    .selectize-dropdown-content {
+        max-height: 153px !important;
+    }
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -117,9 +120,11 @@
                                     <input type="text" name="roll_no" id="roll_no" required class="md-input" md-input ng-model="wizard.roll_no" />
                                 </div>
                             </div>
+                            <br>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Save & Continue</button>
                             </div>
+                            <br>
                         </wz-step>
                         <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
@@ -180,11 +185,12 @@
                                     </div>
                                 </div>
                             </div>
-                            
+                            <br>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
                                 <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Save & Continue</button>
                             </div>
+                            <br>
                         </wz-step>
                         <wz-step wz-title="Parent/Guardian Details" template="app/templates/wizard.step.tpl.html">
                                 <form class="uk-form" >

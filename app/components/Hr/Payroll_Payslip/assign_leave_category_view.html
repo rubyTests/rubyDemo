@@ -1,10 +1,14 @@
  <div id="page_content"  ng-controller="assignleavecategoryviewCtrl as tblData">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Assign Leave Category
+        <h3 class="heading_a uk-margin-bottom">Leave Entitlement
         </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
-                <button style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#addAssignCategory'}" ng-click="addAssignCategory()"><i class="material-icons">add</i>Assign Category</button>
+                <!-- <button style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#addAssignCategory'}" ng-click="addAssignCategory()"><i class="material-icons">add</i>Assign Category</button> -->
+                <div class="uk-width-10-10 uk-width-medium-10-10 uk-margin-medium-bottom">
+                  <a type="button" ui-sref="restricted.hr.LeaveEntitleAdd" class="md-btn md-btn-primary md-btn-small uk-float-right">
+                  <i class="uk-icon-plus"></i> Add Leave Entitlement</a>
+                </div>
                 <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
@@ -43,7 +47,7 @@
     </div>
 
     <!-- Model Window -->
-                <div id="addAssignCategory" class="uk-modal">
+                <!-- <div id="addAssignCategory" class="uk-modal">
                     <div class="uk-modal-dialog">
                         <button type="button" class="uk-modal-close uk-close"></button>
                         <h3 class="uk-modal-title">Leave Entitlement </h3><br>
@@ -81,6 +85,6 @@
                             <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
 </div>

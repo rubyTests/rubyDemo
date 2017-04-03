@@ -14,10 +14,11 @@
                         <tr>
                             <th style="width: 50px !important;">S.No</th>
                             <th>Employee Name</th>
-                            <th>Leave Type</th>
+                            <!-- <th>Leave Type</th>
                             <th>From Date</th>
-                            <th>Upto Date</th>
+                            <th>Upto Date</th> -->
                             <th>Total Leave</th>
+                            <th>Application Date</th>
                             <th>Status</th>
                             <th>Action</th>
                         </tr>
@@ -26,10 +27,11 @@
                         <tr>
                             <th style="width: 50px !important;"></th>
                             <th>Employee Name</th>
-                            <th>Leave Type</th>
+                            <!-- <th>Leave Type</th>
                             <th>From Date</th>
-                            <th>Upto Date</th>
+                            <th>Upto Date</th> -->
                             <th>Total Leave</th>
+                            <th>Application Date</th>
                             <th>Status</th>
                             <th></th>
                         </tr>
@@ -38,13 +40,15 @@
                         <tr ng-repeat="row in tblData.apllicationData">
                             <td>{{$index+1}}</td>
                             <td>{{row.employee_name}}</td>
-                            <td>{{row.leaves_type}}</td>
+                            <!-- <td>{{row.leaves_type}}</td>
                             <td>{{row.from_date}}</td>
-                            <td>{{row.upto_date}}</td>
+                            <td>{{row.upto_date}}</td> -->
                             <td>{{row.total_leave}}</td>
-                            <td>Approved</td>
+                            <td>{{row.upto_date}}</td>
+                            <td>{{row.status}}</td>
                             <td class="">
-                                <a ng-click="editLeaveCategory(row)" data-uk-modal="{target:'#open_leavecategory'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a ui-sref="restricted.finance.leaveStatusChange({empid:{{row.id}}})"><i class="md-icon material-icons">remove_red_eye</i></a>
+                                <!-- <a ui-sref=""><i class="md-icon material-icons">&#xE254;</i></a> -->
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -53,8 +57,27 @@
             </div>
         </div>
     </div>
+
+        <div class="uk-modal" id="modal_header_footer">
+      <div class="uk-modal-dialog">
+      <button type="button" class="uk-modal-close uk-close"></button>
+          <h3 class="uk-modal-title">Change Status</h3>
+          <div class="md-card-content">
+            <form>
+              <div class="uk-form-row">
+                  <input type="text" config="selectize_status_config" options="selectize_status_option" ng-model="selectize_status" selectize />
+              </div>
+            </form>
+          </div>
+          <div class="uk-modal-footer uk-text-right">
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="changeStatus()">Save</button>
+          </div>
+      </div>
+    </div>
+
     <!-- Model Window -->
-                <div id="open_leavecategory" class="uk-modal">
+<!--                 <div id="open_leavecategory" class="uk-modal">
                     <div class="uk-modal-dialog">
                         <button type="button" class="uk-modal-close uk-close"></button>
                         <h3 class="uk-modal-title">{{tit_caption}} Leave Application </h3><br>
@@ -104,7 +127,7 @@
                             <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
                         </div>
                     </div>
-                </div>
+                </div> -->
 </div>
 
 

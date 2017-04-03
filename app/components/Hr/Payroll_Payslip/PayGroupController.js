@@ -59,7 +59,7 @@ angular
             });
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Group Name'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Pay Stucture Name'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Assigned Employee'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Pay Items'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Frequence')

@@ -2,6 +2,9 @@
     .md-hr{
          margin: 24px 0 !important;
     }
+    .selectize-dropdown-content {
+        max-height: 153px !important;
+    }
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -34,7 +37,7 @@
                                                 <div class="uk-width-medium-1-2">
                                                     <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                                         <div class="fileinput-new thumbnail">
-                                                            <img ng-src="assets/img/avatars/user.png" alt="user avatar"/>
+                                                            <img ng-src="assets/img/avatars/logo-tv-logo.png" alt="user avatar"/>
                                                         </div>
                                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                                         <div class="user_avatar_controls">
@@ -68,9 +71,11 @@
                                     <input type="text" name="language" id="language" required class="md-input" md-input ng-model="wizard.w1_language" />
                                 </div>
                             </div>
+                            <br>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Continue</button>
                             </div>
+                            <br>
                         </wz-step>
                         <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
