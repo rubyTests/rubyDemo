@@ -60,12 +60,12 @@ angular
 
             $scope.courseData=[];
             $scope.viewData=[];
-            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(course_data){
                 $scope.courseData.push(course_data.data);
             });
 
-            $http.get($localStorage.service+'AcademicsAPI/subjectDetail',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'AcademicsAPI/subjectDetail',{headers:{'access_token':$localStorage.access_token}})
             .success(function(course_data){
                 $scope.viewData=course_data.message;
             });

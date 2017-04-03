@@ -76,7 +76,7 @@ angular
                 }
             }
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/block',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/block',{headers:{'access_token':$localStorage.access_token}})
             .success(function(response){
                 console.log(response.data,"response.data");
                 $scope.viewData=response.data;
@@ -84,7 +84,7 @@ angular
 
             // Get building data
             $scope.buildingList=[];
-            $http.get($localStorage.service+'institutionApi/building',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });

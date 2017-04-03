@@ -53,7 +53,7 @@ angular
                 })
             });
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/institution',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/institution',{headers:{'access_token':$localStorage.access_token}})
             .success(function(response){
                 $scope.viewData=response.data;
             });

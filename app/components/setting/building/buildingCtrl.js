@@ -114,7 +114,7 @@ angular
             }
 
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/building')
+            $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(response){
                 $scope.viewData=response.data;
             });

@@ -14,24 +14,24 @@ angular
             $scope.Basic=[];
             $scope.contact=[];
             $scope.returnProfile=[];
-            $http.get($localStorage.service+'institutionApi/institutetype')
+            $http.get($localStorage.service+'institutionApi/institutetype',{headers:{'access_token':$localStorage.access_token}})
             .success(function(inst_type){
                 $scope.IinstLIST.push(inst_type.data);
             });
-            $http.get($localStorage.service+'institutionApi/country',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/country',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
                 $scope.CountryLIST.push(country_list.data);
             });
-            $http.get($localStorage.service+'institutionApi/currency',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/currency',{headers:{'access_token':$localStorage.access_token}})
             .success(function(currency_data){
                 $scope.CurrncyLIST.push(currency_data.data);
             });
-            $http.get($localStorage.service+'institutionApi/timezone',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/timezone',{headers:{'access_token':$localStorage.access_token}})
             .success(function(timeZone){
                 $scope.TimeLIST.push(timeZone.data);
             });
 
-            $http.get($localStorage.service+'institutionApi/profile',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/profile',{headers:{'access_token':$localStorage.access_token}})
             .success(function(profileData){
                 $scope.returnProfile.push(profileData.data);
             });

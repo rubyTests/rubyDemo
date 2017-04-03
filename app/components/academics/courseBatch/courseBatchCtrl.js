@@ -81,16 +81,16 @@ angular
                 $scope.courseData=[];
                 $scope.viewData=[];
                 $scope.EmpLIST=[];
-                $http.get($localStorage.service+'AcademicsAPI/batchDetail',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/batchDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(batch_data){
                     $scope.viewData=batch_data.message;
                 });
 
-                $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(course_data){
                     $scope.courseData.push(course_data.data);
                 });
-                $http.get($localStorage.service+'AcademicsAPI/profile',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/profile',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(emp_data){
                     $scope.EmpLIST.push(emp_data.message);
                 });

@@ -59,12 +59,12 @@ angular
                 });
                 $scope.deptData=[];
                 $scope.viewData=[];
-                $http.get($localStorage.service+'AcademicsAPI/courseDetail',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(course_data){
                     $scope.viewData=course_data.message;
                 });
 
-                $http.get($localStorage.service+'AcademicsAPI/departmentlist',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(dept_data){
                     $scope.deptData.push(dept_data.message);
                 });

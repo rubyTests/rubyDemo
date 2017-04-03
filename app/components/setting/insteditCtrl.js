@@ -18,14 +18,14 @@ angular
             // $scope.returnLocation=[];
             $scope.returnProfile1=[];
 
-            $http.get($localStorage.service+'institutionApi/profile',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/profile',{headers:{'access_token':$localStorage.access_token}})
             .success(function(profileData){
                 // console.log(profileData,'profileData');
                 $scope.returnProfile=profileData.data;
                 $scope.returnProfile1.push(profileData.data);
             });
 
-            $http.get($localStorage.service+'institutionApi/location',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/location',{headers:{'access_token':$localStorage.access_token}})
             .success(function(locationData){
                 // console.log(locationData.data[0],'locationData');
                 $scope.returnLocation=locationData.data;
@@ -72,19 +72,19 @@ angular
             });
 
 
-            $http.get($localStorage.service+'institutionApi/institutetype',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/institutetype',{headers:{'access_token':$localStorage.access_token}})
             .success(function(inst_type){
                 $scope.IinstLIST.push(inst_type.data);
             });
-            $http.get($localStorage.service+'institutionApi/country',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/country',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
                 $scope.CountryLIST.push(country_list.data);
             });
-            $http.get($localStorage.service+'institutionApi/currency',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/currency',{headers:{'access_token':$localStorage.access_token}})
             .success(function(currency_data){
                 $scope.CurrncyLIST.push(currency_data.data);
             });
-            $http.get($localStorage.service+'institutionApi/timezone',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/timezone',{headers:{'access_token':$localStorage.access_token}})
             .success(function(timeZone){
                 $scope.TimeLIST.push(timeZone.data);
             });

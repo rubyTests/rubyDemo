@@ -79,18 +79,18 @@ angular
                 $scope.viewData=[];
                 $scope.empList=[];
                 $scope.roomList=[];
-                $http.get($localStorage.service+'AcademicsAPI/departmentDetail',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/departmentDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
                     $scope.viewData=return_data.message;
                     console.log(return_data,'return_data');
                 });
 
-                $http.get($localStorage.service+'institutionApi/room',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
                     $scope.roomList.push(return_data.data);
                 });
 
-                $http.get($localStorage.service+'AcademicsAPI/profile',headers:{'access_token':$localStorage.access_token})
+                $http.get($localStorage.service+'AcademicsAPI/profile',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
                     $scope.empList.push(return_data.message);
                 });

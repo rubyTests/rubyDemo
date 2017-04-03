@@ -58,7 +58,7 @@ angular
                 })
             });
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/room',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
             .success(function(response){
                 $scope.viewData=response.data;
             });
@@ -67,11 +67,11 @@ angular
             $scope.buildingList=[];
             $scope.blockList=[];
 
-            $http.get($localStorage.service+'institutionApi/building',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
-            $http.get($localStorage.service+'institutionApi/block',headers:{'access_token':$localStorage.access_token})
+            $http.get($localStorage.service+'institutionApi/block',{headers:{'access_token':$localStorage.access_token}})
             .success(function(block_data){
                 $scope.blockList.push(block_data.data);
             });
