@@ -67,7 +67,7 @@
 
     Fileinput.prototype.change = function(e) {
         var files = e.target.files === undefined ? (e.target && e.target.value ? [{ name: e.target.value.replace(/^.+\\/, '')}] : []) : e.target.files;
-
+		console.log(e.target.files,"files");
         e.stopPropagation();
 
         if (files.length === 0) {
@@ -92,7 +92,7 @@
                 $img[0].src = re.target.result;
                 files[0].result = re.target.result;
 
-                element.find('.fileinput-filename').text(file.name);
+                element.find('.fileinput-filename').val(re.target.result);
 
                 // if parent has max-height, using `(max-)height: 100%` on child doesn't take padding and border into account
                 if (preview.css('max-height') != 'none') $img.css('max-height', parseInt(preview.css('max-height'), 10) - parseInt(preview.css('padding-top'), 10) - parseInt(preview.css('padding-bottom'), 10)  - parseInt(preview.css('border-top'), 10) - parseInt(preview.css('border-bottom'), 10));
