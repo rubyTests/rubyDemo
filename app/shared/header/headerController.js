@@ -7,7 +7,8 @@ angular
         '$state',
 		'$location',
 		'$localStorage',
-        function ($timeout,$scope,$window,$state,$location,$localStorage) {
+		'$http',
+        function ($timeout,$scope,$window,$state,$location,$localStorage,$http) {
 
             $scope.user_data = {
                 name: "Lue Feest",
@@ -73,9 +74,14 @@ angular
 			
 			// LogOut function
 			$scope.logOut=function(){
-				$localStorage.user_id='';
-				$localStorage.access_token='';
-				$location.path('/');
+				$http.get("http://192.168.1.136/rubyServices/api/GeneralAPI/logout",{headers: {'access_token':$scope.access_token}})
+				.success(function(data){
+					if(data.status==true){
+						$localStorage.user_id='';
+						$localStorage.access_token='';
+						$location.path('/');
+					}
+				})
 			}
 
             $scope.alerts_length = $scope.user_data.alerts.length;

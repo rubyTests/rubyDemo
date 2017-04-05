@@ -2540,7 +2540,7 @@ altairApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.min.js',
+                                'assets/js/custom/uikit_fileinput.js',
                                 'app/components/student/studentadmisionCtrl.js'
                             ], {serie:true});
                         }]

@@ -6,11 +6,26 @@ angular
         'user_data',
         '$stateParams',
         '$filter',
+		'$http',
+		'$localStorage',
         // 'groups_data',
-        function ($rootScope,$scope,user_data,$stateParams,$filter) {
+        function ($rootScope,$scope,user_data,$stateParams,$filter,$http,$localStorage) {
             // console.log($stateParams,'stateParams');
-            var paramsData=$filter('filter')(user_data, {id : $stateParams.stu_id});
-            $scope.user_data = paramsData[0];
+			//console.log($stateParams.stu_id,"ID");
+            
+			$http.get($localStorage.service+'ProfileAPI/parentsDetails',{params:{id:$stateParams.stu_id},headers: {'access_token':$localStorage.access_token} })
+			.success(function(data){
+				// console.log(data.result,"data");
+				$scope.user_data=data.result[0].user_detail;
+				console.log($scope.user_data,"data")
+				$scope.profileId=$scope.user_data.id;
+				$scope.parents_data=data.result[0].user_parents;
+				//console.log($scope.parents_data,"parents_data")
+			}).error(function(err){
+			});
+			
+			// var paramsData=$filter('filter')(user_data, {id : $stateParams.stu_id});
+            // $scope.user_data = paramsData[0];
 
             // $scope.user_data = user_data[0];
             // $scope.user_data_contacts = user_data[0].contact;
@@ -80,16 +95,34 @@ angular
                     "title": "None"
                 }
             ];
-
-
-            // submit button
-            $('#user_edit_submit').on('click',function(e) {
-                e.preventDefault();
-                var data = JSON.stringify($scope.user_data, null, 2),
-                    user_name = user_data[0].name;
-
-                UIkit.modal.alert('<p>Data for ' + user_name + ':</p><pre>' + data + '</pre>');
-            })
+			$scope.parVal=[];
+			$scope.updateValue=function(){
+				//console.log($scope.user_data,"savedData");
+				// console.log($scope.parents_data,"data1");
+				//Student Details
+				
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/profileDetails',
+                data: $scope.user_data,
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+                }).then(function(response){
+                    console.log(response,"student");
+                });
+				
+				//$scope.parVal.push($scope.parents_data);
+				//console.log($scope.parVal,"push");
+				
+				// Parents Details
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/editParentsDetails',
+                data: $scope.parVal,
+				headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                    console.log(response,"parents");
+                });
+			}
 
         }
     ])

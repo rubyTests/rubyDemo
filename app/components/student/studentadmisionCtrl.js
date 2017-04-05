@@ -3,14 +3,15 @@ angular
     .controller('studentadmisionCtrl', [
         '$scope',
         'utils',
-        function ($scope,utils) {
-
+		'$localStorage',
+		'$http',
+        function ($scope,utils,$localStorage,$http) {
             var $wizard_advanced_form = $('#wizard_advanced_form');
 
-            $scope.finishedWizard = function() {
-                var form_serialized = JSON.stringify( utils.serializeObject($wizard_advanced_form), null, 2 );
-                UIkit.modal.alert('<p>Wizard data:</p><pre>' + form_serialized + '</pre>');
-            };
+            // $scope.finishedWizard = function() {
+                // var form_serialized = JSON.stringify( utils.serializeObject($wizard_advanced_form), null, 2 );
+                // UIkit.modal.alert('<p>Wizard data:</p><pre>' + form_serialized + '</pre>');
+            // };
             $scope.selectize_a_data = {
                 options: [
                     {
@@ -334,7 +335,43 @@ angular
                 "United Kingdom",
                 "Vatican City"
             ];
-
+			
+			$scope.save=function(){
+				//alert("done")
+				$scope.imgValue=$('.fileinput-preview').find('img').attr('src');
+				console.log($scope.imgValue,"data");
+			}
+			$scope.wizard=[];
+			$scope.saveContiune=function(){
+				//alert($('#wizard_advanced_form').serialize());
+				$scope.values = $('#wizard_advanced_form').serialize();
+				console.log($scope.values)
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/profileDetails',
+                data: $scope.values,
+				headers:{'Content-Type':'application/x-www-form-urlencoded; charset=UTF-8','access_token':$localStorage.access_token}
+                }).then(function(response){
+                    //console.log(response.data.admission_no);
+					$scope.profileId=response.data.admission_no;
+					$scope.Pwizard={p_first_name:'',p_last_name:'',p_relation:'',p_dob:'',p_education:'',occupation:'',p_income:'',pr_address:'',pr_city:'',pr_state:'',pr_pincode:'',pr_country:'',p_phone:'',p_mobile_no:'',p_email:'',profileId:$scope.profileId};
+                });
+			}
+			//$scope.profileId=2;
+			$scope.parentsDetails=function(){
+				console.log($scope.profileId)
+				console.log($scope.Pwizard)
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/parentsDetails',
+                data: $scope.Pwizard,
+                //data: {p_first_name:$scope.Pwizard.p_first_name,},
+				headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                    console.log(response,"response");
+                });
+			}
+			
             var planets_data = $scope.selectize_planets_options = [
                 {id: 1, title: 'Rafeeq', url: '444'},
                 {id: 2, title: 'Saravanan', url: '222'},

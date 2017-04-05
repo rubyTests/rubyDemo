@@ -27,6 +27,7 @@
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="admission_no">Admission No<span class="req">*</span></label>
                                     <input type="text" name="admission_no" id="admission_no" required class="md-input" md-input ng-model="wizard.w1_birth_place" />
+                                    <input type="hidden" name="profileId" value="{{profileId}}" />
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="admission_date">Admission Date<span class="req">*</span></label>
@@ -43,6 +44,7 @@
                                                             <img ng-src="assets/img/avatars/user.png" alt="user avatar"/>
                                                         </div>
                                                         <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                        <input type="hidden" name="filename" class="fileinput-filename">
                                                         <div class="user_avatar_controls">
                                                                 <span class="btn-file">
                                                                     <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
@@ -70,12 +72,12 @@
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <label class="uk-form-label">Gender<span class="req">*</span></label>
                                     <span class="icheck-inline">
-                                        <input type="radio" name="wizard_status" id="wizard_status_married" required value="married" icheck ng-model="wizard.w1_martial" />
-                                        <label for="wizard_status_married" class="inline-label">Male</label>
+                                        <input type="radio" name="wizard_gender" id="wizard_gender_male" required value="male" icheck ng-model="wizard.gender" />
+                                        <label for="wizard_gender_male" class="inline-label">Male</label>
                                     </span>
                                     <span class="icheck-inline">
-                                        <input type="radio" name="wizard_status" id="wizard_status_single" class="wizard-icheck" value="single" icheck ng-model="wizard.w1_martial" />
-                                        <label for="wizard_status_single" class="inline-label">Female</label>
+                                        <input type="radio" name="wizard_gender" id="wizard_gender_female" class="wizard-icheck" value="female" icheck ng-model="wizard.gender" />
+                                        <label for="wizard_gender_female" class="inline-label">Female</label>
                                     </span>
                                 </div>
                             </div>
@@ -122,7 +124,7 @@
                             </div>
                             <br>
                             <div class="uk-clearfix uk-margin-large-top">
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Save & Continue</button>
+                                <button class="md-btn md-btn-primary uk-float-right" ng-click="saveContiune()" wz-next>Save & Continue</button>
                             </div>
                             <br>
                         </wz-step>
@@ -188,7 +190,7 @@
                             <br>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Save & Continue</button>
+                                <button class="md-btn md-btn-primary uk-float-right" ng-click="saveContiune()" wz-next>Save & Continue</button>
                             </div>
                             <br>
                         </wz-step>
@@ -206,34 +208,35 @@
                                                     <hr class="md-hr"/>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-3 parsley-row">
-                                                            <label for="p_first_name">First name<span class="req">*</span></label>
-                                                            <input type="text" name="p_first_name" id="p_first_name" required class="md-input" md-input ng-model="wizard.p_first_name" />
+                                                            <label>First name<span class="req">*</span></label>
+                                                            <input type="{{ input.type }}" name="p_first_name_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_first_name[topParent][input.name]" />
+															<input type="hidden" name="p_profileId" value="{{profileId}}" ng-model="Pwizard.profileId" />
                                                         </div>
                                                         <div class="uk-width-medium-1-3 parsley-row">
                                                             <label for="p_last_name">Last Name<span class="req">*</span></label>
-                                                            <input type="text" name="p_last_name" id="p_last_name" required class="md-input" md-input ng-model="wizard.p_last_name" />
+                                                            <input type="text" name="p_last_name_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_last_name[topParent][input.name]" />
                                                         </div>
                                                         <div class="uk-width-medium-1-3 parsley-row">
-                                                            <label for="p_religion">Relation<span class="req">*</span></label>
-                                                            <input type="text" name="p_religion" id="p_religion" required class="md-input" md-input ng-model="wizard.p_religion" />
+                                                            <label for="p_relation">Relation<span class="req">*</span></label>
+                                                            <input type="text" name="p_relation_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_relation[topParent][input.name]" />
                                                         </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-4 parsley-row">
                                                             <label for="p_dob">Date of Birth<span class="req">*</span></label>
-                                                            <input type="text" name="p_dob" id="p_dob" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.w1_birth_date"/>
+                                                            <input type="text" name="p_dob_[topParent]" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="Pwizard.p_dob[topParent][input.name]"/>
                                                         </div>
                                                         <div class="uk-width-medium-1-4 parsley-row">
                                                             <label for="p_education">Education<span class="req"></span></label>
-                                                            <input type="text" name="p_education" id="p_education" required class="md-input" md-input ng-model="wizard.p_education" />
+                                                            <input type="text" name="p_education" id="p_education" required class="md-input" md-input ng-model="Pwizard.p_education[topParent][input.name]" />
                                                         </div>
                                                         <div class="uk-width-medium-1-4 parsley-row">
                                                             <label for="occupation">Occupation<span class="req"></span></label>
-                                                            <input type="text" name="occupation" id="occupation" required class="md-input" md-input ng-model="wizard.occupation" />
+                                                            <input type="text" name="occupation_[topParent]" required class="md-input" md-input ng-model="Pwizard.occupation[topParent][input.name]" />
                                                         </div>
                                                         <div class="uk-width-medium-1-4 parsley-row">
                                                             <label for="p_income">Income<span class="req"></span></label>
-                                                            <input type="text" name="p_income" id="p_income" required class="md-input" md-input ng-model="wizard.p_income" />
+                                                            <input type="text" name="p_income_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_income[topParent][input.name]" />
                                                         </div>
                                                     </div>
 
@@ -245,24 +248,24 @@
                                                         <div class="uk-grid" data-uk-grid-margin>
                                                             <div class="uk-width-medium-1-1 parsley-row">
                                                                 <label for="pr_address">Address<span class="req">*</span></label>
-                                                                <input type="text" name="pr_address" id="pr_address" required class="md-input" md-input ng-model="wizard.pr_address" />
+                                                                <input type="text" name="pr_address" id="pr_address" required class="md-input" md-input ng-model="Pwizard.pr_address[topParent][input.name]" />
                                                             </div>
                                                         </div>
                                                         <div class="uk-grid" data-uk-grid-margin>
                                                             <div class="uk-width-medium-1-4 parsley-row">
                                                                 <label for="pr_city">City<span class="req"></span></label>
-                                                                <input type="text" name="pr_city" id="pr_city" required class="md-input" md-input ng-model="wizard.pr_city" />
+                                                                <input type="text" name="pr_city" id="pr_city" required class="md-input" md-input ng-model="Pwizard.pr_city[topParent][input.name]" />
                                                             </div>
                                                             <div class="uk-width-medium-1-4 parsley-row">
                                                                 <label for="pr_state">State<span class="req"></span></label>
-                                                                <input type="text" name="pr_state" id="pr_state" required class="md-input" md-input ng-model="wizard.pr_state" />
+                                                                <input type="text" name="pr_state" id="pr_state" required class="md-input" md-input ng-model="Pwizard.pr_state[topParent][input.name]" />
                                                             </div>
                                                             <div class="uk-width-medium-1-4 parsley-row">
                                                                 <label for="pr_pincode">Pincode<span class="req"></span></label>
-                                                                <input type="text" name="pr_pincode" id="pr_pincode" required class="md-input" md-input ng-model="wizard.pr_pincode" />
+                                                                <input type="text" name="pr_pincode" id="pr_pincode" required class="md-input" md-input ng-model="Pwizard.pr_pincode[topParent][input.name]" />
                                                             </div>
                                                             <div class="uk-width-medium-1-4 parsley-row">
-                                                                <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="selectize_country" name="selectize_country" selectize />
+                                                                <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="selectize_country[topParent][input.name]" name="selectize_country" selectize />
                                                             </div>
                                                         </div>
                                                         <div class="uk-grid" data-uk-grid-margin>
@@ -272,7 +275,7 @@
                                                                         <i class="material-icons">&#xE0CD;</i>
                                                                     </span>
                                                                     <label for="wizard_phone">Phone Number</label>
-                                                                    <input type="text" class="md-input" name="wizard_phone" id="wizard_phone" md-input ng-model="wizard.w1_phone" />
+                                                                    <input type="text" class="md-input" id="wizard_phone" md-input ng-model="Pwizard.p_phone[topParent][input.name]" />
                                                                 </div>
                                                             </div>
                                                             <div class="uk-width-medium-1-3 parsley-row">
@@ -281,7 +284,7 @@
                                                                         <i class="material-icons">&#xE324;</i>
                                                                     </span>
                                                                     <label for="mobile_no">Mobile</label>
-                                                                    <input type="text" class="md-input" name="mobile_no" id="mobile_no" md-input ng-model="wizard.mobile_no" />
+                                                                    <input type="text" class="md-input" id="mobile_no" md-input ng-model="Pwizard.p_mobile_no[topParent][input.name]" />
                                                                 </div>
                                                             </div>
                                                             <div class="uk-width-medium-1-3 parsley-row">
@@ -290,7 +293,7 @@
                                                                         <i class="material-icons">&#xE0BE;</i>
                                                                     </span>
                                                                     <label for="">Email</label>
-                                                                    <input type="text" class="md-input" name="email" id="eamil" md-input ng-model="wizard.email" />
+                                                                    <input type="text" class="md-input" id="eamil" md-input ng-model="Pwizard.p_email[topParent][input.name]" />
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -315,7 +318,7 @@
                             </div>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Save & Continue</button>
+                                <button class="md-btn md-btn-primary uk-float-right" ng-click="parentsDetails()" wz-next>Save & Continue</button>
                             </div>
                         </wz-step>
                         <wz-step wz-title="Additional Details" template="app/templates/wizard.step.tpl.html">
@@ -360,7 +363,7 @@
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="year">Year of completion<span class="req"></span></label>
-                                    <input type="text" name="birth_place" id="birth_place" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.year"/>
+                                    <input type="text" name="completion" id="completion" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.year"/>
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="total_mark">Total marks<span class="req"></span></label>
@@ -428,8 +431,8 @@
                                 </div>
                             </div>
                             <div class="uk-clearfix uk-margin-large-top">
-                                <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next>Save & Finish</button>
+                                <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" wz-previous>Back</button>
+                                <button class="md-btn md-btn-primary uk-float-right" ng-click="saveContiune()" wz-next>Save & Finish</button>
                             </div>
                         </wz-step>
                     </wizard>
