@@ -1,6 +1,6 @@
 angular
     .module('altairApp')
-    .controller('syllabusaddCtrl', [
+    .controller('syllabuseditCtrl', [
         '$scope',
         '$rootScope',
         '$timeout','$filter','$compile','$stateParams','$state','$localStorage','$http',
@@ -8,13 +8,56 @@ angular
             $scope.syllabus=[];
             $scope.courseList=[];
             $scope.subjectList=[];
-            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$scope.access_token}})
             .success(function(course_data){
                 $scope.courseList.push(course_data.data);
             });
-            $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$scope.access_token}})
             .success(function(subject_data){
                 $scope.subjectList.push(subject_data.data);
+            });
+
+            // $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchSyllabusData')
+            // .success(function(syllabus_details){
+            //     // console.log(syllabus_details.data,'syllabus_details');
+            //     var data=$filter('filter')(syllabus_details.data, {ID : $stateParams.id},true);
+            //     console.log(data[0],'data');
+            //     var data=$filter('filter')(syllabus_details.data, {ID : $stateParams.id},true);
+            // });
+
+            $http({
+              method : "GET",
+              url : $localStorage.service+"AcademicsAPI/fetchSubjectSyllabusData",
+              params :{id : $stateParams.id},
+              headers:{'access_token':$scope.access_token}
+            }).then(function mySucces(response) {
+                $scope.sub_syllabus_id=response.data.data[0].ID;
+                $timeout(function(){
+                    $scope.courseID=[response.data.data[0].COURSE_ID];
+                    $scope.subjectID=[response.data.data[0].SUBJECT_ID];
+                },200);
+            },function myError(response){
+                console.log(response);
+            });
+
+            $http({
+              method : "GET",
+              url : $localStorage.service+"AcademicsAPI/fetchSyllabusListDetails",
+              params :{id : $stateParams.id},
+              headers:{'access_token':$scope.access_token}
+            }).then(function mySucces(response) {
+
+                angular.forEach(response.data.data, function (value, keys) {
+                    value.syllabus_title = value.NAME;
+                    value.syllabus_content = value.DESC;
+                    value.syllabus_ID = value.ID;
+                }); 
+                // console.log(response.data.data,'response');
+                $scope.form_dynamic=response.data.data;
+                
+
+            },function myError(response){
+                console.log(response);
             });
 
             $scope.selectize_course_options = $scope.courseList;
@@ -26,7 +69,7 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        // console.log(value);
                     });
                 }
             };
@@ -39,7 +82,7 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        // console.log(value);
                     });
                 }
             };
@@ -56,135 +99,15 @@ angular
             
             // Clone functionality
 
-            $scope.form_template = [
-                [
-                    {
-                        'type': 'text',
-                        'name': 'firstName',
-                        'label': 'First Name'
-                    },
-                    {
-                        'type': 'text',
-                        'name': 'lastName',
-                        'label': 'Last Name'
-                    }
-                ],
-                [
-                    {
-                        'type': 'text',
-                        'name': 'company',
-                        'label': 'Company'
-                    }
-                ],
-                [
-                    {
-                        'type': 'radio',
-                        'label': 'Gender',
-                        'name': 'gender',
-                        'inputs': [
-                            {
-                                'label': 'Man',
-                                'value': 'man'
-                            },
-                            {
-                                'label': 'Woman',
-                                'value': 'woman'
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'switch',
-                        'label': 'Contact',
-                        'inputs': [
-                            {
-                                'label': 'Email',
-                                'name': 'switch_email'
-                            },
-                            {
-                                'label': 'Phone',
-                                'name': 'switch_phone'
-                            }
-                        ]
-                    }
-                ],
-                [
-                    {
-                        'type': 'selectize',
-                        'name': 'city',
-                        'position': 'bottom',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'placeholder': 'City...'
-                        },
-                        'data': [
-                            {
-                                "value": "city_a",
-                                "title": "City A"
-                            },
-                            {
-                                "value": "city_b",
-                                "title": "City B"
-                            },
-                            {
-                                "value": "city_c",
-                                "title": "City C"
-                            },
-                            {
-                                "value": "city_d",
-                                "title": "City D"
-                            },
-                            {
-                                "value": "city_e",
-                                "title": "City E"
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'selectize',
-                        'name': 'country',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'create': false,
-                            'maxItems': 1,
-                            'placeholder': 'Country...'
-                        },
-                        'data': [
-                            {
-                                "value": "country_a",
-                                "title": "Country A"
-                            },
-                            {
-                                "value": "country_b",
-                                "title": "Country B"
-                            },
-                            {
-                                "value": "country_c",
-                                "title": "Country C"
-                            },
-                            {
-                                "value": "country_d",
-                                "title": "Country D"
-                            },
-                            {
-                                "value": "country_e",
-                                "title": "Country E"
-                            }
-                        ]
-                    }
-                ]
-            ];
-
             $scope.form_dynamic = [];
-            $scope.form_dynamic.push($scope.form_template);
+            $scope.form_dynamic.push({'syllabus_title': '','syllabus_content': '','syllabus_ID':''});
 
             $scope.form_dynamic_model = [];
 
             // clone section
             $scope.cloneSection = function($event,$index) {
                 $event.preventDefault();
-                $scope.form_dynamic.push($scope.form_template);
+                $scope.form_dynamic.push({'syllabus_title': '','syllabus_content': '','syllabus_ID':''});
             };
 
             // delete section
@@ -254,15 +177,26 @@ angular
             }
 
             // $scope.syllabus=[];
-            $scope.saveSyllabusDetails=function(){
+            $scope.updateSyllabusDetails=function(){
+                if (angular.isArray($scope.subjectID)) {
+                    var subjectID=$scope.subjectID[0];
+                }else{
+                    var subjectID=$scope.subjectID;
+                }
+                if (angular.isArray($scope.courseID)) {
+                    var courseID=$scope.courseID[0];
+                }else{
+                    var courseID=$scope.courseID;
+                }
+
                 $http({
                     method:'POST',
                     url: $localStorage.service+'AcademicsAPI/syllabusDetail',
                     data: {
-                        'syllabus_ID':$scope.syllabus_ID,
-                        'course_id' : $scope.courseID,
-                        'subject_id' : $scope.subjectID,
-                        'syllabus_data' : $scope.syllabus
+                        'sub_syllabus_id':$scope.sub_syllabus_id,
+                        'course_id' : courseID, 
+                        'subject_id' : subjectID,
+                        'syllabus_data' : $scope.form_dynamic
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){

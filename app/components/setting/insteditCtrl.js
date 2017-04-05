@@ -3,8 +3,8 @@ angular
     .controller('insteditCtrl', [
         '$scope',
         'utils',
-        '$http','$rootScope', '$filter','$compile', '$scope', '$timeout','$stateParams','$state','$localStorage',
-        function ($scope,utils,$http,$rootScope, $filter,$compile, $scope, $timeout,$stateParams,$state,$localStorage) {
+        '$http','$rootScope', '$filter','$compile','$timeout','$stateParams','$state','$localStorage',
+        function ($scope,utils,$http,$rootScope, $filter,$compile,$timeout,$stateParams,$state,$localStorage) {
 
             // var data=$filter('filter')(ts_data, {id : parseInt($stateParams.id)},true);
 

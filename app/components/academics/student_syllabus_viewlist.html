@@ -8,9 +8,9 @@
                     <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
                         <ul class="md-list md-list-outside notes_list">
                             <li class="heading_list" style="color: #e53935">Subject</li>
-                            <li ng-repeat="note in notes_data">
+                            <li ng-repeat="note in notes_data" ng-class="{'md-list-item-active': $index == currentActive}">
                                 <a href="#" class="md-list-content note_link" ng-click="openNote($event,$parent.$index,$index,note)">
-                                    <span class="md-list-heading uk-text-truncate">{{note.sub_title}}</span>
+                                    <span class="md-list-heading uk-text-truncate">{{note.NAME}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -23,15 +23,15 @@
                                 <i class="md-icon material-icons" id="toggleAll" ng-click="toggleAll($event)">&#xe8f2;</i>
                             </div>
                             <h3 class="md-card-toolbar-heading-text large">
-                                {{notes_preview.sub_title}}
+                                {{notes_preview.NAME}}
                             </h3>
                         </div>
                         <div class="md-card-content padding-reset" id="help_content">
                             <h4 class="heading_c full_width_in_card">Syllabus</h4>
                             <div class="uk-accordion uk-accordion-alt help_accordion hierarchical_slide" hierarchical-slide slide-children="h3" slide-context=".md-card-content">
-                                <h3 class="uk-accordion-title" ng-repeat-start="item in notes_preview.chapter" on-last-repeat>{{item.syllabus_title}}</h3>
+                                <h3 class="uk-accordion-title uk-animation-slide-bottom" ng-repeat-start="item in notes_preview.syllabus" on-last-repeat>{{item.NAME}}</h3>
                                 <div class="uk-accordion-content" ng-repeat-end>
-                                    <p>{{item.content}}</p>
+                                    <p>{{item.DESC | htmlToPlaintext}}</p>
                                 </div>
                             </div>
                         </div>

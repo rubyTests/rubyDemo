@@ -66,4 +66,9 @@ altairApp
             return $sce.trustAsHtml(htmlCode);
         }
     }])
+    .filter('htmlToPlaintext', function() {
+      return function(text) {
+       return  text ? String(text).replace(/<[^>]+>/gm, '') : '';
+      };
+     })
 ;

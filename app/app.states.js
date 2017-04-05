@@ -2623,7 +2623,7 @@ altairApp
                 .state("restricted.academics.syllabus_view", {
                     url: "/syllabus_view",
                     templateUrl: 'app/components/academics/syllabus_view.html',
-                    controller: 'syllabusviewCtrl',
+                    // controller: 'syllabusviewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2654,6 +2654,25 @@ altairApp
                     data: {
                         pageTitle: 'Syllabus Add'
                     }
+                })
+                .state("restricted.academics.syllabus_edit", {
+                    url: "/syllabus_edit/{id}",
+                    templateUrl: 'app/components/academics/syllabus_edit.html',
+                    controller: 'syllabuseditCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_tinymce',
+                                'app/components/academics/syllabuseditCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Syllabus Add'
+                    },
+                    params:{id:null}
                 })
                 .state("restricted.academics.syllabus_viewlist", {
                     url: "/syllabus_viewlist/{syllabus_id}",
@@ -2696,7 +2715,7 @@ altairApp
                     }
                 })
                 .state("restricted.academics.view_syllabusDetails", {
-                    url: "/view_syllabusDetails",
+                    url: "/view_syllabusDetails/{id}",
                     templateUrl: 'app/components/academics/student_syllabus_viewlist.html',
                     controller: 'studentsyllabusdetailCtrl',
                     resolve: {
@@ -2720,7 +2739,8 @@ altairApp
                     },
                     data: {
                         pageTitle: 'Syllabus View'
-                    }
+                    },
+                    params:{id:null}
                 })
                 .state("restricted.academics.markattendance", {
                     url: "/attendance",

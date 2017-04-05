@@ -7,10 +7,23 @@ angular
         'notes_data',
         '$timeout',
         'variables',
-        function ($rootScope,$scope,$window,notes_data,$timeout,variables) {
+        '$http',
+        '$stateParams',
+        '$filter',
+        '$localStorage',
+        function ($rootScope,$scope,$window,notes_data,$timeout,variables,$http,$stateParams,$filter,$localStorage) {
             $rootScope.page_full_height = true;
             $rootScope.headerDoubleHeightActive = true;
-
+            var test;
+            // $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchAllSubjectSyllabusData')
+            $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(syllabus_data){
+                var data1=$filter('filter')(syllabus_data.data, {SUBJECT_ID : $stateParams.id},true);
+                // console.log(syllabus_data.data.indexOf(data1[0]),'data');
+                $scope.currentActive=syllabus_data.data.indexOf(data1[0]);
+                $scope.notes_data=syllabus_data.data;
+                $scope.notes_preview=data1[0];
+            });
             
 
             $scope.$on('$destroy', function() {
@@ -21,7 +34,7 @@ angular
             // get note data
             $scope.notes_data = notes_data;
             
-            $scope.notes_preview=$scope.notes_data[0];
+            // $scope.notes_preview=$scope.notes_data[0];
             $scope.change_notes_preview=function(note){
                 $scope.notes_preview=note;
             }

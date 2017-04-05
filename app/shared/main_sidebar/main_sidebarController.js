@@ -111,13 +111,6 @@ angular
                                 {
                                     title: 'Batch',
                                     link: 'restricted.academics.courseBatches'
-                                },
-                                // {
-                                //     title: 'Calendar',
-                                // },
-                                {
-                                    title: 'Assign Class Teacher',
-                                    link: 'restricted.academics.assignClassTeacher'
                                 }
                             ]
                         },
@@ -131,6 +124,10 @@ angular
                                 {
                                     title: 'Syllabus',
                                     link: 'restricted.academics.syllabus_view'
+                                },
+                                {
+                                    title: 'Assign Class Teacher',
+                                    link: 'restricted.academics.assignClassTeacher'
                                 }
                             ]
                         },

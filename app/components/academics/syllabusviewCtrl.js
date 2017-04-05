@@ -1,7 +1,7 @@
 angular
     .module('altairApp')
     .controller('syllabusviewCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -63,11 +63,35 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/academics/syllabusTableDeatail.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
+
+                $http.get($localStorage.service+'AcademicsAPI/syllabusDetail',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(syllabus_details){
+                    $scope.viewData=syllabus_details.message;
                 });
+
+                $scope.deleteSyllabus=function(id,syllabus_id,$index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : $localStorage.service+"AcademicsAPI/syllabusDetail",
+                            params : {id : id,syllabus_id:syllabus_id},
+                            headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                var data=response.data.message.message;
+                                $scope.viewData.splice($index, 1);
+                            },function myError(response) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                }
+            }
         }
     );
