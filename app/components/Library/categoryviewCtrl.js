@@ -43,6 +43,8 @@ angular
                     })
                 });
 
+                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+
                 $scope.selectize_usertype_options = ['Student','Employee'];
                 $scope.selectize_usertype_config = {
                     create: false,

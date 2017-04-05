@@ -36,11 +36,6 @@ angular
                             bSmart: true
                         },
                         {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
                             type: 'number',
                             bRegex: true,
                             bSmart: true
@@ -54,10 +49,10 @@ angular
                 });
 
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Desc'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('No.Of Fine Slabs')
+                // DTColumnDefBuilder.newColumnDef(2).withTitle('Desc'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('No.Of Fine Slabs')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

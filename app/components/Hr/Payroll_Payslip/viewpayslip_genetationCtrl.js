@@ -68,9 +68,40 @@ angular
 
             $scope.addEarning=function(){
                 $scope.tit_caption="Add Earning";
+                
             }
             $scope.addDeduction=function(){
                 $scope.tit_caption="Add Deduction";
+            }
+
+            $scope.addEarnVal = [];
+            $scope.getPayrollEarning = function(){
+                var category_name = $scope.category_name;
+                var category_desc = $scope.category_desc;
+                // console.log(this,'$scope.category_name');
+                $scope.addEarnVal.push({'category_name':category_name,'category_desc':category_desc});
+                console.log($scope.addEarnVal,"addEarnVal");
+                $scope.category_name='';
+                $scope.category_desc='';
+            }
+
+            $scope.addDeductVal = [];
+            $scope.getPayrollDeduction = function(){
+                var category_name = $scope.category_name;
+                var category_desc = $scope.category_desc;
+                // console.log(this,'$scope.category_name');
+                $scope.addDeductVal.push({'category_name':category_name,'category_desc':category_desc});
+                console.log($scope.addEarnVal,"addEarnVal");
+                $scope.category_name='';
+                $scope.category_desc='';
+            }
+
+            $scope.removeEarn = function(val){
+                $scope.addEarnVal.pop(val);
+            }
+
+            $scope.removeDeduct = function(val){
+                $scope.addDeductVal.pop(val);
             }
             // $('input').focusin(function(){
             //   $(this).css({"border": "1px solid rgb(173,208,242)" });

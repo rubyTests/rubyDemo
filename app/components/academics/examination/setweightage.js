@@ -48,6 +48,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Weightage'),
 
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.get_id = [];
             $resource('app/components/academics/examination/setweightage.json')
                 .query()

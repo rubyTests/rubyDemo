@@ -72,6 +72,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(5).withTitle('Drop Time'),
                 DTColumnDefBuilder.newColumnDef(6).withTitle('Fare'),
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.route_name = [];
             $resource('app/components/transport/routeStops.json')
                 .query()

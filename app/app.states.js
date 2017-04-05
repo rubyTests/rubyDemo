@@ -197,6 +197,27 @@ altairApp
                     },
                     
                 })
+
+                .state("restricted.hr.EditPayCategory",{
+                    url: "/EditpayCategory",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/EditPayCategory.html',
+                    resolve: {
+                        get_Payitem : function($http){
+                           return $http({
+                                method:'GET',
+                                url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json',
+                            }).then(function(data){
+                                return data.data;
+                            });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/Hr/Payroll_Payslip/EditPayCategoryCtrl.js'
+                            ]);
+                        }]
+                    },
+                    
+                })
                 .state("restricted.hr.ViewPayGroup",{
                     url: "/View-PayGroup/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/ViewPayGroup.html',
@@ -277,7 +298,7 @@ altairApp
                     }
                 })
                 .state("restricted.BookDetail", {
-                    url: "/Book Detail/{id}/{indexId}",
+                    url: "/BookDetail/{id}/{indexId}",
                     templateUrl: 'app/components/Library/Book_detailsView.html',
                     controller: 'BookDetailController',
                     parmas:{
@@ -2205,13 +2226,13 @@ altairApp
                     }
                 })
 
-                .state("restricted.finance.fee.config", {
-                    url: "/config",
-                    template: '<div ui-view autoscroll="false"/>',
-                    abstract: true
-                })
+                // .state("restricted.finance.fee.config", {
+                //     url: "/config",
+                //     template: '<div ui-view autoscroll="false"/>',
+                //     abstract: true
+                // })
 
-                .state("restricted.finance.fee.config.feeitemDetails", {
+                .state("restricted.finance.fee.feeitemDetails", {
                     url: "/feeitemDetails",
                     templateUrl: 'app/components/finance/feeitemDetails.html',
                     controller: 'feeitemCtrl',
@@ -2229,7 +2250,7 @@ altairApp
                     }
                 })
 
-                .state("restricted.finance.fee.config.fineDetails", {
+                .state("restricted.finance.fee.fineDetails", {
                     url: "/fineDetails",
                     templateUrl: 'app/components/finance/fineDetails.html',
                     controller: 'fineCtrl',
@@ -2247,7 +2268,7 @@ altairApp
                     }
                 })
 
-                .state("restricted.finance.fee.config.fineAdd", {
+                .state("restricted.finance.fee.fineAdd", {
                     url: "/addFine",
                     templateUrl: 'app/components/finance/fineAdd.html',
                     controller: 'fineAddCtrl',
@@ -2265,7 +2286,7 @@ altairApp
                     }
                 })
 
-                .state("restricted.finance.fee.config.fineEdit", {
+                .state("restricted.finance.fee.fineEdit", {
                     url: "/EditFine/{Row_Id}",
                     templateUrl: 'app/components/finance/fineEdit.html',
                     resolve: {

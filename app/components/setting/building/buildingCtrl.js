@@ -66,6 +66,8 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Landmark')
             ];
 
+            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
+
             $scope.addBuilding=function(){
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";

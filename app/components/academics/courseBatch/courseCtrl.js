@@ -57,6 +57,9 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
+
+                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+
                 $scope.deptData=[];
                 $scope.viewData=[];
                 $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})

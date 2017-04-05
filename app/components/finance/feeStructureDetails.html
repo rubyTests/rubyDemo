@@ -15,6 +15,7 @@
                     </div>
                     <thead>
                         <tr>
+                            <th>S.No</th>
                             <th>Fee Structure Name</th>
                             <th>No.of Fee Items</th>
                             <th>Assigned To</th>
@@ -23,6 +24,7 @@
                     </thead>
                     <tfoot>
                         <tr>
+                            <th></th>
                             <th>Fee Structure Name</th>
                             <th>No.of Fee Items</th>
                             <th>Assigned To</th>
@@ -30,6 +32,7 @@
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
+                            <td>{{row.id}}</td>
                             <td>{{row.FeeStructure_Name}}</td>
                             <td>{{row.FeeItemCount.length}}</td>
                             <td>{{row.AssignTo}}</td>

@@ -53,6 +53,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Description')
             ];
+
+            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
+            
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {
                     if (selectedItems.hasOwnProperty(id)) {

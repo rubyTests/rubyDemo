@@ -70,6 +70,8 @@ angular
                     vm.dt_data = dt_data;
                 });
 
+                var modal = UIkit.modal("#open_leavetype",{bgclose: false, keyboard:false});
+
                 $scope.addleavetype=function(){
                     $scope.tit_caption="Add";
                     $scope.status="Save";

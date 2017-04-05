@@ -54,6 +54,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
 
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.get_id = [];
             $scope.course_data = [];
             $resource('app/components/academics/examination/assign.json')

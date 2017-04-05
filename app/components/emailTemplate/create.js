@@ -59,5 +59,9 @@ angular
                 });
                 return false;
             }
+
+            $scope.backBtn = function(){
+                window.history.back();
+            }
         }
     ]);

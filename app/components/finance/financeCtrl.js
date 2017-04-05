@@ -229,8 +229,8 @@ angular
                 maxItems: 1,
                 valueField: 'id',
                 labelField: 'title',
-                searchField: 'title',
-                searchField: 'url',
+                searchField: ['title','url'],
+                // searchField: 'url',
                 create: false,
                 placeholder: 'Student Name / Admission No',
                 render: {

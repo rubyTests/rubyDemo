@@ -57,6 +57,9 @@ angular
                     $compile($('.dt-uikit .md-input'))($scope);
                 })
             });
+
+            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
+            
             $scope.viewData=[];
             $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
             .success(function(response){

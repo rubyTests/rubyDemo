@@ -81,6 +81,9 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
+
+                var modal = UIkit.modal("#open_leavecategory",{bgclose: false, keyboard:false});
+
                 $scope.dpdwnTypeOption=[];
                 $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/Leavetype.json')
                 .query()
@@ -182,6 +185,14 @@ angular
                         $scope.total_leave=data.total_leave;
                         $scope.leave_status='Approved';
                     }
+                }
+
+                $scope.tableHeadvalNew = [];
+                $scope.tableVal = function(){
+                    $scope.tableHeadvalNew.push({"tableHeadVal":$scope.tableHeadVal,"tableRowVal1":$scope.tableRowVal1,"tableRowVal2":$scope.tableRowVal2});
+                    $scope.tableHeadVal = "";
+                    $scope.tableRowVal1 = "";
+                    $scope.tableRowVal2 = "";
                 }
         }
     );

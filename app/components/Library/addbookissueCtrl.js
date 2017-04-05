@@ -39,8 +39,14 @@ angular
                 maxItems: 1,
                 placeholder: 'Student / Employee'
             };
-            $scope.selectize_subject_options = ["Data Structures and Algorithms", "Computer Networking","Laws Of Thermodynamics","Electronic Circuits","Computer Programming","Basic civil and mechanical engineering"];
-            $scope.selectize_subject_config = {
+            $scope.selectize_course_options = ["Computer Science and Engineering", "Information Technology","Electrical and Electronics Engineering","Civil Engineering","Mechanical Engineering"];
+            $scope.selectize_course_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Course'
+            };
+            $scope.selectize_batch_options = ["Batch 1", "Batch 2","Batch 3","Batch 4","Batch 5","Batch 6"];
+            $scope.selectize_batch_config = {
                 create: false,
                 maxItems: 1,
                 placeholder: 'Select Batch'

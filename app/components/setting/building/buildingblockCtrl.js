@@ -55,6 +55,8 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Building')
             ];
 
+            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
+            
             $scope.addBlock=function(){
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";

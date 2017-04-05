@@ -283,10 +283,21 @@ angular
             };
 
 
-            // $timeout(function() {
-            //     var utc = new Date().toJSON().slice(0,10).replace(/-/g,'/');
-            //     $scope.forms_advanced.datepicker = utc;
-            // }, 1000);
+            
+            var d=new Date();
+            var year=d.getFullYear();
+            var month=d.getMonth()+1;
+            var day=d.getDate();
+            if (month<10){
+            month="0" + month;
+            };
+            if (day<10){
+            dayNew="0" + day;
+            };
+            
+            $scope.date=dayNew + "." + month + "." + year;
+            $scope.forms_advanced.datepicker = $scope.date;
+           
 
             var $maskedInput = $('.masked_input');
             if($maskedInput.length) {

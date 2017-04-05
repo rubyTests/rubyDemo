@@ -278,5 +278,9 @@ angular
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 altair_uikit.reinitialize_grid_margin();
             });
+
+            $scope.backBtn = function(){
+                window.history.back();
+            }
         }
     );

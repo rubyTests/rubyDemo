@@ -53,6 +53,11 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -64,8 +69,9 @@ angular
 
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Post Title'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Category')
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Title'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Category'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Date')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

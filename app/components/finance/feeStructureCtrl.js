@@ -29,6 +29,7 @@ angular
                 // Active Buttons extension
                 .withColumnFilter({
                     aoColumns: [
+                        null,
                         {
                             type: 'text',
                             bRegex: true,
@@ -36,21 +37,6 @@ angular
                         },
                         {
                             type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
                             bRegex: true,
                             bSmart: true
                         },
@@ -68,9 +54,10 @@ angular
                 });
 
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Fee Structure Name'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('No.of Fee Items'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Assigned To')
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
+                DTColumnDefBuilder.newColumnDef(1).withTitle('Fee Structure Name'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('No.of Fee Items'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Assigned To')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {

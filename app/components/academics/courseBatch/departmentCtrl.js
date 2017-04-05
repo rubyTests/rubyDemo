@@ -52,7 +52,10 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                 $scope.addDepartment = function() {
+
+                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+                
+                $scope.addDepartment = function() {
                     $scope.titCaption="Add";
                     $scope.btnStatus="Save";
                     $scope.dept_id='';

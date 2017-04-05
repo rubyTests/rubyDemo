@@ -6,5 +6,9 @@ angular
         '$timeout',
         function ($scope,$window,$timeout) {
 
+        	$scope.backBtn = function(){
+	            window.history.back();
+	        }
+
         }
     ]);

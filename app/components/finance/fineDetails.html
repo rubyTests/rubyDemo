@@ -10,7 +10,7 @@
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <a ui-sref="restricted.finance.fee.config.fineAdd"><button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
+                        <a ui-sref="restricted.finance.fee.fineAdd"><button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
                         <i class="uk-icon-plus"></i>  Add Fine
                         </button></a>
                     </div>
@@ -18,7 +18,7 @@
                         <tr>
                             <th>S.No</th>
                             <th>Fine Name</th>
-                            <th>Desc</th>
+                            <!-- <th>Desc</th> -->
                             <th>No.of Fine Slabs</th>
                             <th>Action</th>
                         </tr>
@@ -27,7 +27,7 @@
                         <tr>
                             <th></th>
                             <th>Fine Name</th>
-                            <th>Desc</th>
+                            <!-- <th>Desc</th> -->
                             <th>No.of Fine Slabs</th>
                             <th></th>
                         </tr>
@@ -36,10 +36,10 @@
                         <tr ng-repeat="row in showCase.dt_data">
                             <td>{{row.id}}</td>
                             <td>{{row.Fine_Name}}</td>
-                            <td>{{row.Fine_Desc}}</td>
+                            <!-- <td>{{row.Fine_Desc}}</td> -->
                             <td>{{row.Fine_Slab.length}}</td>
                             <td>
-                                <a ui-sref="restricted.finance.fee.config.fineEdit({Row_Id:{{row.id}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a ui-sref="restricted.finance.fee.fineEdit({Row_Id:{{row.id}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>

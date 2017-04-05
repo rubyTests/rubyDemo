@@ -58,6 +58,8 @@ angular
                 })
             });
 
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+
             $scope.courseData=[];
             $scope.viewData=[];
             $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})

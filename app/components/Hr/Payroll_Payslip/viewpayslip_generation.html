@@ -148,14 +148,18 @@
                                                     <td class="tdStyle">Transport Allowance</td>
                                                     <td class="tdStyle"><input type="text" ng-model="transport" ng-change="earningCalculation()"></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="tdStyle">Total Earnings</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="Total_Earning" ng-blur="getTotalNetPay()" id="earningTotal">
-                                                    </td>
+                                                <tr ng-repeat="x in addEarnVal">
+                                                    <td class="tdStyle">{{x.category_name}}</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="transport" ng-change="earningCalculation()" value="{{x.category_category_desc}}"> <span ng-click="removeEarn(x)"><i class="md-list-addon-icon material-icons uk-text-info">remove_circle</i></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="border-bottom: none;">&nbsp;</td>
                                                     <td class="tdStyle"><a data-uk-modal="{target:'#open_Model'}" ng-click="addEarning()"><i class="md-list-addon-icon material-icons uk-text-info">add_circle</i> Add Earning</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle"><b>Total Earnings</b></td>
+                                                    <td class="tdStyle"><span ng-model="Total_Earning">{{Total_Earning}}</span>
+                                                    </td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -171,20 +175,24 @@
                                                     <td class="tdStyle">Provident Fund</td>
                                                     <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="fund_deduction"></td>
                                                 </tr>
-                                                <tr>
-                                                    <td class="tdStyle">Total Deduction</td>
-                                                    <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="toatl_deduction"></td>
+                                                <tr ng-repeat="x in addDeductVal">
+                                                    <td class="tdStyle">{{x.category_name}}</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="transport" ng-change="earningCalculation()" value="{{x.category_category_desc}}"> <span ng-click="removeDeduct(x)"><i class="md-list-addon-icon material-icons uk-text-info">remove_circle</i></span></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="border-bottom: none;">&nbsp;</td>
                                                     <td class="tdStyle"><a data-uk-modal="{target:'#open_Model'}" ng-click="addDeduction()"><i class="md-list-addon-icon material-icons uk-text-info">add_circle</i> Add Deduction</a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle"><b>Total Deduction</b></td>
+                                                    <td class="tdStyle"><span ng-model="toatl_deduction">{{toatl_deduction}}</span>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 20px;">{{grasspayTotal}}</span></span></td>
+                                    <td class="tdStyle"><span style="margin-left: 0px;"></span></td>
                                     <td class="tdStyle"><span style="margin-left: 20px;"><b>Net Pay</b>  <span style="margin-left: 115px;">{{showTotalNetpay}}</span></span></td>
                                 </tr>
                             </tbody>
@@ -219,7 +227,8 @@
             </form>
         </div>
         <div class="uk-modal-footer uk-text-right">
-            <button type="button" class="md-btn md-btn-primary md-btntn-small uk-modal-close">Add</button>
+            <button type="button" class="md-btn md-btn-primary md-btntn-small uk-modal-close" ng-click="getPayrollEarning()" ng-if="tit_caption == 'Add Earning'">Add</button>
+            <button type="button" class="md-btn md-btn-primary md-btntn-small uk-modal-close" ng-click="getPayrollDeduction()" ng-if="tit_caption == 'Add Deduction'">Add</button>
         </div>
     </div>
 </div>

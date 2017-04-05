@@ -60,6 +60,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Via'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Vehicle Name'),
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.vehicle_name = [];
             $resource('app/components/transport/routeDetail.json')
                 .query()

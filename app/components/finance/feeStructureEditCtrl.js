@@ -32,5 +32,9 @@ angular
                 $scope.EditableData[0].FeeItemCount.push($scope.dataVal);
             };
 
+            $scope.backBtn = function(){
+                window.history.back();
+            }
+
         }
     ]);

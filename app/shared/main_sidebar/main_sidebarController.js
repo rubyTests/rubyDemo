@@ -338,18 +338,14 @@ angular
                         {
                             title:'Fees',
                             submenu:[
+                                    
                                 {
-                                    title:'Configuration',
-                                    submenu:[
-                                        {
-                                            title:'Fee Item',
-                                            link: 'restricted.finance.fee.config.feeitemDetails'
-                                        },
-                                        {
-                                            title:'Fine',
-                                            link: 'restricted.finance.fee.config.fineDetails'
-                                        }
-                                    ]
+                                    title:'Fee Item',
+                                    link: 'restricted.finance.fee.feeitemDetails'
+                                },
+                                {
+                                    title:'Fine',
+                                    link: 'restricted.finance.fee.fineDetails'
                                 },
                                 {
                                     title:'Fee Structure',

@@ -60,6 +60,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Description'),
 
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.get_id = [];
             $resource('app/components/academics/examination/setgrading.json')
                 .query()

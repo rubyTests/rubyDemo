@@ -70,6 +70,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Vehicle Name'),
                 DTColumnDefBuilder.newColumnDef(5).withTitle('Joining Date'),
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.vehicle_name = [];
             $resource('app/components/transport/allocation.json')
                 .query()

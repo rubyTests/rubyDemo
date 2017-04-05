@@ -48,6 +48,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Type'),
 
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.get_id = [];
             $resource('app/components/academics/examination/setassessment.json')
                 .query()

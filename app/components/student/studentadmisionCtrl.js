@@ -335,5 +335,42 @@ angular
                 "Vatican City"
             ];
 
+            var planets_data = $scope.selectize_planets_options = [
+                {id: 1, title: 'Rafeeq', url: '444'},
+                {id: 2, title: 'Saravanan', url: '222'},
+                {id: 3, title: 'Gopi', url: '222'},
+                {id: 4, title: 'Senthil', url: '222'},
+                {id: 5, title: 'Mani', url: '222'},
+                {id: 6, title: 'Vijay', url: '222'},
+                {id: 7, title: 'Karthil', url: '222'},
+                {id: 8, title: 'Selva', url: '222'}
+            ];
+
+            $scope.selectize_planets_config = {
+                plugins: {
+                    'remove_button': {
+                        label     : ''
+                    }
+                },
+                maxItems: 1,
+                valueField: 'id',
+                labelField: 'title',
+                searchField: ['title','url'],
+                // searchField: 'url',
+                create: false,
+                placeholder: 'Student Name / Admission No',
+                render: {
+                    option: function(planets_data, escape) {
+                        return  '<div class="option">' +
+                            '<span class="title">' + escape(planets_data.title) + '</span><br>' +
+                            '<span class="title Addition uk-text-muted uk-text-small">' + escape(planets_data.url) + '</span>' +
+                            '</div>';
+                    }
+                    // item: function(planets_data, escape) {
+                    //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
+                    // }
+                }
+            };
+
         }
     ]);

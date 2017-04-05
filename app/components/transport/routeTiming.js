@@ -60,6 +60,9 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('End Time'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Vehicle Name'),
             ];
+
+            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            
             $scope.route_name = [];
             $resource('app/components/transport/routeTiming.json')
                 .query()

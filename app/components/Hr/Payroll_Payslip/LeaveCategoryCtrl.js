@@ -68,6 +68,9 @@ angular
                 .then(function(leavecategory_data) {
                     $scope.leaveTypeArray=leavecategory_data;
                 });
+
+                var modal = UIkit.modal("#open_leavecategory",{bgclose: false, keyboard:false});
+                
                 $scope.addleavecategory=function(){
                     $scope.tit_caption="Add";
                     $scope.status="Save";

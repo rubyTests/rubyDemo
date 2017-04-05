@@ -375,9 +375,18 @@
                                 </h2>
                                 <hr class="md-hr"/>
                                 <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-4 parsley-row">
+                                    <!-- <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="Sibling">Sibling<span class="req"></span></label>
                                         <input type="text" name="Sibling" id="Sibling" required class="md-input" md-input ng-model="wizard.Sibling" />
+                                    </div> -->
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <input type="text" config="selectize_c_config" options="selectize_c_options" ng-model="selectize_c" name="selectize_c" selectize/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3 data-parsley-americandateley-row">
+                                        <input type="text" config="selectize_a_config" options="selectize_a_data.options" ng-model="selectize_a" name="selectize_a" selectize />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
                                     </div>
                                 </div>
                             </div>

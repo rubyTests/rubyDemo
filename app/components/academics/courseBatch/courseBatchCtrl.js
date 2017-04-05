@@ -54,6 +54,8 @@ angular
                     })
                 });
                 
+                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+
                  $scope.addBatch = function() {
                     $scope.titCaption="Add";
                     $scope.btnStatus="Save";

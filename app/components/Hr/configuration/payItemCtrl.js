@@ -43,6 +43,8 @@ angular
                     })
                 });
 
+                var modal = UIkit.modal("#open_payitem",{bgclose: false, keyboard:false});
+
                 $scope.addItem=function(){
                     $scope.tit_caption="Add";
                     $scope.status="Save";
