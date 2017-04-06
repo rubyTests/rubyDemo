@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('subjectCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter,$http,$rootScope,$localStorage) {
             var vm = this;

@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('file_inputCtrl', [
         '$scope',
         function ($scope) {

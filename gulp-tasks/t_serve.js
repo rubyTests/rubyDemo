@@ -12,7 +12,7 @@ gulp.task('serve', (process.argv[3] === '--compile') ? ['default'] : null, funct
         // http://www.browsersync.io/docs/options/#option-host
         host: "10.0.0.188",
         // http://www.browsersync.io/docs/options/#option-proxy
-        proxy: "altair_app.local",
+        proxy: "rubycampu_app.local",
         // http://www.browsersync.io/docs/options/#option-port
         port: 3022,
         // http://www.browsersync.io/docs/options/#option-notify
@@ -24,7 +24,7 @@ gulp.task('serve', (process.argv[3] === '--compile') ? ['default'] : null, funct
 
     gulp.watch('app/*.js', ['js_app']);
     gulp
-        .watch('assets/js/altair_app.min.js')
+        .watch('assets/js/rubycampu_app.min.js')
         .on('change', bs_angular.reload);
 
     gulp.watch('assets/less/**/*.less', ['less_main']);

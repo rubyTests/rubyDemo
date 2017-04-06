@@ -4,7 +4,7 @@
 */
 ;'use strict';
 
-altairApp
+rubycampusApp
     // page title
     .directive('pageTitle', [
         '$rootScope',

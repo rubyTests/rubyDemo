@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('LeaveEntitleAddCtrl',
         function($scope,$resource) {
             // console.log(get_Payitem,'get_Payitem');

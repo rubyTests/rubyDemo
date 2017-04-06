@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('contact_listCtrl', [
         '$rootScope',
         '$scope',

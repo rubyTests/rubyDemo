@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('EditPayCategoryCtrl',
         function($scope) {
             // console.log(get_Payitem,'get_Payitem');

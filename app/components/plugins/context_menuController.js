@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('context_menuCtrl', [
         '$scope',
         '$timeout',

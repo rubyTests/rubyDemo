@@ -1,17 +1,5 @@
-/*
- *  Altair Admin angularjs
- *  controller
- */
-
-// angular
-    // .module('altairApp')
-    // .controller('mainCtrl', [
-        // function () {}
-    // ])
-// ;
-
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('mainCtrl',
         function($scope, $http, $rootScope, $localStorage,$location) {
 			$localStorage.service='http://192.168.1.136/rubyServices/api/';

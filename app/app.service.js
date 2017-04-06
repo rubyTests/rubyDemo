@@ -1,4 +1,4 @@
-altairApp
+rubycampusApp
     .service('detectBrowser', [
         '$window',
         function($window) {

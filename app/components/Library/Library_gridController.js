@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('Library_gridController', [
         '$scope',
         '$rootScope',

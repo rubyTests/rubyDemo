@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('viewemployee_PaydetailsCtrl', [
         '$scope',
         '$rootScope',

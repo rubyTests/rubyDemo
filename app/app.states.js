@@ -1,4 +1,4 @@
-altairApp
+rubycampusApp
     .config([
         '$stateProvider',
         '$urlRouterProvider',

@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('idle_timeoutCtrl', [
         '$scope',
         'Idle',

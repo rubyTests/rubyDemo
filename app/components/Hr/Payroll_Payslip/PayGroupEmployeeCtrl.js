@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('PayGroupEmployeeCtrl',['$scope','$compile','$stateParams', '$timeout', '$resource', '$filter', 'DTOptionsBuilder', 'DTColumnDefBuilder',function( $scope, $compile, $stateParams, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder) {
             var vm = this;
             vm.selected = {};

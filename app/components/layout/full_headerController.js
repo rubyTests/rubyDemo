@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('full_headerCtrl', [
         '$rootScope',
         '$scope',

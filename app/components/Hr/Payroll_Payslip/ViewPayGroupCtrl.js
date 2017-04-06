@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('ViewPayGroupCtrl', ['$scope','$stateParams','Pay_item','Pay_Structure','Pay_Group','$filter',
     function($scope,$stateParams,Pay_item,Pay_Structure,Pay_Group,$filter){
         $scope.EarningsDiv=true;

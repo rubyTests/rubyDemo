@@ -1,4 +1,4 @@
-altairApp
+rubycampusApp
     .factory('windowDimensions', [
         '$window',
         function($window) {

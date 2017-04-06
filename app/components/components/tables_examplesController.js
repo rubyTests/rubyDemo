@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('tables_examplesCtrl', [
         '$scope',
         '$timeout',

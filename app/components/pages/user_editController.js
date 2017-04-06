@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('user_editCtrl', [
         '$rootScope',
         '$scope',

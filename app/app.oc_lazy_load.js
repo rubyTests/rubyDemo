@@ -1,6 +1,6 @@
 /* ocLazyLoad config */
 
-altairApp
+rubycampusApp
     .config([
         '$ocLazyLoadProvider',
         function($ocLazyLoadProvider) {

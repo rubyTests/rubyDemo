@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('payslipview_for_pdfCtrl', [
         '$scope',
         '$rootScope',

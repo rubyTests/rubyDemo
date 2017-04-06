@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('addassignemployeeCtrl', [
         '$scope',
         '$rootScope',

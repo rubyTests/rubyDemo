@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('addbookissueCtrl', [
         '$scope',
         '$rootScope',
@@ -93,7 +93,7 @@ angular
     ]);
 
     //     angular
-    // .module('altairApp')
+    // .module('rubycampusApp')
     // .controller('addbookissueCtrl', [
     //     '$scope',
     //     '$rootScope',

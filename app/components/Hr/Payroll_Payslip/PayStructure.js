@@ -1,5 +1,5 @@
 angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .controller('PayStructure', [
         '$scope',
         '$timeout',
@@ -97,7 +97,7 @@ angular
         }
     ]);
     angular
-    .module('altairApp')
+    .module('rubycampusApp')
     .directive('pageSelect', function() {
       return {
         restrict: 'E',
