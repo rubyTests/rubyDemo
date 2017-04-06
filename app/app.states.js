@@ -342,12 +342,20 @@ rubycampusApp
                     templateUrl: 'app/components/calender/calendarExamination.html',
                     controller: 'examination',
                     resolve: {
+                         user_data: function($http){
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_fullcalendar',
                                 'lazy_parsleyjs',
                                 'lazy_character_counter',
                                 'lazy_masked_inputs',
+                                'lazy_datatables',
+                                'lazy_charts_metricsgraphics',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'app/components/calender/calendarExamination.js'
                             ]);
@@ -368,6 +376,7 @@ rubycampusApp
                                 'lazy_character_counter',
                                 'lazy_parsleyjs',
                                 'lazy_masked_inputs',
+                                'lazy_datatables',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'app/components/calender/calendarNewEventsView.js'
                             ]);

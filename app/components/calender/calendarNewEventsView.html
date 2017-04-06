@@ -1,30 +1,94 @@
+<style type="text/css">
+.fc-resizer.fc-end-resizer {
+    display: none !important;
+}
+.timeline_date, .md-card-content {
+    font-size: 13px;
+    padding-left: 0;
+}
+.timeline_date{
+    padding-top: 0px;
+}
+.toolbar-fixed.md-card .md-card-content {
+    padding-bottom: 1px;
+    padding-top: 5px;
+}
+@media (min-width:961px)  { 
+    /*.cp_altair span{
+        margin-right: 20px;
+        margin-left: 20px;
+    }*/
+}
+</style>
     <div id="page_content">
         <div id="page_content_inner">
-            <h3 class="heading_b uk-margin-bottom">Event & News</h3>
-            <div class="md-card">
-                <div class="md-card-content">
-                    <div class="uk-grid" data-uk-grid-margin>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                            <div class="parsley-row">
-                                <selectize id="selec_adv_2" config="department_config" options="department" position="bottom" ng-model="department1" name="department" required placeholder='Select Department'></selectize>
-                            </div>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                            <div class="parsley-row">
-                                <selectize id="selec_adv_2" config="course_config" options="course" position="bottom" ng-model="course1" name="course" required placeholder='Select Course'></selectize>
-                            </div>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                            <div class="parsley-row">
-                                <selectize id="selec_adv_2" config="batch_config" options="batch" position="bottom" ng-model="batch1" name="batch" required placeholder='Select Batch'></selectize>
-                            </div>
-                        </div>
-                    </div>
+            <div class="uk-grid">
+                <div class="uk-width-1-2">
+                    <h3 class="heading_b uk-margin-bottom">Event & News</h3>
+                </div>
+                <div class="uk-width-1-2">
+                    <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="checkValiddata('','')"><i class="material-icons">add</i>Add Event and News</button>
+                    <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="openTable()" ng-show="toggle"><i class="material-icons">list</i> Lists</button>
+                    <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="openTable()" ng-hide="toggle"><i class="material-icons">event</i> Calendar</button>
+                    <!-- <sidebar-secondary-toggle ng-class="{ 'uk-hidden-large': secondarySidebarHiddenLarge }"></sidebar-secondary-toggle> -->
                 </div>
             </div>
-            <div class="md-card">
+            <div class="md-card uk-margin-remove uk-animation-slide-bottom" ng-if="toggle">
                 <div class="md-card-content">
                     <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+                </div>
+            </div>
+            <div class="md-card uk-margin-remove uk-animation-slide-bottom" ng-hide="toggle">
+                <div class="md-card-content">
+                    <table datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Course</th>
+                                <th>Batch</th>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                                <th>Time</th>
+                                <!-- <th>End Time</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th></th>
+                                <th>Course</th>
+                                <th>Batch</th>
+                                <th>Type</th>
+                                <th>Name</th>
+                                <th>From Date</th>
+                                <th>To Date</th>
+                                <th>Time</th>
+                                <!-- <th>End Time</th> -->
+                                <th></th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                          <tr ng-repeat="row in calendar_events">
+                            <td>{{row._id}}</td>
+                            <td>{{row.course_name}}</td>
+                            <td>{{row.batch_name}}</td>
+                            <td>{{row.eventType}}</td>
+                            <td>{{row.title}}</td>
+                            <td>{{getdateobject(row.start) | date : 'dd.MM.yyyy'}}</td>
+                            <td>{{getdateobject(row.end) | date : 'dd.MM.yyyy'}}</td>
+                            <td>{{getdateobject(row.start) | date : 'shortTime'}} - {{getdateobject(row.end) | date : 'shortTime'}}</td>
+                            <td class="uk-text-center">
+                                <a class="ts_remove_row" ng-click="viewEvent($index)"><i class="md-icon material-icons">visibility</i></a>
+                                <a class="ts_remove_row" ng-click="editEvent(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteEvent($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+
+                            </td>
+                          </tr>
+                        </tbody>
+                    </table>
+                    <!-- {{calendar_events | json}} -->
                 </div>
             </div>
 
@@ -33,78 +97,76 @@
 <div class="uk-modal" id="modal_header_footer">
     <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Event & News <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="headline tooltip">&#xE878;</i></h3>
+            <h3 class="uk-modal-title">Event & News</h3>
         </div>
-        <!-- <h3 class="heading_b uk-margin-medium-bottom">New Event</h3> -->
-            <div class="uk-margin-medium-bottom" id="calendar_colors">
+            <div class="" id="calendar_colors">
                 <div id="calendar_colors_wrapper">
                     <div class="cp_altair" id="T1489421677871">
-                        <span data-color="#e53935" style="background:#e53935"></span>
-                        <span data-color="#d81b60" style="background:#d81b60"></span>
-                        <span data-color="#8e24aa" style="background:#8e24aa"></span>
-                        <span data-color="#5e35b1" style="background:#5e35b1"></span>
-                        <span data-color="#3949ab" style="background:#3949ab"></span>
-                        <span data-color="#1e88e5" style="background:#1e88e5"></span>
-                        <span data-color="#039be5" style="background:#039be5"></span>
-                        <span data-color="#0097a7" style="background:#0097a7"></span>
-                        <span data-color="#00897b" style="background:#00897b"></span>
-                        <span data-color="#43a047" style="background:#43a047"></span>
-                        <span data-color="#689f38" style="background:#689f38"></span>
-                        <span data-color="#ef6c00" style="background:#ef6c00"></span>
-                        <span data-color="#f4511e" style="background:#f4511e"></span>
-                        <span data-color="#6d4c41" style="background:#6d4c41"></span>
-                        <span data-color="#757575" style="background:#757575"></span>
-                        <span data-color="#546e7a" style="background:#546e7a"></span>
+                        <span ng-repeat="color in colorcode" ng-class="{active_color:active==color}" ng-click="active=color" data-color="{{color}}" style="background:{{color}}"></span>
                         <input type="hidden">
                     </div>
                 </div> 
             </div>
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
-                    <label>Title</label>
-                    <input type="text" class="input-count md-input" id="input_counter" maxlength="60" md-input char-counter ng-model="input_default" />
+                    <div class="parsley-row">
+                        <selectize id="selec_adv_2" config="course_config" options="course" position="bottom" ng-model="forms_advanced.course2" name="course" required placeholder='Select Course'></selectize>
+                    </div>
                 </div>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
-                        <selectize id="selec_adv_2" config="selectize_config" options="eventType" position="bottom" ng-model="eventType1" name="eventType" required placeholder='Select Event'></selectize>
+                        <selectize id="selec_adv_2" config="batch_config" options="batch" position="bottom" ng-model="forms_advanced.batch2" name="batch" required placeholder='Select Batch'></selectize>
                     </div>
                 </div>
             </div>
-             <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-1-2 uk-width-medium-1-3">
+                    <label>Title</label>
+                    <input type="text" class="input-count md-input" id="input_counter" maxlength="60" md-input char-counter ng-model="forms_advanced.input_default" />
+                </div>
+            <!-- </div>
+            <div class="uk-grid" data-uk-grid-margin> -->
+                <div class="uk-width-large-1-2 uk-width-medium-1-3">
+                    <div class="parsley-row">
+                        <selectize id="selec_adv_2" config="selectize_config" options="eventType" position="bottom" ng-model="eventType1" name="eventType" required placeholder='Select Type'></selectize>
+                    </div>
+                </div>
+            <!-- </div>
+             <div class="uk-grid" data-uk-grid-margin> -->
                 <div class="uk-width-large-1-1 uk-width-medium-1-1">
                     <label>Description</label>
                     <input type="text" class="input-count md-input" id="input_counter" maxlength="250" md-input char-counter ng-model="description" />
                 </div>
-            </div>
-            <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-large-1-2 uk-width-medium-1-1">
+            <!-- </div>
+            <div class="uk-grid" data-uk-grid-margin> -->
+                <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                         <label for="uk_dp_start">Start Date</label>
                         <input class="md-input" type="text" id="uk_dp_start" md-input ng-model="dp_start">
                     </div>
                 </div>
-                <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
                         <label for="uk_tp_1">Start time</label>
-                        <input class="md-input masked_input uk-form-width-small" type="text" id="uk_tp_1" md-input ng-model="forms_advanced.startTime" data-inputmask="'alias': 'hh:mm'" data-inputmask-showmaskonhover="false">
+                        <input class="md-input masked_input uk-form-width-small" type="text" id="uk_tp_1" md-input ng-model="startTime" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false">
                     </div>
                 </div>
-            </div>
-            <div class="uk-grid" data-uk-grid-margin>
-                <div class="uk-width-large-1-2 uk-width-medium-1-1">
+           <!--  </div>
+            <div class="uk-grid" data-uk-grid-margin> -->
+                <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                         <label for="uk_dp_end">End Date</label>
                         <input class="md-input" type="text" id="uk_dp_end" md-input ng-model="dp_end">
                     </div>
                 </div>
-                 <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
                         <label for="uk_tp_1">End time</label>
-                        <input class="md-input masked_input uk-form-width-small" type="text" id="uk_tp_1" md-input ng-model="forms_advanced.endTime" data-inputmask="'alias': 'hh:mm'" data-inputmask-showmaskonhover="false">
+                        <input class="md-input masked_input uk-form-width-small" type="text" id="uk_tp_1" md-input ng-model="endTime" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false">
                     </div>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 angular
-    .module('rubycampusApp')
+    .module('altairApp')
     .controller('calendarCtrl', [
         '$scope',
         'uiCalendarConfig',
