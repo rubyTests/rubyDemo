@@ -1,11 +1,7 @@
 <div id="page_content"  ng-controller="employeecategoryCtrl as showCase">
     <div id="page_content_inner">
 
-        <h3 class="heading_a uk-margin-bottom"> Category
-            <!-- <span style="float: right;font-size:18px;">
-                <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_category'}" ng-click="addCategory()">Add Category</button>
-            </span> -->
-        </h3>
+        <h3 class="heading_a uk-margin-bottom"> Category </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <button  style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_category'}" ng-click="addCategory()"><i class="material-icons">add</i>Add Category</button>
@@ -27,13 +23,13 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
+                        <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.name}}</td>
-                            <td>{{row.desc}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.DESCRIPTION}}</td>
                             <td class="uk-text-center">
                                 <a ng-click="editcategory(row)" data-uk-modal="{target:'#open_category'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteCategory(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -61,7 +57,7 @@
                             </div>
                             <div class="uk-modal-footer uk-text-right">
                                 <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
+                                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveCategory()">{{status}}</button>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('employeecategoryCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -59,30 +59,75 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/Hr/configuration/category.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
 
-                var modal = UIkit.modal("#open_category",{bgclose: false, keyboard:false});
-                
-                $scope.addCategory=function(){
-                    $scope.tit_caption="Add";
-                    $scope.status="Save";
-                    $scope.category_name='';
-                    $scope.category_desc='';
-                    $('.uk-modal').find('input').trigger('blur');
+            $scope.addCategory=function(){
+                $scope.tit_caption="Add";
+                $scope.status="Save";
+                $scope.category_name='';
+                $scope.category_desc='';
+                $('.uk-modal').find('input').trigger('blur');
+            }
+            $scope.editcategory=function(data){
+                $scope.tit_caption="Edit";
+                $scope.status="update";
+                if (data) {
+                    $scope.category_id=data.ID;
+                    $scope.category_name=data.NAME;
+                    $scope.category_desc=data.DESCRIPTION;
                 }
-                $scope.editcategory=function(data){
-                    $scope.tit_caption="Edit";
-                    $scope.status="update";
-                    if (data) {
-                        $scope.category_id=data.id;
-                        $scope.category_name=data.name;
-                        $scope.category_desc=data.desc;
+            }
+            $scope.viewData=[];
+            $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
+            .success(function(category_data){
+                $scope.viewData=category_data.data;
+            });
+
+
+            $scope.saveCategory=function(){
+                $http({
+                method:'POST',
+                url: 'http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail',
+                data: {
+                    'id' : $scope.category_id,
+                    'name' : $scope.category_name,
+                    'description' : $scope.category_desc
+                },
+                // headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.data.message);
+                    if($scope.category_id){
+                        var data1=$filter('filter')($scope.viewData,{ID:$scope.category_id},true);
+                        data1[0].NAME=$scope.category_name;
+                        data1[0].DESCRIPTION=$scope.category_desc;
+                    }else{
+                        $scope.viewData.push({ID:return_data.data.data.CAT_ID,NAME:$scope.category_name,DESCRIPTION:$scope.category_desc});
                     }
+                });
+            }
+
+            $scope.deleteCategory=function(id,$index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : "http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail",
+                            params : {id : id},
+                            // headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                var data=response.data.message.message;
+                                $scope.viewData.splice($index, 1);
+                            },function myError(response) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
                 }
+            }
         }
     );

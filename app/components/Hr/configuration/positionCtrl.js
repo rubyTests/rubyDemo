@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('positionCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             $scope.category_data=[];
@@ -60,48 +60,97 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/Hr/configuration/position.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
-
+        
                 var modal = UIkit.modal("#open_category",{bgclose: false, keyboard:false});
                 
                 $scope.addPosition=function(){
                     $scope.tit_caption="Add";
                     $scope.status="Save";
+                    $scope.position_id='';
                     $scope.position_name='';
-                    $scope.selectize_category='';
+                    $scope.category_id='';
                     $('.uk-modal').find('input').trigger('blur');
                 }
                 $scope.editPosition=function(data){
                     $scope.tit_caption="Edit";
                     $scope.status="update";
                     if (data) {
-                        $scope.position_id=data.id;
-                        $scope.position_name=data.name;
-                        $scope.selectize_category=data.cat_name;
+                        $scope.position_id=data.ID;
+                        $scope.position_name=data.NAME;
+                        $scope.category_id=data.CATEGORY_ID;
                     }
                 }
-
-                $resource('app/components/Hr/configuration/category.json')
-                .query()
-                .$promise
-                .then(function(ret_data) {
-                    $scope.category_data.push(ret_data);
+                $scope.viewData=[];
+                $scope.CategoryList=[];
+                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/positionViewDetail')
+                .success(function(position_data){
+                    $scope.viewData=position_data.data;
                 });
-                $scope.selectize_category_options = $scope.category_data;
+                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
+                .success(function(category_data){
+                    $scope.CategoryDataList=category_data.data;
+                    $scope.CategoryList.push(category_data.data);
+                });
+
+                $scope.selectize_category_options =$scope.CategoryList;
                 $scope.selectize_category_config = {
                     create: false,
                     maxItems: 1,
                     placeholder: 'Select Category...',
-                    valueField: 'id',
-                    labelField: 'name',
+                    valueField: 'ID',
+                    labelField: 'NAME',
                     onInitialize: function(selectize){
                         
                     }
                 };
+
+                $scope.savePosition=function(){
+                    $http({
+                        method:'POST',
+                        url: 'http://localhost/smartedu/test/EmployeemgmntAPI/positionDetail',
+                        data: {
+                            'id' : $scope.position_id,
+                            'name' : $scope.position_name,
+                            'category_id' : $scope.category_id
+                        },
+                        // headers:{'access_token':$localStorage.access_token}
+                    }).then(function(return_data){
+                        console.log(return_data.data.data.message);
+                        var categoryData=$filter('filter')($scope.CategoryDataList,{ID:$scope.category_id},true);
+                        if($scope.position_id){
+                            var data1=$filter('filter')($scope.viewData,{ID:$scope.position_id},true);
+                            data1[0].NAME=$scope.position_name;
+                            data1[0].CATEGORY_ID=$scope.category_id;
+                            data1[0].CATEGORY_NAME=categoryData[0].NAME;
+                        }else{
+                            $scope.viewData.push({ID:return_data.data.data.POSITION_ID,NAME:$scope.position_name,CATEGORY_ID:$scope.category_id,CATEGORY_NAME:categoryData[0].NAME});
+                        }
+                    });
+                }
+
+                $scope.deletePosition=function(id,$index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : "http://localhost/smartedu/test/EmployeemgmntAPI/positionDetail",
+                            params : {id : id},
+                            // headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                var data=response.data.message.message;
+                                $scope.viewData.splice($index, 1);
+                            },function myError(response) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                }
+            }
         }
     );
