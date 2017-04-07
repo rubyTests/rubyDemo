@@ -1,5 +1,5 @@
 /*
-*  Altair Admin AngularJS
+*  rubycampus Admin AngularJS
 *  directives
 */
 ;'use strict';

@@ -2427,6 +2427,50 @@ rubycampusApp
                     }
                 })
 
+                // Added by Senthil 05-04-17
+
+                .state("restricted.mails", {
+                    url: "/mails",
+                    templateUrl: 'app/components/message/mails.html',
+                    controller: 'mailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load('app/components/message/mailsCtrl.js');
+                        }],
+                        messages: function($http){
+                            return $http({ method: 'GET', url: 'data/mailbox_datanew.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Mailbox'
+                    }
+                })
+
+                .state("restricted.mails.mailDetails", {
+                    url: "/details/{mailId:[0-9]{1,4}}",
+                    views: {
+                        'mail_content': {
+                            templateUrl: 'app/components/message/mailDetails.html',
+                            controller: 'mailsCtrl'
+                        }
+                    },
+                    params: { hidePreloader: true }
+                })
+
+                .state("restricted.mails.mailList", {
+                    url: "/inbox/{fold}",
+                    views: {
+                        'mail_content': {
+                            templateUrl: 'app/components/message/mailList.html',
+                            controller: 'mailsCtrl'
+                        }
+                    },
+                    params: { fold:null,hidePreloader: true }
+                })
+
                 // Added by Vijayaraj 08-03-17
                 .state("restricted.employeemanagement", {
                     url: "/employeemanagement",
@@ -2549,7 +2593,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.js',
+                                'assets/js/custom/uikit_fileinput.min.js',
                                 'app/components/student/studentadmisionCtrl.js'
                             ], {serie:true});
                         }]

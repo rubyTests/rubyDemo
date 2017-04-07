@@ -1,0 +1,64 @@
+<style type="text/css">
+    .md-card .md-card-toolbar {
+        height: 70px;
+        padding: 15px 30px;
+    }
+</style>
+<div class="md-card">
+    <div class="md-card-toolbar">
+        <p uk-margin>
+            <button class="uk-button uk-button-default uk-width-1-10 uk-margin-small-top uk-margin-small-right" ui-sref="restricted.mails.mailList" data-uk-tooltip title="Back to Inbox"><i class="material-icons">arrow_back</i></button>
+            <button class="uk-button uk-button-default uk-width-1-10 uk-margin-small-top" data-uk-tooltip title="Delete"><i class="material-icons">delete</i></button>
+        </p>
+    </div>
+    <div class="md-card-content large-padding">
+        <div class="uk-grid uk-grid-divider uk-grid-medium">
+            <div class="uk-width-large-1-1">
+                <div class="uk-grid uk-grid-small">
+                    <div class="uk-width-large-1-1">
+                        <h3 class="uk-heading-primary">{{ EditData[0].title }}</h3>
+                    </div>
+                </div>
+                <hr class="uk-grid-divider">
+                <div class="uk-grid uk-grid-small">
+                    <div class="uk-width-large-1-1">
+                        <img class="md-user-image md-list-addon-avatar" ng-src="{{EditData[0].sender_avatar}}" alt=""/>
+                        <span class="uk-margin-left">from  {{EditData[0].email}} on {{EditData[0].date}} </span>
+                    </div>
+                </div>
+                <hr class="uk-grid-divider">
+                <div class="uk-grid uk-grid-small">
+                    <div class="uk-width-large-1-1">
+                        <span class="uk-text-muted uk-text-small">{{EditData[0].content}}</span>
+                    </div>
+                </div>
+                <div class="uk-grid uk-grid-small">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-small-1-1">
+                            <p></p>
+                            <p></p>
+                            <p></p>
+                            <div class="md-card" style="width:830px;" ng-hide="reply">
+                                <div class="uk-margin-left">
+                                <br>
+                                    Click here to <a href class="text-u-l" ng-click="reply=!reply">Reply</a> or <a href class="text-u-l" ng-click="reply=!reply">Forward</a>
+                                </div>
+                                <div class="md-card-content" contenteditable="true" style="height: 50px;">
+                                    
+                                </div>
+                            </div>
+                            <div ng-show="reply">
+                                <form class="md-card-list-item-reply">
+                                    <label for="mailbox_reply_{{$index}}">Reply to <span>{{EditData[0].sender}}</span></label>
+                                    <textarea class="md-input md-input-full" id="mailbox_reply_{{$index}}" cols="120" rows="4" md-input ng-model="message_reply"></textarea>
+                                    <button class="md-btn md-btn-flat md-btn-flat-primary">Send</button>
+                                    <button class="md-btn md-btn-flat md-btn-flat-primary" ng-click="reply=!reply" style="margin-top:10px;">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

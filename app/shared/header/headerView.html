@@ -128,7 +128,7 @@
                                 <div class="md-card-content">
                                     <ul class="uk-tab uk-tab-grid" data-uk-tab="{connect:'#header_alerts',animation:'slide-horizontal'}">
                                         <li class="uk-width-1-2 uk-active"><a href="#" class="js-uk-prevent">Messages ({{messages_length}})</a></li>
-                                        <li class="uk-width-1-2"><a href="javascript:void(0)" class="js-uk-prevent">Alerts ({{alerts_length}})</a></li>
+                                        <li class="uk-width-1-2"><a href="javascript:void(0)" class="js-uk-prevent">Notifications ({{alerts_length}})</a></li>
                                     </ul>
                                     <ul id="header_alerts" class="uk-switcher uk-margin">
                                         <li>
@@ -139,7 +139,8 @@
                                                         <img class="md-user-image md-list-addon-avatar" ng-src="{{message.avatar}}" alt=""  ng-if="message.avatar"/>
                                                     </div>
                                                     <div class="md-list-content">
-                                                        <span class="md-list-heading"><a ui-sref="restricted.pages.mailbox">{{message.title}}</a></span>
+                                                        <!-- <span class="md-list-heading"><a ui-sref="restricted.pages.mailbox">{{message.title}}</a></span> -->
+                                                        <span class="md-list-heading"><a ui-sref="restricted.mails.mailList">{{message.title}}</a></span>
                                                         <span class="uk-text-small uk-text-muted">{{message.content}}</span>
                                                     </div>
                                                 </li>
@@ -173,7 +174,7 @@
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav js-uk-prevent">
                                     <li><a ui-sref="restricted.student.student_profile">My profile</a></li>
-                                    <li><a ui-sref="restricted.pages.settings">Settings</a></li>
+                                    <!-- <li><a ui-sref="restricted.pages.settings">Settings</a></li> -->
                                     <!-- <li><a ui-sref="login">Logout</a></li> -->
                                     <li><a ng-click="logOut()">Logout</a></li>
                                 </ul>
