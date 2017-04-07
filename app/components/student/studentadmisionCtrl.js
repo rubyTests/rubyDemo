@@ -7,11 +7,47 @@ angular
 		'$http',
         function ($scope,utils,$localStorage,$http) {
             var $wizard_advanced_form = $('#wizard_advanced_form');
-
-            // $scope.finishedWizard = function() {
-                // var form_serialized = JSON.stringify( utils.serializeObject($wizard_advanced_form), null, 2 );
-                // UIkit.modal.alert('<p>Wizard data:</p><pre>' + form_serialized + '</pre>');
-            // };
+            $scope.father=[];
+            $scope.Mother=[];
+            $scope.guardian=false;
+            $scope.removeGuardian=false;
+            $scope.addGuardian=true;
+            $scope.showGuardianFrom=function(){
+                $scope.guardian=true;
+                $scope.removeGuardian=true;
+                $scope.addGuardian=false;
+            }
+            $scope.hideGuardianFrom=function(){
+                $scope.guardian=false;
+                $scope.removeGuardian=false;
+                $scope.addGuardian=true;
+            }
+            $scope.checkStatus=function(res){
+                console.log(res);
+                if(res==true){
+                    console.log($scope.father,'trueeee');
+                    $scope.Mother.address=$scope.father.address;
+                    $scope.Mother.city=$scope.father.city;
+                    $scope.Mother.state=$scope.father.state;
+                    $scope.Mother.pincode=$scope.father.pincode;
+                    $scope.Mother.country=$scope.father.country;
+                    $scope.Mother.phone=$scope.father.phone;
+                    $scope.Mother.mobile_no=$scope.father.mobile_no;
+                    $scope.Mother.email=$scope.father.email;
+                    $('.motherDetails').find('input').attr('disabled',true);
+                }else {
+                    console.log('false');
+                    $scope.Mother.addres='';
+                    $scope.Mother.city='';
+                    $scope.Mother.state='';
+                    $scope.Mother.pincode='';
+                    $scope.Mother.country='';
+                    $scope.Mother.phone='';
+                    $scope.Mother.mobile_no='';
+                    $scope.Mother.email='';
+                    $('.motherDetails').find('input').attr('disabled',false);
+                }
+            }
             $scope.selectize_a_data = {
                 options: [
                     {
@@ -87,7 +123,7 @@ angular
             $scope.selectize_d_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Department...'
+                placeholder: 'Select'
             };
             $scope.selectize_n_options = ["India", "Sri Langa", "America"];
             $scope.selectize_n_config = {
@@ -256,13 +292,24 @@ angular
             $scope.form_dynamic.push($scope.form_template);
 
             $scope.form_dynamic_model = [];
-
+            $scope.form_dynamic_model1 = [];
+            $scope.form_dynamic1=[];
+            $scope.form_dynamic1.push({'institute': '','year': '','course_name': '','total_mark': ''});
             // clone section
             $scope.cloneSection = function($event,$index) {
                 $event.preventDefault();
                 $scope.form_dynamic.push($scope.form_template);
             };
+            $scope.cloneSection1 = function($event,$index) {
+                $event.preventDefault();
+                $scope.form_dynamic1.push({'institute': '','year': '','course_name': '','total_mark': ''});
+            };
 
+            $scope.deleteSection1 = function($event,$index) {
+                $event.preventDefault();
+                $scope.form_dynamic_model1.splice($index,1);
+                $scope.form_dynamic1.splice($index,1);
+            };
             // delete section
             $scope.deleteSection = function($event,$index) {
                 $event.preventDefault();
@@ -408,6 +455,5 @@ angular
                     // }
                 }
             };
-
         }
     ]);
