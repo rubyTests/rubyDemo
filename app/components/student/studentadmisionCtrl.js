@@ -37,7 +37,7 @@ angular
                     $('.motherDetails').find('input').attr('disabled',true);
                 }else {
                     console.log('false');
-                    $scope.Mother.addres='';
+                    $scope.Mother.address='';
                     $scope.Mother.city='';
                     $scope.Mother.state='';
                     $scope.Mother.pincode='';
@@ -46,6 +46,7 @@ angular
                     $scope.Mother.mobile_no='';
                     $scope.Mother.email='';
                     $('.motherDetails').find('input').attr('disabled',false);
+                    $('.motherDetails').find('input').trigger('blur');
                 }
             }
             $scope.selectize_a_data = {
