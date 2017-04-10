@@ -98,6 +98,7 @@
                                     <input type="text" name="religion" id="religion" required class="md-input" md-input ng-model="wizard.religion" />
                                 </div>
                             </div>
+                            <br>
                             <div class="" style="margin-top: 45px !important;">
                                 <h2 class="heading_a">
                                     Course & Batch details
@@ -132,10 +133,10 @@
                             </div>
                             <br>
                         </wz-step>
-                        <wz-step wz-title="Academics Details" template="app/templates/wizard.step.tpl.html">
+                        <wz-step wz-title="Previous Academics Details" template="app/templates/wizard.step.tpl.html">
                             <form class="uk-form" >
                                 <h2 class="heading_a" style="margin-bottom: 25px;">
-                                    Academics Details
+                                     Academics Details
                                 </h2>
                                 <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,previous) in form_dynamic1 track by $index">
                                     <div class="uk-width-8-10 uk-width-medium-9-10" style="margin-top: 0px;">
@@ -399,7 +400,7 @@
                         </wz-step>
                         <wz-step wz-title="Parent/Guardian Details" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
-                                Father Information
+                                Parent/Guardian #1
                                 <!-- <span class="sub-heading">Personal Details</span> -->
                             </h2>
                             <div class="uk-grid" data-uk-grid-margin>
@@ -487,10 +488,40 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-facebook"></i></a>
+                                                    </span>
+                                                    <label for="facebook">Facebook</label>
+                                                    <input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="father_facebook" />
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-google-plus"></i></a>
+                                                    </span>
+                                                    <label for="google">Google</label>
+                                                    <input type="text" class="md-input" name="google" id="google" md-input ng-model="father_google" />
+                                                </div>
+
+                                            </div>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-linkedin"></i></a>
+                                                    </span>
+                                                    <label for="linkedin">Linkedin</label>
+                                                    <input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="father_linkedin" />
+                                                </div>
+                                            </div>
+                                        </div>
                             <br>
 
                             <h2 class="heading_a">
-                                Mother Information
+                                Parent/Guardian #2
                                 <!-- <span class="sub-heading">Personal Details</span> -->
                             </h2>
                             <div class="uk-grid" data-uk-grid-margin>
@@ -578,6 +609,36 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-facebook"></i></a>
+                                                    </span>
+                                                    <label for="facebook">Facebook</label>
+                                                    <input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="mother_facebook" />
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-google-plus"></i></a>
+                                                    </span>
+                                                    <label for="google">Google</label>
+                                                    <input type="text" class="md-input" name="google" id="google" md-input ng-model="mother_google" />
+                                                </div>
+
+                                            </div>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-linkedin"></i></a>
+                                                    </span>
+                                                    <label for="linkedin">Linkedin</label>
+                                                    <input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="mother_linkedin" />
+                                                </div>
+                                            </div>
+                                        </div>
                             <br>
                             <div class="">
                                 <button type="button" ng-if="removeGuardian" class="md-btn md-btn-danger uk-float-right" ng-click="hideGuardianFrom()"><i class="material-icons">remove</i> Remove Guardian</button>
@@ -587,7 +648,7 @@
                             <!-- Guardian Details -->
                             <div class="" ng-if="guardian">
                                 <h2 class="heading_a">
-                                    Guardian Information
+                                    Parent/Guardian #3
                                     <!-- <span class="sub-heading">Personal Details</span> -->
                                 </h2>
                                 <div class="uk-grid" data-uk-grid-margin>
@@ -675,6 +736,36 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-facebook"></i></a>
+                                                    </span>
+                                                    <label for="facebook">Facebook</label>
+                                                    <input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="guardian_facebook" />
+                                                </div>
+                                            </div>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-google-plus"></i></a>
+                                                    </span>
+                                                    <label for="google">Google</label>
+                                                    <input type="text" class="md-input" name="google" id="google" md-input ng-model="guardian_google" />
+                                                </div>
+
+                                            </div>
+                                            <div class="uk-width-medium-1-3 parsley-row">
+                                                <div class="uk-input-group">
+                                                    <span class="uk-input-group-addon">
+                                                        <a href="#"><i class="uk-icon-linkedin"></i></a>
+                                                    </span>
+                                                    <label for="linkedin">Linkedin</label>
+                                                    <input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="guardian_linkedin" />
+                                                </div>
+                                            </div>
+                                        </div>
                             </div>
                             <form class="uk-form" >
                                 <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
