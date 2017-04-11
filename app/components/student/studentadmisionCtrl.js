@@ -6,6 +6,23 @@ angular
 		'$localStorage',
 		'$http',
         function ($scope,utils,$localStorage,$http) {
+
+            $scope.checkbox_demo_1=true;
+            $scope.checkbox_demo_2=true;
+            $scope.checkStatusParents=function(check){
+                if(check==true){
+                    $('.first_details').show();
+                }else {
+                    $('.first_details').hide();
+                }
+            }
+            $scope.checkStatusParents1=function(check){
+                if(check==true){
+                    $('.second_details').show();
+                }else {
+                    $('.second_details').hide();
+                }
+            }
             var $wizard_advanced_form = $('#wizard_advanced_form');
             $scope.father=[];
             $scope.Mother=[];
@@ -116,6 +133,24 @@ angular
                 create: false,
                 maxItems: 1,
                 placeholder: 'Select Religion'
+            };
+            $scope.selectize_studentLive_options = ["Living with Parents", "Living with Father", "Living with Mother","Living with Guardian"];
+            $scope.selectize_studentLive_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select'
+            };
+            $scope.selectize_relation_options = ["Father", "Mother", "Guardian"];
+            $scope.selectize_relation_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select'
+            };
+            $scope.selectize_gurdian_options = ["Guardian"];
+            $scope.selectize_gurdian_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select'
             };
             $scope.selectize_d_options = ["CSE", "EEE", "ECE ","MECH"];
             $scope.selectize_d_config = {

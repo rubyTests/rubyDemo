@@ -19,17 +19,15 @@
                         <wz-step wz-title="Student Admission" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
                                 Admission & Personal details
-                                <!-- <span class="sub-heading">Student Admission & Personal details</span> -->
-                            </h2>
-                            <!-- <hr class="md-hr"/> -->
+                            </h2><br>
 							<form class="admission_details">
                             <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 20px;">
                                     <label for="admission_no">Admission No<span class="req">*</span></label>
                                     <input type="text" name="admission_no" id="admission_no" required class="md-input" md-input ng-model="wizard.admission_no" />
                                     <input type="hidden" name="profileId" ng-model="wizard.profileId" ng-value="{{wizard.profileId}}"/>
                                 </div>
-                                 <div class="uk-width-medium-1-3 parsley-row">
+                                 <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 20px;">
                                     <label for="admission_date">Admission Date<span class="req">*</span></label>
                                     <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.admission_date"/>
                                 </div>
@@ -55,9 +53,6 @@
                                                         </div>
                                                     </div>
                                                 </div>
-												<!-- <button  class="md-btn md-btn-primary md-btn-small" ng-click="openModel()" data-uk-modal="{target:'#modal_overflow'}"> -->
-                        <!-- <i class="uk-icon-plus"></i>  Capture -->
-                        <!-- </button> -->
                                             </div>
                                         </div>
                                     </div>
@@ -72,7 +67,7 @@
                                     <label for="last_name">Last Name<span class="req">*</span></label>
                                     <input type="text" name="last_name" id="last_name" required class="md-input" md-input ng-model="wizard.last_name" />
                                 </div>
-                                 <div class="uk-width-medium-1-3 parsley-row">
+                                 <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 15px;">
                                     <label class="uk-form-label">Gender<span class="req">*</span></label>
                                     <span class="icheck-inline">
                                         <input type="radio" name="wizard_gender" id="wizard_gender_male" required value="male" icheck ng-model="wizard.gender" />
@@ -86,19 +81,22 @@
                             </div>
                             <div class="uk-grid" data-uk-grid-margin>
                                  <div class="uk-width-medium-1-4 parsley-row">
+                                 <br>
                                     <label for="wizard_birth_place">Date of Birth<span class="req">*</span></label>
                                     <input type="text" name="wizard_birth" id="wizard_birth" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.w1_birth_date"/>
                                 </div>
-                                <div class="uk-width-medium-1-4 parsley-row">
-                                    <input type="text" config="selectize_n_config" options="selectize_n_options" ng-model="selectize_n" name="selectize_n" selectize/>
-                                </div>
-                                <div class="uk-width-medium-1-4 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row"><br>
                                     <label for="mother_tongue">Mother Tongue<span class="req"></span></label>
                                     <input type="text" name="mother_tongue" id="mother_tongue" required class="md-input" md-input ng-model="wizard.mother_tongue" />
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
+                                <br>
                                    <label for="religion">Religion<span class="req"></span></label>
                                     <input type="text" name="religion" id="religion" required class="md-input" md-input ng-model="wizard.religion" />
+                                </div>
+                                <div class="uk-width-medium-1-4 parsley-row">
+                                    <label for="mother_tongue">Nationality<span class="req"></span></label>
+                                    <input type="text" config="selectize_n_config" options="selectize_n_options" ng-model="selectize_n" name="selectize_n" selectize/>
                                 </div>
                             </div>
                             <div class="" style="margin-top: 45px !important;">
@@ -185,15 +183,18 @@
                             <div class="" style="margin-top: 45px;">
                                 <h2 class="heading_a">
                                 Siblings
-                                </h2>
+                                </h2><br>
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>Course</label>
                                         <input type="text" config="selectize_c_config" options="selectize_c_options" ng-model="previous.selectize_c" name="selectize_c" selectize/>
                                     </div>
                                     <div class="uk-width-medium-1-3 data-parsley-americandateley-row">
+                                        <label>Batch</label>
                                         <input type="text" config="selectize_a_config" options="selectize_a_data.options" ng-model="previous.selectize_a" name="selectize_a" selectize />
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>Search Student</label>
                                         <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="previous.selectize_planets"></selectize>
                                     </div>
                                 </div>
@@ -202,22 +203,31 @@
                                 <h2 class="heading_a">
                                     Additional Details
                                     <!-- <span class="sub-heading"> Additional Personal Details</span> -->
-                                </h2>
-                                <hr class="md-hr"/>
+                                </h2><br>
 
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-4 parsley-row">
-                                        <input type="text" config="selectize_blood_config" options="selectize_blood_options" ng-model="previous.selectize_blood" name="selectize_blood" selectize/>
-                                    </div>
-                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <br>
                                         <label for="birthplace">Birth Place<span class="req"></span></label>
                                        <input type="text" name="birthplace" id="birthplace" required class="md-input" md-input ng-model="previous.birthplace" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
+                                        <label>Blood Group</label>
+                                        <input type="text" config="selectize_blood_config" options="selectize_blood_options" ng-model="previous.selectize_blood" name="selectize_blood" selectize/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4 parsley-row">
+                                        <label>Category</label>
                                         <input type="text" config="selectize_cat_config" options="selectize_cat_options" ng-model="previous.selectize_cat" name="selectize_cat" selectize/>
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
+                                        <label>Student Type</label>
                                         <input type="text" config="selectize_styType_config" options="selectize_stuType_data" ng-model="previous.selectize_styType" selectize/>
+                                    </div>
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>Student Lives</label>
+                                        <input type="text" config="selectize_studentLive_config" options="selectize_studentLive_options" ng-model="previous.student_lives" selectize/>
                                     </div>
                                 </div>
                             </div>
@@ -379,25 +389,32 @@
                         </wz-step>
                         <wz-step wz-title="Parent/Guardian Details" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
-                                Father Information
+                                Parents/Guardian #1
                                 <!-- <span class="sub-heading">Personal Details</span> -->
                             </h2>
                             <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row"><br>
                                     <label>First name<span class="req">*</span></label>
                                     <input type="text" name="p_first_name_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_first_name">
                                     <input type="hidden" name="p_profileId" value="{{profileId}}" ng-model="Pwizard.profileId" />
                                 </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row"><br>
                                     <label for="p_last_name">Last Name<span class="req">*</span></label>
                                     <input type="text" required class="md-input" md-input ng-model="Pwizard.p_last_name">
                                 </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="p_relation">Relation<span class="req">*</span></label>
-                                    <input type="text" name="p_relation_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_relation[topParent][input.name]" />
+                                     <input type="text" config="selectize_relation_config" options="selectize_relation_options" ng-model="Pwizard.first_relation" selectize />
+                                </div>
+                                <div class="uk-width-medium-1-4 parsley-row">
+                                <br>
+                                    <p>
+                                        <input type="checkbox" icheck ng-model="checkbox_demo_1" ng-disabled="Mother.address" ng-change="checkStatusParents(checkbox_demo_1)"/>
+                                        <label for="checkbox_demo_1" class="inline-label">Available ?</label>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid first_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="p_dob">Date of Birth<span class="req">*</span></label>
                                     <input type="text" name="p_dob_[topParent]" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="Pwizard.p_dob[topParent][input.name]"/>
@@ -415,13 +432,13 @@
                                     <input type="text" name="p_income_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_income[topParent][input.name]" />
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid first_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-1 parsley-row">
                                     <label for="pr_address">Address<span class="req">*</span></label>
                                     <input type="text" name="pr_address" id="pr_address" required class="md-input" md-input ng-model="Pwizard.pr_address[topParent][input.name]" />
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid first_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="pr_city">City<span class="req"></span></label>
                                     <input type="text" name="pr_city" id="pr_city" required class="md-input" md-input ng-model="Pwizard.pr_city[topParent][input.name]" />
@@ -438,7 +455,7 @@
                                     <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="selectize_country[topParent][input.name]" name="selectize_country" selectize />
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid first_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <div class="uk-input-group">
                                         <span class="uk-input-group-addon">
@@ -470,25 +487,32 @@
                             <br>
 
                             <h2 class="heading_a">
-                                Mother Information
+                                Parents/Guardian #2
                                 <!-- <span class="sub-heading">Personal Details</span> -->
                             </h2>
                             <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row"><br>
                                     <label>First name<span class="req">*</span></label>
                                     <input type="text" name="p_first_name_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_first_name">
                                     <input type="hidden" name="p_profileId" value="{{profileId}}" ng-model="Pwizard.profileId" />
                                 </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row"><br>
                                     <label for="p_last_name">Last Name<span class="req">*</span></label>
                                     <input type="text" required class="md-input" md-input ng-model="Pwizard.p_last_name">
                                 </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
+                                <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="p_relation">Relation<span class="req">*</span></label>
-                                    <input type="text" name="p_relation_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_relation[topParent][input.name]" />
+                                     <input type="text" config="selectize_relation_config" options="selectize_relation_options" ng-model="Pwizard.second_relation" selectize />
+                                </div>
+                                <div class="uk-width-medium-1-4 parsley-row">
+                                <br>
+                                    <p>
+                                        <input type="checkbox" icheck ng-model="checkbox_demo_2" ng-change="checkStatusParents1(checkbox_demo_2)"/>
+                                        <label for="checkbox_demo_2" class="inline-label">Available ?</label>
+                                    </p>
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid second_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="p_dob">Date of Birth<span class="req">*</span></label>
                                     <input type="text" name="p_dob_[topParent]" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="Pwizard.p_dob[topParent][input.name]"/>
@@ -506,13 +530,13 @@
                                     <input type="text" name="p_income_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_income[topParent][input.name]" />
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid second_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-1 parsley-row">
                                     <label for="pr_address">Address<span class="req">*</span></label>
                                     <input type="text" name="pr_address" id="pr_address" required class="md-input" md-input ng-model="Pwizard.pr_address[topParent][input.name]" />
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid second_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="pr_city">City<span class="req"></span></label>
                                     <input type="text" name="pr_city" id="pr_city" required class="md-input" md-input ng-model="Pwizard.pr_city[topParent][input.name]" />
@@ -529,7 +553,7 @@
                                     <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="selectize_country[topParent][input.name]" name="selectize_country" selectize />
                                 </div>
                             </div>
-                            <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-grid second_details" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <div class="uk-input-group">
                                         <span class="uk-input-group-addon">
@@ -567,22 +591,22 @@
                             <!-- Guardian Details -->
                             <div class="" ng-if="guardian">
                                 <h2 class="heading_a">
-                                    Guardian Information
+                                    Parents/Guardian #3
                                     <!-- <span class="sub-heading">Personal Details</span> -->
                                 </h2>
                                 <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-1-3 parsley-row"><br>
                                         <label>First name<span class="req">*</span></label>
                                         <input type="text" name="p_first_name_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_first_name">
                                         <input type="hidden" name="p_profileId" value="{{profileId}}" ng-model="Pwizard.profileId" />
                                     </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <div class="uk-width-medium-1-3 parsley-row"><br>
                                         <label for="p_last_name">Last Name<span class="req">*</span></label>
                                         <input type="text" required class="md-input" md-input ng-model="Pwizard.p_last_name">
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="p_relation">Relation<span class="req">*</span></label>
-                                        <input type="text" name="p_relation_[topParent]" required class="md-input" md-input ng-model="Pwizard.p_relation[topParent][input.name]" />
+                                         <input type="text" config="selectize_gurdian_config" options="selectize_gurdian_options" ng-model="Pwizard.third_relation" selectize />
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin>
