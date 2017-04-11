@@ -7,7 +7,7 @@ angular
 		'$http',
         function ($scope,utils,$localStorage,$http) {
 
-            $scope.checkbox_demo_1=true;
+            $scope.checkbox_demo_11=true;
             $scope.checkbox_demo_2=true;
             $scope.checkStatusParents=function(check){
                 if(check==true){
