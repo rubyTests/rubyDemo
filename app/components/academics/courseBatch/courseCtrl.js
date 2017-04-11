@@ -99,7 +99,8 @@ angular
                         });
                     }
                 };
-
+                $scope.titCaption="Add";
+                $scope.btnStatus='Save';
                 $scope.addCourse = function() {
                     $scope.titCaption="Add";
                     $scope.btnStatus='Save';

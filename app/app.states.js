@@ -2378,7 +2378,8 @@ rubycampusApp
                                 'lazy_datatables',
                                 'lazy_tinymce',
                                 'lazy_dropify',
-                                'app/components/repository/postAddCtrl.js'
+                                'app/components/repository/postAddCtrl.js',
+                                'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
                     },

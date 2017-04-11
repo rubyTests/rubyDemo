@@ -30,7 +30,7 @@ angular
                 onInitialize: function(selectize){
                     selectize.on('change', function(selectize) {
                         if(selectize=='Create New'){
-                            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
+                            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
                             modal.show();
                             //$state.go('restricted.academics.course')
                         } 
@@ -109,3 +109,12 @@ angular
             }
         }
     ]);
+
+angular.module('rubycampusApp').directive('courseDirective',function(){
+    return {
+        restrict: 'E',
+        controller: 'courseCtrl',
+        controllerAs: 'cCtrl',
+        templateUrl: 'app/components/academics/courseBatch/SenCourse.html',
+    };
+});

@@ -1,0 +1,36 @@
+<div class="uk-width-medium-1-3">
+      <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h3 class="uk-modal-title">{{titCaption}} Course </h3><br>
+         <!--  <div class="uk-container"> -->
+            <div class="md-card-content">
+              <form class="">
+                <div class="uk-form-row">
+                  <label>Course Name</label>
+                  <input type="text" ng-model="course_name" class="md-input" required md-input>
+                  <input type="hidden" ng-model="course_id">
+                </div>
+                 <div class="uk-form-row">
+                  <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="dept_id" selectize/>
+                </div>
+                <div class="uk-form-row">
+                  <input type="text" config="selectize_attdnceType_config" options="selectize_attdnceType_options" ng-model="attendance_type" selectize/>
+                </div>
+                <div class="uk-form-row">
+                  <label>Min Attendance Percentage</label>
+                  <input type="text" ng-model="percentage" class="md-input" required md-input>
+                </div>
+                <div class="uk-form-row">
+                  <input type="text" config="selectize_gradingType_config" options="selectize_gradingType_options" ng-model="grade_type" selectize/>
+                </div>
+                </form>
+            </div>
+          <!-- </div> -->
+          <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveCourse()">{{btnStatus}}</button>
+          </div>
+         </div>
+      </div>
+    </div>
