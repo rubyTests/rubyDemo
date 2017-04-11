@@ -2,18 +2,41 @@ angular
     .module('rubycampusApp')
     .controller('postAddCtrl', [
         '$scope',
+        '$state',
         '$rootScope',
         '$window',
         '$timeout',
-        function ($scope,$rootScope,$window,$timeout) {
+        function ($scope,$state,$rootScope,$window,$timeout) {
 
         	$('.dropify').dropify();
         	
-        	$scope.selectize_courseNew_options = ["Computer Science and Engineering", "Mechanical Engineering", "Electrical Communication Engineering", "Electrical and Electronics Engineering", "Aeronautical Engineering"];
+        	$scope.selectize_courseNew_options = ["Course 1", "Course 2", "Course 3", "Course 4", "Course 5"];
+            $scope.selectize_courseNew_options.push("Create New");
             $scope.selectize_courseNew_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course'
+                placeholder: 'Select Course',
+                render: {
+                    option: function (item, escape) {
+                        console.log(item,"item");
+                        console.log(escape,"escape");
+                        return '<div class="option id="modal_header_footer"">' +
+                                '<div class="text">' +
+                                    '<span class="name">' + escape(item.text) + '</span>' +
+                               '</div>' +
+                            '</div>';
+                    }
+                },
+                onInitialize: function(selectize){
+                    selectize.on('change', function(selectize) {
+                        if(selectize=='Create New'){
+                            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
+                            modal.show();
+                            //$state.go('restricted.academics.course')
+                        } 
+                    });
+                }
+                
             };
 
             $scope.selectize_batch_options = ["Batch 1", "Batch 2", "Batch 3", "Batch 4", "Batch 5"];

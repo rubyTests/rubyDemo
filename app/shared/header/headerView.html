@@ -1,5 +1,5 @@
     <!-- main header -->
-    <header id="header_main" ng-controller="main_headerCtrl">
+    <header id="header_main" ng-controller="main_headerCtrl as showCase">
         <div class="header_main_content">
             <nav class="uk-navbar">
                 <div class="main_logo_top" ng-if="topMenuActive || fullHeaderActive">
@@ -133,25 +133,25 @@
                                     <ul id="header_alerts" class="uk-switcher uk-margin">
                                         <li>
                                             <ul class="md-list md-list-addon">
-                                                <li ng-repeat="message in user_data.messages">
+                                                <li ng-repeat="message in showCase.dt_data | limitTo : 5">
                                                     <div class="md-list-addon-element">
                                                         <span class="md-user-letters md-bg-{{message.color}}-600 md-color-white" ng-if="!message.avatar">{{message.sender | initials}}</span>
                                                         <img class="md-user-image md-list-addon-avatar" ng-src="{{message.avatar}}" alt=""  ng-if="message.avatar"/>
                                                     </div>
                                                     <div class="md-list-content">
                                                         <!-- <span class="md-list-heading"><a ui-sref="restricted.pages.mailbox">{{message.title}}</a></span> -->
-                                                        <span class="md-list-heading"><a ui-sref="restricted.mails.mailList">{{message.title}}</a></span>
-                                                        <span class="uk-text-small uk-text-muted">{{message.content}}</span>
+                                                        <span class="md-list-heading"><a ui-sref="restricted.mails.mailDetails({ mailId:message.id})">{{message.sender}}</a></span>
+                                                        <span class="uk-text-small uk-text-muted">{{message.content | limitTo : 35}}...</span>
                                                     </div>
                                                 </li>
                                             </ul>
                                             <div class="uk-text-center uk-margin-top uk-margin-small-bottom">
-                                                <a sref="restricted.pages.mailbox" class="md-btn md-btn-flat md-btn-flat-primary js-uk-prevent">Show All</a>
+                                                <a ui-sref="restricted.mails.mailList" class="md-btn md-btn-flat md-btn-flat-primary js-uk-prevent">Show All</a>
                                             </div>
                                         </li>
                                         <li>
                                             <ul class="md-list md-list-addon">
-                                                <li ng-repeat="alert in user_data.alerts">
+                                                <li ng-repeat="alert in user_data.alerts | limitTo : 5">
                                                     <div class="md-list-addon-element">
                                                         <i class="md-list-addon-icon material-icons uk-text-warning" ng-if="alert.type == 'warning'">&#xE8B2;</i>
                                                         <i class="md-list-addon-icon material-icons uk-text-success" ng-if="alert.type == 'success'">&#xE88F;</i>
@@ -163,6 +163,9 @@
                                                         <span class="uk-text-small uk-text-muted uk-text-truncate">{{alert.content}}</span>
                                                     </div>
                                                 </li>
+                                                <div class="uk-text-center uk-margin-top uk-margin-small-bottom">
+                                                    <a ui-sref="restricted.mails.mailList" class="md-btn md-btn-flat md-btn-flat-primary js-uk-prevent">Show All</a>
+                                                </div>
                                             </ul>
                                         </li>
                                     </ul>

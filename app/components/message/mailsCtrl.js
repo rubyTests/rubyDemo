@@ -84,6 +84,16 @@ angular
             ];
 
             //$scope.fold = 'Inbox';
+            $scope.btnVal = "Inbox";
+            $scope.functionThree = function(val){
+                if(val == "Sent"){
+                    $scope.btnVal = "Sent";
+                }else if(val == "Trash"){
+                    $scope.btnVal = "Trash";
+                }else{
+                    $scope.btnVal = "Inbox";
+                }
+            }
         }
     ]);
 

@@ -8,8 +8,20 @@ angular
 		'$location',
 		'$localStorage',
 		'$http',
-        function ($timeout,$scope,$window,$state,$location,$localStorage,$http) {
-
+        '$resource',
+        function ($timeout,$scope,$window,$state,$location,$localStorage,$http,$resource) {
+            var vm = this;
+            vm.dt_data = [];
+            //$scope.messageData = [];
+            $resource('data/mailbox_datanew.json')
+            .query()
+            .$promise
+            .then(function(dt_data) {
+                vm.dt_data = dt_data;
+               // $scope.messageData.push(vm.dt_data);
+            });
+            
+            
             $scope.user_data = {
                 name: "Lue Feest",
                 avatar: "assets/img/avatars/avatar_11_tn.png",
@@ -23,6 +35,91 @@ angular
                         "title": "Voluptatibus sed eveniet.",
                         "content": "Tempora magnam aut ea.",
                         "type": "success"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Quod minima ipsa.",
+                        "content": "Vel dignissimos neque enim ad praesentium optio.",
+                        "type": "primary"
+                    },
+                    {
+                        "title": "Hic expedita eaque.",
+                        "content": "Nemo nemo voluptatem officia voluptatum minus.",
+                        "type": "warning"
+                    },
+                    {
+                        "title": "Voluptatibus sed eveniet.",
+                        "content": "Tempora magnam aut ea.",
+                        "type": "success"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Quod minima ipsa.",
+                        "content": "Vel dignissimos neque enim ad praesentium optio.",
+                        "type": "primary"
+                    },
+                    {
+                        "title": "Hic expedita eaque.",
+                        "content": "Nemo nemo voluptatem officia voluptatum minus.",
+                        "type": "warning"
+                    },
+                    {
+                        "title": "Voluptatibus sed eveniet.",
+                        "content": "Tempora magnam aut ea.",
+                        "type": "success"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
+                    },
+                    {
+                        "title": "Perferendis voluptatem explicabo.",
+                        "content": "Enim et voluptatem maiores ab fugiat commodi aut repellendus.",
+                        "type": "danger"
                     },
                     {
                         "title": "Perferendis voluptatem explicabo.",
