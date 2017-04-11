@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('employeetable_viewCtrl',
-        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http) {
 
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
@@ -75,11 +75,11 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
+
+                $scope.ViewList=[];
+                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/employeeProfileView')
+                .success(function(view_list){
+                    $scope.ViewList=view_list.data;
                 });
         }
     );

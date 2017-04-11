@@ -28,7 +28,7 @@
                             <th>Name</th>
                             <th>Employee No</th>
                             <th>Department</th>
-                            <th>Job Title</th>
+                            <th>Position</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -38,19 +38,19 @@
                             <th>Name</th>
                             <th>Employee No</th>
                             <th>Department</th>
-                            <th>Job Title</th>
+                            <th>Position</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
+                        <tr ng-repeat="row in ViewList">
                             <td>{{$index+1}}</td>
-                            <td>{{row.firstname}} {{row.lastname}}</td>
-                            <td>{{row.Admission_No}}</td>
-                            <td>{{row.Dept}}</td>
-                            <td>{{row.jobtitle}}</td>
+                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td>{{row.ADMISSION_NO}}</td>
+                            <td>{{row.DEPT_NAME}}</td>
+                            <td>{{row.POSITION_NAME}}</td>
                             <td class="uk-text-center">
-                                <a ui-sref="restricted.employeemanagement.employee_editprofile({emp_id:{{row.id}}})" class="ts_remove_row" ><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a ui-sref="restricted.employeemanagement.employee_editprofile({emp_id:{{row.ID}}})" class="ts_remove_row" ><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
