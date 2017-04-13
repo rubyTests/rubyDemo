@@ -26,16 +26,16 @@ angular
             var $wizard_advanced_form = $('#wizard_advanced_form');
             $scope.father=[];
             $scope.Mother=[];
-            $scope.guardian=false;
+            setTimeout(function(){$scope.guardianCon=false;},500);	
             $scope.removeGuardian=false;
             $scope.addGuardian=true;
             $scope.showGuardianFrom=function(){
-                $scope.guardian=true;
+                $scope.guardianCon=true;
                 $scope.removeGuardian=true;
                 $scope.addGuardian=false;
             }
             $scope.hideGuardianFrom=function(){
-                $scope.guardian=false;
+                $scope.guardianCon=false;
                 $scope.removeGuardian=false;
                 $scope.addGuardian=true;
             }
@@ -134,7 +134,7 @@ angular
                 maxItems: 1,
                 placeholder: 'Select Religion'
             };
-            $scope.selectize_studentLive_options = ["Living with Parents", "Living with Father", "Living with Mother","Living with Guardian"];
+            $scope.selectize_studentLive_options = ["Parents", "Father", "Mother","Guardian"];
             $scope.selectize_studentLive_config = {
                 create: false,
                 maxItems: 1,
@@ -438,7 +438,7 @@ angular
                 // });
 			}
 			//$scope.profileId=2;
-			$scope.parentsDetails=function(){
+			// $scope.parentsDetails=function(){
 				// console.log($scope.profileId)
 				// console.log($scope.Pwizard)
 				// $http({
@@ -450,7 +450,7 @@ angular
                     // console.log(response,"response");
 					// $scope.Pwizard.parentProfileId=response.data.message;
                 // });
-			}
+			// }
 			$scope.stu={profileId:''};
 			// Admission Details
 			$scope.wizard=[];
@@ -462,11 +462,12 @@ angular
 				$http({
                 method:'POST',
                 url: $localStorage.service+'ProfileAPI/admissionDetails',
-                data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),wizard_gender:$scope.wizard.wizard_gender,wizard_birth:$scope.wizard.wizard_birth,selectize_n:$scope.selectize_n,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,selectize_a:$scope.selectize_a,roll_no:$scope.wizard.roll_no},
+                data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),wizard_gender:$scope.wizard.gender,wizard_birth:$scope.wizard.w1_birth_date,selectize_n:$scope.selectize_n,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,selectize_a:$scope.selectize_a,roll_no:$scope.wizard.roll_no},
 				headers:{'access_token':$localStorage.access_token}
                 }).then(function(response){
                     //console.log(response.data.admission_no);
-					$scope.wizard.profileId=response.data.admission_no;
+					$scope.wizard.profileId=response.data.profile[0].profile_id;
+					$scope.wizard.stuProfileId=response.data.profile[0].stu_profileId;
                 });
 			}
 			// Academics Details
@@ -483,7 +484,7 @@ angular
                 }).then(function(response){
                     console.log(response.data.preEduId);
 					angular.forEach(response.data.preEduId, function(value, key) {
-						console.log(key['institute'] + ': ' + value.institute);
+						//console.log(key['institute'] + ': ' + value.institute);
 						$scope.form_dynamic1[key].preEduId=value;
 					});
 					
@@ -494,7 +495,7 @@ angular
 			$scope.social=[];
 			$scope.contact=[];
 			$scope.contact_details=function(){
-				$scope.wizard.profileId=35;
+				//$scope.wizard.profileId=35;
 				$http({
                 method:'POST',
                 url: $localStorage.service+'ProfileAPI/contactDetails',
@@ -505,6 +506,33 @@ angular
 					// if($scope.sameAddress=="Yes"){
 						
 					// }
+                });
+			}
+			
+			// Parents Details
+			$scope.father={};
+			$scope.mother={};
+			$scope.guardian={};
+			
+			$scope.father.relationId=0;
+			$scope.mother.relationId=0;
+			$scope.guardian.relationId=0;
+			
+			$scope.parentsDetails=function(){
+				//$scope.wizard.profileId=35;
+				//$scope.wizard.stuProfileId=33;
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/parentsProfile',
+                data: {profileId:$scope.wizard.profileId,stuProfileId:$scope.wizard.stuProfileId,father:$scope.father,mother:$scope.mother,guardian:$scope.guardian},
+				headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                    console.log(response,"response");
+					console.log(response.data.profileIds[0].fprofile_id,"fprofileId");
+					console.log(response.data.profileIds[0]['fprofile_id'],"fprofileId-1");
+					$scope.father.relationId=response.data.profileIds[0].frelation_id;
+					$scope.mother.relationId=response.data.profileIds[0].mrelation_id;
+					$scope.guardian.relationId=response.data.profileIds[0].grelation_id;
                 });
 			}
 			
