@@ -1973,6 +1973,7 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'app/components/setting/building/buildingCtrl.js'
@@ -1992,6 +1993,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/setting/building/buildingblockCtrl.js'
                             ], {serie:true});
                         }]
@@ -2009,6 +2011,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/setting/building/roomCtrl.js'
                             ], {serie:true});
                         }]
@@ -2532,9 +2535,9 @@ rubycampusApp
                         }],
                         user_data: function($http){
                             return $http({ method: 'GET', url: 'app/components/employeemanagement/profile.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
+                            .then(function (data) {
+                                return data.data;
+                            });
                         }
                     },
                     data: {
@@ -2566,7 +2569,7 @@ rubycampusApp
                 .state("restricted.employeemanagement.employee_profile_tableview", {
                     url: "/employee_profile_tableview",
                     templateUrl: 'app/components/employeemanagement/employee_table_view.html',
-                    controller: 'employeetable_viewCtrl',
+                    // controller: 'employeetable_viewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2687,7 +2690,24 @@ rubycampusApp
                         pageTitle: 'Employee View'
                     }
                 })
-
+                .state("restricted.student.assignTeacher", {
+                    url: "/assignTeacher",
+                    templateUrl: 'app/components/academics/courseBatch/assignTeacher.html',
+                    //controller: 'assignTeacherCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
+                                'app/components/academics/courseBatch/assignTeacherCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign Teacher'
+                    }
+                })
 
                 // Academics added by vijayaraj
                 .state("restricted.academics", {
@@ -2722,6 +2742,7 @@ rubycampusApp
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'lazy_tinymce',
+                                'lazy_parsleyjs',
                                 'app/components/academics/syllabusaddCtrl.js'
                             ],{serie: true});
                         }]
@@ -2880,6 +2901,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
@@ -2901,6 +2923,7 @@ rubycampusApp
                                 //'smart-table',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/courseBatchCtrl.js'
                             ], {serie:true});
                         }]
@@ -2970,6 +2993,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/departmentCtrl.js'
                             ], {serie:true});
                         }]
@@ -2978,23 +3002,7 @@ rubycampusApp
                         pageTitle: 'Department'
                     }
                 })
-                .state("restricted.academics.assignClassTeacher", {
-                    url: "/assignClassTeacher",
-                    templateUrl: 'app/components/academics/courseBatch/assignTeacher.html',
-                    //controller: 'assignTeacherCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'app/components/academics/courseBatch/assignTeacherCtrl.js'
-                            ], {serie:true});
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'AssignClassTeacher'
-                    }
-                })
+                
 				
 				// Academics Examination by karthik @ 21.03.2017 3.12 PM
 				.state("restricted.academics.examination", {
@@ -3171,6 +3179,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/categoryCtrl.js'
                             ], {serie:true});
                         }]
@@ -3188,6 +3197,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/positionCtrl.js'
                             ], {serie:true});
                         }]
@@ -3504,6 +3514,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
                             ], {serie:true});
                         }]

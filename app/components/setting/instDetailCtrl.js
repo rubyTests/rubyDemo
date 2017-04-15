@@ -5,7 +5,6 @@ angular
         'utils',
         '$http','$rootScope', '$filter','$compile', '$scope', '$timeout','$state','$localStorage',
         function ($scope,utils,$http,$rootScope, $filter,$compile, $scope, $timeout,$state,$localStorage) {
-
             var $wizard_advanced_form = $('#wizard_advanced_form');
             $scope.IinstLIST=[];
             $scope.CountryLIST=[];
@@ -31,7 +30,7 @@ angular
                 $scope.TimeLIST.push(timeZone.data);
             });
 
-            $http.get($localStorage.service+'institutionApi/profile',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
             .success(function(profileData){
                 $scope.returnProfile.push(profileData.data);
             });
@@ -42,7 +41,7 @@ angular
                 maxItems: 1,
                 placeholder: 'Select Person',
                 valueField: 'ID',
-                labelField: 'FIRSTNAME',
+                labelField: 'FULLNAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
@@ -72,7 +71,7 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        
                     });
                 }
             };
@@ -85,7 +84,6 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
                     });
                 }
             };
@@ -98,17 +96,22 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        
                     });
                 }
             };
 
+
             $scope.saveInstitutionData=function(){
                 var data=$('.fileinput-preview').find('img').attr('src');
-                // $scope.Basic.ddd=data;
+                if(data){
+                    var data=$('.fileinput-preview').find('img').attr('src');
+                }else {
+                    var data=$('.user_heading_avatar img:last').attr('src');
+                }
                 $http({
                     method:'POST',
-                    url: $localStorage.service+'institutionApi/institution',
+                    url: $localStorage.service+'institutionApi/institutionDetails',
                     data: {
                         'file_image' : data,
                         'institute_name' : $scope.Basic.institute_name,
@@ -116,7 +119,32 @@ angular
                         'type' : $scope.Basic.institute_type,
                         'time_zone' : $scope.Basic.time_zone,
                         'currency' : $scope.Basic.currency,
-                        'fax' : $scope.Basic.fax,
+                        'profile_id' : $scope.contact.prof_id,
+                        'institution_id' : $scope.Basic.institution_id
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.data.message);
+                    $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
+                    $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
+                    if(return_data.data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }
+                });
+            };
+
+            $scope.saveInstitutionContact=function(){
+                var data=$('.fileinput-preview').find('img').attr('src');
+                // $scope.Basic.ddd=data;
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'institutionApi/institutionContactDetails',
+                    data: {
                         'address' : $scope.contact.address,
                         'contact_name' : $scope.contact.contact_name,
                         'city' : $scope.contact.city,
@@ -128,21 +156,56 @@ angular
                         'email' : $scope.contact.email,
                         'facebook' : $scope.contact.facebook,
                         'google' : $scope.contact.google,
-                        'profile_id' : $scope.contact.prof_id
+                        'profile_id' : $scope.contact.prof_id,
+                        'location_id' : $scope.contact.locationId,
+                        'lnstut_id' : $scope.Basic.institution_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.data.message,'dddddd');
+                    console.log(return_data.data.data.message);
                     $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
-                    // if(return_data.data.data.checkStatus==true){
-                    //     $state.go('restricted.setting.institution_view');
-                    // }
+                    $scope.contact.locationId=return_data.data.data.LOCATION_ID;
+                    if(return_data.data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }
                 });
             };
-            $scope.reLoadView=function(){
-                $timeout(function(){
-                    $state.go('restricted.setting.institution_view');
-                },200)
-            }
+
+
+            $http({
+              method : "GET",
+              url : $localStorage.service+"institutionApi/institutionDetails",
+              headers:{'access_token':$localStorage.access_token}
+            }).then(function mySucces(response) {
+                console.log(response,'response');
+                $scope.Basic.institute_name=response.data.data[0].INST_NAME;
+                $scope.Basic.institute_code=response.data.data[0].CODE;
+                $scope.Basic.institute_type=response.data.data[0].TYPE;
+                $scope.Basic.time_zone=response.data.data[0].TIME_ZONE;
+                $scope.Basic.currency=response.data.data[0].CURRENCY;
+                $scope.Basic.institution_id=response.data.data[0].ID;
+                $scope.contact.prof_id=response.data.data[0].PROF_ID;
+                $scope.LOGO=response.data.data[0].LOGO;
+                $scope.contact.address=response.data.data[0].ADDRESS;
+                $scope.contact.contact_name=response.data.data[0].CONTACT_PERSON;
+                $scope.contact.city=response.data.data[0].CITY;
+                $scope.contact.state=response.data.data[0].STATE;
+                $scope.contact.pincode=response.data.data[0].ZIP_CODE;
+                $scope.contact.country=response.data.data[0].COUNTRY_ID;
+                $scope.contact.phone=response.data.data[0].PHONE_NO_1;
+                $scope.contact.mobile_no=response.data.data[0].PHONE_NO_2;
+                $scope.contact.email=response.data.data[0].EMAIL;
+                $scope.contact.facebook=response.data.data[0].FACEBOOK_LINK;
+                $scope.contact.google=response.data.data[0].GOOGLE_LINK;
+                $scope.contact.locationId=response.data.data[0].LOCATION_ID;
+
+              }, function myError(response) {
+                console.log(response,'error');
+            });
         }
     ]);

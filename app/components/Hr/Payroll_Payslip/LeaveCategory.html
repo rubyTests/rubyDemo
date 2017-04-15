@@ -9,34 +9,27 @@
                     <thead>
                         <tr>
                             <th style="width: 50px !important;">S.No</th>
-                            <th>Leave Type Name</th>
+                            <th>Name</th>
                             <th>Code</th>
-                            <!-- <th>Leave Count</th>
-                            <th>Valid From</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th style="width: 50px !important;"></th>
-                            <th>Leave Type Name</th>
+                            <th>Name</th>
                             <th>Code</th>
-                            <!-- <th>Leave Count</th>
-                            <th>Valid From</th> -->
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in leaveTypeArray">
+                        <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.Name}}</td>
-                            <td>{{row.code}}</td>
-<!--                             <td>{{row.count}}</td>
-                            <td>{{row.valid_from}}</td> -->
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.CODE}}</td>
                             <td class="">
-                                <!-- <a ui-sref="restricted.hr.showleavecategory({id:{{row.id}}})" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="material-icons md-icon">remove_red_eye</i></a> -->
                                 <a ng-click="editLeaveCategory(row)" data-uk-modal="{target:'#open_leavecategory'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteLeavecategory(row.ID)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -50,12 +43,12 @@
             <button type="button" class="uk-modal-close uk-close"></button>
             <h3 class="uk-modal-title">{{tit_caption}} Leave Type </h3><br>
             <div class="md-card-content">
-                <form>
-                    <div class="uk-form-row">
+                <form id="form_validation" ng-submit="saveLeaveCategory()" novalidate>
+                    <div class="parsley-row uk-form-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label>Leave Type Name</label>
-                                <input type="text" ng-model="leave_category" class="md-input" md-input>
+                                <input type="text" ng-model="leave_category" required class="md-input" md-input>
                                 <input type="hidden" ng-model="leavecat_id">
                             </div>
                         </div>          
@@ -68,11 +61,11 @@
                             </div>
                         </div>          
                     </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small">{{status}}</button>
+                    </div>
                 </form>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
             </div>
         </div>
     </div>

@@ -2,6 +2,22 @@ angular
     .module('rubycampusApp')
     .controller('buildingCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
+
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -69,6 +85,7 @@ angular
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
 
             $scope.addBuilding=function(){
+                $scope.clearValidation();
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";
                 $scope.building_id='';
@@ -78,6 +95,7 @@ angular
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editBuilding=function(res){
+                $scope.clearValidation();
                 $scope.titleCaption="Edit";
                 $scope.btnStatus="Update";
                 if(res){
@@ -102,24 +120,37 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    // console.log($scope.building_id)
-                    if($scope.building_id){
-                        var data=$filter('filter')($scope.viewData,{ID:$scope.building_id},true);
-                        data[0].NAME=$scope.building_name;
-                        data[0].NUMBER=$scope.build_no;
-                        data[0].LANDMARK=$scope.landmark;
-                        // console.log(data);
-                    }else{
-                        $scope.viewData.push({ID:return_data.data.BUILDING_ID,NAME:$scope.building_name,NUMBER:$scope.build_no,LANDMARK:$scope.landmark});
+                    console.log(return_data.data.message);
+                    if(return_data.data.status==true){
+                        UIkit.modal("#modal_header_footer").hide();
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
                     }
+                    $scope.refreshTable();
+                    // if($scope.building_id){
+                    //     var data=$filter('filter')($scope.viewData,{ID:$scope.building_id},true);
+                    //     data[0].NAME=$scope.building_name;
+                    //     data[0].NUMBER=$scope.build_no;
+                    //     data[0].LANDMARK=$scope.landmark;
+                    //     // console.log(data);
+                    // }else{
+                    //     $scope.viewData.push({ID:return_data.data.BUILDING_ID,NAME:$scope.building_name,NUMBER:$scope.build_no,LANDMARK:$scope.landmark});
+                    // }
                 });
             }
 
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(response){
-                $scope.viewData=response.data;
-            });
+            $scope.refreshTable=function(){
+                $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(response){
+                    $scope.viewData=response.data;
+                });
+            }
+            $scope.refreshTable();
 
             $scope.deleteBuildingData=function(id, $index){
                 if(id){
@@ -127,12 +158,20 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "$localStorage.service+'institutionApi/building'",
+                            url : $localStorage.service+'institutionApi/building',
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
-                                var data=response.data.message.message;
-                                $scope.viewData.splice($index, 1);
+                                if(response.data.status==true){
+                                    UIkit.notify({
+                                        message : response.data.message.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                // var data=response.data.message.message;
+                                $scope.refreshTable();
                             },function myError(response) {
                               // console.log(response,'response');
                             })

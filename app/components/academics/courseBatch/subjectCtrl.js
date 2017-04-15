@@ -2,6 +2,21 @@ angular
     .module('rubycampusApp')
     .controller('subjectCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter,$http,$rootScope,$localStorage) {
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -49,6 +64,11 @@ angular
                         type: 'number',
                         bRegex: true,
                         bSmart: true
+                    },
+                    {
+                        type: 'number',
+                        bRegex: true,
+                        bSmart: true
                     }
                 ]
             })
@@ -62,16 +82,21 @@ angular
 
             $scope.courseData=[];
             $scope.viewData=[];
+            $scope.refreshTable=function(){
+                $http.get($localStorage.service+'AcademicsAPI/subjectDetail',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(course_data){
+                    $scope.viewData=course_data.message;
+                });
+            }
+            
             $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(course_data){
-                $scope.courseData.push(course_data.data);
-            });
+                .success(function(course_data){
+                    $scope.courseData.push(course_data.data);
+                    console.log(course_data,'fetchCourseData');
+                });
 
-            $http.get($localStorage.service+'AcademicsAPI/subjectDetail',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(course_data){
-                $scope.viewData=course_data.message;
-            });
-
+            $scope.refreshTable();
+            
             $scope.selectize_courseName_options =$scope.courseData;
             $scope.selectize_courseName_config = {
                 create: false,
@@ -79,6 +104,7 @@ angular
                 placeholder: 'Select Course',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
@@ -94,6 +120,7 @@ angular
             };
 
             $scope.addSubject = function() {
+                $scope.clearValidation();
                 $scope.titCaption="Add";
                 $scope.btnStatus='Save';
                 $scope.cou_sub_id='';
@@ -107,9 +134,9 @@ angular
                 $('.uk-modal').find('input').trigger('blur');
             };
             $scope.editSubject= function(res){
+                $scope.clearValidation();
                 $scope.titCaption="Edit";
                 $scope.btnStatus='Update';
-                console.log(res,'resssssss');
                 if(res){
                     $scope.cou_sub_id=res.ID;
                     $scope.sub_id=res.SUB_ID;
@@ -139,20 +166,37 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.message.message);
-                    var course=$filter('filter')($scope.courseData,{ID:$scope.course_id},true);
-                    if($scope.cou_sub_id){
-                        var data1=$filter('filter')($scope.viewData,{ID:$scope.cou_sub_id},true);
-                        data1[0].NAME=$scope.subject_name;
-                        data1[0].SUB_ID=$scope.sub_id;
-                        data1[0].CODE=$scope.sub_code;
-                        data1[0].TYPE=$scope.sub_type;
-                        data1[0].COURSE_ID=$scope.course_id;
-                        data1[0].COURSE_NAME=course[0].NAME;
-                        data1[0].TOTAL_HOURS=$scope.total_hours;
-                        data1[0].CREDIT_HOURS=$scope.credit_hours;
-                    }else{
-                        $scope.viewData.push({ID:return_data.data.message.COUSRE_SUB_ID,NAME:$scope.subject_name,SUB_ID:return_data.data.message.SUBJECTID,CODE:$scope.sub_code,TYPE:$scope.sub_type,TOTAL_HOURS:$scope.total_hours,CREDIT_HOURS:$scope.credit_hours,COURSE_ID:$scope.course_id,COURSE_NAME:course[0].NAME});
+                    if(return_data.data.message.status==true){
+                        UIkit.modal("#modal_overflow").hide();
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.refreshTable();
+                    }else {
+                        UIkit.modal.alert('Course & Subject Name Already Exists');
                     }
+                    // var course=$filter('filter')($scope.courseData,{ID:$scope.course_id},true);
+                    // if(course.length == 0){
+                    //     var COURSENAME='';
+                    // }else {
+                    //     var COURSENAME=course[0].NAME;
+                    // }
+                    // if($scope.cou_sub_id){
+                    //     var data1=$filter('filter')($scope.viewData,{ID:$scope.cou_sub_id},true);
+                    //     data1[0].NAME=$scope.subject_name;
+                    //     data1[0].SUB_ID=$scope.sub_id;
+                    //     data1[0].CODE=$scope.sub_code;
+                    //     data1[0].TYPE=$scope.sub_type;
+                    //     data1[0].COURSE_ID=$scope.course_id;
+                    //     data1[0].COURSE_NAME=COURSENAME;
+                    //     data1[0].TOTAL_HOURS=$scope.total_hours;
+                    //     data1[0].CREDIT_HOURS=$scope.credit_hours;
+                    // }else{
+                    //     $scope.viewData.push({ID:return_data.data.message.COUSRE_SUB_ID,NAME:$scope.subject_name,SUB_ID:return_data.data.message.SUBJECTID,CODE:$scope.sub_code,TYPE:$scope.sub_type,TOTAL_HOURS:$scope.total_hours,CREDIT_HOURS:$scope.credit_hours,COURSE_ID:$scope.course_id,COURSE_NAME:COURSENAME});
+                    // }
                 });
             }
 
@@ -166,8 +210,15 @@ angular
                             params : {'CS_ID' : id,'subID':subID},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
-                                var data=response.data.message.message;
+                                // console.log(response,'ss');
+                                UIkit.notify({
+                                    message : response.data.message,
+                                    status  : 'success',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
                                 $scope.viewData.splice($index, 1);
+                                $scope.refreshTable();
                             },function myError(response) {
                             })
                         }

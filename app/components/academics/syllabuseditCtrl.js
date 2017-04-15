@@ -8,11 +8,11 @@ angular
             $scope.syllabus=[];
             $scope.courseList=[];
             $scope.subjectList=[];
-            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$scope.access_token}})
+            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(course_data){
                 $scope.courseList.push(course_data.data);
             });
-            $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$scope.access_token}})
+            $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(subject_data){
                 $scope.subjectList.push(subject_data.data);
             });
@@ -29,7 +29,7 @@ angular
               method : "GET",
               url : $localStorage.service+"AcademicsAPI/fetchSubjectSyllabusData",
               params :{id : $stateParams.id},
-              headers:{'access_token':$scope.access_token}
+              headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 $scope.sub_syllabus_id=response.data.data[0].ID;
                 $timeout(function(){
@@ -44,7 +44,7 @@ angular
               method : "GET",
               url : $localStorage.service+"AcademicsAPI/fetchSyllabusListDetails",
               params :{id : $stateParams.id},
-              headers:{'access_token':$scope.access_token}
+              headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
 
                 angular.forEach(response.data.data, function (value, keys) {
@@ -67,6 +67,7 @@ angular
                 placeholder: 'Select Course',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         // console.log(value);
@@ -80,6 +81,7 @@ angular
                 placeholder: 'Select Subject',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         // console.log(value);
@@ -203,6 +205,8 @@ angular
                     console.log(return_data.data.message);
                     if(return_data.data.status==true){
                         $state.go('restricted.academics.syllabus_view');
+                    }else {
+                        UIkit.modal.alert('Course & Subject Name Already Exists');
                     }
                 });
             }

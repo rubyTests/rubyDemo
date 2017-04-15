@@ -2,6 +2,23 @@ angular
     .module('rubycampusApp')
     .controller('departmentCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            
+            var $formValidate = $('#form_validation');
+
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -44,6 +61,11 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -56,6 +78,7 @@ angular
                 var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
                 
                 $scope.addDepartment = function() {
+                    $scope.clearValidation();
                     $scope.titCaption="Add";
                     $scope.btnStatus="Save";
                     $scope.dept_id='';
@@ -65,37 +88,42 @@ angular
                     $scope.room_id='';
                     $scope.phone_no='';
                     $('.uk-modal').find('input').trigger('blur');
+                     $scope.deptFORM.$setPristine();
                 };
                 $scope.editDepartment= function(res){
+                    $scope.clearValidation();
                     $scope.titCaption="Edit";
                     $scope.btnStatus="Update";
                     if(res){
                         $scope.dept_id=res.ID;
                         $scope.dept_name=res.NAME;
                         $scope.dept_code=res.CODE;
-                        $scope.hod_prof_id=res.EMP_ID;
-                        $scope.room_id=res.ROOM_ID;
                         $scope.phone_no=res.PHONE;
+                        $scope.hod_prof_id=res.empProfile[0].ID || '';
+                        $scope.room_id=res.roomData[0].ID || '';
+                        
                     }
                 }
 
                 $scope.viewData=[];
                 $scope.empList=[];
                 $scope.roomList=[];
-                $http.get($localStorage.service+'AcademicsAPI/departmentDetail',{headers:{'access_token':$localStorage.access_token}})
-                .success(function(return_data){
-                    $scope.viewData=return_data.message;
-                    console.log(return_data,'return_data');
-                });
-
+                $scope.getdata=function(){
+                    $http.get($localStorage.service+'AcademicsAPI/departmentDetail',{headers:{'access_token':$localStorage.access_token}})
+                    .success(function(return_data){
+                        $scope.viewData=return_data.message;
+                        // console.log(return_data,'return_data');
+                    });    
+                }
+                $scope.getdata();
                 $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
                     $scope.roomList.push(return_data.data);
                 });
 
-                $http.get($localStorage.service+'AcademicsAPI/profile',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
-                    $scope.empList.push(return_data.message);
+                    $scope.empList.push(return_data.data);
                 });
 
                 $scope.selectize_hodProfieId_options =$scope.empList;
@@ -104,7 +132,8 @@ angular
                     maxItems: 1,
                     placeholder: 'Select HOD',
                     valueField: 'ID',
-                    labelField: 'EMP_NAME',
+                    labelField: 'FULLNAME',
+                    searchField: 'FULLNAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             console.log(value);
@@ -119,6 +148,7 @@ angular
                     placeholder: 'Select Room',
                     valueField: 'ID',
                     labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             console.log(value);
@@ -140,22 +170,49 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        console.log(return_data.data.message.message);
-                        var employee=$filter('filter')($scope.empList,{ID:$scope.hod_prof_id},true);
-                        var room=$filter('filter')($scope.roomList,{ID:$scope.room_id},true);
-                        if($scope.dept_id){
-                            var data1=$filter('filter')($scope.viewData,{ID:$scope.dept_id},true);
-                            data1[0].NAME=$scope.dept_name;
-                            data1[0].CODE=$scope.dept_code;
-                            data1[0].PHONE=$scope.phone_no;
-                            data1[0].EMP_ID=$scope.hod_prof_id;
-                            data1[0].EMPLOYEE_NAME=employee[0].EMP_NAME;
-                            data1[0].ROOM_ID=$scope.room_id;
-                            data1[0].ROOM_NAME=room[0].NAME;
-                        }else{
-                            $scope.viewData.push({ID:return_data.data.message.DEPT_ID,NAME:$scope.dept_name,CODE:$scope.dept_code,PHONE:$scope.phone_no,EMPLOYEE_NAME:employee[0].EMP_NAME,EMP_ID:$scope.hod_prof_id,
-                            ROOM_NAME:room[0].NAME,ROOM_ID:$scope.room_id});
+                        if(return_data.data.message.status==true){
+                            console.log(return_data.data.message.message);
+                            UIkit.modal("#modal_overflow").hide();
+                            UIkit.notify({
+                                message : return_data.data.message.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                            $scope.getdata();
+                        }else {
+                            UIkit.modal.alert('Department Name Already Exists');
                         }
+                        // var employee=$filter('filter')($scope.empList,{ID:$scope.hod_prof_id},true);
+                        // console.log(employee,'employee',employee.length);
+                        // if(employee.length == 0){
+                        //     var EMPNAME='';
+                        // }else {
+                        //     var EMPNAME=employee[0].EMP_NAME;
+                        // }
+                        // var room=$filter('filter')($scope.roomList,{ID:$scope.room_id},true);
+                        // if(room.length == 0){
+                        //     var ROOMname='';
+                        // }else {
+                        //    var ROOMname=room[0].NAME; 
+                        // }
+                        // console.log(ROOMname,'ROOMname',EMPNAME,'EMPNAME');
+                        // if($scope.dept_id){
+                        //     var data1=$filter('filter')($scope.viewData,{ID:$scope.dept_id},true);
+                        //     // console.log(data1,'data1');
+                        //     data1[0].NAME=$scope.dept_name;
+                        //     data1[0].CODE=$scope.dept_code;
+                        //     data1[0].PHONE=$scope.phone_no;
+                        //     data1[0].EMP_ID=$scope.hod_prof_id;
+                        //     data1[0].empProfile[0].EMP_NAME=employee[0].EMP_NAME || '';
+                        //     data1[0].ROOM_ID=$scope.room_id;
+                        //     data1[0].roomData[0].NAME=room[0].NAME || '';
+                        //      // console.log(data1,'data1');
+                        // }else{
+                        //     $scope.viewData.push({ID:return_data.data.message.DEPT_ID,NAME:$scope.dept_name,CODE:$scope.dept_code,PHONE:$scope.phone_no,empProfile:[{EMP_NAME:employee[0].EMP_NAME}],EMP_ID:$scope.hod_prof_id,
+                        //     roomData:[{NAME:room[0].NAME || ''}],ROOM_ID:$scope.room_id});
+                        // }
+
                     });
                 }
 
@@ -169,8 +226,14 @@ angular
                                 params : {id : id},
                                 headers:{'access_token':$localStorage.access_token}
                                 }).then(function mySucces(response) {
-                                    var data=response.data.message.message;
-                                    $scope.viewData.splice($index, 1);
+                                    console.log(response,'response');
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.getdata();
                                 },function myError(response) {
                                 })
                             }

@@ -2,6 +2,20 @@ angular
     .module('rubycampusApp')
     .controller('buildingblockCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -58,6 +72,7 @@ angular
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
             
             $scope.addBlock=function(){
+                $scope.clearValidation();
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";
                 $scope.block_id='';
@@ -67,6 +82,7 @@ angular
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editBlock=function(result){
+                $scope.clearValidation();
                 // console.log(result,'result');
                 $scope.titleCaption="Edit";
                 $scope.btnStatus="Update";
@@ -78,12 +94,14 @@ angular
                 }
             }
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/block',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(response){
-                console.log(response.data,"response.data");
-                $scope.viewData=response.data;
-            });
-
+            $scope.refreshTable=function(){
+                $http.get($localStorage.service+'institutionApi/block',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(response){
+                    $scope.viewData=response.data;
+                });
+            }
+            
+            $scope.refreshTable();
             // Get building data
             $scope.buildingList=[];
             $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
@@ -106,6 +124,7 @@ angular
 
             // Save Data
             $scope.saveBlockData=function(){
+                // console.log($scope.block_name,'block_name',$scope.block_no,'block_no',$scope.selectize_buildingId,'buildingId');
                 $http({
                 method:'POST',
                 url: $localStorage.service+'institutionApi/block',
@@ -117,17 +136,27 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    // console.log(return_data.data.message);
-                    var data=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
-                    if($scope.block_id){
-                        var data1=$filter('filter')($scope.viewData,{ID:$scope.block_id},true);
-                        data1[0].NAME=$scope.block_name;
-                        data1[0].NUMBER=$scope.block_no;
-                        data1[0].BUILDING_ID=$scope.selectize_buildingId;
-                        data1[0].BUILDING_NAME=data[0].NAME;
-                    }else{
-                        $scope.viewData.push({ID:return_data.data.BLOCK_ID,NAME:$scope.block_name,NUMBER:$scope.block_no,BUILDING_NAME:data[0].NAME,BUILDING_ID:$scope.selectize_buildingId});
+                    console.log(return_data.data.message);
+                    if(return_data.data.status==true){
+                        UIkit.modal("#modal_header_footer").hide();
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
                     }
+                    $scope.refreshTable();
+                    // var data=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
+                    // if($scope.block_id){
+                    //     var data1=$filter('filter')($scope.viewData,{ID:$scope.block_id},true);
+                    //     data1[0].NAME=$scope.block_name;
+                    //     data1[0].NUMBER=$scope.block_no;
+                    //     data1[0].BUILDING_ID=$scope.selectize_buildingId;
+                    //     data1[0].BUILDING_NAME=data[0].NAME;
+                    // }else{
+                    //     $scope.viewData.push({ID:return_data.data.BLOCK_ID,NAME:$scope.block_name,NUMBER:$scope.block_no,BUILDING_NAME:data[0].NAME,BUILDING_ID:$scope.selectize_buildingId});
+                    // }
                 });
             }
 
@@ -141,10 +170,17 @@ angular
                             url : $localStorage.service+"institutionApi/block",
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
-                            }).then(function mySucces(response) {
-                                var data=response.data.message.message;
-                                $scope.viewData.splice($index, 1);
-                            },function myError(response) {
+                            }).then(function mySucces(return_data) {
+                                if(return_data.data.status==true){
+                                    UIkit.notify({
+                                        message : return_data.data.message.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                $scope.refreshTable();
+                            },function myError(return_data) {
                             })
                         }
                     },function(){

@@ -42,10 +42,12 @@
                 
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label">Course Name<span class="req">*</span></label>
                         <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="courseID" selectize />
                         <input type="hidden" ng-model="sub_syllabus_id">
                     </div>
                     <div class="uk-width-medium-1-2">
+                        <label class="uk-form-label">Subject Name<span class="req">*</span></label>
                         <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" selectize />
                     </div>
                 </div>

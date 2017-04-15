@@ -59,12 +59,12 @@
                         <button type="button" class="uk-modal-close uk-close"></button>
                         <h3 class="uk-modal-title"> {{titCaption}} Subjects </h3><br>
                         <div class="md-card-content">
-                            <form>
-                                <div class="uk-form-row">
+                            <form id="form_validation" name="inputForm" ng-submit="saveSubjectData()" novalidate>
+                                <div class="uk-form-row parsley-row">
                                     <div class="uk-grid">
                                         <div class="uk-width-medium-1-1">
-                                            <label for="subjectname">Subject Name</label>
-                                            <input type="text" ng-model="subject_name" class="md-input" md-input />
+                                            <label class="uk-form-label">Subject Name<span class="req">*</span></label>
+                                            <input type="text" ng-model="subject_name" required class="md-input" md-input />
                                             <input type="hidden" ng-model="sub_id">
                                             <input type="hidden" ng-model="cou_sub_id">
                                         </div>
@@ -85,10 +85,11 @@
                                         </div>
                                     </div>          
                                 </div>
-                                <div class="uk-form-row">
+                                <div class="uk-form-row parsley-row">
                                     <div class="uk-grid">
                                         <div class="uk-width-medium-1-1">
-                                            <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="course_id" selectize/>
+                                            <label class="uk-form-label">Course Name<span class="req">*</span></label>
+                                            <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" required ng-model="course_id" selectize/>
                                         </div>
                                     </div>          
                                 </div>
@@ -104,11 +105,11 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="uk-modal-footer uk-text-right">
+                                    <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                                    <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                                </div>
                             </form>
-                        </div>
-                        <div class="uk-modal-footer uk-text-right">
-                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveSubjectData()">{{btnStatus}}</button>
                         </div>
                     </div>
                 </div>

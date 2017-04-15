@@ -2,6 +2,21 @@ angular
     .module('rubycampusApp')
     .controller('roomCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+                
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -61,11 +76,13 @@ angular
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
             
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(response){
-                $scope.viewData=response.data;
-            });
-
+            $scope.refreshTable=function(){
+                $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(response){
+                    $scope.viewData=response.data;
+                });
+            }
+            $scope.refreshTable();
             // Get building data
             $scope.buildingList=[];
             $scope.blockList=[];
@@ -107,6 +124,7 @@ angular
                 }
             };
             $scope.addRoom=function(){
+                $scope.clearValidation();
                 $scope.btnStatus="Save";
                 $scope.titleCaption="Add";
                 $scope.room_id='';
@@ -118,6 +136,7 @@ angular
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editRoom=function(result){
+                $scope.clearValidation();
                 $scope.btnStatus="Update";
                 $scope.titleCaption="Edit";
                 if(result){
@@ -145,21 +164,31 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    // console.log(return_data.data.message);
-                    var build=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
-                    var block=$filter('filter')($scope.blockList,{ID:$scope.selectize_blockId},true);
-                    if($scope.room_id){
-                        var data1=$filter('filter')($scope.viewData,{ID:$scope.room_id},true);
-                        data1[0].NAME=$scope.room_name;
-                        data1[0].NUMBER=$scope.room_no;
-                        data1[0].FLOOR=$scope.floor;
-                        data1[0].BUILDING_ID=$scope.selectize_buildingId;
-                        data1[0].BUILDING_NAME=build[0].NAME;
-                        data1[0].BLOCK_ID=$scope.selectize_blockId;
-                        data1[0].BLOCK_NAME=block[0].NAME;
-                    }else{
-                        $scope.viewData.push({ID:return_data.data.ROOM_ID,NAME:$scope.room_name,NUMBER:$scope.room_no,FLOOR:$scope.floor,BUILDING_NAME:build[0].NAME,BUILDING_ID:$scope.selectize_buildingId,BLOCK_NAME:block[0].NAME,BLOCK_ID:$scope.selectize_blockId});
+                    if(return_data.data.status==true){
+                        UIkit.modal("#modal_header_footer").hide();
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
                     }
+                    $scope.refreshTable();
+                    // console.log(return_data.data.message);
+                    // var build=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
+                    // var block=$filter('filter')($scope.blockList,{ID:$scope.selectize_blockId},true);
+                    // if($scope.room_id){
+                    //     var data1=$filter('filter')($scope.viewData,{ID:$scope.room_id},true);
+                    //     data1[0].NAME=$scope.room_name;
+                    //     data1[0].NUMBER=$scope.room_no;
+                    //     data1[0].FLOOR=$scope.floor;
+                    //     data1[0].BUILDING_ID=$scope.selectize_buildingId;
+                    //     data1[0].BUILDING_NAME=build[0].NAME;
+                    //     data1[0].BLOCK_ID=$scope.selectize_blockId;
+                    //     data1[0].BLOCK_NAME=block[0].NAME;
+                    // }else{
+                    //     $scope.viewData.push({ID:return_data.data.ROOM_ID,NAME:$scope.room_name,NUMBER:$scope.room_no,FLOOR:$scope.floor,BUILDING_NAME:build[0].NAME,BUILDING_ID:$scope.selectize_buildingId,BLOCK_NAME:block[0].NAME,BLOCK_ID:$scope.selectize_blockId});
+                    // }
                 });
             }
 
@@ -175,8 +204,17 @@ angular
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
-                                var data=response.data.message.message;
-                                $scope.viewData.splice($index, 1);
+                                if(response.data.status==true){
+                                    UIkit.notify({
+                                        message : response.data.message.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                $scope.refreshTable();
+                                // var data=response.data.message.message;
+                                // $scope.viewData.splice($index, 1);
                             },function myError(response) {
                             })
                         }

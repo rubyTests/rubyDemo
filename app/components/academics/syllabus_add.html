@@ -37,15 +37,22 @@
 <div id="page_content">
     <div id="page_content_inner">
     <h3 class="heading_a uk-margin-bottom">Syllabus</h3>
+    <form id="form_validation" name="inputForm" ng-submit="saveSyllabusDetails()" novalidate>
         <div class="md-card">
             <div class="md-card-content">
                 
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="courseID" selectize />
+                        <div class="parsley-row">
+                            <label class="uk-form-label">Course Name<span class="req">*</span></label>
+                            <input type="text" config="selectize_course_config" required options="selectize_course_options" ng-model="courseID" selectize />
+                        </div>
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" selectize />
+                        <div class="parsley-row">
+                            <label class="uk-form-label">Subject Name<span class="req">*</span></label>
+                            <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" required selectize />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -60,11 +67,11 @@
                                 <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
                                     <div class="md-card" style="99.99%">
                                         <div class="md-card-content" style="height: 26px !important;">
-                                            <textarea  style="line-height: 0px !important;" class="md-input" ng-model="syllabus[topParent].syllabus_title" md-input textarea-autosize placeholder="Title"></textarea>
+                                            <textarea  style="line-height: 0px !important;" class="md-input" ng-model="syllabus[topParent].syllabus_title" md-input textarea-autosize placeholder="Title" required></textarea>
                                             <input type="hidden" ng-model="syllabus[topParent].syllabus_ID">
                                         </div>
                                     </div>
-                                    <textarea ui-tinymce="tinymce_options" ng-model="syllabus[topParent].syllabus_content" cols="4" rows="6"></textarea>
+                                    <textarea ui-tinymce="tinymce_options" ng-model="syllabus[topParent].syllabus_content" cols="4" rows="6" required></textarea>
                                 </div>
                             </div>
                         </div>
@@ -81,10 +88,11 @@
                     </div>
                     <div class="uk-text-right">
                         <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small" ui-sref="restricted.academics.syllabus_view">Cancel</button>
-                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" ng-click="saveSyllabusDetails()">Save</button>
+                        <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Save</button>
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
         </div>
+        </form>
     </div>
 </div>

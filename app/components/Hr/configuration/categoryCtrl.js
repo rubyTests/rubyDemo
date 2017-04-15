@@ -2,6 +2,23 @@ angular
     .module('rubycampusApp')
     .controller('employeecategoryCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            
+            var $formValidate = $('#form_validation');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
+
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -61,6 +78,7 @@ angular
                 });
 
             $scope.addCategory=function(){
+                $scope.clearValidation();
                 $scope.tit_caption="Add";
                 $scope.status="Save";
                 $scope.category_name='';
@@ -68,6 +86,7 @@ angular
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editcategory=function(data){
+                $scope.clearValidation();
                 $scope.tit_caption="Edit";
                 $scope.status="update";
                 if (data) {
@@ -77,12 +96,14 @@ angular
                 }
             }
             $scope.viewData=[];
-            $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
-            .success(function(category_data){
-                $scope.viewData=category_data.data;
-            });
-
-
+            
+            $scope.refreshTable=function(){
+                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
+                .success(function(category_data){
+                    $scope.viewData=category_data.data;
+                });
+            }
+            $scope.refreshTable();
             $scope.saveCategory=function(){
                 $http({
                 method:'POST',
@@ -95,13 +116,17 @@ angular
                 // headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
-                    if($scope.category_id){
-                        var data1=$filter('filter')($scope.viewData,{ID:$scope.category_id},true);
-                        data1[0].NAME=$scope.category_name;
-                        data1[0].DESCRIPTION=$scope.category_desc;
-                    }else{
-                        $scope.viewData.push({ID:return_data.data.data.CAT_ID,NAME:$scope.category_name,DESCRIPTION:$scope.category_desc});
+                    if(return_data.data.data.status==true){
+                        UIkit.modal("#open_category").hide();
+                        $scope.refreshTable();
                     }
+                    // if($scope.category_id){
+                    //     var data1=$filter('filter')($scope.viewData,{ID:$scope.category_id},true);
+                    //     data1[0].NAME=$scope.category_name;
+                    //     data1[0].DESCRIPTION=$scope.category_desc;
+                    // }else{
+                    //     $scope.viewData.push({ID:return_data.data.data.CAT_ID,NAME:$scope.category_name,DESCRIPTION:$scope.category_desc});
+                    // }
                 });
             }
 
@@ -117,6 +142,7 @@ angular
                             }).then(function mySucces(response) {
                                 var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);
+                                $scope.refreshTable();
                             },function myError(response) {
                             })
                         }

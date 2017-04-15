@@ -2,6 +2,22 @@ angular
     .module('rubycampusApp')
     .controller('positionCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            
+            var $formValidate = $('#form_validation');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
+
             var vm = this;
             vm.dt_data = [];
             $scope.category_data=[];
@@ -64,6 +80,7 @@ angular
                 var modal = UIkit.modal("#open_category",{bgclose: false, keyboard:false});
                 
                 $scope.addPosition=function(){
+                    $scope.clearValidation();
                     $scope.tit_caption="Add";
                     $scope.status="Save";
                     $scope.position_id='';
@@ -72,6 +89,7 @@ angular
                     $('.uk-modal').find('input').trigger('blur');
                 }
                 $scope.editPosition=function(data){
+                    $scope.clearValidation();
                     $scope.tit_caption="Edit";
                     $scope.status="update";
                     if (data) {
@@ -82,10 +100,13 @@ angular
                 }
                 $scope.viewData=[];
                 $scope.CategoryList=[];
-                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/positionViewDetail')
-                .success(function(position_data){
-                    $scope.viewData=position_data.data;
-                });
+                $scope.refreshTable=function(){
+                    $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/positionViewDetail')
+                    .success(function(position_data){
+                        $scope.viewData=position_data.data;
+                    });
+                }
+                $scope.refreshTable();
                 $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
                 .success(function(category_data){
                     $scope.CategoryDataList=category_data.data;
@@ -116,15 +137,19 @@ angular
                         // headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         console.log(return_data.data.data.message);
-                        var categoryData=$filter('filter')($scope.CategoryDataList,{ID:$scope.category_id},true);
-                        if($scope.position_id){
-                            var data1=$filter('filter')($scope.viewData,{ID:$scope.position_id},true);
-                            data1[0].NAME=$scope.position_name;
-                            data1[0].CATEGORY_ID=$scope.category_id;
-                            data1[0].CATEGORY_NAME=categoryData[0].NAME;
-                        }else{
-                            $scope.viewData.push({ID:return_data.data.data.POSITION_ID,NAME:$scope.position_name,CATEGORY_ID:$scope.category_id,CATEGORY_NAME:categoryData[0].NAME});
+                        if(return_data.data.data.status==true){
+                            UIkit.modal("#open_category").hide();
+                            $scope.refreshTable();
                         }
+                        // var categoryData=$filter('filter')($scope.CategoryDataList,{ID:$scope.category_id},true);
+                        // if($scope.position_id){
+                        //     var data1=$filter('filter')($scope.viewData,{ID:$scope.position_id},true);
+                        //     data1[0].NAME=$scope.position_name;
+                        //     data1[0].CATEGORY_ID=$scope.category_id;
+                        //     data1[0].CATEGORY_NAME=categoryData[0].NAME;
+                        // }else{
+                        //     $scope.viewData.push({ID:return_data.data.data.POSITION_ID,NAME:$scope.position_name,CATEGORY_ID:$scope.category_id,CATEGORY_NAME:categoryData[0].NAME});
+                        // }
                     });
                 }
 
@@ -140,6 +165,7 @@ angular
                             }).then(function mySucces(response) {
                                 var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);
+                                $scope.refreshTable();
                             },function myError(response) {
                             })
                         }

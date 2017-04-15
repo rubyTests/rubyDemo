@@ -1,6 +1,6 @@
 <div id="page_content" ng-controller="assignTeacherCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Assign Class Teacher</h3>
+        <h3 class="heading_a uk-margin-bottom">Assign Teacher</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -13,9 +13,8 @@
                       <tr>
                         <th>S.No</th>
                         <th>Course</th>
-                        <th>Batch</th>
-                        <th hidden="true">Department</th>
-                        <th>Assign Employee</th>
+                        <th>Subject</th>
+                        <th>Employee</th>
                         <th>Action</th>
                       </tr>
                     </thead>
@@ -23,22 +22,20 @@
                       <tr>
                         <th></th>
                         <th>Course</th>
-                        <th>Batch</th>
-                        <th hidden="true">Department</th>
-                        <th>Assign Employee</th>
+                        <th>Subject</th>
+                        <th>Employee</th>
                         <th></th>
                       </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
+                        <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.courseName}}</td>
-                            <td>{{row.cBatch_name}}</td>
-                            <td hidden="true">{{row.departmentName}}</td>
-                            <td>{{row.employeeName}}</td>
+                            <td>{{row.COURSE_NAME}}</td>
+                            <td>{{row.SUBJECT_NAME}}</td>
+                            <td>{{row.EMP_NAME}}</td>
                             <td class="uk-text-center">
                                 <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteAssignTeacher(row.ID)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -50,34 +47,30 @@
       <div id="modal_overflow" class="uk-modal">
         <div class="uk-modal-dialog">
           <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title">Assign Class Teacher
+          <h3 class="uk-modal-title">Assign Teacher
           </h3>
          <!--  <div class="uk-container"> -->
             <div class="md-card-content">
-              <form class=""><p></p>
-                <div class="uk-form-row">
-                  <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="selectize_courseName" name="selectize_courseName" selectize/>
+              <form id="form_validation" name="inputForm" ng-submit="saveAssignteacher()" novalidate>
+                <div class="uk-form-row parsley-row">
+                  <input type="text" config="selectize_deptId_config" required options="selectize_deptId_options" ng-model="dept_id" selectize/>
+                  <input type="hidden" ng-model="hidden_id">
                 </div>
-                <!-- <div class="uk-form-row">
-                  <input type="text" config="selectize_batchName_config" options="selectize_batchName_options" ng-model="selectize_batchName" selectize/>
-                </div> -->
-                <div class="uk-form-row">
-                  <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subject_id" selectize/>
+                <div class="uk-form-row parsley-row">
+                  <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="course_id" required selectize/>
                 </div>
-                <div class="uk-form-row">
-                  <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="selectize_deptId" selectize/>
+                <div class="uk-form-row parsley-row">
+                  <input type="text" config="selectize_subject_config" required options="selectize_subject_options" ng-model="subject_id" selectize/>
                 </div>
-                <div class="uk-form-row">
-                  <input type="text" config="selectize_empName_config" options="selectize_empName_options" ng-model="selectize_empName" selectize/>
+                <div class="uk-form-row parsley-row">
+                  <input type="text" config="selectize_empName_config" required options="selectize_empName_options" ng-model="employee_id" selectize/>
                 </div>
-                
+                <div class="uk-modal-footer uk-text-right">
+                  <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                  <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+            </div>
                 </form>
             </div>
-          <!-- </div> -->
-          <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveAssignteacher()">{{btnStatus}}</button>
-          </div>
          </div>
       </div>
     </div>

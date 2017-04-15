@@ -75,8 +75,8 @@ angular
                     submenu: [
                         {
                             title: 'Institution Details',
-                            // link: 'restricted.setting.institutionDetails'
-                            link:'restricted.setting.institution_view'
+                            link: 'restricted.setting.institutionDetails'
+                            // link:'restricted.setting.institution_view'
                         },
                         {
                             title: 'Building',
@@ -124,10 +124,6 @@ angular
                                 {
                                     title: 'Syllabus',
                                     link: 'restricted.academics.syllabus_view'
-                                },
-                                {
-                                    title: 'Assign Class Teacher',
-                                    link: 'restricted.academics.assignClassTeacher'
                                 }
                             ]
                         },
@@ -234,6 +230,10 @@ angular
                             link: 'restricted.student.student_list'
                         },
                         {
+                            title: 'Assign Teacher',
+                            link: 'restricted.student.assignTeacher'
+                        },
+                        {
                             title: 'Leaves',
                             submenu: [
                                 {
@@ -272,14 +272,6 @@ angular
                         {
                             title: 'Leave Management',
                             submenu: [
-                                // {
-                                //     title: 'Leave Type',
-                                //     link:'restricted.hr.leavetype'
-                                // },
-                                {
-                                    title: 'Apply Leave',
-                                    link:'restricted.hr.applyLeave'
-                                },
                                 {
                                     title: 'Leave Type',
                                     link:'restricted.hr.leave_category'
@@ -287,6 +279,10 @@ angular
                                 {
                                     title: 'Leave Entitlement',
                                     link : 'restricted.hr.assignleave_categoryView'
+                                },
+                                {
+                                    title: 'Apply Leave',
+                                    link:'restricted.hr.applyLeave'
                                 },
                                 {
                                     title: 'Leave Applications',

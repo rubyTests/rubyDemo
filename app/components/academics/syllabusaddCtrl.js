@@ -8,6 +8,19 @@ angular
             $scope.syllabus=[];
             $scope.courseList=[];
             $scope.subjectList=[];
+
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+                
             $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(course_data){
                 $scope.courseList.push(course_data.data);
@@ -24,6 +37,7 @@ angular
                 placeholder: 'Select Course',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
@@ -37,6 +51,7 @@ angular
                 placeholder: 'Select Subject',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
@@ -266,9 +281,11 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.message);
+                    console.log(return_data.data.message,'return_data');
                     if(return_data.data.status==true){
                         $state.go('restricted.academics.syllabus_view');
+                    }else {
+                        UIkit.modal.alert('Course & Subject Name Already Exists');
                     }
                 });
             }

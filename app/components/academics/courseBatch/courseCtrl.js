@@ -3,6 +3,20 @@ angular
     .controller('courseCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
             var vm = this;
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -62,11 +76,14 @@ angular
 
                 $scope.deptData=[];
                 $scope.viewData=[];
-                $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
-                .success(function(course_data){
-                    $scope.viewData=course_data.message;
-                });
 
+                $scope.refreshTable=function(){
+                    $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+                    .success(function(course_data){
+                        $scope.viewData=course_data.message;
+                    });
+                }
+                $scope.refreshTable();
                 $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(dept_data){
                     $scope.deptData.push(dept_data.message);
@@ -83,7 +100,7 @@ angular
                 $scope.selectize_attdnceType_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Type'
+                    placeholder: 'Attendance Type'
                 };
 
                 $scope.selectize_deptId_options =$scope.deptData;
@@ -93,6 +110,7 @@ angular
                     placeholder: 'Select Department',
                     valueField: 'ID',
                     labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             console.log(value);
@@ -102,6 +120,7 @@ angular
                 $scope.titCaption="Add";
                 $scope.btnStatus='Save';
                 $scope.addCourse = function() {
+                    $scope.clearValidation();
                     $scope.titCaption="Add";
                     $scope.btnStatus='Save';
                     $scope.course_id='';
@@ -113,6 +132,7 @@ angular
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.editCourse= function(res){
+                    $scope.clearValidation();
                     $scope.titCaption="Edit";
                     $scope.btnStatus='Update';
                     if(res){
@@ -141,18 +161,36 @@ angular
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.message.message);
-                    var dept=$filter('filter')($scope.deptData,{ID:$scope.dept_id},true);
-                    if($scope.course_id){
-                        var data1=$filter('filter')($scope.viewData,{ID:$scope.course_id},true);
-                        data1[0].NAME=$scope.course_name;
-                        data1[0].ATTENDANCE_TYPE=$scope.attendance_type;
-                        data1[0].PERCENTAGE=$scope.percentage;
-                        data1[0].GARDE_TYPE=$scope.grade_type;
-                        data1[0].DEPT_ID=$scope.dept_id;
-                        data1[0].DEPT_NAME=dept[0].NAME;
-                    }else{
-                        $scope.viewData.push({ID:return_data.data.message.COURSE_ID,NAME:$scope.course_name,ATTENDANCE_TYPE:$scope.attendance_type,PERCENTAGE:$scope.percentage,GARDE_TYPE:$scope.grade_type,DEPT_ID:$scope.dept_id,DEPT_NAME:dept[0].NAME});
+                    if(return_data.data.message.status==true){
+                        UIkit.modal("#modal_overflow").hide();
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.refreshTable();
+                    }else {
+                        // UIkit.notify('Course Name Already Exists','danger');
+                        UIkit.modal.alert('Course Name Already Exists');
                     }
+                    // var dept=$filter('filter')($scope.deptData,{ID:$scope.dept_id},true);
+                    //  if(dept.length == 0){
+                    //         var DEPTNAME='';
+                    //     }else {
+                    //         var DEPTNAME=dept[0].NAME;
+                    //     }
+                    // if($scope.course_id){
+                    //     var data1=$filter('filter')($scope.viewData,{ID:$scope.course_id},true);
+                    //     data1[0].NAME=$scope.course_name;
+                    //     data1[0].ATTENDANCE_TYPE=$scope.attendance_type;
+                    //     data1[0].PERCENTAGE=$scope.percentage;
+                    //     data1[0].GARDE_TYPE=$scope.grade_type;
+                    //     data1[0].DEPT_ID=$scope.dept_id;
+                    //     data1[0].DEPT_NAME=DEPTNAME;
+                    // }else{
+                    //     $scope.viewData.push({ID:return_data.data.message.COURSE_ID,NAME:$scope.course_name,ATTENDANCE_TYPE:$scope.attendance_type,PERCENTAGE:$scope.percentage,GARDE_TYPE:$scope.grade_type,DEPT_ID:$scope.dept_id,DEPT_NAME:DEPTNAME});
+                    // }
                 });
             }
 
@@ -166,8 +204,13 @@ angular
                                 params : {id : id},
                                 headers:{'access_token':$localStorage.access_token}
                                 }).then(function mySucces(response) {
-                                    var data=response.data.message.message;
-                                    $scope.viewData.splice($index, 1);
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.refreshTable();
                                 },function myError(response) {
                                 })
                             }

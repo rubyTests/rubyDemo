@@ -36,8 +36,8 @@
                         <td>{{$index+1}}</td>
                         <td>{{row.NAME}}</td>
                         <td>{{row.CODE}}</td>
-                        <td>{{row.EMPLOYEE_NAME}}</td>
-                        <td>{{row.ROOM_NAME}}</td>
+                        <td>{{row.empProfile[0].EMP_NAME}}</td>
+                        <td>{{row.roomData[0].NAME}}</td>
                         <td>{{row.PHONE}}</td>
                         <td class="">
                             <a ng-click="editDepartment(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
@@ -55,35 +55,80 @@
           <button type="button" class="uk-modal-close uk-close"></button>
           <h3 class="uk-modal-title">{{titCaption}} Department </h3><br>
             <div class="md-card-content">
-              <form class="">
-                <div class="uk-form-row">
+              <form id="form_validation" class="" name="deptFORM" ng-submit="saveDeaprtment()" novalidate>
+                <div class="parsley-row uk-form-row">
                   <input type="hidden" ng-model="dept_id">
-                  <label>Department Name</label>
-                  <input type="text" ng-model="dept_name" class="md-input" required md-input>
+                  <label class="uk-form-label">Department Name<span class="req">*</span></label>
+                  <input type="text" ng-model="dept_name" class="md-input" name="dept_name" required md-input>
                 </div>
                  <div class="uk-form-row">
                    <label>Department Code</label>
-                  <input type="text" ng-model="dept_code" class="md-input" required md-input>
+                  <input type="text" ng-model="dept_code" class="md-input" md-input>
                 </div>
                  <div class="uk-form-row">
                   <input type="text" config="selectize_hodProfieId_config" options="selectize_hodProfieId_options" ng-model="hod_prof_id" selectize/>
                 </div>
                 <div class="uk-form-row">
-                  <input type="text" config="selectize_roomid_config" options="selectize_roomid_options" ng-model="room_id" selectize/>
+                  <input type="text" config="selectize_roomid_config" options="selectize_roomid_options" ng-model="room_id" name="room_id"  selectize/>
                 </div>
                 <div class="uk-form-row">
                   <label>Phone</label>
-                  <input type="text" ng-model="phone_no" class="md-input" required md-input>
+                  <input type="text" ng-model="phone_no" name="phone_no" class="md-input" md-input numeric-only>
+                </div>
+
+                <div class="uk-modal-footer uk-text-right">
+                      <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                      <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
                 </div>
                 </form>
             </div>
-          <div class="uk-modal-footer uk-text-right">
+          <!-- <div class="uk-modal-footer uk-text-right">
                 <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
                 <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveDeaprtment()">{{btnStatus}}</button>
-          </div>
+          </div> -->
          </div>
       </div>
     </div>
 
+
+    <!-- Alert model -->
+    <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h3 class="uk-modal-title">{{titCaption}} Department </h3><br>
+            <div class="md-card-content">
+              <form id="form_validation" class="" name="deptFORM" ng-submit="saveDeaprtment()" novalidate>
+                <div class="parsley-row uk-form-row">
+                  <input type="hidden" ng-model="dept_id">
+                  <label class="uk-form-label">Department Name<span class="req">*</span></label>
+                  <input type="text" ng-model="dept_name" class="md-input" name="dept_name" required md-input>
+                </div>
+                 <div class="uk-form-row">
+                   <label>Department Code</label>
+                  <input type="text" ng-model="dept_code" class="md-input" md-input>
+                </div>
+                 <div class="uk-form-row">
+                  <input type="text" config="selectize_hodProfieId_config" options="selectize_hodProfieId_options" ng-model="hod_prof_id" selectize/>
+                </div>
+                <div class="uk-form-row">
+                  <input type="text" config="selectize_roomid_config" options="selectize_roomid_options" ng-model="room_id" name="room_id"  selectize/>
+                </div>
+                <div class="uk-form-row">
+                  <label>Phone</label>
+                  <input type="text" ng-model="phone_no" name="phone_no" class="md-input" md-input numeric-only>
+                </div>
+
+                <div class="uk-modal-footer uk-text-right">
+                      <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                      <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                </div>
+                </form>
+            </div>
+          <!-- <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="saveDeaprtment()">{{btnStatus}}</button>
+          </div> -->
+         </div>
+      </div>
  
 </div>

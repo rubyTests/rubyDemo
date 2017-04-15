@@ -31,7 +31,7 @@
                             <div class="uk-accordion uk-accordion-alt help_accordion hierarchical_slide" hierarchical-slide slide-children="h3" slide-context=".md-card-content">
                                 <h3 class="uk-accordion-title uk-animation-slide-bottom" ng-repeat-start="item in notes_preview.syllabus" on-last-repeat>{{item.NAME}}</h3>
                                 <div class="uk-accordion-content" ng-repeat-end>
-                                    <p>{{item.DESC | htmlToPlaintext}}</p>
+                                    <p ng-bind-html="item.DESC"></p>
                                 </div>
                             </div>
                         </div>

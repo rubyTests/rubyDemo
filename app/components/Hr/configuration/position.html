@@ -44,20 +44,20 @@
             <button type="button" class="uk-modal-close uk-close"></button>
             <h3 class="uk-modal-title">{{tit_caption}} Position </h3><br>
             <div class="md-card-content">
-                <form>
-                    <div class="uk-form-row">
+                <form id="form_validation" ng-submit="savePosition()" novalidate>
+                    <div class="parsley-row uk-form-row">
                         <label>Position Name</label>
-                        <input type="text" ng-model="position_name" class="md-input" md-input>
+                        <input type="text" ng-model="position_name" required class="md-input" md-input>
                         <input type="hidden" ng-model="position_id">
                     </div>
-                    <div class="uk-form-row">
-                        <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="category_id" selectize/>
+                    <div class="parsley-row uk-form-row">
+                        <input type="text" config="selectize_category_config" required options="selectize_category_options" ng-model="category_id" selectize/>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small">{{status}}</button>
                     </div>
                 </form>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="savePosition()">{{status}}</button>
             </div>
         </div>
     </div>
