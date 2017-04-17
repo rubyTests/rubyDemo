@@ -101,13 +101,13 @@ angular
                 $scope.viewData=[];
                 $scope.CategoryList=[];
                 $scope.refreshTable=function(){
-                    $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/positionViewDetail')
+                    $http.get($localStorage.service+'EmployeemgmntAPI/positionViewDetail',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(position_data){
                         $scope.viewData=position_data.data;
                     });
                 }
                 $scope.refreshTable();
-                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
+                $http.get($localStorage.service+'EmployeemgmntAPI/categoryDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(category_data){
                     $scope.CategoryDataList=category_data.data;
                     $scope.CategoryList.push(category_data.data);
@@ -128,17 +128,22 @@ angular
                 $scope.savePosition=function(){
                     $http({
                         method:'POST',
-                        url: 'http://localhost/smartedu/test/EmployeemgmntAPI/positionDetail',
+                        url: $localStorage.service+'EmployeemgmntAPI/positionDetail',
                         data: {
                             'id' : $scope.position_id,
                             'name' : $scope.position_name,
                             'category_id' : $scope.category_id
                         },
-                        // headers:{'access_token':$localStorage.access_token}
+                        headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        console.log(return_data.data.data.message);
                         if(return_data.data.data.status==true){
                             UIkit.modal("#open_category").hide();
+                            UIkit.notify({
+                                message : return_data.data.data.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
                             $scope.refreshTable();
                         }
                         // var categoryData=$filter('filter')($scope.CategoryDataList,{ID:$scope.category_id},true);
@@ -159,12 +164,17 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/smartedu/test/EmployeemgmntAPI/positionDetail",
+                            url : $localStorage.service+"EmployeemgmntAPI/positionDetail",
                             params : {id : id},
-                            // headers:{'access_token':$localStorage.access_token}
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
-                                var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);
+                                UIkit.notify({
+                                    message : response.data.message,
+                                    status  : 'success',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
                                 $scope.refreshTable();
                             },function myError(response) {
                             })

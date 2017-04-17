@@ -35,7 +35,7 @@
                             <td>{{row.EMP_NAME}}</td>
                             <td class="uk-text-center">
                                 <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="deleteAssignTeacher(row.ID)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteAssignTeacher(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

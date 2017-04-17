@@ -16,7 +16,7 @@ angular
             $rootScope.headerDoubleHeightActive = true;
             var test;
             // $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchAllSubjectSyllabusData')
-            $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchAllSubjectSyllabusData')
+            $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(syllabus_data){
                 var data1=$filter('filter')(syllabus_data.data, {SUBJECT_ID : $stateParams.id},true);
                 // console.log(syllabus_data.data.indexOf(data1[0]),'data');

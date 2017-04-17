@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('assignTeacherCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
             var $formValidate = $('#form_validation');
             $formValidate
                 .parsley()
@@ -95,14 +95,14 @@ angular
                 }
                 $scope.viewData=[];
                 $scope.refreshTable=function(){
-                    $http.get('http://localhost/smartedu/test/AcademicsAPI/assignTeacherDetail')
+                    $http.get($localStorage.service+'AcademicsAPI/assignTeacherDetail',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(view_data){
                         $scope.viewData=view_data.message;
                     });
                 }
                 $scope.refreshTable();
 
-                $http.get('http://localhost/smartedu/test/AcademicsAPI/departmentlist')
+                $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(dept_data){
                     $scope.deptData.push(dept_data.message);
                 });
@@ -175,10 +175,11 @@ angular
                 $scope.getCourseList=function(id){
                     $http({
                     method:'get',
-                    url: 'http://localhost/smartedu/test/AcademicsAPI/fetchcourseDetailList',
+                    url: $localStorage.service+'AcademicsAPI/fetchcourseDetailList',
                     params: {
                         'id' : id
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         $scope.selectize_courseName_options=return_data.data.data;
                     });
@@ -186,10 +187,11 @@ angular
                 $scope.getSubjectList=function(id){
                     $http({
                     method:'get',
-                    url: 'http://localhost/smartedu/test/AcademicsAPI/fetchSubjectDetailList',
+                    url: $localStorage.service+'AcademicsAPI/fetchSubjectDetailList',
                     params: {
                         'id' : id
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         $scope.selectize_subject_options=return_data.data.data;
                     });
@@ -197,10 +199,11 @@ angular
                 $scope.getEmployeeList=function(id){
                     $http({
                     method:'get',
-                    url: 'http://localhost/smartedu/test/AcademicsAPI/fetchTeacherDetailList',
+                    url: $localStorage.service+'AcademicsAPI/fetchTeacherDetailList',
                     params: {
                         'id' : id
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         $scope.selectize_empName_options=return_data.data.data;
                     });
@@ -209,17 +212,23 @@ angular
                 $scope.saveAssignteacher=function(){
                     $http({
                     method:'POST',
-                    url: 'http://localhost/smartedu/test/AcademicsAPI/assignTeacherDetail',
+                    url: $localStorage.service+'AcademicsAPI/assignTeacherDetail',
                     data: {
                         'hidden_id' : $scope.hidden_id,
                         'course_id' : $scope.course_id,
                         'subject' : $scope.subject_id,
                         'employee_id' : $scope.employee_id
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        console.log(return_data.data.message.message);
                         if(return_data.data.message.status==true){
                             UIkit.modal("#modal_overflow").hide();
+                            UIkit.notify({
+                                message : return_data.data.message.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
                             $scope.refreshTable();
                         }else {
                             // UIkit.modal.alert('Course & Batch Name Already Exists');
@@ -229,10 +238,11 @@ angular
                 $scope.getAllCourseList=function(id){
                     $http({
                     method:'get',
-                    url: 'http://localhost/smartedu/test/AcademicsAPI/courseDetail',
+                    url: $localStorage.service+'test/AcademicsAPI/courseDetail',
                     params: {
                         'course_ID' : id
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         // $timeout(function(){
                             $scope.dept_id=return_data.data.message[0].DEPT_ID;
@@ -241,17 +251,23 @@ angular
                     });
                 }
 
-                $scope.deleteAssignTeacher=function(id){
+                $scope.deleteAssignTeacher=function(id,$index){
                     if(id){
                         UIkit.modal.confirm('Are you sure to delete ?', function(e) {
                             if(id){
                                 $http({
                                 method : "DELETE",
-                                url : "http://localhost/smartedu/test/AcademicsAPI/assignTeacherDetail",
+                                url : $localStorage.service+"AcademicsAPI/assignTeacherDetail",
                                 params : {id : id},
-                                // headers:{'access_token':$localStorage.access_token}
+                                headers:{'access_token':$localStorage.access_token}
                                 }).then(function mySucces(response) {
-                                    var data=response.data.message.message;
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.viewData.splice($index, 1);
                                     $scope.refreshTable();
                                 },function myError(response) {
                                 })

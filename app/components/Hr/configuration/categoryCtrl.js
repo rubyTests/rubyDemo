@@ -98,7 +98,7 @@ angular
             $scope.viewData=[];
             
             $scope.refreshTable=function(){
-                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
+                $http.get($localStorage.service+'EmployeemgmntAPI/categoryDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(category_data){
                     $scope.viewData=category_data.data;
                 });
@@ -107,17 +107,23 @@ angular
             $scope.saveCategory=function(){
                 $http({
                 method:'POST',
-                url: 'http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail',
+                url: $localStorage.service+'EmployeemgmntAPI/categoryDetail',
                 data: {
                     'id' : $scope.category_id,
                     'name' : $scope.category_name,
                     'description' : $scope.category_desc
                 },
-                // headers:{'access_token':$localStorage.access_token}
+                headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
                     if(return_data.data.data.status==true){
                         UIkit.modal("#open_category").hide();
+                        UIkit.notify({
+                            message : return_data.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
                         $scope.refreshTable();
                     }
                     // if($scope.category_id){
@@ -136,12 +142,17 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail",
+                            url : $localStorage.service+"EmployeemgmntAPI/categoryDetail",
                             params : {id : id},
-                            // headers:{'access_token':$localStorage.access_token}
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
-                                var data=response.data.message.message;
                                 $scope.viewData.splice($index, 1);
+                                UIkit.notify({
+                                    message : response.data.message,
+                                    status  : 'success',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
                                 $scope.refreshTable();
                             },function myError(response) {
                             })
