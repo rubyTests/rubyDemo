@@ -2648,8 +2648,9 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.min.js',
-                                'app/components/student/studentadmisionCtrl.js'
+                                'assets/js/custom/uikit_fileinput.js',
+                                'app/components/student/studentadmisionCtrl.js',
+                                'app/components/student/cameraCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -2749,9 +2750,9 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
                                 'lazy_parsleyjs',
+								'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
                                 'app/components/academics/courseBatch/assignTeacherCtrl.js'
                             ], {serie:true});
                         }]
