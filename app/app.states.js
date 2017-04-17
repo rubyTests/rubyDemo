@@ -1973,7 +1973,6 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'lazy_parsleyjs',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'app/components/setting/building/buildingCtrl.js'
@@ -1993,7 +1992,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/setting/building/buildingblockCtrl.js'
                             ], {serie:true});
                         }]
@@ -2011,7 +2009,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/setting/building/roomCtrl.js'
                             ], {serie:true});
                         }]
@@ -2475,6 +2472,60 @@ rubycampusApp
                     params: { fold:null,hidePreloader: true }
                 })
 
+                .state("restricted.studentDashboard", {
+                    url: "/studentDashboard",
+                    controller: 'studentDashboardCtrl',
+                    templateUrl: 'app/components/student/studentDashboard.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_countUp',
+                                'lazy_charts_peity',
+                                'lazy_charts_easypiechart',
+                                'lazy_charts_metricsgraphics',
+                                'lazy_charts_chartist',
+                                'lazy_clndr',
+                                'lazy_charts_c3',
+                                'app/components/student/studentDashboardCtrl.js'
+                            ], {serie:true});
+                        }],
+                        sale_chart_data: function($http){
+                            return $http({method: 'GET', url: 'data/mg_dashboard_chart.min.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        todo_data: function($http){
+                            return $http({ method: 'GET', url: 'data/todo_datanew.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        help_data: function($http){
+                            return $http({ method: 'GET', url: 'data/help_faq.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        assign_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/stuAssignment.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Student Dashboard'
+                    }
+
+                })
+
                 // Added by Vijayaraj 08-03-17
                 .state("restricted.employeemanagement", {
                     url: "/employeemanagement",
@@ -2535,9 +2586,9 @@ rubycampusApp
                         }],
                         user_data: function($http){
                             return $http({ method: 'GET', url: 'app/components/employeemanagement/profile.json' })
-                            .then(function (data) {
-                                return data.data;
-                            });
+                                .then(function (data) {
+                                    return data.data;
+                                });
                         }
                     },
                     data: {
@@ -2569,7 +2620,7 @@ rubycampusApp
                 .state("restricted.employeemanagement.employee_profile_tableview", {
                     url: "/employee_profile_tableview",
                     templateUrl: 'app/components/employeemanagement/employee_table_view.html',
-                    // controller: 'employeetable_viewCtrl',
+                    controller: 'employeetable_viewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2690,24 +2741,26 @@ rubycampusApp
                         pageTitle: 'Employee View'
                     }
                 })
-                .state("restricted.student.assignTeacher", {
-                    url: "/assignTeacher",
-                    templateUrl: 'app/components/academics/courseBatch/assignTeacher.html',
-                    //controller: 'assignTeacherCtrl',
+
+                // Added By Senthil 12/04/2017
+
+                .state("restricted.student.stuApplyLeave", {
+                    url: "/stuApplyLeave",
+                    controller: 'stuApplyLeaveCtrl',
+                    templateUrl: 'app/components/student/stuApplyLeave.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'lazy_parsleyjs',
-                                'app/components/academics/courseBatch/assignTeacherCtrl.js'
+                                'app/components/student/stuApplyLeaveCtrl.js'
                             ], {serie:true});
                         }]
                     },
                     data: {
-                        pageTitle: 'Assign Teacher'
+                        pageTitle: 'Student Apply Leave'
                     }
+
                 })
+
 
                 // Academics added by vijayaraj
                 .state("restricted.academics", {
@@ -2742,7 +2795,6 @@ rubycampusApp
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'lazy_tinymce',
-                                'lazy_parsleyjs',
                                 'app/components/academics/syllabusaddCtrl.js'
                             ],{serie: true});
                         }]
@@ -2901,7 +2953,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
@@ -2923,7 +2974,6 @@ rubycampusApp
                                 //'smart-table',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/courseBatchCtrl.js'
                             ], {serie:true});
                         }]
@@ -2993,7 +3043,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/departmentCtrl.js'
                             ], {serie:true});
                         }]
@@ -3002,7 +3051,23 @@ rubycampusApp
                         pageTitle: 'Department'
                     }
                 })
-                
+                .state("restricted.academics.assignClassTeacher", {
+                    url: "/assignClassTeacher",
+                    templateUrl: 'app/components/academics/courseBatch/assignTeacher.html',
+                    //controller: 'assignTeacherCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/courseBatch/assignTeacherCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'AssignClassTeacher'
+                    }
+                })
 				
 				// Academics Examination by karthik @ 21.03.2017 3.12 PM
 				.state("restricted.academics.examination", {
@@ -3162,6 +3227,146 @@ rubycampusApp
 					}
 				})
 
+                // Added By Senthil 12-04-2017
+
+                .state("restricted.academics.assignment", {
+                    url: "/assignment",
+                    templateUrl: 'app/components/academics/assignment/assignmentDetails.html',
+                    //controller: 'assignCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/assignment/assignmentDetailsCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assignment Details'
+                    }
+                })
+
+                .state("restricted.academics.assignmentAdd", {
+                    url: "/assignmentAdd",
+                    templateUrl: 'app/components/academics/assignment/assignmentAdd.html',
+                    controller: 'assignmentAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_tinymce',
+                                'app/components/academics/assignment/assignmentAddCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assignment Add'
+                    }
+                })
+
+                .state("restricted.academics.assignmentEdit", {
+                    url: "/assignmentEdit/{id}",
+                    templateUrl: 'app/components/academics/assignment/assignmentEdit.html',
+                    controller: 'assignmentEditCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_tinymce',
+                                'app/components/academics/assignment/assignmentEditCtrl.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assignment Edit'
+                    },
+                    params:{id:null}
+                })
+
+                .state("restricted.academics.assignmentView", {
+                    url: "/assignmentView",
+                    templateUrl: 'app/components/academics/assignment/assignmentView.html',
+                    controller: 'assignmentViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/academics/assignment/assignmentViewCtrl.js'
+                            ],{serie:true});
+                        }],
+                        ts_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Tablesorter'
+                    }
+                })
+
+                .state("restricted.stuAssignmentView", {
+                    url: "/stuAssignmentView",
+                    templateUrl: 'app/components/student/stuAssignmentView.html',
+                    controller: 'stuAssignmentViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/student/stuAssignmentViewCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/stuAssignment.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Syllabus View'
+                    },
+                    params:{id:null}
+                })
+
+                // .state("restricted.stuAssignmentView.list", {
+                //     url: "/list",
+                //     views: {
+                //         'ivoice_content': {
+                //             templateUrl: 'app/components/student/stuAssignmentBlankView.html',
+                //             controller: 'stuAssignmentViewCtrl'
+                //         },
+                //         'ivoice_content1': {
+                //             templateUrl: 'app/components/student/stuAssignmentBlankView.html',
+                //             controller: 'stuAssignmentViewCtrl'
+                //         }
+                //     },
+                //     data: {
+                //         pageTitle: 'Assignment View'
+                //     }
+                // })
+
+                // .state("restricted.academics.stuAssignmentView.detail", {
+                //     url: "/detail",
+                //     views: {
+                //         'ivoice_content': {
+                //             templateUrl: 'app/components/student/stuAssignmentDetail.html',
+                //             controller: 'stuAssignmentViewCtrl'
+                //         }
+                //     },
+                //     data: {
+                //         pageTitle: 'Assignment View'
+                //     }
+                // })
+
                 // HR Module Added by Vijayaraj 17-03-17
 
                 .state("restricted.hr.config", {
@@ -3179,7 +3384,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/categoryCtrl.js'
                             ], {serie:true});
                         }]
@@ -3197,7 +3401,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/positionCtrl.js'
                             ], {serie:true});
                         }]
@@ -3514,7 +3717,6 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
                             ], {serie:true});
                         }]

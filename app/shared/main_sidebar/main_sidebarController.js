@@ -213,6 +213,10 @@ angular
                                     ]
                                 }
                             ]
+                        },
+                        {
+                            title: 'Assignments',
+                            link: 'restricted.academics.assignment'
                         }
                     ]
                 },
@@ -238,6 +242,7 @@ angular
                             submenu: [
                                 {
                                     title: 'Apply Leaves',
+                                    link: 'restricted.student.stuApplyLeave'
                                 }
                             ]
                         }
@@ -522,6 +527,12 @@ angular
                             link: 'restricted.plugins.events'
                         }
                     ]
+                },
+                {
+                    id: 13,
+                    title: 'Student Dashboard',
+                    icon: '&#xE158;',
+                    link : 'restricted.studentDashboard'
                 },
                 // {
                 //     id: 15,

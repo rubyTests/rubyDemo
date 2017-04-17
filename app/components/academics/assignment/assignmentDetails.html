@@ -1,0 +1,55 @@
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <h3 class="heading_a uk-margin-bottom">Assignment
+
+        </h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding" ng-controller="assignmentDetailsCtrl as showCase">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <a class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.assignmentAdd">
+                        <i class="uk-icon-plus"></i>  Add Assignment
+                        </a>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Subject</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Subject</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in showCase.viewData">
+
+                        {{row | json}}
+                            <td>{{$index+1}}</td>
+                            <td>{{row.assignment_name}}</td>
+                            <td>{{row.subject_name}}</td>
+                            <td>{{row.course_name}}</td>
+                            <td>{{row.batch_name}}</td>
+                            <td class="uk-text-center">
+                                <a ui-sref="restricted.academics.assignmentView({id:{{row.id}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
+                                <a ui-sref="restricted.academics.assignmentEdit({id:{{row.id}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteSyllabus(row.id,row.SUB_SYLLABUS_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

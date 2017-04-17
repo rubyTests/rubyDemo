@@ -1,0 +1,42 @@
+ [
+    {
+        "id": 1,
+        "assignment_name": "Assignment 1",
+        "course_name": "Computer Science and Engineering",
+        "batch_name": "Batch 1",
+        "content": "First Assignment",
+        "subject_name":"Database Management Systems"
+    },
+    {
+        "id": 2,
+        "assignment_name": "Assignment 2",
+        "course_name": "Electrical and Electronics Engineering",
+        "batch_name": "Batch 2",
+        "content": "Second Assignment",
+        "subject_name":"Mobile Computing"
+    },
+    {
+        "id": 3,
+        "assignment_name": "Assignment 3",
+        "course_name": "Electronics Communication Engineering",
+        "batch_name": "Batch 3",
+        "content": "Third Assignment",
+        "subject_name":"Computer Networks"
+    },
+    {
+        "id": 4,
+        "assignment_name": "Assignment 4",
+        "course_name": "Information Technology",
+        "batch_name": "Batch 4",
+        "content": "Fourth Assignment",
+        "subject_name":"Software Engineering"
+    },
+    {
+        "id": 5,
+        "assignment_name": "Assignment 5",
+        "course_name": "Mechanical Engineering",
+        "batch_name": "Batch 5",
+        "content": "Fifth Assignment",
+        "subject_name":"Power Plant Engineering"
+    }
+] 

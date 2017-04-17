@@ -1,0 +1,76 @@
+<div id="page_content"  ng-controller="stuApplyLeaveCtrl as tblData">
+    <div id="page_content_inner">
+    <h3 class="heading_a uk-margin-bottom">Apply Leave</h3>
+        <div class="md-card">  
+            <div class="md-card-content large-padding">
+                <form>
+                    <!-- <div class="uk-grid">
+                        <div class="uk-width-medium-1-1">
+                            <input type="text" config="selectize_leavetype_config" options="selectize_leavetype_options" ng-model="selectize_leavetype" selectize/>
+                        </div>
+                    </div> -->
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-2-10 uk-row-first">
+                            <span class="uk-display-block uk-margin-small-top uk-text-large ng-binding">Leave Duration</span>
+                        </div>
+                        <div class="uk-width-medium-8-10 uk-margin-small-top">
+                            <div class="uk-margin-left">
+                                <span class="icheck-inline">
+                                    <input type="radio" name="task_priority" id="task_priority_minor" ng-model="newTask.priority" value="Single" icheck />
+                                    <label for="task_priority_minor" class="uk-margin-left"> Single Day</label>
+                                </span>
+                                <span class="icheck-inline uk-margin-left">
+                                    <input type="radio" name="task_priority" id="task_priority_critical" ng-model="newTask.priority" value="Multiple" icheck />
+                                    <label for="task_priority_minor" class="uk-margin-left"> Multiple Days</label>
+                                </span>
+                                <span class="icheck-inline uk-margin-left">
+                                    <input type="radio" name="task_priority" id="task_priority_blocker" ng-model="newTask.priority" value="Half" icheck />
+                                    <label for="task_priority_minor" class="uk-margin-left"> Half Day</label>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-2-10 uk-row-first">
+                            <span class="uk-display-block uk-margin-small-top uk-text-large ng-binding">Date</span>
+                        </div>
+                        <div class="uk-width-medium-4-10 uk-margin-small-top">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                <i class="material-icons"></i>
+                                </span>
+                                <label>From Date</label>
+                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="from_date"/>
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-4-10 uk-margin-small-top" ng-show="newTask.priority == 'Multiple'">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                <i class="material-icons"></i>
+                                </span>
+                                <label>To Date</label>
+                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="upto_date"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-medium-2-10 uk-row-first">
+                            <span class="uk-display-block uk-margin-small-top uk-text-large ng-binding">Reason</span>
+                        </div>
+                        <div class="uk-width-medium-8-10">
+                            <div class="uk-margin-left">
+                                <label>Description</label>
+                                <textarea cols="30" rows="2" class="md-input" ng-model="description" md-input textarea-autosize></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-text-right uk-margin-top">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                        <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Apply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

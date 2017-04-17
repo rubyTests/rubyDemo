@@ -16,32 +16,32 @@ table,th,td{
                     <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Apply Leave</button>
                 </div>
                 <table class="uk-table uk-table-hover">
-                            <thead>
-                            <tr>
-                                <th></th>
-                                <th>Casual Leave</th>
-                                <th>Sick Leave</th>
-                                <th ng-repeat="x in tableHeadvalNew">{{x.tableHeadVal}}</th>
-                                <th>Total Leave</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <td><b>Available Leaves</b></td>
-                                <td>10</td>
-                                <td>3</td>
-                                <td ng-repeat="x in tableHeadvalNew">{{x.tableRowVal1}}</td>
-                                <td>13</td>
-                            </tr>
-                            <tr>
-                                <td><b>Remaining Leaves</b></td>
-                                <td>5</td>
-                                <td>1</td>
-                                <td ng-repeat="x in tableHeadvalNew">{{x.tableRowVal2}}</td>
-                                <td>6</td>
-                            </tr>
-                            </tbody>
-                        </table>
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th>Casual Leave</th>
+                        <th>Sick Leave</th>
+                        <th ng-repeat="x in tableHeadvalNew">{{x.tableHeadVal}}</th>
+                        <th>Total Leave</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><b>Available Leaves</b></td>
+                        <td>10</td>
+                        <td>3</td>
+                        <td ng-repeat="x in tableHeadvalNew">{{x.tableRowVal1}}</td>
+                        <td>13</td>
+                    </tr>
+                    <tr>
+                        <td><b>Remaining Leaves</b></td>
+                        <td>5</td>
+                        <td>1</td>
+                        <td ng-repeat="x in tableHeadvalNew">{{x.tableRowVal2}}</td>
+                        <td>6</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
