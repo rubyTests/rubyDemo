@@ -6,7 +6,106 @@ angular
 		'$localStorage',
 		'$http',
         function ($scope,utils,$localStorage,$http) {
-
+			$scope.wizard={};
+			$scope.previous=[];
+			$scope.mailling={};
+			$scope.permanent={};
+			$scope.social=[];
+			$scope.contact=[];
+			$scope.father={};
+			$scope.mother={};
+			$scope.guardian={};
+			$scope.exitValidation = function(){
+				// console.log($scope.wizard.admission_no,"admis")
+				if($scope.wizard.admission_no==undefined || $scope.wizard.admission_date==undefined || $scope.wizard.first_name==undefined || $scope.wizard.last_name==undefined || $scope.wizard.gender==undefined || $scope.wizard.w1_birth_date==undefined || $scope.wizard.batchId==undefined){
+					return false;
+				}else{
+					return true;
+				}
+				
+			}
+			
+			$scope.exitValidation1 = function(){
+				// console.log($scope.wizard.admission_no,"admis")
+				if($scope.previous.selectize_styType==undefined || $scope.previous.student_lives==undefined ){
+					return false;
+				}else{
+					return true;
+				}
+				
+			}
+			
+			$scope.exitValidation2 = function(){
+				// console.log($scope.wizard.admission_no,"admis")
+				if($scope.mailling.address==undefined || $scope.mailling.city==undefined || $scope.mailling.state==undefined || $scope.mailling.pincode==undefined || $scope.mailling.country==undefined || $scope.permanent.address==undefined || $scope.permanent.city==undefined || $scope.permanent.state==undefined || $scope.permanent.pincode==undefined || $scope.permanent.country==undefined){
+					return false;
+				}else{
+					return true;
+				}
+				
+			}
+			
+			$scope.exitValidation3 = function(){
+				// console.log($scope.wizard.admission_no,"admis")
+				if($scope.father.p_first_name==undefined || $scope.father.p_last_name==undefined || $scope.father.first_relation==undefined || $scope.mother.p_first_name==undefined || $scope.mother.p_last_name==undefined || $scope.mother.second_relation==undefined || $scope.guardian.p_first_name==undefined || $scope.guardian.p_last_name==undefined || $scope.guardian.third_relation==undefined){
+					return false;
+				}else{
+					return true;
+				}
+				
+			}
+			
+			setTimeout(function(){
+				var $formValidate = $('#admission_details');
+				$formValidate
+				.parsley()
+				.on('form:validated',function() {
+					$scope.$apply();
+				})
+				.on('field:validated',function(parsleyField) {
+					if($(parsleyField.$element).hasClass('md-input')) {
+						$scope.$apply();
+					}
+				});
+				
+				var $formValidate = $('#academics_details');
+				$formValidate
+				.parsley()
+				.on('form:validated',function() {
+					$scope.$apply();
+				})
+				.on('field:validated',function(parsleyField) {
+					if($(parsleyField.$element).hasClass('md-input')) {
+						$scope.$apply();
+					}
+				});
+				
+				var $formValidate = $('#contact_details');
+				$formValidate
+				.parsley()
+				.on('form:validated',function() {
+					$scope.$apply();
+				})
+				.on('field:validated',function(parsleyField) {
+					if($(parsleyField.$element).hasClass('md-input')) {
+						$scope.$apply();
+					}
+				});
+				
+				var $formValidate = $('#parentsDetails');
+				$formValidate
+				.parsley()
+				.on('form:validated',function() {
+					$scope.$apply();
+				})
+				.on('field:validated',function(parsleyField) {
+					if($(parsleyField.$element).hasClass('md-input')) {
+						$scope.$apply();
+					}
+				});
+				
+			},500)
+			
             $scope.checkbox_demo_11=true;
             $scope.checkbox_demo_2=true;
             $scope.checkStatusParents=function(check){
@@ -24,8 +123,8 @@ angular
                 }
             }
             var $wizard_advanced_form = $('#wizard_advanced_form');
-            $scope.father=[];
-            $scope.Mother=[];
+            $scope.mailling=[];
+            $scope.permanent=[];
             setTimeout(function(){$scope.guardianCon=false;},500);	
             $scope.removeGuardian=false;
             $scope.addGuardian=true;
@@ -44,25 +143,96 @@ angular
                 console.log(res);
                 if(res==true){
 					$scope.sameAddress="Yes";
-                    console.log($scope.father,'trueeee');
-                    $scope.Mother.address=$scope.father.address;
-                    $scope.Mother.city=$scope.father.city;
-                    $scope.Mother.state=$scope.father.state;
-                    $scope.Mother.pincode=$scope.father.pincode;
-                    $scope.Mother.country=$scope.father.country;
+                    $scope.permanent.address=$scope.mailling.address;
+                    $scope.permanent.city=$scope.mailling.city;
+                    $scope.permanent.state=$scope.mailling.state;
+                    $scope.permanent.pincode=$scope.mailling.pincode;
+                    $scope.permanent.country=$scope.mailling.country;
                     $('.motherDetails').find('input').attr('disabled',true);
                 }else {
 					$scope.sameAddress="No";
-                    console.log('false');
-                    $scope.Mother.address='';
-                    $scope.Mother.city='';
-                    $scope.Mother.state='';
-                    $scope.Mother.pincode='';
-                    $scope.Mother.country='';
+                    $scope.permanent.address='';
+                    $scope.permanent.city='';
+                    $scope.permanent.state='';
+                    $scope.permanent.pincode='';
+                    $scope.permanent.country='';
                     $('.motherDetails').find('input').attr('disabled',false);
                     $('.motherDetails').find('input').trigger('blur');
                 }
             }
+			
+			// Select box details
+			$scope.deptData=[];
+			$scope.course_data=[];
+			$scope.batch_data=[];
+			
+			$http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(dept_data){
+				$scope.deptData.push(dept_data.message);
+			});
+			
+			$scope.selectize_deptId_options =$scope.deptData;
+			$scope.selectize_deptId_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Department',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(selectize){
+					selectize.on('change', function(value) {
+						//console.log(value);
+						$scope.courseData(value);
+					});
+				}
+			};
+			
+			$scope.courseData=function(id){
+				console.log(id,"deptId")
+				$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(course_data){
+					// console.log(course_data.data,"course");
+					$scope.selectize_courseId_options=course_data.data;
+				});
+			}
+			
+			$scope.selectize_courseId_options =[];
+			$scope.selectize_courseId_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Course',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(selectize){
+					selectize.on('change', function(value) {
+						//console.log(value);
+						$scope.batchData(value);
+					});
+				}
+			};
+			
+			$scope.selectize_batchId_options =[];
+			$scope.selectize_batchId_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Batch',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(selectize){
+					selectize.on('change', function(value) {
+						//console.log(value);
+					});
+				}
+			};
+			
+			$scope.batchData=function(id){
+				console.log(id,"deptId")
+				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(batch_data){
+					// console.log(batch_data.data,"batch");
+					$scope.selectize_batchId_options=batch_data.data;
+				});
+			}
+			
             $scope.selectize_a_data = {
                 options: [
                     {
@@ -421,7 +591,7 @@ angular
 				$scope.imgValue=$('.fileinput-preview').find('img').attr('src');
 				console.log($scope.imgValue,"data");
 			}
-			$scope.wizard=[];
+			
 			$scope.saveContiune=function(){
 				alert($('#admission_details').serialize());
 				// $scope.values = $('#wizard_advanced_form').serialize();
@@ -453,16 +623,15 @@ angular
 			// }
 			$scope.stu={profileId:''};
 			// Admission Details
-			$scope.wizard=[];
 			$scope.admission_details=function(){
 				// alert($('.admission_details').serialize());
-				$scope.values=$('.admission_details').serialize();
-				//console.log($scope.wizard,"values");
+				//$scope.values=$('.admission_details').serialize();
+				console.log($scope.wizard,"values");
 				
 				$http({
                 method:'POST',
                 url: $localStorage.service+'ProfileAPI/admissionDetails',
-                data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),wizard_gender:$scope.wizard.gender,wizard_birth:$scope.wizard.w1_birth_date,selectize_n:$scope.selectize_n,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,selectize_a:$scope.selectize_a,roll_no:$scope.wizard.roll_no},
+                data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),wizard_gender:$scope.wizard.gender,wizard_birth:$scope.wizard.w1_birth_date,selectize_n:$scope.selectize_n,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,batchId:$scope.wizard.batchId,roll_no:$scope.wizard.roll_no},
 				headers:{'access_token':$localStorage.access_token}
                 }).then(function(response){
                     //console.log(response.data.admission_no);
@@ -471,7 +640,7 @@ angular
                 });
 			}
 			// Academics Details
-			$scope.previous=[];
+			
 			$scope.academics_details=function(){
 				//$scope.wizard.profileId=35;
 				//console.log($scope.form_dynamic1,"previous");
@@ -492,8 +661,7 @@ angular
 			}
 			
 			// Contact Details
-			$scope.social=[];
-			$scope.contact=[];
+			
 			$scope.contact_details=function(){
 				//$scope.wizard.profileId=35;
 				$http({
@@ -510,9 +678,6 @@ angular
 			}
 			
 			// Parents Details
-			$scope.father={};
-			$scope.mother={};
-			$scope.guardian={};
 			
 			$scope.father.relationId=0;
 			$scope.mother.relationId=0;

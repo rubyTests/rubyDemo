@@ -1,5 +1,5 @@
 angular
-    .module('altairApp', [ angularDragula(angular) ] )
+    .module('rubycampusApp', [ angularDragula(angular) ] )
     .controller('scrum_boardCtrl', [
         '$rootScope',
         '$scope',
