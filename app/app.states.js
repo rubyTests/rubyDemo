@@ -2742,6 +2742,24 @@ rubycampusApp
                     }
                 })
 
+                .state("restricted.student.assignTeacher", {
+                    url: "/assignTeacher",
+                    templateUrl: 'app/components/academics/courseBatch/assignTeacher.html',
+                    //controller: 'assignTeacherCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
+                                'app/components/academics/courseBatch/assignTeacherCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign Teacher'
+                    }
+                })
                 // Added By Senthil 12/04/2017
 
                 .state("restricted.student.stuApplyLeave", {
