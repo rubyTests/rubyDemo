@@ -170,7 +170,7 @@ angular
                                         pos     : 'top-center'
                                     });
                                 }
-                                // var data=response.data.message.message;
+                                $scope.viewData.splice($index, 1);
                                 $scope.refreshTable();
                             },function myError(response) {
                               // console.log(response,'response');

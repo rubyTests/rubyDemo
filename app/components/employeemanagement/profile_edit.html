@@ -7,7 +7,7 @@
                         <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }" style="background-color: rgb(231,231,231);padding: 20px !important;">
                             <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
-                                    <img ng-src="{{user_data.photo1_path}}" alt="user avatar"/>
+                                    <img ng-src="http://localhost/smartedu/upload/{{user_data.IMAGE1}}" alt="user avatar"/>
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div class="user_avatar_controls">
@@ -19,6 +19,8 @@
                                     <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
                                 </div>
                             </div>
+
+                            
                             <!-- <div class="user_heading_content">
                                 <h2 class="heading_b">
                                     <span class="uk-text-truncate" id="user_edit_uname">{{user_data.firstname}}{{user_data.lastname}}</span>
@@ -27,15 +29,15 @@
                             </div> -->
                             <div class="user_heading_content">
                                 <h2 class="heading_b uk-margin-bottom" style="color: #444;">
-                                    <span class="uk-text-truncate">{{user_data.firstname}} {{user_data.lastname}}</span>
-                                    <span class="sub-heading">{{user_data.admno}}</span>
+                                    <span class="uk-text-truncate">{{user_data.FIRSTNAME}} {{user_data.LASTNAME}}</span>
+                                    <span class="sub-heading" style="color: #444;">{{user_data.ADMISSION_NO}}</span>
                                 </h2>
                                 <ul class="user_stats">
                                     <li>
-                                        <h4 class="heading_a" style="color: #444;">{{user_data.Dept}}</h4>
+                                        <h4 class="heading_a" style="color: #444;">{{user_data.DEPT_NAME}}</h4>
                                     </li>
                                     <li>
-                                        <h4 class="heading_a" style="color: #444;">{{user_data.jobtitle}}</h4>
+                                        <h4 class="heading_a" style="color: #444;">{{user_data.POSITION_NAME}}</h4>
                                     </li>
                                 </ul>
                             </div>
@@ -44,7 +46,7 @@
                                 <div class="md-fab md-fab-toolbar md-fab-small md-fab-accent" md-fab-toolbar>
                                     <i class="material-icons">&#xE8BE;</i>
                                     <div class="md-fab-toolbar-actions">
-                                        <button type="submit" id="user_edit_save" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Save"><i class="material-icons md-color-white">&#xE161;</i></button>
+                                        <button type="button" id="user_edit_save" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Save" ng-click="updateEmployeeDetails()"><i class="material-icons md-color-white">&#xE161;</i></button>
                                         <button type="submit" id="user_edit_print" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Print"><i class="material-icons md-color-white">&#xE555;</i></button>
                                         <button type="submit" id="user_edit_delete" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Delete"><i class="material-icons md-color-white">&#xE872;</i></button>
                                     </div>
@@ -53,9 +55,10 @@
                         </div>
                         <div class="user_content">
                             <ul id="user_edit_tabs" class="uk-tab" data-uk-tab="{connect:'#user_edit_tabs_content'}">
-                                <li class="uk-active"><a href="#">Personal & Work Details</a></li>
+                                <li class="uk-active"><a href="#">Personal & Work Info</a></li>
+                                <li><a href="#">Contact Details</a></li>
                                 <li><a href="#">Previous Experience</a></li>
-                                <!-- <li><a href="#">Additional Details</a></li> -->
+                                <li><a href="#">Additional Details</a></li>
                             </ul>
                             <ul id="user_edit_tabs_content" class="uk-switcher uk-margin">
                                 <li>
@@ -63,106 +66,54 @@
                                         <h3 class="full_width_in_card heading_c">
                                             Personal Information
                                         </h3>
+                                        <input type="hidden" ng-model="user_data.ID">
+                                        <input type="hidden" ng-model="user_data.PROF_ID">
+                                        <input type="hidden" ng-model="user_data.P_EXTRA_ID">
+                                        <input type="hidden" ng-model="user_data.BANK_ID">
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
+                                                <br>
                                                 <label for="user_edit_uname_control">Date of Birth</label>
-                                                <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="user_data.dob"/>
+                                                <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="user_data.DOB"/>
                                             </div>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_position_control">Marital Status</label>
-                                                <input class="md-input" type="text" id="user_edit_position_control" name="user_edit_position_control" ng-model="user_data.Marital" md-input />
+                                                <input type="text" config="selectize_marital_config" options="selectize_marital_options" ng-model="user_data.MARITAL_ID" selectize/>
                                             </div>
                                         </div>
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_uname_control">Nationality</label>
-                                                <input class="md-input" type="text" id="user_edit_uname_control" name="user_edit_uname_control" ng-model="user_data.nationality" md-input />
+                                                <input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="user_data.NATION_ID" selectize/>
                                             </div>
                                             <div class="uk-width-medium-1-2">
+                                            <br>
                                                 <div class="uk-input-group">
                                                     <span class="uk-input-group-addon">
                                                         <i class="md-list-addon-icon uk-icon-facebook"></i>
                                                     </span>
                                                     <label>Facebook</label>
-                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.facebook" md-input />
+                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.FACEBOOK_LINK" md-input />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="uk-grid" data-uk-grid-margin>
-                                            <div class="uk-width-medium-1-2">
+                                            <div class="uk-width-medium-1-2"><br>
                                                 <div class="uk-input-group">
                                                     <span class="uk-input-group-addon">
                                                         <i class="md-list-addon-icon uk-icon-google-plus"></i>
                                                     </span>
                                                     <label>Google+</label>
-                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.google" md-input />
+                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.GOOGLE_LINK" md-input />
                                                 </div>
                                             </div>
-                                            <div class="uk-width-medium-1-2">
+                                            <div class="uk-width-medium-1-2"><br>
                                                 <div class="uk-input-group">
                                                     <span class="uk-input-group-addon">
                                                         <i class="md-list-addon-icon uk-icon-linkedin"></i>
                                                     </span>
                                                     <label>Linkedin</label>
-                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.linkedin" md-input />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <h3 class="full_width_in_card heading_c">
-                                            Contact Information
-                                        </h3>
-                                        <div class="uk-grid" data-uk-grid-margin>
-                                            <div class="uk-width-medium-1-1">
-                                                <label for="address">Address</label>
-                                                <input class="md-input" type="text" id="address" name="address" ng-model="user_data.address" md-input />
-                                            </div>
-                                            <div class="uk-width-medium-1-2">
-                                                <label for="city">City</label>
-                                                <input class="md-input" type="text" id="city" name="city" ng-model="user_data.city" md-input />
-                                            </div>
-                                            <div class="uk-width-medium-1-2">
-                                                <label for="state">State</label>
-                                                <input class="md-input" type="text" id="state" name="user_edit_position_cstateontrol" ng-model="user_data.state" md-input />
-                                            </div>
-                                        </div>
-                                        <div class="uk-grid" data-uk-grid-margin>
-                                            <div class="uk-width-medium-1-2">
-                                                <label for="pincode">Pincode</label>
-                                                <input class="md-input" type="text" id="pincode" name="pincode" ng-model="user_data.pincode" md-input />
-                                            </div>
-                                            <div class="uk-width-medium-1-2">
-                                                <label for="country">Country</label>
-                                                <input class="md-input" type="text" id="country" name="country" ng-model="user_data.country" md-input />
-                                            </div>
-                                        </div>
-                                        <div class="uk-grid" data-uk-grid-margin>
-                                            <div class="uk-width-medium-1-2">
-                                                <div class="uk-input-group">
-                                                    <span class="uk-input-group-addon">
-                                                        <i class="material-icons md-list-addon-icon">&#xE0CD;</i>
-                                                    </span>
-                                                    <label>Phone</label>
-                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.phone1" md-input />
-                                                </div>
-                                            </div>
-                                            <div class="uk-width-medium-1-2">
-                                                <div class="uk-input-group">
-                                                    <span class="uk-input-group-addon">
-                                                        <i class="material-icons md-list-addon-icon">&#xE324;</i>
-                                                    </span>
-                                                    <label>Mobile</label>
-                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.phone2" md-input />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="uk-grid" data-uk-grid-margin>
-                                            <div class="uk-width-medium-1-2">
-                                                <div class="uk-input-group">
-                                                    <span class="uk-input-group-addon">
-                                                        <i class="material-icons md-list-addon-icon">&#xE0BE;</i>
-                                                    </span>
-                                                    <label>Email</label>
-                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.email" md-input />
+                                                    <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.LINKEDIN_LINK" md-input />
                                                 </div>
                                             </div>
                                         </div>
@@ -171,78 +122,216 @@
                                                 Work Information
                                             </h3>
                                             <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-medium-1-2">
+                                                <div class="uk-width-medium-1-2"><br>
                                                     <label for="address">Qualification</label>
-                                                    <input class="md-input" type="text" id="address" name="address" ng-model="user_data.Quali" md-input />
+                                                    <input class="md-input" type="text" id="address" name="address" ng-model="user_data.QUALIFICATION" md-input />
                                                 </div>
                                                 <div class="uk-width-medium-1-2">
-                                                    <label for="city">Category</label>
-                                                    <input class="md-input" type="text" id="category" name="category" ng-model="user_data.category" md-input />
+                                                    <label>Category</label>
+                                                    <input type="text" config="selectize_cat_config" options="selectize_cat_options" ng-model="user_data.CAT_ID" selectize/>
                                                 </div>
-                                                <!-- <div class="uk-width-medium-1-2">
-                                                    <label for="position">Position</label>
-                                                    <input class="md-input" type="text" id="position" name="position" ng-model="user_data.position" md-input />
-                                                </div> -->
+                                            </div>
+                                            <div class="uk-grid" data-uk-grid-margin style="margin-top: 50px !important;">
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="uk-margin-top">
+                                        <h3 class="full_width_in_card heading_c">
+                                            Mailing Address 
+                                        </h3>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-1">
+                                                <label for="user_edit_uname_control">Address</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="mailing.ADDRESS" md-input />
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="user_edit_position_control">City</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="mailing.CITY" md-input />
+                                            </div>
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="user_edit_uname_control">State</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="mailing.STATE" md-input />
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2"><br>
+                                                <label for="user_edit_position_control">Pincode</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="mailing.ZIP_CODE" md-input />
+                                            </div>
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="user_edit_uname_control">Country</label>
+                                                <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mailing.COUNTRY" selectize/>
+                                            </div>
+                                        </div>
+                                        <div class="uk-margin-top">
+                                            <h3 class="full_width_in_card heading_c">
+                                                Permanant Address 
+                                            </h3>
+                                            <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-1">
+                                                <label for="user_edit_uname_control">Address</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="permanant.ADDRESS" md-input />
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="user_edit_position_control">City</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="permanant.CITY" md-input />
+                                            </div>
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="user_edit_uname_control">State</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="permanant.STATE" md-input />
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2"><br>
+                                                <label for="user_edit_position_control">Pincode</label>
+                                                <input type="text" class="md-input" name="user_edit_google_plus" ng-model="permanant.ZIP_CODE" md-input />
+                                            </div>
+                                            <div class="uk-width-medium-1-2">
+                                                <label for="user_edit_uname_control">Country</label>
+                                                <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="permanant.COUNTRY" selectize/>
+                                            </div>
+                                        </div>
+                                        </div>
+
+                                        <div class="uk-margin-top">
+                                            <h3 class="full_width_in_card heading_c">
+                                                Contact
+                                            </h3>
+                                            <div class="uk-grid" data-uk-grid-margin>
+                                                <div class="uk-width-medium-1-2">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <i class="material-icons md-list-addon-icon">&#xE0CD;</i>
+                                                        </span>
+                                                        <label>Phone</label>
+                                                        <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.PHONE_NO_1" md-input />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <i class="material-icons md-list-addon-icon">&#xE324;</i>
+                                                        </span>
+                                                        <label>Mobile</label>
+                                                        <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.PHONE_NO_2" md-input />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="uk-grid" data-uk-grid-margin>
+                                                <div class="uk-width-medium-1-2">
+                                                    <div class="uk-input-group">
+                                                        <span class="uk-input-group-addon">
+                                                            <i class="material-icons md-list-addon-icon">&#xE0BE;</i>
+                                                        </span>
+                                                        <label>Email</label>
+                                                        <input type="text" class="md-input" name="user_edit_google_plus" ng-model="user_data.EMAIL" md-input />
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
                                 <li>
                                     <div class="uk-accordion" data-uk-accordion>
-                                        <h3 class="uk-accordion-title" ng-repeat-start="parents in user_data.parentCount">Previous Work Details</h3>
+                                        <h3 class="uk-accordion-title" ng-repeat-start="parents in previous_Inst">Previous Work Details</h3>
                                         <div class="uk-accordion-content" ng-repeat-end>
                                             <div class="uk-margin-top">
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="emprole">Employee Role</label>
-                                                            <input class="md-input" type="text" id="emprole" name="emprole" ng-model="parents.emprole" md-input />
+                                                            <input class="md-input" type="text"  ng-model="parents.DESIGNATION" md-input />
                                                         </div>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="firstname">Institute Name</label>
-                                                            <input class="md-input" type="text" id="firstname" name="firstname" ng-model="parents.inst_name" md-input />
+                                                            <input class="md-input" type="text" ng-model="parents.INST_NAME" md-input />
                                                         </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-1">
                                                             <label for="firstname">Address</label>
-                                                            <input class="md-input" type="text" id="firstname" name="firstname" ng-model="parents.address" md-input />
+                                                            <input class="md-input" type="text" ng-model="parents.location[0].ADDRESS" md-input />
                                                         </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="education">City</label>
-                                                            <input class="md-input" type="text" id="education" name="education" ng-model="parents.city" md-input />
+                                                            <input class="md-input" type="text" ng-model="parents.location[0].CITY" md-input />
                                                         </div>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="Occupation">State</label>
-                                                            <input class="md-input" type="text" id="Occupation" name="Occupation" ng-model="parents.state" md-input />
+                                                            <input class="md-input" type="text" ng-model="parents.location[0].STATE" md-input />
                                                         </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
-                                                        <div class="uk-width-medium-1-1">
-                                                            <label for="education">Country</label>
-                                                            <input class="md-input" type="text" id="education" name="education" ng-model="parents.country" md-input />
+                                                        <div class="uk-width-medium-1-2">
+                                                            <label for="period_from">Pincode</label>
+                                                            <input class="md-input" type="text" ng-model="parents.location[0].ZIP_CODE" md-input />
                                                         </div>
-                                                        <!-- <div class="uk-width-medium-1-2">
-                                                            <label for="Occupation">Position</label>
-                                                            <input class="md-input" type="text" id="Occupation" name="Occupation" ng-model="parents.position" md-input />
-                                                        </div> -->
-                                                        <!-- <div class="uk-width-medium-1-3 parsley-row">
-                                                            <label for="period_to">Period <span class="req"></span></label>
-                                                            <input type="text" name="period_to" id="period_to"  class="md-input" md-input ng-model="parents.period_to" />
-                                                        </div> -->
+                                                        <div class="uk-width-medium-1-2">
+                                                            <!-- <label >Country</label> -->
+                                                            <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="parents.location[0].COUNTRY" selectize/>
+                                                        </div>
                                                     </div>
                                                     <div class="uk-grid" data-uk-grid-margin>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="period_from">Period From</label>
-                                                            <input class="md-input" type="text" id="period_from" name="period_from" ng-model="parents.period_from" md-input />
+                                                            <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="parents.PERIOD_FROM">
                                                         </div>
                                                         <div class="uk-width-medium-1-2">
                                                             <label for="period_to">Period To</label>
-                                                            <input class="md-input" type="text" id="period_to" name="period_to" ng-model="parents.period_to" md-input />
+                                                            <input type="text" name="admission_date" id="admission_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="parents.PERIOD_TO">
                                                         </div>
                                                     </div>
                                                 </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="uk-margin-top">
+                                        <h3 class="full_width_in_card heading_c">
+                                            Bank Details
+                                        </h3>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2">
+                                                <label>Account Name</label>
+                                                <input type="text" class="md-input" ng-model="user_data.ACCOUNT_NAME" md-input />
+                                            </div>
+                                            <div class="uk-width-medium-1-2">
+                                                <label>Account Number</label>
+                                                <input type="text" class="md-input" ng-model="user_data.ACCOUNT_NO" md-input />
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" data-uk-grid-margin>
+                                            <div class="uk-width-medium-1-2">
+                                                <label>Bank Name</label>
+                                                <input type="text" class="md-input" ng-model="user_data.BANK_NAME" md-input />
+                                            </div>
+                                            <div class="uk-width-medium-1-2">
+                                                <label>Branch</label>
+                                                <input type="text" class="md-input" ng-model="user_data.BRANCH_NO" md-input />
+                                            </div>
+                                        </div>
+                                        <div class="uk-margin-top">
+                                            <h3 class="full_width_in_card heading_c">
+                                                Addtional Details
+                                            </h3>
+                                            <div class="uk-grid" data-uk-grid-margin>
+                                                 <div class="uk-width-medium-1-2">
+                                                    <label >Passport Number</label>
+                                                    <input type="text" class="md-input" ng-model="user_data.PASSPORT_NO" md-input />
+                                                </div>
+                                                <div class="uk-width-medium-1-2">
+                                                    <label >Work Permit</label>
+                                                    <input type="text" class="md-input" ng-model="user_data.WORK_PERMIT" md-input />
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </li>

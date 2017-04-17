@@ -51,7 +51,7 @@
                             <td>{{row.POSITION_NAME}}</td>
                             <td class="uk-text-center">
                                 <a ui-sref="restricted.employeemanagement.employee_editprofile({emp_id:{{row.ID}}})" class="ts_remove_row" ><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteEmployeeProfile(row.ID,row.PROFILE_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

@@ -212,9 +212,8 @@ angular
                                         pos     : 'top-center'
                                     });
                                 }
+                                $scope.viewData.splice($index, 1);
                                 $scope.refreshTable();
-                                // var data=response.data.message.message;
-                                // $scope.viewData.splice($index, 1);
                             },function myError(response) {
                             })
                         }

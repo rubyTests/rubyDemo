@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('employeetable_viewCtrl',
-        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http) {
+        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
 
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
@@ -77,9 +77,42 @@ angular
                 });
 
                 $scope.ViewList=[];
-                $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/employeeProfileView')
-                .success(function(view_list){
-                    $scope.ViewList=view_list.data;
-                });
+                $scope.refreshTable=function(){
+                    $http.get($localStorage.service+'EmployeemgmntAPI/employeeProfileView',{headers:{'access_token':$localStorage.access_token}})
+                    .success(function(view_list){
+                        $scope.ViewList=view_list.data;
+                    });
+                }
+                $scope.refreshTable();
+                $scope.deleteEmployeeProfile=function(id,prof_id,$index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"EmployeemgmntAPI/employeeProfile",
+                                params : {id : id,prof_id:prof_id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    $scope.ViewList.splice($index, 1);
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.refreshTable();
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    }
+                }
         }
     );

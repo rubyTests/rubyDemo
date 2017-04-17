@@ -47,27 +47,27 @@ angular
                 }
             }
 
-            $http.get('http://localhost/smartedu/test/AcademicsAPI/departmentlist')
+            $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
             .success(function(dept_data){
                 $scope.deptData.push(dept_data.message);
             });
-            $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/categoryDetail')
+            $http.get($localStorage.service+'EmployeemgmntAPI/categoryDetail',{headers:{'access_token':$localStorage.access_token}})
             .success(function(category_data){
                 $scope.CategoryList.push(category_data.data);
             });
-            $http.get('http://localhost/smartedu/test/institutionApi/country')
+            $http.get($localStorage.service+'institutionApi/country',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
                 $scope.CountryLIST.push(country_list.data);
             });
-            $http.get('http://localhost/smartedu/test/SettingAPI/Nationality')
+            $http.get($localStorage.service+'SettingAPI/Nationality',{headers:{'access_token':$localStorage.access_token}})
             .success(function(nationality_list){
                 $scope.NationalityLIST.push(nationality_list.data);
             });
-            $http.get('http://localhost/smartedu/test/EmployeemgmntAPI/positionDetail')
+            $http.get($localStorage.service+'EmployeemgmntAPI/positionDetail',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
                 $scope.postionList.push(country_list.data);
             });
-            $http.get('http://localhost/smartedu/test/SettingAPI/maritalstatus')
+            $http.get($localStorage.service+'SettingAPI/maritalstatus',{headers:{'access_token':$localStorage.access_token}})
             .success(function(marital_list){
                 $scope.maritalList.push(marital_list.data);
             });
@@ -185,7 +185,7 @@ angular
                 var img_file=$('.fileinput-preview').find('img').attr('src');
                 $http({
                     method:'POST',
-                    url: 'http://localhost/smartedu/test/EmployeemgmntAPI/employeeAdmission',
+                    url: $localStorage.service+'EmployeemgmntAPI/employeeAdmission',
                     data: {
                         'employee_id' : $scope.employee_id,
                         'admission_no' : $scope.EMP_ADM.admission_no,
@@ -203,7 +203,7 @@ angular
                         'position' : $scope.EMP_ADM.position,
                         'ProfileID' : $scope.ProfileID
                     },
-                    // headers:{'access_token':$localStorage.access_token}
+                    headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
                     $scope.employee_id=return_data.data.data.EMP_PROFILE_ID;
@@ -214,7 +214,7 @@ angular
             $scope.saveConatctDetails=function(){
                 $http({
                     method:'POST',
-                    url: 'http://localhost/smartedu/test/EmployeemgmntAPI/employeeContactDetail',
+                    url: $localStorage.service+'EmployeemgmntAPI/employeeContactDetail',
                     data: {
                         'mailing_id' : $scope.mailing_id,
                         'permanant_id' : $scope.permanant_id,
@@ -236,7 +236,8 @@ angular
                         "facebook":$scope.ADDITIONAl.facebook,
                         "google":$scope.ADDITIONAl.google,
                         "linked_in":$scope.ADDITIONAl.linkedin
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
                     $scope.mailing_id=return_data.data.data.MAILING_ADDRESS_ID;
@@ -247,13 +248,14 @@ angular
             $scope.savePreviousInstituteDetails=function(){
                  $http({
                     method:'POST',
-                    url: 'http://localhost/smartedu/test/EmployeemgmntAPI/employeePreviousInstitute',
+                    url: $localStorage.service+'EmployeemgmntAPI/employeePreviousInstitute',
                     data: {
                         'instituteID' :$scope.instituteID,
                         'emp_profileID' : $scope.employee_profileID,  
                         'prev_inst_data':$scope.form_dynamic,
                         // 'prevInstID':$scope.PREVOIUS.prevInst_ID
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
                     console.log(return_data.data.data.INSTITUTE_ID,'return_data.data.data.INSTITUTE_ID');
@@ -271,7 +273,7 @@ angular
                 // console.log($scope.ProfileID,'$scope.ProfileID');
                 $http({
                     method:'POST',
-                    url: 'http://localhost/smartedu/test/EmployeemgmntAPI/employeeAdditionalDetails',
+                    url: $localStorage.service+'EmployeemgmntAPI/employeeAdditionalDetails',
                     data: {
                         'profile':$scope.ProfileID,
                         'emp_profile_id':$scope.employee_id,
@@ -282,7 +284,8 @@ angular
                         'branch' :$scope.ADDITIONAl.branch,
                         'passport' :$scope.ADDITIONAl.passport,
                         'work_permit' :$scope.ADDITIONAl.work_permit
-                    }
+                    },
+                    headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
                     if(return_data.data.data.status==true){

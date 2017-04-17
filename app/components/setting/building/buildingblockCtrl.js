@@ -179,6 +179,7 @@ angular
                                         pos     : 'top-center'
                                     });
                                 }
+                                $scope.viewData.splice($index, 1);
                                 $scope.refreshTable();
                             },function myError(return_data) {
                             })

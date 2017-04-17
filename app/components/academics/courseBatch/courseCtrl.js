@@ -210,6 +210,7 @@ angular
                                         timeout : 2000,
                                         pos     : 'top-center'
                                     });
+                                    $scope.viewData.splice($index, 1);
                                     $scope.refreshTable();
                                 },function myError(response) {
                                 })

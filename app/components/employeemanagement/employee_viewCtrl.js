@@ -5,7 +5,9 @@ angular
         '$scope',
         '$window',
         'contact_list',
-        function ($rootScope,$scope,$window,contact_list) {
+        '$http',
+        '$localStorage',
+        function ($rootScope,$scope,$window,contact_list,$http,$localStorage) {
 
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
@@ -49,5 +51,10 @@ angular
                 });
             })
 
+            $scope.ViewList=[];
+                $http.get($localStorage.service+'EmployeemgmntAPI/employeeProfileView',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(view_list){
+                    $scope.ViewList=view_list.data;
+                });
         }
     ]);
