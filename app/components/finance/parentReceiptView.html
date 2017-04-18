@@ -1,202 +1,82 @@
 <style type="text/css">
-    .invoice_header > img {
-        max-height: 160%;
-        width: auto;
-    }
+
+
+.tablesorter tbody > tr > td[contenteditable=true]:focus {
+  outline: #08f 1px solid;
+  background: #eee;
+  resize: none;
+}
+td.no-edit, span.no-edit {
+  background-color: rgba(230,191,153,0.5);
+}
+.focused {
+  color: blue;
+}
+td.editable_updated {
+  background-color: green;
+  color: white;
+}
 </style>
 <div id="page_content">
     <div id="page_content_inner">
-
-        <div class="uk-width-medium-8-10 uk-container-center reset-print">
-
-            <div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
-                <div class="uk-width-large-3-10 hidden-print uk-visible-large">
-                    <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
-                        <ul class="md-list md-list-outside notes_list">
-                            <li class="heading_list" style="color: #e53935">Receipt List</li>
-                            <li>
-                                <a href="javascript:void(0)" class="md-list-content note_link">
-                                    <span class="md-list-heading uk-text-truncate">Receipt 1</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="md-list-content note_link">
-                                    <span class="md-list-heading uk-text-truncate">Receipt 2</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="md-list-content note_link">
-                                    <span class="md-list-heading uk-text-truncate">Receipt 3</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="md-list-content note_link">
-                                    <span class="md-list-heading uk-text-truncate">Receipt 4</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="javascript:void(0)" class="md-list-content note_link">
-                                    <span class="md-list-heading uk-text-truncate">Receipt 5</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+        <h3 class="heading_a uk-margin-bottom">Assignment View</h3>
+        <div class="md-card">
+            <div class="md-card-content">
+                <!-- <div class="uk-margin-bottom">
+                    <button class="md-btn uk-margin-right md-btn-primary" ng-click="showConfimation()">Mark as Completed</button>
+                </div> -->
+                <div class="uk-overflow-container uk-margin-bottom">
+                    <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
+                        <thead>
+                        <tr>
+                            <th data-priority="critical">S.No</th>
+                            <th data-priority="critical">FeeStructure Name</th>
+                            <th data-priority="critical">Payment Date</th>
+                            <th data-priority="critical">Receipt Number</th>
+                            <th data-priority="critical">Amount</th>
+                        </tr>
+                        </thead>
+                        <tfoot>
+                            <tr>
+                                <th>S.No</th>
+                                <th>FeeStructure Name</th>
+                                <th>Payment Date</th>
+                                <th>Receipt Number</th>
+                                <th>Amount</th>
+                            </tr>
+                        </tfoot>
+                        <tbody>
+                            <tr ng-repeat="item in notes_data" on-last-repeat>
+                                <td>{{$index+1}}</td>
+                                <td><a ui-sref="restricted.parentReceiptDetailView">{{item.feestructure}}</a></td>
+                                <td>{{item.payment_date}}</td>
+                                <td>{{item.Receipt_num}}</td>
+                                <td>{{item.amount}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="uk-width-large-7-10">
-                    <div class="md-card md-card-single main-print" id="invoice" single-card>
-                        <div class="md-card-toolbar" ng-class="{ 'hidden-print': invoice.header }">
-                            <div class="md-card-toolbar-actions hidden-print">
-                                <i class="md-icon material-icons" print-page print-message="Do you want to print this invoice?">&#xE8ad;</i>
-                            </div>
-                        </div>
-                        <div class="md-card-content invoice_content print_bg" ng-class="{ 'invoice_footer_active': invoice.footer }">
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-6">
-                                    <div class="invoice_header">
-                                        <img src="assets/img/log.png" alt="" height="30" width="140"/>
-                                    </div>
-
-                                </div>
-                                <div class="uk-width-medium-5-6">
-                                <h3 class="heading_a">Srinivasan Engineering College</h3>
-                                <span class="uk-text-small uk-text-muted">No: 28, Bajanai madam street, Pondicherry</span><br>
-                                <span class="uk-text-small uk-text-muted">0413-654 6542 | school@edu.com</span><br>
-                                </div>
-                            </div>
-                            <hr class="uk-divider-icon">
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-2-3">
-                                    <h3 class="heading_c"><span class="uk-text-medium uk-text-muted">Receipt No:</span> RE0001 </h3>
-                                </div>
-                            </div>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-4">
-                                    <ul class="md-list">
-                                        <li>
-                                            <div class="md-list-content">
-                                                <span class="md-list-heading">17.07.2017</span>
-                                                <span class="uk-text-small uk-text-muted">Date</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <ul class="md-list">
-                                        <li>
-                                            <div class="md-list-content">
-                                                <span class="md-list-heading">Cash</span>
-                                                <span class="uk-text-small uk-text-muted">Payment Mode</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-4">
-                                    <ul class="md-list">
-                                        <li>
-                                            <div class="md-list-content">
-                                                <span class="md-list-heading">Nitheesh</span>
-                                                <span class="uk-text-small uk-text-muted">Student Name</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <ul class="md-list">
-                                        <li>
-                                            <div class="md-list-content">
-                                                <span class="md-list-heading">82310132052</span>
-                                                <span class="uk-text-small uk-text-muted">Admission Number</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <ul class="md-list">
-                                        <li>
-                                            <div class="md-list-content">
-                                                <span class="md-list-heading">Computer Science and Engineering</span>
-                                                <span class="uk-text-small uk-text-muted">Course</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <ul class="md-list">
-                                        <li>
-                                            <div class="md-list-content">
-                                                <span class="md-list-heading">Cse - B</span>
-                                                <span class="uk-text-small uk-text-muted">Batch</span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="uk-grid uk-margin-large-bottom">
-                                <div class="uk-width-10-10">
-                                    <table class="uk-table uk-table-middle">
-                                        <thead>
-                                            <tr class="uk-text-upper">
-                                                <th>Particular</th>
-                                                <th style="text-align: right;">Amount</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="uk-table-middle" on-last-repeat>
-                                                <td>
-                                                    Tution Fee
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    15420
-                                                </td>
-                                            </tr>
-                                            <tr class="uk-table-middle" on-last-repeat>
-                                                <td>
-                                                    Tution Fee
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    15420
-                                                </td>
-                                            </tr>
-                                            <tr class="uk-table-middle" on-last-repeat>
-                                                <td>
-                                                    Tution Fee
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    15420
-                                                </td>
-                                            </tr>
-                                            <tr class="uk-table-middle" on-last-repeat>
-                                                <td>
-                                                    Tution Fee
-                                                </td>
-                                                <td style="text-align: right;">
-                                                    15420
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <div class="uk-grid" data-uk-grid-margin>
-                                        <div class="uk-width-medium-5-6 uk-text-right">
-                                            <span class="uk-text-bold">Total Amount :</span>
-                                        </div>
-                                        <div class="uk-width-medium-1-6 uk-text-right">
-                                            <span class="uk-text-lead">85420</span> 
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="invoice_footer">
-                                Ruby Campus<span>&middot;</span>No: 28, Bajanai madam street, Ellaipillaichavadi<br>
-                                Pondicherry<span>&middot;</span>gutmann.hassie@gmail.com
-                            </div>
-                        </div>
-                    </div>
+                <div class="ts_pager">
+                    <ul class="uk-pagination ts_pager">
+                        <li data-uk-tooltip title="Select Page">
+                            <select class="ts_gotoPage ts_selectize"></select>
+                        </li>
+                        <li class="first"><a href="javascript:void(0)"><i class="uk-icon-angle-double-left"></i></a></li>
+                        <li class="prev"><a href="javascript:void(0)"><i class="uk-icon-angle-left"></i></a></li>
+                        <li><span class="pagedisplay"></span></li>
+                        <li class="next"><a href="javascript:void(0)"><i class="uk-icon-angle-right"></i></a></li>
+                        <li class="last"><a href="javascript:void(0)"><i class="uk-icon-angle-double-right"></i></a></li>
+                        <li data-uk-tooltip title="Page Size">
+                            <select class="pagesize ts_selectize">
+                                <option value="5">5</option>
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                            </select>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>

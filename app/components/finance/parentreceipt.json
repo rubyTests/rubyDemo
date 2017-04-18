@@ -1,0 +1,107 @@
+[
+	{
+		"id":1,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0001",
+	    "amount":"15000",
+	    "feestructure":"Fee Structure 01"
+	},
+	{
+		"id":2,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0002",
+	    "amount":"14620",
+	    "feestructure":"Fee Structure 02"
+	},
+	{
+		"id":3,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0003",
+	    "amount":"84520",
+	    "feestructure":"Fee Structure 03"
+	},
+	{
+		"id":4,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0004",
+	    "amount":"65240",
+	    "feestructure":"Fee Structure 04"
+	},
+	{
+		"id":5,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0005",
+	    "amount":"1200",
+	    "feestructure":"Fee Structure 05"
+	},
+	{
+		"id":6,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0006",
+	    "amount":"35420",
+	    "feestructure":"Fee Structure 06"
+	},
+	{
+		"id":7,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0007",
+	    "amount":"6520",
+	    "feestructure":"Fee Structure 07"
+	},
+	{
+		"id":8,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0008",
+	    "amount":"45210",
+	    "feestructure":"Fee Structure 08"
+	},
+	{
+		"id":9,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0009",
+	    "amount":"9604",
+	    "feestructure":"Fee Structure 09"
+	},
+	{
+		"id":10,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0010",
+	    "amount":"8654",
+	    "feestructure":"Fee Structure 10"
+	},
+	{
+		"id":11,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0011",
+	    "amount":"52100",
+	    "feestructure":"Fee Structure 11"
+	},
+	{
+		"id":12,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0012",
+	    "amount":"3210",
+	    "feestructure":"Fee Structure 12"
+	},
+	{
+		"id":13,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0013",
+	    "amount":"65230",
+	    "feestructure":"Fee Structure 13"
+	},
+	{
+		"id":14,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0014",
+	    "amount":"15200",
+	    "feestructure":"Fee Structure 14"
+	},
+	{
+		"id":15,
+	    "payment_date":"24.06.2016",
+	    "Receipt_num":"RE0015",
+	    "amount":"21000",
+	    "feestructure":"Fee Structure 15"
+	}
+]

@@ -2219,15 +2219,33 @@ rubycampusApp
                     }
                 })
 
-                .state("restricted.finance.fee.parentReceiptView", {
-                    url: "/parentReceiptView",
-                    templateUrl: 'app/components/finance/parentReceiptView.html',
+                // .state("restricted.finance.fee.parentReceiptView", {
+                //     url: "/parentReceiptView",
+                //     templateUrl: 'app/components/finance/parentReceiptView.html',
+                //     controller: 'parentReceiptViewCtrl',
+                //     resolve: {
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'app/components/finance/parentReceiptViewCtrl.js'
+                //             ], {serie:true});
+                //         }]
+                //     },
+                //     data: {
+                //         pageTitle: 'Fee Reciept Details'
+                //     }
+                // })
+
+                // Added By Senthil 17/04/2017
+
+                .state("restricted.parentReceiptDetailView", {
+                    url: "/parentReceiptDetailView",
+                    templateUrl: 'app/components/finance/parentReceiptDetailView.html',
                     controller: 'parentReceiptViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'app/components/finance/parentReceiptViewCtrl.js'
-                            ], {serie:true});
+                                'app/components/finance/parentReceiptDetailViewCtrl.js'
+                            ]);
                         }]
                     },
                     data: {
@@ -2235,11 +2253,30 @@ rubycampusApp
                     }
                 })
 
-                // .state("restricted.finance.fee.config", {
-                //     url: "/config",
-                //     template: '<div ui-view autoscroll="false"/>',
-                //     abstract: true
-                // })
+                .state("restricted.parentReceiptView", {
+                    url: "/parentReceiptView",
+                    templateUrl: 'app/components/finance/parentReceiptView.html',
+                    controller: 'parentReceiptViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/finance/parentReceiptViewCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/finance/parentreceipt.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
 
                 .state("restricted.finance.fee.feeitemDetails", {
                     url: "/feeitemDetails",
@@ -2515,6 +2552,83 @@ rubycampusApp
                         },
                         assign_data: function($http){
                             return $http({ method: 'GET', url: 'app/components/student/stuAssignment.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Student Dashboard'
+                    }
+                })
+
+                //Added By Senthil 17/04/2017
+
+                .state("restricted.notificationList", {
+                    url: "/notificationList",
+                    templateUrl: 'app/components/notification/notificationList.html',
+                    controller: 'notificationListCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/notification/notificationListCtrl.js'
+                            ], {serie:true});
+                        }],
+                        messages: function($http){
+                            return $http({ method: 'GET', url: 'data/mailbox_datanew.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Notification List View'
+                    }
+                })
+
+                .state("restricted.employeeDashboard", {
+                    url: "/employeeDashboard",
+                    controller: 'employeeDashboardCtrl',
+                    templateUrl: 'app/components/employeemanagement/employeeDashboard.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_countUp',
+                                'lazy_charts_peity',
+                                'lazy_charts_easypiechart',
+                                'lazy_charts_metricsgraphics',
+                                'lazy_charts_chartist',
+                                'lazy_clndr',
+                                'lazy_charts_c3',
+                                'app/components/employeemanagement/employeeDashboardCtrl.js'
+                            ], {serie:true});
+                        }],
+                        sale_chart_data: function($http){
+                            return $http({method: 'GET', url: 'data/mg_dashboard_chart.min.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        todo_data: function($http){
+                            return $http({ method: 'GET', url: 'data/todo_datanew.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        help_data: function($http){
+                            return $http({ method: 'GET', url: 'data/help_faq.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        assign_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/employeemanagement/empAssignment.json' })
                                 .then(function (data) {
                                     return data.data;
                                 });

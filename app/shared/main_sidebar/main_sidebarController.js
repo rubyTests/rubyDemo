@@ -362,7 +362,7 @@ angular
                                 },
                                 {
                                     title:'Parent Receipt View',
-                                    link: 'restricted.finance.fee.parentReceiptView'
+                                    link: 'restricted.parentReceiptView'
                                 }
                             ]
                         },
@@ -533,6 +533,12 @@ angular
                     title: 'Student Dashboard',
                     icon: '&#xE158;',
                     link : 'restricted.studentDashboard'
+                },
+                {
+                    id: 13,
+                    title: 'Employee Dashboard',
+                    icon: '&#xE158;',
+                    link : 'restricted.employeeDashboard'
                 },
                 // {
                 //     id: 15,

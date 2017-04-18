@@ -1,0 +1,167 @@
+[
+	{
+		"id":1,
+	    "assignment_title": "Assignment 1",
+	    "content": "File Systems Organization-Sequential,Pointer,Indexed,Direct-Purpose of Database System-Database  System Terminologies-Database characteristics-Data models–Types of data models–Components of DBMS-Relational Algebra.LOGICAL DATABASE DESIGN: Relational DBMS-Codd's Rule-Entity-Relationship model-Extended ER Normalization –Functional Dependencies, Anomaly-1NF to 5NF-Domain Key Normal Form –Denormalization.",
+	    "status":"Completed",
+	    "assigned_by":"Manivannan",
+	    "course":"Computer Science",
+	    "batch":"Batch 1",
+	    "subject":"Operating System",
+	    "due_date":"24.06.2016"
+	},
+	{
+		"id":2,
+	    "assignment_title": "Assignment 2",
+	    "content": "SQL Standards - Data types -Database Objects - DDL - DML - DCL - TCL - Embedded SQL - Static Vs Dynamic SQL - QUERY OPTIMIZATION:  Query  Processing  and  Optimization - Heuristics and Cost Estimates in Query Optimization.",
+	    "status":"Pending",
+	    "assigned_by":"Rajkumar",
+	    "course":"Aeronautical Engineering",
+	    "batch":"Batch 2",
+	    "subject":"Database Management System ",
+	    "due_date":"17.08.2016"
+	},
+	{
+		"id":3,
+	    "assignment_title": "Assignment 3",
+	    "content": "Introduction - Properties of Transaction - Serializability - Concurrency Control - Locking Mechanisms - Two Phase Commit Protocol - Dead lock.",
+	    "status":"Pending",
+	    "assigned_by":"Pawnkumar",
+	    "course":"Computer Science",
+	    "batch":"Batch 3",
+	    "subject":"Numerical Maths",
+	    "due_date":"30.12.2016"
+	},
+	{
+		"id":4,
+	    "assignment_title": "Assignment 4",
+	    "content": "Overview of Physical Storage Media - Magnetic Disks - RAID - Tertiary storage - File Organization - Organization of Records in Files - Indexing and Hashing - Ordered Indices - B+ tree Index Files –B tree Index Files – Static Hashing – Dynamic Hashing - Introduction to Distributed Databases - Client server  technology - Multidimensional  and  Parallel  databases - Spatial  and  multimedia  databases - Mobile and web databases - Data Warehouse - Mining - Data marts.",
+	    "status":"Completed",
+	    "assigned_by":"Pradeep",
+	    "course":"Mechanical Engineering",
+	    "batch":"Batch 4",
+	    "subject":"Data Structure",
+	    "due_date":"07.07.2016"
+	},
+	{
+		"id":5,
+	    "assignment_title": "Assignment 5",
+	    "content": "Data Classification - Threats and risks Database access Control –Types of Privileges –Cryptography-Statistical Databases.-Distributed Databases-Architecture-Transaction Processing-Data Warehousing and Mining-Classification-Association rules-Clustering-Information Retrieval-Relevance  ranking-Crawling  and  Indexing  the  Web-Object  Oriented  Databases-XML Databases.",
+	    "status":"Completed",
+	    "assigned_by":"Ramesh",
+	    "course":"Information Technology",
+	    "batch":"Batch 5",
+	    "subject":"Data Warehousing",
+	    "due_date":"10.02.2017"
+	},
+	{
+		"id":6,
+	    "assignment_title": "Assignment 6",
+	    "content": "File Systems Organization-Sequential,Pointer,Indexed,Direct-Purpose of Database System-Database  System Terminologies-Database characteristics-Data models–Types of data models–Components of DBMS-Relational Algebra.LOGICAL DATABASE DESIGN: Relational DBMS-Codd's Rule-Entity-Relationship model-Extended ER Normalization –Functional Dependencies, Anomaly-1NF to 5NF-Domain Key Normal Form –Denormalization.",
+	    "status":"Completed",
+	    "assigned_by":"Manivannan",
+	    "course":"Computer Science",
+	    "batch":"Batch 6",
+	    "subject":"Operating System",
+	    "due_date":"24.06.2016"
+	},
+	{
+		"id":7,
+	    "assignment_title": "Assignment 7",
+	    "content": "SQL Standards - Data types -Database Objects - DDL - DML - DCL - TCL - Embedded SQL - Static Vs Dynamic SQL - QUERY OPTIMIZATION:  Query  Processing  and  Optimization - Heuristics and Cost Estimates in Query Optimization.",
+	    "status":"Pending",
+	    "assigned_by":"Rajkumar",
+	    "course":"Electrical and Electronic Engineering",
+	    "batch":"Batch 7",
+	    "subject":"Database Management System ",
+	    "due_date":"17.08.2016"
+	},
+	{
+		"id":8,
+	    "assignment_title": "Assignment 8",
+	    "content": "Introduction - Properties of Transaction - Serializability - Concurrency Control - Locking Mechanisms - Two Phase Commit Protocol - Dead lock.",
+	    "status":"Pending",
+	    "assigned_by":"Pawnkumar",
+	    "course":"Aeronautical Engineering",
+	    "batch":"Batch 8",
+	    "subject":"Numerical Maths",
+	    "due_date":"30.12.2016"
+	},
+	{
+		"id":9,
+	    "assignment_title": "Assignment 9",
+	    "content": "Overview of Physical Storage Media - Magnetic Disks - RAID - Tertiary storage - File Organization - Organization of Records in Files - Indexing and Hashing - Ordered Indices - B+ tree Index Files –B tree Index Files – Static Hashing – Dynamic Hashing - Introduction to Distributed Databases - Client server  technology - Multidimensional  and  Parallel  databases - Spatial  and  multimedia  databases - Mobile and web databases - Data Warehouse - Mining - Data marts.",
+	    "status":"Completed",
+	    "assigned_by":"Pradeep",
+	    "course":"Information Technology",
+	    "batch":"Batch 9",
+	    "subject":"Data Structure",
+	    "due_date":"07.07.2016"
+	},
+	{
+		"id":10,
+	    "assignment_title": "Assignment 10",
+	    "content": "Data Classification - Threats and risks Database access Control –Types of Privileges –Cryptography-Statistical Databases.-Distributed Databases-Architecture-Transaction Processing-Data Warehousing and Mining-Classification-Association rules-Clustering-Information Retrieval-Relevance  ranking-Crawling  and  Indexing  the  Web-Object  Oriented  Databases-XML Databases.",
+	    "status":"Completed",
+	    "assigned_by":"Ramesh",
+	    "course":"Electrical and Electronic Engineering",
+	    "batch":"Batch 10",
+	    "subject":"Data Warehousing",
+	    "due_date":"10.02.2017"
+	},
+	{
+		"id":11,
+	    "assignment_title": "Assignment 11",
+	    "content": "File Systems Organization-Sequential,Pointer,Indexed,Direct-Purpose of Database System-Database  System Terminologies-Database characteristics-Data models–Types of data models–Components of DBMS-Relational Algebra.LOGICAL DATABASE DESIGN: Relational DBMS-Codd's Rule-Entity-Relationship model-Extended ER Normalization –Functional Dependencies, Anomaly-1NF to 5NF-Domain Key Normal Form –Denormalization.",
+	    "status":"Completed",
+	    "assigned_by":"Manivannan",
+	    "course":"Computer Science",
+	    "batch":"Batch 11",
+	    "subject":"Operating System",
+	    "due_date":"24.06.2016"
+	},
+	{
+		"id":12,
+	    "assignment_title": "Assignment 12",
+	    "content": "SQL Standards - Data types -Database Objects - DDL - DML - DCL - TCL - Embedded SQL - Static Vs Dynamic SQL - QUERY OPTIMIZATION:  Query  Processing  and  Optimization - Heuristics and Cost Estimates in Query Optimization.",
+	    "status":"Pending",
+	    "assigned_by":"Rajkumar",
+	    "course":"Information Technology",
+	    "batch":"Batch 12",
+	    "subject":"Database Management System ",
+	    "due_date":"17.08.2016"
+	},
+	{
+		"id":13,
+	    "assignment_title": "Assignment 13",
+	    "content": "Introduction - Properties of Transaction - Serializability - Concurrency Control - Locking Mechanisms - Two Phase Commit Protocol - Dead lock.",
+	    "status":"Pending",
+	    "assigned_by":"Pawnkumar",
+	    "course":"Electronic Communication Engineering",
+	    "batch":"Batch 13",
+	    "subject":"Numerical Maths",
+	    "due_date":"30.12.2016"
+	},
+	{
+		"id":14,
+	    "assignment_title": "Assignment 14",
+	    "content": "Overview of Physical Storage Media - Magnetic Disks - RAID - Tertiary storage - File Organization - Organization of Records in Files - Indexing and Hashing - Ordered Indices - B+ tree Index Files –B tree Index Files – Static Hashing – Dynamic Hashing - Introduction to Distributed Databases - Client server  technology - Multidimensional  and  Parallel  databases - Spatial  and  multimedia  databases - Mobile and web databases - Data Warehouse - Mining - Data marts.",
+	    "status":"Completed",
+	    "assigned_by":"Pradeep",
+	    "course":"Electrical and Electronic Engineering",
+	    "batch":"Batch 14",
+	    "subject":"Data Structure",
+	    "due_date":"07.07.2016"
+	},
+	{
+		"id":15,
+	    "assignment_title": "Assignment 15",
+	    "content": "Data Classification - Threats and risks Database access Control –Types of Privileges –Cryptography-Statistical Databases.-Distributed Databases-Architecture-Transaction Processing-Data Warehousing and Mining-Classification-Association rules-Clustering-Information Retrieval-Relevance  ranking-Crawling  and  Indexing  the  Web-Object  Oriented  Databases-XML Databases.",
+	    "status":"Completed",
+	    "assigned_by":"Ramesh",
+	    "course":"Mechanical Engineering",
+	    "batch":"Batch 15",
+	    "subject":"Data Warehousing",
+	    "due_date":"10.02.2017"
+	}
+]
