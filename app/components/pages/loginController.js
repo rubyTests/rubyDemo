@@ -75,7 +75,7 @@ angular
 			$scope.getLogin=function(){
 				$http({
 					method : "GET",
-					url : "http://192.168.1.136/rubyServices/api/GeneralAPI/login",
+					url : $localStorage.service+"GeneralAPI/login",
 					params : {"USER_EMAIL": $scope.login_username, "USER_PASSWORD": $scope.login_password},
 				}).then(function(response){
 					if(response.data.status==true){
