@@ -171,7 +171,7 @@ angular
 			
 			// LogOut function
 			$scope.logOut=function(){
-				$http.get("http://192.168.1.136/rubyServices/api/GeneralAPI/logout",{headers: {'access_token':$scope.access_token}})
+				$http.get($localStorage.service+"GeneralAPI/logout",{headers: {'access_token':$scope.access_token}})
 				.success(function(data){
 					if(data.status==true){
 						$localStorage.user_id='';
