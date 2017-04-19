@@ -39,7 +39,7 @@ angular
             $scope.selectize_contact_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Person',
+                placeholder: 'Admin In-Charge',
                 valueField: 'ID',
                 labelField: 'FULLNAME',
                 onInitialize: function(selectize){
@@ -53,7 +53,7 @@ angular
             $scope.selectize_instType_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Type',
+                placeholder: 'Institute Type',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
@@ -79,7 +79,7 @@ angular
             $scope.selectize_currency_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Type',
+                placeholder: 'Currency',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){

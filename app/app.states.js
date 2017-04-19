@@ -2281,6 +2281,84 @@ rubycampusApp
                     }
                 })
 
+                // End
+
+                // Added By Senthil 18/04/2017
+
+                .state("restricted.empCourseSubView", {
+                    url: "/empCourseSubView",
+                    templateUrl: 'app/components/employeemanagement/empCourseSubView.html',
+                    controller: 'empCourseSubViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/employeemanagement/empCourseSubViewCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/employeemanagement/empCourseSub.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
+                .state("restricted.birthdayListView", {
+                    url: "/birthdayListView",
+                    templateUrl: 'app/components/employeemanagement/birthdayListView.html',
+                    controller: 'birthdayListViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/employeemanagement/birthdayListViewCtrl.js'
+                            ]);
+                        }],
+                        contact_list: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/student_details.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
+                .state("restricted.stuExamReport", {
+                    url: "/stuExamReport",
+                    templateUrl: 'app/components/student/stuExamReport.html',
+                    controller: 'stuExamReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/student/stuExamReportCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/stuExamReport.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
+                // End
+
                 .state("restricted.finance.fee.feeitemDetails", {
                     url: "/feeitemDetails",
                     templateUrl: 'app/components/finance/feeitemDetails.html',

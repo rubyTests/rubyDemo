@@ -1,0 +1,58 @@
+[
+	{
+		"id":1,
+	    "department":"Computer Science",
+	    "course":"Computer Science",
+	    "batch":"Batch 1",
+	    "subject":"Operating System"
+	},
+	{
+		"id":2,
+	    "department":"Aeronautical",
+	    "course":"Aeronautical Engineering",
+	    "batch":"Batch 2",
+	    "subject":"Database Management System "
+	},
+	{
+		"id":3,
+	    "department":"Computer Science",
+	    "course":"Computer Science",
+	    "batch":"Batch 3",
+	    "subject":"Numerical Maths"
+	},
+	{
+		"id":4,
+	    "department":"Mechanical",
+	    "course":"Mechanical Engineering",
+	    "batch":"Batch 4",
+	    "subject":"Data Structure"
+	},
+	{
+		"id":5,
+	    "department":"IT",
+	    "course":"Information Technology",
+	    "batch":"Batch 5",
+	    "subject":"Data Warehousing"
+	},
+	{
+		"id":6,
+	    "department":"Computer Science",
+	    "course":"Computer Science",
+	    "batch":"Batch 6",
+	    "subject":"Operating System"
+	},
+	{
+		"id":7,
+	    "department":"EEE",
+	    "course":"Electrical and Electronic Engineering",
+	    "batch":"Batch 7",
+	    "subject":"Database Management System "
+	},
+	{
+		"id":8,
+	    "department":"Aeronautical",
+	    "course":"Aeronautical Engineering",
+	    "batch":"Batch 8",
+	    "subject":"Numerical Maths"
+	}
+]

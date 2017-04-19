@@ -585,27 +585,27 @@ angular
                 {
                     icon: 'wi-day-sunny-overcast',
                     temperature: '22',
-                    description: 'Mostly Sunny',
+                    description: 'Manikandan',
                     date: moment().add(1,'days').format('DD MMM (dddd)')
                 },
                 {
                     icon: 'wi-cloudy',
                     temperature: '19',
-                    description: 'Partly Cloudy',
+                    description: 'Gnanamani',
                     date: moment().add(2,'days').format('DD MMM (dddd)')
                 },
                 {
                     icon: 'wi-day-rain',
                     temperature: '16',
-                    description: 'Rainy',
+                    description: 'Vinoth',
                     date: moment().add(3,'days').format('DD MMM (dddd)')
-                },
-                {
-                    icon: 'wi-day-sunny uk-text-warning',
-                    temperature: '24',
-                    description: 'Sunny',
-                    date: moment().add(4,'days').format('DD MMM (dddd)')
                 }
+                // {
+                //     icon: 'wi-day-sunny uk-text-warning',
+                //     temperature: '24',
+                //     description: 'Rafeeq',
+                //     date: moment().add(4,'days').format('DD MMM (dddd)')
+                // }
             ];
 
 

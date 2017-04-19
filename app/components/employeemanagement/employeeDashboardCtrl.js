@@ -599,13 +599,13 @@ angular
                     temperature: '16',
                     description: 'Vijayaraj',
                     date: moment().add(3,'days').format('DD MMM (dddd)')
-                },
-                {
-                    icon: 'wi-day-sunny uk-text-warning',
-                    temperature: '24',
-                    description: 'Manikandan',
-                    date: moment().add(4,'days').format('DD MMM (dddd)')
                 }
+                // {
+                //     icon: 'wi-day-sunny uk-text-warning',
+                //     temperature: '24',
+                //     description: 'Manikandan',
+                //     date: moment().add(4,'days').format('DD MMM (dddd)')
+                // }
             ];
 
 
