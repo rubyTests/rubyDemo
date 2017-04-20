@@ -18,7 +18,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info">person</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].firstname}} {{tableArray[0].lastname}}</span>
+                                    <span class="md-list-heading">{{viewData.EMP_NAME}}</span>
                                     <span class="uk-text-small uk-text-muted">Employee Name</span>
                                 </div>
                             </li>
@@ -31,7 +31,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >assignment_ind</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].Admission_No}}</span>
+                                    <span class="md-list-heading">{{viewData.ADMISSION_NO}}</span>
                                     <span class="uk-text-small uk-text-muted">Employee Number</span>
                                 </div>
                             </li>
@@ -44,7 +44,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >import_contacts</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].Dept}}</span>
+                                    <span class="md-list-heading">{{viewData.DEPT_NAME}}</span>
                                     <span class="uk-text-small uk-text-muted">Department</span>
                                 </div>
                             </li>
@@ -54,11 +54,11 @@
                         <ul class="md-list md-list-addon">
                             <li>
                                 <div class="md-list-addon-element">
-                                    <i class="md-list-addon-icon material-icons uk-text-info" >event</i>
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >school</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].AdmissionDate}}</span>
-                                    <span class="uk-text-small uk-text-muted">Date</span>
+                                    <span class="md-list-heading">{{viewData.POS_NAME}}</span>
+                                    <span class="uk-text-small uk-text-muted">Position</span>
                                 </div>
                             </li>
                         </ul>
@@ -79,7 +79,7 @@
                                     <span class="uk-text-muted uk-text-small">Leave Type</span>
                                 </div>
                                 <div class="uk-width-large-5-6">
-                                    <span class="uk-text-large uk-text-middle">Casual leave</span>
+                                    <span class="uk-text-large uk-text-middle">{{leaveList.LEAVE_NAME}}</span>
                                 </div>
                             </div>
                             <hr class="uk-grid-divider">
@@ -88,7 +88,7 @@
                                     <span class="uk-text-muted uk-text-small">From Date</span>
                                 </div>
                                 <div class="uk-width-large-5-6">
-                                    10.03.2017
+                                    {{leaveList.FROM_DATE}}
                                 </div>
                             </div>
                             <hr class="uk-grid-divider">
@@ -97,7 +97,7 @@
                                     <span class="uk-text-muted uk-text-small">To Date</span>
                                 </div>
                                 <div class="uk-width-large-5-6">
-                                    15.10.2017
+                                    {{leaveList.TO_DATE}}
                                 </div>
                             </div>
                             <hr class="uk-grid-divider">
@@ -106,16 +106,16 @@
                                     <span class="uk-text-muted uk-text-small">Message</span>
                                 </div>
                                 <div class="uk-width-large-5-6">
-                                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad aliquam necessitatibus suscipit velit voluptatibus! Ab accusamus ad adipisci alias aliquid at atque consectetur, dicta dignissimos, distinctio dolores esse fugiat iste laborum libero magni maiores maxime modi nemo neque, nesciunt nisi nulla optio placeat quas quia quibusdam quis saepe sit ullam! 
+                                    {{leaveList.DESCRIPTION}}
                                 </div>
                             </div>
                             <hr class="uk-grid-divider uk-hidden-large">
                         </div>
                         <div class="uk-text-right">
                         <br>
-                            <button type="button" class="md-btn md-btn-success md-btn-small uk-modal-close">Approve</button>
-                            <button type="button" class="md-btn md-btn-warning md-btn-small uk-modal-close">Reject</button>
-                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                            <button type="button" ng-if="leaveList.STATUS=='Pending'" class="md-btn md-btn-success md-btn-small" ng-click="changeStatus(leaveList.ID,'Approved')">Approve</button>
+                            <button type="button" ng-if="leaveList.STATUS!='Reject'" class="md-btn md-btn-warning md-btn-small" ng-click="changeStatus(leaveList.ID,'Reject')">Reject</button>
+                            <button type="button"  class="md-btn md-btn-danger md-btn-small uk-modal-close" ui-sref="restricted.hr.leave_application">Cancel</button>
                         </div>
                     </div>
                 </div>

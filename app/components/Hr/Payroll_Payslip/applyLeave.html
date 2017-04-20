@@ -12,34 +12,24 @@ table,th,td{
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <div class="uk-text-right">
-                    <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory1'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Table</button>
                     <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Apply Leave</button>
                 </div>
                 <table class="uk-table uk-table-hover">
                     <thead>
-                    <tr>
-                        <th></th>
-                        <th>Casual Leave</th>
-                        <th>Sick Leave</th>
-                        <th ng-repeat="x in tableHeadvalNew">{{x.tableHeadVal}}</th>
-                        <th>Total Leave</th>
-                    </tr>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Leave Type</th>
+                            <th>Total Leave</th>
+                            <th>Remaining Leave</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td><b>Available Leaves</b></td>
-                        <td>10</td>
-                        <td>3</td>
-                        <td ng-repeat="x in tableHeadvalNew">{{x.tableRowVal1}}</td>
-                        <td>13</td>
-                    </tr>
-                    <tr>
-                        <td><b>Remaining Leaves</b></td>
-                        <td>5</td>
-                        <td>1</td>
-                        <td ng-repeat="x in tableHeadvalNew">{{x.tableRowVal2}}</td>
-                        <td>6</td>
-                    </tr>
+                        <tr ng-repeat="row in ViewDetas">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.LEAVE_NAME}}</td>
+                            <td>{{row.TOTAL_LEAVE}}</td>
+                            <td>{{row.TOTAL_ALLOC_LEAVE-row.TOTAL_LEAVE}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
@@ -51,29 +41,30 @@ table,th,td{
             <button type="button" class="uk-modal-close uk-close"></button>
             <h3 class="uk-modal-title">Leave Application </h3><br>
             <div class="md-card-content">
-                <form>
+                <form id="form_validation" ng-submit="applyLeaves()" novalidate>
                     <div class="uk-grid">
-                        <div class="uk-width-medium-1-1">
-                            <input type="text" config="selectize_leavetype_config" options="selectize_leavetype_options" ng-model="selectize_leavetype" selectize/>
+                        <div class="uk-width-medium-1-1 parsley-row">
+                            <input type="text" config="selectize_leavetype_config" options="selectize_leavetype_options" required ng-model="leave_type" selectize/>
+                            <input type="hidden" ng-model="employee_id">
                         </div>
                     </div>
                     <div class="uk-grid">
                         <div class="uk-width-medium-1-2">
-                            <div class="uk-input-group">
+                            <div class="uk-input-group parsley-row">
                                 <span class="uk-input-group-addon">
                                 <i class="material-icons"></i>
                                 </span>
                                 <label>From Date</label>
-                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="from_date"/>
+                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM-DD-YYYY)" data-uk-datepicker="{format:'MM-DD-YYYY'}" required md-input ng-model="from_date"/>
                             </div>
                         </div>
                         <div class="uk-width-medium-1-2 uk-input-group">
-                            <div class="uk-input-group">
+                            <div class="uk-input-group parsley-row">
                             <span class="uk-input-group-addon">
                             <i class="material-icons"></i>
                             </span>
                             <label>Upto Date</label>
-                            <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="upto_date"/>
+                            <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM-DD-YYYY)" data-uk-datepicker="{format:'MM-DD-YYYY'}" required md-input ng-model="upto_date"/>
                             </div>
                         </div>
                     </div>
@@ -83,16 +74,16 @@ table,th,td{
                             <textarea cols="30" rows="2" class="md-input" ng-model="description" md-input textarea-autosize></textarea>
                         </div>
                     </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small">Apply</button>
+                    </div>
                 </form>
-            </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Apply</button>
             </div>
         </div>
     </div>
 
-        <div id="open_leavecategory1" class="uk-modal">
+       <!--  <div id="open_leavecategory1" class="uk-modal">
         <div class="uk-modal-dialog">
             <button type="button" class="uk-modal-close uk-close"></button>
             <h3 class="uk-modal-title">Leave Application </h3><br>
@@ -123,7 +114,7 @@ table,th,td{
                 <button type="button" ng-click="tableVal()" class="md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>
 

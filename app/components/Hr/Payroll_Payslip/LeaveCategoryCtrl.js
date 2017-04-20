@@ -97,7 +97,7 @@ angular
 
                 $scope.viewData=[];
                 $scope.refreshTable=function(){
-                    $http.get('http://localhost/smartedu/test/LeavemgmntAPI/leaveCategory')
+                    $http.get('http://localhost/rubyServices/api/LeavemgmntAPI/leaveType')
                     .success(function(return_data){
                         $scope.viewData=return_data.data;
                     });
@@ -106,7 +106,7 @@ angular
                 $scope.saveLeaveCategory=function(){
                     $http({
                         method:'POST',
-                        url: 'http://localhost/smartedu/test/LeavemgmntAPI/leaveCategory',
+                        url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveType',
                         data: {
                             'id' : $scope.leavecat_id,
                             'cat_name' : $scope.leave_category,
@@ -137,7 +137,7 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/smartedu/test/LeavemgmntAPI/leaveCategory",
+                            url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveType",
                             params : {id : id},
                             // headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {

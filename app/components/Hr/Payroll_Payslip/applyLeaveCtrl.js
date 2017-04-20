@@ -1,7 +1,21 @@
 angular
     .module('rubycampusApp')
     .controller('applyLeaveCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
+            var $formValidate = $('#form_validation');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
             var vm = this;
             vm.apllicationData=[];
             $scope.leaveTypeArray=[];
@@ -84,115 +98,94 @@ angular
 
                 var modal = UIkit.modal("#open_leavecategory",{bgclose: false, keyboard:false});
 
-                $scope.dpdwnTypeOption=[];
-                $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/Leavetype.json')
-                .query()
-                .$promise
-                .then(function(leavetype_data) {
-                    $scope.leaveTypeArray=leavetype_data;
-                    $scope.dpdwnTypeOption.push(leavetype_data);
-                });
-
-                $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/leaveapplication.json')
-                .query()
-                .$promise
-                .then(function(application_data) {
-                    vm.apllicationData=application_data;
-                });
-                $scope.dpdwnEmpOption=[];
-                $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(employee_data) {
-                    $scope.employee_array=employee_data;
-                    $scope.dpdwnEmpOption.push(employee_data);
-                });
-
-                $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/LeaveCategory.json')
-                .query()
-                .$promise
-                .then(function(category_data) {
-                    angular.forEach(vm.apllicationData, function(value,key){
-                        value.leaves_type=getleaveType(value.leave_type_id);
-                        value.employee_name=getemployeeDetails(value.emp_id);
-                    });
-                    function getleaveType(id){
-                        var data=$filter('filter')($scope.leaveTypeArray,{id : id},true);
-                        if(data[0]) return data[0].Name;
-                    }
-                    function getemployeeDetails(id){
-                        var data1=$filter('filter')($scope.employee_array,{id : id},true);
-                        if(data1[0]) return data1[0].firstname+" "+data1[0].lastname ;
-                    }
-                });
-
-                $scope.selectize_leavetype_options = $scope.dpdwnTypeOption;
-                $scope.selectize_leavetype_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Leave Type...',
-                    valueField: 'id',
-                    labelField: 'Name'
-                };
-                $scope.selectize_employee_options = $scope.dpdwnEmpOption;
-                $scope.selectize_employee_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Employee...',
-                    valueField: 'id',
-                    labelField: 'firstname'
-                };
-
-                $scope.selectize_status_option = ['Approved','Pending','Rejected'];
-                $scope.selectize_status_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Status...',
-                    valueField: 'id',
-                    labelField: 'firstname'
-                };
-
-                $scope.status= "Status";
-
-                $scope.changeStatus = function(){
-                    var ss = $scope.selectize_status;
-                    vm.apllicationData = ss;
-                }
-
                 $scope.addleavecategory=function(){
                     $scope.tit_caption="Add";
                     $scope.status="Save";
-                    $scope.selectize_employee='';
-                    $scope.selectize_leavetype='';
+                    $scope.employee_id='';
+                    $scope.leave_type='';
                     $scope.description='';
                     $scope.from_date='';
                     $scope.upto_date='';
-                    $scope.total_leave='';
-                    $scope.leave_status='';
                     $('.uk-modal').find('input').trigger('blur');
                 }
-                $scope.editLeaveCategory=function(data){
-                  console.log(data,'data');
-                    $scope.tit_caption="Edit";
-                    $scope.status="update";
-                    if (data) {
-                        $scope.application_id=data.id;
-                        $scope.selectize_employee=data.employee_name;
-                        $scope.selectize_leavetype=data.leaves_type;
-                        $scope.description=data.description;
-                        $scope.from_date=data.from_date;
-                        $scope.upto_date=data.upto_date;
-                        $scope.total_leave=data.total_leave;
-                        $scope.leave_status='Approved';
-                    }
+                
+               
+                $scope.leaveType=[];
+                $scope.ViewDetas=[];
+                $scope.refreshTable=function(){
+                   $http({
+                    method:'GET',
+                    url: 'http://localhost/rubyServices/api/LeavemgmntAPI/applyLeave',
+                    params: {
+                        'id' : 1
+                    },
+                    // headers:{'access_token':$localStorage.access_token}
+                    }).then(function(return_data){
+                        console.log(return_data.data.message,'return_data');
+                        $scope.ViewDetas=return_data.data.message;
+                    }); 
                 }
+                $scope.refreshTable();
 
-                $scope.tableHeadvalNew = [];
-                $scope.tableVal = function(){
-                    $scope.tableHeadvalNew.push({"tableHeadVal":$scope.tableHeadVal,"tableRowVal1":$scope.tableRowVal1,"tableRowVal2":$scope.tableRowVal2});
-                    $scope.tableHeadVal = "";
-                    $scope.tableRowVal1 = "";
-                    $scope.tableRowVal2 = "";
+                $http({
+                    method:'GET',
+                    url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveTypelistandcount',
+                    params: {
+                        'id' : 1
+                    },
+                    // headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    $scope.leaveType.push(return_data.data.message);
+                });
+
+                $scope.selectize_leavetype_options = $scope.leaveType;
+                $scope.selectize_leavetype_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Leave Type',
+                    valueField: 'LEAVE_TYPE_ID',
+                    labelField: 'LEAVE_CATEGORY',
+                    searchField: 'LEAVE_CATEGORY',
+                    onInitialize: function(selectize){
+                        selectize.on('change', function() {
+                            console.log('on "change" event fired');
+                        });
+                    }
+                };
+
+                $scope.applyLeaves=function(){
+                    var fromdate=$scope.from_date;
+                    var upto_date=$scope.upto_date;
+                    var start = moment(fromdate,["MM-DD-YYYY"]);
+                    var end = moment(upto_date,["MM-DD-YYYY"]);
+                    var total_days=start.diff(end, "days");
+                    console.log(total_days,'total_days');
+                    $http({
+                        method:'POST',
+                        url: 'http://localhost/rubyServices/api/LeavemgmntAPI/applyLeave',
+                        data: {
+                            // 'employee_id' : $scope.employee_id,
+                            'employee_id' : 1,
+                            'leave_typeID' : $scope.leave_type,
+                            'from_date' : $scope.from_date,
+                            'upto_date' : $scope.upto_date,
+                            'description' : $scope.description,
+                            'total_leave':total_days
+                        },
+                        // headers:{'access_token':$localStorage.access_token}
+                    }).then(function(return_data){
+                        console.log(return_data.data.data.message,'return_data');
+                        if(return_data.data.data.status==true){
+                            UIkit.modal("#open_leavecategory").hide();
+                            UIkit.notify({
+                                message : return_data.data.data.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                            $scope.refreshTable();
+                        }
+                    });
                 }
         }
     );

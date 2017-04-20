@@ -2,21 +2,15 @@
     <div id="page_content_inner">
 
         <h3 class="heading_a uk-margin-bottom">Leave Application
-            <!-- <span style="float: right;font-size:18px;">
-                <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_category'}" ng-click="addCategory()">Add Category</button>
-            </span> -->
         </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
-                <!-- <button  style="float: right;" class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Application</button> -->
                 <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <thead>
                         <tr>
                             <th style="width: 50px !important;">S.No</th>
+                            <th>Leave Type</th>
                             <th>Employee Name</th>
-                            <!-- <th>Leave Type</th>
-                            <th>From Date</th>
-                            <th>Upto Date</th> -->
                             <th>Total Leave</th>
                             <th>Application Date</th>
                             <th>Status</th>
@@ -26,10 +20,8 @@
                     <tfoot>
                         <tr>
                             <th style="width: 50px !important;"></th>
+                            <th>Leave Type</th>
                             <th>Employee Name</th>
-                            <!-- <th>Leave Type</th>
-                            <th>From Date</th>
-                            <th>Upto Date</th> -->
                             <th>Total Leave</th>
                             <th>Application Date</th>
                             <th>Status</th>
@@ -37,19 +29,16 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in tblData.apllicationData">
+                        <tr ng-repeat="row in ViewDetas">
                             <td>{{$index+1}}</td>
-                            <td>{{row.employee_name}}</td>
-                            <!-- <td>{{row.leaves_type}}</td>
-                            <td>{{row.from_date}}</td>
-                            <td>{{row.upto_date}}</td> -->
-                            <td>{{row.total_leave}}</td>
-                            <td>{{row.upto_date}}</td>
-                            <td>{{row.status}}</td>
+                            <td>{{row.LEAVE_NAME}}</td>
+                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td>{{row.TOTAL_LEAVE}}</td>
+                            <td>{{row.FROM_DATE}}</td>
+                            <td>{{row.STATUS}}</td>
                             <td class="">
-                                <a ui-sref="restricted.finance.leaveStatusChange({empid:{{row.id}}})"><i class="md-icon material-icons">remove_red_eye</i></a>
-                                <!-- <a ui-sref=""><i class="md-icon material-icons">&#xE254;</i></a> -->
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a ui-sref="restricted.finance.leaveStatusChange({empid:{{row.EMP_PROFILE_ID}},id:{{row.ID}}})"><i class="md-icon material-icons">remove_red_eye</i></a>
+                                <a class="ts_remove_row" ng-click="deleteLeaveApplication(row.ID,row.EMP_L_BAL_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -57,77 +46,6 @@
             </div>
         </div>
     </div>
-
-        <div class="uk-modal" id="modal_header_footer">
-      <div class="uk-modal-dialog">
-      <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title">Change Status</h3>
-          <div class="md-card-content">
-            <form>
-              <div class="uk-form-row">
-                  <input type="text" config="selectize_status_config" options="selectize_status_option" ng-model="selectize_status" selectize />
-              </div>
-            </form>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="changeStatus()">Save</button>
-          </div>
-      </div>
-    </div>
-
-    <!-- Model Window -->
-<!--                 <div id="open_leavecategory" class="uk-modal">
-                    <div class="uk-modal-dialog">
-                        <button type="button" class="uk-modal-close uk-close"></button>
-                        <h3 class="uk-modal-title">{{tit_caption}} Leave Application </h3><br>
-                        <div class="md-card-content">
-                            <form>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1">
-                                        <input type="text" config="selectize_employee_config" options="selectize_employee_options" ng-model="selectize_employee" selectize/>
-                                        <input type="hidden" ng-model="application_id">
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1">
-                                        <input type="text" config="selectize_leavetype_config" options="selectize_leavetype_options" ng-model="selectize_leavetype" selectize/>
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-1">
-                                        <label>Description</label>
-                                        <input type="text" ng-model="description" class="md-input" md-input>
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-2">
-                                        <label>From Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="from_date"/>
-                                    </div>
-                                    <div class="uk-width-medium-1-2">
-                                        <label>Upto Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="upto_date"/>
-                                    </div>
-                                </div>
-                                <div class="uk-grid">
-                                    <div class="uk-width-medium-1-2">
-                                        <label>Total Leaves</label>
-                                        <input type="text" ng-model="total_leave" class="md-input" md-input>
-                                    </div>
-                                    <div class="uk-width-medium-1-2">
-                                        <label>Status</label>
-                                        <input type="text" ng-model="leave_status" class="md-input" md-input>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="uk-modal-footer uk-text-right">
-                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
-                        </div>
-                    </div>
-                </div> -->
 </div>
 
 

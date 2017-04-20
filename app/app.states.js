@@ -3586,6 +3586,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/categoryCtrl.js'
                             ], {serie:true});
                         }]
@@ -3603,6 +3604,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/positionCtrl.js'
                             ], {serie:true});
                         }]
@@ -3897,13 +3899,14 @@ rubycampusApp
                 // Leave management started 22-03-17
                 .state("restricted.hr.leavetype", {
                     url: "/leavetype",
-                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveType.html',
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/Hr/Payroll_Payslip/LeaveTypeController.js'
+                                'lazy_parsleyjs',
+                                'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -3911,22 +3914,23 @@ rubycampusApp
                         pageTitle: 'Leave Types'
                     }
                 })
-                .state("restricted.hr.leave_category", {
-                    url: "/leave_category",
-                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
-                            ], {serie:true});
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Leave Category'
-                    }
-                })
+                // .state("restricted.hr.leave_category", {
+                //     url: "/leave_category",
+                //     templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveCategory.html',
+                //     resolve: {
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'bower_components/angular-resource/angular-resource.min.js',
+                //                 'lazy_datatables',
+                //                 'lazy_parsleyjs',
+                //                 'app/components/Hr/Payroll_Payslip/LeaveCategoryCtrl.js'
+                //             ], {serie:true});
+                //         }]
+                //     },
+                //     data: {
+                //         pageTitle: 'Leave Category'
+                //     }
+                // })
 
                 .state("restricted.hr.leave_application", {
                     url: "/leave_application",
@@ -3944,8 +3948,8 @@ rubycampusApp
                         pageTitle: 'Leave Application'
                     }
                 })
-                .state("restricted.hr.assignleave_categoryView", {
-                    url: "/assignleave_category",
+                .state("restricted.hr.leave_entitlement_View", {
+                    url: "/leave_entitlement_View",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/assign_leave_category_view.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -3970,6 +3974,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/LeaveEntitleAddCtrl.js'
                             ], {serie:true});
                         }]
@@ -3987,6 +3992,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/applyLeaveCtrl.js'
                             ], {serie:true});
                         }]
@@ -3997,7 +4003,7 @@ rubycampusApp
                 })
 
                 .state("restricted.finance.leaveStatusChange", {
-                    url: "/leaveStatusChange/{empid}",
+                    url: "/leaveStatusChange/{empid}/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/leaveStatusChange.html',
                     controller: 'leaveStatusChangeCtrl',
                     resolve: {
@@ -4011,7 +4017,7 @@ rubycampusApp
                     data: {
                         pageTitle: 'Dynamic Elements'
                     },
-                    params:{empid:null}
+                    params:{empid:null,id:null}
                 })
 
                 // End
@@ -4051,7 +4057,7 @@ rubycampusApp
                     },
                     params:{id:null}   
                 })
-                .state("restricted.finance.assignleavevategory_viewDetails", {
+                .state("restricted.hr.assignleavevategory_viewDetails", {
                     url: "/assignleavevategory_viewDetails/{empid}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/viewassignleavecategory_for_employee.html',
                     controller: 'feeStructureViewCtrl',
@@ -4533,5 +4539,23 @@ rubycampusApp
                     }
                 })
 				
+                // modified by vijayaraj 18-04-17
+                .state("restricted.hr.LeaveEntitle_edit", {
+                    url: "/LeaveEntitle_edit/{empid}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/LeaveEntitleEdit.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
+                                'app/components/Hr/Payroll_Payslip/LeaveEntitleEditCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Leave Entitlement Edit'
+                    },
+                    params:{empid:null}
+                })
         }
     ]);

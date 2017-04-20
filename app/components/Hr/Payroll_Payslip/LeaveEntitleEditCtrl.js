@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('LeaveEntitleAddCtrl',
-        function($scope,$resource,$http,$localStorage,$state) {
+        function($scope,$resource,$http,$localStorage,$state,$stateParams,$http,$timeout) {
             var $formValidate = $('#form_validation');
             $formValidate
             .parsley()
@@ -119,10 +119,47 @@ angular
             };
 
             // delete section
-            $scope.deleteSection = function($event,$index) {
+            $scope.deleteSection = function($event,$index,del_id) {
                 $event.preventDefault();
-                $scope.form_dynamic_model.splice($index,1);
-                $scope.form_dynamic.splice($index,1);
+                if(del_id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(del_id){
+                            $http({
+                            method : "DELETE",
+                            url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlementDelete",
+                            params : {id : del_id},
+                            // headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                console.log(response.data.message,'response');
+                                if(response.data.status==true){
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                $scope.form_dynamic_model.splice($index,1);
+                                $scope.form_dynamic.splice($index,1);
+                            },function myError(response) {
+                                UIkit.notify({
+                                    message : 'Failed',
+                                    status  : 'danger',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                }
+                // $scope.form_dynamic_model.splice($index,1);
+                // $scope.form_dynamic.splice($index,1);
             };
 
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
@@ -138,6 +175,7 @@ angular
                     method:'POST',
                     url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement',
                     data: {
+                        'id':$scope.leavemgnt_id,
                         'dept_id' : $scope.department_id,
                         'emp_id' : $scope.employee_id,
                         'leave_list' : $scope.form_dynamic
@@ -150,5 +188,40 @@ angular
                     }
                 });
             }
+
+            $http({
+            method:'get',
+            url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement',
+            params: {
+                'id' : $stateParams.empid
+            },
+            // headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                console.log(return_data,'return_data');
+                $scope.viewData=return_data.data.message[0];
+                $scope.leavemgnt_id=$stateParams.empid;           
+                $timeout(function() {
+                    $scope.department_id=return_data.data.message[0].DEPT_ID;                    
+                },100);
+                 $timeout(function() {
+                    $scope.employee_id=return_data.data.message[0].EMP_PROFILE_ID;                    
+                },500);
+                
+            });
+
+            $http({
+            method:'get',
+            url: 'http://localhost/rubyServices/api/LeavemgmntAPI/fetchEmployeeLeaveType',
+            params: {
+                'id' : $stateParams.empid
+            },
+            // headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                console.log(return_data.data.message,'list11');
+                // $scope.categoryList=return_data.data.message;
+                $timeout(function() {
+                    $scope.form_dynamic=return_data.data.message;
+                },500);
+            });
         }
     );

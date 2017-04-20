@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('assignleavecategoryviewCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
             var vm = this;
             vm.itamCatTypeArray = [];
             $scope.leaveTypeArray = [];
@@ -66,133 +66,54 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-
-                $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/LeaveCategory.json')
-                .query()
-                .$promise
-                .then(function(leavecategory_data) {
-                    $scope.leaveTypeArray=leavecategory_data;
-                });
-
-                 $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(employee_data) {
-                    $scope.emplyeeData=employee_data;
-                });
-
-                $scope.addAssignCategory=function(){
-                    $scope.tit_caption="Add";
-                    $scope.status="Save";
-                    $scope.selectize_employee='';
-                    $scope.selectize_dept='';
-                    $scope.selectize_leaveCat='';
-                    $scope.leave_count='';
-                    $scope.valid_from='';
-                    $('.uk-modal').find('input').trigger('blur');
-                }
-                $scope.editAssignCategory=function(data){
-                  console.log(data,'data');
-                    $scope.tit_caption="Edit";
-                    $scope.status="update";
-                    if (data) {
-                        $scope.selectize_employee=data.id;
-                        $scope.selectize_dept=data.Dept;
-                        $scope.selectize_leaveCat="Principal";
-                        $scope.leave_count=4;
-                        $scope.valid_from='03.23.2017';
-                    }
-                }
-
-
-            $scope.employeeData=[];
-            $scope.categoryArray=[];
-            $scope.positionData=[];
-            $scope.leaveCategory=[];
-            $resource('app/components/employeemanagement/employee_list.json')
-            .query()
-            .$promise
-            .then(function(employee_data) {
-                $scope.employeeData.push(employee_data);
-            });
-
-            $resource('app/components/Hr/configuration/category.json')
-            .query()
-            .$promise
-            .then(function(category_data) {
-                $scope.categoryArray.push(category_data);
-            });
-
-            $resource('app/components/Hr/configuration/position.json')
-            .query()
-            .$promise
-            .then(function(position_data) {
-                $scope.positionData.push(position_data);
-            });
-
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/LeaveCategory.json')
-            .query()
-            .$promise
-            .then(function(leaveCategory_data) {
-                $scope.leaveCategory.push(leaveCategory_data);
-            });
-
-            $scope.selectize_employee_option = $scope.employeeData;
-            $scope.selectize_employee_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Employee',
-                valueField: 'id',
-                labelField: 'firstname',
-                onInitialize: function(selectize){
-                    selectize.on('change', function() {
-                        console.log('on "change" event fired');
+                $scope.viewData=[];
+                $scope.refreshTable=function(){
+                    $http.get('http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement')
+                    .success(function(return_data){
+                        console.log(return_data,'return_data');
+                        $scope.viewData=return_data.data;
                     });
                 }
-            };
-
-            // $scope.selectize_position_option = $scope.positionData;
-            // $scope.selectize_position_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select Position...',
-            //     valueField: 'id',
-            //     labelField: 'name',
-            //     onInitialize: function(selectize){
-            //         selectize.on('change', function() {
-            //             console.log('on "change" event fired');
-            //         });
-            //     }
-            // };
-
-            $scope.selectize_dept_option = $scope.employeeData;
-            $scope.selectize_dept_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Department',
-                valueField: 'id',
-                labelField: 'Dept',
-                onInitialize: function(selectize){
-                    selectize.on('change', function() {
-                        console.log('on "change" event fired');
+                
+                $scope.refreshTable();
+                $scope.deleteEntitlementDetails=function(id,$index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement",
+                            params : {id : id},
+                            // headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                console.log(response.data.message,'response');
+                                if(response.data.status==true){
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                $scope.viewData.splice($index, 1);
+                                $scope.refreshTable();
+                            },function myError(response) {
+                                UIkit.notify({
+                                    message : 'Failed',
+                                    status  : 'danger',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
                     });
                 }
-            };
-
-            $scope.selectize_leaveCat_option = $scope.leaveCategory;
-            $scope.selectize_leaveCat_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Leave Category',
-                valueField: 'id',
-                labelField: 'Name',
-                onInitialize: function(selectize){
-                    selectize.on('change', function() {
-                        console.log('on "change" event fired');
-                    });
-                }
-            };
-
-            $scope.select_option="employee";
+            }
         }
     );

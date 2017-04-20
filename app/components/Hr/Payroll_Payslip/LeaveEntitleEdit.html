@@ -22,6 +22,7 @@
                     <div class="uk-width-medium-1-2 parsley-row">
                         <label class="uk-form-label">Depertment<span class="req">*</span></label>
                         <input type="text" config="selectize_dept_config" required options="selectize_dept_options" ng-model="department_id" selectize />
+                        <input type="hidden" ng-model="leavemgnt_id">
                     </div>
                     <div class="uk-width-medium-1-2 parsley-row">
                         <label class="uk-form-label">Employee<span class="req">*</span></label>
@@ -34,16 +35,16 @@
                   <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                     <div class="uk-width-medium-1-3 parsley-row">
                         <label class="uk-form-label">Leave Type<span class="req">*</span></label>
-                        <input type="text" config="selectize_leaveCat_config" options="selectize_leaveCat_option" ng-model="section.leave_category" required selectize />
+                        <input type="text" config="selectize_leaveCat_config" options="selectize_leaveCat_option" ng-model="section.LEAVE_TYPE_ID" required selectize />
                     </div>
                     <div class="uk-width-medium-1-3 parsley-row">
                     <br>
                         <label class="uk-form-label">Leave Count<span class="req">*</span></label>
-                        <input type="text" class="md-input" required ng-model="section.leave_count" md-input />
+                        <input type="text" class="md-input" required ng-model="section.LEAVETYPE_COUNT" md-input />
                     </div>
                     <div class="uk-width-medium-1-3 parsley-row"><br>
                         <label class="uk-form-label">Valid From<span class="req">*</span></label>
-                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="section.valid_from"/>
+                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="section.VALID_FROM"/>
                     </div>
                   </div>
                   </div>
@@ -51,7 +52,7 @@
                       <div class="uk-vertical-align uk-height-1-1 alignBtn">
                         <div class="uk-vertical-align-middle">
                             <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
-                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index,section.ID)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
                         </div>
                       </div>
                     </div>

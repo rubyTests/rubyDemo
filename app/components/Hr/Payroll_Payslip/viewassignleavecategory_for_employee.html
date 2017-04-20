@@ -16,7 +16,7 @@
                                         <i class="md-list-addon-icon material-icons" >people</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{employeeData[0].firstname}} {{employeeData[0].lastname}}</span>
+                                        <span class="md-list-heading">{{viewData.EMP_NAME}}</span>
                                         <span class="uk-text-small uk-text-muted">Employee Name</span>
                                     </div>
                                 </li>
@@ -29,7 +29,7 @@
                                         <i class="md-list-addon-icon material-icons" >assignment_ind</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{employeeData[0].Admission_No}}</span>
+                                        <span class="md-list-heading">{{viewData.ADMISSION_NO}}</span>
                                         <span class="uk-text-small uk-text-muted">Employee Number</span>
                                     </div>
                                 </li>
@@ -42,7 +42,7 @@
                                         <i class="md-list-addon-icon material-icons" >import_contacts</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{employeeData[0].Dept}}</span>
+                                        <span class="md-list-heading">{{viewData.DEPT_NAME}}</span>
                                         <span class="uk-text-small uk-text-muted">Department</span>
                                     </div>
                                 </li>
@@ -55,13 +55,13 @@
                                         <i class="md-list-addon-icon material-icons" >school</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{employeeData[0].position}}</span>
+                                        <span class="md-list-heading">{{viewData.POS_NAME}}</span>
                                         <span class="uk-text-small uk-text-muted">Position</span>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <div class="uk-width-medium-1-4">
+                        <!-- <div class="uk-width-medium-1-4">
                             <ul class="md-list md-list-addon">
                                 <li>
                                     <div class="md-list-addon-element">
@@ -73,7 +73,7 @@
                                     </div>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                     
                     <h4>Leave Category</h4>
@@ -90,51 +90,17 @@
                                         <th><i class="md-list-addon-icon material-icons">receipt</i>
                                         Allocated Leaves</th>
                                         <th><i class="md-list-addon-icon material-icons">receipt</i>
-                                        Valif From</th>
+                                        Valid From</th>
                                     </tr>
                                     </thead>
-                                    <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Casual Leave</td>
-                                        <td>CL</td>
-                                        <td>4</td>
-                                        <td>03.05.2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Sick Leave</td>
-                                        <td>SL</td>
-                                        <td>7</td>
-                                        <td>03.05.2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Earned Leave</td>
-                                        <td>EL</td>
-                                        <td>5</td>
-                                        <td>03.05.2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Maternity Leave</td>
-                                        <td>ML</td>
-                                        <td>11</td>
-                                        <td>03.05.2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>5</td>
-                                        <td>Transfer Leave</td>
-                                        <td>TL</td>
-                                        <td>2</td>
-                                        <td>07.22.2017</td>
-                                    </tr>
-                                    <tr>
-                                        <td>6</td>
-                                        <td>Study Leave</td>
-                                        <td>SL</td>
-                                        <td>15</td>
-                                        <td>01.30.2017</td>
+                                    <tbody> 
+                                    <!-- {{categoryList | json}} -->
+                                    <tr ng-repeat="row in categoryList">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{row.LEAVE_NAME}}</td>
+                                        <td>{{row.LEAVE_CODE}}</td>
+                                        <td>{{row.LEAVETYPE_COUNT}}</td>
+                                        <td>{{row.VALID_FROM}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
