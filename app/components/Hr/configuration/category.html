@@ -45,7 +45,7 @@
                             <div class="md-card-content">
                                 <form id="form_validation" ng-submit="saveCategory()" novalidate>
                                     <div class="parsley-row uk-form-row">
-                                        <label>Category Name</label>
+                                        <label for="category_name">Category Name <span class="req">*</span></label>
                                         <input type="text" ng-model="category_name" class="md-input" required md-input>
                                         <input type="hidden" ng-model="category_id">
                                     </div>

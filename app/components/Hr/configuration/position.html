@@ -46,11 +46,12 @@
             <div class="md-card-content">
                 <form id="form_validation" ng-submit="savePosition()" novalidate>
                     <div class="parsley-row uk-form-row">
-                        <label>Position Name</label>
+                        <label for="position_name">Position Name <span class="req">*</span></label>
                         <input type="text" ng-model="position_name" required class="md-input" md-input>
                         <input type="hidden" ng-model="position_id">
                     </div>
                     <div class="parsley-row uk-form-row">
+                        <label for="category" ng-if="category_id">Category <span class="req">*</span></label>
                         <input type="text" config="selectize_category_config" required options="selectize_category_options" ng-model="category_id" selectize/>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
