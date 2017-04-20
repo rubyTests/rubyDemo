@@ -97,7 +97,7 @@
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
                                     <label for="mother_tongue">Nationality<span class="req"></span></label>
-                                    <input type="text" config="selectize_n_config" options="selectize_n_options" ng-model="selectize_n" name="selectize_n" selectize/>
+									<input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="wizard.nationality" selectize/>
                                 </div>
                             </div>
                             <div class="" style="margin-top: 45px !important;">
@@ -133,7 +133,7 @@
                             <br>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button ng-if="!admission_details.$valid"class="md-btn md-btn-primary uk-float-right" type="submit">Save & Continue</button>
-                                <button ng-if="admission_details.$valid" class="md-btn md-btn-primary uk-float-right"  wz-next>Save & Continue</button>
+                                <button ng-if="admission_details.$valid" class="md-btn md-btn-primary uk-float-right" ng-click="admissionDetails()" wz-next>Save & Continue</button>
                             </div>
                             <br>
 							</form>
@@ -191,15 +191,17 @@
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-3 parsley-row">
 											<label>Course</label>
-											<input type="text" config="selectize_c_config" options="selectize_c_options" ng-model="previous.selectize_c" name="selectize_c" selectize/>
+											<input type="text" config="sibling_courseId_config" options="sibling_courseId_options" ng-model="sibling.courseId" selectize/>
 										</div>
 										<div class="uk-width-medium-1-3 data-parsley-americandateley-row">
 											<label>Batch</label>
-											<input type="text" config="selectize_a_config" options="selectize_a_data.options" ng-model="previous.selectize_a" name="selectize_a" selectize />
+											<!-- <input type="text" config="selectize_a_config" options="selectize_batchId_options.options" ng-model="previous.selectize_a" name="selectize_a" selectize /> -->
+											<input type="text" config="sibling_batchId_config" options="sibling_batchId_options" ng-model="sibling.batchId" selectize/>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
 											<label>Search Student</label>
-											<selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="previous.selectize_planets"></selectize>
+											<!-- <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="previous.selectize_planets"></selectize> -->
+											<input type="text" config="sibling_studentId_config" options="sibling_studentId_options" ng-model="sibling.studentId" selectize/>
 										</div>
 									</div>
 								</div>
@@ -237,8 +239,8 @@
 								</div>
 								<div class="uk-clearfix uk-margin-large-top">
 									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" wz-previous>Back</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-if="!academics_details.$valid">Save & Finish</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-if="academics_details.$valid" ng-click="academics_details()" wz-next>Save & Finish</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-if="!academics_details.$valid">Save & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-if="academics_details.$valid" ng-click="academicsDetails()" wz-next>Save & Continue</button>
 								</div>
 							</form>
                         </wz-step>
@@ -271,7 +273,7 @@
 													<input type="text" name="pincode" id="pincode" required class="md-input" md-input ng-model="mailling.pincode" numeric-only />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mailling.country" name="selectize_country" selectize required/>
+													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mailling.country" selectize required/>
 												</div>
 											</div>
 										</div>
@@ -282,7 +284,7 @@
 									Permanent Address
 								</h2>
 								<p>
-									<input type="checkbox" icheck ng-model="checkbox_demo_1" ng-change="checkStatus(checkbox_demo_1)"/>
+									<input type="checkbox" name="sameAddress" icheck ng-model="checkbox_demo_1" ng-change="checkStatus(checkbox_demo_1)"/>
 									<label for="checkbox_demo_1" class="inline-label">Same as Above Address</label>
 								</p>
 								<div class="uk-width-medium-1-1">
@@ -309,7 +311,7 @@
 													<input type="text" required class="md-input" md-input ng-model="permanent.pincode" numeric-only/>
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="permanent.country" name="selectize_country" selectize required/>
+													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="permanent.country" selectize required/>
 												</div>
 											</div>
 										</div>
@@ -391,15 +393,15 @@
 								</div>
 								<br>
 								<div class="uk-clearfix uk-margin-large-top">
-									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!contact_details.$vaild">Save & Continue</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-if="contact_details.$vaild" ng-click="contact_details()" wz-next>Save & Continue</button>
+									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" wz-previous>Back</button>
+									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!contact_details.$valid">Save & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-if="contact_details.$valid" ng-click="contactDetails()" wz-next>Save & Continue</button>
 								</div>
 								<br>
 							</form>
                         </wz-step>
                         <wz-step wz-title="Parent/Guardian Details" template="app/templates/wizard.step.tpl.html" canexit="exitValidation3">
-                            <form class="parentsDetails" name="parentsDetails" id="parentsDetails">
+                            <form class="parents_details" name="parents_details" id="parents_details">
 								<h2 class="heading_a">
 									Parents/Guardian #1
 									<!-- <span class="sub-heading">Personal Details</span> -->
@@ -423,7 +425,7 @@
 									<div class="uk-width-medium-1-4 parsley-row">
 									<br>
 										<p>
-											<input type="checkbox" icheck ng-model="checkbox_demo_11" ng-change="checkStatusParents(checkbox_demo_11)"/>
+											<input type="checkbox" name="availabe" icheck ng-model="checkbox_demo_11" ng-change="checkStatusParents(checkbox_demo_11)"/>
 											<label for="checkbox_demo_11" class="inline-label">Available ?</label>
 										</p>
 									</div>
@@ -466,7 +468,7 @@
 										<input type="text" class="md-input" md-input ng-model="father.pr_pincode" numeric-only/>
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
-										<input type="number" config="selectize_country_config" options="selectize_country_options" ng-model="father.selectize_country" name="selectize_country" selectize />
+										<input type="number" config="selectize_country_config" options="selectize_country_options" ng-model="father.country" selectize />
 									</div>
 								</div>
 								<div class="uk-grid first_details" data-uk-grid-margin>
@@ -551,7 +553,7 @@
 									<div class="uk-width-medium-1-4 parsley-row">
 									<br>
 										<p>
-											<input type="checkbox" icheck ng-model="checkbox_demo_2" ng-change="checkStatusParents1(checkbox_demo_2)"/>
+											<input type="checkbox" name="availabe1" icheck ng-model="checkbox_demo_2" ng-change="checkStatusParents1(checkbox_demo_2)"/>
 											<label for="checkbox_demo_2" class="inline-label">Available ?</label>
 										</p>
 									</div>
@@ -594,7 +596,7 @@
 										<input type="text" class="md-input" md-input ng-model="mother.pr_pincode" numeric-only/>
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
-										<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mother.selectize_country" name="selectize_country" selectize />
+										<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mother.country" selectize />
 									</div>
 								</div>
 								<div class="uk-grid second_details" data-uk-grid-margin>
@@ -721,7 +723,7 @@
 											<input type="text" required class="md-input" md-input ng-model="guardian.pr_pincode" numeric-only/>
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
-											<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="guardian.selectize_country" name="selectize_country" selectize />
+											<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="guardian.country" selectize />
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
@@ -786,8 +788,8 @@
 								</div>
 								<div class="uk-clearfix uk-margin-large-top">
 									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!parentsDetails.$vaild">Save & Continue</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-click="parentsDetails()" ng-if="parentsDetails.$valid">Save & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!parents_details.$valid">Save & Finish</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-click="parentsDetails()" ng-if="parents_details.$valid">Save & Finish</button>
 								</div>
 							</form>
 								<form class="uk-form" >
