@@ -182,30 +182,75 @@ angular
               url : $localStorage.service+"institutionApi/institutionDetails",
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
-                console.log(response,'response');
-                $scope.Basic.institute_name=response.data.data[0].INST_NAME;
-                $scope.Basic.institute_code=response.data.data[0].CODE;
-                $scope.Basic.institute_type=response.data.data[0].TYPE;
-                $scope.Basic.time_zone=response.data.data[0].TIME_ZONE;
-                $scope.Basic.currency=response.data.data[0].CURRENCY;
-                $scope.Basic.institution_id=response.data.data[0].ID;
-                $scope.contact.prof_id=response.data.data[0].PROF_ID;
-                $scope.LOGO=response.data.data[0].LOGO;
-                $scope.contact.address=response.data.data[0].ADDRESS;
-                $scope.contact.contact_name=response.data.data[0].CONTACT_PERSON;
-                $scope.contact.city=response.data.data[0].CITY;
-                $scope.contact.state=response.data.data[0].STATE;
-                $scope.contact.pincode=response.data.data[0].ZIP_CODE;
-                $scope.contact.country=response.data.data[0].COUNTRY_ID;
-                $scope.contact.phone=response.data.data[0].PHONE_NO_1;
-                $scope.contact.mobile_no=response.data.data[0].PHONE_NO_2;
-                $scope.contact.email=response.data.data[0].EMAIL;
-                $scope.contact.facebook=response.data.data[0].FACEBOOK_LINK;
-                $scope.contact.google=response.data.data[0].GOOGLE_LINK;
-                $scope.contact.locationId=response.data.data[0].LOCATION_ID;
-
+                console.log(response.data,'response');
+                $timeout(function(){
+                    $scope.Basic.institute_name=response.data.data[0].INST_NAME;
+                    $scope.Basic.institute_code=response.data.data[0].CODE;
+                    $scope.Basic.institute_type=response.data.data[0].TYPE;
+                    $scope.Basic.time_zone=response.data.data[0].TIME_ZONE;
+                    $scope.Basic.currency=response.data.data[0].CURRENCY;
+                    $scope.Basic.institution_id=response.data.data[0].ID;
+                    $scope.contact.prof_id=response.data.data[0].PROF_ID;
+                    $scope.LOGO=response.data.data[0].LOGO;
+                    $scope.contact.address=response.data.data[0].ADDRESS;
+                    $scope.contact.contact_name=response.data.data[0].CONTACT_PERSON;
+                    $scope.contact.city=response.data.data[0].CITY;
+                    $scope.contact.state=response.data.data[0].STATE;
+                    $scope.contact.pincode=response.data.data[0].ZIP_CODE;
+                    $scope.contact.country=response.data.data[0].COUNTRY_ID;
+                    $scope.contact.phone=response.data.data[0].PHONE_NO_1;
+                    $scope.contact.mobile_no=response.data.data[0].PHONE_NO_2;
+                    $scope.contact.email=response.data.data[0].EMAIL;
+                    $scope.contact.facebook=response.data.data[0].FACEBOOK_LINK;
+                    $scope.contact.google=response.data.data[0].GOOGLE_LINK;
+                    $scope.contact.locationId=response.data.data[0].LOCATION_ID;
+                },200);
               }, function myError(response) {
                 console.log(response,'error');
             });
+
+
+            // form_validation
+            $timeout(function(){
+                var $formValidate = $('#form_validation');
+                $formValidate
+                    .parsley()
+                    .on('form:validated',function() {
+                        $scope.$apply();
+                    })
+                    .on('field:validated',function(parsleyField) {
+                        if($(parsleyField.$element).hasClass('md-input')) {
+                            $scope.$apply();
+                        }
+                    }); 
+
+                var $formValidate = $('#contactValidation');
+                $formValidate
+                    .parsley()
+                    .on('form:validated',function() {
+                        $scope.$apply();
+                    })
+                    .on('field:validated',function(parsleyField) {
+                        if($(parsleyField.$element).hasClass('md-input')) {
+                            $scope.$apply();
+                        }
+                    }); 
+            },500);
+
+            $scope.exitValidation = function(){
+                if($scope.Basic.institute_name==undefined){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+            $scope.exitValidation1 = function(){
+                if($scope.contact.address==undefined || $scope.contact.city==undefined || $scope.contact.state==undefined || $scope.contact.phone==undefined || $scope.contact.mobile_no==undefined || $scope.contact.email==undefined){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
         }
     ]);
