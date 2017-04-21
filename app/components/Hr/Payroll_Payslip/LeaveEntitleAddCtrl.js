@@ -39,7 +39,7 @@ angular
             $scope.deptData=[];
             $scope.leaveType=[];
 
-            $http.get('http://localhost/rubyServices/api/AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
             .success(function(dept_data){
                 $scope.deptData.push(dept_data.message);
             });

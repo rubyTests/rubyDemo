@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('assignleavecategoryviewCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
             var vm = this;
             vm.itamCatTypeArray = [];
             $scope.leaveTypeArray = [];
@@ -68,7 +68,7 @@ angular
                 });
                 $scope.viewData=[];
                 $scope.refreshTable=function(){
-                    $http.get('http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement')
+                    $http.get($localStorage.service+'LeavemgmntAPI/leaveEntitlement',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(return_data){
                         console.log(return_data,'return_data');
                         $scope.viewData=return_data.data;
@@ -82,9 +82,9 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement",
+                            url : $localStorage.service+"LeavemgmntAPI/leaveEntitlement",
                             params : {id : id},
-                            // headers:{'access_token':$localStorage.access_token}
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 console.log(response.data.message,'response');
                                 if(response.data.status==true){
