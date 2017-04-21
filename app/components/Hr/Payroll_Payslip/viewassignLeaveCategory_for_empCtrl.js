@@ -8,16 +8,17 @@ angular
         '$filter',
         '$stateParams',
         '$http',
-        function ($scope,$window,$timeout,$resource,$filter,$stateParams,$http) {
+        '$localStorage',
+        function ($scope,$window,$timeout,$resource,$filter,$stateParams,$http,$localStorage) {
             $scope.viewData=[];
             // $scope.categoryList=[];
             $http({
             method:'get',
-            url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement',
+            url: $localStorage.service+'LeavemgmntAPI/leaveEntitlement',
             params: {
                 'id' : $stateParams.empid
             },
-            // headers:{'access_token':$localStorage.access_token}
+            headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 console.log(return_data,'return_data');
                 $scope.viewData=return_data.data.message[0];
@@ -25,11 +26,11 @@ angular
 
             $http({
             method:'get',
-            url: 'http://localhost/rubyServices/api/LeavemgmntAPI/fetchEmployeeLeaveType',
+            url: $localStorage.service+'LeavemgmntAPI/fetchEmployeeLeaveType',
             params: {
                 'id' : $stateParams.empid
             },
-            // headers:{'access_token':$localStorage.access_token}
+            headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 // console.log(return_data.data.message,'list11');
                 $scope.categoryList=return_data.data.message;

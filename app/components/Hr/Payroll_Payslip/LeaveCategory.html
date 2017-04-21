@@ -29,7 +29,7 @@
                             <td>{{row.CODE}}</td>
                             <td class="">
                                 <a ng-click="editLeaveCategory(row)" data-uk-modal="{target:'#open_leavecategory'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="deleteLeavecategory(row.ID)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteLeavecategory(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

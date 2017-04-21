@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('applyLeaveCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
             var $formValidate = $('#form_validation');
             $formValidate
             .parsley()
@@ -115,11 +115,11 @@ angular
                 $scope.refreshTable=function(){
                    $http({
                     method:'GET',
-                    url: 'http://localhost/rubyServices/api/LeavemgmntAPI/applyLeave',
+                    url: $localStorage.service+'LeavemgmntAPI/applyLeave',
                     params: {
                         'id' : 1
                     },
-                    // headers:{'access_token':$localStorage.access_token}
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         console.log(return_data.data.message,'return_data');
                         $scope.ViewDetas=return_data.data.message;
@@ -129,11 +129,11 @@ angular
 
                 $http({
                     method:'GET',
-                    url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveTypelistandcount',
+                    url: $localStorage.service+'LeavemgmntAPI/leaveTypelistandcount',
                     params: {
                         'id' : 1
                     },
-                    // headers:{'access_token':$localStorage.access_token}
+                    headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     $scope.leaveType.push(return_data.data.message);
                 });
@@ -162,7 +162,7 @@ angular
                     console.log(total_days,'total_days');
                     $http({
                         method:'POST',
-                        url: 'http://localhost/rubyServices/api/LeavemgmntAPI/applyLeave',
+                        url: $localStorage.service+'LeavemgmntAPI/applyLeave',
                         data: {
                             // 'employee_id' : $scope.employee_id,
                             'employee_id' : 1,
@@ -172,7 +172,7 @@ angular
                             'description' : $scope.description,
                             'total_leave':total_days
                         },
-                        // headers:{'access_token':$localStorage.access_token}
+                        headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         console.log(return_data.data.data.message,'return_data');
                         if(return_data.data.data.status==true){

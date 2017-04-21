@@ -39,7 +39,7 @@ angular
             $scope.deptData=[];
             $scope.leaveType=[];
 
-            $http.get('http://localhost/rubyServices/api/AcademicsAPI/departmentlist')
+            $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
             .success(function(dept_data){
                 $scope.deptData.push(dept_data.message);
             });
@@ -47,7 +47,7 @@ angular
             // .success(function(dept_data){
             //     $scope.deptData.push(dept_data.message);
             // });
-            $http.get('http://localhost/rubyServices/api/LeavemgmntAPI/leaveType')
+            $http.get($localStorage.service+'LeavemgmntAPI/leaveType',{headers:{'access_token':$localStorage.access_token}})
             .success(function(leavetype_data){
                 console.log(leavetype_data,'leavetype_data');
                 $scope.leaveType.push(leavetype_data.data);
@@ -55,11 +55,11 @@ angular
             $scope.getEmployeeList=function(id){
                 $http({
                 method:'get',
-                url: 'http://localhost/rubyServices/api/AcademicsAPI/fetchTeacherDetailList',
+                url: $localStorage.service+'AcademicsAPI/fetchTeacherDetailList',
                 params: {
                     'id' : id
                 },
-                // headers:{'access_token':$localStorage.access_token}
+                headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     $scope.selectize_employee_options=return_data.data.data;
                 });
@@ -126,9 +126,9 @@ angular
                         if(del_id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlementDelete",
+                            url : $localStorage.service+"LeavemgmntAPI/leaveEntitlementDelete",
                             params : {id : del_id},
-                            // headers:{'access_token':$localStorage.access_token}
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 console.log(response.data.message,'response');
                                 if(response.data.status==true){
@@ -173,14 +173,14 @@ angular
             $scope.saveLeaveEntitlement=function(){
                 $http({
                     method:'POST',
-                    url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement',
+                    url: $localStorage.service+'LeavemgmntAPI/leaveEntitlement',
                     data: {
                         'id':$scope.leavemgnt_id,
                         'dept_id' : $scope.department_id,
                         'emp_id' : $scope.employee_id,
                         'leave_list' : $scope.form_dynamic
                     },
-                    // headers:{'access_token':$localStorage.access_token}
+                    headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message,'return_data');
                     if(return_data.data.data.status==true){
@@ -191,11 +191,11 @@ angular
 
             $http({
             method:'get',
-            url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveEntitlement',
+            url: $localStorage.service+'LeavemgmntAPI/leaveEntitlement',
             params: {
                 'id' : $stateParams.empid
             },
-            // headers:{'access_token':$localStorage.access_token}
+            headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 console.log(return_data,'return_data');
                 $scope.viewData=return_data.data.message[0];
@@ -211,11 +211,11 @@ angular
 
             $http({
             method:'get',
-            url: 'http://localhost/rubyServices/api/LeavemgmntAPI/fetchEmployeeLeaveType',
+            url: $localStorage.service+'LeavemgmntAPI/fetchEmployeeLeaveType',
             params: {
                 'id' : $stateParams.empid
             },
-            // headers:{'access_token':$localStorage.access_token}
+            headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 console.log(return_data.data.message,'list11');
                 // $scope.categoryList=return_data.data.message;

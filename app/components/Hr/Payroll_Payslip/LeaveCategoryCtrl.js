@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('LeaveCategoryCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
             var $formValidate = $('#form_validation');
             $formValidate
             .parsley()
@@ -97,7 +97,7 @@ angular
 
                 $scope.viewData=[];
                 $scope.refreshTable=function(){
-                    $http.get('http://localhost/rubyServices/api/LeavemgmntAPI/leaveType')
+                    $http.get($localStorage.service+'LeavemgmntAPI/leaveType',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(return_data){
                         $scope.viewData=return_data.data;
                     });
@@ -106,13 +106,13 @@ angular
                 $scope.saveLeaveCategory=function(){
                     $http({
                         method:'POST',
-                        url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveType',
+                        url: $localStorage.service+'LeavemgmntAPI/leaveType',
                         data: {
                             'id' : $scope.leavecat_id,
                             'cat_name' : $scope.leave_category,
                             'cat_code' : $scope.leave_code
                         },
-                        // headers:{'access_token':$localStorage.access_token}
+                        headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         console.log(return_data.data.data.message);
                         if(return_data.data.data.status==true){
@@ -131,15 +131,15 @@ angular
                     });
                 }
 
-                $scope.deleteLeavecategory=function(id){
+                $scope.deleteLeavecategory=function(id,$index){
                 if(id){
                     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveType",
+                            url : $localStorage.service+"LeavemgmntAPI/leaveType",
                             params : {id : id},
-                            // headers:{'access_token':$localStorage.access_token}
+                            headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 console.log(response.data.message,'response');
                                 if(response.data.status==true){
@@ -150,6 +150,7 @@ angular
                                         pos     : 'top-center'
                                     });
                                 }
+                                $scope.viewData.splice($index, 1);
                                 $scope.refreshTable();
                             },function myError(response) {
                                 UIkit.notify({

@@ -7,7 +7,7 @@
                         <div class="user_heading" data-uk-sticky="{ top: 48, media: 960 }" style="background-color: rgb(231,231,231);padding: 20px !important;">
                             <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
                                 <div class="fileinput-new thumbnail">
-                                    <img ng-src="http://localhost/smartedu/upload/{{user_data.IMAGE1}}" alt="user avatar"/>
+                                    <img ng-src="{{user_data.IMAGE1}}" alt="user avatar"/>
                                 </div>
                                 <div class="fileinput-preview fileinput-exists thumbnail"></div>
                                 <div class="user_avatar_controls">
@@ -47,8 +47,8 @@
                                     <i class="material-icons">&#xE8BE;</i>
                                     <div class="md-fab-toolbar-actions">
                                         <button type="button" id="user_edit_save" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Save" ng-click="updateEmployeeDetails()"><i class="material-icons md-color-white">&#xE161;</i></button>
-                                        <button type="submit" id="user_edit_print" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Print"><i class="material-icons md-color-white">&#xE555;</i></button>
-                                        <button type="submit" id="user_edit_delete" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Delete"><i class="material-icons md-color-white">&#xE872;</i></button>
+                                        <!-- <button type="submit" id="user_edit_print" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Print"><i class="material-icons md-color-white">&#xE555;</i></button>
+                                        <button type="submit" id="user_edit_delete" data-uk-tooltip="{cls:'uk-tooltip-small',pos:'bottom'}" title="Delete"><i class="material-icons md-color-white">&#xE872;</i></button> -->
                                     </div>
                                 </div>
                             </div>
@@ -67,8 +67,8 @@
                                             Personal Information
                                         </h3>
                                         <input type="hidden" ng-model="user_data.ID">
-                                        <input type="hidden" ng-model="user_data.PROF_ID">
-                                        <input type="hidden" ng-model="user_data.P_EXTRA_ID">
+                                        <input type="hidden" ng-model="user_data.PROFILE_ID">
+                                        <input type="hidden" ng-model="user_data.PROFILE_EXTRA_ID">
                                         <input type="hidden" ng-model="user_data.BANK_ID">
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
@@ -78,13 +78,13 @@
                                             </div>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_position_control">Marital Status</label>
-                                                <input type="text" config="selectize_marital_config" options="selectize_marital_options" ng-model="user_data.MARITAL_ID" selectize/>
+                                                <input type="text" config="selectize_marital_config" options="selectize_marital_options" ng-model="user_data.MARITAL_STATUS" selectize/>
                                             </div>
                                         </div>
                                         <div class="uk-grid" data-uk-grid-margin>
                                             <div class="uk-width-medium-1-2">
                                                 <label for="user_edit_uname_control">Nationality</label>
-                                                <input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="user_data.NATION_ID" selectize/>
+                                                <input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="user_data.NATIONALITY" selectize/>
                                             </div>
                                             <div class="uk-width-medium-1-2">
                                             <br>
@@ -128,7 +128,7 @@
                                                 </div>
                                                 <div class="uk-width-medium-1-2">
                                                     <label>Category</label>
-                                                    <input type="text" config="selectize_cat_config" options="selectize_cat_options" ng-model="user_data.CAT_ID" selectize/>
+                                                    <input type="text" config="selectize_cat_config" options="selectize_cat_options" ng-model="user_data.EMP_CATEGORY_ID" selectize/>
                                                 </div>
                                             </div>
                                             <div class="uk-grid" data-uk-grid-margin style="margin-top: 50px !important;">

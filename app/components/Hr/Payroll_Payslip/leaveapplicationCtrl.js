@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('leaveapplicationCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
             var vm = this;
             vm.apllicationData=[];
             $scope.leaveTypeArray=[];
@@ -81,11 +81,11 @@ angular
                 $scope.refreshTable=function(){
                    $http({
                     method:'GET',
-                    url: 'http://localhost/rubyServices/api/LeavemgmntAPI/leaveApplicationDetails',
+                    url: $localStorage.service+'LeavemgmntAPI/leaveApplicationDetails',
                     params: {
                         'id' : 1
                     },
-                    // headers:{'access_token':$localStorage.access_token}
+                    headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         console.log(return_data.data.data,'return_data');
                         $scope.ViewDetas=return_data.data.data;
@@ -99,9 +99,9 @@ angular
                             if(id){
                                 $http({
                                 method : "DELETE",
-                                url : "http://localhost/rubyServices/api/LeavemgmntAPI/leaveApplicationDetails",
+                                url : $localStorage.service+"LeavemgmntAPI/leaveApplicationDetails",
                                 params : {id : id,bal_id:bal_id},
-                                // headers:{'access_token':$localStorage.access_token}
+                                headers:{'access_token':$localStorage.access_token}
                                 }).then(function mySucces(response) {
                                     console.log(response,'response');
                                     if(response.data.status==true){

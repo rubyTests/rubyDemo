@@ -11,42 +11,43 @@
 
         <div class="md-card uk-margin-large-bottom">
             <div class="md-card-content">
-                <form id="wizard_advanced_form" class="uk-form-stacked">
+                <!-- <form id="wizard_advanced_form" class="uk-form-stacked"> -->
                     <wizard on-finish="finishedWizard()" template="app/templates/wizard.tpl.html">
-                        <wz-step wz-title="Employee Admission" template="app/templates/wizard.step.tpl.html">
+                        <wz-step wz-title="Employee Admission" template="app/templates/wizard.step.tpl.html" canexit="exitValidation">
                             <h2 class="heading_a">
                                 Admission & Personal details
                                 <!-- <span class="sub-heading">Employee Admission & Personal details</span> -->
-                            </h2>
-
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="admission_no">Employee No</label>
-                                    <input type="text" class="md-input" md-input ng-model="EMP_ADM.admission_no" />
-                                    <input type="hidden" ng-model="employee_id">
-                                </div>
-                                 <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="join_date">Joining Date</label>
-                                    <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="EMP_ADM.join_date"/>
-                                </div>
-                                 <div class="uk-width-medium-1-3 parsley-row">
-                                    <div class="uk-width-large-1-4 uk-width-medium-1-2">
-                                        <div class="uk-form-row">
-                                            <div class="uk-grid">
-                                                <div class="uk-width-medium-1-2"></div>
-                                                <div class="uk-width-medium-1-2">
-                                                    <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
-                                                        <div class="fileinput-new thumbnail">
-                                                            <img ng-src="assets/img/avatars/user.png" alt="user avatar"/>
-                                                        </div>
-                                                        <div class="fileinput-preview fileinput-exists thumbnail"></div>
-                                                        <div class="user_avatar_controls">
-                                                                <span class="btn-file">
-                                                                    <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
-                                                                    <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
-                                                                    <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
-                                                                </span>
-                                                            <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                            </h2><br>
+                            <form id="basicForm" name="basicForm" novalidate>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="admission_no">Employee No <span class="req">*</span></label>
+                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                        <input type="hidden" ng-model="employee_id">
+                                    </div>
+                                     <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="join_date">Joining Date <span class="req">*</span></label>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="EMP_ADM.join_date"/>
+                                    </div>
+                                     <div class="uk-width-medium-1-3 parsley-row">
+                                        <div class="uk-width-large-1-4 uk-width-medium-1-2">
+                                            <div class="uk-form-row">
+                                                <div class="uk-grid">
+                                                    <div class="uk-width-medium-1-2"></div>
+                                                    <div class="uk-width-medium-1-2">
+                                                        <div class="user_heading_avatar fileinput fileinput-new" data-provides="fileinput">
+                                                            <div class="fileinput-new thumbnail">
+                                                                <img ng-src="assets/img/avatars/user.png" alt="user avatar"/>
+                                                            </div>
+                                                            <div class="fileinput-preview fileinput-exists thumbnail"></div>
+                                                            <div class="user_avatar_controls">
+                                                                    <span class="btn-file">
+                                                                        <span class="fileinput-new"><i class="material-icons">&#xE2C6;</i></span>
+                                                                        <span class="fileinput-exists"><i class="material-icons">&#xE86A;</i></span>
+                                                                        <input type="file" name="user_edit_avatar_control" id="user_edit_avatar_control">
+                                                                    </span>
+                                                                <a href="#" class="btn-file fileinput-exists" data-dismiss="fileinput"><i class="material-icons">&#xE5CD;</i></a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -54,212 +55,223 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                             <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="first_name">First Name<span class="req">*</span></label>
-                                    <input type="text" class="md-input" md-input ng-model="EMP_ADM.first_name" />
-                                </div>
-                                 <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="last_name">Last Name<span class="req">*</span></label>
-                                    <input type="text" name="last_name" id="last_name" required class="md-input" md-input ng-model="EMP_ADM.last_name" />
-                                </div>
-                                 <div class="uk-width-medium-1-3 parsley-row">
-                                    <label class="uk-form-label">Gender</label>
-                                    <span class="icheck-inline">
-                                        <input type="radio" value="Male" icheck ng-model="EMP_ADM.gender" />
-                                        <label for="wizard_status_married" class="inline-label">Male</label>
-                                    </span>
-                                    <span class="icheck-inline">
-                                        <input type="radio" class="wizard-icheck" value="Female" icheck ng-model="EMP_ADM.gender" />
-                                        <label for="wizard_status_single" class="inline-label">Female</label>
-                                    </span>
-                                </div>
-                            </div>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="wizard_birth_place">Date of Birth</label>
-                                    <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="EMP_ADM.dob"/>
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <input type="text" config="selectize_marital_config" options="selectize_marital_options" ng-model="EMP_ADM.marital_status" selectize/>
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="EMP_ADM.nationality" selectize/>
-                                </div>
-                            </div>
-                            <div class="" style="margin-top: 45px !important;">
-                                <h2 class="heading_a">
-                                    Work Information
-                                    <!-- <span class="sub-heading">Employee Work details</span> -->
-                                </h2><br>
-                            </div>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row"><br>
-                                    <label for="qualification">Qualification</label>
-                                    <input type="text"  class="md-input" md-input ng-model="EMP_ADM.qualification"/>
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label >Department</label>
-                                    <input type="text" config="selectize_d_config" options="selectize_d_options" ng-model="EMP_ADM.department" selectize />
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label >Category</label>
-                                    <input type="text" config="selectize_cat_config" options="selectize_cat_options" ng-model="EMP_ADM.category" selectize />
-                                </div>
-                            </div>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <label >Position</label>
-                                    <input type="text" config="selectize_pos_config" options="selectize_pos_options" ng-model="EMP_ADM.position" selectize />
-                                </div>
-                            </div>
-                            <div class="uk-clearfix uk-margin-large-top">
-                                <button class="md-btn md-btn-primary uk-float-right" wz-next ng-click="saveAdmissionDetails()">Save & Continue</button>
-                            </div>
-                        </wz-step>
-                        <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html">
-                            <h2 class="heading_a">
-                                Mailing Address
-                            </h2>
-                            
-                            <div class="uk-grid mailingForm" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-1 parsley-row">
-                                    <label for="address">Address</label>
-                                    <input type="text" class="md-input" md-input ng-model="Mailing.address" />
-                                    <input type="hidden" ng-model="ProfileID">
-                                    <input type="hidden" ng-model="mailing_id">
-                                </div>
-                            </div>
-                            <div class="uk-grid mailingForm" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-4 parsley-row">
-                                    <label for="stu_city">City<span class="req"></span></label>
-                                    <input type="text" name="stu_city" id="stu_city" required class="md-input" md-input ng-model="Mailing.city" />
-                                </div>
-                                <div class="uk-width-medium-1-4 parsley-row">
-                                    <label for="stu_state">State<span class="req">*</span></label>
-                                    <input type="text" name="stu_state" id="stu_state" required class="md-input" md-input ng-model="Mailing.state" />
-                                </div>
-                                <div class="uk-width-medium-1-4 parsley-row">
-                                    <label for="pincode">Pincode<span class="req"></span></label>
-                                    <input type="text" name="pincode" id="pincode" required class="md-input" md-input ng-model="Mailing.pincode" />
-                                </div>
-                                <div class="uk-width-medium-1-4 parsley-row">
-                                    <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="Mailing.country"  selectize />
-                                </div>
-                            </div>
-                            <br><br>
-                            <!-- Permanant Address -->
-                            <h2 class="heading_a">
-                                Permanant Address
-                            </h2>
-                            <p>
-                                <input type="checkbox" icheck ng-model="checkbox_demo_1" ng-disabled="Mother.address" ng-change="checkStatus(checkbox_demo_1)"/>
-                                <label for="checkbox_demo_1" class="inline-label">Same as Above Address</label>
-                            </p>
-                            <div class="PermanantDetails">
-                                <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-1 parsley-row">
-                                        <label for="address">Address</label>
-                                        <input type="text" class="md-input" md-input ng-model="Permanant.address" />
-                                        <input type="hidden" ng-model="permanant_id">
+                                 <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="first_name">First Name<span class="req">*</span></label>
+                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.first_name" />
+                                    </div>
+                                     <div class="uk-width-medium-1-3 parsley-row">
+                                        <label for="last_name">Last Name<span class="req">*</span></label>
+                                        <input type="text" name="last_name" id="last_name" required class="md-input" md-input ng-model="EMP_ADM.last_name" />
+                                    </div>
+                                     <div class="uk-width-medium-1-3 parsley-row">
+                                        <label class="uk-form-label">Gender</label>
+                                        <span class="icheck-inline">
+                                            <input type="radio" value="Male" icheck ng-model="EMP_ADM.gender" />
+                                            <label for="wizard_status_married" class="inline-label">Male</label>
+                                        </span>
+                                        <span class="icheck-inline">
+                                            <input type="radio" class="wizard-icheck" value="Female" icheck ng-model="EMP_ADM.gender" />
+                                            <label for="wizard_status_single" class="inline-label">Female</label>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row"><br>
+                                        <label for="dob">Date of Birth <span class="req">*</span></label>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="EMP_ADM.dob"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!EMP_ADM.marital_status" />
+                                        <label for="marital_status" ng-if="EMP_ADM.marital_status">Marital Status</label>
+                                        <input type="text" config="selectize_marital_config" options="selectize_marital_options" ng-model="EMP_ADM.marital_status" selectize/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                    <br ng-if="!EMP_ADM.nationality"/>
+                                        <label for="nationality" ng-if="EMP_ADM.nationality">Nationality</label>
+                                        <input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="EMP_ADM.nationality" selectize/>
+                                    </div>
+                                </div>
+                                <div class="" style="margin-top: 45px !important;">
+                                    <h2 class="heading_a">
+                                        Work Information
+                                        <!-- <span class="sub-heading">Employee Work details</span> -->
+                                    </h2><br>
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row"><br>
+                                        <label for="qualification">Qualification <span class="req">*</span></label>
+                                        <input type="text"  class="md-input" required md-input ng-model="EMP_ADM.qualification"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!EMP_ADM.department"/>
+                                        <label for="Department" ng-if="EMP_ADM.department">Department <span class="req">*</span></label>
+                                        <input type="text" config="selectize_d_config" options="selectize_d_options" ng-model="EMP_ADM.department" required selectize />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!EMP_ADM.category"/>
+                                        <label for="category" ng-if="EMP_ADM.category">Category <span class="req">*</span></label>
+                                        <input type="text" config="selectize_cat_config" options="selectize_cat_options" required ng-model="EMP_ADM.category" selectize />
+                                    </div>
+                                </div>
+                                <div class="uk-grid" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!EMP_ADM.position"/>
+                                         <label for="position" ng-if="EMP_ADM.position">Position <span class="req">*</span></label>
+                                        <input type="text" config="selectize_pos_config" options="selectize_pos_options" required ng-model="EMP_ADM.position" selectize />
+                                    </div>
+                                </div>
+                                <div class="uk-clearfix uk-margin-large-top">
+                                    <button class="md-btn md-btn-primary uk-float-right" ng-if="!basicForm.$valid" type="submit">Save & Continue</button>
+                                    <button class="md-btn md-btn-primary uk-float-right" ng-click="saveAdmissionDetails()" ng-if="basicForm.$valid" type="submit" wz-next>Save & Continue</button>
+                                </div>
+                            </form>
+                        </wz-step>
+                        <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html" canexit="exitValidation1">
+                            <h2 class="heading_a">
+                                Mailing Address
+                            </h2><br>
+                            <form id="contactForm" name="contactForm" novalidate>
+                                <div class="uk-grid mailingForm" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-1 parsley-row">
+                                        <label for="address">Address</label>
+                                        <input type="text" class="md-input" required md-input ng-model="Mailing.address" />
+                                        <input type="hidden" ng-model="ProfileID">
+                                        <input type="hidden" ng-model="mailing_id">
+                                    </div>
+                                </div>
+                                <div class="uk-grid mailingForm" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="stu_city">City<span class="req"></span></label>
-                                        <input type="text" name="stu_city" id="stu_city" required class="md-input" md-input ng-model="Permanant.city" />
+                                        <input type="text" required class="md-input" md-input ng-model="Mailing.city" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="stu_state">State<span class="req">*</span></label>
-                                        <input type="text" name="stu_state" id="stu_state" required class="md-input" md-input ng-model="Permanant.state" />
+                                        <input type="text" required class="md-input" md-input ng-model="Mailing.state" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
                                         <label for="pincode">Pincode<span class="req"></span></label>
-                                        <input type="text" name="pincode" id="pincode" required class="md-input" md-input ng-model="Permanant.pincode" />
+                                        <input type="text" name="pincode" id="pincode" required class="md-input" md-input ng-model="Mailing.pincode" />
                                     </div>
                                     <div class="uk-width-medium-1-4 parsley-row">
-                                        <input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="Permanant.country"  selectize />
+                                        <input type="text" config="selectize_country_config" options="selectize_country_options" required ng-model="Mailing.country"  selectize />
                                     </div>
                                 </div>
-                            </div>
-                            <br><br>
-                            <h2 class="heading_a">
-                                Contact Details
-                            </h2><br><br>
-                            <div class="uk-width-medium-1-1">
+                                <br><br>
+                                <!-- Permanant Address -->
+                                <h2 class="heading_a">
+                                    Permanant Address
+                                </h2>
+                                <p>
+                                    <input type="checkbox" icheck ng-model="checkbox_demo_1" ng-disabled="Mother.address" ng-change="checkStatus(checkbox_demo_1)"/>
+                                    <label for="checkbox_demo_1" class="inline-label">Same as Above Address</label>
+                                </p>
+                                <div class="PermanantDetails">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-1 parsley-row">
+                                            <label for="address">Address</label>
+                                            <input type="text" class="md-input" required md-input ng-model="Permanant.address" />
+                                            <input type="hidden" ng-model="permanant_id">
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-4 parsley-row">
+                                            <label for="stu_city">City<span class="req"></span></label>
+                                            <input type="text" name="stu_city" id="stu_city" required class="md-input" md-input ng-model="Permanant.city" />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row">
+                                            <label for="stu_state">State<span class="req">*</span></label>
+                                            <input type="text" name="stu_state" id="stu_state" required class="md-input" md-input ng-model="Permanant.state" />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row">
+                                            <label for="pincode">Pincode<span class="req"></span></label>
+                                            <input type="text" name="pincode" id="pincode" required class="md-input" md-input ng-model="Permanant.pincode" />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row">
+                                            <input type="text" config="selectize_country_config" options="selectize_country_options" required ng-model="Permanant.country"  selectize />
+                                        </div>
+                                    </div>
+                                </div>
+                                <br><br>
+                                <h2 class="heading_a">
+                                    Contact Details
+                                </h2><br><br>
+                                <div class="uk-width-medium-1-1">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="material-icons">&#xE0CD;</i>
+                                                </span>
+                                                <label for="wizard_phone">Phone Number</label>
+                                                <input type="text" class="md-input" required md-input ng-model="ADDITIONAl.phone_no" />
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="material-icons">&#xE324;</i>
+                                                </span>
+                                                <label for="mobile_no">Mobile</label>
+                                                <input type="text" class="md-input" name="mobile_no" required id="mobile_no" md-input ng-model="ADDITIONAl.mobile_no" />
+                                            </div>
+                                        </div>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <div class="uk-input-group">
+                                                <span class="uk-input-group-addon">
+                                                    <i class="material-icons">&#xE0BE;</i>
+                                                </span>
+                                                <label for="">Email</label>
+                                                <input type="text" class="md-input" name="email" required id="eamil" md-input ng-model="ADDITIONAl.email" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                                <br>
+                                <h2 class="heading_a">
+                                    Social Profile
+                                </h2>
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <div class="uk-input-group">
                                             <span class="uk-input-group-addon">
-                                                <i class="material-icons">&#xE0CD;</i>
+                                                <a href="#"><i class="uk-icon-facebook"></i></a>
                                             </span>
-                                            <label for="wizard_phone">Phone Number</label>
-                                            <input type="text" class="md-input" name="wizard_phone" id="wizard_phone" md-input ng-model="ADDITIONAl.phone_no" />
+                                            <label for="facebook">Facebook</label>
+                                            <input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="ADDITIONAl.facebook" />
                                         </div>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <div class="uk-input-group">
                                             <span class="uk-input-group-addon">
-                                                <i class="material-icons">&#xE324;</i>
+                                                <a href="#"><i class="uk-icon-google-plus"></i></a>
                                             </span>
-                                            <label for="mobile_no">Mobile</label>
-                                            <input type="text" class="md-input" name="mobile_no" id="mobile_no" md-input ng-model="ADDITIONAl.mobile_no" />
+                                            <label for="google">Google</label>
+                                            <input type="text" class="md-input" name="google" id="google" md-input ng-model="ADDITIONAl.google" />
                                         </div>
-                                    </div>
-                                    <div class="uk-width-medium-1-3 parsley-row">
-                                        <div class="uk-input-group">
-                                            <span class="uk-input-group-addon">
-                                                <i class="material-icons">&#xE0BE;</i>
-                                            </span>
-                                            <label for="">Email</label>
-                                            <input type="text" class="md-input" name="email" id="eamil" md-input ng-model="ADDITIONAl.email" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <br>
-                            <br>
-                            <h2 class="heading_a">
-                                Social Profile
-                            </h2>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <div class="uk-input-group">
-                                        <span class="uk-input-group-addon">
-                                            <a href="#"><i class="uk-icon-facebook"></i></a>
-                                        </span>
-                                        <label for="facebook">Facebook</label>
-                                        <input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="ADDITIONAl.facebook" />
-                                    </div>
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <div class="uk-input-group">
-                                        <span class="uk-input-group-addon">
-                                            <a href="#"><i class="uk-icon-google-plus"></i></a>
-                                        </span>
-                                        <label for="google">Google</label>
-                                        <input type="text" class="md-input" name="google" id="google" md-input ng-model="ADDITIONAl.google" />
-                                    </div>
 
-                                </div>
-                                <div class="uk-width-medium-1-3 parsley-row">
-                                    <div class="uk-input-group">
-                                        <span class="uk-input-group-addon">
-                                            <a href="#"><i class="uk-icon-linkedin"></i></a>
-                                        </span>
-                                        <label for="linkedin">Linkedin</label>
-                                        <input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="ADDITIONAl.linkedin" />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <div class="uk-input-group">
+                                            <span class="uk-input-group-addon">
+                                                <a href="#"><i class="uk-icon-linkedin"></i></a>
+                                            </span>
+                                            <label for="linkedin">Linkedin</label>
+                                            <input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="ADDITIONAl.linkedin" />
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="uk-clearfix uk-margin-large-top">
-                                <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next ng-click="saveConatctDetails()">Save & Continue</button>
-                            </div>
+                                <div class="uk-clearfix uk-margin-large-top">
+                                    <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
+                                    <button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!contactForm.$valid">Save & Continue</button>
+                                    <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next ng-click="saveConatctDetails()" ng-if="contactForm.$valid">Save & Continue</button>
+                                </div>
+                            </form>
                         </wz-step>
                         <wz-step wz-title="Previous Work Information" template="app/templates/wizard.step.tpl.html">
-                            <form class="uk-form" >
+                            <!-- <form id="previousWorkForm" name="previousWorkForm" novalidate> -->
+                            <form>
                                 <input type="hidden" ng-model="employee_profileID">
                                 <input type="hidden" ng-model="instituteID">
                                 <div class="uk-grid uk-grid-medium " data-uk-grid-match ng-repeat="(topParent,PREVOIUS) in form_dynamic track by $index">
@@ -271,8 +283,8 @@
                                                 </h2>
                                                 <div class="uk-grid" data-uk-grid-margin>
                                                     <div class="uk-width-medium-1-2 parsley-row">
-                                                        <label for="Emp_role">Employee Role<span class="req"></span></label>
-                                                        <input type="text" class="md-input" md-input ng-model="PREVOIUS.employee_role" />
+                                                        <label for="Emp_role">Employee Role <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="PREVOIUS.employee_role" />
                                                         <input type="hidden" ng-model="PREVOIUS.prevInst_ID" value="{{PREVOIUS.prevInst_ID}}">
                                                          <input type="hidden" ng-model="PREVOIUS.locationID">
                                                     </div>
@@ -326,11 +338,13 @@
                                         </div>
                                     </div>
                                 </div>
-                            </form>
                             <div class="uk-clearfix uk-margin-large-top">
                                 <button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-                                <button class="md-btn md-btn-primary uk-float-right" type="submit" wz-next ng-click="savePreviousInstituteDetails()">Save & Continue</button>
+                                <!-- <button class="md-btn md-btn-primary uk-float-right" type="submit" ng-click="savePreviousInstituteDetails()" ng-if="previousWorkForm.$valid" wz-next>Save & Continue</button>
+                                <button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!previousWorkForm.$valid">Save & Continue</button> -->
+                                <button class="md-btn md-btn-primary uk-float-right" type="submit" ng-click="savePreviousInstituteDetails()"  wz-next>Save & Continue</button>
                             </div>
+                        </form>
                         </wz-step>
                         <wz-step wz-title="Additional Details" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
@@ -387,7 +401,7 @@
                         </wz-step>
                     </wizard>
 
-                </form>
+                <!-- </form> -->
             </div>
         </div>
 

@@ -30,6 +30,9 @@ table,th,td{
                             <td>{{row.TOTAL_LEAVE}}</td>
                             <td>{{row.TOTAL_ALLOC_LEAVE-row.TOTAL_LEAVE}}</td>
                         </tr>
+                        <tr ng-if="ViewDetas.length==0">
+                            <td colspan="4" style="text-align:center;">No Data Found</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

@@ -206,6 +206,12 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
+                    UIkit.notify({
+                        message : return_data.data.data.message,
+                        status  : 'success',
+                        timeout : 2000,
+                        pos     : 'top-center'
+                    });
                     $scope.employee_id=return_data.data.data.EMP_PROFILE_ID;
                     $scope.ProfileID=return_data.data.data.PROFILE_ID;
                 });
@@ -240,6 +246,12 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
+                    UIkit.notify({
+                        message : return_data.data.data.message,
+                        status  : 'success',
+                        timeout : 2000,
+                        pos     : 'top-center'
+                    });
                     $scope.mailing_id=return_data.data.data.MAILING_ADDRESS_ID;
                     $scope.permanant_id=return_data.data.data.PERM_ADDRESS_ID;
                     $scope.employee_profileID=return_data.data.data.EMP_PROFILE_ID;
@@ -258,9 +270,13 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
-                    console.log(return_data.data.data.INSTITUTE_ID,'return_data.data.data.INSTITUTE_ID');
+                    UIkit.notify({
+                        message : return_data.data.data.message,
+                        status  : 'success',
+                        timeout : 2000,
+                        pos     : 'top-center'
+                    });
                     $scope.instituteID=return_data.data.data.INSTITUTE_ID;
-                    console.log(return_data.data.data.LOCATION_ID,'ss');
                     angular.forEach(return_data.data.data.INSTITUTE_ID, function (value, keys) {
                         $scope.form_dynamic[keys].prevInst_ID=value;
                     });
@@ -289,11 +305,80 @@ angular
                 }).then(function(return_data){
                     console.log(return_data.data.data.message);
                     if(return_data.data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
                         $timeout(function(){
                             $state.go('restricted.employeemanagement.employee_profile_tableview');
                         },200);
                     }
                 });
             }
+
+            $scope.EMP_ADM.join_date=$filter('date')(new Date(),'MM.dd.yyyy');
+            $scope.EMP_ADM.dob=$filter('date')(new Date(),'MM.dd.yyyy');
+            // form_validation
+            $timeout(function(){
+                var $formValidate = $('#basicForm');
+                $formValidate
+                    .parsley()
+                    .on('form:validated',function() {
+                        $scope.$apply();
+                    })
+                    .on('field:validated',function(parsleyField) {
+                        if($(parsleyField.$element).hasClass('md-input')) {
+                            $scope.$apply();
+                        }
+                    }); 
+
+                var $formValidate = $('#contactForm');
+                $formValidate
+                    .parsley()
+                    .on('form:validated',function() {
+                        $scope.$apply();
+                    })
+                    .on('field:validated',function(parsleyField) {
+                        if($(parsleyField.$element).hasClass('md-input')) {
+                            $scope.$apply();
+                        }
+                    });
+
+                // var $formValidate = $('#previousWorkForm');
+                // $formValidate
+                //     .parsley()
+                //     .on('form:validated',function() {
+                //         $scope.$apply();
+                //     })
+                //     .on('field:validated',function(parsleyField) {
+                //         if($(parsleyField.$element).hasClass('md-input')) {
+                //             $scope.$apply();
+                //         }
+                //     }); 
+            },500);
+
+            $scope.exitValidation = function(){
+                if($scope.EMP_ADM.admission_no==undefined || $scope.EMP_ADM.join_date==undefined || $scope.EMP_ADM.first_name==undefined || $scope.EMP_ADM.last_name==undefined || $scope.EMP_ADM.dob==undefined || $scope.EMP_ADM.qualification==undefined || $scope.EMP_ADM.department==undefined || $scope.EMP_ADM.category==undefined || $scope.EMP_ADM.position==undefined){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            $scope.exitValidation1 = function(){
+                if($scope.Mailing.address==undefined || $scope.Mailing.city==undefined || $scope.Mailing.state==undefined || $scope.Mailing.country==undefined || $scope.Permanant.address==undefined || $scope.Permanant.city==undefined || $scope.Permanant.state==undefined || $scope.Permanant.country==undefined || $scope.ADDITIONAl.phone_no==undefined || $scope.ADDITIONAl.email==undefined || $scope.ADDITIONAl.mobile_no==undefined){
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+            // $scope.exitValidation2 = function(){
+            //     if($scope.PREVOIUS.employee_role==undefined){
+            //         return false;
+            //     }else{
+            //         return true;
+            //     }
+            // }
         }
     ]);
