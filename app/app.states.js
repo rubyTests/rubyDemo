@@ -2342,6 +2342,8 @@ rubycampusApp
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_ionRangeSlider',
                                 'lazy_tablesorter',
+                                'lazy_charts_chartist',
+                                
                                 'app/components/student/stuExamReportCtrl.js'
                             ]);
                         }],
@@ -3403,6 +3405,28 @@ rubycampusApp
                         pageTitle: 'Enter Student Marks'
                     }
                 })
+
+                // Added By Senthil 20/04/2017 
+
+                .state("restricted.academics.examination.EnterMarkView", {
+                    url: "/EnterMarkView",
+                    templateUrl: 'app/components/academics/examination/enterMarkView.html',
+                    controller: 'enterMarkViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/enterMarkViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Enter Student Marks'
+                    }
+                })
+
+                // End
 				
 				.state("restricted.academics.examination.individualMarkReport", {
 					url: "/individualMarkReport/{id:[0-9]{1,4}}",
@@ -4110,6 +4134,8 @@ rubycampusApp
 							'bower_components/angular-resource/angular-resource.min.js',
 							'lazy_ionRangeSlider',
 							'lazy_tablesorter',
+                            'lazy_charts_chartist',
+                            'lazy_charts_c3',
 							'app/components/plugins/Report/singleemployeeReportController.js'
 						],{serie:true});
 					}],
@@ -4158,6 +4184,8 @@ rubycampusApp
 							'bower_components/angular-resource/angular-resource.min.js',
 							'lazy_ionRangeSlider',
 							'lazy_tablesorter',
+                            'lazy_charts_chartist',
+                            'lazy_charts_c3',
 							'app/components/plugins/Report/singlestudentReportController.js'
 						],{serie:true});
 					}],

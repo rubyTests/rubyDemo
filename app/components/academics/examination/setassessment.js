@@ -34,6 +34,11 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -45,7 +50,8 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Type'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Weightage'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Type'),
 
             ];
 

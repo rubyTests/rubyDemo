@@ -13,6 +13,15 @@ angular
         '$localStorage',
         function ($rootScope,$scope,$window,notes_data,$timeout,variables,$http,$stateParams,$filter,$localStorage) {
 
+            // distributed series
+            $scope.chartist_distributed_data = {
+                labels: ['First Term', 'Second Term', 'Third Term', 'Fourth Term'],
+                series: [35, 85, 62, 10]
+            };
+            $scope.chartist_distributed_options = {
+                distributeSeries: true
+            };
+
             // get note data
             $scope.notes_data = notes_data;
 

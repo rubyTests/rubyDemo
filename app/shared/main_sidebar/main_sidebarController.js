@@ -178,7 +178,7 @@ angular
                             title: 'Examination',
                             submenu: [
 								{
-                                    title: 'Set Grading',
+                                    title: 'Grade Level',
                                     link: 'restricted.academics.examination.setgrading'
                                 },
                                 {
@@ -189,10 +189,10 @@ angular
                                     title: 'Set Assessment',
 									link: 'restricted.academics.examination.setassessment'
                                 },
-								{
-                                    title: 'Set Weightages',
-                                    link: 'restricted.academics.examination.setweightage'
-                                },
+								// {
+        //                             title: 'Set Weightages',
+        //                             link: 'restricted.academics.examination.setweightage'
+        //                         },
                                 {
                                     title: 'Assign Exam',
 									link: 'restricted.academics.examination.assign'
@@ -200,6 +200,10 @@ angular
 								{
                                     title: 'Mark List',
 									link: 'restricted.academics.examination.markDetails'
+                                },
+                                {
+                                    title: 'Enter Mark',
+                                    link: 'restricted.academics.examination.EnterMarkView'
                                 },
                                 {
                                     title:'Online Exam',

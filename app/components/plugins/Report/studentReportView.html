@@ -37,22 +37,25 @@ td.editable_updated {
                         <thead>
                         <tr>
                             <th data-priority="critical"></th>
-                            <th class="filter-false remove sorter-false" data-priority="critical">Image</th>
+                            <!-- <th class="filter-false remove sorter-false" data-priority="critical">Image</th> -->
+                            <th class="filter-false remove sorter-false"data-priority="critical">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</th>
                             <th data-priority="critical">Student Name</th>
+                            <th data-priority="critical">Course</th>
                             <th data-priority="critical">Batch</th>
                             <th data-priority="critical">No of Leaves Taken</th>
-                            <th data-priority="critical">No of Leaves Available</th>
+                            <!-- <th data-priority="critical">No of Leaves Available</th> -->
                             <th data-priority="critical">Adminssion No</th>
                         </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
-                                <th>Image</th>
-                                <th>Employee Name</th>
+                                <th></th>
+                                <th>Student Name</th>
+                                <th>Course</th>
                                 <th>Batch</th>
                                 <th>No of Leaves Taken</th>
-                                <th>No of Leaves Available</th>
+                                <!-- <th>No of Leaves Available</th> -->
                                 <th>Adminssion No</th>
                             </tr>
                         </tfoot>
@@ -61,9 +64,10 @@ td.editable_updated {
                                 <td>{{$index+1}}</td>
                                 <td><img class="md-user-image" ng-src="{{item.photo1_path}}" alt=""/></td>
                                 <td><a ui-sref="restricted.plugins.reportforstudent({id:{{item.id}}})">{{item.firstname+" "+item.lastname}}</td>
+                                <td>{{item.course}}</td>
                                 <td>{{item.batch}}</td>
                                 <td>{{$index+2}}</td>
-                                <td>{{$index+2}}</td>
+                                <!-- <td>{{$index+2}}</td> -->
                                 <td>{{item.Admission_No}}</td>
                             </tr>
                         </tbody>

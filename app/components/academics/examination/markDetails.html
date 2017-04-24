@@ -80,11 +80,11 @@
                         <i class="uk-icon-plus"></i>  Add Block
                         </button>
                     </div> -->
-                    <div class="uk-text-right">
+                    <!-- <div class="uk-text-right">
                         <button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.AddMarkDetails">
                         <i class="uk-icon-plus"></i>  Add Marks
                         </button>
-                    </div>
+                    </div> -->
                     <thead>
                         <tr>
                             <th>S.No</th>
@@ -108,12 +108,13 @@
                     <tbody>
                         <tr ng-repeat="row in showCase.dt_data">
                             <td>{{$index+1}}</td>
-							<td><a ui-sref="restricted.academics.examination.individualMarkReport({id:{{row.id}}})">{{row.name}}</a></td>
+							<!-- <td><a ui-sref="restricted.academics.examination.individualMarkReport({id:{{row.id}}})">{{row.name}}</a></td> -->
+                            <td><a ui-sref="restricted.stuExamReport">{{row.name}}</a></td>
 							<td>{{row.term1}}</td>
 							<td>{{row.term2}}</td>
 							<td>{{row.overall}}</td>
 							<td>
-								<a ng-click="edit_data(row)" ><i class="md-icon material-icons">&#xE254;</i></a>
+								<a ng-click="edit_data(row)" ui-sref="restricted.stuExamReport" ><i class="md-icon material-icons">&#xE417;</i></a>
 								<a href="#" class="ts_remove_row" ><i class="md-icon material-icons">&#xE872;</i></a>
 							</td>
                         </tr>

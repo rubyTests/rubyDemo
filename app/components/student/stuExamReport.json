@@ -5,36 +5,42 @@
 		"exams":[
 			{
 				"subject":"Operating System",
+				"max_mark":100,
 				"mark":70,
 			    "grade":"C",
 			    "exam_date":"24.04.2017"
 			},
 			{
 				"subject":"Data Structures",
+				"max_mark":100,
 				"mark":84,
 			    "grade":"A",
 			    "exam_date":"25.04.2017"
 			},
 			{
 				"subject":"Numerical Methods",
+				"max_mark":100,
 				"mark":76,
 			    "grade":"B",
 			    "exam_date":"26.04.2017"
 			},
 			{
 				"subject":"User Interface",
+				"max_mark":100,
 				"mark":55,
 			    "grade":"E",
 			    "exam_date":"27.04.2017"
 			},
 			{
 				"subject":"Artificial Intelligence",
+				"max_mark":100,
 				"mark":73,
 			    "grade":"B",
 			    "exam_date":"28.04.2017"
 			},
 			{
 				"subject":"Database Management System",
+				"max_mark":100,
 				"mark":93,
 			    "grade":"S",
 			    "exam_date":"29.04.2017"
@@ -47,36 +53,42 @@
 		"exams":[
 			{
 				"subject":"Operating System",
+				"max_mark":100,
 				"mark":50,
 			    "grade":"E",
 			    "exam_date":"04.05.2017"
 			},
 			{
 				"subject":"Data Structures",
+				"max_mark":100,
 				"mark":57,
 			    "grade":"D",
 			    "exam_date":"05.05.2017"
 			},
 			{
 				"subject":"Numerical Methods",
+				"max_mark":100,
 				"mark":76,
 			    "grade":"B",
 			    "exam_date":"06.05.2017"
 			},
 			{
 				"subject":"User Interface",
+				"max_mark":100,
 				"mark":75,
 			    "grade":"B",
 			    "exam_date":"07.05.2017"
 			},
 			{
 				"subject":"Artificial Intelligence",
+				"max_mark":100,
 				"mark":53,
 			    "grade":"E",
 			    "exam_date":"08.05.2017"
 			},
 			{
 				"subject":"Database Management System",
+				"max_mark":100,
 				"mark":73,
 			    "grade":"C",
 			    "exam_date":"09.05.2017"
@@ -89,36 +101,42 @@
 		"exams":[
 			{
 				"subject":"Operating System",
+				"max_mark":100,
 				"mark":67,
 			    "grade":"C",
 			    "exam_date":"14.06.2017"
 			},
 			{
 				"subject":"Data Structures",
+				"max_mark":100,
 				"mark":69,
 			    "grade":"C",
 			    "exam_date":"15.06.2017"
 			},
 			{
 				"subject":"Numerical Methods",
+				"max_mark":100,
 				"mark":58,
 			    "grade":"D",
 			    "exam_date":"16.06.2017"
 			},
 			{
 				"subject":"User Interface",
+				"max_mark":100,
 				"mark":51,
 			    "grade":"E",
 			    "exam_date":"17.04.2017"
 			},
 			{
 				"subject":"Artificial Intelligence",
+				"max_mark":100,
 				"mark":73,
 			    "grade":"B",
 			    "exam_date":"18.06.2017"
 			},
 			{
 				"subject":"Database Management System",
+				"max_mark":100,
 				"mark":93,
 			    "grade":"S",
 			    "exam_date":"19.06.2017"

@@ -14,5 +14,9 @@ angular
                 .then(function(dt_data) {
                     $scope.dt_data = dt_data;
                 });
+
+            $scope.backBtn = function(){
+                $window.history.back();
+            }
         }
     ]);

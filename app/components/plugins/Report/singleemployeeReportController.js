@@ -35,6 +35,43 @@ angular
             $scope.getleaveDesciption = function(laveType_id){
                 var data=$filter('filter')($scope.leavetype, {id : laveType_id},true);
                 return data[0].Name;
+            }
+
+            // live update gauge chart
+            var c3_server_load_id = '#c3_server_load';
+            if($(c3_server_load_id).length) {
+                var server_1 = c3.generate({
+                    bindto: c3_server_load_id,
+                    data: {
+                        columns: [
+                            ['Overall Percentage', 85.02]
+                        ],
+                        type: 'gauge',
+                        onclick: function (d, i) { console.log("onclick", d, i); },
+                        onmouseover: function (d, i) { console.log("onmouseover", d, i); },
+                        onmouseout: function (d, i) { console.log("onmouseout", d, i); }
+                    },
+                    gauge: {
+                        label: {
+                            format: function(value, ratio) {
+                                return value + '%';
+                            },
+                            show: false
+                        },
+                        min: 0,
+                        max: 100,
+                        width: 36
+                    },
+                    color: {
+                        pattern: ['#D32F2F', '#F57C00', '#388E3C' ], // the three color levels for the percentage values.
+                        threshold: {
+                            values: [50, 75, 100]
+                        }
+                    },
+                    size: {
+                        height: 180
+                    }
+                });
             }   
 
             // initialize tables

@@ -21,6 +21,10 @@ td.editable_updated {
     height: 150px;
     width: 150px;
 }
+.ct-bar {
+    fill: none;
+    stroke-width: 15;
+}
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -28,7 +32,7 @@ td.editable_updated {
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
+                    <div class="uk-width-medium-2-5">
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
                                 <div class="user_heading_avatar">
                                     <div class="thumbnail">
@@ -54,13 +58,13 @@ td.editable_updated {
                             <span class="uk-text-small uk-text-muted">BCA - A</span>
                         </div>
                     </div>
-                    <div class="uk-width-medium-1-2">
+                    <!-- <div class="uk-width-medium-1-5">
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center"></div>
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
                             <span class="md-list-heading">Adminssion No : </span>
                             <span class="uk-text-small uk-text-muted"> EMP01</span>
                         </div>
-                        <!-- <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
                             <span class="md-list-heading">Category : </span>
                             <span class="uk-text-small uk-text-muted"> Teaching</span>
                         </div>
@@ -71,15 +75,24 @@ td.editable_updated {
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
                             <span class="md-list-heading">Category : </span>
                             <span class="uk-text-small uk-text-muted">Teaching</span>
-                        </div> -->
+                        </div>
+                    </div> -->
+                    <div class="uk-width-medium-3-5">
+                        <div class="md-card">
+                            <div class="md-card-content">
+                                <h4 class="heading_c uk-margin-bottom">Analytics</h4>
+                                <chartist data="chartist_distributed_data" options="chartist_distributed_options" ng-id="chartist_distributed" type="bar"></chartist>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="uk-overflow-container uk-margin-bottom">
+                <div class="uk-overflow-container" style="margin-top:30px;">
                     <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
                         <thead>
                         <tr>
                             <th data-priority="critical">S.No</th>
                             <th data-priority="critical">Subject</th>
+                            <th data-priority="critical">Max.Mark</th>
                             <th data-priority="critical">Mark</th>
                             <th data-priority="critical">Grade</th>
                             <th data-priority="critical">Exam Date</th>
@@ -89,6 +102,7 @@ td.editable_updated {
                             <tr>
                                 <th>S.No</th>
                                 <th>Subject</th>
+                                <th>Max.Mark</th>
                                 <th>Mark</th>
                                 <th>Grade</th>
                                 <th>Exam Date</th>
@@ -97,11 +111,12 @@ td.editable_updated {
                         <tbody ng-repeat="item in notes_data">
                             <tr style="background-color: #cccac9">
                                 <td>{{$index+1}}</td>
-                                <td colspan="4">{{item.exam_name}}</td>
+                                <td colspan="5">{{item.exam_name}}</td>
                             </tr>
                             <tr ng-repeat="x in item.exams" on-last-repeat>
                                 <td></td>
                                 <td>{{x.subject}}</td>
+                                <td>{{x.max_mark}}</td>
                                 <td>{{x.mark}}</td>
                                 <td>{{x.grade}}</td>
                                 <td>{{x.exam_date}}</td>

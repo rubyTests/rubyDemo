@@ -37,23 +37,23 @@ td.editable_updated {
                         <thead>
                         <tr>
                             <th data-priority="critical"></th>
-                            <th class="filter-false remove sorter-false" data-priority="critical">Image</th>
+                            <th class="filter-false remove sorter-false" data-priority="critical"></th>
                             <th data-priority="critical">Employee Name</th>
-                            <th data-priority="critical">Category</th>
+                            <th data-priority="critical">Departmant</th>
                             <th data-priority="critical">No of Leaves Taken</th>
                             <th data-priority="critical">No of Leaves Available</th>
-                            <th data-priority="critical">Adminssion No</th>
+                            <th data-priority="critical">Employee No</th>
                         </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
-                                <th>Image</th>
+                                <th></th>
                                 <th>Employee Name</th>
-                                <th>Category</th>
+                                <th>Departmant</th>
                                 <th>No of Leaves Taken</th>
                                 <th>No of Leaves Available</th>
-                                <th>Adminssion No</th>
+                                <th>Employee No</th>
                             </tr>
                         </tfoot>
                         <tbody>
@@ -61,7 +61,7 @@ td.editable_updated {
                                 <td>{{$index+1}}</td>
                                 <td><img class="md-user-image" ng-src="{{item.photo1_path}}" alt=""/></td>
                                 <td><a ui-sref="restricted.plugins.reportforemployee({id:{{item.id}}})">{{item.firstname+" "+item.lastname}}</td>
-                                <td>{{item.category}}</td>
+                                <td>{{item.Dept}}</td>
                                 <td>{{$index+2}}</td>
                                 <td>{{$index+2}}</td>
                                 <td>{{item.Admission_No}}</td>

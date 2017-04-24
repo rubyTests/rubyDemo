@@ -62,6 +62,7 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
+                        
                        null
                     ]
                 })
@@ -72,13 +73,16 @@ angular
                 });
                 $scope.dtColumnDefs = [
                     DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                    DTColumnDefBuilder.newColumnDef(1).withTitle('Course'),
-                    DTColumnDefBuilder.newColumnDef(2).withTitle('Batch'),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('Exam'),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('Date'),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('From'),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('To'),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('Action'),
+                    DTColumnDefBuilder.newColumnDef(1).withTitle('Exam'),
+                    DTColumnDefBuilder.newColumnDef(2).withTitle('Assessment'),
+                    DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
+                    DTColumnDefBuilder.newColumnDef(4).withTitle('Batch'),
+                    DTColumnDefBuilder.newColumnDef(5).withTitle('Subject'),
+                    // DTColumnDefBuilder.newColumnDef(6).withTitle('Max.Mark'),
+                    DTColumnDefBuilder.newColumnDef(7).withTitle('Date'),
+                    // DTColumnDefBuilder.newColumnDef(8).withTitle('From'),
+                    // DTColumnDefBuilder.newColumnDef(9).withTitle('To'),
+                    DTColumnDefBuilder.newColumnDef(10).withTitle('Action'),
 
                 ];
             $scope.user_data=user_data[0];
@@ -135,6 +139,44 @@ angular
                 valueField: 'id',
                 labelField: 'cBatch_name',
             };
+            $scope.get_id = [];
+            $resource('app/components/academics/examination/setassessment.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.get_id.push(dt_data);
+                });
+                $scope.selectize_assessment_options = $scope.get_id;
+                $scope.selectize_assessment_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Assessment',
+                    valueField: 'id',
+                    labelField: 'name',
+                    onInitialize: function(val){
+                        console.log(val);
+                    }
+                };
+
+                $scope.get_id1 = [];
+                $resource('app/components/academics/examination/setexam.json')
+                .query()
+                .$promise
+                .then(function(dt_data) {
+                    $scope.get_id1.push(dt_data);
+                });
+                $scope.selectize_exam_options = $scope.get_id1;
+                $scope.selectize_exam_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select Exam',
+                    valueField: 'id',
+                    labelField: 'name',
+                    onInitialize: function(val){
+                        console.log(val);
+                    }
+                };
+
             var modal = UIkit.modal("#modal_header_footer");
             $scope.selectize_config = {
                 create: false,
@@ -366,7 +408,10 @@ angular
                 batch2:1, 
                 batch2_name:'CSE A',events:[
                     { 
-                        "title": "Applied Thermodynamics Engineering",
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Applied Thermodynamics Engineering",
                         "start": "2017-04-08 09:00 AM",
                         "end": "2017-04-08 14:00 PM",
                         "description": "Test World Hello 123",
@@ -374,28 +419,40 @@ angular
                         "backgroundColor":"#ff0000"
                     },
                     { 
-                        "title": "English", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "English", 
                         "start": "2017-03-31 09:00 AM", 
                         "end": "2017-03-31 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 2 
                     },
                     { 
-                        "title": "Maths", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Maths", 
                         "start": "2017-04-01 09:00 AM", 
                         "end": "2017-04-01 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 3 
                     },
                     { 
-                        "title": "Science", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Science", 
                         "start": "2017-04-02 09:00 AM", 
                         "end": "2017-04-02 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 4 
                     },
                     { 
-                        "title": "Social Science", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Social Science", 
                         "start": "2017-04-03 09:00 AM", 
                         "end": "2017-04-03 14:00 PM", 
                         "description": "Test World Hello 123", 
@@ -408,7 +465,10 @@ angular
                 batch2:3, 
                 batch2_name:'CSE C',events:[
                     { 
-                        "title": "Applied Thermodynamics Engineering",
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Applied Thermodynamics Engineering",
                         "start": "2017-04-08 09:00 AM",
                         "end": "2017-04-08 14:00 PM",
                         "description": "Test World Hello 123",
@@ -416,28 +476,40 @@ angular
                         "backgroundColor":"#ff0000"
                     },
                     { 
-                        "title": "English", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "English", 
                         "start": "2017-03-31 09:00 AM", 
                         "end": "2017-03-31 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 2 
                     },
                     { 
-                        "title": "Maths", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Maths", 
                         "start": "2017-04-01 09:00 AM", 
                         "end": "2017-04-01 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 3 
                     },
                     { 
-                        "title": "Science", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Science", 
                         "start": "2017-04-02 09:00 AM", 
                         "end": "2017-04-02 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 4 
                     },
                     { 
-                        "title": "Social Science", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Social Science", 
                         "start": "2017-04-03 09:00 AM", 
                         "end": "2017-04-03 14:00 PM", 
                         "description": "Test World Hello 123", 
@@ -450,7 +522,10 @@ angular
                 batch2:2, 
                 batch2_name:'CSE B',events:[
                     { 
-                        "title": "Applied Thermodynamics Engineering",
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Applied Thermodynamics Engineering",
                         "start": "2017-04-08 09:00 AM",
                         "end": "2017-04-08 14:00 PM",
                         "description": "Test World Hello 123",
@@ -458,28 +533,40 @@ angular
                         "backgroundColor":"#ff0000"
                     },
                     { 
-                        "title": "English", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "English", 
                         "start": "2017-03-31 09:00 AM", 
                         "end": "2017-03-31 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 2 
                     },
                     { 
-                        "title": "Maths", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Maths", 
                         "start": "2017-04-01 09:00 AM", 
                         "end": "2017-04-01 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 3 
                     },
                     { 
-                        "title": "Science", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Science", 
                         "start": "2017-04-02 09:00 AM", 
                         "end": "2017-04-02 14:00 PM", 
                         "description": "Test World Hello 123", 
                         "_id": 4 
                     },
                     { 
-                        "title": "Social Science", 
+                        "exam": "Term 1",
+                        "assessment": "FA 1",
+                        "max_mark":100,
+                        "subject": "Social Science", 
                         "start": "2017-04-03 09:00 AM", 
                         "end": "2017-04-03 14:00 PM", 
                         "description": "Test World Hello 123", 

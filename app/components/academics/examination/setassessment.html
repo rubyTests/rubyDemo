@@ -31,6 +31,7 @@
                         <tr>
                             <th>S.No</th>
                             <th>Name</th>
+                            <th>Weightage</th>
                             <th>Type</th>
                             <th>Action</th>
                         </tr>
@@ -39,6 +40,7 @@
                         <tr>
                             <th></th>
                             <th>Name</th>
+                            <th>Weightage</th>
                             <th>Type</th>
                             <th></th>
                         </tr>
@@ -47,6 +49,7 @@
                       <tr ng-repeat="row in showCase.dt_data">
                         <td>{{$index+1}}</td>
                         <td>{{row.name}}</td>
+                        <td>{{row.weightage}}</td>
                         <td>{{row.type}}</td>
                         <td>
                             <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
@@ -69,6 +72,11 @@
                   <input type="hidden" name="id" ng-model="id">
                   <label>Name</label>
                   <input type="text" ng-model="name" class="md-input" required md-input>
+                </div>
+                <div class="uk-form-row">
+                  <input type="hidden" name="id" ng-model="id">
+                  <label>Weightage</label>
+                  <input type="text" ng-model="weightage" class="md-input" required md-input>
                 </div>
                 <div class="uk-form-row">
                   <input type="text" config="selectize_exam_config" options="selectize_exam_options" ng-model="selectize_exam" selectize/>

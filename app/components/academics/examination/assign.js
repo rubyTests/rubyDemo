@@ -50,7 +50,7 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Weightage'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Assessment'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
 
             ];
@@ -77,11 +77,11 @@ angular
                 .then(function(dt_data) {
                     $scope.get_id.push(dt_data);
                 });
-                $scope.selectize_weightage_options = $scope.get_id;
-                $scope.selectize_weightage_config = {
+                $scope.selectize_assessment_options = $scope.get_id;
+                $scope.selectize_assessment_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Weightage',
+                    placeholder: 'Select Assessment',
 					valueField: 'id',
                     labelField: 'assessment',
 					onInitialize: function(val){

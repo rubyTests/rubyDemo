@@ -2,21 +2,25 @@
     {
         "id": 1,
         "name": "FA-1",
+        "weightage": "10",
         "type":"Term-1"
     },
     {
         "id": 2,
         "name": "SA-1",
+        "weightage": "20",
         "type":"Term-1"
     },
     {
         "id": 3,
         "name": "FA-2",
+        "weightage": "10",
         "type":"Term-2"
     },
     {
         "id": 4,
         "name": "SA-2",
+        "weightage": "20",
         "type":"Term-2"
     }
 ] 
