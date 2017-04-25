@@ -2777,6 +2777,7 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                            	'lazy_parsleyjs',
                                 'assets/js/custom/uikit_fileinput.min.js',
                                 'app/components/employeemanagement/profile_editCtrl.js'
                             ],{serie: true});
@@ -2847,7 +2848,7 @@ rubycampusApp
                                 'lazy_wizard',
                                 'assets/js/custom/uikit_fileinput.js',
                                 'app/components/student/studentadmisionCtrl.js',
-                                'app/components/student/cameraCtrl.js'
+                                // 'app/components/student/cameraCtrl.js'
                             ], {serie:true});
                         }]
                     },

@@ -105,8 +105,8 @@
                                                 </li>
                                             </ul>
                                             <br>
-                                            <h4 class="heading_c uk-margin-small-bottom">Social Profile</h4>
-                                            <ul class="md-list">
+                                            <h4 class="heading_c uk-margin-small-bottom" ng-if="user_data.FACEBOOK_LINK && user_data.GOOGLE_LINK && user_data.LINKEDIN_LINK">Social Profile</h4>
+                                            <ul class="md-list" ng-if="user_data.FACEBOOK_LINK && user_data.GOOGLE_LINK && user_data.LINKEDIN_LINK">
                                                 <li >
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">
@@ -203,7 +203,7 @@
                                 </li>
 
                                 <li>
-                                    <div class="uk-accordion" data-uk-accordion>
+                                    <!-- <div class="uk-accordion" data-uk-accordion>
                                         <h3 class="uk-accordion-title" ng-repeat-start="previous in previous_Inst">Previous work information</h3>
                                         <div class="uk-accordion-content" ng-repeat-end>
                                             <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
@@ -240,11 +240,11 @@
                                                             </div>
                                                             <div class="md-list-content">
                                                                 <span class="md-list-heading">
-                                                                {{previous.location[0].ADDRESS}}
-                                                                {{previous.location[0].CITY}}
-                                                                {{previous.location[0].STATE}} -
-                                                                {{previous.location[0].ZIP_CODE}},
-                                                                {{previous.location[0].COUNRTY_NAME}}
+                                                                {{previous.ADDRESS}}
+                                                                {{previous.CITY}}
+                                                                {{previous.STATE}} -
+                                                                {{previous.ZIP_CODE}},
+                                                                {{previous.COUNTRY_NAME}}
                                                                 </span>
                                                                 <span class="uk-text-small uk-text-muted">Address</span>
                                                             </div>
@@ -259,6 +259,75 @@
                                                 </div>
                                             </div>
                                         </div>
+                                    </div> -->
+                                     <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,previous) in form_dynamic track by $index">
+                                        <div class="uk-width-10-10 uk-width-medium-10-10" style="margin-bottom:-50px !important">
+                                            <div class="uk-margin-top">
+                                                <h3 class="full_width_in_card heading_c">
+                                                    Previous Work Info # {{$index+1}}
+                                                </h3>
+                                                <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
+                                                    <div class="uk-width-large-1-2">
+                                                        <h4 class="heading_c uk-margin-small-bottom">Previous Work Info</h4>
+                                                        <ul class="md-list">
+                                                            <li style="border: none;">
+                                                                <div class="md-list-content">
+                                                                    <span class="md-list-heading">{{previous.DESIGNATION}}</span>
+                                                                    <span class="uk-text-small uk-text-muted">Employee Role</span>
+                                                                </div>
+                                                            </li>
+                                                            <li style="border: none;">
+                                                                <div class="md-list-content">
+                                                                    <span class="md-list-heading">{{previous.INST_NAME}}</span>
+                                                                    <span class="uk-text-small uk-text-muted">Institute</span>
+                                                                </div>
+                                                            </li>
+                                                            <li style="border: none;">
+                                                                <div class="md-list-content">
+                                                                    <span class="md-list-heading">{{previous.PERIOD_FROM}}</span>
+                                                                    <span class="uk-text-small uk-text-muted">Period From</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+
+                                                    <div class="uk-width-large-1-2">
+                                                        <h4 class="heading_c uk-margin-small-bottom"></h4>
+                                                        <ul class="md-list">
+                                                            <li style="border: none;">
+                                                                <div class="md-list-addon-element">
+                                                                    <i class="md-list-addon-icon material-icons">&#xE0C8;</i>
+                                                                </div>
+                                                                <div class="md-list-content">
+                                                                    <span class="md-list-heading">
+                                                                    {{previous.ADDRESS}}
+                                                                    {{previous.CITY}}
+                                                                    {{previous.STATE}} -
+                                                                    {{previous.ZIP_CODE}},
+                                                                    {{previous.COUNTRY_NAME}}
+                                                                    </span>
+                                                                    <span class="uk-text-small uk-text-muted">Address</span>
+                                                                </div>
+                                                            </li>  
+                                                            <li style="border: none;">
+                                                                <div class="md-list-content">
+                                                                    <span class="md-list-heading">{{previous.PERIOD_TO}}</span>
+                                                                    <span class="uk-text-small uk-text-muted">Period To</span>
+                                                                </div>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center">
+                                            <div class="uk-vertical-align uk-height-1-1" style="margin-top: 200px;">
+                                                <div class="uk-vertical-align-middle">
+                                                    <a href="javascript:void(0)" ng-click="cloneSection($event,$index,parents)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                                                    <a href="javascript:void(0)" ng-click="deleteSection($event,$index,parents)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                                                </div>
+                                            </div>
+                                        </div> -->
                                     </div>
                                 </li>
                                 <li>

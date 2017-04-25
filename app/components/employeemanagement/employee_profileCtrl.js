@@ -60,9 +60,46 @@ angular
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 console.log(response.data.data,'previous_Inst');
-                $scope.previous_Inst = response.data.data;
+                // $scope.previous_Inst = response.data.data;
+                $scope.form_dynamic=response.data.data;
             },function myError(response){
                 console.log(response);
+            });
+
+
+            $scope.form_dynamic = [];
+            $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+
+            $scope.form_dynamic_model = [];
+
+            // clone section
+            $scope.cloneSection = function($event,$index,CurrForm) {
+                if(CurrForm.DESIGNATION =='' || CurrForm.PERIOD_FROM=='' || CurrForm.PERIOD_TO==''){
+                    UIkit.notify({
+                        message : 'Please Fill current form',
+                        status  : 'warning',
+                        timeout : 2000,
+                        pos     : 'top-center'
+                    });
+                }else {
+                    console.log('Not Empty');
+                    $event.preventDefault();
+                    $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+                }
+                // $event.preventDefault();
+                // $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+            };
+
+            // delete section
+            $scope.deleteSection = function($event,$index,CurrForm) {
+                console.log(CurrForm,'CurrForm');
+                $event.preventDefault();
+                $scope.form_dynamic_model.splice($index,1);
+                $scope.form_dynamic.splice($index,1);
+            };
+
+            $scope.$on('onLastRepeat', function (scope, element, attrs) {
+                altair_uikit.reinitialize_grid_margin();
             });
         }
     ])

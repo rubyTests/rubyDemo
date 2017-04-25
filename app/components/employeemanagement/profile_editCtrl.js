@@ -11,8 +11,20 @@ angular
         '$state',
         '$localStorage',
         function ($rootScope,$scope,user_data,$stateParams,$filter,$http,$timeout,$state,$localStorage) {
+            $timeout(function(){
+            var $formValidate = $('#user_edit_form');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+            },1000);
 
-            
             // console.log($stateParams.emp_id,'$stateParams');
             // var paramsData=$filter('filter')(user_data, {id : $stateParams.emp_id});
             // $scope.user_data = paramsData[0];
@@ -149,7 +161,9 @@ angular
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 $timeout(function(){
-                    $scope.previous_Inst = response.data.data;
+                    // console.log(response.data,'response.data');
+                    // $scope.previous_Inst = response.data.data;
+                    $scope.form_dynamic=response.data.data;
                 },2000); 
             },function myError(response){
                 console.log(response);
@@ -183,7 +197,7 @@ angular
             $scope.selectize_marital_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Marital Status',
+                placeholder: 'Marital Status',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
@@ -197,7 +211,7 @@ angular
             $scope.selectize_nation_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Nationality',
+                placeholder: 'Nationality',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
@@ -211,7 +225,21 @@ angular
             $scope.selectize_country_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Country',
+                placeholder: 'Country *',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        console.log(value);
+                    });
+                }
+            };
+            $scope.selectize_prevcountry_options = $scope.CountryLIST;
+            $scope.selectize_prevcountry_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Country',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
@@ -225,7 +253,7 @@ angular
             $scope.selectize_cat_config = {
                 create: false,
                     maxItems: 1,
-                    placeholder: 'Select Category...',
+                    placeholder: 'Category',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -250,7 +278,13 @@ angular
                 // }else{
                 //     var NATION_ID=$scope.user_data.NATION_ID;
                 // }
-                var img_file=$('.fileinput-preview').find('img').attr('src');
+                var data=$('.fileinput-preview').find('img').attr('src');
+                if(data){
+                    var img_file=$('.fileinput-preview').find('img').attr('src');
+                }else {
+                    var img_file=$('.user_heading_avatar img:last').attr('src');
+                }
+
                  $http({
                     method:'POST',
                     url: $localStorage.service+'EmployeemgmntAPI/updateEmployeeAdmission',
@@ -287,7 +321,7 @@ angular
                         'p_state':$scope.permanant.STATE,
                         'p_pincode':$scope.permanant.ZIP_CODE,
                         'p_country':$scope.permanant.COUNTRY,
-                        'prvious_work':$scope.previous_Inst,
+                        'prvious_work':$scope.form_dynamic,
                         'Profile_extra_id' :$scope.user_data.PROFILE_EXTRA_ID,
                         'bank_id' :$scope.user_data.BANK_ID
                     },
@@ -301,6 +335,82 @@ angular
                     }
                 });
             }
+
+            $scope.form_dynamic = [];
+            $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+
+            $scope.form_dynamic_model = [];
+
+            // clone section
+            $scope.cloneSection = function($event,$index,CurrForm) {
+                if(CurrForm.DESIGNATION =='' || CurrForm.PERIOD_FROM=='' || CurrForm.PERIOD_TO==''){
+                    UIkit.notify({
+                        message : 'Please Fill current form',
+                        status  : 'warning',
+                        timeout : 2000,
+                        pos     : 'top-center'
+                    });
+                }else {
+                    console.log('Not Empty');
+                    $event.preventDefault();
+                    $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+                }
+                // $event.preventDefault();
+                // $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+            };
+
+            // delete section
+            $scope.deleteSection = function($event,$index,CurrForm) {
+                console.log(CurrForm,'CurrForm');
+                var id=CurrForm.ID;
+                var Loc_id=CurrForm.LOCATION_ID;
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : $localStorage.service+"EmployeemgmntAPI/previousInstitute",
+                            params : {id : id,Loc_id:Loc_id},
+                            // headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                console.log(response,'response');
+                                if(response.data.status==true){
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $event.preventDefault();
+                                    $scope.form_dynamic_model.splice($index,1);
+                                    $scope.form_dynamic.splice($index,1);
+                                }
+                            },function myError(response) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                    
+                }else {
+                    $event.preventDefault();
+                    $scope.form_dynamic_model.splice($index,1);
+                    $scope.form_dynamic.splice($index,1);
+                }
+            };
+
+            $scope.$on('onLastRepeat', function (scope, element, attrs) {
+                altair_uikit.reinitialize_grid_margin();
+            });
+
+            // $scope.addNewWorkINfo=function(){
+            //     // $event.preventDefault();
+            //     $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+            // }
         }
     ])
 ;
