@@ -2856,6 +2856,27 @@ rubycampusApp
                         pageTitle: 'Student Admission'
                     }
                 })
+				
+				.state("restricted.student.admissionEdit", {
+                    url: "/admissionEdit",
+                    templateUrl: 'app/components/student/studentAdmisson_edit.html',
+                    controller: 'studentAdmisson_editCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'lazy_wizard',
+                                'assets/js/custom/uikit_fileinput.js',
+                                'app/components/student/studentAdmisson_edit.js',
+                                'app/components/student/cameraCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Student Admission Edit'
+                    }
+                })
+				
                 .state("restricted.student.student_profile", {
                     url: "/student_profile/{stu_id}",
                     templateUrl: 'app/components/student/student_profile.html',
@@ -2885,7 +2906,8 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'assets/js/custom/uikit_fileinput.min.js',
+								'lazy_parsleyjs',
+                                'assets/js/custom/uikit_fileinput.js',
                                 'app/components/student/profile_editCtrl.js'
                             ],{serie: true});
                         }],
@@ -2904,7 +2926,7 @@ rubycampusApp
                 .state("restricted.student.student_view", {
                     url: "/student_view",
                     templateUrl: 'app/components/student/student_view.html',
-                    controller: 'studentviewCtrl',
+                    //controller: 'studentviewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
