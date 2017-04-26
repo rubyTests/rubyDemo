@@ -94,6 +94,7 @@ angular
                 placeholder: 'Select Country',
                 valueField: 'ID',
                 labelField: 'NAME',
+				searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         
