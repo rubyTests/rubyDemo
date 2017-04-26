@@ -39,10 +39,10 @@
                                 </h2>
                                 <ul class="user_stats">
                                     <li>
-                                        <h4 class="heading_c" style="color: #444;">{{user_data.course}}</h4>
+                                        <h4 class="heading_c" style="color: #444;">{{user_data.course_name}}</h4>
                                     </li>
                                     <li>
-                                        <h4 class="heading_c" style="color: #444;">{{user_data.batch}}</h4>
+                                        <h4 class="heading_c" style="color: #444;">{{user_data.batch_name}}</h4>
                                     </li>
                                 </ul>
                             </div>
@@ -53,8 +53,8 @@
                         <div class="user_content">
                             <ul id="user_profile_tabs" class="uk-tab" data-uk-tab="{connect:'#user_profile_tabs_content', animation:'slide-horizontal'}" data-uk-sticky="{ top: 48, media: 960 }">
                                 <li class="uk-active"><a href="#">Personal Details</a></li>
-                                <li><a href="#">Academics Details</a></li>
                                 <li><a href="#">Contact Information</a></li>
+								<li><a href="#">Additional Details</a></li>
                                 <li><a href="#">Parent/Guardian Details</a></li>
                             </ul>
                             <ul id="user_profile_tabs_content" class="uk-switcher uk-margin">
@@ -71,7 +71,7 @@
                                                 </li>
                                                 <li >
                                                     <div class="md-list-content">
-                                                        <span class="md-list-heading">{{user_data.selectize_n}}</span>
+                                                        <span class="md-list-heading">{{user_data.nationality_name}}</span>
                                                         <span class="uk-text-small uk-text-muted">Nationality</span>
                                                     </div>
                                                 </li>
@@ -95,127 +95,19 @@
                                                 </li>
                                             </ul>
                                         </div>
-										<div class="uk-width-large-1-2">
+										<div class="uk-width-large-1-2" ng-if="user_data.facebook!=null || user_data.google!=null || user_data.linkedin!=null">
 											<h4 class="heading_c uk-margin-small-bottom">Social Profile</h4>
                                             <ul class="md-list">
 												<li>
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">
-                                                            <a href="{{user_data.facebook}}"><i class="md-list-addon-icon uk-icon-facebook setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a href="{{user_data.google}}"><i class="md-list-addon-icon uk-icon-google-plus setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                                            <a href="{{user_data.linkedin}}"><i class="md-list-addon-icon uk-icon-linkedin setWidth"></i></a>
+                                                            <a ng-if="user_data.facebook" href="{{user_data.facebook}}"><i class="md-list-addon-icon uk-icon-facebook setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a ng-if="user_data.google" href="{{user_data.google}}"><i class="md-list-addon-icon uk-icon-google-plus setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <a ng-if="user_data.linkedin" href="{{user_data.linkedin}}"><i class="md-list-addon-icon uk-icon-linkedin setWidth"></i></a>
                                                         </span>
                                                     </div>
                                                 </li>
 											</ul>
-										</div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="uk-accordion" data-uk-accordion>
-                                        <h3 class="uk-accordion-title" ng-repeat-start="pre_edu in pre_edu">Previous Education</h3>
-                                        <div class="uk-accordion-content" ng-repeat-end>
-                                            <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
-                                                <div class="uk-width-large-1-2">
-                                                    <!-- <h4 class="heading_c uk-margin-small-bottom">Work Info</h4> -->
-                                                    <ul class="md-list">
-                                                        <li >
-                                                            <div class="md-list-content">
-                                                                <span class="md-list-heading">{{pre_edu.institute}}</span>
-                                                                <span class="uk-text-small uk-text-muted">Institute Name</span>
-                                                            </div>
-                                                        </li>
-                                                        <li >
-                                                            <div class="md-list-content">
-                                                                <span class="md-list-heading">{{pre_edu.course_name}}</span>
-                                                                <span class="uk-text-small uk-text-muted">Course Name</span>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-												<div class="uk-width-large-1-2">
-													<ul class="md-list">
-														<li>
-                                                            <div class="md-list-content">
-                                                                <span class="md-list-heading">{{pre_edu.completion}}</span>
-                                                                <span class="uk-text-small uk-text-muted">Year of Completion</span>
-                                                            </div>
-														</li>
-														<li>
-                                                            <div class="md-list-content">
-                                                                <span class="md-list-heading">{{pre_edu.total_mark}}</span>
-                                                                <span class="uk-text-small uk-text-muted">Total Marks</span>
-                                                            </div>
-                                                        </li>
-													</ul>
-                                                </div>
-                                            </div>
-                                        </div>
-										<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
-											<div class="uk-width-large-1-2">
-												<h4 class="heading_c uk-margin-small-bottom">Additional Details </h4>
-												<ul class="md-list">
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.birthplace}}</span>
-															<span class="uk-text-small uk-text-muted">Birth Place</span>
-														</div>
-													</li>
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.selectize_blood}}</span>
-															<span class="uk-text-small uk-text-muted">Blood Group</span>
-														</div>
-													</li>
-												</ul>
-											</div>
-											<div class="uk-width-large-1-2">
-												<br>
-												<br>
-												<ul class="md-list">
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.selectize_styType}}</span>
-															<span class="uk-text-small uk-text-muted">Student Type</span>
-														</div>
-													</li>
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.selectize_cat}}</span>
-															<span class="uk-text-small uk-text-muted">Category</span>
-														</div>
-													</li>
-												</ul>
-											</div>
-											<div class="uk-width-large-1-2">
-												<h4 class="heading_c uk-margin-small-bottom">Siblings</h4>
-												<ul class="md-list">
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.selectize_planets}}</span>
-															<span class="uk-text-small uk-text-muted">Name</span>
-														</div>
-													</li>
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.selectize_c}}</span>
-															<span class="uk-text-small uk-text-muted">Course Name</span>
-														</div>
-													</li>
-												</ul>
-											</div>
-											<div class="uk-width-large-1-2">
-												<br>
-												<br>
-												<ul class="md-list">
-													<li >
-														<div class="md-list-content">
-															<span class="md-list-heading">{{user_data.selectize_a}}</span>
-															<span class="uk-text-small uk-text-muted">Batch</span>
-														</div>
-													</li>
-												</ul>
-											</div>
 										</div>
                                     </div>
                                 </li>
@@ -234,7 +126,7 @@
                                                         {{user_data.mail_city}}
                                                         {{user_data.mail_state}} -
                                                         {{user_data.mail_pincode}},
-                                                        {{user_data.mail_country}}
+                                                        {{user_data.mail_country_name}}
                                                         </span>
                                                         <span class="uk-text-small uk-text-muted">Address</span>
                                                     </div>
@@ -254,7 +146,7 @@
                                                         {{user_data.stu_city}}
                                                         {{user_data.stu_state}} -
                                                         {{user_data.pincode}},
-                                                        {{user_data.country}}
+                                                        {{user_data.country_name}}
                                                         </span>
                                                         <span class="uk-text-small uk-text-muted">Address</span>
                                                     </div>
@@ -301,6 +193,114 @@
 										</div>
 									</div>
 								</li>
+                                <li>
+                                    <div class="uk-accordion" data-uk-accordion>
+                                        <h3 class="uk-accordion-title" ng-if="pre_edu" ng-repeat-start="pre_edu in pre_edu">Previous Education</h3>
+                                        <div class="uk-accordion-content" ng-if="pre_edu" ng-repeat-end>
+                                            <div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
+                                                <div class="uk-width-large-1-2">
+                                                    <!-- <h4 class="heading_c uk-margin-small-bottom">Work Info</h4> -->
+                                                    <ul class="md-list">
+                                                        <li >
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">{{pre_edu.institute}}</span>
+                                                                <span class="uk-text-small uk-text-muted">Institute Name</span>
+                                                            </div>
+                                                        </li>
+                                                        <li >
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">{{pre_edu.course_name}}</span>
+                                                                <span class="uk-text-small uk-text-muted">Course Name</span>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+												<div class="uk-width-large-1-2">
+													<ul class="md-list">
+														<li>
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">{{pre_edu.completion}}</span>
+                                                                <span class="uk-text-small uk-text-muted">Year of Completion</span>
+                                                            </div>
+														</li>
+														<li>
+                                                            <div class="md-list-content">
+                                                                <span class="md-list-heading">{{pre_edu.total_mark}}</span>
+                                                                <span class="uk-text-small uk-text-muted">Total Marks</span>
+                                                            </div>
+                                                        </li>
+													</ul>
+                                                </div>
+                                            </div>
+                                        </div>
+										<div class="uk-grid uk-margin-medium-top uk-margin-large-bottom" data-uk-grid-margin>
+											<div class="uk-width-large-1-2">
+												<h4 class="heading_c uk-margin-small-bottom">Additional Details </h4>
+												<ul class="md-list">
+													<li>
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.selectize_styType}}</span>
+															<span class="uk-text-small uk-text-muted">Student Type</span>
+														</div>
+													</li>
+													<li ng-if="user_data.selectize_blood">
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.selectize_blood}}</span>
+															<span class="uk-text-small uk-text-muted">Blood Group</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="uk-width-large-1-2">
+												<br>
+												<br>
+												<ul class="md-list">
+													<li>
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.student_lives}}</span>
+															<span class="uk-text-small uk-text-muted">Student Lives With</span>
+														</div>
+													</li>
+													<li ng-if="user_data.birthplace">
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.birthplace}}</span>
+															<span class="uk-text-small uk-text-muted">Birth Place</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="uk-width-large-1-2" ng-if="user_data.sibling_name">
+												<h4 class="heading_c uk-margin-small-bottom">Siblings</h4>
+												<ul class="md-list">
+													<li >
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.sibling_name}}</span>
+															<span class="uk-text-small uk-text-muted">Name</span>
+														</div>
+													</li>
+													<li >
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.sibling_courseName}}</span>
+															<span class="uk-text-small uk-text-muted">Course Name</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+											<div class="uk-width-large-1-2" ng-if="user_data.sibling_name">
+												<br>
+												<br>
+												<ul class="md-list">
+													<li >
+														<div class="md-list-content">
+															<span class="md-list-heading">{{user_data.sibling_batchName}}</span>
+															<span class="uk-text-small uk-text-muted">Batch</span>
+														</div>
+													</li>
+												</ul>
+											</div>
+										</div>
+                                    </div>
+                                </li>
 								<li>
 									<div class="uk-accordion" data-uk-accordion>
                                         <h3 class="uk-accordion-title" ng-repeat-start="parents_data in parents_data">{{parents_data.p_relation}} Details</h3>
@@ -315,25 +315,25 @@
                                                                 <span class="uk-text-small uk-text-muted">Name</span>
                                                             </div>
                                                         </li>
-                                                        <li>
+                                                        <li ng-if="parents_data.p_dob">
                                                             <div class="md-list-content">
                                                                 <span class="md-list-heading">{{parents_data.p_dob}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Date of Birth</span>
                                                             </div>
                                                         </li>
-														<li>
+														<li ng-if="parents_data.p_education">
                                                             <div class="md-list-content">
                                                                 <span class="md-list-heading">{{parents_data.p_education}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Education</span>
                                                             </div>
                                                         </li>
-														<li>
+														<li ng-if="parents_data.occupation">
                                                             <div class="md-list-content">
                                                                 <span class="md-list-heading">{{parents_data.occupation}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Occupation</span>
                                                             </div>
                                                         </li>
-														<li>
+														<li ng-if="parents_data.p_income">
                                                             <div class="md-list-content">
                                                                 <span class="md-list-heading">{{parents_data.p_income}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Income</span>
@@ -341,7 +341,7 @@
                                                         </li>
                                                     </ul>
                                                 </div>
-												<div class="uk-width-large-1-2">
+												<div class="uk-width-large-1-2" ng-if="parents_data.availabe=='Y'">
 													<h4>Contact Info</h4>
 													<ul class="md-list md-list-addon">
 														<li>
@@ -354,7 +354,7 @@
 																{{parents_data.pr_city}}
 																{{parents_data.pr_state}} -
 																{{parents_data.pr_pincode}},
-																{{parents_data.pr_country}}
+																{{parents_data.country_name}}
 																</span>
 																<span class="uk-text-small uk-text-muted">Address</span>
 															</div>
@@ -388,15 +388,16 @@
 														</li>
 													</ul>
                                                 </div>
-												<div class="uk-width-large-1-2">
+												<div class="uk-width-large-1-2" ng-if="parents_data.p_facebook!='' || parents_data.p_google!='' || parents_data.p_linkedin!='' ">
+												<!-- <div class="uk-width-large-1-2" ng-if="parents_data.p_facebook!='' || parents_data.p_google!='' || parents_data.p_linkedin!=''"> -->
 													<h4>Social Profile</h4>
 													<ul class="md-list">
 														<li>
 															<div class="md-list-content">
 																<span class="md-list-heading">
-																	<a href="{{parents_data.p_facebook}}"><i class="md-list-addon-icon uk-icon-facebook setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-																	<a href="{{parents_data.p_google}}"><i class="md-list-addon-icon uk-icon-google-plus setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-																	<a href="{{parents_data.p_linkedin}}"><i class="md-list-addon-icon uk-icon-linkedin setWidth"></i></a>
+																	<a ng-if="parents_data.p_facebook" href="{{parents_data.p_facebook}}"><i class="md-list-addon-icon uk-icon-facebook setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																	<a ng-if="parents_data.p_google" href="{{parents_data.p_google}}"><i class="md-list-addon-icon uk-icon-google-plus setWidth"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+																	<a ng-if="parents_data.p_linkedin" href="{{parents_data.p_linkedin}}"><i class="md-list-addon-icon uk-icon-linkedin setWidth"></i></a>
 																</span>
 															</div>
 														</li>

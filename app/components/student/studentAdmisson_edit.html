@@ -16,7 +16,7 @@
             <div class="md-card-content">
                 <!-- <form id="wizard_advanced_form" class="uk-form-stacked"> -->
                     <wizard on-finish="finishedWizard()" template="app/templates/wizard.tpl.html">
-                        <wz-step wz-title="Admission" template="app/templates/wizard.step.tpl.html" canexit="exitValidation">
+                        <wz-step wz-title="Admission" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
                                 Admission & Personal details
                             </h2><br>
@@ -24,7 +24,7 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 20px;">
                                     <label for="admission_no">Admission No<span class="req">*</span></label>
-                                    <input type="text" name="admission_no" class="md-input" ng-change="checkAdmisionNo(wizard.admission_no)" md-input ng-model="wizard.admission_no" required/>
+                                    <input type="text" name="admission_no" class="md-input" md-input ng-model="wizard.admission_no" required/>
                                     <input type="hidden" name="profileId" ng-model="wizard.profileId" ng-value="{{wizard.profileId}}"/>
                                     <input type="hidden" name="stuPro_id" ng-model="wizard.stuPro_id" ng-value="{{wizard.stuPro_id}}"/>
                                 </div>
@@ -72,11 +72,11 @@
                                  <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 15px;">
                                     <label class="uk-form-label">Gender<span class="req">*</span></label>
                                     <span class="icheck-inline">
-                                        <input type="radio" tabindex=1 required name="gender" id="wizard_gender_male" value="male" icheck ng-model="wizard.gender" />
+                                        <input type="radio" name="gender" id="wizard_gender_male" value="male" icheck ng-model="wizard.gender" />
                                         <label for="wizard_gender_male" class="inline-label">Male</label>
                                     </span>
                                     <span class="icheck-inline">
-                                        <input type="radio" tabindex=2 name="gender" id="wizard_gender_female" class="wizard-icheck" value="female" icheck ng-model="wizard.gender" />
+                                        <input type="radio" name="gender" id="wizard_gender_female" class="wizard-icheck" value="female" icheck ng-model="wizard.gender" />
                                         <label for="wizard_gender_female" class="inline-label">Female</label>
                                     </span>
                                 </div>
@@ -132,13 +132,13 @@
                             </div>
                             <br>
                             <div class="uk-clearfix uk-margin-large-top">
-                                <button ng-if="!admission_details.$valid" class="md-btn md-btn-primary uk-float-right" type="submit">Save & Continue</button>
-                                <button ng-if="admission_details.$valid" value="test" class="md-btn md-btn-primary uk-float-right" ng-click="admissionDetails()">Save & Continue</button>
+                                <button ng-if="!admission_details.$valid" class="md-btn md-btn-primary uk-float-right" type="submit">Update & Continue</button>
+                                <button ng-if="admission_details.$valid" class="md-btn md-btn-primary uk-float-right" ng-click="admissionDetails()">Update & Continue</button>
                             </div>
                             <br>
 							</form>
                         </wz-step>
-                        <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html" canenter="enterValidation">
+                        <wz-step wz-title="Contact Information" template="app/templates/wizard.step.tpl.html">
                             <h2 class="heading_a">
                                 Mailing Address
                             </h2><br>
@@ -151,7 +151,6 @@
 													<label for="address">Address<span class="req">*</span></label>
 													<input type="text" name="address" id="address" required class="md-input" md-input ng-model="mailling.address" />
 													<input type="hidden"  ng-model="mailling.addressId" />
-													<input type="hidden" ng-model="wizard1.profileId" ng-value="{{wizard1.profileId}}"/>
 												</div>
 											</div>
 											<div class="uk-grid" data-uk-grid-margin>
@@ -188,25 +187,25 @@
 											<div class="uk-grid" data-uk-grid-margin>
 												<div class="uk-width-medium-1-1 parsley-row">
 													<label for="address">Address<span class="req">*</span></label>
-													<input type="text" name="address" ng-required="sameAdres" id="address" class="md-input" md-input ng-model="permanent.address" />
-													<input type="hidden" ng-model="permanent.addressId" />
+													<input type="text" name="address" id="address" required class="md-input" md-input ng-model="permanent.address" />
+													<input type="hidden"  ng-model="permanent.addressId" />
 												</div>
 											</div>
 											<div class="uk-grid" data-uk-grid-margin>
 												<div class="uk-width-medium-1-4 parsley-row">
 													<label for="stu_city">City<span class="req">*</span></label>
-													<input type="text" ng-required="sameAdres" class="md-input" md-input ng-model="permanent.city" />
+													<input type="text" required class="md-input" md-input ng-model="permanent.city" />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
 													<label for="stu_state">State<span class="req">*</span></label>
-													<input type="text" ng-required="sameAdres" class="md-input" md-input ng-model="permanent.state" />
+													<input type="text" required class="md-input" md-input ng-model="permanent.state" />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
 													<label for="pincode">ZipCode<span class="req">*</span></label>
-													<input type="text" ng-required="sameAdres" class="md-input" md-input ng-model="permanent.pincode" numeric-only/>
+													<input type="text" required class="md-input" md-input ng-model="permanent.pincode" numeric-only/>
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<input type="text" ng-required="sameAdres" config="selectize_country_config" options="selectize_country_options" ng-model="permanent.country" selectize/>
+													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="permanent.country" selectize required/>
 												</div>
 											</div>
 										</div>
@@ -259,7 +258,7 @@
 										<div class="uk-width-medium-1-3 parsley-row">
 											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
-													<i class="uk-icon-facebook"></i>
+													<a href="#"><i class="uk-icon-facebook"></i></a>
 												</span>
 												<label for="facebook">Facebook</label>
 												<input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="social.facebook" />
@@ -268,7 +267,7 @@
 										<div class="uk-width-medium-1-3 parsley-row">
 											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
-													<i class="uk-icon-google-plus"></i>
+													<a href="#"><i class="uk-icon-google-plus"></i></a>
 												</span>
 												<label for="google">Google</label>
 												<input type="text" class="md-input" name="google" id="google" md-input ng-model="social.google" />
@@ -278,7 +277,7 @@
 										<div class="uk-width-medium-1-3 parsley-row">
 											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
-													<i class="uk-icon-linkedin"></i>
+													<a href="#"><i class="uk-icon-linkedin"></i></a>
 												</span>
 												<label for="linkedin">Linkedin</label>
 												<input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="social.linkedin" />
@@ -289,17 +288,16 @@
 								<br>
 								<div class="uk-clearfix uk-margin-large-top">
 									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" wz-previous>Back</button>
-									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!contact_details.$valid">Save & Continue</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-if="contact_details.$valid" ng-click="contactDetails()">Save & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!contact_details.$valid">Update & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-if="contact_details.$valid" ng-click="contactDetails()" wz-next>Update & Continue</button>
 								</div>
 								<br>
 							</form>
                         </wz-step>
-						<wz-step wz-title="Additional Details" template="app/templates/wizard.step.tpl.html" canenter="enterValidation1">
+						<wz-step wz-title="Additional Details" template="app/templates/wizard.step.tpl.html">
                             <form class="uk-form" >
                                 <h2 class="heading_a" style="margin-bottom: 25px;">
                                     Previous Academics Details
-									<input type="hidden" ng-model="wizard2.profileId" ng-value="{{wizard2.profileId}}"/>
                                 </h2>
                                 <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,previous) in form_dynamic1 track by $index">
                                     <div class="uk-width-8-10 uk-width-medium-9-10" style="margin-top: 0px;">
@@ -397,12 +395,12 @@
 								</div>
 								<div class="uk-clearfix uk-margin-large-top">
 									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" wz-previous>Back</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-if="!academics_details.$valid">Save & Continue</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-if="academics_details.$valid" ng-click="academicsDetails()" wz-next>Save & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-if="!academics_details.$valid">Update & Continue</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-if="academics_details.$valid" ng-click="academicsDetails()" wz-next>Update & Continue</button>
 								</div>
 							</form>
                         </wz-step>
-                        <wz-step wz-title="Parent/Guardian Details" template="app/templates/wizard.step.tpl.html" canenter="enterValidation2">
+                        <wz-step wz-title="Parent/Guardian Details" template="app/templates/wizard.step.tpl.html">
                             <form class="parents_details" name="parents_details" id="parents_details">
 								<h2 class="heading_a">
 									Father Details
@@ -416,7 +414,6 @@
 										<input type="hidden" value="{{wizard.stuPro_id}}" ng-model="wizard.stuPro_id" />
 										<input type="hidden" value="{{wizard.profileId}}" ng-model="wizard.profileId" />
 										<input type="hidden" value="{{wizard.profileId}}" ng-model="father.first_relation" />
-										<input type="hidden" ng-model="wizard3.profileId" ng-value="{{wizard3.profileId}}"/>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row"><br>
 										<label >Last Name<span class="req">*</span></label>
@@ -436,7 +433,7 @@
 								</div>
 								<div class="uk-grid first_details" data-uk-grid-margin>
 									<div class="uk-width-medium-1-4 parsley-row">
-										<label >Date of Birth</label>
+										<label >Date of Birth<span class="req"></span></label>
 										<input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="father.p_dob"/>
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
@@ -476,8 +473,8 @@
 									</div>
 								</div>
 								<div class="uk-grid first_details" data-uk-grid-margin>
-									<div class="uk-width-medium-1-3">
-										<div class="uk-input-group parsley-row">
+									<div class="uk-width-medium-1-3 parsley-row">
+										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
 												<i class="material-icons">&#xE0CD;</i>
 											</span>
@@ -490,8 +487,8 @@
 											<span class="uk-input-group-addon">
 												<i class="material-icons">&#xE324;</i>
 											</span>
-											<label >Mobile</label>
-											<input type="text"  class="md-input" md-input ng-model="father.p_mobile_no" numeric-only/>
+											<label >Mobile<span class="req"></span></label>
+											<input type="text" class="md-input" md-input ng-model="father.p_mobile_no" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
@@ -605,8 +602,8 @@
 									</div>
 								</div>
 								<div class="uk-grid second_details" data-uk-grid-margin>
-									<div class="uk-width-medium-1-3">
-										<div class="uk-input-group parsley-row">
+									<div class="uk-width-medium-1-3 parsley-row">
+										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
 												<i class="material-icons">&#xE0CD;</i>
 											</span>
@@ -619,7 +616,7 @@
 											<span class="uk-input-group-addon">
 												<i class="material-icons">&#xE324;</i>
 											</span>
-											<label>Mobile</label>
+											<label>Mobile<span class="req"></span></label>
 											<input type="text" class="md-input" md-input ng-model="mother.p_mobile_no" numeric-only/>
 										</div>
 									</div>
@@ -664,7 +661,7 @@
 									</div>
 								</div>
 								<br>
-								<div class="">
+								<div class="" ng-if="rmBtnGuardian">
 									<button type="button" ng-if="removeGuardian" class="md-btn md-btn-danger uk-float-right" ng-click="hideGuardianFrom()"><i class="material-icons">remove</i> Remove Guardian</button>
 									<button type="button" ng-if="addGuardian" class="md-btn md-btn-primary uk-float-right" ng-click="showGuardianFrom()"><i class="material-icons">add</i> Add Guardian</button>
 								</div>
@@ -678,13 +675,13 @@
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-3 parsley-row"><br>
 											<label>First name<span class="req">*</span></label>
-											<input type="text" ng-required="guardianCon" class="md-input" md-input ng-model="guardian.p_first_name">
+											<input type="text" required class="md-input" md-input ng-model="guardian.p_first_name">
 											<input type="hidden" value="{{guardian.relationId}}" ng-model="guardian.relationId" />
 											<input type="hidden" value="{{guardian.third_relation}}" ng-model="guardian.third_relation" />
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row"><br>
 											<label >Last Name<span class="req">*</span></label>
-											<input type="text" ng-required="guardianCon" class="md-input" md-input ng-model="guardian.p_last_name">
+											<input type="text" required class="md-input" md-input ng-model="guardian.p_last_name">
 										</div>
 										<!-- <div class="uk-width-medium-1-3 parsley-row"> -->
 											<!-- <label >Relation<span class="req">*</span></label> -->
@@ -694,47 +691,47 @@
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Date of Birth<span class="req"></span></label>
-											<input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="guardian.p_dob"/>
+											<input type="text" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="guardian.p_dob"/>
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Education<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.p_education" />
+											<input type="text" required class="md-input" md-input ng-model="guardian.p_education" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Occupation<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.occupation" />
+											<input type="text" required class="md-input" md-input ng-model="guardian.occupation" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Income<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.p_income" numeric-only/>
+											<input type="text" required class="md-input" md-input ng-model="guardian.p_income" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-1 parsley-row">
 											<label >Address<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.pr_address" />
+											<input type="text" required class="md-input" md-input ng-model="guardian.pr_address" />
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >City<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.pr_city" />
+											<input type="text" required class="md-input" md-input ng-model="guardian.pr_city" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >State<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.pr_state" />
+											<input type="text" required class="md-input" md-input ng-model="guardian.pr_state" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >ZipCode<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="guardian.pr_pincode" numeric-only/>
+											<input type="text" required class="md-input" md-input ng-model="guardian.pr_pincode" numeric-only/>
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="guardian.country" selectize />
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
-										<div class="uk-width-medium-1-3">
-											<div class="uk-input-group parsley-row">
+										<div class="uk-width-medium-1-3 parsley-row">
+											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
 													<i class="material-icons">&#xE0CD;</i>
 												</span>
@@ -747,7 +744,7 @@
 												<span class="uk-input-group-addon">
 													<i class="material-icons">&#xE324;</i>
 												</span>
-												<label >Mobile</label>
+												<label >Mobile<span class="req"></span></label>
 												<input type="text" class="md-input" md-input ng-model="guardian.p_mobile_no" numeric-only />
 											</div>
 										</div>
@@ -794,8 +791,8 @@
 								</div>
 								<div class="uk-clearfix uk-margin-large-top">
 									<button class="md-btn md-btn-flat md-btn-flat-primary uk-float-left" type="submit" wz-previous>Back</button>
-									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!parents_details.$valid">Save & Finish</button>
-									<button class="md-btn md-btn-primary uk-float-right" ng-click="parentsDetails()" ng-if="parents_details.$valid">Save & Finish</button>
+									<button class="md-btn md-btn-primary uk-float-right" type="submit" ng-if="!parents_details.$valid">Update & Finish</button>
+									<button class="md-btn md-btn-primary uk-float-right" ng-click="parentsDetails()" ng-if="parents_details.$valid">Update & Finish</button>
 								</div>
 							</form>
 								<form class="uk-form" >

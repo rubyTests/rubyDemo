@@ -3,6 +3,7 @@
         <div class="uk-width-large-8-10 uk-container-center">
             <ul class="top_bar_nav" id="list_grid_toggle">
                 <li ng-click="changeView($event,'grid')" ng-class="{ 'uk-active': grid_view }">
+                    <!-- <a ui-sref="restricted.student.student_view"><i class="uk-icon-list"></i> List</a> -->
                     <a ui-sref="restricted.student.student_view"><i class="uk-icon-list"></i> List</a>
                 </li>
                 <li ng-click="changeView($event,'list')" ng-class="{ 'uk-active': list_view }">
@@ -41,17 +42,17 @@
                             <i class="md-icon material-icons" ng-class="{'md-icon-light' : user.featured}">&#xE5D4;</i>
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav">
-                                    <li><a ui-sref="restricted.student.student_editprofile({stu_id:user.id})">Edit</a></li>
+                                    <li><a ui-sref="restricted.student.student_editprofile({stu_id:user.profileId})">Edit</a></li>
                                     <!-- <li><a href="#">Remove</a></li> -->
                                 </ul>
                             </div>
                         </div>
                         <div class="uk-text-center">
-                            <a ui-sref="restricted.student.student_profile({stu_id:user.id})"><img class="md-card-head-avatar" ng-src="{{user.photo1_path}}" alt=""/></a>
+                            <a ui-sref="restricted.student.student_profile({stu_id:user.profileId})"><img class="md-card-head-avatar" ng-src="{{user.image || default_image}}" alt=""/></a>
                         </div>
                         <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.featured}">
-                            <a ui-sref="restricted.student.student_profile({stu_id:user.id})" style="color:rgb(33,33,70);">{{user.firstname}} {{user.lastname}}</a>
-                            <span class="uk-text-truncate">{{user.Admission_No}}</span>
+                            <a ui-sref="restricted.student.student_profile({stu_id:user.profileId})" style="color:rgb(33,33,70);">{{user.fname}} {{user.lname}}</a>
+                            <span class="uk-text-truncate">{{user.adm_no}}</span>
                         </h3>
                     </div>
                     <div class="md-card-content">
@@ -59,9 +60,9 @@
                             <li>
                                 <div class="md-list-content">
                                     <span class="md-list-heading">Course</span>
-                                    <span class="uk-text-small uk-text-muted" style="height: 32px !important;">{{user.course}}</span>
+                                    <span class="uk-text-small uk-text-muted" style="height: 32px !important;">{{user.course_name}}</span>
                                     <span class="md-list-heading">Batch</span>
-                                    <span class="uk-text-small uk-text-muted">{{user.batch}}</span>
+                                    <span class="uk-text-small uk-text-muted" style="height: 32px !important;">{{user.batch_name}}</span>
                                 </div>
                             </li>
                            <!--  <li>
@@ -73,13 +74,13 @@
                             <li>
                                 <div class="md-list-content">
                                     <span class="md-list-heading">Email</span>
-                                    <span class="uk-text-small uk-text-muted uk-text-truncate">{{user.email}}</span>
+                                    <span class="uk-text-small uk-text-muted uk-text-truncate" style="height: 20px !important;">{{user.email}}</span>
                                 </div>
                             </li>
                             <li>
                                 <div class="md-list-content">
                                     <span class="md-list-heading">Phone</span>
-                                    <span class="uk-text-small uk-text-muted">{{user.phone1}}</span>
+                                    <span class="uk-text-small uk-text-muted" style="height: 20px !important;">{{user.phone}}</span>
                                 </div>
                             </li>
                         </ul>

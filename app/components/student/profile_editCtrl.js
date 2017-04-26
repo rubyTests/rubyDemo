@@ -8,199 +8,92 @@ angular
         '$filter',
 		'$http',
 		'$localStorage',
+		'$state',
+		'$timeout',
         // 'groups_data',
-        function ($rootScope,$scope,user_data,$stateParams,$filter,$http,$localStorage) {
+        function ($rootScope,$scope,user_data,$stateParams,$filter,$http,$localStorage,$state,$timeout) {
             // console.log($stateParams,'stateParams');
 			//console.log($stateParams.stu_id,"ID");
-            
+            $scope.CountryLIST=[];
+			$scope.NationalityLIST=[];
+			
 			$http.get($localStorage.service+'ProfileAPI/parentsDetails',{params:{id:$stateParams.stu_id},headers: {'access_token':$localStorage.access_token} })
 			.success(function(data){
-				// console.log(data.result,"data");
-				$scope.user_data=data.result[0].user_detail;
-				console.log($scope.user_data,"data")
-				$scope.profileId=$scope.user_data.id;
-				$scope.parents_data=data.result[0].user_parents;
-				$scope.pre_edu=data.result[0].pre_edu;
-				//console.log($scope.parents_data,"parents_data")
+				$timeout(function(){
+					$scope.user_data=data.result[0].user_detail;
+					console.log($scope.user_data,"data")
+					$scope.profileId=$scope.user_data.id;
+					$scope.parents_data=data.result[0].user_parents;
+					$scope.pre_edu=data.result[0].pre_edu;
+				},100);
 			}).error(function(err){
 			});
 			
-			// var paramsData=$filter('filter')(user_data, {id : $stateParams.stu_id});
-            // $scope.user_data = paramsData[0];
+			$timeout(function(){
+				var $formValidate = $('#user_edit_form');
+				$formValidate
+				.parsley()
+				.on('form:validated',function() {
+					$scope.$apply();
+				})
+				.on('field:validated',function(parsleyField) {
+					if($(parsleyField.$element).hasClass('md-input')) {
+						$scope.$apply();
+					}
+				});
+			},500)
+			
+			$timeout(function(){
+				// date range
+				var $dp_start = $('#uk_dp_start'),
+				$dp_end = $('#uk_dp_end');
 
-            // $scope.user_data = user_data[0];
-            // $scope.user_data_contacts = user_data[0].contact;
-            // languages
-            var langData = $scope.user_languages_options = [
-                {id: 1, title: 'English', value: 'gb'},
-                {id: 2, title: 'French', value: 'fr'},
-                {id: 3, title: 'Chinese', value: 'cn'},
-                {id: 4, title: 'Dutch', value: 'nl'},
-                {id: 5, title: 'Italian', value: 'it'},
-                {id: 6, title: 'Spanish', value: 'es'},
-                {id: 7, title: 'German', value: 'de'},
-                {id: 8, title: 'Polish', value: 'pl'}
-            ];
+				var start_date = UIkit.datepicker($dp_start, {
+					format:'DD.MM.YYYY'
+				});
+
+				var end_date = UIkit.datepicker($dp_end, {
+					format:'DD.MM.YYYY'
+				});
+				
+				// $dp_start.on('change',function() {
+					// //end_date.options.maxDate = $dp_start.val();
+					// var customeDate=$dp_start.val().split(".");
+					// end_date.options.maxDate = parseInt(customeDate[0])-1+"."+customeDate[1]+"."+customeDate[2];
+				// });
+
+				// $dp_end.on('change',function() {
+					// start_date.options.minDate = $dp_end.val();
+				// });
+			},600);
 			
 			$scope.selectize_blood_options = ["O+ve", "A+ve","A+ve","B-ve","B+ve","O-ve"];
             $scope.selectize_blood_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Blood Group'
+                placeholder: 'Blood Group'
             };
             $scope.selectize_cat_options = ["Category 1", "Category 2","Category 3"];
             $scope.selectize_cat_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Category'
+                placeholder: 'Category'
             };
 			
 			$scope.selectize_stuType_data =['Day-scholar','Hostel']
             $scope.selectize_styType_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Student Type'
+                placeholder: 'Student Type'
             };
 			
-			$scope.selectize_c_options = ["Course A", "Course B", "Course C"];
-            $scope.selectize_c_config = {
+			$scope.selectize_studentLive_options = ["Parents", "Father", "Mother","Guardian"];
+            $scope.selectize_studentLive_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course'
+                placeholder: 'Lives With'
             };
 			
-			$scope.selectize_d_options = ["CSE", "EEE", "ECE ","MECH"];
-            $scope.selectize_d_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select'
-            };
-			
-			$scope.selectize_a_data = {
-                options: [
-                    {
-                        id: 1,
-                        title: "Batch A",
-                        value: "a1",
-                        parent_id: 1
-                    },
-                    {
-                        id: 2,
-                        title: "Batch B",
-                        value: "b1",
-                        parent_id: 1
-                    },
-                    {
-                        id: 3,
-                        title: "Batch C",
-                        value: "c1",
-                        parent_id: 1
-                    }
-                ]
-            };
-			$scope.selectize_a_config = {
-                // plugins: {
-                //     'disable_options': {
-                //         disableOptions: ["c1","c2"]
-                //     }
-                // },
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Batch...',
-                optgroupField: 'parent_id',
-                optgroupLabelField: 'title',
-                optgroupValueField: 'ogid',
-                valueField: 'value',
-                labelField: 'title',
-                searchField: 'title',
-                onInitialize: function(selectize){
-                    selectize.on('change', function() {
-                        console.log('on "change" event fired');
-                    });
-                    selectize.on('focus', function() {
-                        console.log('on "focus" event fired');
-                    });
-                    selectize.on('dropdown_open', function() {
-                        console.log('on "dropdown_open" event fired');
-                    });
-                }
-            };
-			
-			$scope.selectize_country_options = ["India", "Sri Langa", "America"];
-            $scope.selectize_country_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Country'
-            };
-			
-			$scope.selectize_n_options = ["India", "Sri Langa", "America"];
-            $scope.selectize_n_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select natioanality'
-            };
-			
-			var planets_data = $scope.selectize_planets_options = [
-                {id: 1, title: 'Rafeeq', url: '444'},
-                {id: 2, title: 'Saravanan', url: '222'},
-                {id: 3, title: 'Gopi', url: '222'},
-                {id: 4, title: 'Senthil', url: '222'},
-                {id: 5, title: 'Mani', url: '222'},
-                {id: 6, title: 'Vijay', url: '222'},
-                {id: 7, title: 'Karthil', url: '222'},
-                {id: 8, title: 'Selva', url: '222'}
-            ];
-
-            $scope.selectize_planets_config = {
-                plugins: {
-                    'remove_button': {
-                        label     : ''
-                    }
-                },
-                maxItems: 1,
-                valueField: 'id',
-                labelField: 'title',
-                searchField: ['title','url'],
-                // searchField: 'url',
-                create: false,
-                placeholder: 'Student Name / Admission No',
-                render: {
-                    option: function(planets_data, escape) {
-                        return  '<div class="option">' +
-                            '<span class="title">' + escape(planets_data.title) + '</span><br>' +
-                            '<span class="title Addition uk-text-muted uk-text-small">' + escape(planets_data.url) + '</span>' +
-                            '</div>';
-                    }
-                    // item: function(planets_data, escape) {
-                    //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
-                    // }
-                }
-            };
-			
-            $scope.user_languages_config = {
-                plugins: {
-                    'remove_button': {
-                        label     : ''
-                    }
-                },
-                render: {
-                    option: function(langData, escape) {
-                        return  '<div class="option">' +
-                            '<i class="item-icon flag-' + escape(langData.value).toUpperCase() + '"></i>' +
-                            '<span>' + escape(langData.title) + '</span>' +
-                            '</div>';
-                    },
-                    item: function(langData, escape) {
-                        return '<div class="item"><i class="item-icon flag-' + escape(langData.value).toUpperCase() + '"></i>' + escape(langData.title) + '</div>';
-                    }
-                },
-                valueField: 'value',
-                labelField: 'title',
-                searchField: 'title',
-                create: false,
-                placeholder: 'Select Language...'
-            };
-
             // user role
             $scope.user_role_config = {
                 valueField: 'value',
@@ -240,43 +133,143 @@ angular
 				// console.log($scope.user_data,"user_data");
 				// console.log($scope.parents_data,"parents_data");
 				// console.log($scope.pre_edu,"pre_edu");
-				
+				//console.log($('.fileinput-preview').find('img').attr('src'));
+				if($('.fileinput-preview').find('img').attr('src')==undefined){
+					$scope.user_data.filename=$('.fileinput-new').find('img').attr('src');
+					if($scope.user_data.filename==undefined){
+						$scope.user_data.filename="";
+					}
+				}else{
+					$scope.user_data.filename=$('.fileinput-preview').find('img').attr('src');
+				}
+				//console.log($scope.user_data.filename,"file");
 				$http({
                 method:'POST',
                 url: $localStorage.service+'ProfileAPI/profileEdit',
                 data: {profile:$scope.user_data,pre_edu:$scope.pre_edu,parents:$scope.parents_data},
 				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
                 }).then(function(response){
-                    console.log(response,"student");
+                    //console.log(response,"student");
+					if(response.data.status==true){
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$state.go('restricted.student.student_list');
+					}
                 });
 				
-				
-				
-				//Student Details
-				
-				// $http({
-                // method:'POST',
-                // url: $localStorage.service+'ProfileAPI/profileDetails',
-                // data: $scope.user_data,
-				// headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
-                // }).then(function(response){
-                    // console.log(response,"student");
-                // });
-				
-				//$scope.parVal.push($scope.parents_data);
-				//console.log($scope.parVal,"push");
-				
-				// Parents Details
-				
-				// $http({
-                // method:'POST',
-                // url: $localStorage.service+'ProfileAPI/editParentsDetails',
-                // data: $scope.parVal,
-				// headers:{'access_token':$localStorage.access_token}
-                // }).then(function(response){
-                    // console.log(response,"parents");
-                // });
 			}
+			
+			$http.get($localStorage.service+'institutionApi/country',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(country_list){
+                $scope.CountryLIST.push(country_list.data);
+            });
+			
+			$scope.selectize_country_options = $scope.CountryLIST;
+            $scope.selectize_country_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Country',
+                valueField: 'ID',
+                labelField: 'NAME',
+				searchField: 'NAME',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        
+                    });
+                }
+            };
+			
+			$http.get($localStorage.service+'SettingAPI/Nationality',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(nationality_list){
+                $scope.NationalityLIST.push(nationality_list.data);
+            });
+			
+			$scope.selectize_nation_options = $scope.NationalityLIST;
+            $scope.selectize_nation_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Nationality',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        //console.log(value);
+                    });
+                }
+            };
+			
+			$scope.sibling_courseId=[];
+			$http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(course_data){
+				$scope.sibling_courseId.push(course_data.data);
+			});
+			
+			$scope.sibling_courseId_options =$scope.sibling_courseId;
+			$scope.sibling_courseId_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Course',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(selectize){
+					selectize.on('change', function(value) {
+						//console.log(value);
+						$scope.siblingBatchData(value);
+					});
+				}
+			};
+			
+			$scope.siblingBatchData=function(id){
+				//console.log(id,"deptId")
+				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(batch_data){
+					// console.log(batch_data.data,"batch");
+					$scope.sibling_batchId_options=batch_data.data;
+				});
+			}
+			
+			$scope.sibling_batchId_options =[];
+			$scope.sibling_batchId_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Batch',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(selectize){
+					selectize.on('change', function(value) {
+						//console.log(value);
+						$scope.siblingProfile(value);
+					});
+				}
+			};
+			
+			$scope.siblingProfile=function(id){
+				$http.get($localStorage.service+'ProfileAPI/studentSiblingDetails',{params:{batchId:id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(Studata){
+					//console.log(Studata.result,"batch");
+					$scope.sibling_studentId_options=Studata.result;
+				});
+			}
+			
+			$scope.sibling_studentId_options =[];
+			$scope.sibling_studentId_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Sibling',
+				valueField: 'ID',
+				labelField: 'FIRSTNAME',
+				searchField: 'FIRSTNAME',
+				onInitialize: function(selectize){
+					selectize.on('change', function(value) {
+						console.log(value);
+					});
+				}
+			};
 
         }
     ])

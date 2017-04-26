@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('studentadmisionCtrl', [
+    .controller('studentAdmisson_editCtrl', [
         '$scope',
         'utils',
 		'$localStorage',
@@ -14,9 +14,6 @@ angular
 			$scope.NationalityLIST=[];
 			$scope.sibling_courseId=[];
 			$scope.wizard=[];
-			$scope.wizard1=[];
-			$scope.wizard2=[];
-			$scope.wizard3=[];
 			$scope.previous=[];
 			$scope.mailling={};
 			$scope.permanent={};
@@ -26,43 +23,8 @@ angular
 			$scope.father={};
 			$scope.mother={};
 			$scope.guardian={};
-			//$scope.wizard.admission_date=$filter('date')(new Date(),'MM.dd.yyyy');
 			
-			// Validation Start
-			
-			$scope.exitValidation = function(){
-				if($scope.wizard.admission_no==undefined){
-					return false;
-				}else{
-					return true;
-				}
-			}
-			
-			$scope.enterValidation = function(){
-				if($scope.wizard1.profileId==undefined){
-					return false;
-				}else{
-					return true;
-				}
-			}
-			
-			$scope.enterValidation1 = function(){
-				if($scope.wizard2.profileId==undefined){
-					return false;
-				}else{
-					return true;
-				}
-			}
-			
-			$scope.enterValidation2 = function(){
-				if($scope.wizard3.profileId==undefined){
-					return false;
-				}else{
-					return true;
-				}
-			}
-			
-			setTimeout(function(){
+			$timeout(function(){
 				var $formValidate = $('#admission_details');
 				$formValidate
 				.parsley()
@@ -111,8 +73,64 @@ angular
 					}
 				});
 				
-			},500)
+			},3000)
 			
+			//if($localStorage.mode=='edit'){
+				$scope.checkbox_demo_1;
+				$http.get($localStorage.service+'ProfileAPI/parentsDetails',{params:{id:$localStorage.stuId},headers: {'access_token':$localStorage.access_token} })
+				.success(function(data){
+					$timeout(function(){
+						$scope.wizard=data.result[0].user_detail;
+						$scope.profileId=$scope.wizard.id;
+						$scope.parents_data=data.result[0].user_parents;
+						$scope.form_dynamic1=data.result[0].pre_edu;
+						$scope.mailling={address:$scope.wizard.mail_address,city:$scope.wizard.mail_city,state:$scope.wizard.mail_state,pincode:$scope.wizard.mail_pincode,country:$scope.wizard.mail_country};
+						$scope.permanent={address:$scope.wizard.address,city:$scope.wizard.stu_city,state:$scope.wizard.stu_state,pincode:$scope.wizard.pincode,country:$scope.wizard.country};
+						if($scope.wizard.location_Id==$scope.wizard.maillingAddressId){
+							$scope.checkbox_demo_1=true;
+							$('.motherDetails').find('input').attr('disabled',true);
+						}
+						$scope.contact={phone:$scope.wizard.wizard_phone,mobile_no:$scope.wizard.mobile_no,email:$scope.wizard.email};
+						$scope.social={facebook:$scope.wizard.facebook,google:$scope.wizard.google,linkedin:$scope.wizard.linkedin};
+						$scope.sibling={courseId:$scope.wizard.sibling_courseId,batchId:$scope.wizard.sibling_batchId,studentId:$scope.wizard.sibling_id};
+						$scope.previous={birthplace:$scope.wizard.birthplace,selectize_blood:$scope.wizard.selectize_blood,selectize_cat:$scope.wizard.selectize_cat,selectize_styType:$scope.wizard.selectize_styType,student_lives:$scope.wizard.student_lives};
+						$scope.guardianCon=false;
+						$scope.rmBtnGuardian=true;
+						angular.forEach(data.result[0].user_parents, function(data) {
+							
+							if(data.p_relation=="Father"){
+								$localStorage.frelationId=data.pPro_id;
+								$scope.father={p_first_name:data.p_first_name,relationId:data.pPro_id,first_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin,availabe:data.availabe};
+								if(data.availabe=='Y'){
+									$scope.checkbox_demo_11=true;
+									$('.first_details').show();
+								}else{
+									$scope.checkbox_demo_11=false;
+									$('.first_details').hide();
+								}
+							}else if(data.p_relation=="Mother"){
+								$localStorage.mrelationId=data.pPro_id;
+								$scope.mother={p_first_name:data.p_first_name,relationId:data.pPro_id,second_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin,availabe:data.availabe};
+								if(data.availabe=='Y'){
+									$scope.checkbox_demo_2=true;
+									$('.second_details').show();
+								}else{
+									$scope.checkbox_demo_2=false;
+									$('.second_details').hide();
+								}
+							}else if(data.p_relation=="Guardian"){
+								$localStorage.grelationId=data.pPro_id;
+								$scope.guardianCon=true;
+								$scope.rmBtnGuardian=false;
+								$scope.guardian={p_first_name:data.p_first_name,relationId:data.pPro_id,third_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin};
+							}
+						});
+					},500);
+				}).error(function(err){
+				});
+			// }else{
+				// $scope.wizard.admission_date=$filter('date')(new Date(),'MM.dd.yyyy');
+			// }
 			
 			$scope.defaultImg="assets/img/avatars/user.png";
 			
@@ -144,32 +162,28 @@ angular
 			
             $scope.checkbox_demo_11=true;
             $scope.checkbox_demo_2=true;
-			$scope.father.availabe="Y";
-			$scope.mother.availabe="Y";
             $scope.checkStatusParents=function(check){
-                if(check==true){
+                //console.log(check,"fa");
+				if(check==true){
+					$scope.father.availabe="Y";
                     $('.first_details').show();
                 }else {
-                    $('.first_details').hide();
 					$scope.father.availabe="N";
-					//console.log($scope.father.relationId,'fRid');
-					$('.first_details').find('input').val('');
-					$('.first_details').find('input').trigger('blur');
+                    $('.first_details').hide();
+					$scope.father={p_first_name:$scope.father.p_first_name,relationId:$localStorage.frelationId,first_relation:'Father',p_last_name:$scope.father.p_last_name,p_dob:'',p_education:'',occupation:'',p_income:'',pr_address:'',pr_city:'',pr_state:'',pr_pincode:'',country:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',availabe:$scope.father.availabe};
+					$('input').trigger('blur');
                 }
-				
             }
-			
             $scope.checkStatusParents1=function(check){
-                if(check==true){
+                //console.log(check,"ma");
+				if(check==true){
+					$scope.mother.availabe="Y";
                     $('.second_details').show();
                 }else {
-					$('.second_details').hide();
                     $scope.mother.availabe="N";
-					// $scope.mother.relationId
-					//console.log($scope.mother.relationId,'mRid');
-					$('.second_details').find('input').val('');
-					$('.second_details').find('input').trigger('blur');
-					
+					$('.second_details').hide();
+					$scope.mother={p_first_name:$scope.mother.p_first_name,relationId:$localStorage.mrelationId,second_relation:'Mother',p_last_name:$scope.mother.p_last_name,p_dob:'',p_education:'',occupation:'',p_income:'',pr_address:'',pr_city:'',pr_state:'',pr_pincode:'',country:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',availabe:$scope.mother.availabe};
+					$('input').trigger('blur');
                 }
             }
             var $wizard_advanced_form = $('#wizard_advanced_form');
@@ -190,11 +204,10 @@ angular
 				$scope.guardian={relationId:'',p_first_name:'',p_dob:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',pr_address:'',pr_city:'',pr_state:'',country:'',pr_pincode:'',occupation:'',p_income:'',p_education:'',third_relation:'Guardian'};
             }
 			$scope.sameAddress="No";
-			$scope.sameAdres=true;
             $scope.checkStatus=function(res){
+                console.log(res);
                 if(res==true){
 					$scope.sameAddress="Yes";
-					$scope.sameAdres=false;
                     $scope.permanent.address=$scope.mailling.address;
                     $scope.permanent.city=$scope.mailling.city;
                     $scope.permanent.state=$scope.mailling.state;
@@ -203,7 +216,6 @@ angular
                     $('.motherDetails').find('input').attr('disabled',true);
                 }else {
 					$scope.sameAddress="No";
-					$scope.sameAdres=true;
 					$scope.permanent.addressId='';
                     $scope.permanent.address='';
                     $scope.permanent.city='';
@@ -342,7 +354,7 @@ angular
 				labelField: 'NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(value) {
-						console.log(value,"courseId");
+						//console.log(value);
 						$scope.siblingBatchData(value);
 					});
 				}
@@ -352,7 +364,7 @@ angular
 				//console.log(id,"deptId")
 				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
 				.success(function(batch_data){
-					console.log(batch_data.data,"batchId");
+					// console.log(batch_data.data,"batch");
 					$scope.sibling_batchId_options=batch_data.data;
 				});
 			}
@@ -366,18 +378,14 @@ angular
 				labelField: 'NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(value) {
-						console.log(value,"profileId");
-						if(value){
-							$scope.siblingProfile(value);
-						}else{
-							$scope.sibling_studentId_options =[];
-						}
+						//console.log(value);
+						$scope.siblingProfile(value);
 					});
 				}
 			};
 			
 			$scope.siblingProfile=function(id){
-				//console.log($scope.wizard.profileId,"proId")
+				console.log($scope.wizard.profileId,"proId")
 				$http.get($localStorage.service+'ProfileAPI/studentSiblingDetails',{params:{batchId:id,profileId:$scope.wizard.profileId},headers:{'access_token':$localStorage.access_token}})
 				.success(function(Studata){
 					//console.log(Studata.result,"batch");
@@ -395,7 +403,7 @@ angular
 				searchField: 'FIRSTNAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(value) {
-						//console.log(value);
+						console.log(value);
 					});
 				}
 			};
@@ -575,7 +583,6 @@ angular
                 $scope.form_dynamic.push($scope.form_template);
             };
             $scope.cloneSection1 = function($event,$index,previous) {
-                //console.log(previous,"previous");
 				if(previous.institute=="" || previous.course_name=="" || previous.completion==""){
 					UIkit.notify({
 						message : 'Please Fill current form',
@@ -590,7 +597,7 @@ angular
             };
 
             $scope.deleteSection1 = function($event,$index,preEdu) {
-                if(preEdu.preEdu_id){
+				if(preEdu.preEdu_id){
 					UIkit.modal.confirm('Are you sure? You want to Delete '+preEdu.institute+'  Detail', function(){
 						$event.preventDefault();
 						$scope.form_dynamic_model1.splice($index,1);
@@ -612,6 +619,7 @@ angular
 					$scope.form_dynamic_model1.splice($index,1);
 					$scope.form_dynamic1.splice($index,1);
 				}
+				
             };
             // delete section
             $scope.deleteSection = function($event,$index) {
@@ -632,20 +640,6 @@ angular
                 $('.autocomplete_template > input').val('');
             });
 			
-			$scope.checkAdmisionNo=function(id){
-				//console.log(id,'id');
-				// $http.get($localStorage.service+'ProfileAPI/studentAdmissionNo',{params:{admission_no:id},headers:{'access_token':$localStorage.access_token}})
-				// .success(function(result){
-					// if(result.status==false){
-						// UIkit.notify({
-							// message : result.message,
-							// status  : 'danger',
-							// timeout : 1000,
-							// pos     : 'top-center'
-						// });
-					// }
-				// });
-			}
 			
 			// Admission Details
 			$scope.admissionDetails=function(){
@@ -653,9 +647,17 @@ angular
 				//$scope.values=$('.admission_details').serialize();
 				//console.log($scope.wizard,"values");
 				
+				if($('.fileinput-preview').find('img').attr('src')==undefined){
+					$scope.wizard.filename=$('.fileinput-new').find('img').attr('src');
+					if($scope.wizard.filename==undefined){
+						$scope.wizard.filename="";
+					}
+				}else{
+					$scope.wizard.filename=$('.fileinput-preview').find('img').attr('src');
+				}
+				
 				$http.get($localStorage.service+'ProfileAPI/studentAdmissionNo',{params:{admission_no:$scope.wizard.admission_no,profileId:$scope.wizard.profileId},headers:{'access_token':$localStorage.access_token}})
 				.success(function(result){
-					//console.log(result,"result");
 					if(result.status==false){
 						UIkit.notify({
 							message : result.message,
@@ -667,19 +669,36 @@ angular
 						$http({
 						method:'POST',
 						url: $localStorage.service+'ProfileAPI/admissionDetails',
-						data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),gender:$scope.wizard.gender,wizard_birth:$scope.wizard.wizard_birth,nationality:$scope.wizard.nationality,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,batchId:$scope.wizard.batchId,roll_no:$scope.wizard.roll_no},
+						data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$scope.wizard.filename,gender:$scope.wizard.gender,wizard_birth:$scope.wizard.wizard_birth,nationality:$scope.wizard.nationality,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,batchId:$scope.wizard.batchId,roll_no:$scope.wizard.roll_no},
 						headers:{'access_token':$localStorage.access_token}
 						}).then(function(response){
 							//console.log(response.data.admission_no);
-							if(response.data.status==true){
-								$scope.wizard.profileId=response.data.profile[0].profile_id;
-								$scope.wizard.stuPro_id=response.data.profile[0].stu_profileId;	
-								$scope.wizard1.profileId=response.data.profile[0].profile_id;
-								WizardHandler.wizard().next();
-							}
+							$scope.wizard.profileId=response.data.profile[0].profile_id;
+							$scope.wizard.stuPro_id=response.data.profile[0].stu_profileId;
+							WizardHandler.wizard().next();
 						});
 					}
 				});
+			}
+			// Academics Details
+			
+			$scope.academicsDetails=function(){
+				//$scope.wizard.profileId=35;
+				//console.log($scope.form_dynamic1,"previous");
+				
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/academicsDetails',
+                data: {profileId:$scope.wizard.profileId,previous:$scope.form_dynamic1,sibling:$scope.sibling.studentId,bloodGroup:$scope.previous.selectize_blood,birthplace:$scope.previous.birthplace,stu_category:$scope.previous.selectize_cat,stu_type:$scope.previous.selectize_styType,student_lives:$scope.previous.student_lives},
+				headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                    //console.log(response.data.preEduId);
+					angular.forEach(response.data.preEduId, function(value, key) {
+						//console.log(key['institute'] + ': ' + value.institute);
+						$scope.form_dynamic1[key].preEdu_id=value;
+					});
+					
+                });
 			}
 			
 			// Contact Details
@@ -697,55 +716,38 @@ angular
                 }).then(function(response){
                     //console.log(response.data);
 					//console.log($scope.sameAddress);
-					if(response.data.status==true){
-						if($scope.sameAddress=="Yes"){
-							$scope.mailling.addressId=response.data.locationId[0];
-							$scope.permanent.addressId=response.data.locationId[0];
-						}else{
-							$scope.mailling.addressId=response.data.locationId[0];
-							$scope.permanent.addressId=response.data.locationId[1];
-						}
-						$scope.wizard2.profileId=$scope.wizard1.profileId;
-						WizardHandler.wizard().next();
+					if($scope.sameAddress=="Yes"){
+						$scope.mailling.addressId=response.data.locationId[0];
+						$scope.permanent.addressId=response.data.locationId[0];
+					}else{
+						$scope.mailling.addressId=response.data.locationId[0];
+						$scope.permanent.addressId=response.data.locationId[1];
 					}
                 });
 			}
-			
-			// Academics Details
-			
-			$scope.academicsDetails=function(){
-				//$scope.wizard.profileId=35;
-				//console.log($scope.form_dynamic1,"previous");
-				
-				$http({
-                method:'POST',
-                url: $localStorage.service+'ProfileAPI/academicsDetails',
-                data: {profileId:$scope.wizard.profileId,previous:$scope.form_dynamic1,sibling:$scope.sibling.studentId,bloodGroup:$scope.previous.selectize_blood,birthplace:$scope.previous.birthplace,stu_category:$scope.previous.selectize_cat,stu_type:$scope.previous.selectize_styType,student_lives:$scope.previous.student_lives},
-				headers:{'access_token':$localStorage.access_token}
-                }).then(function(response){
-                    //console.log(response.data.preEduId);
-					if(response.data.status==true){
-						angular.forEach(response.data.preEduId, function(value, key) {
-							//console.log(key['institute'] + ': ' + value.institute);
-							$scope.form_dynamic1[key].preEdu_id=value;
-						});
-						$scope.wizard3.profileId=$scope.wizard2.profileId;
-						WizardHandler.wizard().next();
-					}
-                });
-			}
-			
 			
 			// Parents Details
 			
-			$scope.father={relationId:'',p_dob:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',pr_address:'',pr_city:'',pr_state:'',country:'',pr_pincode:'',occupation:'',p_income:'',p_education:'',first_relation:'Father',availabe:'Y'};
-			$scope.mother={relationId:'',p_dob:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',pr_address:'',pr_city:'',pr_state:'',country:'',pr_pincode:'',occupation:'',p_income:'',p_education:'',second_relation:'Mother',availabe:'Y'};
+			// $scope.father={relationId:'',p_dob:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',pr_address:'',pr_city:'',pr_state:'',country:'',pr_pincode:'',occupation:'',p_income:'',p_education:'',first_relation:'Father',availabe:true};
+			// $scope.mother={relationId:'',p_dob:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',pr_address:'',pr_city:'',pr_state:'',country:'',pr_pincode:'',occupation:'',p_income:'',p_education:'',second_relation:'Mother',availabe:true};
 			$scope.guardian={relationId:'',p_first_name:'',p_dob:'',p_phone:'',p_mobile_no:'',p_email:'',facebook:'',google:'',linkedin:'',pr_address:'',pr_city:'',pr_state:'',country:'',pr_pincode:'',occupation:'',p_income:'',p_education:'',third_relation:'Guardian'};
 			
 			
 			$scope.parentsDetails=function(){
 				//$scope.wizard.profileId=35;
 				//$scope.wizard.stuPro_id=33;
+				
+				// if($scope.father.availabe==false){
+					// $scope.father.availabe='N'
+				// }else{
+					// $scope.father.availabe='Y'
+				// }
+				
+				// if($scope.mother.availabe==false){
+					// $scope.mother.availabe='N'
+				// }else{
+					// $scope.mother.availabe='Y'
+				// }
 				
 				$http({
                 method:'POST',
@@ -758,7 +760,7 @@ angular
 					$scope.guardian.relationId=response.data.profileIds[0].grelation_id;
 					if(response.data.status==true){
 						UIkit.notify({
-							message : response.data.message,
+							message : "Student Profile Details Updated Successfully",
 							status  : 'success',
 							timeout : 2000,
 							pos     : 'top-center'

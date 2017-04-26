@@ -19,7 +19,16 @@ angular
 				$scope.profileId=$scope.user_data.id;
 				$scope.parents_data=data.result[0].user_parents;
 				$scope.pre_edu=data.result[0].pre_edu;
-				//console.log($scope.parents_data,"parents_data")
+				//console.log($scope.user_data.facebook,"user_data")
+				// if($scope.user_data.facebook!=null){
+					// $scope.socialProfile=true;
+				// }else if($scope.user_data.google!=null){
+					// $scope.socialProfile=true;
+				// }else if($scope.user_data.linkedin!=null){
+					// $scope.socialProfile=true;
+				// }else{
+					// $scope.socialProfile=false;
+				// }
 			}).error(function(err){
 			});
 			

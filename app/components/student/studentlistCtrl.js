@@ -5,14 +5,25 @@ angular
         '$scope',
         '$window',
         'contact_list',
-        function ($rootScope,$scope,$window,contact_list) {
+        '$http',
+        '$localStorage',
+        function ($rootScope,$scope,$window,contact_list,$http,$localStorage) {
 
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
                 $rootScope.toBarActive = false;
             });
 
-            $scope.contact_list = contact_list;
+            //$scope.contact_list = contact_list;
+			
+			$scope.default_image='assets/img/man.png'
+			
+			$http.get($localStorage.service+'ProfileAPI/studentProfileDetails',{headers: {'access_token':$localStorage.access_token} })
+			.success(function(data){
+				// console.log(data.result,"data");
+				$scope.contact_list=data.result;
+			}).error(function(err){
+			});
 
             // get all companies from array
             var all_companies = contact_list.map(function(a) {

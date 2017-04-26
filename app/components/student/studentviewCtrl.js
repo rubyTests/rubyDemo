@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('studentviewCtrl',
-        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($rootScope,$compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage,$state) {
 
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
@@ -85,11 +85,27 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/student/student_profile_view.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
+            // $resource('app/components/student/student_profile_view.json')
+                // .query()
+                // .$promise
+                // .then(function(dt_data) {
+                    // vm.dt_data = dt_data;
+                // });
+				
+				$http.get($localStorage.service+'ProfileAPI/studentProfileDetails',{headers: {'access_token':$localStorage.access_token} })
+				.success(function(data){
+					// console.log(data.result,"data");
+					vm.dt_data=data.result;
+				}).error(function(err){
+				});
+				
+				$scope.adminEditProfile=function(stuId){
+					if(stuId){
+						//console.log(stuId,"stuId");
+						$localStorage.stuId=stuId;
+						$localStorage.mode='edit'
+						$state.go('restricted.student.admissionEdit');
+					}
+				}
         }
     );
