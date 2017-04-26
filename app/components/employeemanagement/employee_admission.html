@@ -28,7 +28,7 @@
                                      <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="join_date">Joining Date <span class="req">*</span></label>
                                         <!-- <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="EMP_ADM.join_date"/> -->
-                                        <input class="md-input" type="text" required id="uk_dp_start" md-input ng-model="EMP_ADM.join_date">
+                                        <input class="md-input" type="text" required id="uk_dp_start" md-input ng-model="EMP_ADM.join_date" ng-change="checkDateValidation(EMP_ADM.join_date)">
                                     </div>
                                      <div class="uk-width-medium-1-3 parsley-row">
                                         <div class="uk-width-large-1-4 uk-width-medium-1-2">
@@ -82,7 +82,7 @@
                                     <div class="uk-width-medium-1-3 parsley-row"><br>
                                         <label for="dob">Date of Birth <span class="req">*</span></label>
                                         <!-- <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="EMP_ADM.dob"/> -->
-                                        <input class="md-input" type="text" required id="uk_dp_end" md-input ng-model="EMP_ADM.dob">
+                                        <input class="md-input" type="text" required id="uk_dp_end" md-input ng-model="EMP_ADM.dob" ng-change="checkDateValidation(EMP_ADM.dob)">
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <br ng-if="!EMP_ADM.marital_status" />

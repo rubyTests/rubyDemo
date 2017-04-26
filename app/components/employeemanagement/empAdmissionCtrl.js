@@ -34,7 +34,7 @@ angular
                     $('.PermanantDetails').find('input').attr('disabled',true);
                 }else {
                     console.log('false');
-                    $scope.Permanant.address=null;
+                    $scope.Permanant.address='';
                     $scope.Permanant.city='';
                     $scope.Permanant.state='';
                     $scope.Permanant.pincode='';
@@ -95,6 +95,7 @@ angular
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
+                        $('#basicForm').parsley().validate();
                         console.log(value);
                     });
                 }
@@ -137,6 +138,9 @@ angular
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
+                        $timeout(function() {
+                            $('#contactForm').parsley().validate();
+                        }, 200);
                         console.log(value);
                     });
                 }
@@ -385,7 +389,7 @@ angular
                         }
                     });
 
-            },500);
+            },1000);
 
             $scope.exitValidation = function(){
                 // if($scope.EMP_ADM.admission_no==undefined || $scope.EMP_ADM.join_date==undefined || $scope.EMP_ADM.first_name==undefined || $scope.EMP_ADM.last_name==undefined || $scope.EMP_ADM.dob==undefined || $scope.EMP_ADM.qualification==undefined || $scope.EMP_ADM.department==undefined){
@@ -453,6 +457,18 @@ angular
             $dp_end.on('change',function() {
                 start_date.options.minDate = $dp_end.val();
             });
-        },600);
+
+            $scope.checkDateValidation=function(data){
+                console.log(data,'data');
+                if(data){
+                    console.log(data,'true');
+                    $timeout(function() {
+                        $('#basicForm').parsley().validate();
+                    }, 200);
+                }else {
+                    console.log(data,'true');
+                }
+            }
+        },1100);
         }
     ]);
