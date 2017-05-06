@@ -1,0 +1,58 @@
+ [
+    {
+        "id": 1,
+        "item_name": "Pencil",
+        "item_category":"Study",
+        "store_name":"Msk Stores",
+        "quantity":"5",
+        "price":"5"
+    },
+    {
+        "id": 2,
+        "item_name": "Pen",
+        "item_category":"Study",
+        "store_name":"Msk Stores",
+        "quantity":"15",
+        "price":"7"
+    },
+    {
+        "id": 3,
+        "item_name": "Computer",
+        "item_category":"Electronic",
+        "store_name":"Msk Stores",
+        "quantity":"5",
+        "price":"5000"
+    },
+    {
+        "id": 4,
+        "item_name": "Table",
+        "item_category":"Study",
+        "store_name":"Msk Stores",
+        "quantity":"5",
+        "price":"5500"
+    },
+    {
+        "id": 5,
+        "item_name": "Pencil",
+        "item_category":"Study",
+        "store_name":"Msk Stores",
+        "quantity":"5",
+        "price":"5"
+    },
+    {
+        "id": 6,
+        "item_name": "Book",
+        "item_category":"Study",
+        "store_name":"Msk Stores",
+        "quantity":"5",
+        "price":"500"
+    },
+    {
+        "id": 7,
+        "item_name": "Note",
+        "item_category":"Study",
+        "store_name":"Msk Stores",
+        "quantity":"5",
+        "price":"25"
+    }
+] 

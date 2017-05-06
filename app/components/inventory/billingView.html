@@ -1,0 +1,49 @@
+ <div id="page_content"  ng-controller="billingViewCtrl as tblData">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Billing
+        <!-- <span style="float: right;font-size:18px;"><a ui-sref="restricted.Library"><i class="uk-icon-th-large"></i></a></span> -->
+        </h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <a ui-sref="restricted.inventory.billingAdd"  class="md-btn md-btn-primary md-btn-small">
+                        <i class="uk-icon-plus"></i> Add Billing</a>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px !important;">S.No</th>
+                            <th>Invoice No.</th>
+                            <th>Invoice Date</th>
+                            <th>Total Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="width: 50px !important;"></th>
+                            <th>Invoice No.</th>
+                            <th>Invoice Date</th>
+                            <th>Total Amount</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.invoice_no}}</td>
+                            <td>{{row.invoice_date}}</td>
+                            <td>{{row.total}}</td>
+                            <td class="">
+                                <!-- <a href="#" class="ts_remove_row" ui-sref="restricted.BookDetail({id: {{row.id}},indexId:{{$index}}})"><i class="md-icon material-icons">&#xE8F4;</i></a> -->
+                                <a href="#" class="ts_remove_row" ui-sref="restricted.inventory.billingDetails"><i class="md-icon material-icons">&#xE8F4;</i></a>
+                                <!-- <a class="ts_remove_row" ui-sref="restricted.inventory.purchaseOrderAdd"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a ><i class="md-icon material-icons">&#xE872;</i></a> -->
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

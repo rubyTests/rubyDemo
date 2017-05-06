@@ -1,0 +1,38 @@
+ [
+    {
+        "id": 1,
+        "subject": "Data Structures",
+        "assessment": "FA 1",
+        "term": "Term 1"
+    },
+    {
+        "id": 2,
+        "subject": "Operating Systems",
+        "assessment": "FA 1",
+        "term": "Term 1"
+    },
+    {
+        "id": 3,
+        "subject": "Database Management System",
+        "assessment": "FA 1",
+        "term": "Term 1"
+    },
+    {
+        "id": 4,
+        "subject": "Numerical Mathematics",
+        "assessment": "FA 1",
+        "term": "Term 1"
+    },
+    {
+        "id": 5,
+        "subject": "Artificial Intelligence",
+        "assessment": "FA 1",
+        "term": "Term 1"
+    },
+    {
+        "id": 6,
+        "subject": "User Interface",
+        "assessment": "FA 1",
+        "term": "Term 1"
+    }
+] 

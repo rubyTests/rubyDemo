@@ -1,0 +1,156 @@
+    <style type="text/css">
+        .uk-grid.AdjPad {
+            padding-left: 20px;
+        }
+        .md-list-content.AdjListCon {
+            padding-top: 10px;
+        }
+        #page_content_inner {
+            padding: 24px 24px 0;
+        }
+        /*.uk-width-medium-1-4 {
+            width: 24% !important;
+        }*/
+        .material-icons.AdjIcon {
+            font-size: 30px !important;
+        }
+        /*input[type=text] { text-align:right }*/
+    </style>
+    <div id="page_content">
+        <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Billing Add</h3>
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-4">
+                                <label for="prev_state">Invoice No.<span class="req"></span></label>
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <div class="uk-input-group">
+                                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                    <label for="uk_dp_1">Invoice Date</label>
+                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <input type="text" config="selectize_store_config" options="selectize_store_options" ng-model="selectize_store" name="selectize_store" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <input type="text" config="selectize_issuedTo_config" options="selectize_issuedTo_options" ng-model="selectize_issuedTo" name="selectize_issuedTo" selectize />
+                            </div>
+                        </div>
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-4" ng-show="selectize_issuedTo == 'Student'">
+                                <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="selectize_course" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4" ng-show="selectize_issuedTo == 'Student'">
+                                <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="selectize_batch" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4" ng-show="selectize_issuedTo == 'Employee'">
+                                <input type="text" config="selectize_department_config" options="selectize_department_options" ng-model="selectize_department" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <label for="prev_state">Name<span class="req"></span></label>
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                            </div>
+                            
+                            <!-- <div class="uk-width-medium-1-4">
+                                <label for="prev_state">Cheque No.<span class="req"></span></label>
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <label for="prev_state">DD No.<span class="req"></span></label>
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                            </div>
+                            <div class="uk-width-medium-1-4">
+                                <label for="prev_state">Bank Name<span class="req"></span></label>
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                            </div> -->
+                        </div>
+                        <!-- <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-2-3 uk-margin-top">
+                            <div class="uk-input-group">
+                                <span class="uk-input-group-addon">
+                                    <i class="material-icons AdjIcon">view_list</i>
+                                </span>
+                                <selectize id="selec_adv_1" config="selectize_feeStruct_config" options="selectize_feeStruct_options" position="bottom" ng-model="forms_advanced.selectize_feeStruct"></selectize>
+                                </div>
+                            </div>
+                        </div> -->
+                        <!-- <pre>
+                            {{forms_advanced.selectize_feeStruct | json}}
+                        </pre> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="page_content_inner">
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <div class="uk-overflow-container">
+                    <table class="uk-table">
+                        <thead>
+                        <tr>
+                            <th class="uk-text-middle"><b>S.No</b></th>
+                            <th class="uk-text-middle"><b>Item</b></th>
+                            <th class="uk-text-middle"><b>Item Code</b></th>
+                            <th class="uk-text-middle"><b>Quantity</b></th>
+                            <th class="uk-text-middle"><b>Unit Price</b></th>
+                            <th class="uk-text-middle"><b>Total</b></th>
+                            <th ></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in newRow track by $index">
+                                <td class="uk-text-middle">{{$index+1}}</td>
+                                <td class="uk-text-middle"><input type="text" name="fee_1" id="fee_1" ng-model="x.feesItem1"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="x.feesItem2"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem3"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem4"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem5" disabled/></td>
+                                <td class="uk-text-right uk-text-middle">
+                                    <a ng-click="addRow();" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
+                                    <a ng-click="removeRow($index);" ng-if="$last && $index != 0 "><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                    <a ng-click="removeRow($index);" ng-if="!$last"><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-medium-4-6">
+                        </div>
+                        <div class="uk-width-medium-2-6" style="padding-left:110px">
+                        <b>Total Amount :</b>
+                        <span style="margin-left: 10px;">{{totalAmount | currency:""}}</span>
+                        </div>
+                        <!-- <div class="uk-width-medium-2-5">
+                        <b>Paid Amount :</b>
+                        <span style="float:right;margin-left: 10px;">{{totalPaid | currency:""}}</span>
+                        </div> -->
+                    </div>
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <label>Notes</label>
+                            <textarea cols="30" rows="1" class="md-input" ng-model="form.input_k" md-input textarea-autosize></textarea>
+                        </div>
+                        <div class="uk-width-medium-1-6 parsley-row">
+                        </div>
+                        <div class="uk-width-medium-2-6 parsley-row uk-text-right" style="margin-top:45px">
+                            <!-- <a class="md-btn md-btn-small md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="margin-top: 25px;">Pay Fee</a> -->
+                            <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                            <a ui-sref="restricted.inventory.billingReceipt"><button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button></a>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

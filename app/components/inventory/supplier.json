@@ -1,0 +1,65 @@
+ [
+    {
+        "id": 1,
+        "supplier_name": "Rajkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Vendor",
+        "contact_number":"7896451312",
+        "tin_number":"TIN123456",
+        "region":"Pondicherry"
+    },
+    {
+        "id": 2,
+        "supplier_name": "Premkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Vendor",
+        "contact_number":"8796541321",
+        "tin_number":"TIN123456",
+        "region":"Perambalur"
+    },
+    {
+        "id": 3,
+        "supplier_name": "Pawnkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Vendor",
+        "contact_number":"9784561321",
+        "tin_number":"TIN123456",
+        "region":"Tanjur"
+    },
+    {
+        "id": 4,
+        "supplier_name": "Ramkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Manufacturer",
+        "contact_number":"8796543116",
+        "tin_number":"TIN123456",
+        "region":"Chennai"
+    },
+    {
+        "id": 5,
+        "supplier_name": "Manojkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Manufacturer",
+        "contact_number":"7895461211",
+        "tin_number":"TIN123456",
+        "region":"Trichy"
+    },
+    {
+        "id": 6,
+        "supplier_name": "Senthilkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Vendor",
+        "contact_number":"9456312113",
+        "tin_number":"TIN123456",
+        "region":"Cuddalore"
+    },
+    {
+        "id": 7,
+        "supplier_name": "Rajkumar",
+        "supplier_address":"yyy",
+        "supplier_type":"Manufacturer",
+        "contact_number":"8976456333",
+        "tin_number":"TIN123456",
+        "region":"Salem"
+    }
+] 

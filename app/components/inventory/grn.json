@@ -1,0 +1,72 @@
+ [
+    {
+        "id": 1,
+        "grn_no": "GRN01",
+        "supplier":"Raj",
+        "po_number":"PO01",
+        "store":"Msk Stores",
+        "invoice_no":"INV01",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    },
+    {
+        "id": 2,
+        "grn_no": "GRN02",
+        "supplier":"Mani",
+        "po_number":"PO02",
+        "store":"Msk Stores",
+        "invoice_no":"INV02",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    },
+    {
+        "id": 3,
+        "grn_no": "GRN03",
+        "supplier":"Vinoth",
+        "po_number":"PO03",
+        "store":"Msk Stores",
+        "invoice_no":"INV03",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    },
+    {
+        "id": 4,
+        "grn_no": "GRN04",
+        "supplier":"Vijay",
+        "po_number":"PO04",
+        "store":"Msk Stores",
+        "invoice_no":"INV04",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    },
+    {
+        "id": 5,
+        "grn_no": "GRN05",
+        "supplier":"Karthick",
+        "po_number":"PO05",
+        "store":"Msk Stores",
+        "invoice_no":"INV05",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    },
+    {
+        "id": 6,
+        "grn_no": "GRN06",
+        "supplier":"Mani",
+        "po_number":"PO06",
+        "store":"Msk Stores",
+        "invoice_no":"INV06",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    },
+    {
+        "id": 7,
+        "grn_no": "GRN07",
+        "supplier":"Rafeeq",
+        "po_number":"PO07",
+        "store":"Msk Stores",
+        "invoice_no":"INV07",
+        "invoice_date":"03.05.2017",
+        "grn_date":"03.05.2017"
+    }
+] 

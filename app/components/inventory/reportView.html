@@ -1,0 +1,154 @@
+<div id="page_content">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom"> Report</h3>
+        <div class="md-card">
+            <div class="md-card-content large-padding">
+                <div class="uk-width-10-10 uk-width-medium-10-10">
+                    <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+                        <div class="uk-width-medium-1-4 parsley-row">
+                            <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="selectize_category" selectize/>
+                        </div>
+                        <div class="uk-width-medium-1-4 parsley-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            <label for="uk_dp_start">Start Date</label>
+                            <input class="md-input" type="text" id="uk_dp_start" md-input ng-model="forms_advanced.dp_start">
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1-4 parsley-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            <label for="uk_dp_end">End Date</label>
+                            <input class="md-input" type="text" id="uk_dp_end" md-input ng-model="forms_advanced.dp_end">
+                            </div>
+                        </div>
+                        <div class="uk-width-medium-1-4 parsley-row">
+                            <!-- <a ui-sref="restricted.inventory.grnAdd"  class="md-btn md-btn-primary md-btn-small">
+                            <i class="uk-icon-search"></i> Search</a> -->
+                            <button style="margin-top: 10px;" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" ng-click="getPayslipdetail()"><i class="uk-icon-search"></i> Search</a></button>
+                        </div>
+                    </div>
+                </div>  
+            </div>
+        </div>
+        <div class="md-card uk-margin-medium-bottom" ng-if="tableView_data.length > 0">
+            <div class="md-card-content large-padding" ng-controller="reportViewCtrl as showCase">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Material Request No.</th>
+                            <th>Date</th>
+                            <th>Store</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Material Request No.</th>
+                            <th>Date</th>
+                            <th>Store</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in tableView_data track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.request_no}}</td>
+                            <td>{{row.date}}</td>
+                            <td>{{row.store}}</td>
+                            <!-- <td><a ui-sref="restricted.hr.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
+                            <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="md-card uk-margin-medium-bottom" ng-if="tableView_data1.length > 0">
+            <div class="md-card-content large-padding" ng-controller="reportViewCtrl as showCase">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>PO No.</th>
+                            <th>PO Date</th>
+                            <th>Store Name</th>
+                            <th>Supplier</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>PO No.</th>
+                            <th>PO Date</th>
+                            <th>Store Name</th>
+                            <th>Supplier</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in tableView_data1 track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.po_number}}</td>
+                            <td>{{row.date}}</td>
+                            <td>{{row.store_name}}</td>
+                            <td>{{row.supplier}}</td>
+                            <!-- <td><a ui-sref="restricted.hr.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
+                            <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="md-card uk-margin-medium-bottom" ng-if="tableView_data2.length > 0">
+            <div class="md-card-content large-padding" ng-controller="reportViewCtrl as showCase">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>GRN No.</th>
+                            <th>GRN Date</th>
+                            <th>Supplier</th>
+                            <th>Purchase Order No.</th>
+                            <th>Invoice No.</th>
+                            <th>Invoice Date</th>
+                            <th>Store Name</th>
+                            <!-- <th>Action</th> -->
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>GRN No.</th>
+                            <th>GRN Date</th>
+                            <th>Supplier</th>
+                            <th>Purchase Order No.</th>
+                            <th>Invoice No.</th>
+                            <th>Invoice Date</th>
+                            <th>Store Name</th>
+                            <!-- <th></th> -->
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in tableView_data2 track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.grn_no}}</td>
+                            <td>{{row.grn_date}}</td>
+                            <td>{{row.supplier}}</td>
+                            <td>{{row.po_number}}</td>
+                            <td>{{row.invoice_no}}</td>
+                            <td>{{row.invoice_date}}</td>
+                            <td>{{row.store}}</td>
+                            <!-- <td><a ui-sref="restricted.hr.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
+                            <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

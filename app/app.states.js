@@ -77,7 +77,8 @@ rubycampusApp
                                 'lazy_prismJS',
                                 'lazy_autosize',
                                 'lazy_iCheck',
-                                'lazy_themes'
+                                'lazy_themes',
+                                'lazy_KendoUI'
                             ]);
                         }]
                     }
@@ -127,6 +128,78 @@ rubycampusApp
                         label: 'Home'
                     }
                 })
+
+                // Added By Senthil 24/04/2017
+
+                .state("restricted.mainStudashboard", {
+                    url: "/mainStudashboard",
+                    templateUrl: 'app/components/dashboard/mainStudashboard.html',
+                    // controller: 'mainStudashboardCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                // ocLazyLoad config (app/app.js)
+                                'lazy_countUp',
+                                'lazy_charts_peity',
+                                'lazy_charts_easypiechart',
+                                'lazy_charts_metricsgraphics',
+                                'lazy_charts_chartist',
+                                'lazy_clndr',
+                                'lazy_charts_c3',
+                                'app/components/dashboard/mainStudashboardCtrl.js'
+                            ], {serie: true} );
+                        }],
+                        sale_chart_data: function($http){
+                            return $http({method: 'GET', url: 'data/mg_dashboard_chart.min.json'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        user_data: function($http){
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        todo_data: function($http){
+                            return $http({ method: 'GET', url: 'data/todo_datanew.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Student Dashboard'
+                    },
+                    ncyBreadcrumb: {
+                        label: 'Home'
+                    }
+                })
+
+                // End
+
+                // Added By Senthil 25/04/2017
+
+                .state("restricted.quickLinksView", {
+                    url: "/quickLinksView",
+                    templateUrl: 'app/components/Dashboard/quickLinksView.html',
+                    controller: 'quickLinksViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_iCheck',
+                                'lazy_tree',
+                                'app/components/dashboard/quickLinksViewCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Tree'
+                    }
+                })
+
+                // End
+
                 ///RUBY CAMPUS Hr payroll and paygroup state  by Manikandan///
                 .state("restricted.hr", {
                     template: '<div ui-view autoscroll="false"/>',
@@ -4011,6 +4084,448 @@ rubycampusApp
                         pageTitle: 'Assign leave Category'
                     }
                 })
+
+                //Added by Senthil 02/05/2017
+
+                .state("restricted.inventory", {
+                    template: '<div ui-view autoscroll="false"/>',
+                    url :"/inventory",
+                    abstract: true
+                })
+
+                .state("restricted.inventory.storeCategory", {
+                    url: "/storeCategoryView",
+                    templateUrl: 'app/components/inventory/storeCategoryView.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
+                                'app/components/inventory/storeCategoryViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Store Category View'
+                    }
+                })
+
+                .state("restricted.inventory.store", {
+                    url: "/storeView",
+                    templateUrl: 'app/components/inventory/storeView.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
+                                'app/components/inventory/storeViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Store View'
+                    }
+                })
+
+                .state("restricted.inventory.itemCategory", {
+                    url: "/itemCategoryView",
+                    templateUrl: 'app/components/inventory/itemCategoryView.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
+                                'app/components/inventory/itemCategoryViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Item Category View'
+                    }
+                })
+
+                .state("restricted.inventory.supplierType", {
+                    url: "/supplierTypeView",
+                    templateUrl: 'app/components/inventory/supplierTypeView.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
+                                'app/components/inventory/supplierTypeViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Supplier Type View'
+                    }
+                })
+
+                // .state("restricted.inventory.item", {
+                //     url: "/itemView",
+                //     templateUrl: 'app/components/inventory/itemView.html',
+                //     resolve: {
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'bower_components/angular-resource/angular-resource.min.js',
+                //                 'lazy_datatables',
+                //                 'lazy_parsleyjs',
+                //                 'app/components/inventory/itemViewCtrl.js'
+                //             ], {serie:true});
+                //         }]
+                //     },
+                //     data: {
+                //         pageTitle: 'Supplier Type View'
+                //     }
+                // })
+
+                .state("restricted.inventory.item", {
+                    url: "/assets",
+                    templateUrl: 'app/components/inventory/itemView.html',
+                    controller: 'itemViewCtrl',
+                        resolve: {
+                            products_data: function($http){
+                                return $http({method: 'GET', url: 'app/components/inventory/assets.json'})
+                                    .then(function (data) {
+                                        return data.data;
+                                    });
+                            },
+                            deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                                return $ocLazyLoad.load([
+                                    'lazy_pagination',
+                                    'lazy_dropify',
+                                    'app/components/inventory/itemViewCtrl.js'
+                                ], { serie: true } );
+                            }]
+                        },
+                        data: {
+                            pageTitle: 'Item List'
+                        }
+                })
+
+                .state("restricted.inventory.storeItem", {
+                    url: "/StoreItemView",
+                    templateUrl: 'app/components/inventory/storeItemView.html',
+                    controller: 'storeItemViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/storeItemViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Store Item View'
+                    }
+                })
+
+                .state("restricted.inventory.supplier", {
+                    url: "/SupplierView",
+                    templateUrl: 'app/components/inventory/supplierView.html',
+                    controller: 'supplierViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/supplierViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Supplier View'
+                    }
+                })
+
+                .state("restricted.inventory.purchaseOrderView", {
+                    url: "/purchaseOrderView",
+                    templateUrl: 'app/components/inventory/purchaseOrderView.html',
+                    controller: 'purchaseOrderViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/purchaseOrderViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order View'
+                    }
+                })
+
+                .state("restricted.inventory.purchaseOrderAdd", {
+                    url: "/purchaseOrderAdd",
+                    templateUrl: 'app/components/inventory/purchaseOrderAdd.html',
+                    controller: 'purchaseOrderAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/purchaseOrderAddCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Add'
+                    }
+                })
+
+                .state("restricted.inventory.purchaseOrderDetails", {
+                    url: "/purchaseOrderDetails",
+                    templateUrl: 'app/components/inventory/purchaseOrderDetails.html',
+                    controller: 'purchaseOrderDetailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/inventory/purchaseOrderDetailsCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Detail View'
+                    }
+                })
+
+                .state("restricted.inventory.purchaseOrderReceipt", {
+                    url: "/purchaseOrderReceipt",
+                    templateUrl: 'app/components/inventory/purchaseOrderReceipt.html',
+                    controller: 'purchaseOrderReceiptCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/inventory/purchaseOrderReceiptCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
+                .state("restricted.inventory.grnView", {
+                    url: "/grnView",
+                    templateUrl: 'app/components/inventory/grnView.html',
+                    controller: 'grnViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/grnViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'GRN View'
+                    }
+                })
+
+                .state("restricted.inventory.grnAdd", {
+                    url: "/grnAdd",
+                    templateUrl: 'app/components/inventory/grnAdd.html',
+                    controller: 'grnAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/grnAddCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Add'
+                    }
+                })
+
+                .state("restricted.inventory.grnDetail", {
+                    url: "/grnDetail",
+                    templateUrl: 'app/components/inventory/grnDetail.html',
+                    controller: 'grnDetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/grnDetailCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Add'
+                    }
+                })
+
+                .state("restricted.inventory.billingView", {
+                    url: "/billingView",
+                    templateUrl: 'app/components/inventory/billingView.html',
+                    controller: 'billingViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/billingViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Add'
+                    }
+                })
+
+                .state("restricted.inventory.billingAdd", {
+                    url: "/billingAdd",
+                    templateUrl: 'app/components/inventory/billingAdd.html',
+                    controller: 'billingAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/billingAddCtrl.js'
+                            ], {serie:true});
+                        }],
+                        struct_data: function($http){
+                            return $http({ method: 'GET', url: 'data/finance/feestructureNew.json' })
+                                .then(function (getdata) {
+                                    return getdata.data;
+                                });
+                        },
+                    },
+                    data: {
+                        pageTitle: 'Billing Add'
+                    }
+                })
+
+                .state("restricted.inventory.billingDetails", {
+                    url: "/billingDetails",
+                    templateUrl: 'app/components/inventory/billingDetails.html',
+                    controller: 'billingDetailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/inventory/billingDetailsCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Billing Detail View'
+                    }
+                })
+
+                .state("restricted.inventory.billingReceipt", {
+                    url: "/billingReceipt",
+                    templateUrl: 'app/components/inventory/billingReceipt.html',
+                    controller: 'billingReceiptCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/inventory/billingReceiptCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
+
+                .state("restricted.inventory.materialRequestView", {
+                    url: "/materialRequestView",
+                    templateUrl: 'app/components/inventory/materialRequestView.html',
+                    controller: 'materialRequestViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/materialRequestViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Material Request View'
+                    }
+                })
+
+                .state("restricted.inventory.materialRequestAdd", {
+                    url: "/materialRequestAdd",
+                    templateUrl: 'app/components/inventory/materialRequestAdd.html',
+                    controller: 'materialRequestAddCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/materialRequestAddCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Material Request Add'
+                    }
+                })
+
+                .state("restricted.inventory.materialRequestDetails", {
+                    url: "/materialRequestDetails",
+                    templateUrl: 'app/components/inventory/materialRequestDetails.html',
+                    controller: 'materialRequestDetailsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/inventory/materialRequestDetailsCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Detail View'
+                    }
+                })
+
+                .state("restricted.inventory.materialRequestReceipt", {
+                    url: "/materialRequestReceipt",
+                    templateUrl: 'app/components/inventory/materialRequestReceipt.html',
+                    controller: 'materialRequestReceiptCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/inventory/materialRequestReceiptCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Material Request Receipt'
+                    }
+                })
+
+                .state("restricted.inventory.reportView", {
+                    url: "/reportView",
+                    templateUrl: 'app/components/inventory/reportView.html',
+                    controller: 'reportViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/reportViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Report View'
+                    }
+                })
+
+                // End
 
                 //Added by Senthil 01/04/2017 
 

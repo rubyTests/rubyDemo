@@ -1,0 +1,145 @@
+<style>
+.selectize-dropdown [data-selectable] {
+    font-size: 13px !important;
+    padding-bottom: 10px;
+    padding-top: 11px;
+}
+.md-hr{
+         margin: 24px 0 !important;
+    }
+
+#page_content_inner {
+    padding: 24px 24px 0;
+}
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+      <h3 class="heading_a uk-margin-bottom">
+          GRN Add
+      </h3>
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+                            <div class="uk-width-10-10 uk-width-medium-10-10">
+                                <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>GRN No.</label>
+                                        <input type="text" ng-model="po_number" class="md-input" md-input />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>GRN Date</label>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="section.valid_from"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <input type="text" config="selectize_purchaseOrder_config" options="selectize_purchaseOrder_options" ng-model="selectize_purchaseOrder" selectize/>
+                                    </div>
+                                    
+                                </div>
+                                <div class="uk-grid uk-margin-medium-top uk-margin-bottom" data-uk-grid-margin>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>Invoice No.</label>
+                                        <input type="text" ng-model="invoice_number" class="md-input" md-input />
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>Invoice Date</label>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="section.invoice_date"/>
+                                    </div>
+                                    <!-- <div class="uk-width-medium-1-3 parsley-row">
+                                        <label>Other Charges</label>
+                                        <input type="text" ng-model="other_charges" class="md-input" md-input />
+                                    </div> -->
+                                </div>
+
+                                <!-- <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+                                  <div class="uk-width-medium-1-1 parsley-row uk-margin-top">
+                                    <div class="uk-overflow-container">
+                                      <table class="uk-table uk-table-hover">
+                                          <thead>
+                                          <tr>
+                                              <th>Item Name</th>
+                                              <th>Quantity</th>
+                                              <th>Unit Price</th>
+                                              <th>Expiry Date</th>
+                                          </tr>
+                                          </thead>
+                                          <tbody>
+                                          </tbody>
+                                      </table>
+                                    </div>
+                                  </div>
+                                </div> -->
+                            </div>   
+
+                            <!-- <div class="uk-text-right" style="margin-top: 30px;">
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                            </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="page_content_inner">
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <div class="uk-overflow-container">
+                    <table class="uk-table">
+                        <thead>
+                        <tr>
+                            <th class="uk-text-middle"><b>S.No</b></th>
+                            <th class="uk-text-middle"><b>Item</b></th>
+                            <th class="uk-text-middle"><b>Quantity</b></th>
+                            <th class="uk-text-middle"><b>Unit Price</b></th>
+                            <th class="uk-text-middle"><b>Total Amount</b></th>
+                            <!-- <th class="uk-text-middle"><b>Unit Price</b></th>
+                            <th class="uk-text-middle"><b>Total</b></th> -->
+                            <th ></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in newRow track by $index">
+                                <td class="uk-text-middle">{{$index+1}}</td>
+                                <td class="uk-text-middle"><input type="text" name="fee_1" id="fee_1" ng-model="x.feesItem1"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="x.feesItem2"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem3"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem4" disabled/></td>
+                                <!-- <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem4"/></td>
+                                <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem5"/></td> -->
+                                <td class="uk-text-right uk-text-middle">
+                                    <a ng-click="addRow();" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
+                                    <a ng-click="removeRow($index);" ng-if="$last && $index != 0 "><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                    <a ng-click="removeRow($index);" ng-if="!$last"><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-medium-4-6">
+                        </div>
+                        <div class="uk-width-medium-2-6">
+                        <b>Total Amount :</b>
+                        <span style="margin-left: 10px;">{{totalAmount | currency:""}}</span>
+                        </div>
+                    </div>
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-medium-3-6 parsley-row">
+                            <!-- <label>Payment Notes</label>
+                            <textarea cols="30" rows="1" class="md-input" ng-model="form.input_k" md-input textarea-autosize></textarea> -->
+                        </div>
+                        <div class="uk-width-medium-1-6 parsley-row">
+                        </div>
+                        <div class="uk-width-medium-2-6 parsley-row uk-text-right uk-margin-top">
+                            <!-- <a class="md-btn md-btn-small md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="margin-top: 25px;">Pay Fee</a> -->
+                            <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                            <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
