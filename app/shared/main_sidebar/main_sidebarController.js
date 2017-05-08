@@ -4,7 +4,9 @@ angular
         '$timeout',
         '$scope',
         '$rootScope',
-        function ($timeout,$scope,$rootScope) {
+		'$http',
+		'$localStorage',
+        function ($timeout,$scope,$rootScope,$http,$localStorage) {
     
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 $timeout(function() {
@@ -59,9 +61,49 @@ angular
                     $('#lang_switcher').next().children('.selectize-input').find('input').attr('readonly',true);
                 }
             };
-    
+			
+			
+			// $http.get('http://192.168.1.139/rubyServices/api/GeneralAPI/menuLink')
+			// .success(function(data){
+				// console.log(data.message,"data");
+				// $scope.sections=data.message;
+				
+			// }).error(function(err){
+			// });
+			var userLov = [
+                {
+                    id: 0,
+                    title: 'Dashboard',
+                    icon: '&#xE871;',
+                    link: 'restricted.dashboard'
+                },
+                {
+                    id: 1,
+                    title: 'Institution',
+                    icon: '&#xE84F;',
+                    submenu: [
+                        {
+                            title: 'Institution Details',
+                            link: 'restricted.setting.institutionDetails'
+                            // link:'restricted.setting.institution_view'
+                        },
+                        {
+                            title: 'Building',
+                            link: 'restricted.setting.building'
+                        },
+                        {
+                            title: 'Building Block',
+                            link: 'restricted.setting.buildingblock'
+                        },
+                        {
+                            title: 'Room',
+                            link: 'restricted.setting.room'
+                        }
+                    ]
+                }];
+			
             // menu entries
-            $scope.sections = [
+            var adminLov = [
                 {
                     id: 0,
                     title: 'Dashboard',
@@ -600,6 +642,12 @@ angular
                     icon: '&#xE158;',
                     link : 'restricted.employeeDashboard'
                 },
+				{
+                    id: 14,
+                    title: 'User Privileges',
+                    icon: '&#xE8E8;',
+                    link : 'restricted.user_privileges.userView'
+                },
                 // {
                 //     id: 15,
                 //     title: 'Sticky Notes',
@@ -1082,8 +1130,12 @@ angular
                 //         }
                 //     ]
                 // }
-            ]
-    
+            ];
+			if($localStorage.role_id==1){
+				$scope.sections = adminLov;
+			}else if($localStorage.role_id==2){
+				$scope.sections = userLov;
+			}
         }
     ])
 ;
