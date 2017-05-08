@@ -7,10 +7,27 @@ angular
 		'$http',
 		'$location',
 		'$localStorage',
-        function ($scope,$rootScope,utils,$http,$location,$localStorage) {
+		'$timeout',
+		'$state',
+        function ($scope,$rootScope,utils,$http,$location,$localStorage,$timeout,$state) {
 
             $scope.registerFormActive = false;
 
+			
+			$timeout(function(){
+				var $formValidate = $('#login');
+				$formValidate
+				.parsley()
+				.on('form:validated',function() {
+					$scope.$apply();
+				})
+				.on('field:validated',function(parsleyField) {
+					if($(parsleyField.$element).hasClass('md-input')) {
+						$scope.$apply();
+					}
+				});
+			},500)
+			
             var $login_card = $('#login_card'),
                 $login_form = $('#login_form'),
                 $login_help = $('#login_help'),
@@ -75,17 +92,45 @@ angular
 			$scope.getLogin=function(){
 				$http({
 					method : "GET",
-					url : "http://192.168.1.138/rubyServices/api/GeneralAPI/login",
+					url : "http://192.168.1.139/rubyServices/api/GeneralAPI/login",
 					params : {"USER_EMAIL": $scope.login_username, "USER_PASSWORD": $scope.login_password},
 				}).then(function(response){
 					if(response.data.status==true){
-						$localStorage.user_id=response.data.message[0].USER_FIRST_NAME;
+						$localStorage.user_id=response.data.message[0].USER_ID;
 						$localStorage.access_token=response.data.access_token;
-						$location.path('/dashboard');
+						$localStorage.role=response.data.message[0].role_name;
+						$localStorage.role_id=response.data.message[0].USER_ROLE_ID;
+						//$location.path('/dashboard');
+						$state.go('restricted.dashboard');
+					}else{
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'danger',
+							timeout : 2000,
+							pos     : 'top-right'
+						});
 					}
 				}, function myError(response) {
 					$scope.authError = 'Please Enter Valid Email';
 				});
+			}
+			
+			// Recovery Details
+			$scope.recovery={};
+			$scope.recoveryData=function(){
+				//console.log($scope.recovery,"recovery");
+				if($scope.recovery!='' || $scope.recovery!=undefined){
+					$http.get('http://192.168.1.139/rubyServices/api/GeneralAPI/passwordReset',{params:{userData:$scope.recovery.data}})
+					.success(function(data){
+						//console.log(data,"data");
+						if(data.status==true){
+							UIkit.modal.confirm('Password has been reset successfully,Please check your email or phone', function(){
+								$state.go('login');
+							});
+						}
+					}).error(function(err){
+					});
+				}
 			}
 			
 			if($localStorage.access_token=='' || $localStorage.access_token==undefined){
