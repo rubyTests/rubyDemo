@@ -1134,7 +1134,8 @@ angular
 			if($localStorage.role_id==1){
 				$scope.sections = adminLov;
 			}else if($localStorage.role_id==2){
-				$scope.sections = userLov;
+				//$scope.sections = userLov;
+				$scope.sections = adminLov;
 			}
         }
     ])
