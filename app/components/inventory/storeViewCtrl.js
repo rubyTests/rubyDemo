@@ -63,10 +63,10 @@ angular
                 });
                 
             vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
+                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Building')
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Code'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Store Category')
             ];
 
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
@@ -108,11 +108,11 @@ angular
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
-            $scope.selectize_buildingId_options =$scope.buildingList;
-            $scope.selectize_buildingId_config = {
+            $scope.selectize_storeCategory_options =$scope.buildingList;
+            $scope.selectize_storeCategory_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Building',
+                placeholder: 'Select Category',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){

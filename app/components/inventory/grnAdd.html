@@ -11,6 +11,10 @@
 #page_content_inner {
     padding: 24px 24px 0;
 }
+
+.md-icon.material-icons.md-24.AdjIconMargin {
+    margin-right: 35px;
+}
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -110,7 +114,7 @@
                                 <td class="uk-text-right uk-text-middle">
                                     <a ng-click="addRow();" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
                                     <a ng-click="removeRow($index);" ng-if="$last && $index != 0 "><i class="md-icon material-icons md-24">&#xE872;</i></a>
-                                    <a ng-click="removeRow($index);" ng-if="!$last"><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                    <a ng-click="removeRow($index);" ng-if="!$last"><i class="md-icon material-icons md-24 AdjIconMargin">&#xE872;</i></a>
                                 </td>
                             </tr>
                         </tbody>

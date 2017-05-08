@@ -24,18 +24,24 @@
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                    </div>
-                    <div class="uk-width-medium-1-2">
+                    <!-- <div class="uk-width-medium-1-2">
+                    </div> -->
+                    <div class="uk-width-medium-2-6">
                         <label for="contact_list_search">Find Student</label>
                         <input class="md-input" type="text" id="contact_list_search" ng-model="searchName" md-input />
+                    </div>
+                    <div class="uk-width-medium-3-6">
+                    </div>
+                    <div class="uk-width-medium-1-6">
+                        <input type="text" class="md-input" config="{ create:false, maxItems: 1 }" options="filter_pageSize" ng-model="pageSize" selectize>
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="uk-grid-width-small-1-2 uk-grid-width-medium-1-3 uk-grid-width-large-1-4 uk-grid-width-xlarge-1-5 hierarchical_show" id="contact_list" hierarchical-show>
-            <div ng-repeat="user in contact_list | filter: searchName" data-uk-filter="{{user.company}}" on-last-repeat>
+            <!-- <div ng-repeat="user in contact_list | filter: searchName" data-uk-filter="{{user.company}}" on-last-repeat> -->
+            <div dir-paginate="user in contact_list | filter: searchName | itemsPerPage: pageSize" data-uk-filter="{{user.company}}" on-last-repeat>
                 <div class="md-card md-card-hover">
                     <div class="md-card-head" ng-class="{'md-bg-cyan-600' : user.featured}">
                         <div class="md-card-head-menu" data-uk-dropdown="{pos:'bottom-right'}">
@@ -86,6 +92,12 @@
                         </ul>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-medium-1-1">
+                <dir-pagination-controls boundary-links="true" template-url="app/templates/dirPagination.tpl.html"></dir-pagination-controls>
             </div>
         </div>
 

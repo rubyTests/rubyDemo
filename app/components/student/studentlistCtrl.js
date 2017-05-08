@@ -60,5 +60,8 @@ angular
                 });
             })
 
+            $scope.pageSize = 10;
+            $scope.filter_pageSize = ['10', '20', '30' , '50'];
+
         }
     ]);

@@ -425,7 +425,10 @@ rubycampusApp
                                 });
                         },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load('app/components/Library/Library_gridController.js');
+                            return $ocLazyLoad.load([
+                                'lazy_pagination',
+                                'app/components/Library/Library_gridController.js'
+                            ]);
                         }]
                     }
                 })
@@ -3080,6 +3083,7 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'lazy_pagination',
                                 'app/components/student/studentlistCtrl.js'
                             ],{serie: true});
                         }],
