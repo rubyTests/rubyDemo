@@ -765,7 +765,7 @@ angular
 							timeout : 2000,
 							pos     : 'top-center'
 						});
-						$state.go('restricted.student.student_list');
+						//$state.go('restricted.student.student_list');
 					}
                 });
 			}
