@@ -4796,13 +4796,30 @@ rubycampusApp
                 url :"/hostel",
                 abstract: true
             })
-
+            .state("restricted.hostel.settings", {
+                url: "/settings",
+                templateUrl: 'app/components/hostel/hostelSettings_view.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/hostelsettingsCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Stettings View'
+                }
+            })
             .state("restricted.hostel.allocation", {
                 url: "/allocation",
                 templateUrl: 'app/components/hostel/allocation_view.html',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
                             'app/components/hostel/allocationviewCtrl.js'
@@ -4819,6 +4836,7 @@ rubycampusApp
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
                             'app/components/hostel/transferCtrl.js'
