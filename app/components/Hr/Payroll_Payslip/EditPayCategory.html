@@ -5,64 +5,69 @@
 /*  .alignBtn{
     vertical-align: bottom !important;
   }*/
-
 .uk-vertical-align-middle {
     vertical-align: bottom !important;
 }
+.uk-modal.uk-modal-dialog-replace .uk-modal-content{
+      font-size: 16px !important;
+  }
 </style>
+
 <div id="page_content" ng-controller="EditPayCategoryCtrl as showCase">
     <div id="page_content_inner">
         <h3 class="heading_a uk-margin-bottom">Edit Pay Structure</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
-              <!-- <form class="uk-form"> -->
-              <!-- <h3 class="heading_b uk-margin-bottom">Pay Category</h3> -->
+              <form id="inputForm" ng-submit="updatePayStructure()">
+                <div class="uk-text-right">
+                  <button type="button" ng-show="form_dynamic.length==0" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" ng-click="cloneSection($event,$index,currentE)">Add Pay item</button> 
+                </div>
                 <div class="uk-width-9-10 uk-width-medium-9-10">
                   <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                        <!-- <label>Pay Group Name</label>
-                        <input type="text" class="md-input" md-input /> -->
-                        <label>Paystructure Name</label>
-                        <input type="text" class="md-input" md-input />
+                    <div class="uk-width-medium-1-2 parsley-row">
+                        <br ng-if="PayFrequency"/>
+                        <label>Paystructure Name <span class="req">*</span></label>
+                        <input type="text" ng-model="paystruc_name" required class="md-input" md-input />
+                        <input type="hidden" ng-model="paystru_id">
                     </div>
-                    <div class="uk-width-medium-1-2">
-                        <!-- <label>Frequency</label>
-                        <input type="text" class="md-input" md-input /> -->
-                        <input type="text" config="PayFrequency_config" options="PayFrequency_options" ng-model="PayFrequency" name="selectize_n" selectize/>
+                    <div class="uk-width-medium-1-2 parsley-row">
+                        <label for="frequency" ng-if="PayFrequency" style="font-size: 12px;color: #727272;">Frequency <span class="req">*</span></label>
+                        <input type="text" config="PayFrequency_config" options="PayFrequency_options" ng-model="PayFrequency" required selectize/>
                     </div>
                   </div>
-                  </div>               
-                  <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
+                </div>               
+                <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
                   <div class="uk-width-9-10 uk-width-medium-9-10">
-                  <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-2">
-                        <input type="text" config="itemType_config" options="itemType_options" ng-model="itemType" name="selectize_n" selectize/>
-                    </div>
-                    <div class="uk-width-medium-1-2">
-                        <label>Percentage of Basic Pay</label>
-                        <input type="text" class="md-input" md-input />
-                    </div>
-                  </div>
-                  </div>
-                    <div class="uk-width-1-10 uk-width-medium-1-10 uk-text-center aligncalss">
-                      <div class="uk-vertical-align uk-height-1-1 alignBtn">
-                        <div class="uk-vertical-align-middle">
-                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
-                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
-                        </div>
+                    <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+                      <div class="uk-width-medium-1-2 parsley-row">
+                          <label for="item" ng-if="section.PAYITEM_ID" style="font-size: 12px;color: #727272;">Pay Item <span class="req">*</span></label>
+                          <input type="text" config="itemType_config" options="itemType_options" ng-model="itemType_array[topParent].PAYITEM_ID" ng-selected="itemType_array[topParent].PAYITEM_ID" required selectize ng-change="checkValid(itemType_array[topParent])"/>
+                      </div>
+                      <div class="uk-width-medium-1-2 parsley-row">
+                          <br ng-if="section.AMOUNT"/>
+                          <label>Percentage of Basic Pay <span class="req">*</span></label>
+                          <input type="text" class="md-input" ng-model="itemType_array[topParent].AMOUNT" ng-value="section.AMOUNT" required md-input numeric-only/>
                       </div>
                     </div>
                   </div>
-                  <div class="uk-grid uk-grid-medium  ng-scope">
+                  <div class="uk-width-1-10 uk-width-medium-1-10 uk-text-center aligncalss">
+                    <div class="uk-vertical-align uk-height-1-1 alignBtn">
+                      <div class="uk-vertical-align-middle">
+                          <a href="javascript:void(0)" ng-click="cloneSection($event,$index,section)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                          <a href="javascript:void(0)" ng-click="deleteSection($event,$index,section,paystru_id)" ng-if="$last"><i class="material-icons md-36">&#xE872;</i></a>
+                          <a href="javascript:void(0)" ng-click="deleteSection($event,$index,section,paystru_id)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="uk-grid uk-grid-medium  ng-scope">
                   <div  class="uk-width-10-10 uk-width-medium-10-10 uk-text-right">
-                  <p></p>
-                    <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backbtn()">Cancel</button>
-                    <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                    <p></p>
+                      <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small" ui-sref="restricted.hr.StructureGroup">Cancel</button>
+                      <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Update</button>
+                  </div>
                 </div>
-                </div>
-                  
-              <!-- </form> -->
-
+              </form>
             </div>
         </div>
     </div>

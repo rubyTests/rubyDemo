@@ -18,7 +18,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info">person</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].firstname}} {{tableArray[0].lastname}}</span>
+                                    <span class="md-list-heading">{{tableView_data.EMPLOYEE_NAME}}</span>
                                     <span class="uk-text-small uk-text-muted">Employee Name</span>
                                 </div>
                             </li>
@@ -31,7 +31,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >assignment_ind</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].Admission_No}}</span>
+                                    <span class="md-list-heading">{{tableView_data.EMPLOYEE_NO}}</span>
                                     <span class="uk-text-small uk-text-muted">Employee Number</span>
                                 </div>
                             </li>
@@ -44,20 +44,20 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >import_contacts</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].Dept}}</span>
+                                    <span class="md-list-heading">{{tableView_data.DEPARTMENT}}</span>
                                     <span class="uk-text-small uk-text-muted">Department</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="uk-width-medium-1-4">
+                    <div class="uk-width-medium-1-4" ng-if="tableView_data.POSITION">
                         <ul class="md-list md-list-addon">
                             <li>
                                 <div class="md-list-addon-element">
                                     <i class="md-list-addon-icon material-icons uk-text-info" >school</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].position}}</span>
+                                    <span class="md-list-heading">{{tableView_data.POSITION}}</span>
                                     <span class="uk-text-small uk-text-muted">Position</span>
                                 </div>
                             </li>
@@ -68,9 +68,9 @@
         </div>
         <br>
         <h3 class="heading_b uk-margin-bottom">Payroll Details
-        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayDetails()">Edit</button>
+        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayDetails()" ng-show="editBTN">Edit</button>
         </h3>
-         <div class="md-card-content uk-width-medium-1-1 large-padding">
+        <div class="md-card-content uk-width-medium-1-1 large-padding">
             <div class="md-card uk-margin-medium-bottom">
                 <div class="md-card-content">
                     <div class="uk-overflow-container">
@@ -84,25 +84,32 @@
                                     <td>
                                         <table>
                                             <tbody>
+                                                <!-- <tr>
+                                                    <td class="tdStyle">Basic</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="basic_val" ng-change="earningCalculation(basic_val)" id="basicvalue"></td>
+                                                </tr>
+                                                <tr ng-repeat="row in PaySrtuctureData | filter:{ITEM_TYPE:'Earnings'}">
+                                                    <td class="tdStyle" >{{row.ITEM_NAME}}</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="row.AMOUNT" name="earningAmount" ng-disabled=true></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="tdStyle"><b>Total Earnings</b></td>
+                                                    <td class="tdStyle"><input type="text" ng-model="Total_Earning" id="earningTotal" ng-disabled=true>
+                                                    </td>
+                                                </tr> -->
                                                 <tr>
                                                     <td class="tdStyle">Basic</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="basic_val" ng-change="earningCalculation()"></td>
+                                                    <td class="tdStyle"><input type="text" ng-model="basic_val" ng-change="earningCalculation(basic_val)" id="basicvalue" required></td>
+                                                </tr>
+                                                <tr ng-repeat="row in PaySrtuctureData | filter:{ITEM_TYPE:'Earnings'}">
+                                                    <td class="tdStyle">{{row.ITEM_NAME}}</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="row.changedAmount" name="earningAmount" ng-disabled="true"> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="tdStyle">Housing Allowance</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="housing_allow" ng-change="earningCalculation()"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdStyle">Human Resource Allowance</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="hr_allowance" ng-change="earningCalculation()"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdStyle">Transport Allowance</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="transport" ng-change="earningCalculation()"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="tdStyle">Total Earnings</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="Total_Earning" ng-blur="getTotalNetPay()" id="earningTotal">
+                                                    <td class="tdStyle">
+                                                    <b>Total Earnings</b>
+                                                    </td>
+                                                    <td class="tdStyle"><input type="text" ng-model="Total_Earning" id="earningTotal" ng-disabled="true">
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -111,31 +118,39 @@
                                     <td>
                                         <table>
                                             <tbody>
-                                                <tr>
-                                                    <td class="tdStyle">Income Tax</td>
-                                                    <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="income_deduction"></td>
+                                                <!-- <tr ng-repeat="row in PaySrtuctureData | filter:{ITEM_TYPE:'Deductions'}">
+                                                    <td class="tdStyle">{{row.ITEM_NAME}}</td>
+                                                    <td class="tdStyle" ><input type="text" ng-change="getTotalDeduction()" ng-disabled=true ng-model="row.AMOUNT" name="deductionAmount"> </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="tdStyle">Provident Fund</td>
-                                                    <td class="tdStyle"><input type="text" ng-change="getTotalDeduction()" ng-model="fund_deduction"></td>
+                                                    <td class="tdStyle"><b>Total Deduction</b></td>
+                                                    <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="total_deduction" ng-disabled=true></td>
+                                                </tr> -->
+                                                <tr ng-repeat="row in PaySrtuctureData | filter:{ITEM_TYPE:'Deductions'}">
+                                                    <td class="tdStyle">{{row.ITEM_NAME}}</td>
+                                                    <td class="tdStyle">
+                                                        <input type="text" ng-change="getTotalDeduction()" ng-disabled=true ng-model="row.changedAmount" name="deductionAmount">
+                                                    </td>
                                                 </tr>
                                                 <tr>
-                                                    <td class="tdStyle">Total Deduction</td>
-                                                    <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="toatl_deduction"></td>
+                                                    <td class="tdStyle">
+                                                        <b>Total Deduction</b>
+                                                    </td>
+                                                    <td class="tdStyle"><input type="text" id="duductionTotal" ng-model="total_deduction" ng-disabled=true></td>
                                                 </tr>
                                             </tbody>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="tdStyle"><span style="margin-left: 0px;"><b>Gross Pay ‎(Total Earnings)</b>‎ <span style="margin-left: 40px;">{{grasspayTotal}}</span></span></td>
-                                    <td class="tdStyle"><span style="margin-left: 60px;"><b>Net Pay</b> <span style="margin-left: 70px;">{{showTotalNetpay}}</span></span></td>
+                                    <td class="tdStyle"></td>
+                                    <td class="tdStyle"><span style="margin-left: 18px;"><b>Net Pay</b> <input type="text" id="netValue" ng-model="showTotalNetpay" ng-disabled=true style="margin-left: 110px;"></span></td>
                                 </tr>
                             </tbody>
                         </table>
                         <div class="" style="float: right;">
-                            <a class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</a>
-                             <button ng-show="btnStatus" type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">Assign Payroll</button>
+                            <a class="md-btn md-btn-danger md-btn-small" onclick="window.history.back();">Cancel</a>
+                             <button ng-show="btnStatus" type="button" class="md-btn md-btn-primary md-btn-small" ng-click="assignPayroll(tableView_data.ID,tableView_data.EMPLOYEE_NAME,PayStru_name.NAME)">Assign Payroll</button>
                         </div>
                     </div>
                 </div>

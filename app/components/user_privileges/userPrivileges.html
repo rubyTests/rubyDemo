@@ -1,6 +1,4 @@
 <style type="text/css">
-
-
 .tablesorter tbody > tr > td[contenteditable=true]:focus {
   outline: #08f 1px solid;
   background: #eee;
@@ -22,29 +20,25 @@ td.editable_updated {
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                    <div class="uk-width-large-1-4 uk-width-medium-1-1">
                         <div class="parsley-row">
-                            <selectize id="selec_adv_2" config="department_config" options="department" position="bottom" ng-model="department1" name="department" required placeholder='Select Department'></selectize>
+                            <selectize id="selec_adv_2" config="modules_config" options="modules" position="bottom" ng-model="module" name="batch" required placeholder='Select Modules'></selectize>
                         </div>
                     </div>
-                    <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                    <div class="uk-width-large-1-4 uk-width-medium-1-1 uk-animation-fade" ng-if="menus.length > 0">
                         <div class="parsley-row">
-                            <selectize id="selec_adv_2" config="course_config" options="course" position="bottom" ng-model="course1" name="course" required placeholder='Select Course'></selectize>
+                            <selectize id="selec_adv_2" config="menuConfig" options="menus" position="bottom" ng-model="menu" name="batch" required placeholder='Select Menu'></selectize>
                         </div>
                     </div>
-                    <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                    <div class="uk-width-large-1-4 uk-width-medium-1-1 uk-animation-fade" ng-if="submenus.length > 0">
                         <div class="parsley-row">
-                            <selectize id="selec_adv_2" config="batch_config" options="batch" position="bottom" ng-model="batch1" name="batch" required placeholder='Select Batch'></selectize>
+                            <selectize id="selec_adv_2" config="menuItemConfig" options="submenus" position="bottom" ng-model="submenusselected" name="batch" required placeholder='Select Menu'></selectize>
                         </div>
                     </div>
-                     <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                     <div class="uk-width-large-1-4 uk-width-medium-1-1">
                         <div class="uk-grid">
-                            <div class="uk-width-large-1-2 uk-width-medium-1-2">
-                                <div class="uk-input-group">
-                                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
-                                    <label for="uk_dp_1">Joining date</label>
-                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
-                                </div>
+                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                <selectize id="selec_adv_2" config="course_config" options="listcategory" position="bottom" ng-model="category" name="category" required placeholder='Select Category'></selectize>
                             </div>
                         </div>
                     </div>
@@ -71,10 +65,19 @@ td.editable_updated {
                             <!-- <th data-name="Select" data-priority="critical"><input type="checkbox" class="ts_checkbox_all"></th> -->
                             <th>Id</th>
                             <th class="filter-false remove sorter-false" data-priority="critical">Image</th>
-                            <th data-priority="critical">Student Name</th>                          
-                            <th class="filter-false remove sorter-false" data-priority="critical">Access to Add</th>
-                            <th class="filter-false remove sorter-false" data-priority="critical">Access to Edit</th>
-                            <th class="filter-false remove sorter-false" data-priority="critical">Access to Delete</th>
+                            <th data-priority="critical">User Name</th>                          
+                            <th class="filter-false remove sorter-false" data-priority="critical">
+                                <input type="checkbox" class="ts_checkbox_all_add" ng-model="checkbox_all_add">
+                                Access to Add {{checkbox_all_add}}
+                            </th>
+                            <th class="filter-false remove sorter-false" data-priority="critical">
+                                <input type="checkbox" class="ts_checkbox_all_edit" ng-model="checkbox_all_edit">
+                                Access to Edit
+                            </th>
+                            <th class="filter-false remove sorter-false" data-priority="critical">
+                                <input type="checkbox" class="ts_checkbox_all_delete" ng-model="checkbox_all_delete">
+                                Access to Delete
+                            </th>
                         </tr>
                         </thead>
                         <tfoot>
@@ -88,13 +91,19 @@ td.editable_updated {
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr ng-repeat="item in table_data" on-last-repeat>
+                            <tr ng-repeat="item in table_data | filter:{Role_id:category}" on-last-repeat>
                                 <td>{{$index+1}}</td>
                                 <td><img class="md-user-image" ng-src="{{item.photo1_path}}" alt=""/></td>
                                 <td>{{item.firstname+" "+item.lastname}}</td>
-                                <td><input type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="item.add"></td>
-                                <td><input type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="item.edit"></td>
-                                <td><input type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="item.delete"></td>
+                                <td>
+                                    <input type="checkbox" class="ts_checkbox addAccess" data-md-icheck icheck ng-model="item.add">
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="ts_checkbox editAccess" data-md-icheck icheck ng-model="item.edit">
+                                </td>
+                                <td>
+                                    <input type="checkbox" class="ts_checkbox deleteAccess" data-md-icheck icheck ng-model="item.delete">
+                                </td>
                             </tr>
                         </tbody>
                     </table>

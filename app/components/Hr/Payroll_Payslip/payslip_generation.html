@@ -2,7 +2,6 @@
     <div id="page_content_inner">
 
         <h3 class="heading_a uk-margin-bottom">Payslip
-       <!--  <span style="float: right;font-size:18px;"><a ui-sref="restricted.academics.syllabus_add" class="md-btn md-btn-primary">Add Syllabus</a></span> -->
         </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding" ng-controller="payslipGenerationCtrl as showCase">
@@ -28,18 +27,18 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
+                        <tr ng-repeat="row in tableData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.firstname}} {{row.lastname}}</td>
-                            <td>{{row.Dept}}</td>
-                            <td>{{row.payitem_name}}</td>
-                            <td>{{row.payitem_freq}}</td>
+                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td>{{row.DEPT_NAME}}</td>
+                            <td>{{row.STRUCURE_NAME}}</td>
+                            <td>{{row.FREQUENCY}}</td>
                             <td class="uk-text-center" ng-if="urlname=='hr'">
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.payslipgeneration_viewdetails({gen_id:{{row.id}}})" class="ts_remove_row"><i class="uk-icon-file"></i> Generate</a>
-                                <a class="md-btn md-btn-warning md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.showpayslipdetails({pay_id:{{row.id}}})" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a>
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.payslipgeneration_viewdetails({gen_id:{{row.ID}}})" class="ts_remove_row"><i class="uk-icon-file"></i> Generate</a>
+                                <a class="md-btn md-btn-warning md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.showpayslipdetails({pay_id:{{row.ID}}})" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a>
                             </td>
                             <td class="uk-text-center" ng-if="urlname=='finance'">
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.finance.showpayslipdetails({pay_id:{{row.id}}})" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a>
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.finance.showpayslipdetails({pay_id:{{row.ID}}})" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a>
                             </td>
                         </tr>
                     </tbody>

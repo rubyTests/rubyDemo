@@ -9,7 +9,7 @@
     }
 </style>
 <div id="page_content">
-    <div id="page_content_inner">
+    <div id="page_content_inner" ng-controller="payslipgen_tableCtrl as showCase">
         <h3 class="heading_a uk-margin-bottom">Payslip</h3>
         <div class="md-card">
             <div class="md-card-content large-padding">
@@ -21,7 +21,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info">person</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].firstname}} {{tableArray[0].lastname}}</span>
+                                    <span class="md-list-heading">{{viewData.EMPLOYEE_NAME}}</span>
                                     <span class="uk-text-small uk-text-muted">Employee Name</span>
                                 </div>
                             </li>
@@ -34,7 +34,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >assignment_ind</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].Admission_No}}</span>
+                                    <span class="md-list-heading">{{viewData.EMPLOYEE_NO}}</span>
                                     <span class="uk-text-small uk-text-muted">Employee Number</span>
                                 </div>
                             </li>
@@ -47,20 +47,20 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >import_contacts</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].Dept}}</span>
+                                    <span class="md-list-heading">{{viewData.DEPT_NAME}}</span>
                                     <span class="uk-text-small uk-text-muted">Department</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
-                    <div class="uk-width-medium-1-4">
+                    <div class="uk-width-medium-1-4" ng-if="viewData.POSITION">
                         <ul class="md-list md-list-addon">
                             <li>
                                 <div class="md-list-addon-element">
                                     <i class="md-list-addon-icon material-icons uk-text-info" >school</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{tableArray[0].position}}</span>
+                                    <span class="md-list-heading">{{viewData.POSITION}}</span>
                                     <span class="uk-text-small uk-text-muted">Position</span>
                                 </div>
                             </li>
@@ -73,7 +73,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-info" >group</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">New Gorup <a ui-sref="restricted.hr.view_employee_paydetails({assign_id:tableArray[0].id})"> <u>View Payroll</u></a></span>
+                                    <span class="md-list-heading">New Gorup <a ui-sref="restricted.hr.view_employee_paydetails({assign_id:viewData.ID})"> <u>View Payroll</u></a></span>
                                     <span class="uk-text-small uk-text-muted">Pay Structure</span>
                                 </div>
                             </li>
@@ -83,19 +83,19 @@
             </div>
         </div>
         <br>
-        <h3 class="heading_a uk-margin-bottom">Payroll Details
+        <h3 class="heading_a uk-margin-bottom">Generated Payslips
         </h3>
          <div class="md-card-content uk-width-medium-1-1 large-padding">
             <div class="md-card uk-margin-medium-bottom">
                 <div class="md-card-content large-padding">
-                    <div class="uk-overflow-container" ng-controller="payslipgen_tableCtrl as showCase">
+                    <div class="uk-overflow-container" >
                         <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th>S.No</th>
                                     <th>Pay period</th>
-                                    <th>Salary</th>
-                                    <th>Payslip status</th>
+                                    <th>Netpay</th>
+                                    <th>Status</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -103,26 +103,40 @@
                                 <tr>
                                     <th></th>
                                     <th>Pay period</th>
-                                    <th>Salary</th>
-                                    <th>Payslip status</th>
+                                    <th>Netpay</th>
+                                    <th>Status</th>
                                     <th></th>
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr ng-repeat="data in tableData">
+                                <tr ng-repeat="data in payslipList">
                                     <td>{{$index+1}}</td>
-                                    <td>{{data.period}}</td>
-                                    <td>{{data.salary}}</td>
-                                    <td>{{data.status}}</td>
-                                    <td ng-if="urlname=='hr'">
-                                        <a ui-sref="restricted.hr.payslipdetails_view({id:{{data.id}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
-                                        <a class="ts_remove_row" ng-click="generatePDF(tableArray[0].id)"><i class="md-icon material-icons">&#xE415;</i></a>
+                                    <td>{{data.GENERATION_DATE}}</td>
+                                    <td>{{data.NETPAY}}</td>
+                                    <td>
+                                        <span ng-show="{{data.STATUS=='Pending'}}" style="color: #2196f3">{{data.STATUS}}</span>
+                                        <span ng-show="{{data.STATUS=='Approved'}}" style="color: green">{{data.STATUS}}</span>
+                                        <span ng-show="{{data.STATUS=='Rejected'}}" style="color: red">{{data.STATUS}}</span>
+                                       <!--  <button ng-show="{{data.STATUS=='Pending'}}" type="button" class="md-btn md-btn-primary md-btn-mini md-btn-wave-light waves-effect waves-button waves-light">{{data.STATUS}}</button>
+                                        <button ng-show="{{data.STATUS=='Approved'}}" type="button" class="md-btn md-btn-success md-btn-mini md-btn-wave-light waves-effect waves-button waves-light">{{data.STATUS}}</button>
+                                        <button ng-show="{{data.STATUS=='Rejected'}}" type="button" class="md-btn md-btn-danger md-btn-mini md-btn-wave-light waves-effect waves-button waves-light">{{data.STATUS}}</button> -->
+                                    </td>
+                                    <td >
+                                        <a ng-show="urlname=='hr'" ui-sref="restricted.hr.payslipdetails_view({id:{{data.EMP_PROFILE_ID}}})" ng-click="passDate(data.GENERATION_DATE)" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
+                                        <a ng-show="urlname=='hr'" class="ts_remove_row" ng-click="generatePDF(data.EMP_PROFILE_ID,data.GENERATION_DATE)"><i class="md-icon material-icons">&#xE415;</i></a>
+                                        <a  ng-hide="{{data.status=='Approved'}} || urlname=='finance'" class="ts_remove_row" ng-click="deletePayslip(data.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                        <a ng-show="urlname=='finance'" ui-sref="restricted.finance.payslipdetails_view({id:{{data.EMP_PROFILE_ID}}})" ng-click="passDate(data.GENERATION_DATE)" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
+                                        <a ng-show="urlname=='finance'" class="ts_remove_row" ng-click="generatePDF(data.EMP_PROFILE_ID,data.GENERATION_DATE)"><i class="md-icon material-icons">&#xE415;</i></a>
+                                    </td>
+                                    <!-- <td ng-if="urlname=='hr'">
+                                        <a ui-sref="restricted.hr.payslipdetails_view({id:{{data.ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
+                                        <a class="ts_remove_row" ng-click="generatePDF(data.ID)"><i class="md-icon material-icons">&#xE415;</i></a>
                                         <a ng-hide="{{data.status=='Approved'}}" class="ts_remove_row"><i class="md-icon material-icons">&#xE872;</i></a>
                                     </td>
                                     <td ng-if="urlname=='finance'">
-                                        <a ui-sref="restricted.finance.payslipdetails_view({id:{{data.id}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
+                                        <a ui-sref="restricted.finance.payslipdetails_view({id:{{data.ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
                                         <a class="ts_remove_row"><i class="md-icon material-icons">&#xE415;</i></a>
-                                    </td>
+                                    </td> -->
                                 </tr>
                             </tbody>
                         </table>

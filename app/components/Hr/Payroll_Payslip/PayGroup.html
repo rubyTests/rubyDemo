@@ -29,16 +29,16 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in CreateNewData">
+                        <tr ng-repeat="row in ViewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.ps_name}}</td>
-                            <td>{{row.Assemp_count}}</td>
-                            <td>{{row.ps_item_count}}</td>
-                            <td>{{row.ps_freq}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.TOTAL_EMPLOYEE}}</td>
+                            <td>{{row.TOTAL_ITEM}}</td>
+                            <td>{{row.FREQUENCY}}</td>
                             <td class="uk-text-center">
-                                <a href="#" ui-sref="restricted.hr.ViewPayGroup({id:{{row.pis_id}}})" ><i class="md-icon material-icons md-24">&#xE417;</i></a>
-                                <a href="#" ui-sref="restricted.hr.EditPayCategory({id:{{row.pis_id}}})" ><i class="md-icon material-icons md-24">&#xE254;</i></a>
-                                <a href="#" ui-sref="restricted.hr.ViewGroupEmployee({id:{{row.pis_id}}})"><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
+                                <a  ui-sref="restricted.hr.ViewPayGroup({id:{{row.ID}}})" ><i class="md-icon material-icons md-24">&#xE417;</i></a>
+                                <a ui-sref="restricted.hr.EditPayCategory({id:{{row.ID}}})" ><i class="md-icon material-icons md-24">&#xE254;</i></a>
+                                <a ui-sref="restricted.hr.ViewGroupEmployee({id:{{row.ID}}})"><i class="md-icon material-icons md-24">&#xE8D3;</i></a>
                             </td>
                         </tr>
                     </tbody>

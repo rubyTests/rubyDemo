@@ -1,8 +1,8 @@
 <div id="page_content">
-    <div id="page_content_inner">
+    <div id="page_content_inner"  ng-controller="PayGroupEmployeeCtrl as showCase">
 
-        <h3 class="heading_b uk-margin-bottom">Pay Group</h3>
-        <div class="md-card uk-margin-medium-bottom" ng-controller="PayGroupEmployeeCtrl as showCase">
+        <h3 class="heading_b uk-margin-bottom">Pay Structure : {{PayStru_name.NAME}}</h3>
+        <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <div class="uk-width-10-10 uk-width-medium-10-10 uk-margin-medium-bottom">
                   <a ui-sref="restricted.hr.assign_employee" class="md-btn md-btn-primary md-btn-small uk-float-right">
@@ -32,13 +32,13 @@
                     <tbody>
                         <tr ng-repeat="row in EmployeeDetail">
                             <td>{{$index+1}}</td>
-                            <td>{{row.empFirstName}}{{row.empLastName}}</td>
-                            <td>{{row.empdet}}</td>
-                            <td>{{row.empcat}}</td>
+                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td>{{row.DEPARTMENT}}</td>
+                            <td>{{row.CATEGORY}}</td>
                             <td>-</td>
                             <td class="uk-text-center">
-                                <a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.emp_id}}})"><i class="md-icon material-icons md-24">&#xE417;</i></a>
-                                <a href="#"><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                <a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.ID}}})"><i class="md-icon material-icons md-24">&#xE417;</i></a>
+                                <a ng-click="removeEmployee(row.ID,$index)"><i class="md-icon material-icons md-24">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

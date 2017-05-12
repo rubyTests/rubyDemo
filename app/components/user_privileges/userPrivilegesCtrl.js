@@ -9,12 +9,35 @@ angular
         'ts_data',
         '$resource',
         '$filter',
-        function ($scope,$rootScope,$timeout,$compile,variables,ts_data,$resource,$filter) {
-
+        '$localStorage',
+        '$http',
+        function ($scope,$rootScope,$timeout,$compile,variables,ts_data,$resource,$filter,$localStorage,$http) {
+            $scope.modules=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'UserMenuAPI/menuDetails',
+                headers:{'access_token':$localStorage.access_token}
+            }).success(function(return_data){
+               $scope.modules=[].concat(return_data.message);
+            });
+             $http({
+                method:'GET',
+                url: $localStorage.service+'UserMenuAPI/subMenuDetails',
+                headers:{'access_token':$localStorage.access_token}
+            }).success(function(return_data){
+               $scope.menusList=[].concat(return_data.message);
+            });
+             $http({
+                method:'GET',
+                url: $localStorage.service+'UserMenuAPI/subMenuItemDetails',
+                headers:{'access_token':$localStorage.access_token}
+            }).success(function(return_data){
+               $scope.submenusList=[].concat(return_data.message);
+            });
+            $scope.listcategory=[{id:1,role:'Student'}, {id:2,role:'Employee'}, {id:3,role:'Parents'}];
             $scope.table_data = ts_data;
             $scope.markedStudent=[];
             $scope.getData=function(item){
-                console.log(item.row_select,"item.row_select")
                 item.remark= item.remark || '';
                 item.duration=item.duration || '';
                 $scope.modalData=item;
@@ -28,7 +51,7 @@ angular
                         UIkit.modal.confirm('Are you sure remove this student?', function(e) {
                             var indexof=$scope.markedStudent.indexOf(item);
                             $scope.markedStudent.splice(indexof,1);
-                            console.log($scope.markedStudent,"removed");
+                            // console.log($scope.markedStudent,"removed");
                         },function(){
                             item.row_select=true;
                         }, {
@@ -48,39 +71,42 @@ angular
                 create: false,
                 maxItems: 1
             };
-            $resource('data/calendar/department.json')
-            .query()
-            .$promise
-            .then(function(response) {
-                $scope.department = response;
-            });
-            $resource('data/calendar/course.json')
-            .query()
-            .$promise
-            .then(function(response) {
-                $scope.courseArray = response;
-            });
-            $resource('data/calendar/courseBatch.json')
-            .query()
-            .$promise
-            .then(function(response) {
-                $scope.batchArray = response;
-            });
-            $scope.department_config = {
+            // $resource('data/calendar/department.json')
+            // .query()
+            // .$promise
+            // .then(function(response) {
+            //     $scope.department = response;
+            // });
+            // $resource('data/calendar/course.json')
+            // .query()
+            // .$promise
+            // .then(function(response) {
+            //     $scope.courseArray = response;
+            // });
+            // $resource('data/calendar/courseBatch.json')
+            // .query()
+            // .$promise
+            // .then(function(response) {
+            //     $scope.batchArray = response;
+            // });
+            // $scope.menus=[];
+            $scope.modules_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Department...',
                 valueField: 'id',
-                labelField: 'dept_name',
+                labelField: 'title',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         if(value==''){
-                            $scope.course=[]
+                            $scope.menus=[];
+                            $scope.submenus=[];
                         }else{
-                            $scope.course=[]
-                            var data=$filter('filter')($scope.courseArray, {dept_id: value});
-                            if (data.length > 0)
-                                $scope.course.push(data);
+                            $scope.menus=[];
+                            $scope.submenus=[];
+                            var data=$filter('filter')($scope.menusList, {menu_id: value}, true);
+                            if (data.length > 0){
+                                $scope.menus.push(data);
+                            }
                         }
                     });
                 }
@@ -88,53 +114,61 @@ angular
             $scope.course_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course...',
                 valueField: 'id',
-                labelField: 'course_name',
-                onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
-                            if(value==''){
-                                $scope.batch=[]
-                            }else {
-                               var data=$filter('filter')($scope.batchArray, {course_id : value});
-                               if (data.length > 0)
-                                
-                                $scope.batch.push(data);
-                            }
-                        });
-                    
-                }
+                labelField: 'role'
             };
-            $scope.batch_config = {
+            $scope.menuConfig = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Batch...',
                 valueField: 'id',
-                labelField: 'cBatch_name',
+                labelField: 'title',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        if(value==''){
+                            $scope.submenus=[]
+                        }else{
+                            $scope.submenus=[]
+                            var data=$filter('filter')($scope.submenusList, {submenu_id: value}, true);
+                            // console.log(data,"data");
+                            if (data.length > 0)
+                                $scope.submenus.push(data);
+                        }
+                    });
+                }
+            };
+            $scope.menuItemConfig = {
+                create: false,
+                maxItems: 1,
+                valueField: 'id',
+                labelField: 'title'
             };
             $scope.addstudent=function(){
                 $scope.markedStudent.push($scope.modalData);
-                console.log($scope.markedStudent,"added");
+                // console.log($scope.markedStudent,"added");
             }
             $scope.showConfimation=function(){
-                 var modal = UIkit.modal("#listofmarkedStudent");
-                if ( modal.isActive() ) {
-                    modal.hide();
-                } else {
-                    if ($scope.markedStudent.length <= 0) {
-                        UIkit.modal.confirm('Are you sure to continue ?', function() {
+                // console.log($scope.table_data,"table_data");
+                // console.log($scope.checkbox_all_add,"checkbox_all_add");
+                // console.log($scope.checkbox_all_edit,"checkbox_all_edit");
+                // console.log($scope.checkbox_all_delete,"checkbox_all_delete");
+                // var modal = UIkit.modal("#listofmarkedStudent");
+                // if ( modal.isActive() ) {
+                //     modal.hide();
+                // } else {
+                //     if ($scope.markedStudent.length <= 0) {
+                //         UIkit.modal.confirm('Are you sure to continue ?', function() {
                                 
-                            },function(){
-                                // item.row_select=true;
-                            }, {
-                                labels: {
-                                    'Ok': 'Ok'
-                                }
-                        });
-                    }else{
-                        modal.show();    
-                    }
-                }
+                //             },function(){
+                //                 // item.row_select=true;
+                //             }, {
+                //                 labels: {
+                //                     'Ok': 'Ok'
+                //                 }
+                //         });
+                //     }else{
+                //         modal.show();    
+                //     }
+                // }
             }
             $scope.duration_config = {
                 create: false,
@@ -360,7 +394,7 @@ angular
                         });
 
                     // select/unselect table rows
-                    $('.ts_checkbox_all')
+                    $('.ts_checkbox_all_add')
                         .iCheck({
                             checkboxClass: 'icheckbox_md',
                             radioClass: 'iradio_md',
@@ -368,8 +402,50 @@ angular
                         })
                         .on('ifChecked',function() {
                             $ts_pager_filter
-                                .find('.ts_checkbox')
+                                .find('.addAccess')
                                 // check all checkboxes in table
+                                .trigger('click')
+                                .prop('checked',true)
+                                .iCheck('update',function(value){
+                                    // console.log(this.add,"wel done");
+                                })
+                                // add highlight to row
+                                .closest('tr')
+                                .addClass('row_highlighted');
+                        })
+                        .on('ifUnchecked',function() {
+                            $ts_pager_filter
+                                .find('.addAccess')
+                                // uncheck all checkboxes in table
+                                .trigger('click')
+                                .prop('checked',false)
+                                // .attr('ng-value',false)
+                                .iCheck('update',function(){
+                                    console.log("wel done");
+                                })
+                                // remove highlight from row
+                                .closest('tr')
+                                .removeClass('row_highlighted');
+                        });
+                     // select/unselect table row
+                    $ts_pager_filter.find('.addAccess')
+                    .on('ifUnchecked',function() {
+                        $(this).closest('tr').removeClass('row_highlighted');
+                        $('.ts_checkbox_all_add').prop('checked',false).iCheck('update');
+                    }).on('ifChecked',function() {
+                        $(this).closest('tr').addClass('row_highlighted');
+                    });
+                    $('.ts_checkbox_all_edit')
+                        .iCheck({
+                            checkboxClass: 'icheckbox_md',
+                            radioClass: 'iradio_md',
+                            increaseArea: '20%'
+                        })
+                        .on('ifChecked',function() {
+                            $ts_pager_filter
+                                .find('.editAccess')
+                                // check all checkboxes in table
+                                .trigger('click')
                                 .prop('checked',true)
                                 .iCheck('update')
                                 // add highlight to row
@@ -378,8 +454,45 @@ angular
                         })
                         .on('ifUnchecked',function() {
                             $ts_pager_filter
-                                .find('.ts_checkbox')
+                                .find('.editAccess')
                                 // uncheck all checkboxes in table
+                                .trigger('click')
+                                .prop('checked',false)
+                                .iCheck('update')
+                                // remove highlight from row
+                                .closest('tr')
+                                .removeClass('row_highlighted');
+                        });
+                    // select/unselect table row
+                    $ts_pager_filter.find('.editAccess')
+                        .on('ifUnchecked',function() {
+                            $(this).closest('tr').removeClass('row_highlighted');
+                            $('.ts_checkbox_all_edit').prop('checked',false).iCheck('update');
+                        }).on('ifChecked',function() {
+                            $(this).closest('tr').addClass('row_highlighted');
+                        });
+                    $('.ts_checkbox_all_delete')
+                        .iCheck({
+                            checkboxClass: 'icheckbox_md',
+                            radioClass: 'iradio_md',
+                            increaseArea: '20%'
+                        })
+                        .on('ifChecked',function() {
+                            $ts_pager_filter
+                                .find('.deleteAccess')
+                                // check all checkboxes in table
+                                .trigger('click')
+                                .prop('checked',true)
+                                .iCheck('update')
+                                // add highlight to row
+                                .closest('tr')
+                                .addClass('row_highlighted');
+                        })
+                        .on('ifUnchecked',function() {
+                            $ts_pager_filter
+                                .find('.deleteAccess')
+                                // uncheck all checkboxes in table
+                                .trigger('click')
                                 .prop('checked',false)
                                 .iCheck('update')
                                 // remove highlight from row
@@ -388,10 +501,10 @@ angular
                         });
 
                     // select/unselect table row
-                    $ts_pager_filter.find('.ts_checkbox')
+                    $ts_pager_filter.find('.deleteAccess')
                         .on('ifUnchecked',function() {
                             $(this).closest('tr').removeClass('row_highlighted');
-                            $('.ts_checkbox_all').prop('checked',false).iCheck('update');
+                            $('.ts_checkbox_all_delete').prop('checked',false).iCheck('update');
                         }).on('ifChecked',function() {
                             $(this).closest('tr').addClass('row_highlighted');
                         });

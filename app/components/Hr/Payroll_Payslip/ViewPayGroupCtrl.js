@@ -1,39 +1,62 @@
 angular
     .module('rubycampusApp')
-    .controller('ViewPayGroupCtrl', ['$scope','$stateParams','Pay_item','Pay_Structure','Pay_Group','$filter',
-    function($scope,$stateParams,Pay_item,Pay_Structure,Pay_Group,$filter){
-        $scope.EarningsDiv=true;
-        $scope.DeductionDiv=true;
-        $scope.hrtagLine=true;
-        $scope.UserDatas = $filter('filter')(Pay_Structure, {id : parseInt($stateParams.id) }, true);
-        $scope.getEarning = $filter('filter')(Pay_Group ,  {PayStructure_id : parseInt($stateParams.id) }, true);
-        $scope.getItemNameFun = function(id){
-            $scope.payItemStructure = $filter('filter')(Pay_item,{id : id} ,true);
-            if($scope.payItemStructure[0]) {
-               return $scope.payItemStructure[0];
-            }
-        };
-        $scope.EarningsData=[];
-        $scope.DeductionData=[];
-        angular.forEach($scope.getEarning, function(value, key){
-            var PayitemData=$scope.getItemNameFun(value.Pay_item_id);
-            // console.log(PayitemData.len,'PayitemData');
-            if (PayitemData.Type=="Earnings") {
-                $scope.EarningsData.push({Name : PayitemData.Name, Type : "Earnings",Amount : value.Amount});
-            }else if (PayitemData.Type=="Deduction"){
-                $scope.DeductionData.push({Name : PayitemData.Name, Type : "Deduction",Amount : value.Amount});
-            }
+    .controller('ViewPayGroupCtrl',
+    function($scope,$stateParams,$http,$localStorage,$timeout,$state){
+        $scope.stru_id=$stateParams.id;
+        $scope.viewData=[];
+        $http({
+            method:'GET',
+            url: $localStorage.service+'PayrollPayslipAPI/payStructureDetail',
+            params:{
+                id:$stateParams.id
+            },
+            headers:{'access_token':$localStorage.access_token}
+        }).then(function(return_data){
+            console.log(return_data.data.message,'edit');
+            $scope.viewData=return_data.data.message;
         });
-        if($scope.EarningsData.length==0){
-            $scope.EarningsDiv=false;
+
+        $scope.deletepayStructure=function(id){
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/checkpayitemAvailableorNot',
+                params:{
+                    id:id
+                },
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function mySucces(response) {
+                console.log(response,'response');
+                if(response.data.status==true){
+                    UIkit.modal.alert('There are payitems assigned to this pay structure, remove the pay item first to continue deleting pay structure');
+                }
+            },function myError(response) {
+                console.log(response,'error');
+                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                    if(id){
+                        $http({
+                        method : "DELETE",
+                        url : $localStorage.service+"PayrollPayslipAPI/paystructureDelete",
+                        params : {id : id},
+                        headers:{'access_token':$localStorage.access_token}
+                        }).then(function mySucces(response) {
+                            console.log('delete',response);
+                            UIkit.notify({
+                                message : response.data.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                            $state.go('restricted.hr.StructureGroup');
+                        },function myError(response) {
+                        })
+                    }
+                },function(){
+                    // console.log("false");
+                }, {
+                    labels: {
+                        'Ok': 'Ok'
+                    }
+                });
+            })
         }
-        if($scope.DeductionData.length==0){
-            $scope.DeductionDiv=false;
-        }
-        if( $scope.EarningsDiv && $scope.DeductionDiv == false){
-            $scope.hrtagLine=false;
-            // alert();
-        }
-        // console.log($scope.EarningsData.length,'$scope.EarningsData');
-        //  console.log($scope.DeductionData.length,'$scope.DeductionData');
-    }]);
+    });

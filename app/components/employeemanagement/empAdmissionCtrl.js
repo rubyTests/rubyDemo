@@ -451,7 +451,8 @@ angular
             });
 
             $dp_start.on('change',function() {
-                end_date.options.maxDate = $dp_start.val();
+                var customeDate=$dp_start.val().split(".");
+                end_date.options.maxDate = parseInt(customeDate[0])-1+"."+customeDate[1]+"."+customeDate[2];
             });
 
             $dp_end.on('change',function() {

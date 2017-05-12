@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('approvePayslipCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -51,11 +51,15 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            $resource('app/components/academics/syllabusTableDeatail.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = '';
+
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'PayrollPayslipAPI/fetchApproveStatus',
+                    params:{status:'Pending'},
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message,'return_data');
+                    $scope.tableView_data = return_data.data.message;
                 });
         }
     );

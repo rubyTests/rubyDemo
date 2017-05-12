@@ -7,56 +7,146 @@ angular
         '$resource',
         '$stateParams',
         '$filter',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter) {
-            $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(return_data) {
-                    var paramsData=$filter('filter')(return_data, {id : $stateParams.id});
-                    $scope.tableArray=paramsData;
+        '$http',
+        '$localStorage',
+        '$state',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$http,$localStorage,$state) {
+            $scope.tableView_data=[];
+            $scope.PaySrtuctureData=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/fetchEmployeeDetails',
+                params:{id:$stateParams.id},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.tableView_data = return_data.data.message[0];
+            });
+
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/fetchPayStructureDetails',
+                params:{id:$localStorage.structureName},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.PaySrtuctureData = return_data.data.message;
+                angular.forEach($scope.PaySrtuctureData, function(value, keys){
+                    var data=0;
+                    value.changedAmount=data.toFixed(2);
                 });
-            $scope.selectize_dept_data =['Computer Science And Engineering','Electronic Communication Engineering','Materials Science engineering','Electrical and Electronics Engineering'];
-            $scope.selectize_dept_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Department...',
-                onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        var deptReturn_Data=$filter('filter')($scope.tableArray, {Dept : value});
-                        $scope.tableView_data = deptReturn_Data;
-                        $('#page_content_inner').trigger('click');
+            });
+            console.log($localStorage.structureName,'$localStorage.structureName');
+            // $scope.basic_val=0;
+            // $timeout(function(){
+            //     // var totalEarn=0;
+            //     // var totalDeduction=0;
+            //     // $('[name="earningAmount"]').each(function(){
+            //     //     totalEarn+=parseFloat($(this).val());
+            //     // })
+
+            //     //  $('[name="deductionAmount"]').each(function(){
+            //     //     totalDeduction+=parseFloat($(this).val());
+            //     // })
+            //     // // console.log(totalEarn,'totalEarn');
+            //     // // console.log(totalDeduction,'totalDeduction');
+            //     // $scope.Total_Earning=totalEarn.toFixed(2);
+            //     // $scope.total_deduction=totalDeduction.toFixed(2);
+            //     // $scope.showTotalNetpay=parseFloat(totalEarn-totalDeduction).toFixed(2);
+            //     var basicVal=0;
+            //     var perOfTotalEarn=0;
+            //     var perOfTotalDeduc=0;
+            //     $('[name="earningAmount"]').each(function(){
+            //         perOfTotalEarn+=parseFloat(basicVal)/parseFloat($(this).val());
+            //     })
+
+            //      $('[name="deductionAmount"]').each(function(){
+            //         perOfTotalDeduc+=parseFloat(basicVal)/parseFloat($(this).val());
+            //     })
+            //     var SUMTotal_Earning=parseFloat(basicVal) + parseFloat(perOfTotalEarn);
+            //     $scope.Total_Earning=SUMTotal_Earning.toFixed(2);
+            //     $scope.total_deduction=parseFloat(perOfTotalDeduc).toFixed(2);
+            //     $scope.showTotalNetpay=parseFloat($scope.Total_Earning-$scope.total_deduction).toFixed(2);
+
+            // },1500);
+            var initValue=0;
+            $scope.Total_Earning=initValue.toFixed(2);
+            $scope.total_deduction=initValue.toFixed(2);
+            $scope.earningCalculation=function(basicVal){
+                var totalEarn=0;
+                var totalDeduct=0;
+                var basicVal=basicVal || 0;
+                angular.forEach($scope.PaySrtuctureData,function(value, keys){
+                    if (value.ITEM_TYPE=='Earnings') {
+                        value.AMOUNT= value.AMOUNT || 0;
+                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        totalEarn+=parseFloat(value.changedAmount);
+                    }else if (value.ITEM_TYPE=='Deductions'){
+                        value.AMOUNT= value.AMOUNT || 0;
+                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        totalDeduct+=parseFloat(value.changedAmount);
+                    }
+                    
+                });
+                var TotalNumberE=(parseFloat(basicVal)+parseFloat(totalEarn)).toFixed(2);
+                $scope.Total_Earning=(angular.isNumber(TotalNumberE)? 0.00:TotalNumberE);
+                $scope.total_deduction=(angular.isNumber(totalDeduct)? totalDeduct:0.00).toFixed(2);
+                var totalNetpay=parseFloat($scope.Total_Earning) - parseFloat($scope.total_deduction);
+                $scope.showTotalNetpay = totalNetpay.toFixed(2);
+            }
+
+            $scope.PayStru_name=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/payStructure',
+                params:{id:$localStorage.structureName},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(pay_structure){
+                console.log(pay_structure.data.message[0],'pay_structure');
+                $scope.PayStru_name=pay_structure.data.message[0];
+            });
+
+            $scope.assignPayroll=function(empId,empName,struct_Name){
+                console.log(empId,'empId');
+                var alertMessage='Are you sure to assign '+empName+ ' to ' +struct_Name+ ' pay structure?';
+                if(empId){
+                    UIkit.modal.confirm(alertMessage, function(e) {
+                        if(empId){
+                            $http({
+                                method:'POST',
+                                url: $localStorage.service+'PayrollPayslipAPI/assignPayroll',
+                                data:{
+                                    'emp_id':empId,
+                                    'stru_id':$localStorage.structureName,
+                                    'basic_pay':$scope.basic_val
+                                },
+                                headers:{'access_token':$localStorage.access_token}
+                            }).then(function(return_data){
+                                console.log(return_data.data.message.message,'return_data');
+                                if(return_data.data.status==true){
+                                    UIkit.notify({
+                                        message : return_data.data.message.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $state.go('restricted.hr.StructureGroup');
+                                }else {
+                                    UIkit.notify({
+                                        message : 'Failed',
+                                        status  : 'danger',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                            });
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
                     });
                 }
-            };
-
-            $scope.earningCalculation=function(){
-                var basic_val=$scope.basic_val || 0;
-                var housing_allow=$scope.housing_allow || 0;
-                var transport=$scope.transport || 0;
-                var hr_allowance=$scope.hr_allowance || 0;
-                $scope.Total_Earning=parseInt(basic_val) + parseInt(housing_allow) + parseInt(transport) + parseInt(hr_allowance);            
-                $scope.grasspayTotal=$scope.Total_Earning;
-                $('#earningTotal').trigger('change');
-                $scope.getTotalNetPay();
             }
-            $scope.getTotalDeduction=function(){
-                var income_deduction=$scope.income_deduction || 0;
-                var fund_deduction=$scope.fund_deduction || 0;
-                $scope.toatl_deduction=parseInt(income_deduction) + parseInt(fund_deduction);
-                $('#duductionTotal').trigger('change');
-                $scope.getTotalNetPay();
-            }
-            $scope.getTotalNetPay=function(){
-                var Total_Earning=$scope.Total_Earning || 0;
-                var toatl_deduction=$scope.toatl_deduction || 0;
-                $scope.showTotalNetpay=parseInt(Total_Earning) - parseInt(toatl_deduction);
-            }
-
-            // $('input').focusin(function(){
-            //   $(this).css({"border": "1px solid rgb(173,208,242)" });
-            // });
-            // $('input').focusout(function(){
-            //   $(this).css({"border": "1px solid #b3b3b3"});
-            // });
         }
     ]);

@@ -9,30 +9,60 @@ angular
         'DTOptionsBuilder', 
         'DTColumnDefBuilder',
         '$compile',
-        function ($scope,$rootScope,$timeout,$resource,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile) {
+        '$http',
+        '$localStorage',
+        function ($scope,$rootScope,$timeout,$resource,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile,$http,$localStorage) {
             $scope.deptArray=[];
             $scope.tableArray=[];
-            $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(return_data) {
-                    $scope.tableArray=return_data;
-                });
-            $scope.selectize_dept_data =['Computer Science And Engineering','Electronic Communication Engineering','Materials Science engineering','Electrical and Electronics Engineering'];
+
+            $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(dept_data){
+                $scope.deptArray.push(dept_data.message);
+            });
+            
+            $scope.selectize_dept_options =$scope.deptArray;
             $scope.selectize_dept_config = {
+                // create: false,
+                // maxItems: 1,
+                // placeholder: 'Department',
+                // onInitialize: function(selectize){
+                //     selectize.on('change', function(value) {
+                //         if(value){
+                //             var deptReturn_Data=$filter('filter')($scope.tableArray, {Dept : value});
+                //             $scope.tableView_data = deptReturn_Data;
+                //             $('#page_content_inner').trigger('click');
+                //         }
+                //     });
+                // }
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Department...',
+                placeholder: 'Department',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
+                        console.log(value);
                         if(value){
-                            var deptReturn_Data=$filter('filter')($scope.tableArray, {Dept : value});
-                            $scope.tableView_data = deptReturn_Data;
-                            $('#page_content_inner').trigger('click');
+                            $scope.getEmployeeList(value);
                         }
                     });
                 }
             };
+            $scope.checkNumber=function(id){
+                return angular.isNumber(id);
+            }
+            $scope.getEmployeeList=function(deptVal){
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'PayrollPayslipAPI/fetchEmployeeList',
+                    params:{id:deptVal},
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message,'employee');
+                    $scope.tableView_data = return_data.data.message;
+                });
+            }
 
             var vm = this;
             vm.dtOptions = DTOptionsBuilder
@@ -87,5 +117,7 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
+                 console.log($localStorage.structureName,'$localStorage');
+                 $scope.strucName=$localStorage.structureName;
         }
     ]);

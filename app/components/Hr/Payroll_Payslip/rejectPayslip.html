@@ -9,10 +9,10 @@
                         <tr>
                             <th>S.No</th>
                             <th>Employee Name</th>
-                            <th>Pay period</th>
-                            <th>Payroll group</th>
                             <th>Department</th>
-                            <th>Remarks</th>
+                            <th>Pay Structure</th>
+                            <th>Pay period</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -20,17 +20,25 @@
                         <tr>
                             <th></th>
                             <th>Employee Name</th>
-                            <th>Pay period</th>
-                            <th>Payroll group</th>
                             <th>Department</th>
-                            <th>Remarks</th>
+                            <th>Pay Structure</th>
+                            <th>Pay period</th>
+                            <th>Status</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
-                            
-                            
+                        <tr ng-repeat="row in tableView_data">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td>{{row.DEPT_NAME}}</td>
+                            <td>{{row.STRUCURE_NAME}}</td>
+                            <td>{{row.GENERATION_DATE}}</td>
+                            <td><span style="color:red;">{{row.STATUS}}</span></td>
+                            <td>
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.payslipgeneration_viewdetails({gen_id:{{row.EMP_PROFILE_ID}}})" class="ts_remove_row"><i class="uk-icon-file"></i> Generate</a>
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.payslipreject_view({id:{{row.EMP_PROFILE_ID}}})" ng-click="passGenDate(row.GENERATION_DATE)" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

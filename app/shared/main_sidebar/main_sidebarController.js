@@ -50,7 +50,7 @@ angular
                             '</div>';
                     },
                     item: function(langData, escape) {
-                        return '<div class="item"><i class="item-icon flag-' + escape(langData.value).toUpperCase() + '"></i></div>';
+                        return '<div class=item><i class="item-icon flag-' + escape(langData.value).toUpperCase() + '"></i></div>';
                     }
                 },
                 valueField: 'value',
@@ -187,25 +187,6 @@ angular
                         },
                         {
                             title: 'Timetable'
-                            // submenu: [
-                            //     {
-                            //         title: 'Configuration',
-                            //         submenu: [
-                            //         {
-                            //             title: 'Class Room Allocation',
-                            //         },
-                            //         {
-                            //             title: 'Create Week Days',
-                            //         },
-                            //         {
-                            //             title: 'Set Class Timing',
-                            //         },
-                            //     ]
-                            //     },
-                            //     {
-                            //         title: 'Manage Time Table',
-                            //     }
-                            // ]
                         },
                        
                         {
@@ -231,10 +212,6 @@ angular
                                     title: 'Set Assessment',
 									link: 'restricted.academics.examination.setassessment'
                                 },
-								// {
-        //                             title: 'Set Weightages',
-        //                             link: 'restricted.academics.examination.setweightage'
-        //                         },
                                 {
                                     title: 'Assign Exam',
 									link: 'restricted.academics.examination.assign'
@@ -422,7 +399,7 @@ angular
                                 },
                                 {
                                     title:'Approve Payslips',
-                                    link: 'restricted.hr.approvepayslip'
+                                    link: 'restricted.finance.approvepayslip'
                                 },
                                 {
                                     title:'Payslip Report',
@@ -647,489 +624,7 @@ angular
                     title: 'User Privileges',
                     icon: '&#xE8E8;',
                     link : 'restricted.user_privileges.userView'
-                },
-                // {
-                //     id: 15,
-                //     title: 'Sticky Notes',
-                //     icon: '&#xE8F0;',
-                //     link: 'restricted.pages.sticky_notes'
-                // },
-                // {
-                //     id: 7,
-                //     title: 'Forms',
-                //     icon: '&#xE8D2;',
-                //     submenu: [
-                //         {
-                //             title: 'Regular Elements',
-                //             link: 'restricted.forms.regular'
-                //         },
-                //         {
-                //             title: 'Advanced Elements',
-                //             link: 'restricted.forms.advanced'
-                //         },
-                //         {
-                //             title: 'Dynamic',
-                //             link: 'restricted.forms.dynamic'
-                //         },
-                //         {
-                //             title: 'File Input',
-                //             link: 'restricted.forms.file_input'
-                //         },
-                //         {
-                //             title: 'File Upload',
-                //             link: 'restricted.forms.file_upload'
-                //         },
-                //         {
-                //             title: 'Validation',
-                //             link: 'restricted.forms.validation'
-                //         },
-                //         {
-                //             title: 'Wizard',
-                //             link: 'restricted.forms.wizard'
-                //         },
-                //         {
-                //             title: 'CKeditor',
-                //             link: 'restricted.forms.wysiwyg_ckeditor',
-                //             group: 'WYSIWYG Editors'
-                //         },
-                //         {
-                //             title: 'Ckeditor Inline',
-                //             link: 'restricted.forms.wysiwyg_inline'
-                //         },
-                //         {
-                //             title: 'TinyMCE',
-                //             link: 'restricted.forms.wysiwyg_tinymce'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 8,
-                //     title: 'Layout',
-                //     icon: '&#xE8F1;',
-                //     submenu: [
-                //         {
-                //             title: 'Top Menu',
-                //             link: 'restricted.layout.top_menu'
-                //         },
-                //         {
-                //             title: 'Full Header',
-                //             link: 'restricted.layout.full_header'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 9,
-                //     title: 'Kendo UI Widgets',
-                //     icon: '&#xE1BD;',
-                //     submenu: [
-                //         {
-                //             title: 'Autocomplete',
-                //             link: 'restricted.kendoui.autocomplete'
-                //         },
-                //         {
-                //             title: 'Calendar',
-                //             link: 'restricted.kendoui.calendar'
-                //         },
-                //         {
-                //             title: 'ColorPicker',
-                //             link: 'restricted.kendoui.colorpicker'
-                //         },
-                //         {
-                //             title: 'ComboBox',
-                //             link: 'restricted.kendoui.combobox'
-                //         },
-                //         {
-                //             title: 'DatePicker',
-                //             link: 'restricted.kendoui.datepicker'
-                //         },
-                //         {
-                //             title: 'DateTimePicker',
-                //             link: 'restricted.kendoui.datetimepicker'
-                //         },
-                //         {
-                //             title: 'DropDownList',
-                //             link: 'restricted.kendoui.dropdown_list'
-                //         },
-                //         {
-                //             title: 'Masked Input',
-                //             link: 'restricted.kendoui.masked_input'
-                //         },
-                //         {
-                //             title: 'Menu',
-                //             link: 'restricted.kendoui.menu'
-                //         },
-                //         {
-                //             title: 'MultiSelect',
-                //             link: 'restricted.kendoui.multiselect'
-                //         },
-                //         {
-                //             title: 'Numeric TextBox',
-                //             link: 'restricted.kendoui.numeric_textbox'
-                //         },
-                //         {
-                //             title: 'PanelBar',
-                //             link: 'restricted.kendoui.panelbar'
-                //         },
-                //         {
-                //             title: 'TimePicker',
-                //             link: 'restricted.kendoui.timepicker'
-                //         },
-                //         {
-                //             title: 'Toolbar',
-                //             link: 'restricted.kendoui.toolbar'
-                //         },
-                //         {
-                //             title: 'Window',
-                //             link: 'restricted.kendoui.window'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 10,
-                //     title: 'Components',
-                //     icon: '&#xE87B;',
-                //     submenu: [
-                //         {
-                //             title: 'Accordions',
-                //             link: 'restricted.components.accordion'
-                //         },
-                //         {
-                //             title: 'Autocomplete',
-                //             link: 'restricted.components.autocomplete'
-                //         },
-                //         {
-                //             title: 'Breadcrumbs',
-                //             link: 'restricted.components.breadcrumbs'
-                //         },
-                //         {
-                //             title: 'Buttons',
-                //             link: 'restricted.components.buttons'
-                //         },
-                //         {
-                //             title: 'Buttons: FAB',
-                //             link: 'restricted.components.buttons_fab'
-                //         },
-                //         {
-                //             title: 'Cards',
-                //             link: 'restricted.components.cards'
-                //         },
-                //         {
-                //             title: 'Colors',
-                //             link: 'restricted.components.colors'
-                //         },
-                //         {
-                //             title: 'Common',
-                //             link: 'restricted.components.common'
-                //         },
-                //         {
-                //             title: 'Dropdowns',
-                //             link: 'restricted.components.dropdowns'
-                //         },
-                //         {
-                //             title: 'Dynamic Grid',
-                //             link: 'restricted.components.dynamic_grid'
-                //         },
-                //         {
-                //             title: 'Footer',
-                //             link: 'restricted.components.footer'
-                //         },
-                //         {
-                //             title: 'Grid',
-                //             link: 'restricted.components.grid'
-                //         },
-                //         {
-                //             title: 'Icons',
-                //             link: 'restricted.components.icons'
-                //         },
-                //         {
-                //             title: 'Lightbox/Modal',
-                //             link: 'restricted.components.modal'
-                //         },
-                //         {
-                //             title: 'List/Grid View',
-                //             link: 'restricted.components.list_grid_view'
-                //         },
-                //         {
-                //             title: 'Lists',
-                //             link: 'restricted.components.lists'
-                //         },
-                //         {
-                //             title: 'Nestable',
-                //             link: 'restricted.components.nestable'
-                //         },
-                //         {
-                //             title: 'Notifications',
-                //             link: 'restricted.components.notifications'
-                //         },
-                //         {
-                //             title: 'Panels',
-                //             link: 'restricted.components.panels'
-                //         },
-                //         {
-                //             title: 'Preloaders',
-                //             link: 'restricted.components.preloaders'
-                //         },
-                //         {
-                //             title: 'Slider',
-                //             link: 'restricted.components.slider'
-                //         },
-                //         {
-                //             title: 'Slideshow',
-                //             link: 'restricted.components.slideshow'
-                //         },
-                //         {
-                //             title: 'Sortable',
-                //             link: 'restricted.components.sortable'
-                //         },
-                //         {
-                //             title: 'Switcher',
-                //             link: 'restricted.components.switcher'
-                //         },
-                //         {
-                //             title: 'Tables',
-                //             link: 'restricted.components.tables'
-                //         },
-                //         {
-                //             title: 'Tables Examples',
-                //             link: 'restricted.components.tables_examples'
-                //         },
-                //         {
-                //             title: 'Tabs',
-                //             link: 'restricted.components.tabs'
-                //         },
-                //         {
-                //             title: 'Tooltips',
-                //             link: 'restricted.components.tooltips'
-                //         },
-                //         {
-                //             title: 'Typography',
-                //             link: 'restricted.components.typography'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 11,
-                //     title: 'E-commerce',
-                //     icon: '&#xE8CB;',
-                //     submenu: [
-                //         {
-                //             title: 'Product Details',
-                //             link: 'restricted.ecommerce.product_details'
-                //         },
-                //         {
-                //             title: 'Product Edit',
-                //             link: 'restricted.ecommerce.product_edit'
-                //         },
-                //         {
-                //             title: 'Products Grid',
-                //             link: 'restricted.ecommerce.products_grid'
-                //         },
-                //         {
-                //             title: 'Products List',
-                //             link: 'restricted.ecommerce.products_list'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 12,
-                //     title: 'Plugins',
-                //     icon: '&#xE8C0;',
-                //     submenu: [
-                //         {
-                //             title: 'Calendar',
-                //             link: 'restricted.plugins.calendar'
-                //         },
-                //         {
-                //             title: 'Charts',
-                //             link: 'restricted.plugins.charts'
-                //         },
-                //         {
-                //             title: 'Charts (Echarts)',
-                //             link: 'restricted.plugins.charts_echarts'
-                //         },
-                //         {
-                //             title: 'Code Editor',
-                //             link: 'restricted.plugins.code_editor'
-                //         },
-                //         {
-                //             title: 'Context Menu',
-                //             link: 'restricted.plugins.context_menu'
-                //         },
-                //         {
-                //             title: 'Datatables',
-                //             link: 'restricted.plugins.datatables'
-                //         },
-                //         {
-                //             title: 'Diff View',
-                //             link: 'restricted.plugins.diff_view'
-                //         },
-                //         {
-                //             title: 'Filemanager',
-                //             link: 'restricted.plugins.filemanager'
-                //         },
-                //         {
-                //             title: 'Gantt Chart',
-                //             link: 'restricted.plugins.gantt_chart'
-                //         },
-                //         {
-                //             title: 'Google Maps',
-                //             link: 'restricted.plugins.google_maps'
-                //         },
-                //         {
-                //             title: 'Image Cropper',
-                //             link: 'restricted.plugins.image_cropper'
-                //         },
-                //         {
-                //             title: 'Idle Timeout',
-                //             link: 'restricted.plugins.idle_timeout'
-                //         },
-                //         {
-                //             title: 'Push Notifications',
-                //             link: 'restricted.plugins.push_notifications'
-                //         },
-                //         {
-                //             title: 'Tablesorter',
-                //             link: 'restricted.plugins.tablesorter'
-                //         },
-                //         {
-                //             title: 'Tour',
-                //             link: 'restricted.plugins.tour'
-                //         },
-                //         {
-                //             title: 'Tree',
-                //             link: 'restricted.plugins.tree'
-                //         },
-                //         {
-                //             title: 'Vector Maps',
-                //             link: 'restricted.plugins.vector_maps'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 13,
-                //     title: 'Pages',
-                //     icon: '&#xE24D;',
-                //     submenu: [
-                //         {
-                //             title: 'Blank',
-                //             link: 'restricted.pages.blank'
-                //         },
-                //         {
-                //             title: 'Contact List',
-                //             link: 'restricted.pages.contact_list'
-                //         },
-                //         {
-                //             title: 'Contact List Horizontal',
-                //             link: 'restricted.pages.contact_list_horizontal'
-                //         },
-                //         {
-                //             title: 'Gallery',
-                //             link: 'restricted.pages.gallery'
-                //         },
-                //         {
-                //             title: 'Help/Faq',
-                //             link: 'restricted.pages.help'
-                //         },
-                //         {
-                //             title: 'Login Page',
-                //             link: 'login'
-                //         },
-                //         {
-                //             title: 'Notes',
-                //             link: 'restricted.pages.notes'
-                //         },
-                //         {
-                //             title: 'Pricing Tables',
-                //             link: 'restricted.pages.pricing_tables'
-                //         },
-                //         {
-                //             title: 'Search Results',
-                //             link: 'restricted.pages.search_results'
-                //         },
-                //         {
-                //             title: 'Settings',
-                //             link: 'restricted.pages.settings'
-                //         },
-                //         {
-                //             title: 'Todo',
-                //             link: 'restricted.pages.todo'
-                //         },
-                //         {
-                //             title: 'User edit',
-                //             link: 'restricted.pages.user_edit'
-                //         },
-                //         {
-                //             title: 'Issues List',
-                //             link: 'restricted.pages.issues.list',
-                //             group: 'Issues'
-                //         },
-                //         {
-                //             title: 'Issue Details',
-                //             link: 'restricted.pages.issues.details({ issueId: 1 })'
-                //         },
-                //         {
-                //             title: 'Blog List',
-                //             link: 'restricted.pages.blog.list',
-                //             group: 'Blog'
-                //         },
-                //         {
-                //             title: 'Blog Article',
-                //             link: 'restricted.pages.blog.article({ articleId: 1 })'
-                //         },
-                //         {
-                //             title: 'Error 404',
-                //             link: 'error.404',
-                //             group: 'Errors'
-                //         },
-                //         {
-                //             title: 'Error 500',
-                //             link: 'error.500'
-                //         }
-                //     ]
-                // },
-                // {
-                //     id: 14,
-                //     title: 'Multi level',
-                //     icon: '&#xE241;',
-                //     submenu: [
-                //         {
-                //             title: 'First level',
-                //             submenu: [
-                //                 {
-                //                     title: 'Second level',
-                //                     submenu: [
-                //                         {
-                //                             title: 'Third level'
-                //                         },
-                //                         {
-                //                             title: 'Third level'
-                //                         },
-                //                         {
-                //                             title: 'Third level'
-                //                         }
-                //                     ]
-                //                 },
-                //                 {
-                //                     title: 'Long title to test',
-                //                     submenu: [
-                //                         {
-                //                             title: 'Third level'
-                //                         },
-                //                         {
-                //                             title: 'Third level'
-                //                         },
-                //                         {
-                //                             title: 'Third level'
-                //                         }
-                //                     ]
-                //                 },
-                //                 {
-                //                     title: 'Even longer title multi line'
-                //                 }
-                //             ]
-                //         }
-                //     ]
-                // }
+                }
             ];
 			if($localStorage.role_id==1){
 				$scope.sections = adminLov;
@@ -1137,6 +632,1272 @@ angular
 				//$scope.sections = userLov;
 				$scope.sections = adminLov;
 			}
+            // $scope.sections=[
+            //         {
+            //           "id": "1",
+            //           "title": "Dashboard",
+            //           "icon": "&#xE871;",
+            //           "link": "restricted.dashboard",
+            //           "submenu_id": null,
+            //           "menu_id": null,
+            //           "submenuTitle": null,
+            //           "submenuLink": null,
+            //           "submenuIcon": null,
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "2",
+            //           "title": "Institution",
+            //           "icon": "&#xE84F;",
+            //           "link": "",
+            //           "submenu_id": "1",
+            //           "menu_id": "2",
+            //           "submenuTitle": "Institution Details",
+            //           "submenuLink": "restricted.setting.institutionDetails",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "2",
+            //           "title": "Institution",
+            //           "icon": "&#xE84F;",
+            //           "link": "",
+            //           "submenu_id": "2",
+            //           "menu_id": "2",
+            //           "submenuTitle": "Building",
+            //           "submenuLink": "restricted.setting.building",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "2",
+            //           "title": "Institution",
+            //           "icon": "&#xE84F;",
+            //           "link": "",
+            //           "submenu_id": "3",
+            //           "menu_id": "2",
+            //           "submenuTitle": "Building Block",
+            //           "submenuLink": "restricted.setting.buildingblock",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "2",
+            //           "title": "Institution",
+            //           "icon": "&#xE84F;",
+            //           "link": "",
+            //           "submenu_id": "4",
+            //           "menu_id": "2",
+            //           "submenuTitle": "Room",
+            //           "submenuLink": "restricted.setting.room",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "5",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Course & Batch",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "1",
+            //           "Itemsubmenu_id": "5",
+            //           "itemTitle": "Department",
+            //           "itemLink": "restricted.academics.department"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "5",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Course & Batch",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "2",
+            //           "Itemsubmenu_id": "5",
+            //           "itemTitle": "Course",
+            //           "itemLink": "restricted.academics.course"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "5",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Course & Batch",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "3",
+            //           "Itemsubmenu_id": "5",
+            //           "itemTitle": "Batch",
+            //           "itemLink": "restricted.academics.courseBatches"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "6",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Subjects & Syllabus",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "4",
+            //           "Itemsubmenu_id": "6",
+            //           "itemTitle": "Subjects",
+            //           "itemLink": "restricted.academics.subjects"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "6",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Subjects & Syllabus",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "5",
+            //           "Itemsubmenu_id": "6",
+            //           "itemTitle": "Syllabus",
+            //           "itemLink": "restricted.academics.syllabus_view"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "7",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Attendance",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "6",
+            //           "Itemsubmenu_id": "7",
+            //           "itemTitle": "Student Attendance Register",
+            //           "itemLink": ""
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "7",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Attendance",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "7",
+            //           "Itemsubmenu_id": "7",
+            //           "itemTitle": "Student Attendance Report",
+            //           "itemLink": "restricted.plugins.studentreport"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "7",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Attendance",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "8",
+            //           "Itemsubmenu_id": "7",
+            //           "itemTitle": "Student Attendance Marking",
+            //           "itemLink": "restricted.academics.markattendance"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "8",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Timetable",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "9",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Discipline",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "9",
+            //           "Itemsubmenu_id": "9",
+            //           "itemTitle": "Add Compliant",
+            //           "itemLink": ""
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "10",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Examination",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "10",
+            //           "Itemsubmenu_id": "10",
+            //           "itemTitle": "Grade Level",
+            //           "itemLink": "restricted.academics.examination.setgrading"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "10",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Examination",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "11",
+            //           "Itemsubmenu_id": "10",
+            //           "itemTitle": "Set Exam",
+            //           "itemLink": "restricted.academics.examination.setexam"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "10",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Examination",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "12",
+            //           "Itemsubmenu_id": "10",
+            //           "itemTitle": "Set Assessment",
+            //           "itemLink": "restricted.academics.examination.setassessment"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "10",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Examination",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "13",
+            //           "Itemsubmenu_id": "10",
+            //           "itemTitle": "Assign Exam",
+            //           "itemLink": "restricted.academics.examination.assign"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "10",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Examination",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "14",
+            //           "Itemsubmenu_id": "10",
+            //           "itemTitle": "Mark List",
+            //           "itemLink": "restricted.academics.examination.markDetails"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "10",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Examination",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "15",
+            //           "Itemsubmenu_id": "10",
+            //           "itemTitle": "Enter Mark",
+            //           "itemLink": "restricted.academics.examination.EnterMarkView"
+            //         },
+            //         {
+            //           "id": "3",
+            //           "title": "Academics",
+            //           "icon": "school",
+            //           "link": "",
+            //           "submenu_id": "11",
+            //           "menu_id": "3",
+            //           "submenuTitle": "Assignments",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "4",
+            //           "title": "Student",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "12",
+            //           "menu_id": "4",
+            //           "submenuTitle": "Student Admission",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "4",
+            //           "title": "Student",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "13",
+            //           "menu_id": "4",
+            //           "submenuTitle": "Students",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "4",
+            //           "title": "Student",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "14",
+            //           "menu_id": "4",
+            //           "submenuTitle": "Assign Teacher",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "4",
+            //           "title": "Student",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "15",
+            //           "menu_id": "4",
+            //           "submenuTitle": "Leaves",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "16",
+            //           "Itemsubmenu_id": "15",
+            //           "itemTitle": "Apply Leaves",
+            //           "itemLink": "restricted.student.stuApplyLeave"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "19",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Fees",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "32",
+            //           "Itemsubmenu_id": "19",
+            //           "itemTitle": "Fee Item",
+            //           "itemLink": "restricted.finance.fee.feeitemDetails"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "19",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Fees",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "33",
+            //           "Itemsubmenu_id": "19",
+            //           "itemTitle": "Fine",
+            //           "itemLink": "restricted.finance.fee.fineDetails"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "19",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Fees",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "34",
+            //           "Itemsubmenu_id": "19",
+            //           "itemTitle": "Fee Structure",
+            //           "itemLink": "restricted.finance.fee.feeStructureDetails"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "19",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Fees",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "35",
+            //           "Itemsubmenu_id": "19",
+            //           "itemTitle": "Fee Collection",
+            //           "itemLink": "restricted.finance.fee.feeCollectionDetails"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "19",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Fees",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "36",
+            //           "Itemsubmenu_id": "19",
+            //           "itemTitle": "Fee Report",
+            //           "itemLink": "restricted.finance.fee.feeReport"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "19",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Fees",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "37",
+            //           "Itemsubmenu_id": "19",
+            //           "itemTitle": "Parent Receipt View",
+            //           "itemLink": "restricted.parentReceiptView"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "20",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Payslip Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "38",
+            //           "Itemsubmenu_id": "20",
+            //           "itemTitle": "Payslip",
+            //           "itemLink": "restricted.finance.payslipGenaration_view"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "20",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Payslip Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "39",
+            //           "Itemsubmenu_id": "20",
+            //           "itemTitle": "Approve Payslips",
+            //           "itemLink": "restricted.finance.approvepayslip"
+            //         },
+            //         {
+            //           "id": "5",
+            //           "title": "Finance",
+            //           "icon": "&#xE263;",
+            //           "link": "",
+            //           "submenu_id": "20",
+            //           "menu_id": "5",
+            //           "submenuTitle": "Payslip Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "40",
+            //           "Itemsubmenu_id": "20",
+            //           "itemTitle": "Payslip Report",
+            //           "itemLink": "restricted.finance.payslipReport"
+            //         },
+            //         {
+            //           "id": "6",
+            //           "title": "Repository",
+            //           "icon": "&#xE2CC;",
+            //           "link": "",
+            //           "submenu_id": "21",
+            //           "menu_id": "6",
+            //           "submenuTitle": "Category",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "6",
+            //           "title": "Repository",
+            //           "icon": "&#xE2CC;",
+            //           "link": "",
+            //           "submenu_id": "22",
+            //           "menu_id": "6",
+            //           "submenuTitle": "Post",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "7",
+            //           "title": "Email Template",
+            //           "icon": "&#xE158;",
+            //           "link": "restricted.emailTemplate.template",
+            //           "submenu_id": null,
+            //           "menu_id": null,
+            //           "submenuTitle": null,
+            //           "submenuLink": null,
+            //           "submenuIcon": null,
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "8",
+            //           "title": "Library",
+            //           "icon": "&#xE02F;",
+            //           "link": "",
+            //           "submenu_id": "23",
+            //           "menu_id": "8",
+            //           "submenuTitle": "Category",
+            //           "submenuLink": "restricted.library.category",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "8",
+            //           "title": "Library",
+            //           "icon": "&#xE02F;",
+            //           "link": "",
+            //           "submenu_id": "24",
+            //           "menu_id": "8",
+            //           "submenuTitle": "Books",
+            //           "submenuLink": "restricted.library.bookviewdetails",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "8",
+            //           "title": "Library",
+            //           "icon": "&#xE02F;",
+            //           "link": "",
+            //           "submenu_id": "25",
+            //           "menu_id": "8",
+            //           "submenuTitle": "Issue Books",
+            //           "submenuLink": "restricted.library.bookissue_view",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "8",
+            //           "title": "Library",
+            //           "icon": "&#xE02F;",
+            //           "link": "",
+            //           "submenu_id": "26",
+            //           "menu_id": "8",
+            //           "submenuTitle": "Return Books",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "8",
+            //           "title": "Library",
+            //           "icon": "&#xE02F;",
+            //           "link": "",
+            //           "submenu_id": "27",
+            //           "menu_id": "8",
+            //           "submenuTitle": "Report",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "9",
+            //           "title": "Transport",
+            //           "icon": "&#xE530;",
+            //           "link": "",
+            //           "submenu_id": "28",
+            //           "menu_id": "9",
+            //           "submenuTitle": "Vehicle",
+            //           "submenuLink": "restricted.transport.vehicleDetail",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "9",
+            //           "title": "Transport",
+            //           "icon": "&#xE530;",
+            //           "link": "",
+            //           "submenu_id": "29",
+            //           "menu_id": "9",
+            //           "submenuTitle": "Route",
+            //           "submenuLink": "restricted.transport.routeDetail",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "9",
+            //           "title": "Transport",
+            //           "icon": "&#xE530;",
+            //           "link": "",
+            //           "submenu_id": "30",
+            //           "menu_id": "9",
+            //           "submenuTitle": "Route Timing",
+            //           "submenuLink": "restricted.transport.routeTiming",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "9",
+            //           "title": "Transport",
+            //           "icon": "&#xE530;",
+            //           "link": "",
+            //           "submenu_id": "31",
+            //           "menu_id": "9",
+            //           "submenuTitle": "Route Stops",
+            //           "submenuLink": "restricted.transport.routeStops",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "9",
+            //           "title": "Transport",
+            //           "icon": "&#xE530;",
+            //           "link": "",
+            //           "submenu_id": "32",
+            //           "menu_id": "9",
+            //           "submenuTitle": "Route Allocation",
+            //           "submenuLink": "restricted.transport.routeAllocation",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "10",
+            //           "title": "Hostel",
+            //           "icon": "&#xE88A;",
+            //           "link": "",
+            //           "submenu_id": "33",
+            //           "menu_id": "10",
+            //           "submenuTitle": "Allocation",
+            //           "submenuLink": "restricted.hostel.allocation",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "10",
+            //           "title": "Hostel",
+            //           "icon": "&#xE88A;",
+            //           "link": "",
+            //           "submenu_id": "34",
+            //           "menu_id": "10",
+            //           "submenuTitle": "Transfer",
+            //           "submenuLink": "restricted.hostel.transfer",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "10",
+            //           "title": "Hostel",
+            //           "icon": "&#xE88A;",
+            //           "link": "",
+            //           "submenu_id": "35",
+            //           "menu_id": "10",
+            //           "submenuTitle": "Vacate",
+            //           "submenuLink": "restricted.hostel.vacate",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "10",
+            //           "title": "Hostel",
+            //           "icon": "&#xE88A;",
+            //           "link": "",
+            //           "submenu_id": "36",
+            //           "menu_id": "10",
+            //           "submenuTitle": "Visitors",
+            //           "submenuLink": "restricted.hostel.visitors",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "37",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Settings",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "41",
+            //           "Itemsubmenu_id": "37",
+            //           "itemTitle": "Store Category",
+            //           "itemLink": "restricted.inventory.storeCategory"
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "37",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Settings",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "42",
+            //           "Itemsubmenu_id": "37",
+            //           "itemTitle": "Item Category",
+            //           "itemLink": "restricted.inventory.itemCategory"
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "37",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Settings",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "43",
+            //           "Itemsubmenu_id": "37",
+            //           "itemTitle": "Supplier Type",
+            //           "itemLink": "restricted.inventory.supplierType"
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "38",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Store",
+            //           "submenuLink": "restricted.inventory.store",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "39",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Item",
+            //           "submenuLink": "restricted.inventory.item",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "40",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Store Item",
+            //           "submenuLink": "restricted.inventory.storeItem",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "41",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Supplier",
+            //           "submenuLink": "restricted.inventory.supplier",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "42",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Material Request",
+            //           "submenuLink": "restricted.inventory.materialRequestView",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "43",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Purchase Order",
+            //           "submenuLink": "restricted.inventory.purchaseOrderView",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "44",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Billing",
+            //           "submenuLink": "restricted.inventory.billingView",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "45",
+            //           "menu_id": "11",
+            //           "submenuTitle": "GRN",
+            //           "submenuLink": "restricted.inventory.grnView",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "11",
+            //           "title": "Inventory",
+            //           "icon": "&#xE8D1;",
+            //           "link": "",
+            //           "submenu_id": "46",
+            //           "menu_id": "11",
+            //           "submenuTitle": "Reports",
+            //           "submenuLink": "restricted.inventory.reportView",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "12",
+            //           "title": "Calendar",
+            //           "icon": "&#xE8DF;",
+            //           "link": "restricted.employeeDashboard",
+            //           "submenu_id": "47",
+            //           "menu_id": "12",
+            //           "submenuTitle": "Calendar",
+            //           "submenuLink": "restricted.plugins.calendar",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "12",
+            //           "title": "Calendar",
+            //           "icon": "&#xE8DF;",
+            //           "link": "restricted.employeeDashboard",
+            //           "submenu_id": "48",
+            //           "menu_id": "12",
+            //           "submenuTitle": "Exam Calendar",
+            //           "submenuLink": "restricted.plugins.examination",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "12",
+            //           "title": "Calendar",
+            //           "icon": "&#xE8DF;",
+            //           "link": "restricted.employeeDashboard",
+            //           "submenu_id": "49",
+            //           "menu_id": "12",
+            //           "submenuTitle": "Events Calendar",
+            //           "submenuLink": "restricted.plugins.events",
+            //           "submenuIcon": "",
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "13",
+            //           "title": "User Privileges",
+            //           "icon": "&#xE8E8;",
+            //           "link": "restricted.user_privileges.userView",
+            //           "submenu_id": null,
+            //           "menu_id": null,
+            //           "submenuTitle": null,
+            //           "submenuLink": null,
+            //           "submenuIcon": null,
+            //           "item_id": null,
+            //           "Itemsubmenu_id": null,
+            //           "itemTitle": null,
+            //           "itemLink": null
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "16",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Employee Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "17",
+            //           "Itemsubmenu_id": "16",
+            //           "itemTitle": "Employee Category",
+            //           "itemLink": "restricted.hr.config.category"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "16",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Employee Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "18",
+            //           "Itemsubmenu_id": "16",
+            //           "itemTitle": "Employee Position",
+            //           "itemLink": "restricted.hr.config.position"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "16",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Employee Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "19",
+            //           "Itemsubmenu_id": "16",
+            //           "itemTitle": "Employee Admission",
+            //           "itemLink": "restricted.employeemanagement.admission"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "16",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Employee Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "20",
+            //           "Itemsubmenu_id": "16",
+            //           "itemTitle": "Employees",
+            //           "itemLink": "restricted.employeemanagement.employee_view"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "17",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Leave Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "21",
+            //           "Itemsubmenu_id": "17",
+            //           "itemTitle": "Leave Type",
+            //           "itemLink": "restricted.hr.leavetype"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "17",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Leave Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "22",
+            //           "Itemsubmenu_id": "17",
+            //           "itemTitle": "Leave Entitlement",
+            //           "itemLink": "restricted.hr.leave_entitlement_View"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "17",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Leave Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "23",
+            //           "Itemsubmenu_id": "17",
+            //           "itemTitle": "Apply Leave",
+            //           "itemLink": "restricted.hr.applyLeave"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "17",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Leave Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "24",
+            //           "Itemsubmenu_id": "17",
+            //           "itemTitle": "Leave Applications",
+            //           "itemLink": "restricted.hr.leave_application"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "17",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Leave Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "25",
+            //           "Itemsubmenu_id": "17",
+            //           "itemTitle": "Attendance Register",
+            //           "itemLink": "restricted.academics.empattendancemark"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "17",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Leave Management",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "26",
+            //           "Itemsubmenu_id": "17",
+            //           "itemTitle": "Attendance Report",
+            //           "itemLink": "restricted.plugins.employeereport"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "18",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Payroll & Payslip",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "27",
+            //           "Itemsubmenu_id": "18",
+            //           "itemTitle": "Pay Item",
+            //           "itemLink": "restricted.hr.payitem_details"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "18",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Payroll & Payslip",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "28",
+            //           "Itemsubmenu_id": "18",
+            //           "itemTitle": "Pay Structure",
+            //           "itemLink": "restricted.hr.StructureGroup"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "18",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Payroll & Payslip",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "29",
+            //           "Itemsubmenu_id": "18",
+            //           "itemTitle": "Payslip",
+            //           "itemLink": "restricted.hr.payslipGenaration_view"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "18",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Payroll & Payslip",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "30",
+            //           "Itemsubmenu_id": "18",
+            //           "itemTitle": "Payslip Report",
+            //           "itemLink": "restricted.hr.payslipReport"
+            //         },
+            //         {
+            //           "id": "14",
+            //           "title": "HR",
+            //           "icon": "&#xE7EF;",
+            //           "link": "",
+            //           "submenu_id": "18",
+            //           "menu_id": "14",
+            //           "submenuTitle": "Payroll & Payslip",
+            //           "submenuLink": "",
+            //           "submenuIcon": "",
+            //           "item_id": "31",
+            //           "Itemsubmenu_id": "18",
+            //           "itemTitle": "Rejected Payslips",
+            //           "itemLink": "restricted.hr.rejectpayslip"
+            //         }
+            //       ];
+            // $scope.convertTo = function (arr, key, dayWise) {
+            //     var groups = {};
+            //     for (var i=0;l= arr.length, i<l;i++) {
+            //         arr[i][key] = arr[i][key];
+            //       // console.log(groups,"groups");
+            //       groups[arr[i][key]] = groups[arr[i][key]] || [];
+            //       groups[arr[i][key]].title = arr[i].title;
+            //       groups[arr[i][key]].icon = arr[i].icon;
+            //       groups[arr[i][key]].link = arr[i].link;
+                  
+            //       if (arr[i].submenuTitle && !arr[i].item) {
+            //         groups[arr[i][key]].submenu=groups[arr[i][key]].submenu || [];
+            //         var data={title:arr[i].submenuTitle, id:arr[i].submenu_id, link:arr[i].submenuLink};
+            //         groups[arr[i][key]].submenu.push(data);
+            //       }
+            //     }
+            //     return groups;
+            // };
+            // $scope.sections = $scope.convertTo($scope.sections, 'id', true);
         }
     ])
 ;

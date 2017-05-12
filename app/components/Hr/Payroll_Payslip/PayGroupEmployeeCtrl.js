@@ -1,13 +1,19 @@
 angular
     .module('rubycampusApp')
-    .controller('PayGroupEmployeeCtrl',['$scope','$compile','$stateParams', '$timeout', '$resource', '$filter', 'DTOptionsBuilder', 'DTColumnDefBuilder',function( $scope, $compile, $stateParams, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder) {
+    .controller('PayGroupEmployeeCtrl',['$scope',
+        '$compile',
+        '$stateParams', 
+        '$timeout', 
+        '$resource', 
+        '$filter', 
+        'DTOptionsBuilder', 
+        'DTColumnDefBuilder',
+        '$localStorage',
+        '$http',
+        function( $scope, $compile, $stateParams, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
+            $scope.EmployeeDetail=[];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
                 .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
@@ -67,41 +73,61 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Employee Category'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Recent Payslip')
             ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
+            
+            console.log($stateParams.id,'$stateParams');
+            $localStorage.structureName=$stateParams.id;
+            // $scope.test=$stateParams.id;
+
+            $scope.refreshTable=function(){
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'PayrollPayslipAPI/getAssignEmployee',
+                    params:{id:$stateParams.id},
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data,'assigned emp');
+                    $scope.EmployeeDetail = return_data.data.message;
+                });
             }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
+            $scope.refreshTable();
+            $scope.PayStru_name=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/payStructure',
+                params:{id:$stateParams.id},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(pay_structure){
+                console.log(pay_structure.data.message[0],'pay_structure');
+                $scope.PayStru_name=pay_structure.data.message[0];
+            });
+            $scope.removeEmployee=function(id,$index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                                method:'POST',
+                                url: $localStorage.service+'PayrollPayslipAPI/assignEmployee',
+                                data:{id:id},
+                                headers:{'access_token':$localStorage.access_token}
+                            }).then(function(return_data){
+                                console.log(return_data,'employee');
+                                $scope.EmployeeDetail.splice($index, 1);
+                                UIkit.notify({
+                                    message : return_data.data.message.message,
+                                    status  : 'success',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
+                                $scope.refreshTable();
+                            });
                         }
-                    }
-                }
-                vm.selectAll = true;
-            }             
-            $scope.EmployeeDetail=[];
-            console.log($scope.CreateNewData,'$scope.CreateNewData');
-            // alert($stateParams.id);
-            $scope.EmployeeProfileFn=function(){                       
-                $scope.gropEmployeeProfile=$filter('filter')($scope.EmployeeProfile,{ PayStructure_id : parseInt($stateParams.id)},true);
-                console.log($scope.gropEmployeeProfile,'$scope.gropEmployeeProfile  1');
-                angular.forEach($scope.gropEmployeeProfile,function(value,key){
-                    // console.log(value,'value');
-                     $scope.EmployeeDetail.push({emp_id : value.id,empFirstName : value.firstname,empLastName : value.lastname,empdet:value.Dept,empcat:value.category});
-                     // console.log($scope.EmployeeDetail,'$scope.EmployeeDetail');
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
                     });
+                }
             }
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.EmployeeProfile = data;
-                    $scope.EmployeeProfileFn();
-                }); 
         }]);

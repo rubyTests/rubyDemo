@@ -1,13 +1,8 @@
 angular
     .module('rubycampusApp')
     .controller('dt_default',
-        function($compile, $scope, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, $filter, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -64,64 +59,14 @@ angular
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Pay Items'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Frequence')
             ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }             
-            $scope.CreateNewData=[];
-            $scope.PayItemStructureFn=function(){
-                $scope.PayStructure.forEach(function(value,key){
-                    $scope.CreateNewData.push({ ps_name : value.Name ,ps_item_count : $scope.GetPayItemCount(value.id) , ps_freq : value.Frequency ,pis_id : value.id ,Assemp_count : $scope.GetEmpCount(value.id) });
-                    });
-            }
-            $scope.GetPayItemCount=function(str_id){
-                var getPaySN=$filter('filter')($scope.PayItemStructure,{ PayStructure_id : str_id}, true);
-                return getPaySN.length;
-
-            }
-            $scope.GetEmpCount=function(id){
-                var getEmployeeCount=$filter('filter')($scope.EmployeeProfile,{PayStructure_id : id}, true);
-                console.log(getEmployeeCount,'getEmployeeCount');
-                return getEmployeeCount.length;
-            }
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.PayItem = data;
-                });
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.PayStructure = data;
-                });
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.EmployeeProfile = data;
-                });
-            $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json')
-                .query()
-                .$promise
-                .then(function(data) {
-                    $scope.PayItemStructure = data;
-                    $scope.PayItemStructureFn();
-                }); 
+            
+            $scope.ViewData=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/payStructureDetail',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.ViewData=return_data.data.message;
+            });
         }
     );

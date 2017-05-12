@@ -313,16 +313,10 @@ rubycampusApp
                     url: "/AddpayCategory",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayCategory.html',
                     resolve: {
-                        get_Payitem : function($http){
-                           return $http({
-                                method:'GET',
-                                url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json',
-                            }).then(function(data){
-                                return data.data;
-                            });
-                        },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                            	'lazy_parsleyjs',
+                            	'smart-filter',
                                 'app/components/Hr/Payroll_Payslip/PayCategoryController.js'
                             ]);
                         }]
@@ -331,49 +325,24 @@ rubycampusApp
                 })
 
                 .state("restricted.hr.EditPayCategory",{
-                    url: "/EditpayCategory",
+                    url: "/EditpayCategory/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/EditPayCategory.html',
                     resolve: {
-                        get_Payitem : function($http){
-                           return $http({
-                                method:'GET',
-                                url:'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json',
-                            }).then(function(data){
-                                return data.data;
-                            });
-                        },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                            	'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/EditPayCategoryCtrl.js'
                             ]);
                         }]
                     },
-                    
+                    params:{id:null}
                 })
                 .state("restricted.hr.ViewPayGroup",{
                     url: "/View-PayGroup/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/ViewPayGroup.html',
                     controller : 'ViewPayGroupCtrl',
-                    parmas :{'id' :{value:null}},
+                    parmas :{id:null},
                     resolve: {
-                        Pay_item : function($http){
-                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItem.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        Pay_Structure : function($http){
-                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
-                        Pay_Group: function($http){
-                            return $http({method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json'})
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        },
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'app/components/Hr/Payroll_Payslip/ViewPayGroupCtrl.js'
@@ -386,7 +355,7 @@ rubycampusApp
                     url: "/ViewGroup Employee/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroupEmployee.html',
                     // controller : 'PayGroupEmployeeCtrl',
-                    parmas :{'id' :{value:null}},
+                    parmas :{id:null},
                     resolve: {
                         // params:{'id': {value:null}},
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -402,7 +371,7 @@ rubycampusApp
                 .state("restricted.hr.StructureGroup", {
                     url: "/payGroup",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroup.html',
-                    controller :'dt_default',
+                    // controller :'dt_default',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3875,6 +3844,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_KendoUI',
+                                'lazy_parsleyjs',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'app/components/Hr/Payroll_Payslip/viewpayslip_genetationCtrl.js'
                             ]);
@@ -3888,7 +3858,7 @@ rubycampusApp
                 .state("restricted.hr.showpayslipdetails",{
                     url: "/showpayslipdetails/{pay_id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/payslipgeneration_table.html',
-                    controller : 'payslipgen_tableCtrl',
+                    // controller : 'payslipgen_tableCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3920,10 +3890,27 @@ rubycampusApp
                     },
                     params:{id:null}                
                 })
+                .state("restricted.hr.payslipreject_view",{
+                    url: "/payslipreject_view/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipreject_to_revert.html',
+                    controller : 'payslipreject_to_revertCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/payslipreject_to_revertCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view Employee Pay details'
+                    },
+                    params:{id:null}                
+                })
                 .state("restricted.hr.rejectpayslip", {
                     url: "/rejectpayslip",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/rejectPayslip.html',
-                    controller: 'rejectPayslipCtrl',
+                    // controller: 'rejectPayslipCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3937,10 +3924,10 @@ rubycampusApp
                         pageTitle: 'reject payslip'
                     }
                 })
-                .state("restricted.hr.approvepayslip", {
+                .state("restricted.finance.approvepayslip", {
                     url: "/approvepayslip",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/approvePayslip.html',
-                    controller: 'approvePayslipCtrl',
+                    // controller: 'approvePayslipCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3992,7 +3979,7 @@ rubycampusApp
                 .state("restricted.finance.showpayslipdetails",{
                     url: "/showpayslipdetails/{pay_id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/payslipgeneration_table.html',
-                    controller : 'payslipgen_tableCtrl',
+                    // controller : 'payslipgen_tableCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -4070,6 +4057,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/configuration/payItemCtrl.js'
                             ], {serie:true});
                         }]

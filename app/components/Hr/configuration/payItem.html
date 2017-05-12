@@ -1,3 +1,8 @@
+<style type="text/css">
+    .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+        font-size: 16px !important;
+    }
+</style>
 <div id="page_content"  ng-controller="payItemCtrl as showCase">
     <div id="page_content_inner">
 
@@ -16,10 +21,10 @@
 
                     <thead>
                         <tr>
-                            <th>S.No</th>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Action</th>
+                            <th style="width: 10% !important;">S.No</th>
+                            <th style="width: 40% !important;">Name</th>
+                            <th style="width: 30% !important;">Type</th>
+                            <th style="width: 25% !important;">Action</th>
                         </tr>
                     </thead>
                     <tfoot>
@@ -31,13 +36,13 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
+                        <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.name}}</td>
-                            <td>{{row.type}}</td>
-                            <td class="uk-text-center">
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.TYPE}}</td>
+                            <td class="">
                                 <a ng-click="editPayItem(row)" data-uk-modal="{target:'#open_payitem'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deletePayItem(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -46,28 +51,28 @@
         </div>
     </div>
     <!-- Model Window -->
-                <div id="open_payitem" class="uk-modal">
-                    <div class="uk-modal-dialog">
-                        <button type="button" class="uk-modal-close uk-close"></button>
-                        <h3 class="uk-modal-title">{{tit_caption}} Item </h3><br>
-                        <div class="md-card-content">
-                            <form>
-                                <div class="uk-form-row">
-                                    <label>Name</label>
-                                    <input type="text" ng-model="item_name" class="md-input" md-input>
-                                    <input type="hidden" ng-model="item_id">
-                                </div>
-                                <div class="uk-form-row">
-                                    <input type="text" config="selectize_item_config" options="selectize_item_options" ng-model="selectize_item" selectize/>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="uk-modal-footer uk-text-right">
-                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
-                        </div>
+    <div id="open_payitem" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h3 class="uk-modal-title">{{tit_caption}} Item </h3><br>
+            <div class="md-card-content">
+                <form id="form_validation" ng-submit="savePayItem()" novalidate>
+                    <div class="uk-form-row parsley-row">
+                        <label>Name</label>
+                        <input type="text" ng-model="item_name" required class="md-input" md-input>
+                        <input type="hidden" ng-model="item_id">
                     </div>
-                </div>
+                    <div class="uk-form-row parsley-row">
+                        <input type="text" config="selectize_item_config" required options="selectize_item_options" ng-model="item_type" selectize/>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small">{{status}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 

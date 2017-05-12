@@ -1,9 +1,28 @@
+<style type="text/css">
+    .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+        font-size: 16px !important;
+    }
+</style>
 <div id="page_content">
     <div id="page_content_inner">
         <h3 class="heading_a uk-margin-bottom">Payroll Structure</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content uk-width-medium-1-1 large-padding">
-                <div class="uk-grid  uk-grid-medium" ng-repeat="row in UserDatas">
+                <div class="uk-navbar-flip">
+                    <ul class="uk-navbar-nav user_actions">
+                      <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
+                          <button class="md-btn md-btn-primary md-btn-small md-btn-wave-light">More <i class="material-icons">&#xE5C5;</i></button>
+                          <div class="uk-dropdown uk-dropdown-small">
+                              <ul class="uk-nav js-uk-prevent">
+                                  <li style="margin-left:-10px !important;"><a ui-sref="restricted.hr.EditPayCategory({id:stru_id})"><i class="md-icon material-icons">&#xE254;</i> Edit</a></li>
+                                  <li style="margin-left:-10px !important;"><a ng-click="deletepayStructure(stru_id)"><i class="md-icon material-icons">&#xE872;</i> Delete</a></li>
+                                  <li style="margin-left:-10px !important;"><a ui-sref="restricted.hr.ViewGroupEmployee({id:stru_id})"><i class="md-icon material-icons md-24">&#xE8D3;</i> Assign Employee</a></li>
+                              </ul>
+                          </div>
+                      </li>
+                    </ul>
+                </div>
+                <div class="uk-grid  uk-grid-medium" >
                     <div class="uk-width-medium-1-2">
                         <ul class="md-list md-list-addon">
                             <li>
@@ -11,7 +30,7 @@
                                     <i class="md-list-addon-icon material-icons uk-text-primary" >assignment_ind</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{row.Name}}</span>
+                                    <span class="md-list-heading">{{viewData.NAME}}</span>
                                     <span class="uk-text-small uk-text-muted">Pay Structure Name</span>
                                 </div>
                             </li>
@@ -24,16 +43,17 @@
                                     <i class="md-list-addon-icon material-icons uk-text-primary" >av_timer</i>
                                 </div>
                                 <div class="md-list-content">
-                                    <span class="md-list-heading">{{row.Frequency}}</span>
+                                    <span class="md-list-heading">{{viewData.FREQUENCY}}</span>
                                     <span class="uk-text-small uk-text-muted">Payment Frequency</span>
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <hr class="uk-grid-divider" ng-if="EarningsDiv && DeductionDiv">
+                <!-- <hr class="uk-grid-divider" ng-if="EarningsDiv && DeductionDiv"> -->
                 <h4>Pay Details</h4>
-                <div ng-if="EarningsData.length > 0">
+                <div >
+                <!-- <div ng-if="EarningsData.length > 0"> -->
                     <h4>Earning</h4>
                     <div class="md-card uk-margin-medium-bottom">
                         <div class="md-card-content">
@@ -43,13 +63,13 @@
                                     <tr>
                                         <th><i class="md-list-addon-icon material-icons">school</i>  Pay Item Name</th>
                                         <th><i class="md-list-addon-icon material-icons">attach_money</i>
-                                        Pay Item Value</th>
+                                        Pay Item Value (%)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="row in EarningsData">
-                                            <td>{{row.Name}}</td>
-                                            <td>{{row.Amount}}</td>
+                                        <tr ng-repeat="row in viewData.item">
+                                            <td ng-if="row.ITEM_TYPE=='Earnings'">{{row.ITEM_NAME}}</td>
+                                            <td ng-if="row.ITEM_TYPE=='Earnings'">{{row.AMOUNT}} %</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -57,7 +77,8 @@
                         </div>
                     </div>
                 </div>
-                <div ng-if="DeductionData.length > 0">
+                <!-- <div ng-if="DeductionData.length > 0"> -->
+                <div>
                     <h4>Deduction</h4>
                     <div class="md-card uk-margin-medium-bottom">
                         <div class="md-card-content">
@@ -66,13 +87,13 @@
                                     <thead>
                                     <tr>
                                         <th><i class="md-list-addon-icon material-icons">school</i>  Pay Item Name</th>
-                                        <th><i class="md-list-addon-icon material-icons">attach_money</i>Pay Item Value</th>
+                                        <th><i class="md-list-addon-icon material-icons">attach_money</i>Pay Item Value (%)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="row in DeductionData">
-                                            <td>{{row.Name}}</td>
-                                            <td>{{row.Amount}}</td>
+                                        <tr ng-repeat="row in viewData.item">
+                                            <td ng-if="row.ITEM_TYPE=='Deductions'">{{row.ITEM_NAME}}</td>
+                                            <td ng-if="row.ITEM_TYPE=='Deductions'">{{row.AMOUNT}} %</td>
                                         </tr>
                                     </tbody>
                                 </table>

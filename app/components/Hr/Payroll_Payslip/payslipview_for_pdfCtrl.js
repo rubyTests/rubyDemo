@@ -10,73 +10,68 @@ angular
         '$location',
         '$http',
         '$window',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$location,$http,$window) {
-            $resource('app/components/employeemanagement/employee_list.json')
-                .query()
-                .$promise
-                .then(function(return_data) {
-                    var paramsData=$filter('filter')(return_data, {id : $stateParams.id});
-                    $scope.tableArray=paramsData;
-                });
+        '$localStorage',
+        '$state',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$location,$http,$window,$localStorage,$state) {
+          
 
                 var path=$location.path().split( '/' );
                 $scope.urlname=path[1];
 
-                $scope.basic_val=5000;
-                $scope.housing_allow=1000;
-                $scope.hr_allowance=500;
-                $scope.transport=750;
-                $scope.Total_Earning=7250;
-                $scope.grasspayTotal=7250;
+            
 
-                $scope.income_deduction=450;
-                $scope.fund_deduction=100;
-                $scope.toatl_deduction=550;
-                $scope.showTotalNetpay=6700;
+            $scope.viewData=[];
+            $scope.payslipList=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'PayrollPayslipAPI/fetchEmployeePayDetails',
+                params:{id:$stateParams.id},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.viewData=return_data.data.message[0];
+                $scope.getPayslipDetail(return_data.data.message[0].ID,return_data.data.message[0].PAY_STRUCTURE_ID,return_data.data.message[0].BASIC_PAY);
+            });
 
-
-                $('#tblBody').find('input').attr('disabled',true);
-                $scope.editPayDetails=function(){
-                    $('#tblBody').find('input').attr('disabled',false);
-                }
-            $scope.earningCalculation=function(){
-                var basic_val=$scope.basic_val || 0;
-                var housing_allow=$scope.housing_allow || 0;
-                var transport=$scope.transport || 0;
-                var hr_allowance=$scope.hr_allowance || 0;
-                $scope.Total_Earning=parseInt(basic_val) + parseInt(housing_allow) + parseInt(transport) + parseInt(hr_allowance);            
-                $scope.grasspayTotal=$scope.Total_Earning;
-                $('#earningTotal').trigger('change');
-                $scope.getTotalNetPay();
+            $scope.getPayslipDetail=function(emp_id,stru_id,basicPay){
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'PayrollPayslipAPI/fetchPaySlipAddonDetails',
+                    params:{
+                        'empId':emp_id,
+                        'pay_struc_ID':stru_id,
+                        'genDate':$localStorage.GenDate
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    $scope.checkStatus=return_data.data.message;
+                    $scope.payslipList=return_data.data.message.addon;
+                        var TotalEarns=0;
+                        var TotalDeduc=0;
+                        angular.forEach(return_data.data.message.addon, function(value , key) {
+                            if(value.TYPE=='Earnings'){
+                                value.AMOUNT=value.AMOUNT || 0;
+                                TotalEarns+=parseFloat(value.AMOUNT);
+                            }else if(value.TYPE=='Deductions'){
+                                value.AMOUNT= value.AMOUNT || 0;
+                                TotalDeduc+=parseFloat(value.AMOUNT);
+                            }
+                        })
+                        $scope.Total_Earning=(parseFloat(basicPay)+parseFloat(TotalEarns)).toFixed(2);
+                        $scope.toatl_deduction=parseFloat(TotalDeduc).toFixed(2);
+                        $scope.TotalNetPay=parseFloat($scope.Total_Earning-$scope.toatl_deduction).toFixed(2);
+                });
             }
-            $scope.getTotalDeduction=function(){
-                var income_deduction=$scope.income_deduction || 0;
-                var fund_deduction=$scope.fund_deduction || 0;
-                $scope.toatl_deduction=parseInt(income_deduction) + parseInt(fund_deduction);
-                $('#duductionTotal').trigger('change');
-                $scope.getTotalNetPay();
-            }
-            $scope.getTotalNetPay=function(){
-                var Total_Earning=$scope.Total_Earning || 0;
-                var toatl_deduction=$scope.toatl_deduction || 0;
-                $scope.showTotalNetpay=parseInt(Total_Earning) - parseInt(toatl_deduction);
-            }
-
-            // $('input').focusin(function(){
-            //   $(this).css({"border": "1px solid rgb(173,208,242)" });
-            // });
-            // $('input').focusout(function(){
-            //   $(this).css({"border": "1px solid #b3b3b3"});
-            // });
 
             $scope.generatePdf = function(id) {
               $http({
-                url : 'http://localhost/ruby/Rubyctrl/index',
+                // url : 'http://localhost/ruby/Rubyctrl/index',
+                url: $localStorage.service+'PayrollPayslipAPI/index',
                 method : 'POST',
-                data : { 'id':id},
+                data : { 'id':id,'genDate':$localStorage.GenDate},
                 responseType : 'arraybuffer',
                 headers: {
-                 'Content-type' : 'application/pdf'
+                'Content-type' : 'application/pdf',
+                'access_token':$localStorage.access_token
                 },
                 cache: true,
                }).success(function(data) {
@@ -89,5 +84,29 @@ angular
                 console.log('error');
                });
             }
+            $scope.changeStatus=function(payslip_id,pay_status){
+                console.log(payslip_id,pay_status,'dsds');
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'PayrollPayslipAPI/updatePayslipStatus',
+                    data:{
+                        'payslipID':payslip_id,
+                        'status':pay_status
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.status,'return_data.data');
+                    if(return_data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $state.go('restricted.finance.payslipGenaration_view');
+                    }
+                });
+            }
+            console.log($localStorage.GenDate,'$localStorage.GenDate');
         }
     ]);

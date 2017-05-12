@@ -1,10 +1,15 @@
+<style type="text/css">
+    .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+        font-size: 16px !important;
+    }
+</style>
 <div id="page_content">
     <div id="page_content_inner">
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <input type="text" config="selectize_dept_config" options="selectize_dept_data" ng-model="selectize_dept" selectize />
+                        <input type="text" config="selectize_dept_config" options="selectize_dept_options" ng-model="deptartment" selectize />
                     </div>
                 </div>
             </div>
@@ -35,12 +40,19 @@
                     <tbody>
                         <tr ng-repeat="row in tableView_data">
                             <td>{{$index+1}}</td>
-                            <td>{{row.firstname}} {{row.lastname}}</td>
-                            <td>{{row.Admission_No}}</td>
-                            <td>{{row.position}}</td>
-                            <td>{{row.category}}</td>
-                            <td ng-if="row.payitem_id != ''"><a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.id}}})">Change Pay Group</a></td>
-                            <td ng-if="row.payitem_id == ''"><a ui-sref="restricted.hr.add_employee_details({id:{{row.id}}})">Add to this Group</a></td>
+                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td>{{row.EMPLOYEE_NO}}</td>
+                            <td>{{row.POSITION}}</td>
+                            <td>{{row.CATEGORY}}</td>
+                            <td>
+                                <a ng-show="{{row.PAY_STRUCTURE_ID==strucName}}" data-uk-tooltip="{pos:'top'}" title="Already Assigned">Change Pay Group</a>
+                                <a ng-show="{{row.PAY_STRUCTURE_ID!='' && row.PAY_STRUCTURE_ID!=strucName}}" ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.ID}}})">Change Pay Group</a>
+                                <a ng-show="{{row.PAY_STRUCTURE_ID==''}}" ui-sref="restricted.hr.add_employee_details({id:{{row.ID}}})">Add to this Group</a>
+                            </td>
+                            <!-- <td>{{row.PAY_STRUCTURE_ID!=''}}</td> -->
+                            <!-- <td ng-show="{{row.PAY_STRUCTURE_ID!=null}}"><a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.ID}}})">Change Pay Group</a></td>
+                            <td ng-show="{{row.PAY_STRUCTURE_ID==null}}"><a ui-sref="restricted.hr.add_employee_details({id:{{row.ID}}})">Add to this Group</a></td> -->
+                            <!-- <td><a ui-sref="restricted.hr.add_employee_details({id:{{row.ID}}})">Add to this Group</a></td> -->
                         </tr>
                     </tbody>
                 </table>
