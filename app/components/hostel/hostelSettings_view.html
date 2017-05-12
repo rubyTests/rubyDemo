@@ -1,0 +1,77 @@
+ <div id="page_content"  ng-controller="hostelsettingsCtrl as tblData">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Allocation
+        </h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <!-- <a ui-sref="restricted.hostel.allocationregister"  class="md-btn md-btn-primary md-btn-small"> -->
+                        <button data-uk-modal="{target:'#modal_overflow'}" ng-click="openModel()"  class="md-btn md-btn-primary md-btn-small">
+                        <i class="uk-icon-plus"></i> Settings
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th style="width: 50px !important;">S.No</th>
+                            <th>Hostel</th>
+                            <th>Building</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th style="width: 50px !important;"></th>
+                            <th>Hostel</th>
+                            <th>Building</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.building}}</td>
+                            <td class="">
+                                <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteAssignTeacher(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- Model Window start-->
+    <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+            <button type="button" class="uk-modal-close uk-close"></button>
+            <h3 class="uk-modal-title"> Hostel Settings</h3><br>
+            <div class="md-card-content">
+                <form id="form_validation" name="inputForm" ng-submit="saveHostelSettings()" novalidate>
+                    <div class="uk-form-row parsley-row">
+                        <input type="hidden" ng-model="hidden_id">
+                        <div class="md-input-wrapper ">
+                            <label>Name</label>
+                            <input type="text" md-input="" class="md-input ng-pristine ng-isolate-scope ng-empty ng-invalid ng-invalid-required md-input-processed ng-touched" ng-model="hostel_name" required><span class="md-input-bar "></span>
+                        </div> 
+                    </div> 
+                    <div class="uk-form-row parsley-row">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-1">
+                                <input type="text" config="selectize_buildingId_config" options="selectize_buildingId_options" ng-model="selectize_bname" required selectize />
+                            </div>
+                        </div>          
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                    </div>
+                </form>
+               
+            </div>
+           
+        </div>
+    </div>
+    <!-- Model Window End-->
+</div>
