@@ -91,9 +91,13 @@ angular
                         fillform();
                     }
                 }else {
-                    fillform();      
+                    fillform();
                 }
             };
+            $scope.cloneSection1=function($event,$index,currentE,ITemArray) {
+                $event.preventDefault();
+                $scope.form_dynamic.push({'PAYITEM_ID':'','AMOUNT':''});
+            }
             function fillform(){
                 UIkit.notify({
                     message : 'Please Fill current form',

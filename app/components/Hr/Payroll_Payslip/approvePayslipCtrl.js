@@ -61,5 +61,10 @@ angular
                     console.log(return_data.data.message,'return_data');
                     $scope.tableView_data = return_data.data.message;
                 });
+
+                $scope.passDate=function(date,stuc_id){
+                    $localStorage.GenDate=date;
+                    $localStorage.stucId=stuc_id;
+                }
         }
     );

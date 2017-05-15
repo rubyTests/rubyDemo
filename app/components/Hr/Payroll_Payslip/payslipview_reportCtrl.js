@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('payslipview_for_pdfCtrl', [
+    .controller('payslipview_reportCtrl', [
         '$scope',
         '$rootScope',
         '$timeout',
@@ -31,12 +31,7 @@ angular
                 $scope.viewData=return_data.data.message[0];
                 $scope.getPayslipDetail(return_data.data.message[0].ID,return_data.data.message[0].PAY_STRUCTURE_ID,return_data.data.message[0].BASIC_PAY);
             });
-            $scope.editBTN=true;
-            $scope.editPayDetails=function(){
-                $('#basicpay').attr('disabled',false);
-                $scope.btnStatus=true;
-                $scope.editBTN=false;
-            }
+
             $scope.getPayslipDetail=function(emp_id,stru_id,basicPay){
                 $http({
                     method:'GET',
@@ -49,7 +44,6 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     $scope.checkStatus=return_data.data.message;
-                    $scope.PAYSLIP_ID=return_data.data.message.PAYSLIP_ID;
                     $scope.payslipList=return_data.data.message.addon;
                         var TotalEarns=0;
                         var TotalDeduc=0;
@@ -68,50 +62,6 @@ angular
                 });
             }
 
-            $scope.earningCalculation=function(basicVal){
-                var perOfTotalEarn=0;
-                var perOfTotalDeduc=0;
-                $('[name="earningAmount"]').each(function(){
-                    perOfTotalEarn+=parseFloat($(this).val());
-                })
-
-                 $('[name="deductionAmount"]').each(function(){
-                    perOfTotalDeduc+=parseFloat($(this).val());
-                })
-                // console.log(perOfTotalEarn,'-',perOfTotalDeduc);
-                var SUMTotal_Earning=parseFloat(basicVal) + parseFloat(perOfTotalEarn);
-                $scope.Total_Earning=SUMTotal_Earning.toFixed(2);
-                $scope.total_deduction=parseFloat(perOfTotalDeduc).toFixed(2);
-                $scope.showTotalNetpay=parseFloat($scope.Total_Earning-$scope.total_deduction).toFixed(2);
-                $scope.NetpayAmount=parseFloat($scope.Total_Earning-$scope.total_deduction).toFixed(2);
-                $scope.TotalNetPay=$scope.NetpayAmount;
-            }
-            $scope.assignPayroll=function(){
-                // console.log('test');
-                // console.log($scope.payslipList,'payslipList',$scope.PAYSLIP_ID);
-                // console.log($scope.PAYSLIP_ID,'basic');
-                // console.log($scope.TotalNetPay,'netpay');
-                $http({
-                    url: $localStorage.service+'PayrollPayslipAPI/updatePayslipGeneration',
-                    method : 'POST',
-                    data : { 
-                        'payslipid':$scope.PAYSLIP_ID,
-                        'netpay':$scope.TotalNetPay
-                    },
-                    headers:{'access_token':$localStorage.access_token}
-                }).success(function(result) {
-                    console.log(result,'success');
-                     UIkit.notify({
-                        message : result.message.message,
-                        status  : 'success',
-                        timeout : 2000,
-                        pos     : 'top-center'
-                    });
-                    $state.go('restricted.hr.payslipGenaration_view');
-                }).error(function(result){
-                    console.log(result,'error');
-                });
-            }
             $scope.generatePdf = function(id) {
               $http({
                 // url : 'http://localhost/ruby/Rubyctrl/index',

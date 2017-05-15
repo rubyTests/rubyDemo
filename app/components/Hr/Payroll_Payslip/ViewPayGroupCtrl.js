@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('ViewPayGroupCtrl',
-    function($scope,$stateParams,$http,$localStorage,$timeout,$state){
+    function($scope,$stateParams,$http,$localStorage,$timeout,$state,$filter){
         $scope.stru_id=$stateParams.id;
         $scope.viewData=[];
         $http({
@@ -12,8 +12,12 @@ angular
             },
             headers:{'access_token':$localStorage.access_token}
         }).then(function(return_data){
-            console.log(return_data.data.message,'edit');
             $scope.viewData=return_data.data.message;
+            // $scope.checkviewData=return_data.data.message.item;
+            var earns=$filter('filter')($scope.viewData.item, {ITEM_TYPE : 'Earnings'});
+            var deduction=$filter('filter')($scope.viewData.item, {ITEM_TYPE : 'Deductions'});
+            $scope.earningLength=earns.length;
+            $scope.deductionLength=deduction.length;
         });
 
         $scope.deletepayStructure=function(id){
@@ -27,7 +31,7 @@ angular
             }).then(function mySucces(response) {
                 console.log(response,'response');
                 if(response.data.status==true){
-                    UIkit.modal.alert('There are payitems assigned to this pay structure, remove the pay item first to continue deleting pay structure');
+                    UIkit.modal.alert('There are employees assigned to this pay structure, remove the employees first to continue deleting pay structure');
                 }
             },function myError(response) {
                 console.log(response,'error');

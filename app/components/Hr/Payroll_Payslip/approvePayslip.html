@@ -35,7 +35,8 @@
                             <td>{{row.STRUCURE_NAME}}</td>
                             <td>{{row.GENERATION_DATE}}</td>
                             <td><span style="color: rgb(25,118,210);">{{row.STATUS}}</span></td>
-                            <td><a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.finance.payslipdetails_view({id:{{row.EMP_PROFILE_ID}}})" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a></td>
+                            <td><a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.finance.payslipviewdetails({payslipid:{{row.ID}},empid:{{row.EMP_PROFILE_ID}}})" class="ts_remove_row" ng-click="passDate(row.GENERATION_DATE,row.PAYSTRUCTURE_ID)"><i class="uk-icon-eye"></i> View</a></td>
+                            <!-- <td><a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.finance.payslipdetails_view({id:{{row.EMP_PROFILE_ID}}})" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a></td> -->
                         </tr>
                     </tbody>
                 </table>

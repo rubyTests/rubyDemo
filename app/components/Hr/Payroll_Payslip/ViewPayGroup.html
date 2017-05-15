@@ -14,9 +14,9 @@
                           <button class="md-btn md-btn-primary md-btn-small md-btn-wave-light">More <i class="material-icons">&#xE5C5;</i></button>
                           <div class="uk-dropdown uk-dropdown-small">
                               <ul class="uk-nav js-uk-prevent">
-                                  <li style="margin-left:-10px !important;"><a ui-sref="restricted.hr.EditPayCategory({id:stru_id})"><i class="md-icon material-icons">&#xE254;</i> Edit</a></li>
-                                  <li style="margin-left:-10px !important;"><a ng-click="deletepayStructure(stru_id)"><i class="md-icon material-icons">&#xE872;</i> Delete</a></li>
-                                  <li style="margin-left:-10px !important;"><a ui-sref="restricted.hr.ViewGroupEmployee({id:stru_id})"><i class="md-icon material-icons md-24">&#xE8D3;</i> Assign Employee</a></li>
+                                  <li style="margin-left:0px !important;"><a ui-sref="restricted.hr.EditPayCategory({id:stru_id})"> Edit</a></li>
+                                  <li style="margin-left:0px !important;"><a ng-click="deletepayStructure(stru_id)"> Delete</a></li>
+                                  <li style="margin-left:0px !important;"><a ui-sref="restricted.hr.ViewGroupEmployee({id:stru_id})">Assign Employee</a></li>
                               </ul>
                           </div>
                       </li>
@@ -50,11 +50,12 @@
                         </ul>
                     </div>
                 </div>
+                
                 <!-- <hr class="uk-grid-divider" ng-if="EarningsDiv && DeductionDiv"> -->
-                <h4>Pay Details</h4>
-                <div >
+                <h4 class="heading_a" >Pay Details</h4>
+                <div style="margin-top:25px;">
                 <!-- <div ng-if="EarningsData.length > 0"> -->
-                    <h4>Earning</h4>
+                    <h5 class="heading_c uk-margin-bottom" >Earning</h5>
                     <div class="md-card uk-margin-medium-bottom">
                         <div class="md-card-content">
                             <div class="uk-overflow-container">
@@ -67,9 +68,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="row in viewData.item">
-                                            <td ng-if="row.ITEM_TYPE=='Earnings'">{{row.ITEM_NAME}}</td>
-                                            <td ng-if="row.ITEM_TYPE=='Earnings'">{{row.AMOUNT}} %</td>
+                                        <tr ng-repeat="row in viewData.item | filter:{ITEM_TYPE:'Earnings'}">
+                                            <td >{{row.ITEM_NAME}}</td>
+                                            <td >{{row.AMOUNT}} %</td>
+                                        </tr>
+
+                                        <tr ng-show="earningLength==0">
+                                            <td colspan="2" style="text-align: center;padding:15px !important;">There are no earnings</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -77,9 +82,10 @@
                         </div>
                     </div>
                 </div>
+
                 <!-- <div ng-if="DeductionData.length > 0"> -->
                 <div>
-                    <h4>Deduction</h4>
+                    <h5 class="heading_c uk-margin-bottom" >Deduction</h5>
                     <div class="md-card uk-margin-medium-bottom">
                         <div class="md-card-content">
                             <div class="uk-overflow-container">
@@ -91,9 +97,12 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        <tr ng-repeat="row in viewData.item">
-                                            <td ng-if="row.ITEM_TYPE=='Deductions'">{{row.ITEM_NAME}}</td>
-                                            <td ng-if="row.ITEM_TYPE=='Deductions'">{{row.AMOUNT}} %</td>
+                                        <tr ng-repeat="row in viewData.item | filter:{ITEM_TYPE:'Deductions'}">
+                                            <td >{{row.ITEM_NAME}}</td>
+                                            <td >{{row.AMOUNT}} %</td>
+                                        </tr>
+                                        <tr ng-show="deductionLength==0">
+                                            <td colspan="2" style="text-align: center;padding:15px !important;">There are no deductions</td>
                                         </tr>
                                     </tbody>
                                 </table>

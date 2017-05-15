@@ -76,6 +76,7 @@ angular
                         headers: {
                          'Content-type' : 'application/pdf'
                         },
+                        // headers:{'access_token':$localStorage.access_token}
                         cache: true,
                     }).success(function(data) {
                         console.log('data',data);

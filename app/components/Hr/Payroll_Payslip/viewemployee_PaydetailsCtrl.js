@@ -10,9 +10,13 @@ angular
         '$http',
         '$localStorage',
         '$state',
-        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$http,$localStorage,$state) {
+        '$location',
+        function ($scope,$rootScope,$timeout,$resource,$stateParams,$filter,$http,$localStorage,$state,$location) {
 
-            console.log($localStorage.structureName,'$localStorage.structureName',$stateParams.assign_id);
+              var path=$location.path().split( '/' );
+                $scope.urlname=path[1];
+
+            console.log($localStorage.structureName,'$localStorage.structureName3333',$stateParams.assign_id);
             $http({
                 method:'GET',
                 url: $localStorage.service+'PayrollPayslipAPI/fetchEmployeeDetails',
@@ -157,7 +161,7 @@ angular
                                         timeout : 2000,
                                         pos     : 'top-center'
                                     });
-                                    $state.go('restricted.hr.StructureGroup');
+                                    $state.go('restricted.hr.ViewGroupEmployee',{id: $localStorage.structureName});
                                 }else {
                                     UIkit.notify({
                                         message : 'Failed',

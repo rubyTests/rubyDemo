@@ -15,7 +15,7 @@
                             <th>Employee Name</th>
                             <th>Department</th>
                             <th>Employee Category</th>
-                            <th>Recent Payslip</th>
+                            <!-- <th>Recent Payslip</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -25,17 +25,17 @@
                             <th>Employee Name</th>
                             <th>Department</th>
                             <th>Employee Category</th>
-                            <th>Recent Payslip</th>
+                            <!-- <th>Recent Payslip</th> -->
                             <th>Action</th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in EmployeeDetail">
                             <td>{{$index+1}}</td>
-                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td><a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.ID}}})">{{row.EMPLOYEE_NAME}}</a></td>
                             <td>{{row.DEPARTMENT}}</td>
                             <td>{{row.CATEGORY}}</td>
-                            <td>-</td>
+                            <!-- <td>-</td> -->
                             <td class="uk-text-center">
                                 <a ui-sref="restricted.hr.view_employee_paydetails({assign_id:{{row.ID}}})"><i class="md-icon material-icons md-24">&#xE417;</i></a>
                                 <a ng-click="removeEmployee(row.ID,$index)"><i class="md-icon material-icons md-24">&#xE872;</i></a>

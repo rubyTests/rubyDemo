@@ -58,8 +58,8 @@
                             <td>{{row.NETPAY}}</td>
                             <td>{{row.STATUS}}</td>
                             <td >
-                                <a ng-show="urlname=='hr'" ui-sref="restricted.hr.payslipdetails_view({id:{{row.EMP_PROFILE_ID}}})" ng-click="passGenDate(row.GENERATION_DATE)">View</a>
-                                <a ng-show="urlname=='finance'" ui-sref="restricted.finance.payslipdetails_view({id:{{row.EMP_PROFILE_ID}}})" ng-click="passGenDate(row.GENERATION_DATE)">View</a>
+                                <a ng-show="urlname=='hr'" ui-sref="restricted.hr.reportpayslipdetails({id:{{row.EMP_PROFILE_ID}}})" ng-click="passGenDate(row.GENERATION_DATE)">View</a>
+                                <a ng-show="urlname=='finance'" ui-sref="restricted.finance.reportpayslipdetails({id:{{row.EMP_PROFILE_ID}}})" ng-click="passGenDate(row.GENERATION_DATE)">View</a>
                             </td>
                             <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.ID}}})" ng-click="passGenDate(row.GENERATION_DATE)">View</a></td> -->
                         </tr>

@@ -109,13 +109,10 @@
         </div>
         <br>
         <h3 class="heading_a uk-margin-bottom">Payroll Details
-        <span ng-show="urlname=='hr' && checkStatus.STATUS!='Approved'" style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayDetails()" ng-show="editBTN">Edit</button>
         </h3>
          <div class="md-card-content uk-width-medium-1-1 large-padding">
             <div class="md-card uk-margin-medium-bottom">
                 <div class="md-card-content large-padding">
-                <form ng-submit="assignPayroll()">
-                    <input type="hidden" ng-model="PAYSLIP_ID">
                     <div class="uk-overflow-container">
                         <table class="uk-table">
                             <thead>
@@ -129,11 +126,11 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="tdStyle">Basic</td>
-                                                    <td class="tdStyle " > <input type="text" ng-model="viewData.BASIC_PAY" ng-disabled="true" ng-change="earningCalculation(viewData.BASIC_PAY)" id="basicpay" required ></td>
+                                                    <td class="tdStyle " > <input type="text" ng-model="viewData.BASIC_PAY" ng-disabled="true"></td>
                                                 </tr>
                                                 <tr ng-repeat="row in payslipList | filter:{TYPE:'Earnings'}">
                                                     <td class="tdStyle">{{row.NAME}}</td>
-                                                    <td class="tdStyle"> <input type="text" ng-model="row.AMOUNT" name="earningAmount" ng-disabled="true"></td>
+                                                    <td class="tdStyle"> <input type="text" ng-model="row.AMOUNT" ng-disabled="true"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle"><b>Total Earnings</b></td>
@@ -148,7 +145,7 @@
                                             <tbody>
                                                 <tr ng-repeat="row in payslipList | filter:{TYPE:'Deductions'}">
                                                     <td class="tdStyle" >{{row.NAME}}</td>
-                                                    <td class="tdStyle" ><input type="text" ng-model="row.AMOUNT" name="deductionAmount" ng-disabled="true"></td>
+                                                    <td class="tdStyle" ><input type="text" ng-model="row.AMOUNT" ng-disabled="true"></td>
                                                 </tr>
                                                 <tr>
                                                     <td class="tdStyle"><b>Total Deduction</b> </td>
@@ -165,16 +162,11 @@
                             </tbody>
                         </table>
                         <div class="" style="float: right;">
-                            <button type="button" class="md-btn md-btn-success md-btn-small uk-modal-close" ng-if="urlname=='finance' && checkStatus.STATUS!='Approved' && checkStatus.STATUS!='Rejected'" ng-click="changeStatus(payslipList[0].EMP_PAYSLIP_ID,'Approved')">Approve</button>
-                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-if="urlname=='finance' && checkStatus.STATUS!='Rejected' && checkStatus.STATUS!='Approved'" ng-click="changeStatus(payslipList[0].EMP_PAYSLIP_ID,'Rejected')">Reject</button>
-
-                            <a ng-show="urlname=='hr'" class="md-btn md-btn-danger md-btn-small" onclick="window.history.back();">Cancel</a>
-                             <button ng-if="urlname=='hr'" ng-show="btnStatus" type="submit" class="md-btn md-btn-success md-btn-small">Assign Payroll</button>
-
+                            <!-- <button type="button" class="md-btn md-btn-success md-btn-small uk-modal-close" ng-if="urlname=='finance' && checkStatus.STATUS!='Approved' && checkStatus.STATUS!='Rejected'" ng-click="changeStatus(payslipList[0].EMP_PAYSLIP_ID,'Approved')">Approve</button>
+                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-if="urlname=='finance' && checkStatus.STATUS!='Rejected' && checkStatus.STATUS!='Approved'" ng-click="changeStatus(payslipList[0].EMP_PAYSLIP_ID,'Rejected')">Reject</button> -->
                             <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="generatePdf(viewData.ID)">Pdf Report</button>
                         </div>
                     </div>
-                    </form>
                 </div>
             </div>
         </div>

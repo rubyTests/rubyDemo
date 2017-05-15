@@ -11,7 +11,7 @@
                             <th>S.No</th>
                             <th>Employee Name</th>
                             <th>Department</th>
-                            <th>Pay Group</th>
+                            <th>Pay Structure</th>
                             <th>Frequency</th>
                             <th>Action</th>
                         </tr>
@@ -21,7 +21,7 @@
                             <th></th>
                             <th>Employee Name</th>
                             <th>Department</th>
-                            <th>Pay Group</th>
+                            <th>Pay Structure</th>
                             <th>Frequency</th>
                             <th></th>
                         </tr>
@@ -29,7 +29,7 @@
                     <tbody>
                         <tr ng-repeat="row in tableData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.EMPLOYEE_NAME}}</td>
+                            <td><a ui-sref="restricted.hr.showpayslipdetails({pay_id:{{row.ID}}})">{{row.EMPLOYEE_NAME}}</a></td>
                             <td>{{row.DEPT_NAME}}</td>
                             <td>{{row.STRUCURE_NAME}}</td>
                             <td>{{row.FREQUENCY}}</td>

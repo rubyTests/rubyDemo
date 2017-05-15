@@ -36,7 +36,6 @@
                             <td>{{row.GENERATION_DATE}}</td>
                             <td><span style="color:red;">{{row.STATUS}}</span></td>
                             <td>
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.payslipgeneration_viewdetails({gen_id:{{row.EMP_PROFILE_ID}}})" class="ts_remove_row"><i class="uk-icon-file"></i> Generate</a>
                                 <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light" ui-sref="restricted.hr.payslipreject_view({id:{{row.EMP_PROFILE_ID}}})" ng-click="passGenDate(row.GENERATION_DATE)" class="ts_remove_row" ><i class="uk-icon-eye"></i> View</a>
                             </td>
                         </tr>

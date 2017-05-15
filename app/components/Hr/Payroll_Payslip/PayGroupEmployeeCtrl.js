@@ -54,11 +54,11 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        }
+                        // {
+                        //     type: 'number',
+                        //     bRegex: true,
+                        //     bSmart: true
+                        // }
                     ]
                 })
                 .withOption('initComplete', function() {
@@ -71,7 +71,7 @@ angular
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Employee Name'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Department'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Employee Category'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('Recent Payslip')
+                // DTColumnDefBuilder.newColumnDef(4).withTitle('Recent Payslip')
             ];
             
             console.log($stateParams.id,'$stateParams');

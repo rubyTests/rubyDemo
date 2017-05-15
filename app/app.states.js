@@ -2468,12 +2468,13 @@ rubycampusApp
                 .state("restricted.finance.fee.feeitemDetails", {
                     url: "/feeitemDetails",
                     templateUrl: 'app/components/finance/feeitemDetails.html',
-                    controller: 'feeitemCtrl',
+                    // controller: 'feeitemCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/finance/feeitemCtrl.js'
                             ], {serie:true});
                         }]
@@ -4012,6 +4013,58 @@ rubycampusApp
                     params:{id:null}                
                 })
 
+                .state("restricted.finance.reportpayslipdetails",{
+                    url: "/reportpayslipdetails/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipdetails_reportview.html',
+                    controller : 'payslipview_reportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/payslipview_reportCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view Employee Pay details'
+                    },
+                    params:{id:null}                
+                })
+
+                .state("restricted.hr.reportpayslipdetails",{
+                    url: "/reportpayslipdetails/{id}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipdetails_reportview.html',
+                    controller : 'payslipview_reportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/payslipview_reportCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view Employee Pay details'
+                    },
+                    params:{id:null}                
+                })
+                .state("restricted.finance.payslipviewdetails",{
+                    url: "/payslipviewdetails/{payslipid}/{empid}",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/financepayslipdetails_view_for_pdf.html',
+                    controller : 'payslipview_for_pdfCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/Hr/Payroll_Payslip/financepayslipview_for_pdfCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view Employee Pay details'
+                    },
+                    params:{payslipid:null,empid:null}                
+                })
                 // payslip Report Added by Vijayaraj 21-03-17
 
                 .state("restricted.finance.payslipReport",{

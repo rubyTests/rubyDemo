@@ -128,7 +128,7 @@ angular
                                         timeout : 2000,
                                         pos     : 'top-center'
                                     });
-                                    $state.go('restricted.hr.StructureGroup');
+                                    $state.go('restricted.hr.ViewGroupEmployee',{id: $localStorage.structureName});
                                 }else {
                                     UIkit.notify({
                                         message : 'Failed',
