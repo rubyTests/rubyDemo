@@ -147,7 +147,7 @@ angular
                         headers:{'access_token':$localStorage.access_token}
                         }).then(function mySucces(response) {
                             console.log('delete',response);
-                            UIkit.modal.alert('This pay item already added to a pay structure, remove it from paystructure to continue removing this pay item');
+                            UIkit.modal.alert('This pay item assigned to a pay structure, remove the paystructure to continue removing this pay item');
                         },function myError(response) {
                             console.log(response,'error');
                             UIkit.modal.confirm('Are you sure to delete ?', function(e) {
