@@ -64,13 +64,15 @@ angular
             };
 			
 			
-			// $http.get('http://192.168.1.139/rubyServices/api/GeneralAPI/menuLink')
-			// .success(function(data){
-				// console.log(data.message,"data");
-				// $scope.sections=data.message;
+			$http.get('http://192.168.1.139/rubyServices/api/UserMenuAPI/menuLink',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(data){
+				console.log(data.message,"data");
+				$scope.sections=data.message;
+				$scope.sections = $scope.convertTo($scope.sections, 'id', true);
 				
-			// }).error(function(err){
-			// });
+			}).error(function(err){
+			});
+			
 			var userLov = [
                 {
                     id: 0,
@@ -1909,7 +1911,7 @@ angular
                 }
                 return groups;
             };
-            $scope.sections = $scope.convertTo($scope.sections, 'id', true);
+            // $scope.sections = $scope.convertTo($scope.sections, 'id', true);
             // console.log($scope.sections);
         }
     ])
