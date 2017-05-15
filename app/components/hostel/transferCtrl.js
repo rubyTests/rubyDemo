@@ -106,7 +106,7 @@ angular
                 $scope.refreshTable();
 
                 $scope.empName =[];
-                $http.get($localStorage.service+'EmployeemgmntAPI/employeeProfileView',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'HostelAPI/allocateEmployeeDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
                     $scope.empName.push(user_data.data);
                 });
@@ -115,9 +115,9 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Employee',
-                    valueField: 'PROFILE_ID',
-                    labelField: 'EMPLOYEE_NAME',
-                    searchField: 'EMPLOYEE_NAME',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             $scope.getAllDetails(value);
@@ -125,7 +125,7 @@ angular
                     }
                 };
                 $scope.studentName =[];
-                $http.get($localStorage.service+'ProfileAPI/studentProfileDetails',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'HostelAPI/allocateStudentDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
                     $scope.studentName.push(user_data.result);
                 });
@@ -134,9 +134,9 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Student',
-                    valueField: 'profileId',
-                    labelField: 'fname',
-                    searchField: 'fname',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                         $scope.getAllDetails(value);
@@ -152,14 +152,14 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        $scope.getHostelList(return_data.data.message[0].HOSTEL_ID);
-                        $scope.getBlocklList(return_data.data.message[0].BLOCK_ID);
-                        $scope.getRoomList(return_data.data.message[0].ROOM_ID);
+                        // $scope.getHostelList(return_data.data.message[0].HOSTEL_ID);
+                        // $scope.getBlocklList(return_data.data.message[0].BLOCK_ID);
+                        // $scope.getRoomList(return_data.data.message[0].ROOM_ID);
                         $timeout(function() {
                             $scope.selectize_hname=return_data.data.message[0].HOSTEL_ID;
                             $scope.selectize_block=return_data.data.message[0].BLOCK_ID;
                             $scope.selectize_room=return_data.data.message[0].ROOM_ID;
-                        }, 200);
+                        }, 500);
                     });
                 }
                 $scope.selectize_hname_options =[];
@@ -176,19 +176,16 @@ angular
                         });
                     }
                 };
-                $scope.getHostelList=function(id){
+                //$scope.getHostelList=function(id){
                     $http({
                     method:'get',
                     url: $localStorage.service+'HostelAPI/hostelBlocks',
-                    params: {
-                        'id' : id
-                    },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         //console.log(return_data,'return_data222');
                         $scope.selectize_block_options=return_data.data.message;
                     });
-                }
+                //}
                 $scope.selectize_block_options =[];
                 $scope.selectize_block_config = {
                     create: false,
@@ -203,19 +200,16 @@ angular
                         });
                     }
                 };
-                $scope.getBlocklList=function(id){
+                //$scope.getBlocklList=function(id){
                     $http({
                     method:'get',
                     url: $localStorage.service+'HostelAPI/hostelView',
-                    params: {
-                        'id' : id
-                    },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         //console.log(return_data,'return_data222');
                         $scope.selectize_hname_options=return_data.data.message;
                     });
-                }
+                //}
                 $scope.selectize_room_options =[];
                 $scope.selectize_room_config = {
                     create: false,
@@ -230,18 +224,15 @@ angular
                         });
                     }
                 };
-                $scope.getRoomList=function(id){
+                //$scope.getRoomList=function(id){
                     $http({
                     method:'get',
                     url: $localStorage.service+'institutionApi/roomDetails',
-                    params: {
-                        'id' : id
-                    },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         $scope.selectize_room_options=return_data.data.data;
                     });
-                }
+                //}
                 $http.get($localStorage.service+'HostelAPI/allocationView',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(getId){
                     $scope.getId=getId.message[0].ID;

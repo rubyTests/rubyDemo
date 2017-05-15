@@ -157,7 +157,7 @@ angular
                     }
                 };
                 $scope.studentName =[];
-                $http.get($localStorage.service+'ProfileAPI/studentProfileDetails',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'HostelAPI/hostelStudentDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
                     $scope.studentName.push(user_data.result);
                 });
@@ -166,9 +166,9 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Select Student',
-                    valueField: 'profileId',
-                    labelField: 'fname',
-                    searchField: 'fname',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             
