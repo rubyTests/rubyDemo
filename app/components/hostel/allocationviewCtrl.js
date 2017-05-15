@@ -94,7 +94,7 @@ angular
                     placeholder: 'Select Resident',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            
+                            console.log(value);
                         });
                     }
                 };
@@ -104,12 +104,17 @@ angular
                     $scope.hidden_id=null;
                     $scope.selectize_usertype=null;
                     $scope.selectize_hname=null;
-                    $scope.selectize_profileId=null;
+                    $scope.selectize_emp_profileId=null;
+                    $scope.selectize_stu_profileId=null;
                     $scope.selectize_block=null;
                     $scope.selectize_room=null;
                     $scope.reg_date=null;
                     $('.uk-modal').find('input').trigger('blur');
                 };
+                $scope.userChange=function(){
+                    $scope.selectize_emp_profileId=null;
+                    $scope.selectize_stu_profileId=null;
+                }
                 // $scope.edit_data=function(data){
                 //     $scope.btnStatus="Update";
                 //     if (data) {
@@ -278,11 +283,13 @@ angular
                             });
                             $scope.refreshTable();
                         }else {
-                            // UIkit.modal.alert('Course & Batch Name Already Exists');
+                            //UIkit.modal.alert('Course & Batch Name Already Exists');
                         }
+                    }, function error(response) {
+                        UIkit.modal.alert(' The Profile Name You Entered Already Exists');
                     });
                 }
-                  $scope.deleteAssignTeacher=function(id,$index){
+                  $scope.deleteAllocation=function(id,$index){
                     if(id){
                         UIkit.modal.confirm('Are you sure to delete ?', function(e) {
                             if(id){

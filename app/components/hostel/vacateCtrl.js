@@ -2,9 +2,23 @@ angular
     .module('rubycampusApp')
     .controller('vacateCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
-            $scope.btnStatus="Save";
 			$scope.vacate={id:'',selectize_usertype:'',selectize_employee:'',selectize_student:'',vacate_date:''};
-			var vm = this;
+			var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
+            var vm = this;
             $scope.viewData=[];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -63,7 +77,15 @@ angular
                 });
 
                 var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
-
+                 $scope.openModel = function() {
+                    $scope.btnStatus="Save";
+                    $scope.hidden_id=null;
+                    $scope.vacate.selectize_usertype=null;
+                    $scope.vacate.selectize_employee=null;
+                    $scope.vacate.selectize_student=null;
+                    $scope.vacate.vacate_date=null;
+                    $('.uk-modal').find('input').trigger('blur');
+                };
                 $scope.selectize_usertype_options = ['Student','Employee'];
                 $scope.selectize_usertype_config = {
                     create: false,
@@ -75,7 +97,7 @@ angular
 				$scope.empName =[];
                 $http.get($localStorage.service+'HostelAPI/allocateEmployeeDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
-                    $scope.empName.push(user_data.data);
+                    $scope.empName.push(user_data.result);
                 });
                 $scope.selectize_employee_options =$scope.empName;
                 $scope.selectize_employee_config = {
@@ -171,6 +193,8 @@ angular
                             });
                             $scope.refreshTable();
                         }
+                    }, function error(response) {
+                        UIkit.modal.alert(' The Profile Name You Entered Already Exists');
                     });
 					
                     //$('.uk-modal').find('input').trigger('blur');
@@ -189,6 +213,36 @@ angular
                         // $scope.selectize_employee=data.name;
                         // $scope.selectize_student=data.name;
                         // $scope.vacate_date=data.reg_date;
+                    }
+                }
+                $scope.deleteVacate=function(id,$index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"HostelAPI/vacate",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.viewData.splice($index, 1);
+                                    $scope.refreshTable();
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
                     }
                 }
         }
