@@ -9,9 +9,15 @@ angular
 		'$localStorage',
 		'$http',
         function ($rootScope,$scope,user_data,$stateParams,$filter,$localStorage,$http) {    
-            console.log($stateParams,'stateParams');
+            //console.log($stateParams,'stateParams');
             
-			$http.get($localStorage.service+'ProfileAPI/parentsDetails',{params:{id:$stateParams.stu_id},headers: {'access_token':$localStorage.access_token} })
+            if($localStorage.myProfile=="myProfile"){
+        		$scope.proId=$localStorage.userProfile_id
+        	}else{
+        		$scope.proId=$stateParams.stu_id;
+        	}
+
+			$http.get($localStorage.service+'ProfileAPI/parentsDetails',{params:{id:$scope.proId},headers: {'access_token':$localStorage.access_token} })
 			.success(function(data){
 				// console.log(data.result,"data");
 				$scope.user_data=data.result[0].user_detail;
