@@ -364,10 +364,10 @@
                             </div>
                         </li>
                         <li data-uk-dropdown="{mode:'click',pos:'bottom-right'}">
-                            <a href="#" class="user_action_image"><img class="md-user-image" ng-src="{{user_data.avatar}}" alt="" add-image-prop/></a>
+                            <a href="#" class="user_action_image"><img class="md-user-image" ng-src="{{user_logo}}" alt="" add-image-prop/></a>
                             <div class="uk-dropdown uk-dropdown-small">
                                 <ul class="uk-nav js-uk-prevent">
-                                    <li><a ui-sref="restricted.student.student_profile">My profile</a></li>
+                                    <li><a ng-click="myProfile()">My profile</a></li>
                                     <!-- <li><a ui-sref="restricted.pages.settings">Settings</a></li> -->
                                     <!-- <li><a ui-sref="login">Logout</a></li> -->
                                     <li><a ng-click="logOut()">Logout</a></li>

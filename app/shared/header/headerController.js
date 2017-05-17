@@ -168,7 +168,22 @@ angular
                     }
                 ]
             };
-			
+            $scope.myProfile=function(){
+                //alert();
+                $localStorage.myProfile="myProfile";
+                $state.go("restricted.student.student_profile"); 
+            }
+			// $scope.user_prof=$localStorage.userProfile_id;
+            // console.log($scope.user_prof,'user_prof');
+            // $scope.user_logo = [];
+            $http.get($localStorage.service+'ProfileAPI/profileDetails',{params:{id:$localStorage.userProfile_id},headers: {'access_token':$localStorage.access_token} })
+            .success(function(data){
+                
+                $scope.user_logo=data.result[0].IMAGE1;
+            }).error(function(err){
+            });
+
+
 			// LogOut function
 			$scope.logOut=function(){
 				$http.get($localStorage.service+"GeneralAPI/logout",{headers: {'access_token':$scope.access_token}})
