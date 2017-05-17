@@ -7,15 +7,15 @@
                 <div class="uk-grid" data-uk-grid-margin="">
                     <div class="uk-width-medium-3-10">
                         <label for="product_search_name">Item Name</label>
-                        <input type="text" class="md-input" id="product_search_name" ng-model="filter.name" md-input>
+                        <input type="text" class="md-input" id="product_search_name" ng-model="filter.NAME" md-input>
                     </div>
                     <div class="uk-width-medium-2-10">
                         <label for="product_search_price">Code</label>
-                        <input type="text" class="md-input" id="product_search_price" ng-model="filter.sku" md-input>
+                        <input type="text" class="md-input" id="product_search_price" ng-model="filter.CODE" md-input>
                     </div>
                     <div class="uk-width-medium-3-10">
                         <div class="uk-margin-small-top">
-                            <selectize config="filter_category_config" options="filter_category_options" ng-model="multiSelectData.category" position="bottom"></selectize>
+                            <selectize config="filter_itemcategory_config" options="filter_itemcategory_options" ng-model="multiSelectData.ITEM_CATEGORY_ID" position="bottom"></selectize>
                         </div>
                     </div>
                     <div class="uk-width-medium-2-10">
@@ -31,7 +31,7 @@
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-1-1 uk-text-right">
-                        <button class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addleavecategory()"><i class="material-icons">add</i>Add Item</button>
+                        <button class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#open_leavecategory'}" ng-click="addItem()"><i class="material-icons">add</i>Add Item</button>
                     </div>
                 </div>
                 <div class="uk-grid" data-uk-grid-margin>
@@ -51,26 +51,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr dir-paginate="product in products_data | filter: filter | multiSelectFilter: multiSelectData | itemsPerPage: pageSize">
+                                    <tr dir-paginate="product in viewData | filter: filter | multiSelectFilter: multiSelectData | itemsPerPage: pageSize">
                                         <td class="uk-width-1-10"><img class="img_thumb" ng-src="{{ product.image }}" alt=""></td>
-                                        <td class="uk-width-3-10 uk-text-large"><a>{{ product.name }}</a></td>
-                                        <td class="uk-width-1-10 uk-text-nowrap">{{ product.code}}</td>
-                                        <!-- <td class="uk-width-1-10 uk-text-nowrap">{{ product.price | currency : "$" : 2}}</td> -->
-                                        <td class="uk-width-1-10">{{ product.quantity }}</td>
+                                        <td class="uk-width-3-10 uk-text-large"><a>{{ product.NAME }}</a></td>
+                                        <td class="uk-width-1-10 uk-text-nowrap">{{ product.CODE}}</td>
+                                        <td class="uk-width-1-10">{{ product.UNIT }}</td>
                                         <td class="uk-width-2-10 uk-text-nowrap">
-                                            <!-- <span class="uk-badge uk-badge-success" ng-if="product.status == 'in_stock'">In stock</span>
-                                            <span class="uk-badge uk-badge-danger" ng-if="product.status == 'out_of_stock'">Out of stock</span>
-                                            <span class="uk-badge uk-badge-muted" ng-if="product.status == 'ships_3_5_days'">Ships in 3-5 days</span> -->
-                                            <span class="uk-width-1-10 uk-text-nowrap">{{product.category}}</span>
+                                            <span class="uk-width-1-10 uk-text-nowrap">{{product.ITEM_CATEGORY_NAME}}</span>
                                         </td>
-                                        <td>
-                                            Karthik
-                                            <!-- <i class="material-icons md-color-light-blue-600 md-24" ng-if="product.active">&#xE86C;</i> -->
-                                        </td>
+                                        <td>{{product.PART_NO}}</td>
                                         <td class="uk-text-nowrap">
-                                            <!-- <a ui-sref="restricted.inventory.product_details"><i class="md-icon material-icons md-24">&#xE8F4;</i></a> -->
-                                            <a ng-click="editLeaveCategory(product)" data-uk-modal="{target:'#open_leavecategory'}" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                            <a href="#"><i class="md-icon material-icons md-24">&#xE872;</i></a>
+                                            <a data-uk-modal="{target:'#open_leavecategory'}" ng-click="editItem(product)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                            <a class="ts_remove_row" ng-click="deleteItem(product.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -89,29 +81,29 @@
         <!-- <button type="button" class="uk-modal-close uk-close"></button> -->
         <h3 class="uk-modal-title">{{tit_caption}} Item </h3><br>
         <div class="md-card-content">
-            <form>
+            <form id="form_validation" ng-submit="saveItemData()" name="inputForm" novalidate>
                 <div class="uk-grid">
                     <div class="uk-width-medium-2-3 uk-width-large-2-3">
                         <label>Name</label>
-                        <input type="text" ng-model="products.name" class="md-input" md-input/>
-                        <input type="hidden" ng-model="application_id">
+                        <input type="text" ng-model="item_name" class="md-input" md-input/>
+                        <input type="hidden" ng-model="item_id">
                     </div>
                     <div class="uk-width-medium-1-3 uk-width-large-1-3">
                         <label>Code</label>
-                        <input type="text" ng-model="products.sku" class="md-input" md-input/>
+                        <input type="text" ng-model="item_code" class="md-input" md-input/>
                     </div>
                 </div>
                 <div class="uk-grid">
                     <div class="uk-width-medium-1-3 uk-width-large-1-3">
                         <label>Unit</label>
-                        <input type="text" ng-model="products.quantity" class="md-input" md-input/>
+                        <input type="text" ng-model="item_unit" class="md-input" md-input/>
                     </div>
                     <div class="uk-width-medium-1-3 uk-width-large-1-3">
-                        <selectize config="filter_category_config_one" options="filter_category_options" ng-model="products.category"></selectize>
+                        <selectize config="filter_itemcategory_config_one" options="filter_itemcategory_options" ng-model="selectize_itemCategory"></selectize>
                     </div>
                     <div class="uk-width-medium-1-3 uk-width-large-1-3">
                         <label>Part No.</label>
-                        <input type="text" ng-model="products.holder" class="md-input" md-input>
+                        <input type="text" ng-model="item_part_no" class="md-input" md-input>
                     </div>
                 </div>
                 <div class="uk-grid" data-uk-grid-margin>
@@ -121,16 +113,16 @@
                                 <h3 class="heading_a uk-margin-small-bottom">
                                     Upload Image
                                 </h3>
-                                <input type="file" id="input-file-b" class="dropify" data-default-file="assets/img/gallery/Image08.jpg" ng-model="products.image"/>
+                                <input type="file" id="input-file-b" class="dropify" data-default-file="assets/img/gallery/Image08.jpg" ng-model="item_image"/>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                    <button type="submit" class="md-btn md-btn-primary md-btn-small">{{status}}</button>
+                </div>
             </form>
-        </div>
-        <div class="uk-modal-footer uk-text-right">
-            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-            <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{status}}</button>
         </div>
     </div>
 </div>

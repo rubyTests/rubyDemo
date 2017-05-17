@@ -33,13 +33,13 @@
                     <tbody>
                         <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.request_no}}</td>
+                            <td>{{row.REQ_NUMBER}}</td>
                             <td>{{row.request_by}}</td>
-                            <td>{{row.date}}</td>
-                            <td>{{row.store}}</td>
+                            <td>{{row.REQ_DATE}}</td>
+                            <td>{{row.STORE_NAME}}</td>
                             <td class="">
                                 <!-- <a href="#" class="ts_remove_row" ui-sref="restricted.BookDetail({id: {{row.id}},indexId:{{$index}}})"><i class="md-icon material-icons">&#xE8F4;</i></a> -->
-                                <a href="#" class="ts_remove_row" ui-sref="restricted.inventory.materialRequestDetails"><i class="md-icon material-icons">&#xE8F4;</i></a>
+                                <a href="#" class="ts_remove_row" ui-sref="restricted.inventory.materialRequestDetails({id:{{row.ID}}})"><i class="md-icon material-icons">&#xE8F4;</i></a>
                                 <!-- <a class="ts_remove_row" ui-sref="restricted.inventory.purchaseOrderAdd"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a ><i class="md-icon material-icons">&#xE872;</i></a> -->
                             </td>

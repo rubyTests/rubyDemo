@@ -67,38 +67,35 @@ angular
 
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
 
-            $scope.addBuilding=function(){
+            $scope.addSupplierType=function(){
                 $scope.clearValidation();
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";
-                $scope.building_id='';
-                $scope.building_name='';
-                $scope.build_no='';
-                $scope.landmark='';
+                $scope.supp_type_id='';
+                $scope.supp_type_name='';
+                $scope.supp_type_code='';
                 $('.uk-modal').find('input').trigger('blur');
             }
-            $scope.editBuilding=function(res){
+            $scope.editSupplierType=function(res){
                 $scope.clearValidation();
                 $scope.titleCaption="Edit";
                 $scope.btnStatus="Update";
                 if(res){
-                    $scope.building_id=res.ID;
-                    $scope.building_name=res.NAME;
-                    $scope.build_no=res.NUMBER;
-                    $scope.landmark=res.LANDMARK;
+                    $scope.supp_type_id=res.ID;
+                    $scope.supp_type_name=res.NAME;
+                    $scope.supp_type_code=res.CODE;
                 }
             }
             
             // Save Data
-            $scope.saveBuildingData=function(){
+            $scope.saveSupplierTypeData=function(){
                 $http({
                 method:'POST',
-                url: $localStorage.service+'institutionApi/building',
+                url: $localStorage.service+'inventoryApi/supplierType',
                 data: {
-                    'build_id' : $scope.building_id,
-                    'build_name' : $scope.building_name,
-                    'bulid_no' : $scope.build_no,
-                    'landmark' : $scope.landmark
+                    'supp_type_id' : $scope.supp_type_id,
+                    'supp_type_name' : $scope.supp_type_name,
+                    'supp_type_code' : $scope.supp_type_code
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -118,20 +115,20 @@ angular
 
             $scope.viewData=[];
             $scope.refreshTable=function(){
-                $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'inventoryApi/supplierType',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(response){
                     $scope.viewData=response.data;
                 });
             }
             $scope.refreshTable();
 
-            $scope.deleteBuildingData=function(id, $index){
+            $scope.deleteSupplierTypeData=function(id, $index){
                 if(id){
                     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : $localStorage.service+'institutionApi/building',
+                            url : $localStorage.service+'inventoryApi/supplierType',
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {

@@ -87,7 +87,7 @@
                                             <i class="md-list-addon-icon material-icons" >receipt</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">PO001</span>
+                                            <span class="md-list-heading">{{po_data.PO_NUMBER}}</span>
                                             <span class="uk-text-small uk-text-muted">PO No.</span>
                                         </div>
                                     </li>
@@ -101,7 +101,7 @@
                                             <i class="md-list-addon-icon material-icons" >date_range</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">03.01.2017</span>
+                                            <span class="md-list-heading">{{po_data.PO_DATE}}</span>
                                             <span class="uk-text-small uk-text-muted">PO Date</span>
                                         </div>
                                     </li>
@@ -115,7 +115,7 @@
                                             <i class="md-list-addon-icon material-icons" >contacts</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Msk Store</span>
+                                            <span class="md-list-heading">{{po_data.STORE_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Store</span>
                                         </div>
                                     </li>
@@ -128,7 +128,7 @@
                                             <i class="md-list-addon-icon material-icons" >person</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Rajkumar</span>
+                                            <span class="md-list-heading">{{po_data.SUPPLIER_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Supplier</span>
                                         </div>
                                     </li>
@@ -155,46 +155,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Pencil</td>
-                            <td>15.00</td>
-                            <td>3</td>
-                            <td>45.00</td>
+                        <tr ng-repeat="po in po_data.po_items">
+                            <td>{{$index + 1}}</td>
+                            <td>{{po.ITEM_NAME}}</td>
+                            <td>{{po.PRICE}}</td>
+                            <td>{{po.QUANTITY}}</td>
+                            <td>{{po.PRICE * po.QUANTITY}}</td>
                         </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Pen</td>
-                            <td>5.00</td>
-                            <td>3</td>
-                            <td>15.00</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Table</td>
-                            <td>1500.00</td>
-                            <td>3</td>
-                            <td>4500.00</td>
-                            
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Computer</td>
-                            <td>5000.00</td>
-                            <td>5</td>
-                            <td>25000.00</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Chalks</td>
-                            <td>3.00</td>
-                            <td>5</td>
-                            <td>15.00</td>
-                        </tr>
-                        <!-- <tr>
-                            <td colspan="2" style="text-align: right;font-weight: bold;">Total Amount</td>
-                            <td>50000</td>
-                        </tr> -->
                         </tbody>
                     </table>
                 </div>
@@ -212,7 +179,7 @@
                         <div class="uk-width-medium-1-2 uk-text-center">
                             <div style="margin-right: 30px">
                                 <span><b>Total Amount :</b></span>
-                                <span>29575.00</span>
+                                <span>{{po_data.AMOUNT}}</span>
                             </div>
                         </div>
                     </div>

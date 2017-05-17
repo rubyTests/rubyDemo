@@ -9,7 +9,7 @@
             padding: 24px 24px 0;
         }
     </style>
-    <div id="page_content">
+    <div id="page_content" >
         <div id="page_content_inner">
         <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-medium-1-2">
@@ -86,7 +86,7 @@
                                             <i class="md-list-addon-icon material-icons" >receipt</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">INV001</span>
+                                            <span class="md-list-heading">{{matReq_data.REQ_NUMBER }}</span>
                                             <span class="uk-text-small uk-text-muted">Request No.</span>
                                         </div>
                                     </li>
@@ -100,7 +100,7 @@
                                             <i class="md-list-addon-icon material-icons" >date_range</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">03.01.2017</span>
+                                            <span class="md-list-heading">{{matReq_data.REQ_DATE}}</span>
                                             <span class="uk-text-small uk-text-muted">Date</span>
                                         </div>
                                     </li>
@@ -128,7 +128,7 @@
                                             <i class="md-list-addon-icon material-icons" >contacts</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Msk Store</span>
+                                            <span class="md-list-heading">{{matReq_data.STORE_DATA_ID}}</span>
                                             <span class="uk-text-small uk-text-muted">Store</span>
                                         </div>
                                     </li>
@@ -168,26 +168,24 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Pencil</td>
-                            <td>15.00</td>
-                            <td>3</td>
+                        <tr ng-repeat="req in matReq_data.materialReqItems">
+                            <td>{{ $index + 1 }}</td>
+                            <td>{{req.ITEM_NAME}}</td>
+                            <td>{{req.ITEM_CODE}}</td>
+                            <td>{{req.QUANTITY}}</td>
                             <!-- <td>45.00</td> -->
                         </tr>
-                        <tr>
+<!--                         <tr>
                             <td>2</td>
                             <td>Pen</td>
                             <td>5.00</td>
                             <td>3</td>
-                            <!-- <td>15.00</td> -->
                         </tr>
                         <tr>
                             <td>3</td>
                             <td>Table</td>
                             <td>1500.00</td>
                             <td>3</td>
-                            <!-- <td>4500.00</td> -->
                             
                         </tr>
                         <tr>
@@ -195,15 +193,13 @@
                             <td>Computer</td>
                             <td>5000.00</td>
                             <td>5</td>
-                            <!-- <td>25000.00</td> -->
                         </tr>
                         <tr>
                             <td>5</td>
                             <td>Chalks</td>
                             <td>3.00</td>
                             <td>5</td>
-                            <!-- <td>15.00</td> -->
-                        </tr>
+                        </tr> -->
                         <!-- <tr>
                             <td colspan="2" style="text-align: right;font-weight: bold;">Total Amount</td>
                             <td>50000</td>

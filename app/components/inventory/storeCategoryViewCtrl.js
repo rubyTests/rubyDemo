@@ -67,38 +67,35 @@ angular
 
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
 
-            $scope.addBuilding=function(){
+            $scope.addStoreCategory=function(){
                 $scope.clearValidation();
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";
-                $scope.building_id='';
-                $scope.building_name='';
-                $scope.build_no='';
-                $scope.landmark='';
+                $scope.store_cat_id='';
+                $scope.store_cat_name='';
+                $scope.store_cat_code='';
                 $('.uk-modal').find('input').trigger('blur');
             }
-            $scope.editBuilding=function(res){
+            $scope.editStoreCategory=function(res){
                 $scope.clearValidation();
                 $scope.titleCaption="Edit";
                 $scope.btnStatus="Update";
                 if(res){
-                    $scope.building_id=res.ID;
-                    $scope.building_name=res.NAME;
-                    $scope.build_no=res.NUMBER;
-                    $scope.landmark=res.LANDMARK;
+                    $scope.store_cat_id=res.ID;
+                    $scope.store_cat_name=res.NAME;
+                    $scope.store_cat_code=res.CODE;
                 }
             }
             
             // Save Data
-            $scope.saveBuildingData=function(){
+            $scope.saveStoreCategoryData=function(){
                 $http({
                 method:'POST',
-                url: $localStorage.service+'institutionApi/building',
+                url: $localStorage.service+'inventoryApi/storeCategory',
                 data: {
-                    'build_id' : $scope.building_id,
-                    'build_name' : $scope.building_name,
-                    'bulid_no' : $scope.build_no,
-                    'landmark' : $scope.landmark
+                    'store_cat_id' : $scope.store_cat_id,
+                    'store_cat_name' : $scope.store_cat_name,
+                    'store_cat_code' : $scope.store_cat_code
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -118,20 +115,20 @@ angular
 
             $scope.viewData=[];
             $scope.refreshTable=function(){
-                $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'inventoryApi/storeCategory',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(response){
                     $scope.viewData=response.data;
                 });
             }
             $scope.refreshTable();
 
-            $scope.deleteBuildingData=function(id, $index){
+            $scope.deleteStoreCategoryData=function(id, $index){
                 if(id){
                     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : $localStorage.service+'institutionApi/building',
+                            url : $localStorage.service+'inventoryApi/storeCategory',
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {

@@ -48,7 +48,6 @@ rubycampusApp
                         pageTitle: 'Login'
                     }
 				})
-				
 				.state("forgotpassword", {
 					url: "/forgotpassword",
 					templateUrl: 'app/components/pages/forgotpassword.html',
@@ -63,29 +62,6 @@ rubycampusApp
 						}]
 					}
 				})
-				
-				// Email and verification  
-				
-				.state("verification", {
-                    url: "/verification/{token}",
-                    templateUrl: 'app/components/pages/verification/verification.html',
-					controller: 'verificationCtrl',
-                    resolve: {
-						deps: ['$ocLazyLoad', function($ocLazyLoad) {   
-							return $ocLazyLoad.load([
-								'lazy_uikit',
-								'lazy_iCheck',
-								'lazy_parsleyjs',
-								'app/components/pages/verification/verificationCtrl.js'
-							]);
-						}]
-					},
-					data: {
-                        pageTitle: 'Verification'
-                    },
-					params:{token:null}
-                })
-				
             // -- RESTRICTED --
                 .state("restricted", {
                     abstract: true,
@@ -224,41 +200,6 @@ rubycampusApp
 
                 // End
 
-				///RUBY CAMPUS user privileges added by manivannan///
-                .state("restricted.user_privileges", {
-                    template: '<div ui-view autoscroll="false"/>',
-                    url :"/user-privileges",
-                    abstract: true
-                })
-				.state("restricted.user_privileges.userView", {
-                    url: "/user",
-                    templateUrl: 'app/components/user_privileges/userPrivileges.html',
-                    controller: 'userPrivilegesCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_ionRangeSlider',
-                                'lazy_tablesorter',
-                                'app/components/user_privileges/userPrivilegesCtrl.js'
-                            ],{serie:true});
-                        }],
-                        ts_data: function($http){
-                            return $http({ method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
-                    },
-                    data: {
-                        pageTitle: 'Tablesorter'
-                    }
-                })
-				.state("restricted.user_privileges.user", {
-                    template: '<div ui-view autoscroll="false"/>',
-                    url :"/user-privileges/user",
-                    abstract: true
-                })
                 ///RUBY CAMPUS Hr payroll and paygroup state  by Manikandan///
                 .state("restricted.hr", {
                     template: '<div ui-view autoscroll="false"/>',
@@ -4302,6 +4243,7 @@ rubycampusApp
                                 return $ocLazyLoad.load([
                                     'lazy_pagination',
                                     'lazy_dropify',
+                                    'lazy_parsleyjs',
                                     'app/components/inventory/itemViewCtrl.js'
                                 ], { serie: true } );
                             }]
@@ -4320,6 +4262,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/inventory/storeItemViewCtrl.js'
                             ], {serie:true});
                         }]
@@ -4338,6 +4281,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/inventory/supplierViewCtrl.js'
                             ], {serie:true});
                         }]
@@ -4384,7 +4328,7 @@ rubycampusApp
                 })
 
                 .state("restricted.inventory.purchaseOrderDetails", {
-                    url: "/purchaseOrderDetails",
+                    url: "/purchaseOrderDetails/{id}",
                     templateUrl: 'app/components/inventory/purchaseOrderDetails.html',
                     controller: 'purchaseOrderDetailsCtrl',
                     resolve: {
@@ -4580,7 +4524,7 @@ rubycampusApp
                 })
 
                 .state("restricted.inventory.materialRequestDetails", {
-                    url: "/materialRequestDetails",
+                    url: "/materialRequestDetails/{id}",
                     templateUrl: 'app/components/inventory/materialRequestDetails.html',
                     controller: 'materialRequestDetailsCtrl',
                     resolve: {

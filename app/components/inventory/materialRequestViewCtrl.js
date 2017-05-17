@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('materialRequestViewCtrl',
-        function($compile, $scope, $rootScope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter) {
+        function($compile, $scope, $rootScope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter, $localStorage, $http) {
 
             var vm = this;
             $scope.viewData=[];
@@ -40,6 +40,11 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -49,11 +54,21 @@ angular
                     })
                 });
 
-                $resource('app/components/inventory/materialRequest.json')
-                .query()
-                .$promise
-                .then(function(allac_data) {
-                    $scope.viewData=allac_data;
+                // $resource('app/components/inventory/materialRequest.json')
+                // .query()
+                // .$promise
+                // .then(function(allac_data) {
+                //     $scope.viewData=allac_data;
+                // });
+
+                $scope.viewData=[];
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'inventoryApi/materialRequest',
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data,'return_data');
+                    $scope.viewData=return_data.data.data;
                 });
 
                 $scope.addAllocation=function(){

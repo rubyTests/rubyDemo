@@ -1,7 +1,23 @@
 angular
     .module('rubycampusApp')
     .controller('supplierViewCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $http, $rootScope, $filter,$localStorage) {
+
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -79,50 +95,120 @@ angular
             
 			
 			$scope.supplierType=[];
-			$resource('app/components/transport/vehicleDetail.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.supplierType.push(dt_data);
-                });
+			$http.get($localStorage.service+'inventoryApi/supplierType',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(supplierType_data){
+                $scope.supplierType.push(supplierType_data.data);
+            });
 				
-				$scope.selectize_supplierType_options = $scope.supplierType;
-				$scope.selectize_supplierType_config = {
-					create: false,
-                    maxItems: 1,
-                    placeholder: 'Supplier Type',
-					valueField: 'id',
-                    labelField: 'name',
-					onInitialize: function(val){
-                        console.log(val);
-                    }
-				};
-				
-                 $scope.openModel = function() {
-                    //$scope.buttonStatus='Save';
-                    $scope.title = "Add";
-                    $scope.Savebutton=true;
-                    $scope.Updatebutton=false;
-                    $scope.dept_name=null;
-                    $scope.dept_code=null;
-                    $scope.selectize_hodProfieId=null;
-                    $scope.Phone=null;
-                    $('.uk-modal').find('input').trigger('blur');
-                };
-                $scope.edit_data= function(res){
-                    if (typeof res=="undefined") return false;
-                    //console.log(res,"messsssssssssss");
-                    $scope.title = "Edit";
-                    $scope.Updatebutton=true;
-                    $scope.Savebutton=false;
-                    $scope.supplier_name=res.supplier_name;
-                    $scope.contact_number=res.contact_number;
-                    $scope.selectize_supplierType=res.supplier_type;
-                    $scope.supplier_address=res.supplier_address;
-                    $scope.tin_number=res.tin_number;
-                    $scope.region=res.region;
-                    $scope.id=vm.dt_data.indexOf(res);
+			$scope.selectize_supplierType_options = $scope.supplierType;
+			$scope.selectize_supplierType_config = {
+				create: false,
+                maxItems: 1,
+                placeholder: 'Supplier Type',
+				valueField: 'ID',
+                labelField: 'NAME',
+				onInitialize: function(val){
+                    console.log(val);
                 }
+			};
+			
+             $scope.openModel = function() {
+                $scope.titleCaption="Add";
+                $scope.btnStatus="Save";
+                $scope.supplier_id=null;
+                $scope.supplier_name=null;
+                $scope.supplier_contact_number=null;
+                $scope.supplier_address=null;
+                $scope.supplier_region=null;
+                $scope.selectize_supplierType=null;
+                $('.uk-modal').find('input').trigger('blur');
+            };
+            $scope.edit_supplier= function(res){
+                $scope.titleCaption="Edit";
+                $scope.btnStatus="Update";
+                if(res){
+                    $scope.supplier_id=res.ID;
+                    $scope.supplier_name=res.NAME;
+                    $scope.selectize_supplierType=res.SUPPLIER_TYPE_ID;
+                    $scope.supplier_address=res.ADDRESS;
+                    $scope.supplier_region=res.REGION;
+                    $scope.supplier_contact_number=res.PHONE;
+                }
+            }
+
+            $scope.viewData=[];
+            $scope.refreshTable=function(){
+                $http.get($localStorage.service+'inventoryApi/supplier',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(response){
+                    $scope.viewData=response.data;
+                    console.log($scope.viewData,'$scope.viewData');
+                });
+            }
+            
+            $scope.refreshTable();
+
+            // Save Data
+            $scope.saveSupplierData=function(){
+                $http({
+                method:'POST',
+                url: $localStorage.service+'inventoryApi/supplier',
+                data: {
+                    'supplier_id' : $scope.supplier_id,
+                    'supplier_name' : $scope.supplier_name,
+                    'supplier_contact_number' : $scope.supplier_contact_number,
+                    'supplier_address' : $scope.supplier_address,
+                    'supplier_region' : $scope.supplier_region,
+                    'supplier_type_id' : $scope.selectize_supplierType,
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message);
+                    if(return_data.data.status==true){
+                        UIkit.modal("#modal_overflow").hide();
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }
+                    $scope.refreshTable();
+                });
+            }
+
+            // delete block
+            $scope.deleteSupplier=function(id, $index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : $localStorage.service+"inventoryApi/supplier",
+                            params : {id : id},
+                            headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(return_data) {
+                                if(return_data.data.status==true){
+                                    UIkit.notify({
+                                        message : return_data.data.message.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                $scope.viewData.splice($index, 1);
+                                $scope.refreshTable();
+                            },function myError(return_data) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                }
+            }
        
 
 
