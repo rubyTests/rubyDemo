@@ -95,11 +95,13 @@ angular
 					url : "http://192.168.1.139/rubyServices/api/GeneralAPI/login",
 					params : {"USER_EMAIL": $scope.login_username, "USER_PASSWORD": $scope.login_password},
 				}).then(function(response){
+					//console.log(response,'response111');
 					if(response.data.status==true){
 						$localStorage.user_id=response.data.message[0].USER_ID;
 						$localStorage.access_token=response.data.access_token;
 						$localStorage.role=response.data.message[0].role_name;
 						$localStorage.role_id=response.data.message[0].USER_ROLE_ID;
+						$localStorage.userProfile_id=response.data.message[0].USER_PROFILE_ID;
 						//$location.path('/dashboard');
 						$state.go('restricted.dashboard');
 					}else{
