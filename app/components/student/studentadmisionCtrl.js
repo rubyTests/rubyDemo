@@ -26,6 +26,8 @@ angular
 			$scope.father={};
 			$scope.mother={};
 			$scope.guardian={};
+			$scope.loader=false;
+			$scope.showPage=true;
 			//$scope.wizard.admission_date=$filter('date')(new Date(),'MM.dd.yyyy');
 			
 			// Validation Start
@@ -648,7 +650,9 @@ angular
 			}
 			
 			// Admission Details
+			// $scope.showPage=true;
 			$scope.admissionDetails=function(){
+				// $scope.showPage=false;
 				// alert($('.admission_details').serialize());
 				//$scope.values=$('.admission_details').serialize();
 				//console.log($scope.wizard,"values");
@@ -664,19 +668,31 @@ angular
 							pos     : 'top-center'
 						});
 					}else{
+						
+						$scope.content_preloader_show('regular',$('.md-card-single'));
+
 						$http({
 						method:'POST',
 						url: $localStorage.service+'ProfileAPI/admissionDetails',
 						data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),gender:$scope.wizard.gender,wizard_birth:$scope.wizard.wizard_birth,nationality:$scope.wizard.nationality,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,batchId:$scope.wizard.batchId,roll_no:$scope.wizard.roll_no},
 						headers:{'access_token':$localStorage.access_token}
 						}).then(function(response){
-							//console.log(response.data.admission_no);
-							if(response.data.status==true){
+							console.log(response,'responsetest');
+								if(response.data.status==true){
+								// $scope.hidePreloader= true;
 								$scope.wizard.profileId=response.data.profile[0].profile_id;
 								$scope.wizard.stuPro_id=response.data.profile[0].stu_profileId;	
 								$scope.wizard1.profileId=response.data.profile[0].profile_id;
-								WizardHandler.wizard().next();
+								//WizardHandler.wizard().next();
 							}
+
+			  				$timeout(function() {
+								$scope.content_preloader_hide();
+								WizardHandler.wizard().next();
+								
+							}, 3000);
+					
+							
 						});
 					}
 				});
@@ -685,6 +701,7 @@ angular
 			// Contact Details
 			
 			$scope.contactDetails=function(){
+				$scope.content_preloader_show('regular',$('.md-card-single'));
 				//$scope.wizard.profileId=120;
 				//console.log($scope.mailling,"mailling");
 				//console.log($scope.permanent,"permanent");
@@ -706,7 +723,12 @@ angular
 							$scope.permanent.addressId=response.data.locationId[1];
 						}
 						$scope.wizard2.profileId=$scope.wizard1.profileId;
-						WizardHandler.wizard().next();
+						//WizardHandler.wizard().next();
+						$timeout(function() {
+							$scope.content_preloader_hide();
+							WizardHandler.wizard().next();
+							
+						}, 3000);
 					}
                 });
 			}
@@ -714,6 +736,7 @@ angular
 			// Academics Details
 			
 			$scope.academicsDetails=function(){
+				$scope.content_preloader_show('regular',$('.md-card-single'));
 				//$scope.wizard.profileId=35;
 				//console.log($scope.form_dynamic1,"previous");
 				
@@ -730,7 +753,12 @@ angular
 							$scope.form_dynamic1[key].preEdu_id=value;
 						});
 						$scope.wizard3.profileId=$scope.wizard2.profileId;
-						WizardHandler.wizard().next();
+						//WizardHandler.wizard().next();
+						$timeout(function() {
+							$scope.content_preloader_hide();
+							WizardHandler.wizard().next();
+							
+						}, 3000);
 					}
                 });
 			}

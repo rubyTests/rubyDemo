@@ -8,12 +8,17 @@
     .selectize-dropdown-content {
         max-height: 153px !important;
     }
+   body > .content-preloader.preloader-active {
+        top: 303px !important;
+    }
 </style>
+<!-- <div id="page_preloader" ><img src="assets/img/page_preloader.gif" alt=""/>
+</div> -->
+   
 <div id="page_content">
-    <div id="page_content_inner">
-
+     <div id="page_content_inner">
         <div class="md-card uk-margin-large-bottom">
-            <div class="md-card-content">
+            <div class="md-card-content ">
                 <!-- <form id="wizard_advanced_form" class="uk-form-stacked"> -->
                     <wizard on-finish="finishedWizard()" template="app/templates/wizard.tpl.html">
                         <wz-step wz-title="Admission" template="app/templates/wizard.step.tpl.html" canexit="exitValidation">
@@ -819,6 +824,8 @@
 
     </div>
 </div>
+
+
 
 
 <!-- <div class="uk-width-medium-1-3" ng-controller="cameraController as vm"> -->
