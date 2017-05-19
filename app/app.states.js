@@ -4456,7 +4456,7 @@ rubycampusApp
                 })
 
                 .state("restricted.inventory.billingDetails", {
-                    url: "/billingDetails",
+                    url: "/billingDetails/{id}",
                     templateUrl: 'app/components/inventory/billingDetails.html',
                     controller: 'billingDetailsCtrl',
                     resolve: {
