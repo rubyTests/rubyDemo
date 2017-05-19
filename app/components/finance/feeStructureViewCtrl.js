@@ -7,21 +7,18 @@ angular
         '$timeout',
         '$stateParams',
         '$resource',
-        '$filter',
-        function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter) {
-
-            $scope.ViewData = [];
-            $resource('data/finance/feestructureNew.json')
-            .query()
-            .$promise
-            .then(function(return_data) {
-                var paramsData=$filter('filter')(return_data, {id : $stateParams.Assign_Id});
-                $scope.ViewData=paramsData[0];
-                 console.log($scope.ViewData,'TestData');
+        '$filter','$localStorage','$http',
+        function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$localStorage,$http) {
+            $http({
+                url: $localStorage.service+'FinanceAPI/feeStructureView',
+                method : 'GET',
+                params:{'id':$stateParams.Assign_Id},
+                headers: { 'access_token':$localStorage.access_token},
+            }).success(function(response) {
+                console.log(response.message,'success');
+                $scope.viewData=response.message[0];
+            }).error(function(data){
+                console.log('error');
             });
-
-
-            $scope.checkbox_demo_1 = true;
-
         }
     ]);

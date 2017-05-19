@@ -4,7 +4,9 @@ angular
         '$scope',
         '$window',
         '$timeout',
-        function ($scope,$window,$timeout) {
+        '$localStorage',
+        '$http',
+        function ($scope,$window,$timeout,$localStorage,$http) {
 
             $scope.form_template = [
                 [
@@ -147,6 +149,35 @@ angular
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 altair_uikit.reinitialize_grid_margin();
             });
+
+
+
+            // $http({
+            //     url: $localStorage.service+'FinanceAPI/fetchStudent',
+            //     method : 'GET',
+            //     headers: { 'access_token':$localStorage.access_token},
+            // }).success(function(response) {
+            //     console.log(response.message,'student');
+            //     $scope.studentList.push(response.message);
+            // }).error(function(data){
+            //     console.log('error');
+            // });
+
+            // $scope.selectize_student_config = $scope.studentList;
+            // $scope.selectize_student_options = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Student',
+            //     valueField: 'PROF_ID',
+            //     labelField: 'STUDENT_NAME',
+            //     searchField: 'STUDENT_NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(value) {
+            //             console.log(value);
+            //         });
+            //     }
+            // };
+
 
             $scope.selectize_feeItem_options = ["Tution Fee", "Book Fee", "Mess Fee", "Transport Fee", "Uniform Fee"];
             $scope.selectize_feeItem_config = {

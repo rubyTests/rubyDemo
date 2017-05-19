@@ -20,88 +20,120 @@
             <div class="uk-width-large-1-1">
                 <div class="md-card">
                     <div class="md-card-content large-padding">
-                        <form class="uk-form" >
-                        <!-- <h2 class="heading_a">
-                                Fee Structure
-                                <span class="sub-heading">Add Fee Structure Informations</span>
-                            </h2>
-                            <hr class="md-hr"/> -->
+                        <form id="form_validation" ng-submit="saveFeeStructure()">
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                     <label for="Fee_Structure">Fee Structure Name<span class="req"></span></label>
-                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="Fee_Structure_Name" />
+                                    <input type="text"  class="md-input" md-input ng-model="structure_name" required />
+                                    <input type="hidden" ng-model="structure_id">
                                 </div>
                                 <div class="uk-width-medium-1-2 parsley-row">
                                 <label>Assign To:</label>
-                                <div class="dynamic_radio uk-margin-small-top" ng-init="radio_BatchStu == 'Batch'" >
+                                <div class="dynamic_radio uk-margin-small-top" ng-init="assigned_to = 'Batch'" >
                                     <span class="icheck-inline">
-                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_1" icheck ng-model="radio_BatchStu" value="Batch" ng-checked="true" />
-                                        <label for="radio_demo_inline_1" class="inline-label">Course</label>
+                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="assigned_to" value="Batch" />
+                                        <label for="radio_demo_inline_2" class="inline-label">Batch</label>
                                     </span>
                                     <span class="icheck-inline">
-                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="radio_BatchStu" value="Student" />
+                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="assigned_to" value="Student" />
                                         <label for="radio_demo_inline_2" class="inline-label">Student</label>
                                     </span>
                                 </div>
                                 </div>
                             </div>
-                            <p></p>
-                            <div class="uk-width-1-1" ng-show="radio_BatchStu != 'Student'">
+                            <div class="uk-width-1-1" ng-show="assigned_to == 'Student'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
-                                    <p></p>
-                                        <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="forms_advanced.selectize_course"></selectize>
+                                        <input type="text" id="selec_adv_1" config="selectize_student_config" options="selectize_student_options" position="bottom" ng-model="student_id" ng-required="assigned_to == 'Student'" selectize/>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-width-1-1" ng-show="radio_BatchStu == 'Student'">
+                            <div class="uk-width-1-1" ng-show="assigned_to == 'Batch'">
                                 <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-2 parsley-row">
-                                        <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!coursedata"/>
+                                        <label for="course" ng-if="coursedata" style="font-size: 12px;color: #727272;">Course <span class="req">*</span></label>
+                                        <input type="text" config="course_config" options="course_options" ng-model="coursedata" ng-required="assigned_to == 'Batch'" selectize/>
                                     </div>
-                                </div>
-                            </div>
-                                    
-                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
-                                <div class="uk-width-8-10 uk-width-medium-9-10">
-                                    <div class="uk-grid" ng-repeat="fields in section" on-last-repeat>
-                                        <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
-                                            <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-medium-1-2 parsley-row">
-                                                    <input type="text" config="selectize_feeItem_config" options="selectize_feeItem_options" ng-model="selectize_feeItem" name="selectize_feeItem" selectize />
-                                                </div>
-                                                <div class="uk-width-medium-1-2 parsley-row">
-                                                    <label for="prev_state">Amount<span class="req"></span></label>
-                                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
-                                                </div>
-                                            </div>
-                                            <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-medium-1-3 parsley-row">
-                                                    <label for="from_date">Due Date<span class="req"></span></label>
-                                                    <input type="text" name="join_date" id="join_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.join_date"/>
-                                                </div>
-                                                <div class="uk-width-medium-1-3 parsley-row">
-                                                    <input type="text" config="selectize_freq_config" options="selectize_freq_options" ng-model="selectize_freq" name="selectize_freq" selectize />
-                                                </div>
-                                                <div class="uk-width-medium-1-3 parsley-row">
-                                                    <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="selectize_fine" name="selectize_freq" selectize />
-                                                </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!batch_id"/>
+                                        <label for="bacth" ng-if="batch_id" style="font-size: 12px;color: #727272;">Batch <span class="req">*</span></label>
+                                        <input type="text" id="selec_adv_1" config="batch_config" options="batch_options" position="bottom" ng-model="batch_id" ng-required="assigned_to == 'Batch'" selectize/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3" ng-show="batch_id">
+                                        <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" style="margin-top: 15px;"><br>
+                                            <button class="md-btn">Select Student<i class="material-icons">&#xE313;</i></button>
+                                            <div class="uk-dropdown">
+                                                <!-- &nbsp;<input type="checkbox" ng-model="selectAll" ng-click="checkAll(selectAll)"/> &nbsp;&nbsp;All
+                                                <br> -->
+                                                <ul class="uk-nav uk-nav-dropdown uk-dropdown-scrollable">
+                                                    <li ng-repeat="data in studentViewBatch">
+                                                        <div class="uk-input-group">
+                                                            <span class="uk-input-group-addon">
+                                                            <input type="checkbox" ng-model="studentData[data.PROFILE_ID]" ng-true-value="{{data.PROFILE_ID}}" ng-false-value="undefined" icheck/></span>
+                                                            <label>{{data.STUDENT_NAME}}</label>
+                                                        </div>
+                                                    </li>
+                                                    <li ng-show="studentViewBatch.length==0">
+                                                        <div class="uk-input-group">
+                                                            <!-- <span class="uk-input-group-addon">No Student
+                                                            </span> -->
+                                                            &nbsp;&nbsp;<label>Student not available</label>
+                                                        </div>
+                                                        <!-- <span>No Student</span> -->
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index" style="margin-top: 40px;">
+                                <div class="uk-width-8-10 uk-width-medium-9-10">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-2 parsley-row">
+                                            <label for="bacth" ng-if="itemType_array[topParent].feeitem.length==1" style="font-size: 12px;color: #727272;">Fee Item <span class="req">*</span></label>
+                                            <input type="text" config="selectize_feeItem_config" options="selectize_feeItem_options" ng-model="itemType_array[topParent].feeitem" ng-change="checkValid(itemType_array[topParent])" required selectize />
+                                        </div>
+                                        <div class="uk-width-medium-1-2 parsley-row">
+                                            <br ng-if="itemType_array[topParent].feeitem.length==1"/>
+                                            <label for="prev_state">Amount<span class="req"></span></label>
+                                            <input type="text" class="md-input" required md-input ng-model="itemType_array[topParent].amount" numeric-only/>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="itemType_array[topParent].frequency || itemType_array[topParent].feefine.length==1"/> <br ng-if="itemType_array[topParent].frequency && itemType_array[topParent].feefine.length==1"/>
+                                            <label for="from_date">Due Date<span class="req"></span></label>
+                                            <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="itemType_array[topParent].due_date" ng-change="checkDateValidation(itemType_array[topParent].due_date)"/>
+                                        </div>
+
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="itemType_array[topParent].feefine.length==1 && itemType_array[topParent].frequency"/>
+                                            <label for="bacth" ng-if="itemType_array[topParent].frequency" style="font-size: 12px;color: #727272;">Frequency <span class="req">*</span></label>
+                                            <input type="text" config="selectize_freq_config" options="selectize_freq_options" ng-model="itemType_array[topParent].frequency" required selectize />
+                                        </div>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="itemType_array[topParent].frequency && itemType_array[topParent].feefine.length==1"/>
+                                            <label for="bacth" ng-if="itemType_array[topParent].feefine.length==1" style="font-size: 12px;color: #727272;">Fee Fine <span class="req">*</span></label>
+                                            <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="itemType_array[topParent].feefine" required selectize />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center">
-                                    <div class="uk-vertical-align uk-height-1-1">
+                                    <div class="uk-vertical-align uk-height-1-1" style="margin-top: 50px;">
                                         <div class="uk-vertical-align-middle">
-                                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index,itemType_array)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
                                             <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-text-right">
-                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
-                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                            <div class="uk-text-right" style="margin-top: 50px;">
+                            <!-- <pre>{{itemType_array | json}}</pre> -->
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" onclick="window.history.back();">Cancel</button>
+                                <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Save</button>
                             </div>
                         </form>
                     </div>

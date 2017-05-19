@@ -1,13 +1,26 @@
 angular
     .module('rubycampusApp')
     .controller('fineAddCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http,$state) {
+
+            var $formValidate = $('#form_validation');
+                $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
+
+
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -67,205 +80,26 @@ angular
                     })
                 });
 
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Description')
-            ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }
-
-            $resource('data/finance/fine.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
-
-                $scope.selectize_buildingId_options = ["1", "2", "3"];
-                $scope.selectize_buildingId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Building Id...'
-                };
-
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
-
                 // Clone functionality
 
-            $scope.form_template = [
-                [
-                    {
-                        'type': 'text',
-                        'name': 'firstName',
-                        'label': 'First Name'
-                    },
-                    {
-                        'type': 'text',
-                        'name': 'lastName',
-                        'label': 'Last Name'
-                    }
-                ],
-                [
-                    {
-                        'type': 'text',
-                        'name': 'company',
-                        'label': 'Company'
-                    }
-                ],
-                [
-                    {
-                        'type': 'radio',
-                        'label': 'Gender',
-                        'name': 'gender',
-                        'inputs': [
-                            {
-                                'label': 'Man',
-                                'value': 'man'
-                            },
-                            {
-                                'label': 'Woman',
-                                'value': 'woman'
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'switch',
-                        'label': 'Contact',
-                        'inputs': [
-                            {
-                                'label': 'Email',
-                                'name': 'switch_email'
-                            },
-                            {
-                                'label': 'Phone',
-                                'name': 'switch_phone'
-                            }
-                        ]
-                    }
-                ],
-                [
-                    {
-                        'type': 'selectize',
-                        'name': 'city',
-                        'position': 'bottom',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'placeholder': 'City...'
-                        },
-                        'data': [
-                            {
-                                "value": "city_a",
-                                "title": "City A"
-                            },
-                            {
-                                "value": "city_b",
-                                "title": "City B"
-                            },
-                            {
-                                "value": "city_c",
-                                "title": "City C"
-                            },
-                            {
-                                "value": "city_d",
-                                "title": "City D"
-                            },
-                            {
-                                "value": "city_e",
-                                "title": "City E"
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'selectize',
-                        'name': 'country',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'create': false,
-                            'maxItems': 1,
-                            'placeholder': 'Country...'
-                        },
-                        'data': [
-                            {
-                                "value": "country_a",
-                                "title": "Country A"
-                            },
-                            {
-                                "value": "country_b",
-                                "title": "Country B"
-                            },
-                            {
-                                "value": "country_c",
-                                "title": "Country C"
-                            },
-                            {
-                                "value": "country_d",
-                                "title": "Country D"
-                            },
-                            {
-                                "value": "country_e",
-                                "title": "Country E"
-                            }
-                        ]
-                    }
-                ]
-            ];
-            $scope.mode = [
-                            {
-                                'label': 'Man',
-                                'value': 'man'
-                            },
-                            {
-                                'label': 'Woman',
-                                'value': 'woman'
-                            }
-                    ];
-                    console.log($scope.mode);
             $scope.form_dynamic = [];
-            $scope.form_dynamic.push($scope.form_template);
-
+            $scope.form_dynamic.push({'Days_After':'','Fine_Value':'','mode':''});
             $scope.form_dynamic_model = [];
 
             // clone section
-            $scope.cloneSection = function($event,$index) {
-                $event.preventDefault();
-                var ss = $scope.form_dynamic.push($scope.form_template);
-                console.log($scope.form_template);
+            $scope.cloneSection = function($event,$index,CurrRow) {
+                console.log(CurrRow,'CurrRow');
+                if(CurrRow.Days_After=='' || CurrRow.Fine_Value=='' || CurrRow.mode==''){
+                    UIkit.notify({
+                        message : 'Please Fill current form',
+                        status  : 'warning',
+                        timeout : 1000,
+                        pos     : 'top-center'
+                    });
+                }else {
+                    $event.preventDefault();
+                    $scope.form_dynamic.push({'Days_After':'','Fine_Value':'','mode':''});
+                }
             };
 
             // delete section
@@ -281,6 +115,40 @@ angular
 
             $scope.backBtn = function(){
                 window.history.back();
+            }
+            $scope.saveFineDetails=function(){
+                console.log($scope.form_dynamic);
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'FinanceAPI/feeFine',
+                    data: {
+                        'id':$scope.fine_id,
+                        'name':$scope.fine_name,
+                        'fineItem' : $scope.form_dynamic
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){  
+                    console.log(return_data,'success');
+                    if(return_data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 1000,
+                            pos     : 'top-center'
+                        });
+                        $timeout(function(){
+                            $state.go('restricted.finance.fee.fineDetails');
+                        },100);
+                    }else {
+                        UIkit.notify({
+                            message : 'Failed',
+                            status  : 'danger',
+                            timeout : 1000,
+                            pos     : 'top-center'
+                        });
+                        // UIkit.modal.alert('Paystructure Name Already Exists');
+                    }
+                });
             }
         }
     );

@@ -2070,19 +2070,7 @@ rubycampusApp
                 .state("restricted.finance", {
                     url: "/finance",
                     template: '<div ui-view autoscroll="false"/>',
-                    controller: 'financeCtrl',
-                    abstract: true,
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'app/components/finance/financeCtrl.js'
-                            ], {serie:true});
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Finance'
-                    }
+                    abstract: true
                 })
 
                 .state("restricted.finance.fee", {
@@ -2094,7 +2082,7 @@ rubycampusApp
                 .state("restricted.finance.fee.feeStructureDetails", {
                     url: "/feeStructureDetails",
                     templateUrl: 'app/components/finance/feeStructureDetails.html',
-                    controller: 'feeStructureCtrl',
+                    // controller: 'feeStructureCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2116,6 +2104,8 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                            	'lazy_parsleyjs',
+                            	'smart-filter',
                                 'app/components/finance/feeStructureAddCtrl.js'
                             ] );
                         }]
@@ -2128,10 +2118,13 @@ rubycampusApp
                 .state("restricted.finance.fee.feeStructureEdit", {
                     url: "/feeStructureEdit/{Assign_Id}",
                     templateUrl: 'app/components/finance/feeStructureEdit.html',
+                    controller: 'feeStructureEditCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
+                            	'smart-filter',
                                 'app/components/finance/feeStructureEditCtrl.js'
                             ] );
                         }]
@@ -2148,6 +2141,7 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                            	'bower_components/angular-resource/angular-resource.min.js',
                                 'app/components/finance/feeStructureViewCtrl.js'
                             ] );
                         }]
@@ -2166,6 +2160,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'smart-filter',
                                 'app/components/finance/feeCollectionCtrl.js'
                             ], {serie:true});
                         }]
@@ -2428,7 +2423,7 @@ rubycampusApp
                 .state("restricted.finance.fee.fineDetails", {
                     url: "/fineDetails",
                     templateUrl: 'app/components/finance/fineDetails.html',
-                    controller: 'fineCtrl',
+                    // controller: 'fineCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2452,6 +2447,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/finance/fineAddCtrl.js'
                             ], {serie:true});
                         }]
@@ -2468,6 +2464,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'app/components/finance/fineEditCtrl.js'
                             ], {serie:true});
                         }]

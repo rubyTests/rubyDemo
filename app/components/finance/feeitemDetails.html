@@ -31,13 +31,13 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row.id}}</td>
-                            <td>{{row.Fee_Item_Name}}</td>
-                            <td>{{row.Fee_Item_Desc}}</td>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.DESCRIPTION}}</td>
                             <td>
-                                <a href="#" class="ts_remove_row" ng-click="updateModal(row)" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="remove_item($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="editItem(row)" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a  class="ts_remove_row" ng-click="remove_item(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -48,25 +48,25 @@
 
     <div class="uk-modal" id="modal_header_footer">
       <div class="uk-modal-dialog">
-      <button type="button" class="uk-modal-close uk-close"></button>
-          <h3 class="uk-modal-title" ng-if="addLabel">Add Fee Item</h3>
-          <h3 class="uk-modal-title" ng-if="updateLabel">Edit Fee Item</h3><br>
+      <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation()"></button>
+          <h3 class="uk-modal-title">Fee Item</h3>
+          <br>
           <div class="md-card-content">
-            <form>
-              <div class="uk-form-row">
+            <form id="form_validation" ng-submit="addFeeItems()" novalidate>
+              <div class="uk-form-row parsley-row">
                   <label>Fee Item Name</label>
-                  <input type="text" ng-model="Fee_Item_Name" class="md-input" md-input>
+                  <input type="text" ng-model="itemname" class="md-input" required md-input>
+                  <input type="hidden" ng-model="itemID">
               </div>
-              <div class="uk-form-row">
+              <div class="uk-form-row parsley-row">
                   <label>Description</label>
-                  <input type="text" ng-model="Fee_Item_Desc" class="md-input" required md-input>
+                  <input type="text" ng-model="description" class="md-input" required md-input>
+              </div>
+              <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">{{BtnStatus}}</button>
               </div>
             </form>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="addFeeItem()" ng-if="addButton">Save</button>
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="updateFeeItem()" ng-if="updateButton">Update</button>
           </div>
       </div>
     </div>

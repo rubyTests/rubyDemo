@@ -5,115 +5,127 @@
     padding-top: 11px;
 }
 .md-hr{
-     margin: 24px 0 !important;
-}
-.uk-grid-medium {
-    margin-left: -25px;
-    margin-top: 50px !important;
-}
-
-.md-btn.md-btn-flat.md-btn.md-btn-primary.md-btn-small.uk-modal-close.AdjButPad {
-    margin-top: 20px;
-}
-
-.md-btn.md-btn-flat.md-btn.md-btn-danger.md-btn-small.uk-modal-close.AdjButPad {
-    margin-top: 20px;
-}
+         margin: 24px 0 !important;
+    }
     /*.selectize-control.single {
     margin-top: 0px !important;
 }*/
 </style>
 <div id="page_content">
-    <div id="page_content_inner" ng-controller="feeStructureEditCtrl">
+    <div id="page_content_inner">
         <h2 class="heading_a uk-margin-bottom">
-            Edit Fee Structure
+            Add Fee Structure
         </h2>
         <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-large-1-1">
                 <div class="md-card">
                     <div class="md-card-content large-padding">
-                        <form class="uk-form" >
-                        <!-- <h2 class="heading_a">
-                                Fee Structure
-                                <span class="sub-heading">Add Fee Structure Informations</span>
-                            </h2>
-                            <hr class="md-hr"/> -->
+                        <form id="form_validation" ng-submit="saveFeeStructure()">
                             <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-2 parsley-row">
+                                <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="Fee_Structure">Fee Structure Name<span class="req"></span></label>
-                                    <input type="text" name="Fee_Structure_Name" id="Fee_Structure_Name" class="md-input" md-input ng-model="EditableData[0].FeeStructure_Name" />
+                                    <input type="text"  class="md-input" md-input ng-model="structure_name" required />
+                                    <input type="hidden" ng-model="structure_id">
                                 </div>
-                                <div class="uk-width-medium-1-2 parsley-row">
+                                <!-- <div class="uk-width-medium-1-2 parsley-row">
                                 <label>Assign To:</label>
-                                <div class="uk-margin-small-top">
+                                <div class="dynamic_radio uk-margin-small-top" >
                                     <span class="icheck-inline">
-                                        <input type="radio" icheck ng-value="Batch" ng-model="EditableData[0].AssignTo" ng-checked="EditableData[0].AssignTo == 'Course'" ng-change="EditableData[0].AssignTo = 'Course'"/>
-                                        <label for="radio_demo_inline_1" class="inline-label">Course</label>
+                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="assigned_to" value="Batch" ng-disabled="true"/>
+                                        <label for="radio_demo_inline_2" class="inline-label">Batch</label>
                                     </span>
                                     <span class="icheck-inline">
-                                        <input type="radio" icheck ng-value="Student" ng-model="EditableData[0].AssignTo" ng-checked="EditableData[0].AssignTo == 'Student'" ng-change="EditableData[0].AssignTo = 'Student'"/>
+                                        <input type="radio" name="radio_demo_inline" id="radio_demo_inline_2" icheck ng-model="assigned_to" value="Student" ng-disabled="true"/>
                                         <label for="radio_demo_inline_2" class="inline-label">Student</label>
                                     </span>
                                 </div>
-                                </div>
+                                </div> -->
                             </div>
-                            <p></p>
-                            <div class="uk-width-1-1" ng-show="EditableData[0].AssignTo == 'Course'">
+                            <br>
+                            <div class="uk-width-1-1" ng-show="assigned_to == 'Student'">
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-2 parsley-row">
-                                    <p></p>
-                                        <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="EditableData[0].CourseName.course"></selectize>
+                                        <!-- <label for="student" ng-if="student_id" style="font-size: 12px;color: #727272;">Student <span class="req">*</span></label> -->
+                                        <selectize id="selec_adv_1" config="selectize_student_config" options="selectize_student_options" position="bottom" ng-model="student_id"></selectize>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-width-1-1" ng-show="EditableData[0].AssignTo == 'Student'">
+                            <div class="uk-width-1-1" ng-show="assigned_to == 'Batch'">
                                 <div class="uk-grid" data-uk-grid-margin>
-                                    <div class="uk-width-medium-1-2 parsley-row">
-                                        <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="EditableData.StudentName"></selectize>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!coursedata"/>
+                                        <label for="course" ng-if="coursedata" style="font-size: 12px;color: #727272;">Course <span class="req">*</span></label>
+                                        <selectize config="course_config" options="course_options" ng-model="coursedata"></selectize>
+                                    </div>
+                                    <div class="uk-width-medium-1-3 parsley-row">
+                                        <br ng-if="!batch_id"/>
+                                        <label for="bacth" ng-if="batch_id" style="font-size: 12px;color: #727272;">Batch <span class="req">*</span></label>
+                                        <selectize id="selec_adv_1" config="batch_config" options="batch_options" position="bottom" ng-model="batch_id"></selectize>
+                                    </div>
+                                    <div class="uk-width-medium-1-3" ng-show="assignStatus">
+                                        <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}" style="margin-top: 29px;">
+                                            <button class="md-btn">Select Student<i class="material-icons">&#xE313;</i></button>
+                                            <div class="uk-dropdown">
+                                                <ul class="uk-nav uk-nav-dropdown uk-dropdown-scrollable">
+                                                    <li ng-repeat="data in studentViewBatch">
+                                                        <div class="uk-input-group">
+                                                            <span class="uk-input-group-addon">
+                                                            <input type="checkbox" ng-model="studentData[data.PROFILE_ID]" ng-true-value="{{data.PROFILE_ID}}" ng-false-value="undefined" ng-checked="data.FEE_STRUCTURE_ID!=''" icheck/></span>
+                                                            <label>{{data.STUDENT_NAME}}</label>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                                    
-                            <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in EditableData[0].FeeItemCount track by $index">
+
+
+                            <div class="uk-grid uk-grid-medium" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index" style="margin-top: 40px;">
                                 <div class="uk-width-8-10 uk-width-medium-9-10">
-                                    <div class="uk-grid" >
-                                        <div class="uk-width-1-1">
-                                            <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-medium-1-2 parsley-row">
-                                                    <input type="text" config="selectize_feeItem_config" options="selectize_feeItem_options" ng-model="section.Fee_Item_Name" name="selectize_feeItem" selectize />
-                                                </div>
-                                                <div class="uk-width-medium-1-2 parsley-row">
-                                                    <label for="prev_state">Amount<span class="req"></span></label>
-                                                    <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="section.Amount" />
-                                                </div>
-                                            </div>
-                                            <div class="uk-grid" data-uk-grid-margin>
-                                                <div class="uk-width-medium-1-3 parsley-row">
-                                                    <label for="from_date">Due Date<span class="req"></span></label>
-                                                    <input type="text" name="join_date" id="join_date" required class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="section.DueDate"/>
-                                                </div>
-                                                <div class="uk-width-medium-1-3 parsley-row">
-                                                    <input type="text" config="selectize_freq_config" options="selectize_freq_options" ng-model="section.Frequency" name="selectize_freq" selectize />
-                                                </div>
-                                                <div class="uk-width-medium-1-3 parsley-row">
-                                                    <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="section.Fine" name="selectize_freq" selectize />
-                                                </div>
-                                            </div>
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-2 parsley-row">
+                                            <label for="bacth" ng-if="itemType_array[topParent].FEE_ITEM_ID.length==1" style="font-size: 12px;color: #727272;">Fee Item <span class="req">*</span></label>
+                                            <input type="text" config="selectize_feeItem_config" options="selectize_feeItem_options" ng-model="itemType_array[topParent].FEE_ITEM_ID" ng-change="checkValid(itemType_array[topParent])" required selectize />
+                                        </div>
+                                        <div class="uk-width-medium-1-2 parsley-row">
+                                            <br ng-if="itemType_array[topParent].FEE_ITEM_ID.length==1"/>
+                                            <label for="prev_state">Amount<span class="req"></span></label>
+                                            <input type="text" class="md-input" required md-input ng-model="itemType_array[topParent].AMOUNT" />
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="itemType_array[topParent].FREQUENCY || itemType_array[topParent].FEE_FINE_ID.length==1"/>
+                                            <label for="from_date">Due Date<span class="req"></span></label>
+                                            <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="itemType_array[topParent].DUE_DATE" ng-change="checkDateValidation(itemType_array[topParent].DUE_DATE)"/>
+                                        </div>
+
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="itemType_array[topParent].FEE_FINE_ID.length==1 && !itemType_array[topParent].FREQUENCY"/>
+                                            <label for="bacth" ng-if="itemType_array[topParent].FREQUENCY" style="font-size: 12px;color: #727272;">Frequency <span class="req">*</span></label>
+                                            <input type="text" config="selectize_freq_config" options="selectize_freq_options" ng-model="itemType_array[topParent].FREQUENCY" required selectize />
+                                        </div>
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="itemType_array[topParent].FREQUENCY && itemType_array[topParent].FEE_FINE_ID.length!=1"/>
+                                            <label for="bacth" ng-if="itemType_array[topParent].FEE_FINE_ID.length==1" style="font-size: 12px;color: #727272;">Fee Fine <span class="req">*</span></label>
+                                            <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="itemType_array[topParent].FEE_FINE_ID" required selectize />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center">
-                                    <div class="uk-vertical-align uk-height-1-1">
+                                    <div class="uk-vertical-align uk-height-1-1" style="margin-top: 50px;">
                                         <div class="uk-vertical-align-middle">
-                                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
-                                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                                            <a href="javascript:void(0)" ng-click="cloneSection($event,$index,itemType_array)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                                            <a href="javascript:void(0)" ng-click="deleteSection($event,$index,section)"><i class="material-icons md-36">&#xE872;</i></a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="uk-text-right">
-                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close AdjButPad" ng-click="backBtn()">Cancel</button>
-                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close AdjButPad">Save</button>
+                            <div class="uk-text-right" style="margin-top: 50px;">
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" onclick="window.history.back();">Cancel</button>
+                                <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Update</button>
                             </div>
                         </form>
                     </div>

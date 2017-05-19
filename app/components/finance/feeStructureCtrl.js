@@ -1,13 +1,8 @@
 angular
     .module('rubycampusApp')
     .controller('feeStructureCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -53,66 +48,50 @@ angular
                     })
                 });
 
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Fee Structure Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('No.of Fee Items'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Assigned To')
-            ];
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
+                $scope.viewData=[];
+                $scope.refreshTable=function(){
+                    $http({
+                        url: $localStorage.service+'FinanceAPI/feeStructure',
+                        method : 'GET',
+                        headers: { 'access_token':$localStorage.access_token},
+                    }).success(function(response) {
+                        console.log(response,'success');
+                        $scope.viewData=response.message;
+                    }).error(function(data){
+                        console.log('error');
+                    });
+                }
+                $scope.refreshTable();
+                $scope.deleteFeeStructure=function($index,id){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"FinanceAPI/feeStructure",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    console.log('delete',response);
+                                    $scope.viewData.splice($index, 1);
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.refreshTable();
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
                     }
                 }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }
-
-            $resource('data/finance/feestructureNew.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
-
-                $scope.selectize_buildingId_options = ["1", "2", "3"];
-                $scope.selectize_buildingId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Building Id...'
-                };
-
-                $scope.selectize_attdncType_options = ["Subject-Wise", "Daily"];
-                $scope.selectize_attdncType_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Attendance Type...'
-                };
-                 $scope.selectize_deptId_options = ["1", "2", "3"];
-                $scope.selectize_deptId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Department Id...'
-                };
-                 $scope.selectize_calenId_options = ["1", "2", "3"];
-                $scope.selectize_calenId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Calendar Id...'
-                };
-
-
-
-
         }
     );

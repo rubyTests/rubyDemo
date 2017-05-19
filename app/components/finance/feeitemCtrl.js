@@ -1,13 +1,8 @@
 angular
     .module('rubycampusApp')
     .controller('feeitemCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http) {
             var vm = this;
-            vm.selected = {};
-            vm.selectAll = false;
-            vm.toggleAll = toggleAll;
-            vm.toggleOne = toggleOne;
-            var titleHtml = '<input ng-model="showCase.selectAll" ng-click="showCase.toggleAll(showCase.selectAll, showCase.selected)" type="checkbox">';
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -48,83 +43,115 @@ angular
                     })
                 });
 
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Description')
-            ];
-
+           
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
             
-            function toggleAll (selectAll, selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        selectedItems[id] = selectAll;
-                    }
-                }
-            }
-            function toggleOne (selectedItems) {
-                for (var id in selectedItems) {
-                    if (selectedItems.hasOwnProperty(id)) {
-                        if(!selectedItems[id]) {
-                            vm.selectAll = false;
-                            return;
-                        }
-                    }
-                }
-                vm.selectAll = true;
-            }
-            
+           
             $scope.openModal = function(){
-                $scope.addLabel = true;
-                $scope.updateLabel = false;
-                $scope.addButton = true;
-                $scope.updateButton = false;
-
-                $scope.Fee_Item_Name = null;
-                $scope.Fee_Item_Desc = null;
+                $scope.BtnStatus='Save';
+                $scope.itemID=null;
+                $scope.itemname = null;
+                $scope.description = null;
                 $('.uk-modal').find('input').trigger('blur');
             }
-
-            $scope.addFeeItem = function(){
-
-                var data = {
-                    id : vm.dt_data.length+1,
-                    Fee_Item_Name : $scope.Fee_Item_Name,
-                    Fee_Item_Desc : $scope.Fee_Item_Desc
-                };
-                vm.dt_data.push(data);
+            $scope.editItem = function(data){
+                $scope.BtnStatus='Update';
+                if(data){
+                    $scope.itemID=data.ID;
+                    $scope.itemname = data.NAME;
+                    $scope.description = data.DESCRIPTION;
+                    $('.uk-modal').find('input').trigger('blur');
+                }
+            }
+            $scope.viewData=[];
+            $scope.refreshTable=function(){
+                $http({
+                    url: $localStorage.service+'FinanceAPI/feeItem',
+                    method : 'GET',
+                    headers: { 'access_token':$localStorage.access_token},
+                }).success(function(response) {
+                    console.log(response,'success');
+                    $scope.viewData=response.message;
+                }).error(function(data){
+                    console.log('error');
+                });
+            }
+            $scope.refreshTable();
+            $scope.addFeeItems=function(){
+                $http({
+                    url: $localStorage.service+'FinanceAPI/feeItem',
+                    method : 'POST',
+                    data:{
+                        'itemid':$scope.itemID,
+                        'itemname':$scope.itemname,
+                        'description':$scope.description
+                    },
+                    headers: { 'access_token':$localStorage.access_token},
+                }).success(function(response) {
+                    console.log(response,'response');
+                    if(response.message.status==true){
+                        UIkit.notify({
+                            message : response.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        UIkit.modal("#modal_header_footer").hide();
+                        $scope.refreshTable();
+                    }else {
+                        UIkit.modal.alert('FeeItem Already Exists');
+                    }
+                }).error(function(response){
+                    console.log('error');
+                });
             }
 
-            $scope.updateModal = function(data){
-                if (typeof data=="undefined") return false;
-                $scope.addLabel = false;
-                $scope.updateLabel = true;
-                $scope.addButton = false;
-                $scope.updateButton = true;
+            var $formValidate = $('#form_validation');
+                $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
 
-                $scope.Fee_Item_Name = data.Fee_Item_Name;
-                $scope.Fee_Item_Desc = data.Fee_Item_Desc;
-                $scope.id = vm.dt_data.indexOf(data);
-            }
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
 
-            $scope.updateFeeItem = function() {
-                vm.dt_data[$scope.id].Fee_Item_Name = $scope.Fee_Item_Name;
-                vm.dt_data[$scope.id].Fee_Item_Desc = $scope.Fee_Item_Desc;
-            }
-
-            $resource('data/finance/feeitem.json')
-            .query()
-            .$promise
-            .then(function(dt_data) {
-                vm.dt_data = dt_data;
-            });
-
-            $scope.remove_item = function(data) {
-                // var index = vm.dt_data.indexOf(data);
-                if (typeof data=="undefined") return false;
-                console.log(data);
-                vm.dt_data.splice(data,1);
+            $scope.remove_item = function(id,$index) {
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : $localStorage.service+"FinanceAPI/feeItem",
+                            params : {id : id},
+                            headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                console.log('delete',response);
+                                $scope.viewData.splice($index, 1);
+                                UIkit.notify({
+                                    message : response.data.message,
+                                    status  : 'success',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
+                                $scope.refreshTable();
+                            },function myError(response) {
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                }
             }
         }
     );
