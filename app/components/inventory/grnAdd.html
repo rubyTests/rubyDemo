@@ -29,11 +29,11 @@
                                 <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>GRN No.</label>
-                                        <input type="text" ng-model="po_number" class="md-input" md-input />
+                                        <input type="text" ng-model="grn_number" class="md-input" md-input />
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>GRN Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="section.valid_from"/>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="grn_date"/>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <input type="text" config="selectize_purchaseOrder_config" options="selectize_purchaseOrder_options" ng-model="selectize_purchaseOrder" selectize/>
@@ -47,7 +47,7 @@
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Invoice Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="section.invoice_date"/>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="invoice_date"/>
                                     </div>
                                     <!-- <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Other Charges</label>

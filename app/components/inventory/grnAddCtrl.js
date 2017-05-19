@@ -39,5 +39,22 @@ angular
             $scope.removeRow = function(index){
                 $scope.newRow.splice(index,1);
             }
+
+            // var d=new Date();
+            // var year=d.getFullYear();
+            // var month=d.getMonth()+1;
+            // var day=d.getDate();
+            // if (month<10){
+            // month="0" + month;
+            // };
+            // if (day<10){
+            //     dayNew = "0" + day;
+            // }else{
+            //     dayNew = day;
+            // };
+            
+            // $scope.date=dayNew + "." + month + "." + year;
+            // $scope.invoice_date = $scope.date;
+            //$scope.grn_date = $scope.date;
         }
     );

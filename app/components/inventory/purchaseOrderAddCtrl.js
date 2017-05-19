@@ -20,7 +20,7 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        $scope.selectize_storeItem_options = [];
+                        $scope.storeItem_options = [];
                         $scope.getItems(value);
                     });
                 }
@@ -33,23 +33,44 @@ angular
                     params : {'id' : id},
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    $scope.selectize_storeItem_options = return_data.data.data;
+                    $scope.storeItem_options = return_data.data.data;
+                    angular.forEach($scope.storeItem_options, function(values, keys){
+                        values.value=values.ITEM_NAME;
+                        console.log(values,"values");
+                    });
+                    UIkit.on('domready.uk.dom', function(){
+                        UIkit.autocomplete($('#autocomplete'), {
+                          source: $scope.storeItem_options,
+                          minLength:0,
+                          flipDropdown:true
+                        }).on('selectitem.uk.autocomplete', function (e, data, ac) {
+                            var id = data.value;
+                            $http({
+                                method : 'GET',
+                                url : $localStorage.service+'inventoryApi/getItemCode',
+                                params : {'id' : id},
+                                headers:{'access_token':$localStorage.access_token}
+                            }).then(function(item_code){
+                                $scope.items[0]['item_code'] = item_code.data.data[0]["CODE"];
+                            });
+                        });
+                    });
                 });
             }
 
-            $scope.selectize_storeItem_options = [];
-            $scope.selectize_storeItem_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Item',
-                valueField: 'ID',
-                labelField: 'NAME',
-                onInitialize: function(selectize){
-                    selectize.on('change', function(val){
+            // $scope.selectize_storeItem_options = [];
+            // $scope.selectize_storeItem_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Select Item',
+            //     valueField: 'ID',
+            //     labelField: 'NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(val){
 
-                    })
-                }
-            };
+            //         })
+            //     }
+            // };
 
             $scope.supplier_type = [];
             $http.get($localStorage.service+'inventoryApi/supplierType',{headers:{'access_token':$localStorage.access_token}})
@@ -328,7 +349,7 @@ angular
             }
 
             $scope.newRowObj = {
-                selectize_storeItem : '',
+                item_name : '',
                 unitprice : '',
                 quantity : '',
                 totalprice : ''
@@ -336,7 +357,7 @@ angular
             $scope.items=[];
             $scope.items.push($scope.newRowObj);
             $scope.addRow = function(){
-                $scope.items.push({ 'selectize_storeItem': '', 'unitprice' : '', 'quantity' : '', 'totalprice' : '' });
+                $scope.items.push({ 'item_name': '', 'unitprice' : '', 'quantity' : '', 'totalprice' : '' });
             }
 
             $scope.removeRow = function(index){

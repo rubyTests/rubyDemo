@@ -127,7 +127,7 @@ angular
             $scope.getItems = function(id){
                 $http({
                     method : 'GET',
-                    url : $localStorage.service+'inventoryApi/item',
+                    url : $localStorage.service+'inventoryApi/itemCategoryItems',
                     params : {'id' : id},
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -140,7 +140,7 @@ angular
                 create: false,
                 maxItems: 1,
                 placeholder: 'Select Item',
-                valueField: 'NAME',
+                valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(val){
@@ -158,8 +158,8 @@ angular
                 $scope.selectize_item=null;
                 $scope.selectize_itemCategory=null;
                 $scope.selectize_store=null;
-                $scope.store_itemquantity=null;
-                $scope.store_itemprice=null;
+                $scope.store_item_quantity=null;
+                $scope.store_item_price=null;
                 $('.uk-modal').find('input').trigger('blur');
             };
             $scope.edit_storeItem= function(res){
@@ -167,7 +167,7 @@ angular
                 $scope.btnStatus="Update";
                 if(res){
                     $scope.store_item_id=res.ID;
-                    $scope.selectize_item=res.NAME;
+                    $scope.selectize_item=res.ITEM_ID;
                     $scope.selectize_itemCategory=res.ITEM_CATEGORY_ID;
                     $scope.selectize_store=res.STORE_ID;
                     $scope.store_item_quantity=res.QUANTITY;
@@ -180,7 +180,6 @@ angular
                 $http.get($localStorage.service+'inventoryApi/storeItem',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(response){
                     $scope.viewData=response.data;
-                    console.log($scope.viewData,'$scope.viewData');
                 });
             }
             
@@ -201,7 +200,6 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.message);
                     if(return_data.data.status==true){
                         UIkit.modal("#modal_overflow").hide();
                         UIkit.notify({

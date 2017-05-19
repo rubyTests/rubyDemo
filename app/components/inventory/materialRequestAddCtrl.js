@@ -14,6 +14,7 @@ angular
             $scope.store_name = [];
             $http.get($localStorage.service+'inventoryApi/store',{headers:{'access_token':$localStorage.access_token}})
             .success(function(store_data){
+                console.log(store_data,'store_data');
                 $scope.store_name.push(store_data.data);
             });
             
@@ -38,37 +39,82 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        $scope.selectize_storeItem_options = [];
+                        $scope.storeItem_options = [];
                         $scope.getItems(value);
                     });
                 }
             };
 
             $scope.getItems = function(id){
+
                 $http({
                     method : 'GET',
                     url : $localStorage.service+'inventoryApi/storeIdData',
                     params : {'id' : id},
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data,'return_datareturn_data');
-                    $scope.selectize_storeItem_options = return_data.data.data;
-                });
+                    $scope.storeItem_options = return_data.data.data;
+                    angular.forEach($scope.storeItem_options, function(values, keys){
+                        values.value=values.ITEM_NAME;
+                        console.log(values,"values");
+                    });
+                    UIkit.on('domready.uk.dom', function(){
+                        UIkit.autocomplete($('#autocomplete'), {
+                          source: $scope.storeItem_options,
+                          minLength:0,
+                          flipDropdown:true
+                        }).on('selectitem.uk.autocomplete', function (e, data, ac) {
+                            var id = data.value;
+                            $http({
+                                method : 'GET',
+                                url : $localStorage.service+'inventoryApi/getItemCode',
+                                params : {'id' : id},
+                                headers:{'access_token':$localStorage.access_token}
+                            }).then(function(item_code){
+                                $scope.items[0]['item_code'] = item_code.data.data[0]["CODE"];
+                            });
+                        });
+                    });
+                });               
             }
 
-            $scope.selectize_storeItem_options = [];
-            $scope.selectize_storeItem_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Item',
-                valueField: 'ID',
-                labelField: 'NAME',
-                onInitialize: function(selectize){
-                    selectize.on('change', function(val){
 
-                    })
-                }
-            };
+            // $scope.storeItem_options = [];
+            // function getAutocompleteData (release){
+            //     $resource('data/search_data.json')
+            //     .query()
+            //     .$promise
+            //     .then(function(dt_data) {
+            //         var data = filterFilter($scope.search_data, $scope.test);
+            //         release(data);
+            //         $("#message").html(data);
+            //     });
+            // }
+            // UIkit.on('domready.uk.dom', function(){
+            //     UIkit.autocomplete($('#autocomplete'), {
+            //       source: $scope.storeItem_options,
+            //       minLength:0,
+            //       flipDropdown:true
+            //     });
+            // });
+            // $scope.filterName=function(){
+            //     // var data = filterFilter($scope.countryNames, $scope.country);
+            //     // console.log("data");
+            //     return $scope.search_data;
+            // }
+
+            // $scope.selectize_storeItem_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Select Item',
+            //     valueField: 'ID',
+            //     labelField: 'ITEM_NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(val){
+
+            //         })
+            //     }
+            // };
             
             var d = new Date();
             var year = d.getFullYear();
@@ -95,7 +141,7 @@ angular
             }
 
             $scope.newRowObj = {
-                selectize_storeItem : '',
+                item_name : '',
                 item_code : '',
                 item_quantity : ''
             };

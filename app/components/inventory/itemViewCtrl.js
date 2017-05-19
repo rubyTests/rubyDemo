@@ -94,7 +94,7 @@ angular
                 }).then(function(return_data){
                     console.log(return_data.data.message);
                     if(return_data.data.status==true){
-                        UIkit.modal("#modal_header_footer").hide();
+                        UIkit.modal("#open_leavecategory").hide();
                         UIkit.notify({
                             message : return_data.data.message,
                             status  : 'success',
