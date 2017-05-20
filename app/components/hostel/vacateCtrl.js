@@ -3,8 +3,10 @@ angular
     .controller('vacateCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
 			$scope.vacate={id:'',selectize_usertype:'',selectize_employee:'',selectize_student:'',vacate_date:''};
-			var $formValidate = $('#form_validation');
-            $formValidate
+			
+			setTimeout(function(){
+				var $formValidate = $('#form_validation');
+				$formValidate
                 .parsley()
                 .on('form:validated',function() {
                     $scope.$apply();
@@ -14,7 +16,7 @@ angular
                         $scope.$apply();
                     }
                 });
-
+			},500);
                 $scope.clearValidation=function(){
                     $('#form_validation').parsley().reset();
                 }
