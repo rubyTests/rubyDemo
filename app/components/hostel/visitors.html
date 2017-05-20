@@ -39,7 +39,7 @@
                         <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
                             <td>{{row.Name}}</td>
-                            <td>{{row.HostelName}} - {{row.roomName}}</td>
+                            <td>{{row.roomName}}</td>
                             <td>{{row.RELATION}}</td>
                             <td>{{row.visitorName}}</td>
                             <td>{{row.DATE}}</td>
@@ -60,25 +60,25 @@
             <button type="button" class="uk-modal-close uk-close"></button>
             <h3 class="uk-modal-title"> Visitor</h3><br>
             <div class="md-card-content">
-                <form>
-                    <div class="uk-form-row">
+                 <form id="form_validation" name="inputForm" ng-submit="sendData()" novalidate>
+                    <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-								<label>Residant<span class="req"></span></label>
-                                <input type="text" config="selectize_usertype_config" options="selectize_usertype_options" ng-model="visitor.selectize_usertype" selectize />
+								<!-- <label>Residant<span class="req"></span></label> -->
+                                <input type="text" config="selectize_usertype_config" options="selectize_usertype_options" ng-model="visitor.selectize_usertype" required selectize />
                             </div>
                         </div>          
                     </div>
                     <div class="uk-form-row" ng-if="visitor.selectize_usertype=='Employee'">
-                        <div class="uk-grid">
+                        <div class="uk-grid parsley-row">
                             <div class="uk-width-medium-1-1">
                                 <label>Department<span class="req"></span></label>
-                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize required/>
+                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize/>
                             </div>
                         </div>
-						<div class="uk-grid">
+						<div class="uk-grid parsley-row">
                             <div class="uk-width-medium-1-1">
-                                <input type="text" config="selectize_employee_config" options="selectize_employee_options" ng-model="visitor.selectize_employee" selectize />
+                                <input type="text" config="selectize_employee_config" options="selectize_employee_options" ng-model="visitor.selectize_employee" required selectize />
                             </div>
                         </div>          
                     </div>
@@ -86,19 +86,19 @@
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label>Department<span class="req"></span></label>
-                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize required/>
+                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize/>
                             </div>
                         </div>
 						<div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label for="religion">Course<span class="req"></span></label>
-								<input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="wizard.course_id" selectize required/>
+								<input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="wizard.course_id" selectize/>
                             </div>
                         </div>
 						<div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label for="religion">Batch<span class="req"></span></label>
-								<input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="wizard.batchId" selectize required/>
+								<input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="wizard.batchId" selectize/>
                             </div>
                         </div>
 						<div class="uk-grid">
@@ -111,7 +111,7 @@
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label>Visitor Name</label>
-                                <input type="text" ng-model="visitor.visitorname" class="md-input" md-input>
+                                <input type="text" ng-model="visitor.visitorname" class="md-input" md-input required>
                             </div>
                         </div>          
                     </div>
@@ -119,43 +119,44 @@
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label>Relation</label>
-                                <input type="text" ng-model="visitor.relation" class="md-input" md-input>
+                                <input type="text" ng-model="visitor.relation" class="md-input" md-input required>
                             </div>
                         </div>          
                     </div>
-                    <div class="uk-form-row">
+                    <div class="uk-form-row parsley-row">
                         <div class="uk-grid" ng-if="btnStatus!='Update'">
-                            <div class="uk-width-medium-1-2">
+                            <div class="parsley-row uk-width-medium-1-2">
                                 <label>Date</label>
-                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="visitor.visit_date"/>
+                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="visitor.visit_date" required>
                             </div>
-                            <div class="uk-width-medium-1-2">
+                            <div class=" parsley-row uk-width-medium-1-2">
                                 <label>InTime</label>
-                                <input type="text" class="md-input" md-input ng-model="visitor.visit_intime"/>
+                                <input type="text" class="md-input" md-input ng-model="visitor.visit_intime" required >
                             </div>
                         </div>
 						<div class="uk-grid" ng-if="btnStatus=='Update'">
-                            <div class="uk-width-medium-1-3">
+                            <div class="parsley-row uk-width-medium-1-3">
                                 <label>Date</label>
-                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="visitor.visit_date"/>
+                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="visitor.visit_date" required/>
                             </div>
-                            <div class="uk-width-medium-1-3">
+                            <div class="parsley-row uk-width-medium-1-3">
                                 <label>InTime</label>
-                                <input type="text" class="md-input" md-input ng-model="visitor.visit_intime"/>
+                                <input type="text" class="md-input" md-input ng-model="visitor.visit_intime" required/>
                             </div>
-							<div class="uk-width-medium-1-3">
+							<div class="parsley-row uk-width-medium-1-3">
                                 <label>OutTime</label>
-                                <input type="text" class="md-input" md-input ng-model="visitor.visit_outtime"/>
+                                <input type="text" class="md-input" md-input ng-model="visitor.visit_outtime" required/>
                             </div>
                         </div>						
                     </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                        <!-- <button type="submit" ng-click="sendData()" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{btnStatus}}</button> -->
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                    </div>
                 </form>
             </div>
-            <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                <!-- <button type="submit" ng-click="sendData()" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{btnStatus}}</button> -->
-                <button type="submit" ng-click="sendData()" class="md-btn md-btn-primary md-btn-small uk-modal-close">{{btnStatus}}</button>
-            </div>
+           
         </div>
     </div>
     <!-- Model Window End-->

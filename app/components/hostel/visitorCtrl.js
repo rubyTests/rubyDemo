@@ -2,6 +2,21 @@ angular
     .module('rubycampusApp')
     .controller('visitorCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
+            var $formValidate = $('#form_validation');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
             var vm = this;
             $scope.viewData=[];
             vm.dtOptions = DTOptionsBuilder
@@ -271,19 +286,20 @@ angular
                     // $scope.visit_date='';
                     // $scope.visit_intime='';
                     // $scope.visit_outtime='';
-                    //$('.uk-modal').find('input').trigger('blur');
+                    $('.uk-modal').find('input').trigger('blur');
                 }
                 $scope.editAllocation=function(data){
                     $scope.btnStatus="Update";
                     if (data) {
                         $scope.id=data.ID;
+                        console.log($scope.id,'$scope.id');
 						if(data.RESIDENT_TYPE=='Student'){
 							$scope.wizard={dept_id:data.deptId,course_id:data.courseId,batchId:data.batchId};
 							$scope.visitor={selectize_usertype:data.RESIDENT_TYPE,selectize_student:data.PROFILE_ID,visitorname:data.visitorName,relation:data.RELATION,visit_date:data.DATE,visit_intime:data.INTIME,visit_outtime:data.OUTTIME};
 						}else{
 							$scope.wizard={dept_id:data.deptId};
 							$scope.visitor={selectize_usertype:data.RESIDENT_TYPE,selectize_employee:data.PROFILE_ID,visitorname:data.visitorName,relation:data.RELATION,visit_date:data.DATE,visit_intime:data.INTIME,visit_outtime:data.OUTTIME};
-						}	
+						}	    
                     }
                 }
 				
