@@ -14,6 +14,7 @@ angular
                     if(!$rootScope.miniSidebarActive) {
                         // activate current section
                         $('#sidebar_main').find('.current_section > a').trigger('click');
+						$('#sidebar_main').find('.act_item').parents('li:first').find('a:first').trigger('click');
                     } else {
                         // add tooltips to mini sidebar
                         var tooltip_elem = $('#sidebar_main').find('.menu_tooltip');
@@ -66,7 +67,7 @@ angular
 			
 			$http.get('http://192.168.1.139/rubyServices/api/UserMenuAPI/menuLink',{headers:{'access_token':$localStorage.access_token}})
 			.success(function(data){
-				console.log(data.message,"data");
+				//console.log(data.message,"data");
 				$scope.sections=data.message;
 				$scope.sections = $scope.convertTo($scope.sections, 'id', true);
 				
