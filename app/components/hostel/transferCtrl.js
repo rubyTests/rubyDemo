@@ -104,7 +104,8 @@ angular
                 $scope.empName =[];
                 $http.get($localStorage.service+'HostelAPI/allocateEmployeeDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
-                    $scope.empName.push(user_data.data);
+                    console.log(user_data,'user_data');
+                    $scope.empName.push(user_data.result[0]);
                 });
                 $scope.selectize_employee_options =$scope.empName;
                 $scope.selectize_employee_config = {
@@ -116,7 +117,8 @@ angular
                     searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            $scope.getAllDetails(value);
+                            console.log(value,"value");
+                            // $scope.getAllDetails(value);
                         });
                     }
                 };
@@ -135,6 +137,7 @@ angular
                     searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
+                            //console.log(value,"value");
                         $scope.getAllDetails(value);
                         });
                     }
@@ -149,8 +152,8 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         // $scope.getHostelList(return_data.data.message[0].HOSTEL_ID);
-                        // $scope.getBlocklList(return_data.data.message[0].BLOCK_ID);
-                        // $scope.getRoomList(return_data.data.message[0].ROOM_ID);
+                        $scope.getBlocklList(return_data.data.message[0].BLOCK_ID);
+                        $scope.getRoomList(return_data.data.message[0].ROOM_ID);
                         $timeout(function() {
                             $scope.selectize_hname=return_data.data.message[0].HOSTEL_ID;
                             $scope.selectize_block=return_data.data.message[0].BLOCK_ID;
@@ -172,16 +175,18 @@ angular
                         });
                     }
                 };
-                //$scope.getHostelList=function(id){
+                $scope.getHostelList=function(id){
+                    console.log(id,'id');
                     $http({
                     method:'get',
                     url: $localStorage.service+'HostelAPI/hostelBlocks',
+                    params :{id:id},
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        //console.log(return_data,'return_data222');
+                        console.log(return_data,'return_data222');
                         $scope.selectize_block_options=return_data.data.message;
                     });
-                //}
+                }
                 $scope.selectize_block_options =[];
                 $scope.selectize_block_config = {
                     create: false,
@@ -196,7 +201,7 @@ angular
                         });
                     }
                 };
-                //$scope.getBlocklList=function(id){
+                $scope.getBlocklList=function(id){
                     $http({
                     method:'get',
                     url: $localStorage.service+'HostelAPI/hostelView',
@@ -204,8 +209,9 @@ angular
                     }).then(function(return_data){
                         //console.log(return_data,'return_data222');
                         $scope.selectize_hname_options=return_data.data.message;
+                        $scope.getHostelList(return_data.data.message[0].ID);
                     });
-                //}
+                }
                 $scope.selectize_room_options =[];
                 $scope.selectize_room_config = {
                     create: false,
@@ -220,7 +226,7 @@ angular
                         });
                     }
                 };
-                //$scope.getRoomList=function(id){
+                $scope.getRoomList=function(id){
                     $http({
                     method:'get',
                     url: $localStorage.service+'institutionApi/roomDetails',
@@ -228,13 +234,18 @@ angular
                     }).then(function(return_data){
                         $scope.selectize_room_options=return_data.data.data;
                     });
-                //}
+                }
                 $http.get($localStorage.service+'HostelAPI/allocationView',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(getId){
                     $scope.getId=getId.message[0].ID;
                     console.log($scope.getId,'getId');
                 });
                 $scope.saveTransfer=function(){
+                    if($scope.selectize_usertype=='Student'){
+                        $scope.selectize_profileId=$scope.selectize_stu_profileId
+                    }else{
+                        $scope.selectize_profileId=$scope.selectize_emp_profileId
+                    }
                     $http({
                     method:'POST',
                     url: $localStorage.service+'HostelAPI/allocation',
@@ -245,7 +256,7 @@ angular
                         'buildingId' : $scope.selectize_hname,
                         'blockId' : $scope.selectize_block,
                         'roomId' : $scope.selectize_room,
-                        'date' : $scope.reg_date
+                        'date' : $scope.transferDate
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
@@ -264,32 +275,70 @@ angular
                         }
                     });
                 }
+                var date = new Date();
+                $scope.transferDate=$filter('date')(date,'MM.DD.YYYY');
+
                 $scope.openModel = function() {
                     $scope.btnStatus="Save";
                     $scope.hidden_id=null;
                     $scope.selectize_usertype=null;
                     $scope.selectize_hname=null;
-                    $scope.selectize_profileId=null;
+                    $scope.selectize_emp_profileId=null;
+                    $scope.selectize_stu_profileId=null;
                     $scope.selectize_block=null;
                     $scope.selectize_room=null;
                     $scope.transfer_date=null;
                     $('.uk-modal').find('input').trigger('blur');
                 };
+                $scope.userChange=function(){
+                    $scope.selectize_emp_profileId=null;
+                    $scope.selectize_stu_profileId=null;
+                }
                 $scope.edit_data=function(data){
+                   console.log(data,'edit_data');
                     $scope.btnStatus="Update";
                     if (data) {
-                         $timeout(function(){
-                            $scope.hidden_id=data.ID;
+                         // $timeout(function(){
+                            $scope.id=data.ID;
                             $scope.selectize_usertype=data.RESIDENT_TYPE;
-                            $scope.selectize_profileId=data.PROFILE_ID;
-                            $scope.selectize_hname=data.HostelName;
-                            $scope.selectize_block=data.BLOCK_ID;
-                            $scope.transfer_date=data.DATE;
-                        },600);
-                        $timeout(function(){
-                              $scope.selectize_room=data.RoomName;
-                        },400);
+                            $scope.selectize_emp_profileId=data.PROFILE_ID;
+                            $scope.selectize_stu_profileId=data.PROFILE_ID;
+                            $scope.selectize_hname=data.HOSTEL_ID;
+                            $scope.selectize_room=data.roomName;
+                            $scope.transferDate=data.DATE;
+                        // },100);
+                      
                        
+                    }
+                }
+                $scope.deleteAllocation=function(id,$index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"HostelAPI/TranferView",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.viewData.splice($index, 1);
+                                    $scope.refreshTable();
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
                     }
                 }
                
