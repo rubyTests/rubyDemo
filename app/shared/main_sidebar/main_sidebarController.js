@@ -65,7 +65,7 @@ angular
             };
 			
 			
-			$http.get('http://192.168.1.139/rubyServices/api/UserMenuAPI/menuLink',{headers:{'access_token':$localStorage.access_token}})
+			$http.get($localStorage.service+'UserMenuAPI/menuLink',{headers:{'access_token':$localStorage.access_token}})
 			.success(function(data){
 				//console.log(data.message,"data");
 				$scope.sections=data.message;
