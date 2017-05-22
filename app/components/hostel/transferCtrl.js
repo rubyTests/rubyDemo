@@ -17,7 +17,6 @@ angular
                     $('#form_validation').parsley().reset();
                 }
             var vm = this;
-            $scope.viewData=[];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
                 .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
@@ -93,14 +92,11 @@ angular
                     placeholder: 'Select Resident'
                 };
 
-                
-
-                $scope.viewData=[];
                 $scope.refreshTable=function(){
                     $http.get($localStorage.service+'HostelAPI/TranferView',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(view_data){
-                        console.log(view_data,'view_data11');
-                        $scope.viewData=view_data.message[0];
+                        //console.log(view_data.message,'view_data11');
+                        $scope.viewData=view_data.message;
                     });
                 }
                 $scope.refreshTable();

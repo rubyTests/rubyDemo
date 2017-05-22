@@ -14,7 +14,7 @@
                         <tr>
                             <th style="width: 50px !important;">S.No</th>
                             <th>Name</th>
-                            <th>From Hostel</th>
+							<th>From Hostel</th>
                             <th>To Hostel</th>
                             <th>Transfer Date</th>
                             <th>Action</th>
@@ -33,9 +33,9 @@
                     <tbody>
                         <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
-                            <td>{{row.PROFILE_ID}}</td>
-                            <td>{{row.HOSTEL_ID}} - {{row.hostel_form}}</td>
-                            <td>{{row.h_name}} - {{row.hostel_to}}</td>
+                            <td>{{row.Name}}</td>
+                            <td>{{row.preHostelName}} - {{row.preRoomName}}</td>
+                            <td>{{row.HostelName}} - {{row.roomName}}</td>
                             <td>{{row.DATE}}</td>
                             <td class="">
                                 <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
