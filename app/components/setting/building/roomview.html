@@ -70,9 +70,11 @@
                       <input type="text" ng-model="floor" class="md-input" md-input>
                     </div>
                     <div class="uk-form-row parsley-row">
+                      <label class="uk-form-label" ng-show="selectize_buildingId" style="font-size: 12px;color: #727272;">Building<span class="req">*</span></label>
                       <input type="text" config="selectize_buildingId_config" options="selectize_buildingId_options" ng-model="selectize_buildingId" required selectize/>
                     </div>
                     <div class="uk-form-row parsley-row">
+                      <label class="uk-form-label" ng-show="selectize_blockId" style="font-size: 12px;color: #727272;">Block<span class="req">*</span></label>
                       <input type="text" config="selectize_blockId_config" options="selectize_blockId_options" ng-model="selectize_blockId" required selectize/>
                     </div>
                     <div class="uk-modal-footer uk-text-right">

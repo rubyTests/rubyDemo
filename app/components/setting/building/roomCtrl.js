@@ -6,11 +6,11 @@ angular
             $formValidate
                 .parsley()
                 .on('form:validated',function() {
-                    $scope.$apply();
+                    // $scope.$apply();
                 })
                 .on('field:validated',function(parsleyField) {
                     if($(parsleyField.$element).hasClass('md-input')) {
-                        $scope.$apply();
+                        // $scope.$apply();
                     }
                 });
                 
@@ -100,12 +100,13 @@ angular
             $scope.selectize_buildingId_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Building',
+                placeholder: 'Building',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
+                        $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -114,12 +115,13 @@ angular
             $scope.selectize_blockId_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Block',
+                placeholder: 'Block',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
+                        $('#form_validation').parsley().validate();
                     });
                 }
             };

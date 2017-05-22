@@ -63,9 +63,11 @@
                   <input type="hidden" ng-model="course_id">
                 </div>
                  <div class="uk-form-row">
+                  <label class="uk-form-label" ng-show="dept_id" style="font-size: 12px;color: #727272;">Department<span class="req"></span></label>
                   <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="dept_id" selectize/>
                 </div>
                 <div class="uk-form-row">
+                  <label class="uk-form-label" ng-show="attendance_type" style="font-size: 12px;color: #727272;">Attendance Ttype<span class="req"></span></label>
                   <input type="text" config="selectize_attdnceType_config" options="selectize_attdnceType_options" ng-model="attendance_type" selectize/>
                 </div>
                 <div class="uk-form-row">
@@ -73,6 +75,7 @@
                   <input type="text" ng-model="percentage" class="md-input" md-input>
                 </div>
                 <div class="uk-form-row">
+                  <label class="uk-form-label" ng-show="grade_type" style="font-size: 12px;color: #727272;">Grade<span class="req"></span></label>
                   <input type="text" config="selectize_gradingType_config" options="selectize_gradingType_options" ng-model="grade_type" selectize/>
                 </div>
                 <div class="uk-modal-footer uk-text-right">

@@ -25,6 +25,18 @@ angular
             //     var data=$filter('filter')(syllabus_details.data, {ID : $stateParams.id},true);
             // });
 
+            var $formValidate = $('#form_validation');
+                $formValidate
+                    .parsley()
+                    .on('form:validated',function() {
+                        //$scope.$apply();
+                    })
+                    .on('field:validated',function(parsleyField) {
+                        if($(parsleyField.$element).hasClass('md-input')) {
+                           // $scope.$apply();
+                        }
+                    });
+
             $http({
               method : "GET",
               url : $localStorage.service+"AcademicsAPI/fetchSubjectSyllabusData",
@@ -64,13 +76,14 @@ angular
             $scope.selectize_course_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course',
+                placeholder: 'Course',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         // console.log(value);
+                        $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -78,13 +91,14 @@ angular
             $scope.selectize_subject_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Subject',
+                placeholder: 'Subject',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         // console.log(value);
+                        $('#form_validation').parsley().validate();
                     });
                 }
             };

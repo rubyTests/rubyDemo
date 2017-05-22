@@ -125,7 +125,7 @@ angular
                 $scope.selectize_courseId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Course',
+                    placeholder: 'Course',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -145,7 +145,7 @@ angular
                 $scope.selectize_incharge_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Batch Incharge',
+                    placeholder: 'Batch Incharge',
                     valueField: 'ID',
                     labelField: 'FULLNAME',
                     searchField: 'FULLNAME',

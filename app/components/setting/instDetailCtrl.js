@@ -66,7 +66,7 @@ angular
             $scope.selectize_timezone_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Timezone',
+                placeholder: 'Timezone',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
@@ -91,7 +91,7 @@ angular
             $scope.selectize_country_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Country',
+                placeholder: 'Country',
                 valueField: 'ID',
                 labelField: 'NAME',
 				searchField: 'NAME',

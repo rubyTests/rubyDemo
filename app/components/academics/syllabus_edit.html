@@ -37,18 +37,25 @@
 <div id="page_content">
     <div id="page_content_inner">
     <h3 class="heading_a uk-margin-bottom">Syllabus</h3>
+    <form id="form_validation" name="inputForm" ng-submit="updateSyllabusDetails()" novalidate>
         <div class="md-card">
             <div class="md-card-content">
                 
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label">Course Name<span class="req">*</span></label>
-                        <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="courseID" selectize />
-                        <input type="hidden" ng-model="sub_syllabus_id">
+                        <div class="parsley-row">
+                            <br ng-show="subjectID">
+                            <label class="uk-form-label" ng-show="courseID" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
+                            <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="courseID" selectize required/>
+                            <input type="hidden" ng-model="sub_syllabus_id">
+                        </div>
                     </div>
                     <div class="uk-width-medium-1-2">
-                        <label class="uk-form-label">Subject Name<span class="req">*</span></label>
-                        <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" selectize />
+                        <div class="parsley-row">
+                            <br ng-show="courseID">
+                            <label class="uk-form-label" ng-show="subjectID" style="font-size: 12px;color: #727272;">Subject<span class="req">*</span></label>
+                            <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" required selectize />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -56,7 +63,7 @@
 
         <div class="md-card">
             <div class="md-card-content large-padding">
-                <form class="uk-form" method="post">
+                <!-- <form class="uk-form" method="post"> -->
                     <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
                         <div class="uk-width-9-10 uk-width-medium-9-10 uk-width-small-5">
                             <div class="uk-grid">
@@ -86,10 +93,12 @@
                     <!-- {{form_dynamic | json}} -->
                     <div class="uk-text-right">
                         <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small" ui-sref="restricted.academics.syllabus_view">Cancel</button>
-                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" ng-click="updateSyllabusDetails()">Update</button>
+                        <!-- <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" ng-click="updateSyllabusDetails()">Update</button> -->
+                        <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Update</button>
                     </div>
-                </form>
+                <!-- </form> -->
             </div>
         </div>
+    </form>
     </div>
 </div>

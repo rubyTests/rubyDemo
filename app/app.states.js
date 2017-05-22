@@ -2171,7 +2171,7 @@ rubycampusApp
                 })
 
                 .state("restricted.finance.fee.feeCollectView", {
-                    url: "/feeCollectView",
+                    url: "/feeCollectView/{student_id}",
                     templateUrl: 'app/components/finance/feeCollectView.html',
                     controller: 'feeCollectViewCtrl',
                     resolve: {
@@ -2191,7 +2191,8 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Fee Structure Details'
-                    }
+                    },
+                    params:{student_id:null}
                 })
 
                 .state("restricted.finance.fee.feeReport", {
@@ -3077,6 +3078,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'lazy_tinymce',
                                 'app/components/academics/syllabusaddCtrl.js'
                             ],{serie: true});
@@ -3096,6 +3098,7 @@ rubycampusApp
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'lazy_tinymce',
+                                'lazy_parsleyjs',
                                 'app/components/academics/syllabuseditCtrl.js'
                             ],{serie: true});
                         }]

@@ -58,7 +58,7 @@
             <div class="md-card-content">
               <form id="form_validation" class="" name="inputForm" ng-submit="saveCourseBatch()" novalidate>
                 <div class="uk-form-row parsley-row">
-                  <label class="uk-form-label">Course Name<span class="req">*</span></label>
+                  <label class="uk-form-label" ng-show="course_id" style="font-size: 12px;color: #727272;">Course Name<span class="req">*</span></label>
                   <input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="course_id" required selectize/>
                   <input type="hidden" ng-model="batch_id">
                 </div>
@@ -67,6 +67,7 @@
                   <input type="text" ng-model="batch_name" class="md-input" required md-input>
                 </div>
                 <div class="uk-form-row">
+                  <label class="uk-form-label" ng-show="incharge_id" style="font-size: 12px;color: #727272;">In-Charge<span class="req"></span></label>
                   <input type="text" config="selectize_incharge_config" options="selectize_incharge_options" ng-model="incharge_id" selectize/>
                 </div>
                 <div class="uk-form-row">

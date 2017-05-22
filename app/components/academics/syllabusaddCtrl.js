@@ -9,17 +9,19 @@ angular
             $scope.courseList=[];
             $scope.subjectList=[];
 
-            var $formValidate = $('#form_validation');
-            $formValidate
-                .parsley()
-                .on('form:validated',function() {
-                    $scope.$apply();
-                })
-                .on('field:validated',function(parsleyField) {
-                    if($(parsleyField.$element).hasClass('md-input')) {
+            // $timeout(function(){
+                var $formValidate = $('#form_validation');
+                $formValidate
+                    .parsley()
+                    .on('form:validated',function() {
                         $scope.$apply();
-                    }
-                });
+                    })
+                    .on('field:validated',function(parsleyField) {
+                        if($(parsleyField.$element).hasClass('md-input')) {
+                            $scope.$apply();
+                        }
+                    });    
+            // },700);
                 
             $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(course_data){
@@ -34,7 +36,7 @@ angular
             $scope.selectize_course_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course',
+                placeholder: 'Course',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
@@ -48,7 +50,7 @@ angular
             $scope.selectize_subject_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Subject',
+                placeholder: 'Subject',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',

@@ -57,7 +57,7 @@
           <div class="md-card-content">
             <form id="form_validation" name="inputForm" ng-submit="saveBlockData()" novalidate>
                   <div class="uk-form-row parsley-row">
-                    <label class="uk-form-label">Block Name<span class="req">*</span></label>
+                    <label class="uk-form-label">Block Name<span class="req"> *</span></label>
                     <input type="text" ng-model="block_name" class="md-input" required md-input>
                     <input type="hidden" ng-model="block_id">
 
@@ -67,7 +67,8 @@
                       <input type="text" ng-model="block_no" class="md-input" md-input>
                     </div>
                     <div class="uk-form-row parsley-row">
-                      <input type="text" config="selectize_buildingId_config" required options="selectize_buildingId_options" ng-model="selectize_buildingId" selectize/>
+                        <label class="uk-form-label" ng-show="selectize_buildingId" style="font-size: 12px;color: #727272;">Building<span class="req"> *</span></label>
+                        <input type="text" config="selectize_buildingId_config" required options="selectize_buildingId_options" ng-model="selectize_buildingId" selectize/>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
                         <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>

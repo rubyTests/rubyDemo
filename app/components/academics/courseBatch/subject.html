@@ -81,6 +81,7 @@
                                 <div class="uk-form-row">
                                     <div class="uk-grid">
                                         <div class="uk-width-medium-1-1">
+                                            <label class="uk-form-label" ng-show="sub_type" style="font-size: 12px;color: #727272;">Subject Type<span class="req"></span></label>
                                             <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="sub_type" selectize/>
                                         </div>
                                     </div>          
@@ -88,7 +89,7 @@
                                 <div class="uk-form-row parsley-row">
                                     <div class="uk-grid">
                                         <div class="uk-width-medium-1-1">
-                                            <label class="uk-form-label">Course Name<span class="req">*</span></label>
+                                             <label class="uk-form-label" ng-show="course_id" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
                                             <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" required ng-model="course_id" selectize/>
                                         </div>
                                     </div>          

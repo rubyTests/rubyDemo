@@ -72,10 +72,12 @@
                   <input type="text" ng-model="dept_code" class="md-input" md-input>
                 </div>
                  <div class="uk-form-row">
+                  <label class="uk-form-label" ng-show="hod_prof_id" style="font-size: 12px;color: #727272;">HOD<span class="req"></span></label>
                   <input type="text" config="selectize_hodProfieId_config" options="selectize_hodProfieId_options" ng-model="hod_prof_id" selectize/>
                 </div>
                 <div class="uk-form-row">
-                  <input type="text" config="selectize_roomid_config" options="selectize_roomid_options" ng-model="room_id" name="room_id"  selectize/>
+                  <label class="uk-form-label" ng-show="room_id" style="font-size: 12px;color: #727272;">Room<span class="req"></span></label>
+                  <input type="text" config="selectize_roomid_config" options="selectize_roomid_options" ng-model="room_id" name="room_id" selectize/>
                 </div>
                 <div class="uk-form-row">
                   <label>Phone</label>
