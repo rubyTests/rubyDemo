@@ -178,11 +178,15 @@ angular
             // $scope.user_logo = [];
             $http.get($localStorage.service+'ProfileAPI/profileDetails',{params:{id:$localStorage.userProfile_id},headers: {'access_token':$localStorage.access_token} })
             .success(function(data){
-                
-                $scope.user_logo=data.result[0].IMAGE1;
+                //console.log(data,"data");
+				if(data.status==true){
+					$scope.user_logo=data.result[0].IMAGE1;
+				}else{
+					$localStorage.access_token='';
+					$state.go("login");
+				}
             }).error(function(err){
             });
-
 
 			// LogOut function
 			$scope.logOut=function(){
