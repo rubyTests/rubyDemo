@@ -2,6 +2,11 @@ angular
     .module('rubycampusApp')
     .controller('visitorCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
+            var $maskedInput = $('.masked_input');
+            console.log($maskedInput,"$maskedInput");
+                if($maskedInput.length) {
+                    $maskedInput.inputmask();
+                }
             var $formValidate = $('#form_validation');
             $formValidate
                 .parsley()
@@ -94,6 +99,19 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
+                // masked inputs
+
+                // var $maskedInput = $('.masked_input');
+                // if($maskedInput.length) {
+                //     $maskedInput.inputmask();
+                // }
+                $scope.forms_advanced={
+                    startTime:"00:00"
+                }
+                $scope.getTime=function(){
+                    $scope.getDatetime = new Date();
+                }
+                
 
                 var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
 
@@ -101,7 +119,7 @@ angular
                 $scope.selectize_usertype_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Resident'
+                    placeholder: 'Resident'
                 };
 
                 $scope.selectize_employee_options = ['Vijay Raj','Karthik Selvam','Mani Vannan','Senthil Kumar','Mani Kandan','Junaid Muhammed'];

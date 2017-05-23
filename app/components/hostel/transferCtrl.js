@@ -104,7 +104,7 @@ angular
                 $scope.empName =[];
                 $http.get($localStorage.service+'HostelAPI/allocateEmployeeDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
-                    console.log(user_data,'user_data');
+                    //console.log(user_data,'user_data');
                     $scope.empName.push(user_data.result[0]);
                 });
                 $scope.selectize_employee_options =$scope.empName;
@@ -118,7 +118,7 @@ angular
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             console.log(value,"value");
-                            // $scope.getAllDetails(value);
+                             $scope.getAllDetails(value);
                         });
                     }
                 };
@@ -151,6 +151,7 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
+                        console.log(return_data,'hstlll');
                         // $scope.getHostelList(return_data.data.message[0].HOSTEL_ID);
                         $scope.getBlocklList(return_data.data.message[0].BLOCK_ID);
                         $scope.getRoomList(return_data.data.message[0].ROOM_ID);
@@ -176,14 +177,13 @@ angular
                     }
                 };
                 $scope.getHostelList=function(id){
-                    console.log(id,'id');
                     $http({
                     method:'get',
                     url: $localStorage.service+'HostelAPI/hostelBlocks',
                     params :{id:id},
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        console.log(return_data,'return_data222');
+                        //console.log(return_data,'blocksss');
                         $scope.selectize_block_options=return_data.data.message;
                     });
                 }
@@ -207,7 +207,7 @@ angular
                     url: $localStorage.service+'HostelAPI/hostelView',
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        //console.log(return_data,'return_data222');
+                        console.log(return_data,'hostelnameee');
                         $scope.selectize_hname_options=return_data.data.message;
                         $scope.getHostelList(return_data.data.message[0].ID);
                     });
@@ -238,7 +238,7 @@ angular
                 $http.get($localStorage.service+'HostelAPI/allocationView',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(getId){
                     $scope.getId=getId.message[0].ID;
-                    console.log($scope.getId,'getId');
+                    //console.log($scope.getId,'getId');
                 });
                 $scope.saveTransfer=function(){
                     if($scope.selectize_usertype=='Student'){
@@ -256,7 +256,7 @@ angular
                         'buildingId' : $scope.selectize_hname,
                         'blockId' : $scope.selectize_block,
                         'roomId' : $scope.selectize_room,
-                        'date' : $scope.transferDate
+                        'date' : $scope.currDate
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
@@ -276,7 +276,51 @@ angular
                     });
                 }
                 var date = new Date();
-                $scope.transferDate=$filter('date')(date,'MM.DD.YYYY');
+                $scope.currDate=$filter('date')(date,'dd.MM.yyyy');
+               //date range
+                // var $dp_start = $scope.transferDate;
+                // console.log($dp_start,'checkkk');
+                //    $dp_end = $('#uk_dp_end');
+
+                // var start_date = UIkit.datepicker($dp_start, {
+                //     format:'DD.MM.YYYY'
+                // });
+
+                // var end_date = UIkit.datepicker($dp_end, {
+                //     format:'DD.MM.YYYY'
+                // });
+
+                // $dp_start.on('change',function() {
+                //     end_date.options.minDate = $dp_start.val();
+                // });
+
+                // $dp_end.on('change',function() {
+                //     start_date.options.maxDate = $dp_end.val();
+                // });
+
+
+                $timeout(function(){
+                    // date range
+                    var $dp_start = $('#uk_dp_start'),
+                        $dp_end = $('#uk_dp_end');
+
+                    var start_date = UIkit.datepicker($dp_start, {
+                        format:'DD.MM.YYYY'
+                    });
+
+                    var end_date = UIkit.datepicker($dp_end, {
+                        format:'DD.MM.YYYY'
+                    });
+
+                    $dp_start.on('change',function() {
+                        var customeDate=$dp_start.val().split(".");
+                        end_date.options.maxDate = parseInt(customeDate[0])-1+"."+customeDate[1]+"."+customeDate[2];
+                    });
+
+                    $dp_end.on('change',function() {
+                        start_date.options.minDate = $dp_end.val();
+                    });
+                },1100);
 
                 $scope.openModel = function() {
                     $scope.btnStatus="Save";
@@ -287,26 +331,34 @@ angular
                     $scope.selectize_stu_profileId=null;
                     $scope.selectize_block=null;
                     $scope.selectize_room=null;
-                    $scope.transfer_date=null;
+                    $scope.transferDate=null;
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.userChange=function(){
                     $scope.selectize_emp_profileId=null;
                     $scope.selectize_stu_profileId=null;
                 }
+                $scope.hosteChange=function(){
+                    $scope.selectize_block=null;
+                    $scope.selectize_room=null;
+                }
                 $scope.edit_data=function(data){
                    console.log(data,'edit_data');
                     $scope.btnStatus="Update";
+                     // $('.uk-modal').find('Button').trigger('change');
                     if (data) {
-                         // $timeout(function(){
+                       
+                        $timeout(function(){
                             $scope.id=data.ID;
                             $scope.selectize_usertype=data.RESIDENT_TYPE;
                             $scope.selectize_emp_profileId=data.PROFILE_ID;
                             $scope.selectize_stu_profileId=data.PROFILE_ID;
-                            $scope.selectize_hname=data.HOSTEL_ID;
+                            $scope.selectize_hname=data.HostelName;
                             $scope.selectize_room=data.roomName;
-                            $scope.transferDate=data.DATE;
-                        // },100);
+                            $scope.currDate=data.DATE;
+                        },500);
+                        
+                         
                       
                        
                     }

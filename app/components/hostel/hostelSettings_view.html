@@ -1,6 +1,11 @@
+<style type="text/css">
+    .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+        font-size: 16px !important;
+    }
+</style>
  <div id="page_content"  ng-controller="hostelsettingsCtrl as tblData">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Allocation
+        <h3 class="heading_a uk-margin-bottom">Hostel
         </h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
@@ -8,7 +13,7 @@
                     <div class="uk-text-right">
                         <!-- <a ui-sref="restricted.hostel.allocationregister"  class="md-btn md-btn-primary md-btn-small"> -->
                         <button data-uk-modal="{target:'#modal_overflow'}" ng-click="openModel()"  class="md-btn md-btn-primary md-btn-small">
-                        <i class="uk-icon-plus"></i> Settings
+                        <i class="uk-icon-plus"></i> Add Hostel
                         </button>
                     </div>
                     <thead>
@@ -59,6 +64,7 @@
                     <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
+                                <label for="rooms" ng-if="selectize_bname" style="font-size: 12px;color: #727272;">Buildings</label>
                                 <input type="text" config="selectize_buildingId_config" options="selectize_buildingId_options" ng-model="selectize_bname" required selectize />
                             </div>
                         </div>          

@@ -116,21 +116,29 @@ angular
                     labelField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            if($scope.vacate.selectize_usertype=='Student'){
-                                $scope.courseData(value);
-                            }else{
-                                $scope.getEmployeeList(value);
-                            }
+                            $scope.getEmployeeList(value);
+                            // if($scope.vacate.selectize_usertype=='Student'){
+                            //     $scope.courseData(value);
+                            // }else{
+                            //     $scope.getEmployeeList(value);
+                            // }
                         });
                     }
                 };
                 
-                $scope.courseData=function(id){
-                    $http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-                    .success(function(course_data){
-                        $scope.selectize_courseId_options=course_data.data;
-                    });
-                }
+                // $scope.courseData=function(id){
+                //     $http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+                //     .success(function(course_data){
+                //         $scope.selectize_courseId_options=course_data.data;
+                //     });
+                // }
+
+                $http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:'2'},headers:{'access_token':$localStorage.access_token}})
+                .success(function(course_data){
+                    console.log(course_data,'course_data');
+                    $scope.selectize_courseId_options=course_data.data;
+                });
+                
                 
                 $scope.selectize_courseId_options =[];
                 $scope.selectize_courseId_config = {
@@ -210,6 +218,7 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
+                        console.log(return_data,'return_data11');
                         $scope.selectize_student_options=return_data.data.result;
                     });
                 }

@@ -64,7 +64,7 @@
                     <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-								<!-- <label>Residant<span class="req"></span></label> -->
+								<label ng-if="selectize_usertype">Resident Type<span class="req"></span></label>
                                 <input type="text" config="selectize_usertype_config" options="selectize_usertype_options" ng-model="visitor.selectize_usertype" required selectize />
                             </div>
                         </div>          
@@ -72,7 +72,7 @@
                     <div class="uk-form-row" ng-if="visitor.selectize_usertype=='Employee'">
                         <div class="uk-grid parsley-row">
                             <div class="uk-width-medium-1-1">
-                                <label>Department<span class="req"></span></label>
+                                <label ng-if="dept_id">Department<span class="req"></span></label>
                                 <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize/>
                             </div>
                         </div>
@@ -85,37 +85,38 @@
                     <div class="uk-form-row" ng-if="visitor.selectize_usertype=='Student'">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-                                <label>Department<span class="req"></span></label>
+                                <label ng-if="dept_id">Department<span class="req"></span></label>
                                 <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize/>
                             </div>
                         </div>
 						<div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-                                <label for="religion">Course<span class="req"></span></label>
+                                <label for="religion" ng-if="course_id">Course<span class="req"></span></label> 
 								<input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="wizard.course_id" selectize/>
                             </div>
                         </div>
 						<div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-                                <label for="religion">Batch<span class="req"></span></label>
+                                <label for="religion" ng-if="batchId">Batch<span class="req"></span></label>
 								<input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="wizard.batchId" selectize/>
                             </div>
                         </div>
 						<div class="uk-grid">
                             <div class="uk-width-medium-1-1">
+                                <label ng-if="selectize_student">Student<span class="req"></span></label>
                                 <input type="text" config="selectize_student_config" options="selectize_student_options" ng-model="visitor.selectize_student" selectize />
                             </div>
                         </div>        
                     </div>
-                    <div class="uk-form-row">
+                    <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-                                <label>Visitor Name</label>
+                                <label>Name</label>
                                 <input type="text" ng-model="visitor.visitorname" class="md-input" md-input required>
                             </div>
                         </div>          
                     </div>
-                    <div class="uk-form-row">
+                    <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label>Relation</label>
@@ -129,9 +130,18 @@
                                 <label>Date</label>
                                 <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="visitor.visit_date" required>
                             </div>
-                            <div class=" parsley-row uk-width-medium-1-2">
-                                <label>InTime</label>
+                            <!-- <div class=" parsley-row uk-width-medium-1-2">
+                                <label>Time In</label>
                                 <input type="text" class="md-input" md-input ng-model="visitor.visit_intime" required >
+                            </div> -->
+                            <div class="uk-width-large-1-3 uk-width-medium-1-2">
+                                <div class="parsley-row">
+                                    <div class="uk-input-group">
+                                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
+                                        <label for="uk_tp_1">Time In</label>
+                                        <input type="text" class="md-input masked_input" md-input ng-model="forms_advanced.startTime" name="timeIn" data-inputmask="'alias': 'hh:mm'" data-inputmask-showmaskonhover="false" required/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 						<div class="uk-grid" ng-if="btnStatus=='Update'">

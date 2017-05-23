@@ -145,6 +145,7 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         if(return_data.data.status==true){
+
                             UIkit.modal("#modal_overflow").hide();
                             UIkit.notify({
                                 message : return_data.data.message,
@@ -156,6 +157,8 @@ angular
                         }else {
                             //UIkit.modal.alert('Course & Batch Name Already Exists');
                         }
+                    }, function error(response) {
+                        UIkit.modal.alert('Building Already Assigned');
                     });
                 }
                 $scope.deleteAssignTeacher=function(id,$index){

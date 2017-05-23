@@ -91,7 +91,7 @@ angular
                 $scope.selectize_usertype_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Resident',
+                    placeholder: 'Resident',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             console.log(value);
@@ -151,7 +151,7 @@ angular
                 $scope.selectize_employee_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Employee',
+                    placeholder: 'Employee',
                     valueField: 'PROFILE_ID',
                     labelField: 'EMPLOYEE_NAME',
                     searchField: 'EMPLOYEE_NAME',
@@ -170,7 +170,7 @@ angular
                 $scope.selectize_student_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Student',
+                    placeholder: 'Student',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -183,14 +183,14 @@ angular
                 $scope.hostelName =[];
                 $http.get($localStorage.service+'HostelAPI/hostelView',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
-                    console.log(user_data,'chk');
+                    //console.log(user_data,'chk');
                     $scope.hostelName.push(user_data.message);
                 });
                 $scope.selectize_hname_options =$scope.hostelName;
                 $scope.selectize_hname_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Hostel',
+                    placeholder: 'Hostel',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -204,7 +204,7 @@ angular
                 $scope.selectize_block_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Blocks',
+                    placeholder: 'Blocks',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -218,7 +218,7 @@ angular
                 $scope.selectize_room_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Rooms',
+                    placeholder: 'Rooms',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -286,7 +286,7 @@ angular
                             //UIkit.modal.alert('Course & Batch Name Already Exists');
                         }
                     }, function error(response) {
-                        UIkit.modal.alert(' The Profile Name You Entered Already Exists');
+                        UIkit.modal.alert('Profile Name Already Assigned');
                     });
                 }
                   $scope.deleteAllocation=function(id,$index){
