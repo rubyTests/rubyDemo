@@ -7,6 +7,7 @@ angular
 			// $localStorage.service='http://campusenter.com/services/api/';
 			// $localStorage.uploadUrl='http://campusenter.com/services/upload/';
             //alert($localStorage.access_token);
+            // $localStorage.service='http://localhost/rubyServices/api/';
 			if($localStorage.access_token=='' || $localStorage.access_token==undefined){
 				$location.path('/');
 			}
