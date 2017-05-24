@@ -4,21 +4,23 @@ angular
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
 			$scope.vacate={id:'',selectize_usertype:'',selectize_employee:'',selectize_student:'',vacate_date:''};
 			
-				var $formValidate = $('#form_validation');
-                $formValidate
-                    .parsley()
-                    .on('form:validated',function() {
-                        $scope.$apply();
-                    })
-                    .on('field:validated',function(parsleyField) {
-                        if($(parsleyField.$element).hasClass('md-input')) {
-                            $scope.$apply();
-                        }
-                    });
+				$timeout(function(){
+					var $formValidate = $('#form_validation');
+					$formValidate
+						.parsley()
+						.on('form:validated',function() {
+							$scope.$apply();
+						})
+						.on('field:validated',function(parsleyField) {
+							if($(parsleyField.$element).hasClass('md-input')) {
+								$scope.$apply();
+							}
+						});
 
-                    $scope.clearValidation=function(){
-                        $('#form_validation').parsley().reset();
-                    }
+						$scope.clearValidation=function(){
+							$('#form_validation').parsley().reset();
+						}
+				},1000);
             var vm = this;
             $scope.viewData=[];
             vm.dtOptions = DTOptionsBuilder

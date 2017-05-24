@@ -229,7 +229,7 @@ angular
                 $scope.getRoomList=function(id){
                     $http({
                     method:'get',
-                    url: $localStorage.service+'institutionApi/roomDetails',
+                    url: $localStorage.service+'InstitutionAPI/roomDetails',
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         $scope.selectize_room_options=return_data.data.data;
@@ -261,7 +261,7 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         if(return_data.data.status==true){
-
+							console.log(return_data,"Data");
                             UIkit.modal("#modal_overflow").hide();
                             UIkit.notify({
                                 message : return_data.data.message,

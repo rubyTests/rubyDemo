@@ -243,7 +243,7 @@ angular
                  $scope.getRoomList=function(id){
                     $http({
                     method:'get',
-                    url: $localStorage.service+'institutionApi/roomDetails',
+                    url: $localStorage.service+'InstitutionAPI/roomDetails',
                     params: {
                         'id' : id
                     },

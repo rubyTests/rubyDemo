@@ -112,7 +112,7 @@ angular
                     }
                 $scope.refreshTable();
                 $scope.buildingId =[];
-                $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
                     $scope.buildingId.push(user_data.data);
                 });
