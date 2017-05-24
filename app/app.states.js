@@ -4852,6 +4852,7 @@ rubycampusApp
                         return $ocLazyLoad.load([
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
+							'lazy_parsleyjs',
                             'app/components/hostel/vacateCtrl.js'
                         ], {serie:true});
                     }]
@@ -4868,6 +4869,7 @@ rubycampusApp
                         return $ocLazyLoad.load([
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
+                            'lazy_parsleyjs',
                             'app/components/hostel/visitorCtrl.js'
                         ], {serie:true});
                     }]
