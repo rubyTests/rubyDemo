@@ -6,9 +6,8 @@
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="tblData.dtOptions" dt-column-defs="tblData.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button data-uk-modal="{target:'#modal_overflow'}" ng-click="openModel()"  class="md-btn md-btn-primary md-btn-small">
-                        <i class="uk-icon-plus"></i> Vacate
-                        </button>
+                        <a ui-sref="restricted.hostel.addAacate"  class="md-btn md-btn-primary md-btn-small">
+                        <i class="uk-icon-plus"></i> Vacate</a>
                     </div>
                     <thead>
                         <tr>
@@ -38,7 +37,8 @@
                             <td>{{row.REASON}}</td>
                             <td>{{row.VacateDate}}</td>
                             <td class="">
-                                <a class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}" ng-click="editVacate(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a ui-sref="restricted.hostel.edit_vacate({id:{{row.ID}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <!-- <a class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}" ng-click="editVacate(row)"><i class="md-icon material-icons">&#xE254;</i></a> -->
                                 <a class="ts_remove_row" ng-click="deleteVacate(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -47,86 +47,4 @@
             </div>
         </div>
     </div>
-    <!-- Model Window start-->
-    <div id="modal_overflow" class="uk-modal">
-        <div class="uk-modal-dialog">
-            <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation()"></button>
-            <h3 class="uk-modal-title"> Vacate</h3><br>
-            <div class="md-card-content">
-               <form id="form_validation" name="inputForm" ng-submit="addVacate()" novalidate>
-                    <div class="uk-form-row parsley-row">
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label ng-if="selectize_usertype">Resident Type<span class="req"></span></label>
-                                <input type="text" config="selectize_usertype_config" options="selectize_usertype_options" ng-model="vacate.selectize_usertype" required selectize />
-                               <!--  <input type="hidden" ng-model="vacate.id" /> -->
-                            </div>
-                        </div>          
-                    </div>
-                    <div class="uk-form-row" ng-if="vacate.selectize_usertype=='Employee'">
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label ng-if="dept_id">Department<span class="req"></span></label>
-                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize />
-                            </div>
-                        </div>
-                        <div class="uk-grid parsley-row">
-                            <div class="uk-width-medium-1-1">
-                                <label ng-if="selectize_employee">Employee<span class="req"></span></label>
-                                <input type="text" config="selectize_employee_config" options="selectize_employee_options" ng-model="vacate.selectize_employee" required selectize />
-                            </div>
-                        </div>          
-                    </div>
-                    <div class="uk-form-row" ng-if="vacate.selectize_usertype=='Student'">
-                       <!--  <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label ng-if="dept_id">Department<span class="req"></span></label>
-                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize />
-                            </div>
-                        </div> -->
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label for="religion" ng-if="course_id">Course<span class="req"></span></label>
-                                <input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="wizard.course_id" selectize />
-                            </div>
-                        </div>
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label for="religion" ng-if="batchId">Batch<span class="req"></span></label>
-                                <input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="wizard.batchId" selectize/>
-                            </div>
-                        </div>
-                        <div class="uk-grid parsley-row">
-                            <div class="uk-width-medium-1-1">
-                                <label ng-if="selectize_student">Student<span class="req"></span></label>
-                                <input type="text" config="selectize_student_config" options="selectize_student_options" ng-model="vacate.selectize_student" selectize required/>
-                            </div>
-                        </div>          
-                    </div>
-                    <div class="uk-form-row parsley-row">
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label>Reason</label>
-                                <input type="text" ng-model="vacate.vacate_reason" class="md-input" md-input>
-                            </div>
-                        </div>          
-                    </div>
-                    <div class="uk-form-row parsley-row">
-                        <div class="uk-grid">
-                            <div class="uk-width-medium-1-1">
-                                <label>Vacate Date</label>
-                                <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="vacate.vacate_date"/ required>
-                            </div>
-                        </div>          
-                    </div>
-                    <div class="uk-modal-footer uk-text-right">
-                        <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
-                        <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
-                    </div>
-                </form>
-            </div>
-            
-        </div>
-    </div>
-    <!-- Model Window End-->
 </div>

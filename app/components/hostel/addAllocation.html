@@ -1,14 +1,15 @@
-<style type="text/css">
-    .parsley-row{
-        margin-top: 24px;
-    }
-</style>
+    <style type="text/css">
+
+.parsley-row{
+    margin-top: 24px;
+}
+    </style>
     <div id="page_content">
         <div id="page_content_inner">
-            <h3 class="heading_a uk-margin-bottom">Allocation Add</h3>
+            <h3 class="heading_a uk-margin-bottom">Allocation</h3>
                 <div class="md-card">
                     <div class="md-card-content large-padding">
-                        <form id="form_validation" name="inputForm" ng-submit="saveTransfer()" novalidate>
+                        <form id="form_validation" name="inputForm" ng-submit="saveAllocation()" novalidate>
                             <div class="uk-grid"> 
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <input type="hidden" ng-model="hidden_id">
@@ -18,7 +19,7 @@
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Employee'">
                                     <br ng-if="!dept_id">
-                                    <label ng-if="dept_id">Department<span class="req"></span></label>
+                                    <label ng-if="dept_id" style="font-size: 12px;color: #727272;">Department<span class="req"></span></label>
                                     <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="dept_id" selectize />
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Employee'">
@@ -28,13 +29,13 @@
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Student'">
                                     <br ng-if="!course_id">
-                                    <label for="religion" ng-if="course_id">Course<span class="req"></span></label>
+                                    <label for="course" ng-if="course_id" style="font-size: 12px;color: #727272;">Course<span class="req"></span></label>
                                     <input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="course_id"selectize />
                                 </div>
                                
                                 <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Student'">
                                     <br ng-if="!batchId">
-                                    <label for="religion" ng-if="batchId">Batch<span class="req"></span></label>
+                                    <label for="batch" ng-if="batchId" style="font-size: 12px;color: #727272;">Batch<span class="req"></span></label>
                                     <input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="batchId" selectize/>
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Student'">
@@ -50,24 +51,24 @@
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <br ng-if="!selectize_block">
-                                    <label for="employee" ng-if="selectize_block" style="font-size: 12px;color: #727272;">Blocks</label>
+                                    <label for="employee" ng-if="selectize_block" style="font-size: 12px;color: #727272;">Block</label>
                                     <input type="text" config="selectize_block_config" required options="selectize_block_options" ng-model="selectize_block" selectize />
                                 </div>
 
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <br ng-if="!selectize_room">
-                                    <label for="employee" ng-if="selectize_room" style="font-size: 12px;color: #727272;">Rooms</label>
+                                    <label for="employee" ng-if="selectize_room" style="font-size: 12px;color: #727272;">Room</label>
                                     <input type="text" config="selectize_room_config" required options="selectize_room_options" ng-model="selectize_room" selectize />
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <br ng-if="!reg_date">
-                                    <label ng-if="reg_date">Transfer Date</label>
+                                    <label ng-if="reg_date">Register Date</label>
                                     <input type="text" class="md-input" data-parsley-americandate
                                     placeholder="Register Date" data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="reg_date" required/>
                                 </div>
                             </div>
                             <div class="uk-margin-top uk-text-right">
-                                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ui-sref="restricted.hostel.allocation">Cancel</button>
                                 <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
                             </div>
                         </form>

@@ -214,7 +214,7 @@ angular
                 $scope.selectize_block_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Blocks',
+                    placeholder: 'Block',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -228,7 +228,7 @@ angular
                 $scope.selectize_room_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Rooms',
+                    placeholder: 'Room',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -302,6 +302,7 @@ angular
                         UIkit.modal.alert('Profile Name Already Assigned');
                     });
                 }
+
 
           
            
