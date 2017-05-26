@@ -77,7 +77,7 @@ angular
             
             $scope.viewData=[];
             $scope.refreshTable=function(){
-                $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'InstitutionAPI/room',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(response){
                     $scope.viewData=response.data;
                 });
@@ -87,11 +87,11 @@ angular
             $scope.buildingList=[];
             $scope.blockList=[];
 
-            $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
-            $http.get($localStorage.service+'institutionApi/block',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/block',{headers:{'access_token':$localStorage.access_token}})
             .success(function(block_data){
                 $scope.blockList.push(block_data.data);
             });
@@ -155,7 +155,7 @@ angular
             $scope.saveRoomData=function(){
                 $http({
                 method:'POST',
-                url: $localStorage.service+'institutionApi/room',
+                url: $localStorage.service+'InstitutionAPI/room',
                 data: {
                     'room_id' : $scope.room_id,
                     'room_name' : $scope.room_name,
@@ -202,7 +202,7 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : $localStorage.service+"institutionApi/room",
+                            url : $localStorage.service+"InstitutionAPI/room",
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {

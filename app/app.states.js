@@ -1989,6 +1989,23 @@ rubycampusApp
                         pageTitle: 'Institiution Details'
                     }
                 })
+				
+				.state("restricted.setting.institutionDetailsView", {
+                    url: "/institutionDetailsView",
+                    templateUrl: 'app/components/setting/institution_detailsView.html',
+                    controller: 'institution_detailsViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'assets/js/custom/uikit_fileinput.js',
+                                'app/components/setting/institution_detailsViewCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Institiution Details'
+                    }
+                })
 
                 .state("restricted.setting.institutionEdit", {
                     url: "/institutionEdit/{id}",

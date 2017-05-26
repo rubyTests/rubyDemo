@@ -290,10 +290,14 @@ angular
             var day=d.getDate();
             if (month<10){
             month="0" + month;
-            };
+            }else{
+				month=month;
+			}
             if (day<10){
             dayNew="0" + day;
-            };
+            }else{
+				dayNew=day;
+			}
             
             $scope.date=dayNew + "." + month + "." + year;
             $scope.forms_advanced.datepicker = $scope.date;

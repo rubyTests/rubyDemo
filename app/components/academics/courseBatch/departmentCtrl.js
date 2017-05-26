@@ -116,7 +116,7 @@ angular
                     });    
                 }
                 $scope.getdata();
-                $http.get($localStorage.service+'institutionApi/room',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'InstitutionAPI/room',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
                     $scope.roomList.push(return_data.data);
                 });

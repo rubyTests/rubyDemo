@@ -53,7 +53,7 @@ angular
                 })
             });
             $scope.viewData=[];
-            $http.get($localStorage.service+'institutionApi/institution',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/institution',{headers:{'access_token':$localStorage.access_token}})
             .success(function(response){
                 $scope.viewData=response.data;
             });
@@ -64,7 +64,7 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : $localStorage.service+"institutionApi/institution",
+                            url : $localStorage.service+"InstitutionAPI/institution",
                             params : {'id' : id,'profile_id':profile_id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {

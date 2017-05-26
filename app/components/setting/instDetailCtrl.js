@@ -13,19 +13,19 @@ angular
             $scope.Basic=[];
             $scope.contact=[];
             $scope.returnProfile=[];
-            $http.get($localStorage.service+'institutionApi/institutetype',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/institutetype',{headers:{'access_token':$localStorage.access_token}})
             .success(function(inst_type){
                 $scope.IinstLIST.push(inst_type.data);
             });
-            $http.get($localStorage.service+'institutionApi/country',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/country',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
                 $scope.CountryLIST.push(country_list.data);
             });
-            $http.get($localStorage.service+'institutionApi/currency',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/currency',{headers:{'access_token':$localStorage.access_token}})
             .success(function(currency_data){
                 $scope.CurrncyLIST.push(currency_data.data);
             });
-            $http.get($localStorage.service+'institutionApi/timezone',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/timezone',{headers:{'access_token':$localStorage.access_token}})
             .success(function(timeZone){
                 $scope.TimeLIST.push(timeZone.data);
             });
@@ -112,7 +112,7 @@ angular
                 }
                 $http({
                     method:'POST',
-                    url: $localStorage.service+'institutionApi/institutionDetails',
+                    url: $localStorage.service+'InstitutionAPI/institutionDetails',
                     data: {
                         'file_image' : data,
                         'institute_name' : $scope.Basic.institute_name,
@@ -144,7 +144,7 @@ angular
                 // $scope.Basic.ddd=data;
                 $http({
                     method:'POST',
-                    url: $localStorage.service+'institutionApi/institutionContactDetails',
+                    url: $localStorage.service+'InstitutionAPI/institutionContactDetails',
                     data: {
                         'address' : $scope.contact.address,
                         'contact_name' : $scope.contact.contact_name,
@@ -180,7 +180,7 @@ angular
 
             $http({
               method : "GET",
-              url : $localStorage.service+"institutionApi/institutionDetails",
+              url : $localStorage.service+"InstitutionAPI/institutionDetails",
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 console.log(response.data,'response');

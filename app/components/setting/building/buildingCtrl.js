@@ -110,8 +110,8 @@ angular
             $scope.saveBuildingData=function(){
                 $http({
                 method:'POST',
-                // url: 'http://localhost/smartedu/test/institutionApi/building',
-                url: $localStorage.service+'institutionApi/building',
+                // url: 'http://localhost/smartedu/test/InstitutionAPI/building',
+                url: $localStorage.service+'InstitutionAPI/building',
                 data: {
                     'build_id' : $scope.building_id,
                     'build_name' : $scope.building_name,
@@ -145,7 +145,7 @@ angular
 
             $scope.viewData=[];
             $scope.refreshTable=function(){
-                $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(response){
                     $scope.viewData=response.data;
                 });
@@ -158,7 +158,7 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : $localStorage.service+'institutionApi/building',
+                            url : $localStorage.service+'InstitutionAPI/building',
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {

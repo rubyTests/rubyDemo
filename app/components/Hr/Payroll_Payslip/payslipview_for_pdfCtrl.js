@@ -115,7 +115,8 @@ angular
             $scope.generatePdf = function(id) {
               $http({
                 // url : 'http://localhost/ruby/Rubyctrl/index',
-                url: $localStorage.service+'PayrollPayslipAPI/index',
+                //url: $localStorage.service+'PayrollPayslipAPI/index',
+                url: 'http://localhost/PDF_Generate/mpdf-codeigniter/',
                 method : 'POST',
                 data : { 'id':id,'genDate':$localStorage.GenDate},
                 responseType : 'arraybuffer',

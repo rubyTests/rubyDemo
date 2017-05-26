@@ -182,8 +182,10 @@ angular
 				if(data.status==true){
 					$scope.user_logo=data.result[0].IMAGE1;
 				}else{
-					$localStorage.access_token='';
-					$state.go("login");
+					if(data.message=='Invalid User Access Token'){
+						$localStorage.access_token='';
+						$state.go("login");
+					}
 				}
             }).error(function(err){
             });

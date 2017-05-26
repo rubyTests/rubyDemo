@@ -95,7 +95,7 @@ angular
             }
             $scope.viewData=[];
             $scope.refreshTable=function(){
-                $http.get($localStorage.service+'institutionApi/block',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'InstitutionAPI/block',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(response){
                     $scope.viewData=response.data;
                 });
@@ -104,7 +104,7 @@ angular
             $scope.refreshTable();
             // Get building data
             $scope.buildingList=[];
-            $http.get($localStorage.service+'institutionApi/building',{headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
@@ -128,7 +128,7 @@ angular
                 // console.log($scope.block_name,'block_name',$scope.block_no,'block_no',$scope.selectize_buildingId,'buildingId');
                 $http({
                 method:'POST',
-                url: $localStorage.service+'institutionApi/block',
+                url: $localStorage.service+'InstitutionAPI/block',
                 data: {
                     'block_id' : $scope.block_id,
                     'block_name' : $scope.block_name,
@@ -168,7 +168,7 @@ angular
                         if(id){
                             $http({
                             method : "DELETE",
-                            url : $localStorage.service+"institutionApi/block",
+                            url : $localStorage.service+"InstitutionAPI/block",
                             params : {id : id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(return_data) {

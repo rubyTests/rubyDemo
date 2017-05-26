@@ -163,7 +163,7 @@ angular
 				
 			}
 			
-			$http.get($localStorage.service+'institutionApi/country',{headers:{'access_token':$localStorage.access_token}})
+			$http.get($localStorage.service+'InstitutionAPI/country',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
                 $scope.CountryLIST.push(country_list.data);
             });
