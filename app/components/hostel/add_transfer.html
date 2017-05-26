@@ -1,0 +1,103 @@
+<style type="text/css">
+    .parsley-row{
+        margin-top: 24px;
+    }
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+        <form id="form_validation" name="inputForm" ng-submit="saveTransfer()" novalidate>
+            <h3 class="heading_a uk-margin-bottom">Transfer</h3>
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+                        <div class="uk-grid"> 
+                            <div class="uk-width-medium-1-4 parsley-row">
+                                <input type="hidden" ng-model="hidden_id">
+                                <br ng-if="!selectize_usertype">
+                                <label for="resident" ng-if="selectize_usertype" style="font-size: 12px;color: #727272;">Resident Type</label>
+                                <input type="text" config="selectize_usertype_config" options="selectize_usertype_options" ng-model="selectize_usertype" selectize ng-change="userChange();"/>
+                            </div>
+                            <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Employee'">
+                                <br ng-if="!dept_id">
+                                <label ng-if="dept_id">Department<span class="req"></span></label>
+                                <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="dept_id" selectize />
+                            </div>
+                             <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_usertype=='Employee'">
+                                <br ng-if="!selectize_emp_profileId">
+                                <label for="employee" ng-if="selectize_emp_profileId" style="font-size: 12px;color: #727272;">Employee</label>
+                                <input type="text" config="selectize_employee_config" ng-required="selectize_usertype=='Employee'" options="selectize_employee_options" ng-model="selectize_emp_profileId" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_usertype=='Student'">
+                                <br ng-if="!course_id">
+                                <label for="religion" ng-if="course_id">Course<span class="req"></span></label>
+                                <input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="course_id"selectize />
+                            </div>
+                           
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_usertype=='Student'">
+                                <br ng-if="!batchId">
+                                <label for="religion" ng-if="batchId">Batch<span class="req"></span></label>
+                                <input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="batchId" selectize/>
+                            </div>
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_usertype=='Student'">
+                                <br ng-if="!selectize_stu_profileId">
+                                <label for="student" ng-if="selectize_stu_profileId" style="font-size: 12px;color: #727272;">Student</label>
+                                <input type="text" config="selectize_student_config" ng-required="selectize_usertype=='Student'" options="selectize_student_options" ng-model="selectize_stu_profileId" selectize />
+                            </div>
+                                
+                        
+                            <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_stu_profileId || selectize_emp_profileId">
+                                <br ng-if="!preHostelName">
+                                <label for="hname" ng-if="preHostelName" style="font-size: 12px;color: #727272;"> Hostel</label>
+                                <input type="text" ng-model="preHostelName" class="md-input" placeholder="Hostel" md-input>
+                            </div>
+                            <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_stu_profileId || selectize_emp_profileId">
+                                <br ng-if="!preBlockName">
+                                <label for="block" ng-if="preBlockName" style="font-size: 12px;color: #727272;">Block</label>
+                                <input type="text" ng-model="preBlockName" class="md-input" placeholder="Block" md-input>
+                            </div>
+
+                            <div class="uk-width-medium-1-3 parsley-row" ng-show="selectize_stu_profileId || selectize_emp_profileId">
+                                <br ng-if="!preRoomName">
+                                <label for="room" ng-if="preRoomName" style="font-size: 12px;color: #727272;">Rooms</label>
+                                <input type="text" ng-model="preRoomName" class="md-input" placeholder="Room" md-input>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-card" ng-show="selectize_stu_profileId || selectize_emp_profileId ">
+                    <div class="md-card-content large-padding">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-4 parsley-row">
+                                <br ng-if="!selectize_hname">
+                                <label for="hostel" ng-if="selectize_hname" style="font-size: 12px;color: #727272;">Hostel</label>
+                                <input type="text" config="selectize_hname_config" required options="selectize_hname_options" ng-model="selectize_hname" selectize />
+                            </div>
+                           <div class="uk-width-medium-1-4 parsley-row">
+                                <br ng-if="!selectize_block">
+                                <label for="blocks" ng-if="selectize_block" style="font-size: 12px;color: #727272;">Blocks</label>
+                                <input type="text" config="selectize_block_config" required options="selectize_block_options" ng-model="selectize_block" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4 parsley-row">
+                                <br ng-if="!selectize_room">
+                                <label for="rooms" ng-if="selectize_room" style="font-size: 12px;color: #727272;">Rooms</label>
+                                <input type="text" config="selectize_room_config" required options="selectize_room_options" ng-model="selectize_room" selectize />
+                            </div>
+                            <div class="uk-width-medium-1-4 parsley-row">
+                                <br>
+                                <label>Transfer Date</label>
+                                <input class="md-input" type="text" required id="uk_dp_end" md-input ng-model="currDate">
+                                <!-- <input type="text" class="md-input" data-parsley-americandate
+                                placeholder="Register Date" data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="currDate" required/> -->
+                            </div>
+                        </div><br>
+                        <div class="uk-margin-top uk-text-right">
+                            <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ui-sref="restricted.hostel.transfer">Cancel</button>
+                            <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                        </div>
+                    </div>
+
+                </div>
+                
+            </form>
+        </div>
+    </div>
+            
