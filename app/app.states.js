@@ -1997,13 +1997,14 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'lazy_wizard',
                                 'assets/js/custom/uikit_fileinput.js',
                                 'app/components/setting/institution_detailsViewCtrl.js'
                             ], {serie:true});
                         }]
                     },
                     data: {
-                        pageTitle: 'Institiution Details'
+                        pageTitle: 'Institiution View Details'
                     }
                 })
 
@@ -3193,6 +3194,30 @@ rubycampusApp
                     },
                     params:{id:null}
                 })
+				
+				// Student and parent view of subject
+				.state("restricted.academics.studentSubjectView", {
+                    url: "/studentSubjectView",
+                    templateUrl: 'app/components/academics/studentView/student_syllabus_viewlist.html',
+                    controller: 'studentsyllabusdetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'app/components/academics/studentView/studentsyllabusdetailCtrl.js'
+                            ]);
+                        }],
+						notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/academics/syllabus.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Subject&Syllabus View'
+                    }
+                })
+				
                 .state("restricted.academics.markattendance", {
                     url: "/attendance",
                     templateUrl: 'app/components/plugins/studentAttendanceView.html',
@@ -3370,7 +3395,7 @@ rubycampusApp
 				.state("restricted.academics.examination.setgrading", {
                     url: "/setgrading",
                     templateUrl: 'app/components/academics/examination/setgrading.html',
-                    controller: 'setgradingCtrl',
+                    //controller: 'setgradingCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3388,7 +3413,7 @@ rubycampusApp
 				.state("restricted.academics.examination.setexam", {
                     url: "/setexam",
                     templateUrl: 'app/components/academics/examination/setexam.html',
-                    controller: 'setexamCtrl',
+                    // controller: 'setexamCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3403,28 +3428,28 @@ rubycampusApp
                     }
                 })
 				
-				.state("restricted.academics.examination.setassessment", {
-                    url: "/setassessment",
-                    templateUrl: 'app/components/academics/examination/setassessment.html',
-                    controller: 'setassessmentCtrl',
-                    resolve: {
-                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                            return $ocLazyLoad.load([
-                                'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
-                                'app/components/academics/examination/setassessment.js'
-                            ], {serie:true});
-                        }]
-                    },
-                    data: {
-                        pageTitle: 'Set Assessment'
-                    }
-                })
+				// .state("restricted.academics.examination.setassessment", {
+                    // url: "/setassessment",
+                    // templateUrl: 'app/components/academics/examination/setassessment.html',
+                    // // controller: 'setassessmentCtrl',
+                    // resolve: {
+                        // deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            // return $ocLazyLoad.load([
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                // 'lazy_datatables',
+                                // 'app/components/academics/examination/setassessment.js'
+                            // ], {serie:true});
+                        // }]
+                    // },
+                    // data: {
+                        // pageTitle: 'Set Assessment'
+                    // }
+                // })
 				
 				.state("restricted.academics.examination.setweightage", {
                     url: "/setweightage",
                     templateUrl: 'app/components/academics/examination/setweightage.html',
-                    controller: 'setweightageCtrl',
+                    // controller: 'setweightageCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -3490,6 +3515,124 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Enter Student Marks'
+                    }
+                })
+				
+				// Exam module  setTerm
+				
+				.state("restricted.academics.examination.setTerm", {
+                    url: "/setTerm",
+                    templateUrl: 'app/components/academics/examination/setTerm.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setTerm.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set Term'
+                    }
+                })
+				
+				.state("restricted.academics.examination.createExam", {
+                    url: "/createExam",
+                    templateUrl: 'app/components/academics/examination/createExam.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/createExam.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Create Exam'
+                    }
+                })
+				
+				.state("restricted.academics.examination.setassessment", {
+                    url: "/setassessment",
+                    templateUrl: 'app/components/academics/examination/setassessment1.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/setassessment1.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Set Assessment'
+                    }
+                })
+				
+				.state("restricted.academics.examination.setexamination", {
+                    url: "/examination",
+                    templateUrl: 'app/components/academics/examination/calendarExamination.html',
+                    controller: 'examination',
+                    resolve: {
+                         user_data: function($http){
+                            return $http({ method: 'GET', url: 'data/user_data.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_parsleyjs',
+                                'lazy_character_counter',
+                                'lazy_masked_inputs',
+                                'lazy_datatables',
+                                'lazy_charts_metricsgraphics',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/academics/examination/calendarExamination.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Exam Calendar'
+                    }
+                })
+				
+				.state("restricted.academics.examination.assessmentList", {
+                    url: "/assessmentList",
+                    templateUrl: 'app/components/academics/examination/assessmentList.html',
+                    controller: 'assessmentListCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/assessmentList.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assessment Mark List'
+                    }
+                })
+				
+				.state("restricted.academics.examination.assessmentMark", {
+                    url: "/assessmentMark",
+                    templateUrl: 'app/components/academics/examination/assessmentMark.html',
+                    controller: 'assessmentMarkCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/assessmentMark.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assessment Marks'
                     }
                 })
 
