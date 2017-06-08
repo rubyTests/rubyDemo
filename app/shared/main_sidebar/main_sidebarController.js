@@ -6,13 +6,15 @@ angular
         '$rootScope',
 		'$http',
 		'$localStorage',
-        function ($timeout,$scope,$rootScope,$http,$localStorage) {
+        '$filter',
+        function ($timeout,$scope,$rootScope,$http,$localStorage,$filter) {
     
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 $timeout(function() {
                     if(!$rootScope.miniSidebarActive) {
                         // activate current section
                         $('#sidebar_main').find('.current_section > a').trigger('click');
+						$('#sidebar_main').find('.act_item').parents('li:first').find('a:first').trigger('click');
                     } else {
                         // add tooltips to mini sidebar
                         var tooltip_elem = $('#sidebar_main').find('.menu_tooltip');
@@ -50,7 +52,7 @@ angular
                             '</div>';
                     },
                     item: function(langData, escape) {
-                        return '<div class="item"><i class="item-icon flag-' + escape(langData.value).toUpperCase() + '"></i></div>';
+                        return '<div class=item><i class="item-icon flag-' + escape(langData.value).toUpperCase() + '"></i></div>';
                     }
                 },
                 valueField: 'value',
@@ -63,13 +65,6 @@ angular
             };
 			
 			
-			// $http.get('http://192.168.1.139/rubyServices/api/GeneralAPI/menuLink')
-			// .success(function(data){
-				// console.log(data.message,"data");
-				// $scope.sections=data.message;
-				
-			// }).error(function(err){
-			// });
 			var userLov = [
                 {
                     id: 0,
@@ -216,46 +211,89 @@ angular
                                 }
                             ]
                         },
-                        {
-                            title: 'Examination',
-                            submenu: [
+                        // {
+                            // title: 'Examination',
+                            // submenu: [
+								// {
+                                    // title: 'Set Grading',
+                                    // link: 'restricted.academics.examination.setgrading'
+                                // },
+                                // {
+                                    // title: 'Set Exam',
+                                    // link: 'restricted.academics.examination.setexam'
+                                // },
+                                // {
+                                    // title: 'Set Assessment',
+									// link: 'restricted.academics.examination.setassessment'
+                                // },
+								// {
+                                    // title: 'Set Weightages',
+                                    // link: 'restricted.academics.examination.setweightage'
+                                // },
+                                // {
+                                    // title: 'Assign Exam',
+									// link: 'restricted.academics.examination.assign'
+                                // },
+								// {
+                                    // title: 'Mark List',
+									// link: 'restricted.academics.examination.markDetails'
+                                // }
+                                // // {
+                                    // // title:'Online Exam',
+                                    // // submenu: [
+                                        // // {
+                                            // // title: 'Add Online Exam',
+                                        // // },
+                                        // // {
+                                            // // title: 'View Exam Result',
+                                        // // }
+                                    // // ]
+                                // // }
+                            // ]
+                        // },
+						{
+							title: 'Examination',
+							submenu: [
 								{
                                     title: 'Set Grading',
                                     link: 'restricted.academics.examination.setgrading'
                                 },
                                 {
-                                    title: 'Set Exam',
-                                    link: 'restricted.academics.examination.setexam'
-                                },
-                                {
-                                    title: 'Set Assessment',
-									link: 'restricted.academics.examination.setassessment'
+                                    title: 'Set Term',
+                                    link: 'restricted.academics.examination.setTerm'
                                 },
 								{
-                                    title: 'Set Weightages',
-                                    link: 'restricted.academics.examination.setweightage'
+                                    title: 'Create Exam',
+                                    link: 'restricted.academics.examination.createExam'
                                 },
                                 {
-                                    title: 'Assign Exam',
-									link: 'restricted.academics.examination.assign'
+                                    title: 'Assessment',
+									submenu: [
+										{
+											title: 'Set Assessment',
+											link: 'restricted.academics.examination.setassessment'
+										},
+										{
+											title: 'Assessment MarkList',
+											link: 'restricted.academics.examination.assessmentList'
+										},
+									]
                                 },
 								{
-                                    title: 'Mark List',
-									link: 'restricted.academics.examination.markDetails'
-                                },
-                                {
-                                    title:'Online Exam',
-                                    submenu: [
-                                        {
-                                            title: 'Add Online Exam',
-                                        },
-                                        {
-                                            title: 'View Exam Result',
-                                        }
-                                    ]
+                                    title: 'Exam',
+									submenu: [
+										{
+											title: 'Set Exam',
+											link: 'restricted.academics.examination.setexamination'
+										},
+										{
+											title: 'Exam MarkList',
+											//link: 'restricted.academics.examination.setassessmentmarklist'
+										},
+									]
                                 }
-                            ]
-                        },
+							]
+						},
                         {
                             title: 'Assignments',
                             link: 'restricted.academics.assignment'
@@ -597,64 +635,16 @@ angular
                     id: 1,
                     title: 'Institution',
                     icon: '&#xE84F;',
-                    submenu: [
-                        {
-                            title: 'Institution Details',
-                            link: 'restricted.setting.institutionDetails'
-                            // link:'restricted.setting.institution_view'
-                        },
-						{
-                            title: 'Institution Details View',
-                            link: 'restricted.setting.institutionDetailsView'
-                        },
-                        {
-                            title: 'Building',
-                            link: 'restricted.setting.building'
-                        },
-                        {
-                            title: 'Building Block',
-                            link: 'restricted.setting.buildingblock'
-                        },
-                        {
-                            title: 'Room',
-                            link: 'restricted.setting.room'
-                        }
-                    ]
+                    link:'restricted.setting.institutionDetailsView'
                 },
                 {
                     id: 2,
                     title: 'Academics',
                     icon: 'school',
                     submenu: [
-                         {
-                            title: 'Course & Batch',
-                            submenu: [
-                                {
-                                    title: 'Department',
-                                    link: 'restricted.academics.department'
-                                },
-                                {
-                                    title: 'Course',
-                                    link: 'restricted.academics.course'
-                                },
-                                {
-                                    title: 'Batch',
-                                    link: 'restricted.academics.courseBatches'
-                                }
-                            ]
-                        },
                         {
                             title: 'Subjects & Syllabus',
-                            submenu: [
-                                {
-                                    title: 'Subjects',
-                                    link: 'restricted.academics.subjects'
-                                },
-                                {
-                                    title: 'Syllabus',
-                                    link: 'restricted.academics.syllabus_view'
-                                }
-                            ]
+							link:'restricted.academics.studentSubjectView'
                         },
                         {
                             title: 'Attendance',
@@ -729,17 +719,6 @@ angular
 								{
                                     title: 'Mark List',
 									link: 'restricted.academics.examination.markDetails'
-                                },
-                                {
-                                    title:'Online Exam',
-                                    submenu: [
-                                        {
-                                            title: 'Add Online Exam',
-                                        },
-                                        {
-                                            title: 'View Exam Result',
-                                        }
-                                    ]
                                 }
                             ]
                         },
@@ -755,16 +734,8 @@ angular
                     icon: '&#xE7FD;',
                     submenu:[
                         {
-                            title:'Student Admission',
-                            link: 'restricted.student.admission'
-                        },
-                        {
-                            title:'Students',
-                            link: 'restricted.student.student_list'
-                        },
-                        {
-                            title: 'Assign Teacher',
-                            link: 'restricted.student.assignTeacher'
+                            title:'My Profile',
+                            link: 'restricted.student.student_profile'
                         },
                         {
                             title: 'Leaves',
@@ -781,48 +752,13 @@ angular
                     id: 6,
                     title: 'Repository',
                     icon: '&#xE2CC;',
-                    submenu:[
-                        {
-                            title:'Category',
-                            link: 'restricted.repository.categoryView'
-                        },
-                        {
-                            title:'Post',
-                            link: 'restricted.repository.postView'
-                        }
-                        // ,{
-                        //     title:'Repository View',
-                        //     link: 'restricted.repository.repositoryView'
-                        // }
-                    ]
+                    link: 'restricted.repository.repositoryView'
                 },
                 {
                     id: 8,
                     title: 'Library',
                     icon: '&#xE02F;',
-                    // link: 'restricted.Library'
-                    submenu: [
-                        {
-                            title: 'Category',
-                            link: 'restricted.library.category'
-                        },
-                        {
-                            title: 'Books',
-                            link: 'restricted.library.bookviewdetails'
-                        },
-                        {
-                            title: 'Issue Books',
-                            link: 'restricted.library.bookissue_view'
-                        },
-                        {
-                            title: 'Return Books',
-                            // link: ''
-                        },
-                        {
-                            title: 'Report',
-                            // link: ''
-                        }
-                    ]
+                    link: 'restricted.Library'
                 },
                 {
                     id: 9,
@@ -892,13 +828,201 @@ angular
                             link: 'restricted.plugins.events'
                         }
                     ]
+                }
+            ];
+			var parentRole = [
+                {
+                    id: 0,
+                    title: 'Dashboard',
+                    icon: '&#xE871;',
+                    link: 'restricted.studentDashboard'
                 },
-                // {
-                    // id: 13,
-                    // title: 'Student Dashboard',
-                    // icon: '&#xE158;',
-                    // link : 'restricted.studentDashboard'
-                // },
+                {
+                    id: 1,
+                    title: 'Institution',
+                    icon: '&#xE84F;',
+                    link:'restricted.setting.institutionDetailsView'
+                },
+                {
+                    id: 2,
+                    title: 'Academics',
+                    icon: 'school',
+                    submenu: [
+                        {
+                            title: 'Subjects & Syllabus',
+							link:'restricted.academics.studentSubjectView'
+                        },
+                        {
+                            title: 'Attendance',
+                            submenu: [
+                                {
+                                    title: 'Student Attendance Register',
+                                },
+                                {
+                                    title: 'Student Attendance Report',
+									link: 'restricted.plugins.studentreport'
+                                },
+                                {
+                                    title: 'Student Attendance Marking',
+                                    link: 'restricted.academics.markattendance'
+                                },
+                            ]
+                        },
+                        {
+                            title: 'Timetable'
+                        },
+                       
+                        {
+                            title: 'Discipline',
+                            submenu: [
+                                {
+                                    title: 'Add Compliant',
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Examination',
+                            submenu: [
+								{
+                                    title: 'Set Grading',
+                                    link: 'restricted.academics.examination.setgrading'
+                                },
+                                {
+                                    title: 'Set Exam',
+                                    link: 'restricted.academics.examination.setexam'
+                                },
+                                {
+                                    title: 'Set Assessment',
+									link: 'restricted.academics.examination.setassessment'
+                                },
+								{
+                                    title: 'Set Weightages',
+                                    link: 'restricted.academics.examination.setweightage'
+                                },
+                                {
+                                    title: 'Assign Exam',
+									link: 'restricted.academics.examination.assign'
+                                },
+								{
+                                    title: 'Mark List',
+									link: 'restricted.academics.examination.markDetails'
+                                },
+                                {
+                                    title:'Online Exam',
+                                    submenu: [
+                                        {
+                                            title: 'Add Online Exam',
+                                        },
+                                        {
+                                            title: 'View Exam Result',
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'Student',
+                    icon: '&#xE7FD;',
+                    submenu:[
+                        {
+                            title:'Profile',
+                            link: 'restricted.student.student_list'
+                        },
+                        {
+                            title: 'Leaves',
+                            submenu: [
+                                {
+                                    title: 'Apply Leaves',
+                                    link: 'restricted.student.stuApplyLeave'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 6,
+                    title: 'Repository',
+                    icon: '&#xE2CC;',
+                    link: 'restricted.repository.repositoryView'
+                },
+                {
+                    id: 8,
+                    title: 'Library',
+                    icon: '&#xE02F;',
+                    link: 'restricted.Library'
+                },
+                {
+                    id: 9,
+                    title: 'Transport',
+                    icon: '&#xE530;',
+                    submenu: [
+						{
+							title: 'Vehicle',
+							link : 'restricted.transport.vehicleDetail'
+						},
+						{
+							title: 'Route',
+							link : 'restricted.transport.routeDetail'
+						},
+						{
+							title: 'Route Timing',
+							link : 'restricted.transport.routeTiming'
+						},
+						{
+							title: 'Route Stops',
+							link : 'restricted.transport.routeStops'
+						},
+						{
+							title: 'Route Allocation',
+							link : 'restricted.transport.routeAllocation'
+						}
+					]
+                },
+                {
+                    id: 10,
+                    title: 'Hostel',
+                    icon: '&#xE88A;',
+                    submenu: [
+                        {
+                            title: 'Allocation',
+                            link: 'restricted.hostel.allocation'
+                        },
+                        {
+                            title: 'Transfer',
+                            link: 'restricted.hostel.transfer'
+                        },
+                        {
+                            title: 'Vacate',
+                            link: 'restricted.hostel.vacate'
+                        },
+                        {
+                            title: 'Visitors',
+                            link: 'restricted.hostel.visitors'
+                        }
+                    ]
+                },
+                {
+                    id: 12,
+                    title: 'Calendar',
+                    icon: '&#xE8DF;',
+                    submenu: [
+                        {
+                            title: 'Calendar',
+                            link: 'restricted.plugins.calendar'
+                        },
+                        {
+                            title: 'Exam Calendar',
+                            link: 'restricted.plugins.examination'
+                        },
+                        {
+                            title: 'Events Calendar',
+                            link: 'restricted.plugins.events'
+                        }
+                    ]
+                }
             ];
 			
 			
@@ -908,7 +1032,10 @@ angular
 				$scope.sections = userLov;
 			}else if($localStorage.role_id==3){
 				$scope.sections = studentRole;
+			}else if($localStorage.role_id==4){
+				$scope.sections = parentRole;
 			}
+           
         }
     ])
 ;
