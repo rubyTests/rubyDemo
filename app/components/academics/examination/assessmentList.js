@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('markDetailsCtrl', [
+    .controller('assessmentListCtrl', [
         '$compile',
         '$scope',
         '$window',

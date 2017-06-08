@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('setgradingCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -63,48 +63,91 @@ angular
 
             var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
             
-            $scope.get_id = [];
-            $resource('app/components/academics/examination/setgrading.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                     angular.forEach( vm.dt_data, function(value, key){
-                        $scope.hod_id=  value.HOD_profile_id;
-                        //console.log($scope.hod_id);
-                        $scope.get_id.push($scope.hod_id);
-                    });
+			$scope.refreshTable=function(){
+				$http({
+				method:'get',
+				url: $localStorage.service+'ExamAPI/setGrade',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					vm.dt_data = return_data.data.message;
+				});
+			}
+			
+			$scope.refreshTable();
+			
+			 $scope.openModel = function() {
+				//$scope.buttonStatus='Save';
+				$scope.Savebutton=true;
+				$scope.Updatebutton=false;
+				$scope.dept_name=null;
+				$scope.dept_code=null;
+				$scope.selectize_hodProfieId=null;
+				$scope.Phone=null;
+				$('.uk-modal').find('input').trigger('blur');
+			};
+			$scope.edit_data= function(res){
+				if (res){
+					// console.log(res,"messsssssssssss");
+					$scope.Updatebutton=true;
+					$scope.Savebutton=false;
+					$scope.grade={id:res.ID,name:res.NAME,marks:res.MINI_PERCENTAGE,credit:res.CREDIT_POINTS,description:res.DESCRIPTION};
+				}
+			}
+			$scope.grade={};
+			$scope.saveData= function(){
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ExamAPI/setGrade',
+                data: {id:$scope.grade.id,name:$scope.grade.name,percentage:$scope.grade.marks,creditPoints:$scope.grade.credit,description:$scope.grade.description},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+                }).then(function(response){
+                    if(response.data.status==true){
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$scope.refreshTable();
+						$scope.clearData();
+					}
                 });
-                $scope.selectize_hodProfieId_options = $scope.get_id;
-                $scope.selectize_hodProfieId_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Head Of Department'
-                };
-                 $scope.openModel = function() {
-                    //$scope.buttonStatus='Save';
-                    $scope.Savebutton=true;
-                    $scope.Updatebutton=false;
-                    $scope.dept_name=null;
-                    $scope.dept_code=null;
-                    $scope.selectize_hodProfieId=null;
-                    $scope.Phone=null;
-                    $('.uk-modal').find('input').trigger('blur');
-                };
-                $scope.edit_data= function(res){
-                    if (typeof res=="undefined") return false;
-                    //console.log(res,"messsssssssssss");
-                    $scope.Updatebutton=true;
-                    $scope.Savebutton=false;
-                    $scope.dept_name=res.dept_name;
-                    $scope.dept_code=res.dept_code;
-                    $scope.selectize_hodProfieId=res.HOD_profile_id;
-                    $scope.Phone=res.phone1;
-                    $scope.id=vm.dt_data.indexOf(res);
-                }
-       
-
-
-
+			}
+			
+			$scope.clearData=function(){
+				$scope.grade={};
+			}
+			
+			$scope.deleteGrade=function(id,$index){
+				if(id){
+					UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+						if(id){
+							$http({
+							method : "DELETE",
+							url : $localStorage.service+"ExamAPI/setGrade",
+							params : {id : id},
+							headers:{'access_token':$localStorage.access_token}
+							}).then(function mySucces(response) {
+								UIkit.notify({
+									message : response.data.message,
+									status  : 'success',
+									timeout : 2000,
+									pos     : 'top-center'
+								});
+								$scope.refreshTable();
+								$scope.viewData.splice($index, 1);
+							},function myError(response) {
+							})
+						}
+					},function(){
+						// console.log("false");
+					}, {
+						labels: {
+							'Ok': 'Ok'
+						}
+					});
+				}
+			}
+			
         }
     );

@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('setassessmentCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -58,53 +58,106 @@ angular
             var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
             
             $scope.get_id = [];
-            $resource('app/components/academics/examination/setassessment.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
-			$resource('app/components/academics/examination/setexam.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.get_id.push(dt_data);
-                });
-                $scope.selectize_exam_options = $scope.get_id;
-                $scope.selectize_exam_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Exam',
-					valueField: 'id',
-                    labelField: 'name',
-					onInitialize: function(val){
-                        console.log(val);
-                    }
-                };
-                 $scope.openModel = function() {
-                    //$scope.buttonStatus='Save';
-                    $scope.Savebutton=true;
-                    $scope.Updatebutton=false;
-                    $scope.dept_name=null;
-                    $scope.dept_code=null;
-                    $scope.selectize_hodProfieId=null;
-                    $scope.Phone=null;
-                    $('.uk-modal').find('input').trigger('blur');
-                };
-                $scope.edit_data= function(res){
-                    if (typeof res=="undefined") return false;
-                    //console.log(res,"messsssssssssss");
-                    $scope.Updatebutton=true;
-                    $scope.Savebutton=false;
-                    $scope.dept_name=res.dept_name;
-                    $scope.dept_code=res.dept_code;
-                    $scope.selectize_hodProfieId=res.HOD_profile_id;
-                    $scope.Phone=res.phone1;
-                    $scope.id=vm.dt_data.indexOf(res);
-                }
+			$http({
+			method:'get',
+			url: $localStorage.service+'ExamAPI/setExam',
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				//vm.dt_data = return_data.data.message;
+				$scope.get_id.push(return_data.data.message);
+			});
+			$scope.selectize_exam_options = $scope.get_id;
+			$scope.selectize_exam_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Exam',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					console.log(val);
+				}
+			};
+			 $scope.openModel = function() {
+				//$scope.buttonStatus='Save';
+				$scope.Savebutton=true;
+				$scope.Updatebutton=false;
+				$('.uk-modal').find('input').trigger('blur');
+			};
+			$scope.edit_data= function(res){
+				if (typeof res=="undefined") return false;
+				//console.log(res,"messsssssssssss");
+				$scope.Updatebutton=true;
+				$scope.Savebutton=false;
+				$scope.assessment={id:res.ID,name:res.NAME,weightage:res.WEIGHTAGE,exam:res.EXAM_ID};
+			}
+			
+			$scope.refreshTable=function(){
+				$http({
+				method:'get',
+				url: $localStorage.service+'ExamAPI/setAssessment',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					vm.dt_data = return_data.data.message;
+				});
+			}
+			
+			$scope.refreshTable();
+			
+			$scope.assessment={};
+			$scope.saveData= function(){
+				$http({
+				method:'POST',
+				url: $localStorage.service+'ExamAPI/setAssessment',
+				data: {id:$scope.assessment.id,name:$scope.assessment.name,weightage:$scope.assessment.weightage,examId:$scope.assessment.exam},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+				}).then(function(response){
+					if(response.data.status==true){
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$scope.refreshTable();
+						$scope.clearData();
+					}
+				});
+			}
+			
+			$scope.clearData=function(){
+				$scope.assessment={};
+			}
+			
+			$scope.deleteAssessment=function(id,$index){
+				if(id){
+					UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+						if(id){
+							$http({
+							method : "DELETE",
+							url : $localStorage.service+"ExamAPI/setAssessment",
+							params : {id : id},
+							headers:{'access_token':$localStorage.access_token}
+							}).then(function mySucces(response) {
+								UIkit.notify({
+									message : response.data.message,
+									status  : 'success',
+									timeout : 2000,
+									pos     : 'top-center'
+								});
+								$scope.refreshTable();
+								$scope.viewData.splice($index, 1);
+							},function myError(response) {
+							})
+						}
+					},function(){
+						// console.log("false");
+					}, {
+						labels: {
+							'Ok': 'Ok'
+						}
+					});
+				}
+			}
        
-
-
-
         }
     );

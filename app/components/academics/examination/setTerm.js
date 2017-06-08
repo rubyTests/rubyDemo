@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('setexamCtrl',
+    .controller('settermCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
             vm.dt_data = [];
@@ -62,13 +62,13 @@ angular
 				//console.log(res,"messsssssssssss");
 				$scope.Updatebutton=true;
 				$scope.Savebutton=false;
-				$scope.exam={id:res.ID,name:res.NAME,description:res.DESCRIPTION};
+				$scope.term={id:res.ID,name:res.NAME,description:res.DESCRIPTION};
 			}
 			
 			$scope.refreshTable=function(){
 				$http({
 				method:'get',
-				url: $localStorage.service+'ExamAPI/setExam',
+				url: $localStorage.service+'ExamAPI/setTerm',
 				headers:{'access_token':$localStorage.access_token}
 				}).then(function(return_data){
 					vm.dt_data = return_data.data.message;
@@ -77,12 +77,12 @@ angular
 			
 			$scope.refreshTable();
 			
-			$scope.exam={};
+			$scope.term={};
 			$scope.saveData= function(){
 				$http({
 				method:'POST',
-				url: $localStorage.service+'ExamAPI/setExam',
-				data: {id:$scope.exam.id,name:$scope.exam.name,description:$scope.exam.description},
+				url: $localStorage.service+'ExamAPI/setTerm',
+				data: {id:$scope.term.id,name:$scope.term.name,description:$scope.term.description},
 				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
 				}).then(function(response){
 					if(response.data.status==true){
@@ -99,7 +99,7 @@ angular
 			}
 			
 			$scope.clearData=function(){
-				$scope.exam={};
+				$scope.term={};
 			}
 			
 			$scope.deleteExam=function(id,$index){
@@ -108,7 +108,7 @@ angular
 						if(id){
 							$http({
 							method : "DELETE",
-							url : $localStorage.service+"ExamAPI/setExam",
+							url : $localStorage.service+"ExamAPI/setTerm",
 							params : {id : id},
 							headers:{'access_token':$localStorage.access_token}
 							}).then(function mySucces(response) {

@@ -33,22 +33,22 @@
                     </thead>
                     <tfoot>
                         <tr>
-							              <th></th>
+							<th></th>
                             <th>Name</th>
                             <th>Assessment</th>
-							              <th>Course</th>
+							<th>Course</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                       <tr ng-repeat="row in showCase.dt_data">
                         <td>{{$index+1}}</td>
-                        <td>{{row.name}}</td>
-                        <td>{{row.weightage}}</td>
-                        <td>{{row.course_name}}</td>
+                        <td>{{row.NAME}}</td>
+                        <td>{{row.ASSESSMENT_NAME}}</td>
+                        <td>{{row.COURSE}}</td>
                         <td>
                             <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                            <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            <a class="ts_remove_row" ng-click="deleteAssignExam(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                         </td>
                       </tr>
                     </tbody>
@@ -66,22 +66,43 @@
                 <div class="uk-form-row">
                   <input type="hidden" name="id" ng-model="id">
                   <label>Name</label>
-                  <input type="text" ng-model="name" class="md-input" required md-input>
+                  <input type="text" ng-model="assignExam.name" class="md-input" required md-input>
                 </div>
                 <div class="uk-form-row">
-                  <input type="text" config="selectize_assessment_config" options="selectize_assessment_options" ng-model="selectize_assessment" selectize/>
+                  <input type="text" config="selectize_assessment_config" options="selectize_assessment_options" ng-model="assignExam.assessmentId" selectize/>
                 </div>
+				<div class="uk-form-row">
+					<div class="uk-grid">	
+						<div class="uk-width-medium-1-2">
+							<div class="uk-input-group ">
+								<span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+								<label for="uk_dp_start">Start Date</label>
+								<input class="md-input" type="text" id="uk_dp_start" md-input ng-model="assignExam.startDate">
+							</div>
+						</div>
+						<div class="uk-width-medium-1-2">
+							<div class="uk-input-group">
+								<span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+								<label for="uk_dp_end">End Date</label>
+								<input class="md-input" type="text" id="uk_dp_end" md-input ng-model="assignExam.endDate">
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="uk-form-row">
         <br>
                   <!-- <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="selectize_course" selectize/> -->
-				  <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="forms_advanced.selectize_course"></selectize>
+				  <!-- <selectize id="selec_adv_1" config="selectize_course_config" options="selectize_course_options" position="bottom" ng-model="forms_advanced.selectize_course"></selectize> -->
+				  
+				  <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="assignExam.courseId" selectize/>
+				  
                 </div>
                 </form>
             </div>
           <div class="uk-modal-footer uk-text-right">
-                <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save</button>
-                <button type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Update</button>
+                <button ng-click="clearData()" type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                <button ng-click="saveData()" type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Savebutton">Save</button>
+                <button ng-click="saveData()" type="button" class="md-btn md-btn-primary md-btn-small uk-modal-close" ng-if="Updatebutton">Update</button>
           </div>
          </div>
       </div>

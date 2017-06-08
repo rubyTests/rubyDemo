@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('setexamCtrl',
+    .controller('setassessment1Ctrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
             vm.dt_data = [];
@@ -34,6 +34,11 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -45,13 +50,34 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Description'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Exam Name'),
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Max Mark'),
 
             ];
 
             var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
-              
-			$scope.openModel = function() {
+            
+            $scope.get_id = [];
+			$http({
+			method:'get',
+			url: $localStorage.service+'ExamAPI/setCreateExam',
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				//vm.dt_data = return_data.data.message;
+				$scope.get_id.push(return_data.data.message);
+			});
+			$scope.selectize_exam_options = $scope.get_id;
+			$scope.selectize_exam_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Exam',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					console.log(val);
+				}
+			};
+			 $scope.openModel = function() {
 				//$scope.buttonStatus='Save';
 				$scope.Savebutton=true;
 				$scope.Updatebutton=false;
@@ -62,13 +88,13 @@ angular
 				//console.log(res,"messsssssssssss");
 				$scope.Updatebutton=true;
 				$scope.Savebutton=false;
-				$scope.exam={id:res.ID,name:res.NAME,description:res.DESCRIPTION};
+				$scope.assessment={id:res.ID,name:res.NAME,maxMark:res.MAX_MARK,exam:res.CREATEEXAM_ID};
 			}
 			
 			$scope.refreshTable=function(){
 				$http({
 				method:'get',
-				url: $localStorage.service+'ExamAPI/setExam',
+				url: $localStorage.service+'ExamAPI/setAssessment1',
 				headers:{'access_token':$localStorage.access_token}
 				}).then(function(return_data){
 					vm.dt_data = return_data.data.message;
@@ -77,12 +103,12 @@ angular
 			
 			$scope.refreshTable();
 			
-			$scope.exam={};
+			$scope.assessment={};
 			$scope.saveData= function(){
 				$http({
 				method:'POST',
-				url: $localStorage.service+'ExamAPI/setExam',
-				data: {id:$scope.exam.id,name:$scope.exam.name,description:$scope.exam.description},
+				url: $localStorage.service+'ExamAPI/setAssessment1',
+				data: {id:$scope.assessment.id,name:$scope.assessment.name,maxMark:$scope.assessment.maxMark,examId:$scope.assessment.exam},
 				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
 				}).then(function(response){
 					if(response.data.status==true){
@@ -99,16 +125,16 @@ angular
 			}
 			
 			$scope.clearData=function(){
-				$scope.exam={};
+				$scope.assessment={};
 			}
 			
-			$scope.deleteExam=function(id,$index){
+			$scope.deleteAssessment=function(id,$index){
 				if(id){
 					UIkit.modal.confirm('Are you sure to delete ?', function(e) {
 						if(id){
 							$http({
 							method : "DELETE",
-							url : $localStorage.service+"ExamAPI/setExam",
+							url : $localStorage.service+"ExamAPI/setAssessment1",
 							params : {id : id},
 							headers:{'access_token':$localStorage.access_token}
 							}).then(function mySucces(response) {
@@ -132,6 +158,6 @@ angular
 					});
 				}
 			}
-		
+       
         }
     );

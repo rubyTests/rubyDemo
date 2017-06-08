@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
     .controller('assignCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -64,61 +64,80 @@ angular
                 .$promise
                 .then(function(dt_data) {
                     vm.dt_data = dt_data;
-                     angular.forEach( vm.dt_data, function(value, key){
-                        $scope.hod_id=  value.HOD_profile_id;
-                        //console.log($scope.hod_id);
-                        $scope.get_id.push($scope.hod_id);
-                    });
                 });
                 
-			$resource('app/components/academics/examination/setweightage.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.get_id.push(dt_data);
-                });
-                $scope.selectize_assessment_options = $scope.get_id;
-                $scope.selectize_assessment_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Assessment',
-					valueField: 'id',
-                    labelField: 'assessment',
-					onInitialize: function(val){
-                        console.log(val);
-                    }
-                };
+			$http({
+			method:'get',
+			url: $localStorage.service+'ExamAPI/setAssessment',
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				$scope.get_id.push(return_data.data.message);
+			});
+			
+			$scope.selectize_assessment_options = $scope.get_id;
+			$scope.selectize_assessment_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Assessment',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					console.log(val);
+				}
+			};
 				
-			$resource('app/components/academics/courseBatch/course.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.course_data.push(dt_data);
-                });
-                $scope.selectize_course_options = $scope.course_data;
-                $scope.selectize_course_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Course',
-					valueField: 'id',
-                    labelField: 'course_name',
-					onInitialize: function(val){
-                        console.log(val);
-                    }
-                };
+			$http({
+			method:'get',
+			url: $localStorage.service+'AcademicsAPI/fetchCourseData',
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				$scope.course_data.push(return_data.data.data);
+			});
+			
+			$scope.selectize_course_options = $scope.course_data;
+			$scope.selectize_course_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Course',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					console.log(val);
+				}
+			};
+			
+			// date range
+            var $dp_start = $('#uk_dp_start'),
+                $dp_end = $('#uk_dp_end');
+
+            var start_date = UIkit.datepicker($dp_start, {
+                format:'DD.MM.YYYY'
+            });
+
+            var end_date = UIkit.datepicker($dp_end, {
+                format:'DD.MM.YYYY'
+            });
+
+            $dp_start.on('change',function() {
+                end_date.options.minDate = $dp_start.val();
+            });
+
+            $dp_end.on('change',function() {
+                start_date.options.maxDate = $dp_end.val();
+            });
 				
 			// Advanced selects
 
-            var course_data = $scope.selectize_course_options = [
-                {id: 1, title: 'Computer Science and Engineering'},
-                {id: 2, title: 'Mechanical Engineering'},
-                {id: 3, title: 'Electrical Communication Engineering'},
-                {id: 4, title: 'Electrical and Electronics Engineering'},
-                {id: 5, title: 'Aeronautical Engineering'},
-                {id: 6, title: 'Information Technology Engineering'},
-                {id: 7, title: 'Civil Engineering'},
-                {id: 8, title: 'Marine Engineering'}
-            ];
+            // var course_data = $scope.selectize_course_options = [
+                // {id: 1, title: 'Computer Science and Engineering'},
+                // {id: 2, title: 'Mechanical Engineering'},
+                // {id: 3, title: 'Electrical Communication Engineering'},
+                // {id: 4, title: 'Electrical and Electronics Engineering'},
+                // {id: 5, title: 'Aeronautical Engineering'},
+                // {id: 6, title: 'Information Technology Engineering'},
+                // {id: 7, title: 'Civil Engineering'},
+                // {id: 8, title: 'Marine Engineering'}
+            // ];
 
             $scope.selectize_course_config = {
                 plugins: {
@@ -127,31 +146,32 @@ angular
                     }
                 },
                 maxItems: null,
-                valueField: 'id',
-                labelField: 'title',
-                searchField: 'title',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
                 create: false,
                 placeholder: 'Course Name',
                 render: {
                     option: function(course_data, escape) {
                         return  '<div class="option">' +
-                            '<span class="title">' + escape(course_data.title) + '</span><br>' +
+                            '<span class="title">' + escape(course_data.NAME) + '</span><br>' +
                             '</div>';
                     }
                     // item: function(planets_data, escape) {
                     //     return '<div class="item"><a href="' + escape(planets_data.url) + '" target="_blank">' + escape(planets_data.title) + '</a></div>';
                     // }
                 }
+				// onInitialize: function(val){
+					// selectize.on('change',function(values){
+						// console.log(values,"values");
+					// })
+				// }
             };
 				
                  $scope.openModel = function() {
                     //$scope.buttonStatus='Save';
                     $scope.Savebutton=true;
                     $scope.Updatebutton=false;
-                    $scope.dept_name=null;
-                    $scope.dept_code=null;
-                    $scope.selectize_hodProfieId=null;
-                    $scope.Phone=null;
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.edit_data= function(res){
@@ -159,15 +179,84 @@ angular
                     //console.log(res,"messsssssssssss");
                     $scope.Updatebutton=true;
                     $scope.Savebutton=false;
-                    $scope.dept_name=res.dept_name;
-                    $scope.dept_code=res.dept_code;
-                    $scope.selectize_hodProfieId=res.HOD_profile_id;
-                    $scope.Phone=res.phone1;
-                    $scope.id=vm.dt_data.indexOf(res);
+					$http({
+					method:'get',
+					url: $localStorage.service+'ExamAPI/setAssignExam',
+					headers:{'access_token':$localStorage.access_token}
+					}).then(function(return_data){
+						$scope.assignExam = {id:res.ID,name:res.NAME,assessmentId:res.ASSESSMENT_ID,courseId:res.COURSE_ID,startDate:res.START_DATE,endDate:res.END_DATE};
+					});
                 }
        
-
 			//$scope.name=$scope.selectize_weightage+" "+$scope.selectize_course;
-
+			
+			$scope.refreshTable=function(){
+				$http({
+				method:'get',
+				url: $localStorage.service+'ExamAPI/setAssignExam',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					vm.dt_data = return_data.data.message;
+				});
+			}
+			
+			$scope.refreshTable();
+			
+			$scope.assignExam={};
+			$scope.saveData= function(){
+				$http({
+				method:'POST',
+				url: $localStorage.service+'ExamAPI/setAssignExam',
+				data: {id:$scope.assignExam.id,name:$scope.assignExam.name,assessmentId:$scope.assignExam.assessmentId,courseId:$scope.assignExam.courseId,startDate:assignExam.startDate,endDate:assignExam.endDate},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+				}).then(function(response){
+					if(response.data.status==true){
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$scope.refreshTable();
+						$scope.clearData();
+					}
+				});
+			}
+			
+			$scope.clearData=function(){
+				$scope.assignExam={};
+			}
+			
+			$scope.deleteAssignExam=function(id,$index){
+				if(id){
+					UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+						if(id){
+							$http({
+							method : "DELETE",
+							url : $localStorage.service+"ExamAPI/setAssignExam",
+							params : {id : id},
+							headers:{'access_token':$localStorage.access_token}
+							}).then(function mySucces(response) {
+								UIkit.notify({
+									message : response.data.message,
+									status  : 'success',
+									timeout : 2000,
+									pos     : 'top-center'
+								});
+								$scope.refreshTable();
+								$scope.viewData.splice($index, 1);
+							},function myError(response) {
+							})
+						}
+					},function(){
+						// console.log("false");
+					}, {
+						labels: {
+							'Ok': 'Ok'
+						}
+					});
+				}
+			}
+			
         }
     );

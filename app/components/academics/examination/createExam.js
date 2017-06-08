@@ -1,7 +1,7 @@
 angular
     .module('rubycampusApp')
-    .controller('setexamCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
+    .controller('setCreateExamCtrl',
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage,$filter) {
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -34,6 +34,16 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -45,30 +55,76 @@ angular
             vm.dtColumnDefs = [
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Description'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Term'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('Start Date'),
+                DTColumnDefBuilder.newColumnDef(2).withTitle('End Date'),
 
             ];
 
+			// date range
+            var $dp_start = $('#uk_dp_start'),
+                $dp_end = $('#uk_dp_end');
+
+            var start_date = UIkit.datepicker($dp_start, {
+                format:'DD.MM.YYYY'
+            });
+
+            var end_date = UIkit.datepicker($dp_end, {
+                format:'DD.MM.YYYY'
+            });
+
+            $dp_start.on('change',function() {
+                end_date.options.minDate = $dp_start.val();
+            });
+
+            $dp_end.on('change',function() {
+                start_date.options.maxDate = $dp_end.val();
+            });
+			
             var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
-              
+             
 			$scope.openModel = function() {
 				//$scope.buttonStatus='Save';
 				$scope.Savebutton=true;
 				$scope.Updatebutton=false;
 				$('.uk-modal').find('input').trigger('blur');
 			};
+			
+			$scope.get_id = [];
+			$http({
+			method:'get',
+			url: $localStorage.service+'ExamAPI/setTerm',
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				$scope.get_id.push(return_data.data.message);
+			});
+			$scope.selectize_term_options = $scope.get_id;
+			$scope.selectize_term_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Term',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					console.log(val);
+				}
+			};
+			
 			$scope.edit_data= function(res){
 				if (typeof res=="undefined") return false;
 				//console.log(res,"messsssssssssss");
 				$scope.Updatebutton=true;
 				$scope.Savebutton=false;
-				$scope.exam={id:res.ID,name:res.NAME,description:res.DESCRIPTION};
+				$scope.Fromdate = $filter('date')(res.STARTDATE,'dd.MM.yyyy');
+				$scope.Todate = $filter('date')(res.ENDDATE,'dd.MM.yyyy');
+				// $scope.exam={id:res.ID,name:res.NAME,termId:res.SETTERM_ID,startDate:res.STARTDATE,endDate:res.ENDDATE};
+				$scope.exam={id:res.ID,name:res.NAME,termId:res.SETTERM_ID,startDate:$scope.Fromdate,endDate:$scope.Todate};
 			}
 			
 			$scope.refreshTable=function(){
 				$http({
 				method:'get',
-				url: $localStorage.service+'ExamAPI/setExam',
+				url: $localStorage.service+'ExamAPI/setCreateExam',
 				headers:{'access_token':$localStorage.access_token}
 				}).then(function(return_data){
 					vm.dt_data = return_data.data.message;
@@ -79,10 +135,12 @@ angular
 			
 			$scope.exam={};
 			$scope.saveData= function(){
+				$scope.startDate = $filter('date')($scope.exam.startDate,'yyyy-MM-dd');
+				$scope.endDate = $filter('date')($scope.exam.endDate,'yyyy-MM-dd');
 				$http({
 				method:'POST',
-				url: $localStorage.service+'ExamAPI/setExam',
-				data: {id:$scope.exam.id,name:$scope.exam.name,description:$scope.exam.description},
+				url: $localStorage.service+'ExamAPI/setCreateExam',
+				data: {id:$scope.exam.id,name:$scope.exam.name,termId:$scope.exam.termId,startDate:$scope.startDate,endDate:$scope.endDate},
 				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
 				}).then(function(response){
 					if(response.data.status==true){
@@ -108,7 +166,7 @@ angular
 						if(id){
 							$http({
 							method : "DELETE",
-							url : $localStorage.service+"ExamAPI/setExam",
+							url : $localStorage.service+"ExamAPI/setCreateExam",
 							params : {id : id},
 							headers:{'access_token':$localStorage.access_token}
 							}).then(function mySucces(response) {
