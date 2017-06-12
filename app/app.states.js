@@ -3274,15 +3274,35 @@ rubycampusApp
                 // })
                 .state("restricted.academics.course", {
                     url: "/course",
-                    templateUrl: 'app/components/academics/courseBatch/course.html',
+                    // templateUrl: 'app/components/academics/courseBatch/course.html',
+                    views:{
+                        '':{
+                            template: '<div><div ui-view="page"></div><div ui-view="modal1"></div><div ui-view="modal2"></div></div>',
+                            controller:'courseCtrl',
+                            controllerAs:'showCase'
+                        },
+                        "page@restricted.academics.course":{
+                            templateUrl: 'app/components/academics/courseBatch/course.html'
+                            
+                        },
+                        "modal1@restricted.academics.course":{
+                            templateUrl: 'app/components/academics/courseBatch/courseModal.html'
+                        },
+                        "modal2@restricted.academics.course":{
+                            templateUrl: 'app/components/academics/courseBatch/departmentModal.html',
+                            controller:'departmentCtrl'
+                        }
+                    },
+                    
                     // controller: 'courseCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
-								'bower_components/angular-resource/angular-resource.min.js',
+                                'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/academics/courseBatch/courseCtrl.js'
+                                'app/components/academics/courseBatch/courseCtrl.js',
+                                'app/components/academics/courseBatch/departmentCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -3290,21 +3310,36 @@ rubycampusApp
                         pageTitle: 'Course'
                     }
                 })
-                 .state("restricted.academics.courseBatches", {
+                .state("restricted.academics.courseBatches", {
                     url: "/courseBatches",
-                    templateUrl: 'app/components/academics/courseBatch/courseBatch.html',
-                    //controller: 'courseBatchCtrl',
-                    resolve: {
-                           
+                    views:{
+                        '':{
+                            template: '<div><div ui-view="page"></div><div ui-view="modal1"></div><div ui-view="modal2"></div></div>',
+                            controller:'courseBatchCtrl',
+                            controllerAs:'showCase'
+                        },
+                        "page@restricted.academics.courseBatches":{
+                            templateUrl: 'app/components/academics/courseBatch/courseBatch.html'
+                            
+                        },
+                        "modal1@restricted.academics.courseBatches":{
+                            templateUrl: 'app/components/academics/courseBatch/batchModal.html'
+                        },
+                        "modal2@restricted.academics.courseBatches":{
+                            templateUrl: 'app/components/academics/courseBatch/courseModal.html',
+                            controller:'courseCtrl'
+                        }
+                    },
+                    
+                    // controller: 'courseBatchCtrl',
+                   resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                // 'bower_components/angular-resource/angular-resource.min.js',
-                                //'xeditable',
-                                //'smart-table',
-								'lazy_parsleyjs',
+                                'lazy_parsleyjs',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/academics/courseBatch/courseBatchCtrl.js'
+                                'app/components/academics/courseBatch/courseBatchCtrl.js',
+                                'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -3314,15 +3349,34 @@ rubycampusApp
                 })
                 .state("restricted.academics.subjects", {
                     url: "/subjects",
-                    templateUrl: 'app/components/academics/courseBatch/subject.html',
-                    //controller: 'subjectCtrl',
-                    resolve: {
+                    views:{
+                        '':{
+                            template: '<div><div ui-view="page"></div><div ui-view="modal1"></div><div ui-view="modal2"></div></div>',
+                            controller:'subjectCtrl',
+                            controllerAs:'showCase'
+                        },
+                        "page@restricted.academics.subjects":{
+                            templateUrl: 'app/components/academics/courseBatch/subject.html'
+                            
+                        },
+                        "modal1@restricted.academics.subjects":{
+                            templateUrl: 'app/components/academics/courseBatch/subjectModal.html'
+                        },
+                        "modal2@restricted.academics.subjects":{
+                            templateUrl: 'app/components/academics/courseBatch/courseModal.html',
+                            controller:'courseCtrl'
+                        }
+                    },
+                    
+                    // controller: 'subjectCtrl',
+                   resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_parsleyjs',
                                 'lazy_datatables',
-                                'app/components/academics/courseBatch/subjectCtrl.js'
+                                'app/components/academics/courseBatch/subjectCtrl.js',
+                                'app/components/academics/courseBatch/courseCtrl.js',
                             ], {serie:true});
                         }],
                     },
@@ -3330,6 +3384,23 @@ rubycampusApp
                         pageTitle: 'Subjects'
                     }
                 })
+                // .state("restricted.academics.subjects", {
+                //     url: "/subjects",
+                //     templateUrl: 'app/components/academics/courseBatch/subject.html',
+                //     resolve: {
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'bower_components/angular-resource/angular-resource.min.js',
+                //                 'lazy_parsleyjs',
+                //                 'lazy_datatables',
+                //                 'app/components/academics/courseBatch/subjectCtrl.js'
+                //             ], {serie:true});
+                //         }],
+                //     },
+                //     data: {
+                //         pageTitle: 'Subjects'
+                //     }
+                // })
                 .state("restricted.academics.syllabus", {
                     url: "/syllabus",
                     templateUrl: 'app/components/academics/courseBatch/syllabus.html',
@@ -3368,13 +3439,32 @@ rubycampusApp
                 })
                 .state("restricted.academics.department", {
                     url: "/department",
-                    templateUrl: 'app/components/academics/courseBatch/department.html',
+                    views:{
+                        '':{
+                            template: '<div> \
+                                        <div ui-view="page"></div> \
+                                        <div ui-view="modal1"></div>\
+                                        <div ui-view="modal2"></div>\
+                                       </div>',
+                            controller:'departmentCtrl',
+                            controllerAs:'showCase'
+                        },
+                        "page@restricted.academics.department":{
+                            templateUrl: 'app/components/academics/courseBatch/department.html',
+                        },
+                        "modal1@restricted.academics.department":{
+                            templateUrl: 'app/components/academics/courseBatch/departmentModal.html',
+                        },
+                        "modal2@restricted.academics.department":{
+                        }
+                    },
+                    
                     // controller: 'departmentCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
-								'bower_components/angular-resource/angular-resource.min.js',
+                                'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'app/components/academics/courseBatch/departmentCtrl.js'
                             ], {serie:true});
@@ -4967,7 +5057,7 @@ rubycampusApp
                     }]
                 },
                 data: {
-                    pageTitle: 'Stettings View'
+                    pageTitle: 'Hostel View'
                 }
             })
             .state("restricted.hostel.allocation", {
@@ -4976,7 +5066,7 @@ rubycampusApp
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
-                            'lazy_parsleyjs',
+                            // 'lazy_parsleyjs',
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
                             'app/components/hostel/allocationviewCtrl.js'
@@ -4985,6 +5075,24 @@ rubycampusApp
                 },
                 data: {
                     pageTitle: 'Allocation View'
+                }
+            })
+            .state("restricted.hostel.addAllocation", {
+                url: "/addallocation",
+                templateUrl: 'app/components/hostel/addAllocation.html',
+                controller: 'addAllocationCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/addAllocationCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Allocation Add'
                 }
             })
             .state("restricted.hostel.transfer", {
@@ -5004,12 +5112,50 @@ rubycampusApp
                     pageTitle: 'Tranfer Details'
                 }
             })
+            .state("restricted.hostel.addTransfer", {
+                url: "/addTransfer",
+                templateUrl: 'app/components/hostel/add_transfer.html',
+                controller: 'addTransferCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/hostel/addTransferCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Add Tranfer'
+                }
+            })
+            .state("restricted.hostel.edit_transfer", {
+                url: "/edit_transfer/{id}",
+                templateUrl: 'app/components/hostel/editTransfer.html',
+                controller: 'editTransferCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'lazy_parsleyjs',
+                            'app/components/hostel/editTransferCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Edit Transfer'
+                }
+            })
             .state("restricted.hostel.vacate", {
                 url: "/vacate",
                 templateUrl: 'app/components/hostel/vacate.html',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
 							'lazy_parsleyjs',
@@ -5018,7 +5164,45 @@ rubycampusApp
                     }]
                 },
                 data: {
-                    pageTitle: 'Tranfer Details'
+                    pageTitle: 'Vacte Details'
+                }
+            })
+            .state("restricted.hostel.addAacate", {
+                url: "/addVacate",
+                templateUrl: 'app/components/hostel/addVacate.html',
+                controller: 'addVacateCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'lazy_parsleyjs',
+                            'app/components/hostel/addVacateCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Add Vacte'
+                }
+            })
+             .state("restricted.hostel.edit_vacate", {
+                url: "/edit_vacate/{id}",
+                templateUrl: 'app/components/hostel/editVacate.html',
+                controller: 'editVacateCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'lazy_parsleyjs',
+                            'app/components/hostel/editVacate.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Edit Vacte'
                 }
             })
             .state("restricted.hostel.visitors", {
@@ -5027,6 +5211,8 @@ rubycampusApp
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
                         return $ocLazyLoad.load([
+                            'lazy_masked_inputs',
+                            'lazy_parsleyjs',
                             'bower_components/angular-resource/angular-resource.min.js',
                             'lazy_datatables',
                             'lazy_parsleyjs',
@@ -5038,6 +5224,47 @@ rubycampusApp
                     pageTitle: 'Visitors'
                 }
             })
+            .state("restricted.hostel.addVisitors", {
+                url: "/addVisitors",
+                templateUrl: 'app/components/hostel/addVisitors.html',
+                controller: 'addVisitorCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_masked_inputs',
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'lazy_parsleyjs',
+                            'app/components/hostel/addVisitorCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Add Visitors'
+                }
+            })
+            .state("restricted.hostel.edit_visitor", {
+                    url: "/edit_visitor/{id}",
+                    templateUrl: 'app/components/hostel/editVisitor.html',
+                    controller: 'editVisitorCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'lazy_tinymce',
+                                'lazy_parsleyjs',
+                                'app/components/hostel/editVisitor.js'
+                            ],{serie: true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Visitor Edit'
+                    },
+                    params:{id:null}
+                })
             .state("restricted.hostel.feereport", {
                 url: "/feereport",
                 templateUrl: 'app/components/hostel/report.html',
@@ -5194,7 +5421,6 @@ rubycampusApp
 					pageTitle: 'Vehicle Details'
 				}
 			})
-			
 			.state("restricted.transport.vehicleDetailAdd", {
 				url: "/vehicleDetailAdd",
 				templateUrl: 'app/components/transport/vehicleDetailAdd.html',
@@ -5202,6 +5428,7 @@ rubycampusApp
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
 							'bower_components/angular-resource/angular-resource.min.js',
 							'lazy_datatables',
 							'lazy_dropify',
@@ -5213,6 +5440,25 @@ rubycampusApp
 					pageTitle: 'Add Vehicle Details'
 				}
 			})
+            .state("restricted.transport.vehicleDetailEdit", {
+                url: "/vehicleDetailEdit/{id}",
+                templateUrl: 'app/components/transport/vehicleDetailsEdit.html',
+                controller: 'vehicleDetailsEditCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'lazy_dropify',
+                            'app/components/transport/vehicleDetailsEditCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Edit Vehicle Details'
+                }
+            })
 			
 			.state("restricted.transport.routeDetail", {
 				url: "/routeDetail",
@@ -5221,6 +5467,7 @@ rubycampusApp
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
 							'bower_components/angular-resource/angular-resource.min.js',
 							'lazy_datatables',
 							'app/components/transport/routeDetail.js'
@@ -5239,6 +5486,8 @@ rubycampusApp
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
+                            'lazy_masked_inputs',
+                            'lazy_parsleyjs',
 							'bower_components/angular-resource/angular-resource.min.js',
 							'lazy_datatables',
 							'app/components/transport/routeTiming.js'
@@ -5267,6 +5516,44 @@ rubycampusApp
 					pageTitle: 'Route Stops'
 				}
 			})
+            .state("restricted.transport.addRouteStops", {
+                url: "/addRouteStops",
+                templateUrl: 'app/components/transport/addRouteStops.html',
+                controller: 'addRouteStopsCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_masked_inputs',
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/transport/addRouteStops.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Add Route Stops'
+                }
+            })
+            .state("restricted.transport.editRouteStops", {
+                url: "/editRouteStops/{id}",
+                templateUrl: 'app/components/transport/editRouteStops.html',
+                controller: 'addRouteStopsCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'lazy_masked_inputs',
+                            'lazy_parsleyjs',
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/transport/editRouteStops.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Edit Route Stops'
+                }
+            })
 			
 			.state("restricted.transport.routeAllocation", {
 				url: "/routeAllocation",
@@ -5275,6 +5562,7 @@ rubycampusApp
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
+                            'lazy_parsleyjs',
 							'bower_components/angular-resource/angular-resource.min.js',
 							'lazy_datatables',
 							'app/components/transport/allocation.js'
