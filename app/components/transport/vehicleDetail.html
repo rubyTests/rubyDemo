@@ -10,6 +10,9 @@
     margin: 18px auto;
     width: 417px;
   }
+  .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+    font-size: 16px !important;
+  }
 </style>
 <div id="page_content" ng-controller="vehicleDetailCtrl as showCase">
     <div id="page_content_inner">
@@ -43,15 +46,16 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                      <tr ng-repeat="row in showCase.dt_data">
+                      <tr ng-repeat="row in viewData">
                         <td>{{$index+1}}</td>
-                        <td>{{row.name}}</td>
-                        <td>{{row.type}}</td>
-                        <td>{{row.capacity}}</td>
-                        <td>{{row.regno}}</td>
+                        <td>{{row.NAME}}</td>
+                        <td>{{row.TYPE}}</td>
+                        <td>{{row.CAPACITY}}</td>
+                        <td>{{row.REG_NO}}</td>
                         <td>
-                            <a ui-sref="restricted.transport.vehicleDetailAdd"><i class="md-icon material-icons">&#xE254;</i></a>
-                            <a class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            <a ui-sref="restricted.transport.vehicleDetailEdit({id:{{row.ID}}})"><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a class="ts_remove_row" ng-click="deleteVehicle(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                           <!--  <a class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a> -->
                         </td>
                       </tr>
                     </tbody>

@@ -2,8 +2,9 @@ angular
     .module('rubycampusApp')
     .controller('subjectCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter,$http,$rootScope,$localStorage) {
-            var $formValidate = $('#form_validation');
-            $formValidate
+            $timeout(function(){
+                var $formValidate = $('#form_validation');
+                $formValidate
                 .parsley()
                 .on('form:validated',function() {
                     $scope.$apply();
@@ -12,11 +13,11 @@ angular
                     if($(parsleyField.$element).hasClass('md-input')) {
                         $scope.$apply();
                     }
-                });
-
-                $scope.clearValidation=function(){
-                    $('#form_validation').parsley().reset();
-                }
+                });    
+            })
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -78,7 +79,7 @@ angular
                 })
             });
 
-            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+            var modal = UIkit.modal("#subject_modal",{bgclose: false, keyboard:false});
 
             $scope.courseData=[];
             $scope.viewData=[];
@@ -88,26 +89,60 @@ angular
                     $scope.viewData=course_data.message;
                 });
             }
-            
-            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
-                .success(function(course_data){
-                    $scope.courseData.push(course_data.data);
-                    console.log(course_data,'fetchCourseData');
-                });
-
             $scope.refreshTable();
+            
+            $scope.setCourseId=function(cor_data){
+                    if (cor_data.status==false) {
+                       $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                    }else{
+                        $scope.courseData.push(cor_data.data);
+                        $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                    }
+                }
+            $scope.refreshcourse=function(){
+                $scope.courseData=[];
+                $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(cor_data){
+                    //console.log(cor_data,'cor_data');
+                    $scope.setCourseId(cor_data);
+                }).error(function(cor_data){
+                    $scope.setCourseId(cor_data);
+                })
+            };
+            $scope.refreshcourse();
             
             $scope.selectize_courseName_options =$scope.courseData;
             $scope.selectize_courseName_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course',
+                placeholder: 'Course',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
+                render: {
+                    option: function (item, escape) {
+                        if(item.ID==0){
+                            return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                        }else{
+                             return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<span class="name">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                        }
+                       
+                    }
+                },
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        if (value==0 && value!='') {
+                            UIkit.modal("#course_modal").show();
+                        };
+
                     });
                 }
             };
@@ -123,14 +158,16 @@ angular
                 $scope.clearValidation();
                 $scope.titCaption="Add";
                 $scope.btnStatus='Save';
-                $scope.cou_sub_id='';
-                $scope.sub_id='';
-                $scope.subject_name='';
-                $scope.sub_code='';
-                $scope.sub_type='';
-                $scope.course_id='';
-                $scope.total_hours='';
-                $scope.credit_hours='';
+                $scope.subjectdata={
+                        cou_sub_id:"",
+                        sub_id: "",
+                        subject_name: "",
+                        sub_code: "",
+                        sub_type: "",
+                        course_id: "",
+                        total_hours: "",
+                        credit_hours: ""
+                    };
                 $('.uk-modal').find('input').trigger('blur');
             };
             $scope.editSubject= function(res){
@@ -138,36 +175,39 @@ angular
                 $scope.titCaption="Edit";
                 $scope.btnStatus='Update';
                 if(res){
-                    $scope.cou_sub_id=res.ID;
-                    $scope.sub_id=res.SUB_ID;
-                    $scope.subject_name=res.NAME;
-                    $scope.sub_code=res.CODE;
-                    $scope.sub_type=res.TYPE;
-                    $scope.course_id=res.COURSE_ID;
-                    $scope.total_hours=res.TOTAL_HOURS;
-                    $scope.credit_hours=res.CREDIT_HOURS;
+                    $scope.subjectdata={
+                        cou_sub_id: res.ID,
+                        sub_id: res.SUB_ID,
+                        subject_name: res.NAME,
+                        sub_code: res.CODE,
+                        sub_type: res.TYPE,
+                        course_id: res.COURSE_ID,
+                        total_hours: res.TOTAL_HOURS,
+                        credit_hours: res.CREDIT_HOURS
+                    };
+                   
                 }
             }
-
+            $scope.subjectdata={};
             $scope.saveSubjectData=function(){
                 $http({
                     method:'POST',
                     url: $localStorage.service+'AcademicsAPI/subjectDetail',
                     data: {
-                        'cou_sub_id' : $scope.cou_sub_id,
-                        'sub_id' : $scope.sub_id,
-                        'subject_name' : $scope.subject_name,
-                        'sub_code' : $scope.sub_code,
-                        'sub_type' : $scope.sub_type,
-                        'course_id' : $scope.course_id,
-                        'total_hours' : $scope.total_hours,
-                        'credit_hours' : $scope.credit_hours
+                        'cou_sub_id' : $scope.subjectdata.cou_sub_id,
+                        'sub_id' : $scope.subjectdata.sub_id,
+                        'subject_name' : $scope.subjectdata.subject_name,
+                        'sub_code' : $scope.subjectdata.sub_code,
+                        'sub_type' : $scope.subjectdata.sub_type,
+                        'course_id' : $scope.subjectdata.course_id,
+                        'total_hours' : $scope.subjectdata.total_hours,
+                        'credit_hours' : $scope.subjectdata.credit_hours
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.message.message);
                     if(return_data.data.message.status==true){
-                        UIkit.modal("#modal_overflow").hide();
+                        UIkit.modal("#subject_modal").hide();
                         UIkit.notify({
                             message : return_data.data.message.message,
                             status  : 'success',

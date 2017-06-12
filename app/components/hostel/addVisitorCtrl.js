@@ -42,9 +42,9 @@ angular
                     });
                 }
             };
-            $scope.visitor={
-                visit_intime:"00:00"
-            }
+            // $scope.visitor={
+            //     visit_intime:"00:00"
+            // }
             // Dept course and batch details start
                 $scope.deptData=[];
                 $scope.course_data=[];

@@ -92,7 +92,7 @@ angular
 			$scope.getLogin=function(){
 				$http({
 					method : "GET",
-					url : "http://192.168.1.139/rubyServices/api/GeneralAPI/login",
+					url : "http://localhost/rubyServices/api/GeneralAPI/login",
 					// url : "http://campusenter.com/services/api/GeneralAPI/login",
 					params : {"USER_EMAIL": $scope.login_username, "USER_PASSWORD": $scope.login_password},
 				}).then(function(response){
@@ -123,7 +123,7 @@ angular
 			$scope.recoveryData=function(){
 				//console.log($scope.recovery,"recovery");
 				if($scope.recovery!='' || $scope.recovery!=undefined){
-					$http.get('http://192.168.1.139/rubyServices/api/GeneralAPI/passwordReset',{params:{userData:$scope.recovery.data}})
+					$http.get('http://localhost/rubyServices/api/GeneralAPI/passwordReset',{params:{userData:$scope.recovery.data}})
 					.success(function(data){
 						//console.log(data,"data");
 						if(data.status==true){

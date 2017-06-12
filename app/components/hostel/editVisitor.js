@@ -32,6 +32,7 @@ angular
               params :{id : $stateParams.id},
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(data) {
+                console.log(data,'visitor');
                 $scope.getVisitorId=data.data.message[0].ID;
                 $timeout(function() {
                 if (data) {

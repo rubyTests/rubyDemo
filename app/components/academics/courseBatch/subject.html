@@ -1,11 +1,23 @@
-<div id="page_content" ng-controller="subjectCtrl as showCase">
+<style type="text/css">
+  .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+    font-size: 16px !important;
+  }
+  .linkClr{
+    color: rgb(94,100,255) !important;
+  }
+  .linkClrtxt{
+    color: rgb(94,100,255) !important;
+    margin-left: 10px !important;
+  }
+</style>
+<div id="page_content">
     <div id="page_content_inner">
         <h3 class="heading_a uk-margin-bottom">Subject</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_overflow'}" ng-click="addSubject()">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#subject_modal'}" ng-click="addSubject()">
                         <i class="uk-icon-plus"></i>  Add Subjects
                         </button>
                     </div>
@@ -43,7 +55,7 @@
                             <td>{{row.TOTAL_HOURS}}</td>
                             <td>{{row.CREDIT_HOURS}}</td>
                             <td class="uk-text-center">
-                                <a data-uk-modal="{target:'#modal_overflow'}" ng-click="editSubject(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a data-uk-modal="{target:'#subject_modal'}" ng-click="editSubject(row)"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a class="ts_remove_row" ng-click="deleteSubject(row.ID,row.SUB_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -52,68 +64,4 @@
             </div>
         </div>
     </div>
-     
-
-     <div id="modal_overflow" class="uk-modal">
-                    <div class="uk-modal-dialog">
-                        <button type="button" class="uk-modal-close uk-close"></button>
-                        <h3 class="uk-modal-title"> {{titCaption}} Subjects </h3><br>
-                        <div class="md-card-content">
-                            <form id="form_validation" name="inputForm" ng-submit="saveSubjectData()" novalidate>
-                                <div class="uk-form-row parsley-row">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-medium-1-1">
-                                            <label class="uk-form-label">Subject Name<span class="req">*</span></label>
-                                            <input type="text" ng-model="subject_name" required class="md-input" md-input />
-                                            <input type="hidden" ng-model="sub_id">
-                                            <input type="hidden" ng-model="cou_sub_id">
-                                        </div>
-                                    </div>          
-                                </div>
-                                <div class="uk-form-row">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-medium-1-1">
-                                            <label for="subcode">Subject Code</label>
-                                            <input type="text" ng-model="sub_code" class="md-input" md-input>
-                                        </div>
-                                    </div>          
-                                </div>
-                                <div class="uk-form-row">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-medium-1-1">
-                                            <label class="uk-form-label" ng-show="sub_type" style="font-size: 12px;color: #727272;">Subject Type<span class="req"></span></label>
-                                            <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="sub_type" selectize/>
-                                        </div>
-                                    </div>          
-                                </div>
-                                <div class="uk-form-row parsley-row">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-medium-1-1">
-                                             <label class="uk-form-label" ng-show="course_id" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
-                                            <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" required ng-model="course_id" selectize/>
-                                        </div>
-                                    </div>          
-                                </div>
-                                <div class="uk-form-row">
-                                    <div class="uk-grid">
-                                        <div class="uk-width-medium-1-2">
-                                            <label>Total Hours</label>
-                                            <input type="text" class="md-input" ng-model="total_hours" md-input />
-                                        </div>
-                                        <div class="uk-width-medium-1-2">
-                                            <label>Credit Hours</label>
-                                            <input type="text" class="md-input label-fixed" ng-model="credit_hours" md-input />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="uk-modal-footer uk-text-right">
-                                    <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
-                                    <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-   
 </div>

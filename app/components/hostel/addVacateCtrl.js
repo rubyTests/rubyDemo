@@ -108,13 +108,13 @@ angular
                 $scope.getEmployeeList=function(id){
                     $http({
                     method:'get',
-                    url: $localStorage.service+'AcademicsAPI/fetchTeacherDetailList',
+                    url: $localStorage.service+'HostelAPI/allocateEmployeeDetail',
                     params: {
                         'id' : id
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        $scope.selectize_employee_options=return_data.data.data;
+                        $scope.selectize_employee_options=return_data.data.result;
                     });
                 }
                 
@@ -123,9 +123,9 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Employee',
-                    valueField: 'EMP_ID',
-                    labelField: 'EMP_ANME',
-                    searchField: 'EMP_ANME',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                         });

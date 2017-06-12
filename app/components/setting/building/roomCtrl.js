@@ -194,39 +194,88 @@ angular
                 });
             }
 
+            $scope.deleteRoom=function(id,$index){
+                $http({
+                    method : "get",
+                    url : $localStorage.service+"InstitutionAPI/checkRoom",
+                    params : {id : id},
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function mySucces(response) {
+                        if(response.data.status==true){
+                            if(id){
+                                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                    if(id){
+                                        $http({
+                                        method : "DELETE",
+                                        url : $localStorage.service+"InstitutionAPI/room",
+                                        params : {id : id},
+                                        headers:{'access_token':$localStorage.access_token}
+                                        }).then(function mySucces(response) {
+                                            if(response.data.status==true){
+                                                UIkit.notify({
+                                                    message : response.data.message.message,
+                                                    status  : 'success',
+                                                    timeout : 2000,
+                                                    pos     : 'top-center'
+                                                });
+                                                $scope.viewData.splice($index, 1);
+                                                $scope.refreshTable();
+                                            }
+                                            
+                                        },function myError(response) {
+                                        })
+                                    }
+                                },function(){
+                                     console.log("false");
+                                    $scope.refreshTable();
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
+                            }
 
-            // delete block
-            $scope.deleteRoom=function(id, $index){
-                if(id){
-                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                        if(id){
-                            $http({
-                            method : "DELETE",
-                            url : $localStorage.service+"InstitutionAPI/room",
-                            params : {id : id},
-                            headers:{'access_token':$localStorage.access_token}
-                            }).then(function mySucces(response) {
-                                if(response.data.status==true){
-                                    UIkit.notify({
-                                        message : response.data.message.message,
-                                        status  : 'success',
-                                        timeout : 2000,
-                                        pos     : 'top-center'
-                                    });
-                                }
-                                $scope.viewData.splice($index, 1);
-                                $scope.refreshTable();
-                            },function myError(response) {
-                            })
                         }
-                    },function(){
-                        // console.log("false");
-                    }, {
-                        labels: {
-                            'Ok': 'Ok'
-                        }
-                    });
-                }
+                    },function myError(response) {
+                        //console.log(response,'errr');
+                        UIkit.modal.alert(response.data.message);
+                    })
+               
             }
+            // delete block
+            //  $scope.deleteRoom=function(id, $index){
+            //     if(id){
+            //         $http({
+            //             method : "DELETE",
+            //             url : $localStorage.service+"InstitutionAPI/room",
+            //             params : {id : id},
+            //             headers:{'access_token':$localStorage.access_token}
+            //         }).then(function mySucces(response) {
+            //             UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+            //             if(id){
+            //                 if(response.data.status==true){
+            //                     UIkit.notify({
+            //                         message : response.data.message,
+            //                         status  : 'success',
+            //                         timeout : 2000,
+            //                         pos     : 'top-center'
+            //                     });
+            //                 }
+            //                 $scope.viewData.splice($index, 1);
+            //                 $scope.refreshTable();
+            //                 }
+            //             },function(){
+            //                 // console.log("false");
+            //             }, {
+            //                 labels: {
+            //                     'Ok': 'Ok'
+            //                 }
+            //             })
+            //         },function myError(response) {
+            //             UIkit.modal.alert(response.data.message);
+
+            //         })
+            //     }
+            // }
         }
     );

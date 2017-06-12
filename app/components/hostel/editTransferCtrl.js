@@ -13,17 +13,32 @@ angular
                 if($maskedInput.length) {
                     $maskedInput.inputmask();
                 }
-            var $formValidate = $('#form_validation');
-            $formValidate
-                .parsley()
-                .on('form:validated',function() {
-                    //$scope.$apply();
-                })
-                .on('field:validated',function(parsleyField) {
-                    if($(parsleyField.$element).hasClass('md-input')) {
-                       // $scope.$apply();
-                    }
-                });
+            
+            // var $formValidate = $('#form_validation');
+            //     $formValidate
+            //         .parsley()
+            //         .on('form:validated',function() {
+            //             //$scope.$apply();
+            //         })
+            //         .on('field:validated',function(parsleyField) {
+            //             if($(parsleyField.$element).hasClass('md-input')) {
+            //                // $scope.$apply();
+            //             }
+            //         });
+                // $scope.clearValidation=function(){
+                //     $('#form_validation').parsley().reset();
+                // }
+                $timeout(function(){
+                    // date range
+                    var $dp_end = $('#uk_dp_end');
+
+                    var end_date = UIkit.datepicker($dp_end, {
+                        format:'DD.MM.YYYY'
+                    });
+                    $dp_end.on('change',function() {
+                        start_date.options.minDate = $dp_end.val();
+                    });
+                },100);
 
             
             $http({
@@ -49,19 +64,20 @@ angular
                             $scope.batchId=data.data.message[0].batchId;
                         
                     }else{
-                       
+                      
                         // $scope.id=data.ID;
-                        $scope.selectize_usertype=data.RESIDENT_TYPE;
-                        $scope.selectize_emp_profileId=data.PROFILE_ID;
-                        $scope.selectize_hname=data.HOSTEL_ID;
-                        $scope.selectize_block=data.BLOCK_ID;
-                        $scope.selectize_room=data.roomName;
-                        $scope.currDate=data.DATE;
+                        $scope.selectize_usertype=data.data.message[0].RESIDENT_TYPE;
+                        $scope.selectize_emp_profileId=data.data.message[0].PROFILE_ID;
+                        $scope.selectize_hname=data.data.message[0].HOSTEL_ID;
+                        $scope.selectize_block=data.data.message[0].BLOCK_ID;
+                        $scope.selectize_room=data.data.message[0].ROOM_ID;
+                        $scope.currDate=data.data.message[0].DATE;
                         $scope.dept_id=data.data.message[0].deptId;
+                       
                         
                     }  
                 }
-                }, 300);   
+                }, 100);   
             },function myError(response){
                 console.log(response);
             });
@@ -150,13 +166,14 @@ angular
                 $scope.getEmployeeList=function(id){
                     $http({
                     method:'get',
-                    url: $localStorage.service+'AcademicsAPI/fetchTeacherDetailList',
+                    url: $localStorage.service+'HostelAPI/allocateEmployeeDetail',
                     params: {
                         'id' : id
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        $scope.selectize_employee_options=return_data.data.data;
+                        //console.log(return_data,'emplyy')
+                        $scope.selectize_employee_options=return_data.data.result;
                     });
                 }
                 
@@ -165,12 +182,16 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Employee',
-                    valueField: 'EMP_ID',
-                    labelField: 'EMP_ANME',
-                    searchField: 'EMP_ANME',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            $scope.getAllDetails(value);
+                            if (value) {
+                                // $('#form_validation').parsley().validate();
+                                $scope.getAllDetails(value);    
+                            }
+                            
                         });
                     }
                 };
@@ -200,7 +221,11 @@ angular
                     searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            $scope.getAllDetails(value);
+                            if (value) {
+                                // $('#form_validation').parsley().validate();
+                                $scope.getAllDetails(value);    
+                            }
+
                         });
                     }
                 };
@@ -285,8 +310,7 @@ angular
                         }else{
                             $scope.selectize_room_options='';
                         }
-
-                        
+                        // $('#form_validation').parsley().validate();
                     });
                 }
                 $scope.selectize_room_options =[];
@@ -299,7 +323,7 @@ angular
                     searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            
+                            $('#form_validation').parsley().validate();     
                         });
                     }
                 };
@@ -339,7 +363,7 @@ angular
                             });
                             $state.go('restricted.hostel.transfer');
                         }else {
-                            UIkit.modal.alert('Same Room');
+                            UIkit.modal.alert('Resident alredy belong to the same room');
                         }
                     });
                 }

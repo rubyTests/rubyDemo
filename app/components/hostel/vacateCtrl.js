@@ -39,9 +39,31 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
+                .withButtons([
+                    {
+                        extend:    'print',
+                        text:      '<i class="uk-icon-print"></i> Print',
+                        titleAttr: 'Print'
+                    },
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
+                        titleAttr: ''
+                    },
+                    {
+                        extend:    'pdfHtml5',
+                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF'
+                    }
+                ])
                  .withOption('initComplete', function() {
                     $timeout(function() {
                         $compile($('.dt-uikit .md-input'))($scope);
@@ -54,7 +76,7 @@ angular
                     url: $localStorage.service+'HostelAPI/vacate',
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(view_data){
-                    console.log(view_data,'view_dataview_data');
+                    //console.log(view_data,'view_dataview_data');
                     $scope.viewData=view_data.data.message;
                 });
                 $scope.deleteVacate=function(id,$index){

@@ -183,6 +183,7 @@ angular
                                 $scope.viewData.splice($index, 1);
                                 $scope.refreshTable();
                             },function myError(return_data) {
+                                UIkit.modal.alert('Block details are assigned to hostel settings');
                             })
                         }
                     },function(){

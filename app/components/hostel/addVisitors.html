@@ -1,8 +1,11 @@
-    <style type="text/css">
+<style type="text/css">
     .parsley-row{
         margin-top: 24px;
     }
-    </style>
+    .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+        font-size: 16px !important;
+    }
+</style>
     <div id="page_content">
         <div id="page_content_inner">
             <h3 class="heading_a uk-margin-bottom">Visitor</h3>
@@ -58,11 +61,14 @@
                                     <input type="text" class="md-input" data-parsley-americandate placeholder="Date" data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="visitor.visit_date"/ required>
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row" ng-show="btnStatus!='Update'">
-                                    <br ng-if="visitor.visit_intime">
+                                   
                                     <div class="uk-input-group">
-                                        <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
-                                        <label ng-if="visitor.visit_intime" style="font-size: 12px;color: #727272;">Time In</label>
-                                        <input type="text" class="md-input masked_input" md-input ng-model="visitor.visit_intime" name="timeIn" data-inputmask="'alias': 'hh:mm'" data-inputmask-showmaskonhover="false" required/>
+                                        
+                                        <span class="uk-input-group-addon">
+                                        <br><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
+                                        <br>
+                                        <label>Time In</label>
+                                        <input type="text" class="md-input masked_input" md-input ng-model="visitor.visit_intime" name="timeIn" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false" required/>
                                     </div>
                                 </div>
                                <!--  <div class="uk-width-medium-1-3 parsley-row" ng-if="btnStatus=='Update'">

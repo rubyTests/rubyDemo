@@ -138,13 +138,19 @@ angular
                 $scope.getEmployeeList=function(id){
                     $http({
                     method:'get',
-                    url: $localStorage.service+'AcademicsAPI/fetchTeacherDetailList',
+                    url: $localStorage.service+'HostelAPI/allocateEmployeeDetail',
                     params: {
                         'id' : id
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        $scope.selectize_employee_options=return_data.data.data;
+                        //console.log(return_data,'emplyyyyyyy');
+                        if(return_data.data.status==false){
+                            $scope.selectize_employee_options.push("Allocate Employee");
+                        }else{
+                            $scope.selectize_employee_options=return_data.data.result;
+                        }
+                       
                     });
                 }
                 
@@ -153,12 +159,16 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Employee',
-                    valueField: 'EMP_ID',
-                    labelField: 'EMP_ANME',
-                    searchField: 'EMP_ANME',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                             $scope.getAllDetails(value);
+                            // if(value=='Allocate Employee'){
+                            //     $state.go('restricted.hostel.addAllocation');
+                            //     $localStorage.urlPath=true;
+                            // }
+                            $scope.getAllDetails(value);
                         });
                     }
                 };
@@ -178,7 +188,11 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        console.log(return_data,'return_datareturn_data');
+                        // if(return_data.data.status==false){
+                        //    $scope.selectize_student_options.push("Allocate Student");
+                        // }else{
+                        //     $scope.selectize_student_options=return_data.data.result;
+                        // }
                         $scope.showName=return_data.data.result[0].NAME;
                         $scope.selectize_student_options=return_data.data.result;
                     });
@@ -194,6 +208,10 @@ angular
                     searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
+                            // if(value=='Allocate Student'){
+                            //     $state.go('restricted.hostel.addAllocation')
+                            //     $localStorage.urlPath=true;
+                            // }
                             $scope.getAllDetails(value);
                         });
                     }
@@ -246,8 +264,10 @@ angular
                     $http({
                     method:'get',
                     url: $localStorage.service+'InstitutionAPI/roomDetails',
+                    params :{id:id},
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
+                        console.log(return_data,'rooooom');
                         $scope.preRoomName=return_data.data.data[0].NAME;
                     });
                 }
@@ -372,7 +392,7 @@ angular
                             });
                            $state.go('restricted.hostel.transfer');
                         }else {
-                            UIkit.modal.alert('Same Room');
+                            UIkit.modal.alert('Resident alredy belong to the same room');
                         }
                     });
                 }

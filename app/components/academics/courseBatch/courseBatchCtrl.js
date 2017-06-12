@@ -2,9 +2,11 @@ angular
     .module('rubycampusApp')
     .controller('courseBatchCtrl',
        
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
-            var $formValidate = $('#form_validation');
-            $formValidate
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage,$state) {
+             var vm = this;
+            $timeout(function(){
+                var $formValidate = $('#form_validation');
+                $formValidate
                 .parsley()
                 .on('form:validated',function() {
                     $scope.$apply();
@@ -13,11 +15,11 @@ angular
                     if($(parsleyField.$element).hasClass('md-input')) {
                         $scope.$apply();
                     }
-                });
+                });    
+            })
                 $scope.clearValidation=function(){
                     $('#form_validation').parsley().reset();
                 }
-            var vm = this;  
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -73,18 +75,20 @@ angular
                     })
                 });
                 
-                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+                var modal = UIkit.modal("#batch_modal",{bgclose: false, keyboard:false});
 
                  $scope.addBatch = function() {
                     $scope.clearValidation();
                     $scope.titCaption="Add";
                     $scope.btnStatus="Save";
-                    $scope.batch_id='';
-                    $scope.course_id='';
-                    $scope.batch_name='';
-                    $scope.incharge_id='';
-                    $scope.period_from='';
-                    $scope.period_to='';
+                     $scope.batchdata={
+                            batch_id:"",
+                            course_id:"",
+                            batch_name:"",
+                            period_from:"",
+                            period_to:"",
+                            incharge_id:""
+                        };
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.editBatch= function(res){
@@ -92,12 +96,14 @@ angular
                     $scope.titCaption="Edit";
                     $scope.btnStatus="Update";
                     if(res){
-                        $scope.batch_id=res.ID;
-                        $scope.course_id=res.COURSE_ID;
-                        $scope.batch_name=res.NAME;
-                        $scope.period_from=res.PERIOD_FROM;
-                        $scope.period_to=res.PERIOD_TO;  
-                        $scope.incharge_id=res.empData[0].ID;
+                        $scope.batchdata={
+                            batch_id:res.ID,
+                            course_id:res.COURSE_ID,
+                            batch_name:res.NAME,
+                            period_from:res.PERIOD_FROM,
+                            period_to:res.PERIOD_TO,
+                            incharge_id:res.empData[0].ID
+                        };
                     }                    
                 }
 
@@ -110,16 +116,33 @@ angular
                         $scope.viewData=batch_data.message;
                     });
                 }
-                
                 $scope.refreshTable();
-                $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
-                .success(function(course_data){
-                    $scope.courseData.push(course_data.data);
-                });
+                $scope.setCourseId=function(cor_data){
+                    if (cor_data.status==false) {
+                       $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                    }else{
+                        $scope.courseData.push(cor_data.data);
+                        $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                    }
+                }
+                $scope.refreshcourse=function(){
+                    $scope.courseData=[];
+                    $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+                    .success(function(cor_data){
+                        console.log(cor_data,'cor_data');
+                        $scope.setCourseId(cor_data);
+                    }).error(function(cor_data){
+                        $scope.setCourseId(cor_data);
+                    })
+                };
+                $scope.refreshcourse();
+
                 $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(emp_data){
-                    $scope.EmpLIST.push(emp_data.data);
+                    //console.log(emp_data.data[0],'incharge');
+                    $scope.EmpLIST.push(emp_data.data[0]);
                 });
+
 
                 $scope.selectize_courseId_options =$scope.courseData;
                 $scope.selectize_courseId_config = {
@@ -129,8 +152,30 @@ angular
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
+                    render: {
+                        option: function (item, escape) {
+                            if(item.ID==0){
+                                return '<div class="option">' +
+                                            '<div class="text">' +
+                                                '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                           '</div>' +
+                                        '</div>';
+                            }else{
+                                 return '<div class="option">' +
+                                            '<div class="text">' +
+                                                '<span class="name">' + escape(item.NAME) + '</span>' +
+                                           '</div>' +
+                                        '</div>';
+                            }
+                           
+                        }
+                    },
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
+                            if (value==0 && value!='') {
+                                UIkit.modal("#course_modal").show();
+                            };
+                            
                             if(value){
                                 $scope.selectize_incharge_options =$scope.EmpLIST;
                             }
@@ -146,7 +191,7 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Batch Incharge',
-                    valueField: 'ID',
+                    valueField: 'PROFILE_ID',
                     labelField: 'FULLNAME',
                     searchField: 'FULLNAME',
                     onInitialize: function(selectize){
@@ -156,24 +201,24 @@ angular
                     }
                 };
 
-
+                $scope.batchdata ={};
                 $scope.saveCourseBatch=function(){
                     $http({
                         method:'POST',
                         url: $localStorage.service+'AcademicsAPI/batchDetail',
                         data: {
-                            'batch_id' : $scope.batch_id,
-                            'course_id' : $scope.course_id,
-                            'batch_name' : $scope.batch_name,
-                            'incharge' : $scope.incharge_id,
-                            'period_from' : $scope.period_from,
-                            'period_to' : $scope.period_to
+                            'batch_id' : $scope.batchdata.batch_id,
+                            'course_id' : $scope.batchdata.course_id,
+                            'batch_name' :$scope.batchdata.batch_name,
+                            'incharge' : $scope.batchdata.incharge_id,
+                            'period_from' : $scope.batchdata.period_from,
+                            'period_to' : $scope.batchdata.period_to
                         },
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                     console.log(return_data.data.message.message);
                     if(return_data.data.message.status==true){
-                        UIkit.modal("#modal_overflow").hide();
+                        UIkit.modal("#batch_modal").hide();
                         UIkit.notify({
                             message : return_data.data.message.message,
                             status  : 'success',

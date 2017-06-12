@@ -29,20 +29,20 @@ angular
               params :{id : $stateParams.id},
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(data) {
-                console.log(data,'response11');
+                console.log(data,'vacatee');
                 $scope.getVacateId=data.data.message[0].ID;
                
                 if (data) {
                     if(data.data.message[0].RESIDENT_TYPE=='Student'){
                         $timeout(function(){
                             $scope.wizard={
-                                dept_id:data.data.message[0].deptId,
+                                // dept_id:data.data.message[0].deptId,
                                 course_id:data.data.message[0].courseId,
                                 batchId:data.data.message[0].batchId
                             };
                             $scope.vacate={
                                 selectize_usertype:data.data.message[0].RESIDENT_TYPE,
-                                selectize_student:data.data.message[0].PROFILE_ID,
+                                selectize_student:data.data.message[0].Name,
                                 vacate_reason:data.data.message[0].REASON,
                                 vacate_date:data.data.message[0].VacateDate
                             };
@@ -53,7 +53,7 @@ angular
                         };
                         $scope.vacate={
                             selectize_usertype:data.data.message[0].RESIDENT_TYPE,
-                            selectize_employee:data.data.message[0].PROFILE_ID,
+                            selectize_employee:data.data.message[0].Name,
                             vacate_reason:data.data.message[0].REASON,
                             vacate_date:data.data.message[0].VacateDate
                         };
@@ -150,13 +150,14 @@ angular
                 $scope.getEmployeeList=function(id){
                     $http({
                     method:'get',
-                    url: $localStorage.service+'AcademicsAPI/fetchTeacherDetailList',
+                    url: $localStorage.service+'HostelAPI/allocateEmployeeDetail',
                     params: {
                         'id' : id
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        $scope.selectize_employee_options=return_data.data.data;
+                        console.log(return_data,'emplye');
+                        $scope.selectize_employee_options=return_data.data.result;
                     });
                 }
                 
@@ -165,9 +166,9 @@ angular
                     create: false,
                     maxItems: 1,
                     placeholder: 'Employee',
-                    valueField: 'EMP_ID',
-                    labelField: 'EMP_ANME',
-                    searchField: 'EMP_ANME',
+                    valueField: 'ID',
+                    labelField: 'NAME',
+                    searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                         });
@@ -203,6 +204,7 @@ angular
 
             
             $scope.updateVacateDetails=function(){
+
                 if($scope.vacate.selectize_usertype=='Student'){
                         $scope.profileId=$scope.vacate.selectize_student
                     }else{

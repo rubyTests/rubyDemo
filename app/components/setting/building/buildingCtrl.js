@@ -173,7 +173,7 @@ angular
                                 $scope.viewData.splice($index, 1);
                                 $scope.refreshTable();
                             },function myError(response) {
-                              // console.log(response,'response');
+                                UIkit.modal.alert('Building details are assigned to hostel settings');
                             })
                         }
                     },function(){

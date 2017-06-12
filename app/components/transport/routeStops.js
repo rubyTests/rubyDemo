@@ -1,9 +1,9 @@
 angular
     .module('rubycampusApp')
     .controller('routeStopsCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        function($compile, $scope, $rootScope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $filter, $localStorage, $http) {
+
             var vm = this;
-            vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
                 .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
@@ -30,127 +30,94 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-						{
+                        {
                             type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
-						{
+                        {
                             type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
-						{
+                        {
                             type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
-						{
+                         {
                             type: 'text',
                             bRegex: true,
                             bSmart: true
                         },
-						{
+                        {
                             type: 'text',
                             bRegex: true,
                             bSmart: true
                         }
-						
                     ]
                 })
-                .withOption('initComplete', function() {
+                .withButtons([
+                    {
+                        extend:    'print',
+                        text:      '<i class="uk-icon-print"></i> Print',
+                        titleAttr: 'Print'
+                    },
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
+                        titleAttr: ''
+                    },
+                    {
+                        extend:    'pdfHtml5',
+                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF'
+                    }
+                ])
+                 .withOption('initComplete', function() {
                     $timeout(function() {
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Stop Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Route Name'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Vehicle Name'),
-                DTColumnDefBuilder.newColumnDef(4).withTitle('PickUp Time'),
-                DTColumnDefBuilder.newColumnDef(5).withTitle('Drop Time'),
-                DTColumnDefBuilder.newColumnDef(6).withTitle('Fare'),
-            ];
 
-            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
-            
-            $scope.route_name = [];
-            $resource('app/components/transport/routeStops.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
+                $scope.viewData=[];
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'TransportAPI/routeStops',
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(view_data){
+                    console.log(view_data,'view_dataview_data');
+                    $scope.viewData=view_data.data.message;
                 });
-            $resource('app/components/transport/routeDetail.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.route_name.push(dt_data);
-                });    
-				$scope.selectize_routeName_options = $scope.route_name;
-                $scope.selectize_routeName_config = {
-                    create: false,
-                    maxItems: 1,
-                    placeholder: 'Select Route Name',
-					valueField: 'id',
-                    labelField: 'name',
-					onInitialize: function(val){
-                        console.log(val);
+                $scope.deleteRouteStops=function(id,$index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"TransportAPI/routeStops",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    //console.log(response.data.message.message,'delete');
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                    $scope.viewData.splice($index, 1);
+                                    // $scope.refreshTable();
+                                },function myError(response) {
+                                })
+                            }
+                        },function(){
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
                     }
-                };
-				
-			$scope.vehicle_name=[];
-			$resource('app/components/transport/vehicleDetail.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    $scope.vehicle_name.push(dt_data);
-                });
-				
-				$scope.selectize_vehicleName_options = $scope.vehicle_name;
-				$scope.selectize_vehicleName_config = {
-					create: false,
-                    maxItems: 1,
-                    placeholder: 'Vehicle Name',
-					valueField: 'id',
-                    labelField: 'name',
-					onInitialize: function(val){
-                        console.log(val);
-                    }
-				};
-				
-				$scope.selectize_fareType_options = ["Annualy", "Monthly", "Weekly"];
-				$scope.selectize_fareType_config = {
-					create: false,
-					maxItems: 1,
-					placeholder: 'Fare Type'
-				};
-				
-                 $scope.openModel = function() {
-                    //$scope.buttonStatus='Save';
-                    $scope.Savebutton=true;
-                    $scope.Updatebutton=false;
-                    $scope.dept_name=null;
-                    $scope.dept_code=null;
-                    $scope.selectize_hodProfieId=null;
-                    $scope.Phone=null;
-                    $('.uk-modal').find('input').trigger('blur');
-                };
-                $scope.edit_data= function(res){
-                    if (typeof res=="undefined") return false;
-                    //console.log(res,"messsssssssssss");
-                    $scope.Updatebutton=true;
-                    $scope.Savebutton=false;
-                    $scope.dept_name=res.dept_name;
-                    $scope.dept_code=res.dept_code;
-                    $scope.selectize_hodProfieId=res.HOD_profile_id;
-                    $scope.Phone=res.phone1;
-                    $scope.id=vm.dt_data.indexOf(res);
                 }
-       
-
-
-
         }
     );

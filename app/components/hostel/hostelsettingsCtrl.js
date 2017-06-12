@@ -87,6 +87,7 @@ angular
 
                 var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
                 $scope.openModel = function() {
+                    $scope.clearValidation();
                     $scope.btnStatus="Save";
                     $scope.hidden_id=null;
                     $scope.hostel_name=null;
@@ -95,6 +96,7 @@ angular
                 };
                 $scope.edit_data=function(data){
                     $scope.btnStatus="Update";
+                    $scope.clearValidation();
                     if (data) {
                         $scope.hidden_id=data.ID;
                         $scope.hostel_name=data.NAME;
@@ -114,7 +116,12 @@ angular
                 $scope.buildingId =[];
                 $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(user_data){
-                    $scope.buildingId.push(user_data.data);
+                    //console.log(user_data,'building');
+                    if(user_data.status==false){
+                        $scope.buildingId.push({ID:0, NAME:"Add Building"});
+                    }else{
+                        $scope.buildingId.push(user_data.data);
+                    }
                 });
 
                 $scope.selectize_buildingId_options =$scope.buildingId;
@@ -125,10 +132,33 @@ angular
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
+                    render: {
+                        option: function (item, escape) {
+                            //console.log(item,"item");
+                            if(item.ID==0){
+                                return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                            }else{
+                                return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<span class="name">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                            }
+                            
+                        }
+                    },
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            // $scope.selectize_courseName_options=[];
-                            // $scope.getNameList(value);
+                            if(value==0){
+                                var modal = UIkit.modal("#addBuilding_modal",{bgclose: false, keyboard:false});
+                                modal.show();
+                                //$state.go('restricted.academics.course')
+                            } 
+                            
                         });
                     }
                 };
@@ -144,8 +174,20 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        if(return_data.data.status==true){
-
+                        //console.log(return_data,'return_data');
+                        if($scope.btnStatus=='Save'){
+                            UIkit.modal("#modal_overflow").hide();
+                            UIkit.notify({
+                                message : 'Hostel Allocated Successfully',
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                            $scope.refreshTable();
+                        }else {
+                            //UIkit.modal.alert('Course & Batch Name Already Exists');
+                        }
+                        if($scope.btnStatus=='Update'){
                             UIkit.modal("#modal_overflow").hide();
                             UIkit.notify({
                                 message : return_data.data.message,
@@ -171,19 +213,22 @@ angular
                                 params : {id : id},
                                 headers:{'access_token':$localStorage.access_token}
                                 }).then(function mySucces(response) {
-                                    UIkit.notify({
-                                        message : response.data.message,
-                                        status  : 'success',
-                                        timeout : 2000,
-                                        pos     : 'top-center'
-                                    });
+                                    if(response.data.status==true){
+                                        UIkit.notify({
+                                            message : response.data.message.message,
+                                            status  : 'success',
+                                            timeout : 2000,
+                                            pos     : 'top-center'
+                                        });
+                                    }
                                     $scope.viewData.splice($index, 1);
                                     $scope.refreshTable();
                                 },function myError(response) {
+                                    UIkit.modal.alert('Hostel details are assigned to allocated students');
                                 })
                             }
                         },function(){
-                            // console.log("false");
+                             //console.log("false");
                         }, {
                             labels: {
                                 'Ok': 'Ok'
@@ -191,6 +236,34 @@ angular
                         });
                     }
                 }
+
+                // // Save Building Data
+            $scope.saveBuildingData=function(){
+                $http({
+                method:'POST',
+                // url: 'http://localhost/smartedu/test/InstitutionAPI/building',
+                url: $localStorage.service+'InstitutionAPI/building',
+                data: {
+                    'build_id' : $scope.building_id,
+                    'build_name' : $scope.building_name,
+                    'bulid_no' : $scope.build_no,
+                    'landmark' : $scope.landmark
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message);
+                    if(return_data.data.status==true){
+                        UIkit.modal("#addBuilding_modal").hide();
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }
+                    $scope.refreshTable();
+                });
+            }
 
         }
     );
