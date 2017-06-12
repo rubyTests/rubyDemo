@@ -556,6 +556,10 @@ angular
                     icon: '&#xE88A;',
                     submenu: [
                         {
+                            title: 'Settings',
+                            link: 'restricted.hostel.settings'
+                        },
+                        {
                             title: 'Allocation',
                             link: 'restricted.hostel.allocation'
                         },
