@@ -95,6 +95,7 @@ angular
                         url: $localStorage.service+'TransportAPI/routeTiming',
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(view_data){
+                        console.log(view_data,'view_dataview_data');
                         $scope.viewData=view_data.data.message;
                     });
                 }
@@ -135,8 +136,10 @@ angular
                     $scope.clearValidation();
                     $scope.routeTimingData={
                         selectize_routeName:"",
-                        startTime:"",
-                        endTime:"",
+                        m_startTime:"",
+                        m_endTime:"",
+                        e_startTime:"",
+                        e_endTime:"",
                         selectize_vehicleName:""
                     };
                     $('.uk-modal').find('input').trigger('blur');

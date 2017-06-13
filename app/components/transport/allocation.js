@@ -85,26 +85,20 @@ angular
                 });
 
             var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
-            $scope.selectize_usertype_options = ['Student','Employee'];
-            $scope.selectize_usertype_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Resident',
-                onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        $scope.refreshStudent();  
-                    });
-                }
-            };
+            
             $scope.viewData=[];
                 $scope.refreshTable=function(){
+                    //console.log($scope.student_name,"StuRef Tbl")
                     $http({
                         method:'GET',
                         url: $localStorage.service+'TransportAPI/routeAllocation',
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(view_data){
-                        console.log(view_data,'view_data1');
-                        
+                        angular.forEach(view_data.data.message, function(value, key){
+                            var date = value.JOINING_DATE.split("-");
+                            value.JOINING_DATE = date[1]+"."+date[2]+"."+date[0];
+                        });
+                        console.log(view_data.data.message,"view_data.data.message");
                         $scope.viewData=view_data.data.message;
                     });
                 }
@@ -144,9 +138,12 @@ angular
             $scope.refreshStudent = function(){
     			$http.get($localStorage.service+'ProfileAPI/studentlist',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(return_data){
-                    //console.log(return_data,'student_name');
-                    $scope.student_name.push(return_data.result);
-                }); 
+                    //console.log(return_data.result,'student_name');
+                    $scope.selectize_stdName_options=[]
+                    $scope.selectize_stdName_options.push(return_data.result);
+                }).error(function(){
+                    $scope.selectize_stdName_options=[];
+                })
             } 
             $scope.refreshStudent();  
 			$scope.selectize_stdName_options = $scope.student_name;
@@ -179,10 +176,23 @@ angular
                     });
                 }
             };
+
+            $scope.selectize_usertype_options = ['Student','Employee'];
+            $scope.selectize_usertype_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Resident',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        $scope.refreshStudent();  
+                    });
+                }
+            };
+
             $scope.openModel = function() {
                 $scope.refreshStudent();
                 var date = new Date();
-                var startDate=$filter('date')(date,'dd.MM.yyyy');  
+                var startDate=$filter('date')(date,'MM.dd.yyyy');  
                 $scope.buttonStatus='Save';
                 $scope.clearValidation();
                 $scope.allocateData={

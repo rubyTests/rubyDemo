@@ -86,38 +86,87 @@ angular
                     url: $localStorage.service+'TransportAPI/routeStops',
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(view_data){
-                    console.log(view_data,'view_dataview_data');
+                    console.log(view_data,'view_dataview_data222');
                     $scope.viewData=view_data.data.message;
                 });
                 $scope.deleteRouteStops=function(id,$index){
-                    if(id){
-                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                            if(id){
-                                $http({
-                                method : "DELETE",
-                                url : $localStorage.service+"TransportAPI/routeStops",
-                                params : {id : id},
-                                headers:{'access_token':$localStorage.access_token}
-                                }).then(function mySucces(response) {
-                                    //console.log(response.data.message.message,'delete');
-                                    UIkit.notify({
-                                        message : response.data.message,
-                                        status  : 'success',
-                                        timeout : 2000,
-                                        pos     : 'top-center'
+                    $http({
+                        method : "get",
+                        url : $localStorage.service+"TransportAPI/checkRoutestopsdetails",
+                        params : {id : id},
+                        headers:{'access_token':$localStorage.access_token}
+                        }).then(function mySucces(response) {
+                            //console.log(response,'responseresponse');
+                            if(response.data.status==true){
+                                if(id){
+                                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                        if(id){
+                                            $http({
+                                            method : "DELETE",
+                                            url : $localStorage.service+"TransportAPI/routeStops",
+                                            params : {id : id},
+                                            headers:{'access_token':$localStorage.access_token}
+                                            }).then(function mySucces(response) {
+                                                
+                                                if(response.data.status==true){
+                                                    UIkit.notify({
+                                                        message : response.data.message,
+                                                        status  : 'success',
+                                                        timeout : 2000,
+                                                        pos     : 'top-center'
+                                                    });
+                                                    $scope.viewData.splice($index, 1);
+                                                    
+                                                }
+                                                
+                                            },function myError(response) {
+                                            })
+                                        }
+                                    },function(){
+                                         console.log("false");
+                                    }, {
+                                        labels: {
+                                            'Ok': 'Ok'
+                                        }
                                     });
-                                    $scope.viewData.splice($index, 1);
-                                    // $scope.refreshTable();
-                                },function myError(response) {
-                                })
+                                }
+
                             }
-                        },function(){
-                        }, {
-                            labels: {
-                                'Ok': 'Ok'
-                            }
-                        });
-                    }
+                        },function myError(response) {
+                            //console.log(response,'errr');
+                            UIkit.modal.alert(response.data.message);
+                        })
+                   
                 }
+                // $scope.deleteRouteStops=function(id,$index){
+                //     if(id){
+                //         UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                //             if(id){
+                //                 $http({
+                //                 method : "DELETE",
+                //                 url : $localStorage.service+"TransportAPI/routeStops",
+                //                 params : {id : id},
+                //                 headers:{'access_token':$localStorage.access_token}
+                //                 }).then(function mySucces(response) {
+                //                     //console.log(response.data.message.message,'delete');
+                //                     UIkit.notify({
+                //                         message : response.data.message,
+                //                         status  : 'success',
+                //                         timeout : 2000,
+                //                         pos     : 'top-center'
+                //                     });
+                //                     $scope.viewData.splice($index, 1);
+                //                     // $scope.refreshTable();
+                //                 },function myError(response) {
+                //                 })
+                //             }
+                //         },function(){
+                //         }, {
+                //             labels: {
+                //                 'Ok': 'Ok'
+                //             }
+                //         });
+                //     }
+                // }
         }
     );
