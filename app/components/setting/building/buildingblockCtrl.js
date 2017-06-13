@@ -162,38 +162,87 @@ angular
             }
 
             // delete block
-            $scope.deleteBlock=function(id, $index){
-                if(id){
-                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                        if(id){
-                            $http({
-                            method : "DELETE",
-                            url : $localStorage.service+"InstitutionAPI/block",
-                            params : {id : id},
-                            headers:{'access_token':$localStorage.access_token}
-                            }).then(function mySucces(return_data) {
-                                if(return_data.data.status==true){
-                                    UIkit.notify({
-                                        message : return_data.data.message.message,
-                                        status  : 'success',
-                                        timeout : 2000,
-                                        pos     : 'top-center'
+            $scope.deleteBlock=function(id,$index){
+                    $http({
+                        method : "get",
+                        url : $localStorage.service+"InstitutionAPI/block",
+                        params : {id : id},
+                        headers:{'access_token':$localStorage.access_token}
+                        }).then(function mySucces(response) {
+                            //console.log(response,'responseresponse');
+                            if(response.data.status==true){
+                                if(id){
+                                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                        if(id){
+                                            $http({
+                                            method : "DELETE",
+                                            url : $localStorage.service+"InstitutionAPI/block",
+                                            params : {id : id},
+                                            headers:{'access_token':$localStorage.access_token}
+                                            }).then(function mySucces(response) {
+                                                
+                                                if(response.data.status==true){
+                                                    UIkit.notify({
+                                                        message : response.data.message.message,
+                                                        status  : 'success',
+                                                        timeout : 2000,
+                                                        pos     : 'top-center'
+                                                    });
+                                                }
+                                                $scope.viewData.splice($index, 1);
+                                                $scope.refreshTable();
+                                                
+                                            },function myError(response) {
+                                            })
+                                        }
+                                    },function(){
+                                         console.log("false");
+                                    }, {
+                                        labels: {
+                                            'Ok': 'Ok'
+                                        }
                                     });
                                 }
-                                $scope.viewData.splice($index, 1);
-                                $scope.refreshTable();
-                            },function myError(return_data) {
-                                UIkit.modal.alert('Block details are assigned to hostel settings');
-                            })
-                        }
-                    },function(){
-                        // console.log("false");
-                    }, {
-                        labels: {
-                            'Ok': 'Ok'
-                        }
-                    });
+
+                            }
+                        },function myError(response) {
+                            //console.log(response,'errr');
+                            UIkit.modal.alert(response.data.message);
+                        })
+                   
                 }
-            }
+            // $scope.deleteBlock=function(id, $index){
+            //     if(id){
+            //         UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+            //             if(id){
+            //                 $http({
+            //                 method : "DELETE",
+            //                 url : $localStorage.service+"InstitutionAPI/block",
+            //                 params : {id : id},
+            //                 headers:{'access_token':$localStorage.access_token}
+            //                 }).then(function mySucces(return_data) {
+            //                     if(return_data.data.status==true){
+            //                         UIkit.notify({
+            //                             message : return_data.data.message.message,
+            //                             status  : 'success',
+            //                             timeout : 2000,
+            //                             pos     : 'top-center'
+            //                         });
+            //                     }
+            //                     $scope.viewData.splice($index, 1);
+            //                     $scope.refreshTable();
+            //                 },function myError(return_data) {
+            //                     UIkit.modal.alert('Block details are assigned to hostel settings');
+            //                 })
+            //             }
+            //         },function(){
+            //             // console.log("false");
+            //         }, {
+            //             labels: {
+            //                 'Ok': 'Ok'
+            //             }
+            //         });
+            //     }
+            // }
         }
     );
