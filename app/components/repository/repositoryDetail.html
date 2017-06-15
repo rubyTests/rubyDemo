@@ -7,19 +7,20 @@
                     <div class="md-card-content large-padding">
                         <div class="uk-article">
                             <!-- {{article_content}} -->
-                            <h1 class="uk-article-title">{{repData.Repository_Title}}</h1>
+                            <h1 class="uk-article-title">{{Rep_data.TITLE}}</h1>
                             <p class="uk-article-meta">
-                                Written by {{repData.Author}} on {{repData.Date}}
-                                <br>Posted in <a href="#">{{repData.Repository_Category}}</a>
+                                Written by Junaid on {{Rep_data.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'MMMM DD, YYYY' }}
+                                <br>Posted in <a href="#">{{Rep_data.CATEGORY_NAME}}</a>
                             </p>
                             <!-- <p class="uk-article-lead">{{article.subtitle}}</p> -->
                             <hr class="uk-article-divider">
                             <p>
-                                <figure class="uk-thumbnail uk-thumbnail-large thumbnail_left">
-                                    <img ng-src="{{repData.Repository_File}}" alt="">
+                                <figure class="uk-thumbnail uk-thumbnail-medium thumbnail_left">
+                                    <img ng-src="{{Rep_data.UPLOAD_FILE}}" width="100%" height="50%" alt="">
                                     <figcaption class="uk-thumbnail-caption">Some caption</figcaption>
                                 </figure>
-                                {{repData.Repository_Content}}
+                                <!-- {{Rep_data.CONTENT}} -->
+                                <p ng-bind-html="Rep_data.CONTENT"></p>
                         </div>
                     </div>
                 </div>
@@ -27,11 +28,11 @@
             <div class="uk-width-medium-1-4">
                 <h5 class="uk-margin-small-bottom uk-text-upper">Recent Posts</h5>
                 <ul class="md-list uk-margin-remove">
-                    <li ng-repeat="postVal in recentpost | limitTo:8 ">
+                    <li ng-repeat="postVal in viewData | limitTo:8 ">
                         <div class="md-list-content">
                             <!-- <span class="md-list-heading uk-text-truncate"><a ui-sref="restricted.repository.repositoryDetail({ ReposId:{{postVal.id}} })">{{postVal.Repository_Title}}</a></span> -->
-                            <span class="md-list-heading uk-text-truncate"><a ng-click="getDetails(postVal)">{{postVal.Repository_Title}}</a></span>
-                            <span class="uk-text-small uk-text-muted">April 16, 2016</span>
+                            <span class="md-list-heading uk-text-truncate"><a ng-click="getDetails(postVal)">{{postVal.TITLE}}</a></span>
+                            <span class="uk-text-small uk-text-muted">{{postVal.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'MMMM DD, YYYY'}}</span>
                         </div>
                     </li>
                 </ul>

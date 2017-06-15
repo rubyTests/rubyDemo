@@ -11,7 +11,10 @@ angular
         '$compile',
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
-        function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$compile,DTOptionsBuilder, DTColumnDefBuilder) {
+        '$filter',
+        '$http',
+        '$localStorage',
+        function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$compile,DTOptionsBuilder, DTColumnDefBuilder, $filter, $http, $localStorage) {
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
                 $rootScope.toBarActive = false;
@@ -92,11 +95,20 @@ angular
                 vm.selectAll = true;
             }
 
-            $resource('data/repository/post.json')
-            .query()
-            .$promise
-            .then(function(post_data) {
-                vm.post_data = post_data;
+            // $resource('data/repository/post.json')
+            // .query()
+            // .$promise
+            // .then(function(post_data) {
+            //     vm.post_data = post_data;
+            // });
+
+            $scope.viewData=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'RepositoryAPI/Rep_Post',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.viewData=return_data.data.message;
             });
 
             $scope.remove_Category = function(index){

@@ -47,14 +47,14 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.post_data">
-                            <td>{{row.id}}</td>
-                            <td>{{row.Repository_Title}}</td>
-                            <td>{{row.Repository_Category}}</td>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{row.ID}}</td>
+                            <td>{{row.TITLE}}</td>
+                            <td>{{row.CATEGORY_NAME}}</td>
                             <td>{{row.Date}}</td>
                             <td>
-                                <a href="#" class="ts_remove_row" ui-sref="restricted.repository.repositoryDetail({ ReposId:{{row.id}} })"><i class="md-icon material-icons">&#xE8F4;</i></a>
-                                <a ui-sref="restricted.repository.postEdit({Row_Id:{{row.id}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a href="#" class="ts_remove_row" ui-sref="restricted.repository.repositoryDetail({ ReposId:{{row.ID}} })"><i class="md-icon material-icons">&#xE8F4;</i></a>
+                                <!-- <a ui-sref="restricted.repository.postEdit({Row_Id:{{row.ID}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a> -->
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>

@@ -5,7 +5,7 @@
 </style>
 <div id="page_content" ng-controller="categoryViewCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Category</h3>
+        <h3 class="heading_a uk-margin-bottom">Repository Category</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -31,13 +31,13 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.category_data">
-                            <td>{{row.id}}</td>
-                            <td>{{row.Category_Name}}</td>
-                            <td>{{row.Category_Desc}}</td>
+                        <tr ng-repeat="row in viewData">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.NAME}}</td>
+                            <td>{{row.DESC}}</td>
                             <td>
-                                <a href="#" class="ts_remove_row" ng-click="updateModal(row)" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="remove_Category($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a href="#" class="ts_remove_row" ng-click="editRepositoryCategory(row)" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteBookCategoryData(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>
@@ -50,35 +50,34 @@
       <div class="uk-modal-dialog">
       <button type="button" class="uk-modal-close uk-close"></button>
           <div class="uk-modal-header">
-              <h3 class="uk-modal-title" ng-if="addLabel">Add Category</h3>
-              <h3 class="uk-modal-title" ng-if="updateLabel">Edit Category</h3><br>
+              <h3 class="uk-modal-title">{{titlecaption}} Category</h3>
           </div>
-          <div class="md-card-content">
-            <form class=""><p></p>
-              <div class="uk-width-10-10 uk-width-medium-10-10">
-                <div class="uk-width-1-1">
-                  <div class="parsley-row">
-                    <label> Name</label>
-                    <input type="text" ng-model="Category_Name" class="md-input" required md-input>
-                  </div>
-                </div>
-              </div>
-              <p></p>
-              <div class="uk-width-10-10 uk-width-medium-10-10">
+          <form id="form_validation" name="inputForm" ng-submit="saveRepositoryCategory()">
+            <div class="md-card-content">
+                <div class="uk-width-10-10 uk-width-medium-10-10">
                   <div class="uk-width-1-1">
                     <div class="parsley-row">
-                      <label> Description</label>
-                      <input type="text" ng-model="Category_Desc" class="md-input" required md-input>
+                      <label> Name</label>
+                      <input type="text" ng-model="rep_cat_name" class="md-input" required md-input>
+                      <input type="hidden" ng-model="rep_cat_id">
                     </div>
                   </div>
-              </div>
-            </form>
-          </div>
-          <div class="uk-modal-footer uk-text-right">
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="addCategory()" ng-if="addButton">Save</button>
-              <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close" ng-click="updateCategory()" ng-if="updateButton">Update</button>
-          </div>
+                </div>
+                <p></p>
+                <div class="uk-width-10-10 uk-width-medium-10-10">
+                    <div class="uk-width-1-1">
+                      <div class="parsley-row">
+                        <label> Description</label>
+                        <input type="text" ng-model="rep_cat_desc" class="md-input" required md-input>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close">Cancel</button>
+                <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+            </div>
+          </form>
       </div>
     </div>
 </div>

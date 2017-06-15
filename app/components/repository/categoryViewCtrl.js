@@ -11,7 +11,9 @@ angular
         '$compile',
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
-        function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$compile,DTOptionsBuilder, DTColumnDefBuilder) {
+        '$http',
+        '$localStorage',
+        function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$compile,DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
             var vm = this;
             vm.category_data = [];
             vm.selected = {};
@@ -85,54 +87,92 @@ angular
                 vm.selectAll = true;
             }
 
-            $resource('data/repository/category.json')
-            .query()
-            .$promise
-            .then(function(category_data) {
-                vm.category_data = category_data;
-            });
-
             $scope.openModal = function(){
-                $scope.addLabel = true;
-                $scope.updateLabel = false;
-                $scope.addButton = true;
-                $scope.updateButton = false;
+                $scope.titlecaption="Add";
+                $scope.btnStatus="Save";
 
-                $scope.Category_Name = null;
-                $scope.Category_Desc = null;
+                $scope.rep_cat_name = null;
+                $scope.rep_cat_desc = null;
                 $('.uk-modal').find('input').trigger('blur');
             }
 
-            $scope.addCategory = function(){
-                var data = {
-                    id : vm.category_data.length+1,
-                    Category_Name : $scope.Category_Name,
-                    Category_Desc : $scope.Category_Desc
+            // Save Data
+            $scope.saveRepositoryCategory=function(){
+                $http({
+                method:'POST',
+                url: $localStorage.service+'RepositoryAPI/Rep_Category',
+                data: {
+                    'rep_cat_id' : $scope.rep_cat_id,
+                    'rep_cat_name' : $scope.rep_cat_name,
+                    'rep_cat_desc' : $scope.rep_cat_desc
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    if(return_data.data.status==true){
+                        UIkit.modal("#modal_header_footer").hide();
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }
+                    $scope.refreshTable();
+                });
+            }
+
+            $scope.viewData=[];
+            $scope.refreshTable=function(){
+                $http.get($localStorage.service+'RepositoryAPI/Rep_Category',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(response){
+                    $scope.viewData=response.message;
+                });
+            }
+            $scope.refreshTable();
+
+            $scope.editRepositoryCategory=function(data){
+                $scope.titlecaption="Edit";
+                $scope.btnStatus="Update";
+                if (data) {
+                    $scope.rep_cat_id=data.ID;
+                    $scope.rep_cat_name=data.NAME;
+                    $scope.rep_cat_desc=data.DESC;
                 }
-                vm.category_data.push(data);
             }
 
-            $scope.updateModal = function(data){
-                if (typeof data=="undefined") return false;
-                $scope.addLabel = false;
-                $scope.updateLabel = true;
-                $scope.addButton = false;
-                $scope.updateButton = true;
 
-                $scope.Category_Name = data.Category_Name;
-                $scope.Category_Desc = data.Category_Desc;
-                $scope.id = vm.category_data.indexOf(data);
+            $scope.deleteBookCategoryData=function(id, $index){
+                if(id){
+                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        if(id){
+                            $http({
+                            method : "DELETE",
+                            url : $localStorage.service+'RepositoryAPI/Rep_Category',
+                            params : {id : id},
+                            headers:{'access_token':$localStorage.access_token}
+                            }).then(function mySucces(response) {
+                                if(response.data.status==true){
+                                    UIkit.notify({
+                                        message : response.data.message,
+                                        status  : 'success',
+                                        timeout : 2000,
+                                        pos     : 'top-center'
+                                    });
+                                }
+                                $scope.viewData.splice($index, 1);
+                                $scope.refreshTable();
+                            },function myError(response) {
+                              // console.log(response,'response');
+                            })
+                        }
+                    },function(){
+                        // console.log("false");
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                }
             }
-
-            $scope.updateCategory = function(){
-                vm.category_data[$scope.id].Category_Name = $scope.Category_Name;
-                vm.category_data[$scope.id].Category_Desc = $scope.Category_Desc;
-            }
-
-            $scope.remove_Category = function(index){
-                if (typeof index=="undefined") return false;
-                vm.category_data.splice(index,1);
-            }
-
         }
     ]);

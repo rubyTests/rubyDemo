@@ -6,51 +6,96 @@ angular
         '$rootScope',
         '$window',
         '$timeout',
-        function ($scope,$state,$rootScope,$window,$timeout) {
+        '$filter',
+        '$http',
+        '$rootScope',
+        '$localStorage',
+        function ($scope, $state, $rootScope, $window, $timeout, $filter, $http, $rootScope, $localStorage) {
 
         	$('.dropify').dropify();
         	
-        	$scope.selectize_courseNew_options = ["Course 1", "Course 2", "Course 3", "Course 4", "Course 5"];
-            $scope.selectize_courseNew_options.push("Create New");
-            $scope.selectize_courseNew_config = {
+        	$http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(course_data){
+                $scope.selectize_courseId_options=course_data.message;
+            });
+                
+            $scope.selectize_courseId_options =[];
+            $scope.selectize_courseId_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course',
-                render: {
-                    option: function (item, escape) {
-                        console.log(item,"item");
-                        console.log(escape,"escape");
-                        return '<div class="option id="modal_header_footer"">' +
-                                '<div class="text">' +
-                                    '<span class="name">' + escape(item.text) + '</span>' +
-                               '</div>' +
-                            '</div>';
-                    }
-                },
+                placeholder: 'Course',
+                valueField: 'ID',
+                labelField: 'NAME',
                 onInitialize: function(selectize){
-                    selectize.on('change', function(selectize) {
-                        if(selectize=='Create New'){
-                            var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
-                            modal.show();
-                            //$state.go('restricted.academics.course')
-                        } 
+                    selectize.on('change', function(value) {
+                        console.log(value);
                     });
                 }
-                
             };
+
+            $scope.CategoryData=[];
+            $http({
+                method : 'GET',
+                url : $localStorage.service+'RepositoryAPI/Rep_Category',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.CategoryData.push(return_data.data.message);
+            })
+
+            $scope.selectize_category_options =$scope.CategoryData;
+            $scope.selectize_category_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Category',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        console.log(value);
+                    });
+                }
+            };
+
+
+
+            $scope.saveRepPostDetails = function(){
+                var $fileInput = $('.dropify-preview').find('img').attr('src');
+                $http({
+                    method : 'POST',
+                    url : $localStorage.service+'RepositoryAPI/Rep_Post',
+                    data : {
+                        'rep_id' : $scope.rep_id,
+                        'rep_title' : $scope.rep_title,
+                        'rep_upload_file' : $fileInput,
+                        'rep_content' : $scope.rep_content,
+                        'categoryId' : $scope.selectize_category,
+                        'courseId' : $scope.selectize_courseId
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    if(return_data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $timeout(function(){
+                            $state.go('restricted.repository.postView');
+                        },200);
+                    }else {
+                        UIkit.modal.alert('Already Exists');
+                    }
+                })
+            }
+
 
             $scope.selectize_batch_options = ["Batch 1", "Batch 2", "Batch 3", "Batch 4", "Batch 5"];
             $scope.selectize_batch_config = {
                 create: false,
                 maxItems: 1,
                 placeholder: 'Select Batch'
-            };
-
-            $scope.selectize_category_options = ["Category One", "Category Two", "Category Three", "Category Four", "Category Five"];
-            $scope.selectize_category_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Select Category'
             };
 
             $scope.tinymce_options = {
