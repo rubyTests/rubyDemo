@@ -376,11 +376,12 @@ angular
                     } else {
                         // $scope.dp_start='';
                         // $scope.dp_end='';
-                        if (start || end) {
-                            $scope.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
-                            // console.log($scope.dp_start);
-                            end_date.options.minDate = $scope.dp_start;
-                            $scope.dp_end=end._d.getDate()+"."+eval(end._d.getMonth()+1)+"."+end._d.getFullYear();
+                        console.log($scope.dp_start._d,"dp_start");
+                        if ($scope.dp_start._d) {
+                            // console.log($scope.dp_start._d,"dp_start");
+                            var start={_d:$scope.dp_start._d};
+                            $scope.setExam.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
+                            console.log($scope.dp_start);
                             $scope.addEvents={};
                             $scope.addEvents={start_date : start, end : end};    
                         };
@@ -436,6 +437,7 @@ angular
                         uiCalendarConfig.calendars.myCalendar.fullCalendar('changeView', 'listWeek')
                     },
                     select: function (start, end) {
+                        $scope.dp_start=start;
                         $scope.checkValiddata(start, end);
                     },
                     eventDrop:function( event, delta, revertFunc, jsEvent, ui, view ) {
