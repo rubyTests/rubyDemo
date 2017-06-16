@@ -4,13 +4,19 @@ angular
         '$scope',
         '$rootScope',
         'products_data',
-        function ($scope,$rootScope,products_data) {
+        '$localStorage',
+        function ($scope,$rootScope,products_data,$localStorage) {
 
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
                 $rootScope.toBarActive = false;
             });
-
+			
+			if($localStorage.role_id==3 || $localStorage.role_id==4){
+				$scope.userRole=false;
+			}else{
+				$scope.userRole=true;
+			}
             // products data
             $scope.products_data =products_data;
             console.log($scope.products_data,'$scope.products_data');
