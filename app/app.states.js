@@ -34,7 +34,7 @@ rubycampusApp
                 .state("login", {
 					url: "/",
 					templateUrl: 'app/components/pages/customeloginView.html',
-					controller: 'loginCtrl',
+					controller: 'loginCtrl',   
 					resolve: {
 						deps: ['$ocLazyLoad', function($ocLazyLoad) {   
 							return $ocLazyLoad.load([
@@ -2152,6 +2152,63 @@ rubycampusApp
                     }
                 })
 
+                .state("restricted.finance.fee.assignedFeeStructure", {
+                    url: "/assignedFeeStructure",
+                    templateUrl: 'app/components/finance/assignedfeestructureView.html',
+                    // controller: 'assignedfeestructureViewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_datatables',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/finance/assignedfeestructureViewCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assigned Fee Structure'
+                    }
+                })
+
+                .state("restricted.finance.fee.showAssignedFeeStructure", {
+                    url: "/showAssignedFeeStructure/{strc_id}",
+                    templateUrl: 'app/components/finance/showAssignedstudentview.html',
+                    controller: 'showAssignedstudentviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/finance/showAssignedstudentviewCtrl.js'
+                            ] );
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assigned Fee Structure'
+                    },
+                    params:{strc_id:null}
+                })
+
+                .state("restricted.finance.fee.assignFeeStructure", {
+                    url: "/assignFeeStructure",
+                    templateUrl: 'app/components/finance/assignFeeStructure.html',
+                    controller: 'assignFeeStructureCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/finance/assignFeeStructureCtrl.js'
+                            ],{serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assign Fee Structure'
+                    }
+                })
+
                 .state("restricted.finance.fee.feeStructureView", {
                     url: "/feeStructureView/{Assign_Id}",
                     templateUrl: 'app/components/finance/feeStructureView.html',
@@ -2189,28 +2246,28 @@ rubycampusApp
                 })
 
                 .state("restricted.finance.fee.feeCollectView", {
-                    url: "/feeCollectView/{student_id}",
+                    url: "/feeCollectView/{student_feeid}",
                     templateUrl: 'app/components/finance/feeCollectView.html',
                     controller: 'feeCollectViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
-                                'lazy_datatables',
+                                'lazy_datatables','smart-filter','lazy_parsleyjs',
                                 'app/components/finance/feeCollectViewCtrl.js'
                             ], {serie:true});
                         }],
-                        struct_data: function($http){
-                            return $http({ method: 'GET', url: 'data/finance/feestructureNew.json' })
-                                .then(function (getdata) {
-                                    return getdata.data;
-                                });
-                        },
+                        // struct_data: function($http){
+                        //     return $http({ method: 'GET', url: 'data/finance/feestructureNew.json' })
+                        //         .then(function (getdata) {
+                        //             return getdata.data;
+                        //         });
+                        // },
                     },
                     data: {
                         pageTitle: 'Fee Structure Details'
                     },
-                    params:{student_id:null}
+                    params:{student_feeid:null}
                 })
 
                 .state("restricted.finance.fee.feeReport", {
@@ -2232,7 +2289,7 @@ rubycampusApp
                 })
 
                 .state("restricted.finance.fee.totalFeeView", {
-                    url: "/totalFeeView",
+                    url: "/totalFeeView/{profile_id}",
                     templateUrl: 'app/components/finance/totalFeeView.html',
                     controller: 'totalFeeViewCtrl',
                     resolve: {
@@ -2246,12 +2303,14 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Total Fee Details'
-                    }
+                    },
+                    params:{profile_id:null}
                 })
 
                 .state("restricted.finance.fee.feeStructView", {
-                    url: "/feeStructView",
+                    url: "/feeStructView/{feepaymentId}",
                     templateUrl: 'app/components/finance/feeStructView.html',
+                    controller: 'feeStructViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -2262,11 +2321,12 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Fee Structure View'
-                    }
+                    },
+                    params:{feepaymentId:null}
                 })
 
                 .state("restricted.finance.fee.receiptView", {
-                    url: "/receiptView",
+                    url: "/receiptView/{feepaymentid}",
                     templateUrl: 'app/components/finance/receiptView.html',
                     controller: 'receiptViewCtrl',
                     resolve: {
@@ -2278,7 +2338,8 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Fee Reciept Details'
-                    }
+                    },
+                    params:{feepaymentid:null}
                 })
 
                 // .state("restricted.finance.fee.parentReceiptView", {
