@@ -9,12 +9,10 @@ angular
 		'$localStorage',
 		'$http',
         function ($rootScope,$scope,user_data,$stateParams,$filter,$localStorage,$http) {    
-            //console.log($stateParams,'stateParams');
-            
-            if($localStorage.myProfile=="myProfile"){
+            // console.log($stateParams.stu_id,'stateParams');
+            $scope.proId=$stateParams.stu_id;
+            if($scope.proId==null){
         		$scope.proId=$localStorage.userProfile_id
-        	}else{
-        		$scope.proId=$stateParams.stu_id;
         	}
 
 			$http.get($localStorage.service+'ProfileAPI/parentsDetails',{params:{id:$scope.proId},headers: {'access_token':$localStorage.access_token} })

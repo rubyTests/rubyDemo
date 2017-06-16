@@ -157,7 +157,11 @@ angular
 							timeout : 2000,
 							pos     : 'top-center'
 						});
-						$state.go('restricted.student.student_list');
+						if($localStorage.role_id==3){
+							$state.go('restricted.student.student_profile');
+						}else{
+							$state.go('restricted.student.student_list');
+						}
 					}
                 });
 				

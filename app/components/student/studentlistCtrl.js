@@ -18,7 +18,7 @@ angular
 			
 			$scope.default_image='assets/img/man.png'
 			
-			$http.get($localStorage.service+'ProfileAPI/studentProfileDetails',{headers: {'access_token':$localStorage.access_token} })
+			$http.get($localStorage.service+'ProfileAPI/studentProfileDetails',{params:{'roleId':$localStorage.role_id,'profileId':$localStorage.userProfile_id},headers: {'access_token':$localStorage.access_token} })
 			.success(function(data){
 				// console.log(data.result,"data");
 				$scope.contact_list=data.result;
