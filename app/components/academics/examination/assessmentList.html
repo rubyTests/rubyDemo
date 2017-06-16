@@ -12,7 +12,7 @@
     <div id="page_content">
         <div id="page_content_inner">
         <h2 class="heading_a">
-            Mark List
+           Assessment Mark
         </h2>
         <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-large-1-1">
@@ -22,15 +22,49 @@
 							
 							<div class="uk-text-left">
 							</div>
-							<!-- <div class="uk-text-right">
-								<button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.AddMarkDetails">
+							<div class="uk-text-right">
+								<button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.assessmentMark">
 								<i class="uk-icon-plus"></i>  Add Marks
 								</button>
-							</div> -->
+							</div>
+							<br>
                             <!-- <hr class="md-hr"/> -->
                             <div class="uk-grid uk-grid-medium form_hr">
                                 <div class="uk-width-8-10 uk-width-medium-9-10">
                                     <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >import_contacts</i>
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Term</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-6 parsley-row">
+                                            <input type="text" config="selectize_term_config" options="selectize_term_options" ng-model="assessmentList.termId" selectize/>
+                                        </div>
+                                        <div class="uk-width-medium-1-6 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >contacts</i>
+                                                        <!-- <i class="material-icons">developer_board</i> -->
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Exam</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-6 parsley-row">
+                                            <input type="text" config="selectize_exam_config" options="selectize_exam_options" ng-model="assessmentList.createExam" selectize/>
+                                        </div>
+                                    </div>
+									<div class="uk-grid" data-uk-grid-margin>
                                         <div class="uk-width-medium-1-6 parsley-row">
                                             <ul class="md-list md-list-addon">
                                                 <li>
@@ -71,7 +105,7 @@
             </div>
         </div>
     </div>
-    <div id="page_content_inner" ng-controller="markDetailsCtrl as showCase">
+    <div id="page_content_inner" ng-controller="assessmentListCtrl as showCase">
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">

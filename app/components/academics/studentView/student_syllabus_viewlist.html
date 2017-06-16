@@ -1,0 +1,45 @@
+<div id="page_content">
+    <div id="page_content_inner">
+
+        <div class="uk-width-medium-8-10 uk-container-center reset-print">
+
+            <div class="uk-grid uk-grid-collapse" data-uk-grid-margin>
+                <div class="uk-width-large-3-10 hidden-print uk-visible-large">
+                    <div class="md-list-outside-wrapper" custom-scrollbar list-outside>
+                        <ul class="md-list md-list-outside notes_list">
+                            <li class="heading_list" style="color: #e53935">Subject</li>
+                            <li ng-repeat="note in notes_data" ng-class="{'md-list-item-active': $index == currentActive}">
+                                <a href="#" class="md-list-content note_link" ng-click="openNote($event,$parent.$index,$index,note)">
+                                    <span class="md-list-heading uk-text-truncate">{{note.NAME}}</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="uk-width-large-7-10">
+                    <div class="md-card md-card-single" single-card>
+                        <div class="md-card-toolbar">
+                            <div class="md-card-toolbar-actions">
+                                <i class="md-icon material-icons" id="toggleAll" ng-click="toggleAll($event)">&#xe8f2;</i>
+                            </div>
+                            <h3 class="md-card-toolbar-heading-text large">
+                                {{notes_preview.NAME}}
+                            </h3>
+                        </div>
+                        <div class="md-card-content padding-reset" id="help_content">
+                            <h4 class="heading_c full_width_in_card">Syllabus</h4>
+                            <div class="uk-accordion uk-accordion-alt help_accordion hierarchical_slide" hierarchical-slide slide-children="h3" slide-context=".md-card-content">
+                                <h3 class="uk-accordion-title uk-animation-slide-bottom" ng-repeat-start="item in notes_preview.syllabus" on-last-repeat>{{item.NAME}}</h3>
+                                <div class="uk-accordion-content" ng-repeat-end>
+                                    <p ng-bind-html="item.DESC"></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,94 @@
+<div id="page_content">
+	<div id="page_content_inner">
+		<h2 class="heading_a">
+		   Assessment Mark
+		</h2>
+		<div class="uk-grid" data-uk-grid-margin>
+			<div class="uk-width-large-1-1">
+				<div class="md-card">
+					<div class="md-card-content large-padding">
+						<form class="uk-form" >
+							<div class="uk-width-9-10 uk-width-medium-9-10">
+								<div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+									<div class="uk-width-medium-1-2 parsley-row">
+										<label ng-if="assessmentList.termId">Term</label>
+										<input type="text" config="selectize_term_config" options="selectize_term_options" ng-model="assessmentList.termId" selectize/>
+									</div>
+									<div class="uk-width-medium-1-2 parsley-row">
+										<label ng-if="assessmentList.createExam">Exam</label>
+										<input type="text" config="selectize_exam_config" options="selectize_exam_options" ng-model="assessmentList.createExam" selectize/>
+									</div>
+								</div>
+								<div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+									<div class="uk-width-medium-1-2 parsley-row">
+										<label ng-if="assessmentList.assessmentId">Assessment</label>
+										<input type="text" config="selectize_assessment_config" options="selectize_assessment_options" ng-model="assessmentList.assessmentId" name="assessmentId" selectize />
+									</div>
+									<div class="uk-width-medium-1-2 parsley-row">
+										<label ng-if="assessmentList.course">Course</label>
+										<input type="text" config="selectize_courseNew_config" options="selectize_courseNew_options" ng-model="assessmentList.course" name="selectize_courseNew" selectize />
+									</div>
+								</div>
+								<div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
+									<div class="uk-width-medium-1-2 parsley-row">
+										<label ng-if="assessmentList.batch">CourseBatch</label>
+										<input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="assessmentList.batch" name="selectize_batch" selectize />
+									</div>
+									<div class="uk-width-medium-1-2 parsley-row">
+										<label ng-if="assessmentList.subject">Subject</label>
+										<input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="assessmentList.subject" name="selectize_subject" selectize />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div id="page_content_inner">
+		<h3 class="heading_a uk-margin-bottom">Add Student Assessment marks</h3>
+		<div class="md-card uk-margin-medium-bottom">
+			<div class="md-card-content large-padding">
+				<div class="uk-overflow-container">
+					<table class="uk-table uk-table-hover">
+						<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Student Name</th>
+							<th>Maximum Mark</th>
+							<th>Enter Marks</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr ng-repeat="title in dt_data">
+							<td>{{$index + 1}}</td>
+							<td>{{title.Name}}</td>
+							<td>{{title.MAX_MARK}}</td>
+							<td><input type="text" ng-model="title.MARK"></td>
+						</tr>
+						</tbody>
+					</table>
+					<div class="uk-text-right">
+						<a href="javascript:void(0)" ng-click="backBtn();" class="md-btn md-btn-danger md-btn-small">Cancel</a>
+						<a ng-click="saveData()" class="md-btn md-btn-primary md-btn-small">Submit</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<style type="text/css">
+	.uk-grid.AdjPad {
+		padding-left: 20px;
+	}
+	.md-list-content.AdjListCon {
+		padding-top: 10px;
+	}
+	#page_content_inner {
+		padding: 24px 24px 0;
+	}
+</style>

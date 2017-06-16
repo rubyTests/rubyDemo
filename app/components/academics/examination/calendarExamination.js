@@ -165,7 +165,7 @@ angular
 			});
 			
 			$scope.get_id1 = [];
-			$scope.fetchTerm=function(id){
+			$scope.fetchTerm=function(id){	
 				$http({
 				method:'get',
 				url: $localStorage.service+'ExamAPI/setCreateExam',

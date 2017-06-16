@@ -22,11 +22,11 @@
 							
 							<div class="uk-text-left">
 							</div>
-							<!-- <div class="uk-text-right">
-								<button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.AddMarkDetails">
+							<div class="uk-text-right">
+								<button  class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.examination.examMark">
 								<i class="uk-icon-plus"></i>  Add Marks
 								</button>
-							</div> -->
+							</div>
                             <!-- <hr class="md-hr"/> -->
                             <div class="uk-grid uk-grid-medium form_hr">
                                 <div class="uk-width-8-10 uk-width-medium-9-10">
@@ -114,7 +114,7 @@
 							<td>{{row.term2}}</td>
 							<td>{{row.overall}}</td>
 							<td>
-								<a ng-click="edit_data(row)" ui-sref="restricted.stuExamReport" ><i class="md-icon material-icons">&#xE417;</i></a>
+								<a ng-click="edit_data(row)" ui-sref="restricted.academics.examination.stuExamReport" ><i class="md-icon material-icons">&#xE417;</i></a>
 								<a href="#" class="ts_remove_row" ><i class="md-icon material-icons">&#xE872;</i></a>
 							</td>
                         </tr>

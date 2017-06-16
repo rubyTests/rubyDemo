@@ -8,7 +8,9 @@ angular
         '$resource',
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
-        function ($compile,$scope,$window,$timeout,$resource, DTOptionsBuilder, DTColumnDefBuilder) {
+        '$http',
+        '$localStorage',
+        function ($compile,$scope,$window,$timeout,$resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
 
             var vm = this;
             vm.selected = {};
@@ -121,7 +123,95 @@ angular
                 maxItems: 1,
                 placeholder: 'Select Batch'
             };
+			$scope.courseData=[];
+			$scope.batchData=[];
+			$http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(data){
+				$scope.courseData.push(data.message);
+			});
+			$scope.fetchBatch=function(id){
+				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(batch_data){
+					$scope.selectize_batch_options=batch_data.data;
+				});
+			}
+			
+			$scope.selectize_courseNew_options =$scope.courseData;
+			$scope.selectize_courseNew_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Course...',
+                valueField: 'ID',
+                labelField: 'NAME',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+						$scope.fetchBatch(value);
+                    });
+                    
+                }
+            };
+			
+			$scope.selectize_batch_options=[];
+            $scope.selectize_batch_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Batch...',
+                valueField: 'ID',
+                labelField: 'NAME',
+				onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+					   
+                    });
+                }
+            };
 
+			$scope.get_id = [];
+			$http({
+			method:'get',
+			url: $localStorage.service+'ExamAPI/setTerm',
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				//console.log(return_data.data.message,'return_data');
+				$scope.get_id.push(return_data.data.message);
+			});
+			
+			$scope.get_id1 = [];
+			$scope.fetchTerm=function(id){
+				$http({
+				method:'get',
+				url: $localStorage.service+'ExamAPI/setCreateExam',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					// $scope.get_id1.push(return_data.data.message);
+					$scope.selectize_exam_options = return_data.data.message;
+				});
+			}
+			
+			$scope.selectize_term_options = $scope.get_id;
+			$scope.selectize_term_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Term',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					$scope.fetchTerm(val);
+				}
+			};
+
+			// $scope.selectize_exam_options = $scope.get_id1;
+			$scope.selectize_exam_options = [];
+			$scope.selectize_exam_config = {
+				create: false,
+				maxItems: 1,
+				placeholder: 'Select Exam',
+				valueField: 'ID',
+				labelField: 'NAME',
+				onInitialize: function(val){
+					//console.log(val);
+				}
+			};
+			
 
             // Advanced selects
 
