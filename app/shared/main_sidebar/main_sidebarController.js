@@ -438,8 +438,19 @@ angular
                                     link: 'restricted.finance.fee.feeCollectionDetails'
                                 },
                                 {
-                                    title:'Fee Report',
-                                    link: 'restricted.finance.fee.feeReport'
+                                    title:'Report',
+                                    submenu:[
+                                        {
+                                            title:'Student Fee Report',
+                                            link: 'restricted.finance.fee.feeReport'
+                                        },
+                                        {
+                                            title:'Fee Defaulter',
+                                            link: 'restricted.finance.fee.feeReport'
+                                        }
+                                    ]
+                                    // title:'Fee Report',
+                                    // link: 'restricted.finance.fee.feeReport'
                                 },
                                 {
                                     title:'Parent Receipt View',
