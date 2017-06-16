@@ -275,7 +275,8 @@ angular
 										},
 										{
 											title: 'Assessment MarkList',
-											link: 'restricted.academics.examination.assessmentList'
+											// link: 'restricted.academics.examination.assessmentList'
+											link: 'restricted.academics.examination.assessmentMark'
 										},
 									]
                                 },
@@ -288,7 +289,7 @@ angular
 										},
 										{
 											title: 'Exam MarkList',
-											//link: 'restricted.academics.examination.setassessmentmarklist'
+											link: 'restricted.academics.examination.markDetails'
 										},
 									]
                                 }
@@ -654,48 +655,17 @@ angular
                             title: 'Attendance',
                             submenu: [
                                 {
-                                    title: 'Student Attendance Register',
-                                },
-                                {
-                                    title: 'Student Attendance Report',
+                                    title: 'Attendance Report',
 									link: 'restricted.plugins.studentreport'
                                 },
-                                {
-                                    title: 'Student Attendance Marking',
-                                    link: 'restricted.academics.markattendance'
-                                },
+								{
+                                    title: 'My Leaves',
+									link: 'restricted.student.stuApplyLeave'
+                                }
                             ]
                         },
                         {
                             title: 'Timetable'
-                            // submenu: [
-                            //     {
-                            //         title: 'Configuration',
-                            //         submenu: [
-                            //         {
-                            //             title: 'Class Room Allocation',
-                            //         },
-                            //         {
-                            //             title: 'Create Week Days',
-                            //         },
-                            //         {
-                            //             title: 'Set Class Timing',
-                            //         },
-                            //     ]
-                            //     },
-                            //     {
-                            //         title: 'Manage Time Table',
-                            //     }
-                            // ]
-                        },
-                       
-                        {
-                            title: 'Discipline',
-                            submenu: [
-                                {
-                                    title: 'Add Compliant',
-                                }
-                            ]
                         },
                         {
                             title: 'Examination',
@@ -734,23 +704,9 @@ angular
                 },
                 {
                     id: 3,
-                    title: 'Student',
+                    title: 'My Profile',
                     icon: '&#xE7FD;',
-                    submenu:[
-                        {
-                            title:'My Profile',
-                            link: 'restricted.student.student_profile'
-                        },
-                        {
-                            title: 'Leaves',
-                            submenu: [
-                                {
-                                    title: 'Apply Leaves',
-                                    link: 'restricted.student.stuApplyLeave'
-                                }
-                            ]
-                        }
-                    ]
+					link: 'restricted.student.student_profile'
                 },
                 {
                     id: 6,
@@ -763,56 +719,6 @@ angular
                     title: 'Library',
                     icon: '&#xE02F;',
                     link: 'restricted.Library'
-                },
-                {
-                    id: 9,
-                    title: 'Transport',
-                    icon: '&#xE530;',
-                    submenu: [
-						{
-							title: 'Vehicle',
-							link : 'restricted.transport.vehicleDetail'
-						},
-						{
-							title: 'Route',
-							link : 'restricted.transport.routeDetail'
-						},
-						{
-							title: 'Route Timing',
-							link : 'restricted.transport.routeTiming'
-						},
-						{
-							title: 'Route Stops',
-							link : 'restricted.transport.routeStops'
-						},
-						{
-							title: 'Route Allocation',
-							link : 'restricted.transport.routeAllocation'
-						}
-					]
-                },
-                {
-                    id: 10,
-                    title: 'Hostel',
-                    icon: '&#xE88A;',
-                    submenu: [
-                        {
-                            title: 'Allocation',
-                            link: 'restricted.hostel.allocation'
-                        },
-                        {
-                            title: 'Transfer',
-                            link: 'restricted.hostel.transfer'
-                        },
-                        {
-                            title: 'Vacate',
-                            link: 'restricted.hostel.vacate'
-                        },
-                        {
-                            title: 'Visitors',
-                            link: 'restricted.hostel.visitors'
-                        }
-                    ]
                 },
                 {
                     id: 12,
@@ -834,6 +740,7 @@ angular
                     ]
                 }
             ];
+			
 			var parentRole = [
                 {
                     id: 0,
