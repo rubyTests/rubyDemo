@@ -15,8 +15,14 @@
                             <!-- <p class="uk-article-lead">{{article.subtitle}}</p> -->
                             <hr class="uk-article-divider">
                             <p>
-                                <figure class="uk-thumbnail uk-thumbnail-medium thumbnail_left">
-                                    <img ng-src="{{Rep_data.UPLOAD_FILE}}" width="100%" height="50%" alt="">
+                                <figure class="uk-thumbnail uk-thumbnail-medium thumbnail_left" style="width: 400px">
+                                    <!-- <iframe src="{{Rep_data.UPLOAD_FILESrc}}" style="width: 100%"></iframe> -->
+                                    <video controls autoplay ng-if="Rep_data.extention=='mp4' && Rep_data.extention=='ogg'"></video>
+                                    <img ng-if="Rep_data.extention=='png' || Rep_data.extention=='jpg'" ng-src="{{'assets/uploads/'+Rep_data.UPLOAD_FILE}}" width="100%" height="50%" alt="">
+                                    <img ng-if="Rep_data.extention=='pdf'" ng-src="assets/uploads/file/pdf.png" width="100%" height="50%" alt="">
+                                    <img ng-if="Rep_data.extention=='docs'" ng-src="assets/uploads/file/docs.png" width="100%" height="50%" alt="">
+                                    <img ng-if="Rep_data.extention=='zip'" ng-src="assets/uploads/file/zip.jpg" width="100%" height="50%" alt="">
+                                    <img ng-if="Rep_data.extention=='rar'" ng-src="assets/uploads/file/rar.png" width="100%" height="50%" alt="">
                                     <figcaption class="uk-thumbnail-caption">Some caption</figcaption>
                                 </figure>
                                 <!-- {{Rep_data.CONTENT}} -->

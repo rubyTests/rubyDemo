@@ -60,19 +60,29 @@ angular
 
 
             $scope.saveRepPostDetails = function(){
-                var $fileInput = $('.dropify-preview').find('img').attr('src');
+                // var $fileInput = $('.dropify-preview').find('img').attr('src');
+                var $fileInput = document.getElementById('input-file-a').files[0];
+                var formdata = new FormData();
+                formdata.append('file', $fileInput);
+                formdata.append('rep_id', $scope.rep_id);
+                formdata.append('rep_title', $scope.rep_title);
+                formdata.append('rep_content', $scope.rep_content);
+                formdata.append('courseId', $scope.selectize_category);
+                formdata.append('categoryId', $scope.selectize_courseId);
+                console.log(formdata,"formdata");
                 $http({
                     method : 'POST',
                     url : $localStorage.service+'RepositoryAPI/Rep_Post',
-                    data : {
-                        'rep_id' : $scope.rep_id,
-                        'rep_title' : $scope.rep_title,
-                        'rep_upload_file' : $fileInput,
-                        'rep_content' : $scope.rep_content,
-                        'categoryId' : $scope.selectize_category,
-                        'courseId' : $scope.selectize_courseId
-                    },
-                    headers:{'access_token':$localStorage.access_token}
+                    data: formdata,
+                    // data : {
+                    //     'rep_id' : $scope.rep_id,
+                    //     'rep_title' : $scope.rep_title,
+                    //     'rep_upload_file' : $fileInput,
+                    //     'rep_content' : $scope.rep_content,
+                    //     'categoryId' : $scope.selectize_category,
+                    //     'courseId' : $scope.selectize_courseId
+                    // },
+                    headers:{'access_token':$localStorage.access_token, 'Content-Type': undefined}
                 }).then(function(return_data){
                     if(return_data.data.status==true){
                         UIkit.notify({
