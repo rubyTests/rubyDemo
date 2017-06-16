@@ -335,17 +335,27 @@
                         <div class="md-card-head">
                             <div class="uk-cover uk-position-relative uk-height-1-1 transform-origin-50" id="video_player">
                                 <iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/-CYs99M7hzA?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe>
+                                <!-- <video controls autoplay ng-if="Rep_data.extention=='mp4' && Rep_data.extention=='ogg'"></video>
+                                <img ng-if="Rep_data.extention=='png' || Rep_data.extention=='jpg'" ng-src="{{'assets/uploads/'+Rep_data.UPLOAD_FILE}}" width="100%" height="50%" alt="">
+                                <img ng-if="Rep_data.extention=='pdf'" ng-src="assets/uploads/file/pdf.png" width="100%" height="50%" alt="">
+                                <img ng-if="Rep_data.extention=='docs'" ng-src="assets/uploads/file/docs.png" width="100%" height="50%" alt="">
+                                <img ng-if="Rep_data.extention=='zip'" ng-src="assets/uploads/file/zip.jpg" width="100%" height="50%" alt="">
+                                <img ng-if="Rep_data.extention=='rar'" ng-src="assets/uploads/file/rar.png" width="100%" height="50%" alt=""> -->
                             </div>
                         </div>
                         <div class="md-card-content">
                             <ul class="md-list md-list-addon md-list-interactive" id="video_player_playlist">
-                                <li ng-click="videoChange($event,video.id)" ng-repeat="video in video_data" ng-class="{'md-list-item-active': $index == 0 }">
+                                <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:5" ng-class="{'md-list-item-active': $index == 0 }">
                                     <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">&#xE037;</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='png' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='jpg'">collections</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='mp4' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='ogg'">&#xE037;</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='pdf'">file_download</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='zip'">file_download</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='rar'">file_download</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{video.name}}</span>
-                                        <span class="uk-text-small uk-text-muted">{{video.source}}</span>
+                                        <span class="md-list-heading">{{post.TITLE}}</span>
+                                        <span class="uk-text-small uk-text-muted">{{post.CRT_DT}}</span>
                                     </div>
                                 </li>
                             </ul>

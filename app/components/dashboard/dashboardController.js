@@ -10,7 +10,9 @@ angular
         'sale_chart_data',
         'variables',
         'todo_data',
-        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables,todo_data) {
+        '$http',
+        '$localStorage',
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables,todo_data, $http, $localStorage) {
 
         // circular statistics
             $scope.stat_conversions_data = [5,3,9,6,5,9,7];
@@ -459,40 +461,48 @@ angular
                 $scope.todo_data.splice(index,1);
             }
 
+            $scope.posts_data=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'RepositoryAPI/Rep_Post',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.posts_data=return_data.data.message;
+            });
 
                     // video player
-            $scope.video_data = [
-                {
-                    id: '-CYs99M7hzA',
-                    name: 'Unboxing the HERO4',
-                    source: 'Mashable'
-                },
-                {
-                    id: 'te689fEo2pY',
-                    name: 'Apple Watch Unboxing & Setup',
-                    source: 'Unbox Therapy'
-                },
-                {
-                    id: '7AFJeaYojhU',
-                    name: 'Energous WattUp Power Transmitter',
-                    source: 'TechCrunch'
-                },
-                {
-                    id: 'hajnEpCq5SE',
-                    name: 'The new MacBook - Design',
-                    source: 'Apple'
-                }
-            ];
+            // $scope.video_data = [
+            //     {
+            //         id: '-CYs99M7hzA',
+            //         name: 'Unboxing the HERO4',
+            //         source: 'Mashable'
+            //     },
+            //     {
+            //         id: 'te689fEo2pY',
+            //         name: 'Apple Watch Unboxing & Setup',
+            //         source: 'Unbox Therapy'
+            //     },
+            //     {
+            //         id: '7AFJeaYojhU',
+            //         name: 'Energous WattUp Power Transmitter',
+            //         source: 'TechCrunch'
+            //     },
+            //     {
+            //         id: 'hajnEpCq5SE',
+            //         name: 'The new MacBook - Design',
+            //         source: 'Apple'
+            //     }
+            // ];
 
             var $video_player = $('#video_player'),
                 $video_playlist = $('#video_player_playlist'),
                 active_class = 'md-list-item-active';
 
-            $scope.videoChange = function($event,videoID) {
+            $scope.videoChange = function($event,post_url) {
 
                 var $this = $($event.currentTarget);
                 if(!$this.hasClass(active_class)) {
-                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/' + videoID + '?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
+                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="assets/uploads/' + post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
 
                     $video_playlist.children('li').removeClass(active_class);
                     $this.addClass(active_class);
