@@ -3786,6 +3786,53 @@ rubycampusApp
                         pageTitle: 'Assessment Marks'
                     }
                 })
+				
+				.state("restricted.academics.examination.examMark", {
+                    url: "/examMark",
+                    templateUrl: 'app/components/academics/examination/examMark.html',
+                    controller: 'examMarkCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/examination/examMark.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Exam Marks'
+                    }
+                })
+				
+				// Student Exam Report 
+				
+				.state("restricted.academics.examination.stuExamReport", {
+                    url: "/stuExamReport",
+                    templateUrl: 'app/components/academics/examination/stuExamReport.html',
+                    controller: 'stuExamReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'lazy_charts_chartist',
+                                
+                                'app/components/academics/examination/stuExamReportCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/academics/examination/stuExamReport.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Fee Reciept Details'
+                    }
+                })
 
                 // Added By Senthil 20/04/2017 
 
