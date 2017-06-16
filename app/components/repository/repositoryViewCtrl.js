@@ -6,12 +6,19 @@ angular
         '$rootScope',
         'utils',
         'repository_articles',
-        function ($stateParams,$scope,$rootScope,utils,repository_articles) {
+        '$localStorage',
+        function ($stateParams,$scope,$rootScope,utils,repository_articles,$localStorage) {
             $rootScope.toBarActive = true;
             $scope.$on('$destroy', function() {
                 $rootScope.toBarActive = false;
             });
 
+			if($localStorage.role_id==3 || $localStorage.role_id==4){
+				$scope.userRole=false;
+			}else{
+				$scope.userRole=true;
+			}
+			
             $scope.repository_articles = repository_articles;
 
             $scope.article = utils.findByItemId($scope.repository_articles, $stateParams.articleId);
