@@ -272,6 +272,7 @@ angular
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         $scope.getBatchList(value);
+                        $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -302,6 +303,7 @@ angular
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         $scope.getStudentdetails(value);
+                        $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -331,17 +333,20 @@ angular
             $scope.studentCheck=false;
             $scope.studentData=[];  
             $scope.saveFeeStructure=function(){
-                console.log($scope.studentData,'datadata');
+                // console.log($scope.itemType_array,'datadata');
+                angular.forEach($scope.itemType_array, function(value, keys){
+                    var due_date = value.due_date.split(".");
+                    value.due_date = due_date[2]+"-"+due_date[0]+"-"+due_date[1];
+                });
                 $http({
                     method:'POST',
                     url: $localStorage.service+'FinanceAPI/feeStructure',
                     data: {
                         'stru_id' : $scope.structure_id,
                         'structure_name' : $scope.structure_name,
-                        'assigned_to' : $scope.assigned_to,
-                        'studentData': $scope.studentData,
-                        'student':$scope.student_id,
-                        'batch':$scope.batch_id,
+                        // 'batch_id' : $scope.batch_id,
+                        // 'coursedata' : $scope.coursedata,
+                        // 'studentData': $scope.studentData,
                         'feedata' : $scope.itemType_array
                     },
                     headers:{'access_token':$localStorage.access_token}

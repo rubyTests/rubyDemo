@@ -31,6 +31,9 @@ angular
             $scope.form_dynamic.push({'FEE_ITEM_ID':'','AMOUNT':'','DUE_DATE':'','FREQUENCY':'','FEE_FINE_ID':''});
             $scope.form_dynamic_model = [];
 
+            $scope.cloneSection1=function(){
+                $scope.form_dynamic.push({'FEE_ITEM_ID':'','AMOUNT':'','DUE_DATE':'','FREQUENCY':'','FEE_FINE_ID':''});
+            }
             // delete section
             $scope.deleteSection = function($event,$index,currArray) {
                 console.log(currArray,'currArray');
@@ -95,13 +98,21 @@ angular
                 $scope.editView=response.message[0];
                 $scope.structure_id=response.message[0].ID;
                 $scope.structure_name=response.message[0].NAME;
-                $scope.assigned_to=response.message[0].ASSIGN_TO;
+                // $scope.assigned_to=response.message[0].ASSIGN_TO;
                 $timeout(function(){
-                    $scope.batch_id=response.message[0].BATCHID;
-                    $scope.coursedata=response.message[0].COUSREID;
+                    // $scope.coursedata=response.message[0].COURSEID;
+                    // $scope.batch_id=response.message[0].BATCHID;
+                    // $scope.coursedata=response.message[0].COURSE_ID;
+                    // $scope.batch_id=response.message[0].BATCH_ID;
 
                     $scope.form_dynamic=response.message[0].fee_item;
                     $scope.itemType_array=response.message[0].fee_item;
+                    // console.log($scope.form_dynamic);
+                    angular.forEach($scope.form_dynamic, function(value, keys){
+                        console.log(value, "value");
+                        var due_date = value.DUE_DATE.split("-");
+                        value.DUE_DATE = due_date[1]+"."+due_date[2]+"."+due_date[0];
+                    })
                 },200);
                 $timeout(function(){
                     // $scope.form_dynamic=response.message[0].fee_item;
@@ -393,17 +404,21 @@ angular
             $scope.studentCheck=false;
             $scope.studentData=[];  
             $scope.saveFeeStructure=function(){
-                console.log($scope.studentData,'datadata');
+                // console.log($scope.studentData,'datadata');
+                angular.forEach($scope.itemType_array, function(value, keys){
+                    var due_date = value.DUE_DATE.split(".");
+                    value.DUE_DATE = due_date[2]+"-"+due_date[0]+"-"+due_date[1];
+                });
                 $http({
                     method:'POST',
                     url: $localStorage.service+'FinanceAPI/feeStructure',
                     data: {
                         'stru_id' : $scope.structure_id,
                         'structure_name' : $scope.structure_name,
-                        'assigned_to' : $scope.assigned_to,
-                        'studentData': $scope.studentData,
-                        'student':$scope.student_id,
-                        'batch':$scope.batch_id,
+                        // 'assigned_to' : $scope.assigned_to,
+                        // 'studentData': $scope.studentData,
+                        // 'student':$scope.student_id,
+                        // 'batch':$scope.batch_id,
                         'feedata' : $scope.itemType_array
                     },
                     headers:{'access_token':$localStorage.access_token}

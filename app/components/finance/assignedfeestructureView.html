@@ -3,22 +3,21 @@
         margin-top: 15px;
     }
 </style>
-<div id="page_content" ng-controller="feeStructureCtrl as showCase">
+<div id="page_content" ng-controller="assignedfeestructureViewCtrl as showCase">
     <div id="page_content_inner">
-        <h3 class="heading_a uk-margin-bottom">Fee Structure</h3>
+        <h3 class="heading_a uk-margin-bottom">Assigned Fee Structure</h3>
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <a ui-sref="restricted.finance.fee.feeStructureAdd"><button  class="md-btn md-btn-primary md-btn-small"><i class="uk-icon-plus"></i>  Add Fee Structure
+                        <a ui-sref="restricted.finance.fee.assignFeeStructure"><button  class="md-btn md-btn-primary md-btn-small"><i class="uk-icon-plus"></i>  Assign Fee Structure
                         </button></a>
                     </div>
                     <thead>
                         <tr>
                             <th>S.No</th>
                             <th>Fee Structure Name</th>
-                            <th>No.of Fee Items</th>
-                            <!-- <th>Assigned To</th> -->
+                            <th>No.of Student</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -26,7 +25,7 @@
                         <tr>
                             <th></th>
                             <th>Fee Structure Name</th>
-                            <th>No.of Fee Items</th>
+                            <th>No.of Student</th>
                             <!-- <th>Assigned To</th> -->
                         </tr>
                     </tfoot>
@@ -34,13 +33,15 @@
                         <tr ng-repeat="row in viewData">
                             <td>{{$index+1}}</td>
                             <td>{{row.NAME}}</td>
-                            <td>{{row.ITEM_COUNT}}</td>
-                            <!-- <td>{{row.ASSIGN_TO}}</td> -->
+                            <td>{{row.TOTAL_STUDENT}}</td>
                             <td>
                                 <!-- <a class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructureView({Assign_Id:{{row.ID}}})"><i class="md-icon material-icons">&#xE8F4;</i></a> -->
-                                <a  class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructureEdit({Assign_Id:{{row.ID}}})"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a  class="ts_remove_row" ng-click="deleteFeeStructure($index,row.ID)"><i class="md-icon material-icons">&#xE872;</i></a>
-                               <!--  <a class="ts_remove_row" ui-sref="restricted.finance.fee.assignFeeStructure({Assign_Id:{{row.ID}}})" data-uk-tooltip="{pos:'top'}" title="Assign Student"><i class="md-icon material-icons">&#xE417;</i></a> -->
+                                <!-- <a  class="ts_remove_row" ui-sref="restricted.finance.fee.feeStructureEdit({Assign_Id:{{row.ID}}})"><i class="md-icon material-icons">&#xE254;</i></a> -->
+                                <!-- <a  class="ts_remove_row" ng-click="deleteFeeStructure($index,row.ID)"><i class="md-icon material-icons">&#xE872;</i></a> -->
+
+
+                                <a class="ts_remove_row" ui-sref="restricted.finance.fee.showAssignedFeeStructure({strc_id:{{row.FEE_STRUCTURE_ID}}})"><i class="md-icon material-icons">&#xE417;</i></a>
+                                <!-- <a  class="ts_remove_row" ng-click="deleteAssignedFeeStructure($index,row.FEE_STRUCTURE_ID)"><i class="md-icon material-icons">&#xE872;</i></a> -->
                             </td>
                         </tr>
                     </tbody>

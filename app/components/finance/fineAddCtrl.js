@@ -2,7 +2,7 @@ angular
     .module('rubycampusApp')
     .controller('fineAddCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$localStorage,$http,$state) {
-
+            $scope.defaultDueDays = 30;
             var $formValidate = $('#form_validation');
                 $formValidate
                 .parsley()

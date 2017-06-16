@@ -19,11 +19,6 @@
                 <div class="md-card">
                     <div class="md-card-content large-padding">
                         <form class="uk-form" >
-                        <!-- <h2 class="heading_a">
-                                Fee Collection
-                                <span class="sub-heading">Fee Collection Informations</span>
-                            </h2>
-                            <hr class="md-hr"/> -->
                             <div class="uk-grid uk-grid-medium form_hr">
                                 <div class="uk-width-8-10 uk-width-medium-9-10">
                                     <div class="uk-grid" data-uk-grid-margin>
@@ -40,14 +35,13 @@
                                             </ul>
                                         </div>
                                         <div class="uk-width-medium-2-6 parsley-row">
-                                            <input type="text" config="selectize_courseNew_config" options="selectize_courseNew_options" ng-model="selectize_courseNew" name="selectize_courseNew" selectize />
+                                            <input type="text" config="course_config" options="course_options" ng-model="course_id" selectize />
                                         </div>
                                         <div class="uk-width-medium-1-6 parsley-row">
                                             <ul class="md-list md-list-addon">
                                                 <li>
                                                     <div class="md-list-addon-element">
                                                         <i class="md-list-addon-icon material-icons" >contacts</i>
-                                                        <!-- <i class="material-icons">developer_board</i> -->
                                                     </div>
                                                     <div class="md-list-content AdjListCon">
                                                         <span class="md-list-heading">Batch</span>
@@ -56,7 +50,7 @@
                                             </ul>
                                         </div>
                                         <div class="uk-width-medium-2-6 parsley-row">
-                                            <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="selectize_batch" name="selectize_batch" selectize />
+                                            <input type="text" config="batch_config" options="batch_options" ng-model="batch_id" selectize />
                                         </div>
                                     </div>
                                 </div>
@@ -77,7 +71,7 @@
                                             </ul>
                                         </div>
                                         <div class="uk-width-medium-3-6 parsley-row">
-                                            <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
+                                            <input type="text" config="batch_config1" options="batch_options1" ng-model="studentlist" selectize />
                                         </div>
                                     </div>
                                 </div>
@@ -92,11 +86,6 @@
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
-                    <!-- <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
-                        <i class="uk-icon-plus"></i>  Add Block
-                        </button>
-                    </div> -->
                     <thead>
                         <tr>
                             <th>Sl.No</th>
@@ -104,7 +93,7 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
-                            <th>Fee Due</th>
+                            <th>Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -115,23 +104,21 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
-                            <th>Fee Due</th>
+                            <th>Amount</th>
                             <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row.id}}</td>
-                            <td>{{row.Name}}</td>
-                            <td>{{row.Admission_No}}</td>
-                            <td>{{row.Course}}</td>
-                            <td>{{row.Batch}}</td>
-                            <td>{{row.Fee_Due}}</td>
+                        <tr ng-repeat="row in viewTable">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.STUDENT_NAME}}</td>
+                            <td>{{row.ADMISSION_NO}}</td>
+                            <td>{{row.COURSE_NAME}}</td>
+                            <td>{{row.BATCH_NAME}}</td>
+                            <td>{{(row.Total_Amount+row.Total_Fine) - (row.Total_Paid+row.Total_Paid_Fine)}}</td>
                             <td>
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.feeCollectView">
-                                <i class="uk-icon-money"></i>
-                                Pay
-                                </a>
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.feeCollectView({student_feeid:{{row.ID}}})">
+                                <i class="uk-icon-money"></i>Pay</a>
                             </td>
                         </tr>
                     </tbody>

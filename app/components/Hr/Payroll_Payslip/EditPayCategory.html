@@ -40,7 +40,7 @@
                   <div class="uk-width-9-10 uk-width-medium-9-10">
                     <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                       <div class="uk-width-medium-1-2 parsley-row">
-                          <label for="item" ng-if="section.PAYITEM_ID" style="font-size: 12px;color: #727272;">Pay Item <span class="req">*</span></label>
+                          <label for="item" ng-show="itemType_array[topParent].PAYITEM_ID.length==1" style="font-size: 12px;color: #727272;">Pay Item <span class="req">*</span></label>
                           <input type="text" config="itemType_config" options="itemType_options" ng-model="itemType_array[topParent].PAYITEM_ID" ng-selected="itemType_array[topParent].PAYITEM_ID" required selectize ng-change="checkValid(itemType_array[topParent])"/>
                       </div>
                       <div class="uk-width-medium-1-2 parsley-row">

@@ -26,9 +26,9 @@
 
             </div>
             <div class="uk-width-medium-5-6">
-            <h3 class="heading_a">Srinivasan Engineering College</h3>
-            <span class="uk-text-small uk-text-muted">No: 28, Bajanai madam street, Pondicherry</span><br>
-            <span class="uk-text-small uk-text-muted">0413-654 6542 | school@edu.com</span><br>
+            <h3 class="heading_a">{{instituteDetails.INSTITUTION_NAME}}</h3>
+            <span class="uk-text-small uk-text-muted">{{instituteDetails.ADDRESS}}, {{instituteDetails.CITY}},{{instituteDetails.STATE}}</span><br>
+            <span class="uk-text-small uk-text-muted">{{instituteDetails.PHONE_NO}}</span><br>
             </div>
         </div>
         <hr class="uk-divider-icon">
@@ -61,7 +61,7 @@
                 <ul class="md-list">
                     <li>
                         <div class="md-list-content">
-                            <span class="md-list-heading">17.07.2017</span>
+                            <span class="md-list-heading">{{viewDetail.PAYMENT_DATE}}</span>
                             <span class="uk-text-small uk-text-muted">Date</span>
                         </div>
                     </li>
@@ -71,7 +71,7 @@
                 <ul class="md-list">
                     <li>
                         <div class="md-list-content">
-                            <span class="md-list-heading">Cash</span>
+                            <span class="md-list-heading">{{viewDetail.MODEOF_PAYMENT}}</span>
                             <span class="uk-text-small uk-text-muted">Payment Mode</span>
                         </div>
                     </li>
@@ -83,7 +83,7 @@
                 <ul class="md-list">
                     <li>
                         <div class="md-list-content">
-                            <span class="md-list-heading">Nitheesh</span>
+                            <span class="md-list-heading">{{viewDetail.STUDENT_NAME}}</span>
                             <span class="uk-text-small uk-text-muted">Student Name</span>
                         </div>
                     </li>
@@ -93,7 +93,7 @@
                 <ul class="md-list">
                     <li>
                         <div class="md-list-content">
-                            <span class="md-list-heading">82310132052</span>
+                            <span class="md-list-heading">{{viewDetail.ADMISSION_NO}}</span>
                             <span class="uk-text-small uk-text-muted">Admission Number</span>
                         </div>
                     </li>
@@ -103,7 +103,7 @@
                 <ul class="md-list">
                     <li>
                         <div class="md-list-content">
-                            <span class="md-list-heading">Computer Science and Engineering</span>
+                            <span class="md-list-heading">{{viewDetail.COURSE_NAME}}</span>
                             <span class="uk-text-small uk-text-muted">Course</span>
                         </div>
                     </li>
@@ -113,7 +113,7 @@
                 <ul class="md-list">
                     <li>
                         <div class="md-list-content">
-                            <span class="md-list-heading">Cse - B</span>
+                            <span class="md-list-heading">{{viewDetail.BATCH_NAME}}</span>
                             <span class="uk-text-small uk-text-muted">Batch</span>
                         </div>
                     </li>
@@ -130,37 +130,27 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="uk-table-middle" on-last-repeat>
-                            <td>
-                                Tution Fee
-                            </td>
-                            <td style="text-align: right;">
-                                15420
-                            </td>
+                        <tr class="uk-table-middle" ng-repeat="items in viewDetail.itemlist">
+                            <td>{{items.FEEITEM_NAME}}</td>
+                            <td style="text-align: right;">{{items.PAID_AMOUNT | currency:""}}</td>
                         </tr>
-                        <tr class="uk-table-middle" on-last-repeat>
-                            <td>
-                                Tution Fee
-                            </td>
-                            <td style="text-align: right;">
-                                15420
-                            </td>
-                        </tr>
-                        <tr class="uk-table-middle" on-last-repeat>
-                            <td>
-                                Tution Fee
-                            </td>
-                            <td style="text-align: right;">
-                                15420
-                            </td>
-                        </tr>
-                        <tr class="uk-table-middle" on-last-repeat>
-                            <td>
-                                Tution Fee
-                            </td>
-                            <td style="text-align: right;">
-                                15420
-                            </td>
+
+                        <!-- <tr class="uk-table-middle" ng-repeat="fines in viewDetail.finelist">
+                            {{fines | json}}
+                            <td ng-show="{{fines.FINEFEEITEM_NAME}}">{{fines.FINEFEEITEM_NAME}}</td>
+                            <td ng-show="{{fines.FINEFEEITEM_NAME}}" style="text-align: right;">{{fines.FEEFINE_AMOUNT | currency:""}}</td>
+                        </tr> -->
+                    </tbody>
+                </table>
+                <div>
+                    <h4>Fee fine details</h4>
+                </div>
+                <!-- {{viewDetail.finelist | json}} -->
+                <table class="uk-table uk-table-middle">
+                    <tbody>
+                        <tr class="uk-table-middle" ng-repeat="fines in viewDetail.finelist">
+                            <td>{{fines.FEEITEM_NAME}}</td>
+                            <td style="text-align: right;">{{fines.AMOUNT | currency:""}}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -169,7 +159,7 @@
                         <span class="uk-text-bold">Total Amount :</span>
                     </div>
                     <div class="uk-width-medium-1-6 uk-text-right">
-                        <span class="uk-text-lead">85420</span> 
+                        <span class="uk-text-lead">{{viewDetail.TOTAL_AMOUNT | currency:""}}</span> 
                     </div>
                 </div>
             </div>
@@ -185,8 +175,8 @@
             </div>
         </div> -->
         <div class="invoice_footer">
-            Ruby Campus<span>&middot;</span>No: 28, Bajanai madam street, Ellaipillaichavadi<br>
-            Pondicherry<span>&middot;</span>gutmann.hassie@gmail.com
+            Ruby Campus<span>&middot;</span>{{instituteDetails.ADDRESS}},{{instituteDetails.CITY}}<br>
+            {{instituteDetails.STATE}}<span>&middot;</span>{{instituteDetails.PHONE_NO}}
         </div>
     </div>
 </div>

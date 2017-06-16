@@ -63,34 +63,75 @@ angular
                 }
                 $scope.refreshTable();
                 $scope.deleteFeeStructure=function($index,id){
+                    // if(id){
+                    //     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                    //         if(id){
+                    //             $http({
+                    //             method : "DELETE",
+                    //             url : $localStorage.service+"FinanceAPI/feeStructure",
+                    //             params : {id : id},
+                    //             headers:{'access_token':$localStorage.access_token}
+                    //             }).then(function mySucces(response) {
+                    //                 console.log('delete',response);
+                    //                 $scope.viewData.splice($index, 1);
+                    //                 UIkit.notify({
+                    //                     message : response.data.message,
+                    //                     status  : 'success',
+                    //                     timeout : 2000,
+                    //                     pos     : 'top-center'
+                    //                 });
+                    //                 $scope.refreshTable();
+                    //             },function myError(response) {
+                    //             })
+                    //         }
+                    //     },function(){
+                    //         // console.log("false");
+                    //     }, {
+                    //         labels: {
+                    //             'Ok': 'Ok'
+                    //         }
+                    //     });
+                    // }
+
+
                     if(id){
-                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                            if(id){
-                                $http({
-                                method : "DELETE",
-                                url : $localStorage.service+"FinanceAPI/feeStructure",
-                                params : {id : id},
-                                headers:{'access_token':$localStorage.access_token}
-                                }).then(function mySucces(response) {
-                                    console.log('delete',response);
-                                    $scope.viewData.splice($index, 1);
-                                    UIkit.notify({
-                                        message : response.data.message,
-                                        status  : 'success',
-                                        timeout : 2000,
-                                        pos     : 'top-center'
-                                    });
-                                    $scope.refreshTable();
-                                },function myError(response) {
-                                })
-                            }
-                        },function(){
-                            // console.log("false");
-                        }, {
-                            labels: {
-                                'Ok': 'Ok'
-                            }
-                        });
+                        $http({
+                        method : "GET",
+                        url: $localStorage.service+'FinanceAPI/checkFeeStructure',
+                        params : {id : id},
+                        headers:{'access_token':$localStorage.access_token}
+                        }).then(function mySucces(response) {
+                            UIkit.modal.alert('This fee structure assigned to a student, remove the student to continue removing this fee structure');
+                        },function myError(response) {
+                            console.log(response,'error');
+                            UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                if(id){
+                                    $http({
+                                        method : "DELETE",
+                                        url : $localStorage.service+"FinanceAPI/feeStructure",
+                                        params : {id : id},
+                                        headers:{'access_token':$localStorage.access_token}
+                                    }).then(function mySucces(response) {
+                                        console.log('delete',response);
+                                        $scope.viewData.splice($index, 1);
+                                        UIkit.notify({
+                                            message : response.data.message,
+                                            status  : 'success',
+                                            timeout : 2000,
+                                            pos     : 'top-center'
+                                        });
+                                        $scope.refreshTable();
+                                    },function myError(response) {
+                                    })
+                                }
+                            },function(){
+                                // console.log("false");
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
+                        })
                     }
                 }
         }

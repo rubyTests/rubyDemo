@@ -79,7 +79,7 @@
                                         <div class="uk-width-medium-3-10 parsley-row">
                                             <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
                                         </div>
-                                        <div class="uk-width-medium-3-10">
+                                       <!--  <div class="uk-width-medium-3-10">
                                             <div class="uk-input-group">
                                                 <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                                                 <label for="uk_dp_1">From Date</label>
@@ -92,7 +92,7 @@
                                                 <label for="uk_dp_1">To Date</label>
                                                 <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker1">
                                             </div>
-                                        </div>
+                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -102,15 +102,10 @@
             </div>
         </div>
     </div>
-    <div id="page_content_inner" ng-controller="feeReportCtrl as showCase">
+    <div id="page_content_inner" >
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
-                    <!-- <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}">
-                        <i class="uk-icon-plus"></i>  Add Block
-                        </button>
-                    </div> -->
                     <thead>
                         <tr>
                             <th>Sl.No</th>
@@ -136,16 +131,16 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in showCase.dt_data">
-                            <td>{{row.id}}</td>
-                            <td>{{row.Name}}</td>
-                            <td>{{row.Admission_No}}</td>
-                            <td>{{row.Course}}</td>
-                            <td>{{row.Batch}}</td>
-                            <td>{{row.Total_Fee}}</td>
-                            <td>{{row.Fee_Due}}</td>
+                        <tr ng-repeat="row in viewTable track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.STUDENT_NAME}}</td>
+                            <td>{{row.ADMISSION_NO}}</td>
+                            <td>{{row.COURSE_NAME}}</td>
+                            <td>{{row.BATCH_NAME}}</td>
+                            <td>{{(row.Total_Amount+row.Total_Fine)}}</td>
+                            <td>{{(row.Total_Amount+row.Total_Fine) - (row.Total_Paid+row.Total_Paid_Fine)}}</td>
                             <td>
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.totalFeeView">
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.totalFeeView({profile_id:{{row.STUDENT_PROFILE_ID}}})">
                                 <i class="uk-icon-money"></i>
                                 Fee Details
                                 </a>

@@ -17,6 +17,10 @@
         /*input[type=text] { text-align:right }*/
     </style>
     <div id="page_content">
+    <form id="form_validation" ng-submit="sendpayFeesDetail()">
+        <input type="hidden" ng-model="student_feeID">
+        <input type="hidden" ng-model="student_profileID">
+        <input type="hidden" ng-model="totalpayAmout" ng-value="{{totalPaid | currency:''}}">
         <div id="page_content_inner">
         <h3 class="heading_a uk-margin-bottom">Fee Collection</h3>
         <div class="uk-grid" data-uk-grid-margin>
@@ -31,7 +35,7 @@
                                             <i class="md-list-addon-icon material-icons" >person</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Nitheesh</span>
+                                            <span class="md-list-heading">{{BasicDetails.STUDENT_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Student Name</span>
                                         </div>
                                     </li>
@@ -44,7 +48,7 @@
                                             <i class="md-list-addon-icon material-icons" >insert_comment</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">82310132052</span>
+                                            <span class="md-list-heading">{{BasicDetails.ADMISSION_NO}}</span>
                                             <span class="uk-text-small uk-text-muted">Admission Number</span>
                                         </div>
                                     </li>
@@ -57,7 +61,7 @@
                                             <i class="md-list-addon-icon material-icons" >import_contacts</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Computer Science and Engineering</span>
+                                            <span class="md-list-heading">{{BasicDetails.COURSE_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Course</span>
                                         </div>
                                     </li>
@@ -70,7 +74,7 @@
                                             <i class="md-list-addon-icon material-icons" >contacts</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Cse - B</span>
+                                            <span class="md-list-heading">{{BasicDetails.BATCH_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Batch</span>
                                         </div>
                                     </li>
@@ -82,40 +86,36 @@
                                 <div class="uk-input-group">
                                     <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                                     <label for="uk_dp_1">Payment Date</label>
-                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
+                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="payment_date">
                                 </div>
                             </div>
-                            <div class="uk-width-medium-1-4">
-                                <input type="text" config="selectize_paymode_config" options="selectize_paymode_options" ng-model="selectize_paymode" name="selectize_paymode" selectize />
+                            <div class="uk-width-medium-1-4 parsley-row">
+                                <input type="text" config="selectize_paymode_config" options="selectize_paymode_options" ng-model="selectize_paymode" required selectize />
                             </div>
-                            <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Cash' || selectize_paymode == 'Others'">
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'Cash' || selectize_paymode == 'Others'">
                                 <label for="prev_state">Reference Number<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                                <input type="text" class="md-input" md-input ng-model="refence_no" ng-required="selectize_paymode == 'Cash' || selectize_paymode == 'Others'" />
                             </div>
-                            <!-- <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Online_Payment'">
-                                <label for="prev_state">Transaction Id<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
-                            </div> -->
-                            <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Cheque'">
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'Cheque'">
                                 <label for="prev_state">Cheque No.<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                                <input type="text" class="md-input" md-input ng-model="cheque_no" ng-required="selectize_paymode == 'Cheque'"/>
                             </div>
-                            <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'DD'">
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'DD'">
                                 <label for="prev_state">DD No.<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                                <input type="text" class="md-input" md-input ng-model="dd_no" ng-required="selectize_paymode == 'DD'"/>
                             </div>
-                            <div class="uk-width-medium-1-4" ng-show="selectize_paymode == 'Online_Payment' || selectize_paymode == 'Cheque'">
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'Online_Payment' || selectize_paymode == 'Cheque'">
                                 <label for="prev_state">Bank Name<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="wizard.prev_state" />
+                                <input type="text" class="md-input" md-input ng-model="bankname" ng-required="selectize_paymode == 'Cheque'"/>
                             </div>
                         </div>
                         <div class="uk-grid" data-uk-grid-margin>
                             <div class="uk-width-medium-2-3 uk-margin-top">
-                            <div class="uk-input-group">
+                            <div class="uk-input-group parsley-row">
                                 <span class="uk-input-group-addon">
                                     <i class="material-icons AdjIcon">view_list</i>
                                 </span>
-                                <selectize id="selec_adv_1" config="selectize_feeStruct_config" options="selectize_feeStruct_options" position="bottom" ng-model="forms_advanced.selectize_feeStruct"></selectize>
+                                <selectize id="selec_adv_1" config="selectize_feeStruct_config" options="selectize_feeStruct_options" position="bottom" ng-model="structure_ids" required></selectize>
                                 </div>
                             </div>
                         </div>
@@ -127,21 +127,52 @@
             </div>
         </div>
     </div>
-    <div id="page_content_inner">
+    <div id="page_content_inner" ng-show="structure_ids">
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <div class="uk-overflow-container">
                     <table class="uk-table">
                         <thead>
                         <tr>
-                            <th><i class="md-list-addon-icon material-icons">school</i> FEE ITEM NAME</th>
+                            <th><i class="md-list-addon-icon material-icons">school</i> Fee Item</th>
                             <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
-                            AMOUNT</th>
+                            Amount</th>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
+                            Fine Amount</th>
                             <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
-                            PAY FEES</th>
+                            Paid Amount</th>    
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                            Due Amount</th>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                            Pay Fees</th>
                         </tr>
                         </thead>
-                        <tbody ng-repeat="(keys, fee) in newData track by $index">
+                        <!-- <tbody ng-repeat="(keys, value) in structureItems | groupBy: 'STRUCTURE_NAME'">
+                            <tr>
+                            <td colspan="4" style="background-color: rgb(233,233,233)">{{value[0].STRUCTURE_NAME}}</td>
+                            </tr>
+                            <tr ng-repeat="(key, feeItem) in value[0].ITEMS track by $index">
+                                <td>{{feeItem.ITEM_NAME}}</td>
+                                <td class="uk-text-right">{{feeItem.AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right">{{feeItem.AMOUNT-feeItem.PAID_AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
+                            </tr>
+                        </tbody> -->
+                        <tbody ng-repeat="(keys, value) in structureItems">
+                            <tr>
+                            <td colspan="6" style="background-color: rgb(233,233,233)">{{value.STRUCTURE_NAME}}</td>
+                            </tr>
+                            <tr ng-repeat="(key, feeItem) in value.list track by $index">
+                                <td>{{feeItem.ITEM_NAME}}</td>
+                                <td class="uk-text-right">{{feeItem.AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right">{{(feeItem.TOTAL_PAID_AMOUNT*1)+(feeItem.TOTAL_PAID_FINE_AMOUNT*1) | currency:""}}</td>
+                                 <td class="uk-text-right">{{(feeItem.AMOUNT-feeItem.TOTAL_PAID_AMOUNT)+(feeItem.FINE_AMOUNT-feeItem.TOTAL_PAID_FINE_AMOUNT) | currency:""}}</td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
+                            </tr>
+                        </tbody>
+
+                        <!-- <tbody ng-repeat="(keys, fee) in newData track by $index">
                             <tr>
                             <td colspan="3" style="background-color: rgb(233,233,233)">{{fee.FeeStructure_Name}}</td>
                             </tr>
@@ -150,20 +181,89 @@
                                 <td class="uk-text-right">{{feeItem.Amount | currency:""}}</td>
                                 <td class="uk-text-right"><input type="text" ng-change="changePaid()" name="fee_1" id="fee_1" ng-model="feesItem[keys][key].fees"/></td>
                             </tr>
-                        </tbody>
+                        </tbody> -->
+
+
                     </table>
                 </div>
+                <!-- <div style="margin-top: 20px;"> 
+                    <h4>Fine Details</h4>
+                    <table class="uk-table">
+                        <thead>
+                            <tr>
+                                <th><i class="md-list-addon-icon material-icons">school</i> FINE NAME</th>
+                                <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
+                                AMOUNT</th>
+                                <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                                FINE AMOUNT</th>
+                                <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                                PAY FEES FINE</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="(keys, value) in feefineItems | groupBy: 'STRUCTURE_NAME'"">
+                            <tr>
+                            <td colspan="4" style="background-color: rgb(233,233,233)">{{value[0].STRUCTURE_NAME}}</td>
+                            </tr>
+                            <tr ng-repeat="(key, feeItem) in feefineItems track by $index" ng-if="value[0].STRUCTURE_NAME==feeItem.STRUCTURE_NAME">
+                                <td>{{feeItem.FINE_NAME}}</td>
+                                <td class="uk-text-right">{{feeItem.VALUE | currency:""}}</td>
+                                <td class="uk-text-right">{{feeItem.VALUE-feeItem.TOTAL_PAID_FINE_AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
+                            </tr>
+                        </tbody>
+
+                        <tbody ng-repeat="(keys, value) in feefineItems">
+                            <tr>
+                            <td colspan="4" style="background-color: rgb(233,233,233)">{{value.STRUCTURE_NAME}}</td>
+                            </tr>
+                            <tr ng-repeat="(key, feeItem) in value.finelist track by $index">
+                                <td>{{feeItem.ITEM_NAME}}</td>
+                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT-feeItem.TOTAL_PAID_FINE_AMOUNT | currency:""}}</td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div> -->
                 <div class="md-card-content">
-                    <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
+                    <!-- <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
+                        <div class="uk-width-medium-4-10">
+                        <span style="float: right;"><b>Total Amount :</b></span>
+                        </div>
+                        <div class="uk-width-medium-1-10">
+                            <p style="">{{(totalAmount*1)+(totalFINEAmount * 1)| currency:""}}</p>
+                        </div>
+                        <div class="uk-width-medium-3-10">
+                            <b>Total Due :</b>
+                            <span style="">{{(totalAmount*1 + totalFINEAmount*1)-(totalDueAmount*1 + totalFINEDueAmount*1) | currency:""}}</span>
+                        </div>
                         <div class="uk-width-medium-1-5">
+                            <b>Paid Amount :</b>
+                            <span style="">{{totalPaid | currency:""}}</span>
                         </div>
-                        <div class="uk-width-medium-2-5">
-                        <b>Total Amount :</b>
-                        <span style="float:right;margin-left: 10px;">{{totalAmount | currency:""}}</span>
+                    </div> -->
+                    <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
+                        <div class="uk-width-medium-4-10">
+                        <span style="float: right;"><b>Total Amount :</b></span>
                         </div>
-                        <div class="uk-width-medium-2-5">
-                        <b>Paid Amount :</b>
-                        <span style="float:right;margin-left: 10px;">{{totalPaid | currency:""}}</span>
+                        <div class="uk-width-medium-1-10">
+                            <p style="">{{(totalAmount*1) + (totalFINEAmount*1)| currency:""}}</p>
+                        </div>
+                        <div class="uk-width-medium-3-10">
+                            <b>Total Due :</b>
+                            <span style="">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</span>
+                        </div>
+                        <div class="uk-width-medium-3-10">
+                            <b>Total Due :</b>
+                            <span style="">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</span>
+                        </div>
+                        <div class="uk-width-medium-3-10">
+                            <b>Total Due :</b>
+                            <span style="">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</span>
+                        </div>
+                        <div class="uk-width-medium-1-5">
+                            <b>Paid Amount :</b>
+                            <span style="">{{totalPaid | currency:""}}</span>
                         </div>
                     </div>
                     <div class="uk-grid" data-uk-grid-margin>
@@ -174,7 +274,8 @@
                         <div class="uk-width-medium-2-6 parsley-row">
                         </div>
                         <div class="uk-width-medium-1-6 parsley-row uk-text-right">
-                            <a class="md-btn md-btn-small md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="margin-top: 25px;">Pay Fee</a>
+                            <!-- <a class="md-btn md-btn-small md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="margin-top: 25px;">Pay Fee</a> -->
+                            <button class="md-btn md-btn-small md-btn-primary md-btn-wave-light" type="submit" style="margin-top: 25px;" ng-show="feeBtn">Pay Fee</button>
                         </div>
                     </div>
                     </div>
@@ -182,4 +283,5 @@
             </div>
         </div>
     </div>
+    </form>
 </div>

@@ -56,29 +56,64 @@ angular
             }
             $scope.refreshTable();
             $scope.deleteFeeFine=function(id,$index){
+                // if(id){
+                //     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                //         if(id){
+                //             $http({
+                //                 url: $localStorage.service+'FinanceAPI/feeFine',
+                //                 method : 'DELETE',
+                //                 params:{'id':id},
+                //                 headers: { 'access_token':$localStorage.access_token},
+                //             }).success(function(response) {
+                //                 console.log(response,'success111');
+                //                 $scope.viewData.splice($index, 1);
+                //                 $scope.refreshTable();
+                //             }).error(function(data){
+                //                 console.log('error');
+                //             });
+                //         }
+                //     },function(){
+                //         // console.log("false");
+                //     }, {
+                //         labels: {
+                //             'Ok': 'Ok'
+                //         }
+                //     });
+                // }
+
                 if(id){
-                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                        if(id){
-                            $http({
-                                url: $localStorage.service+'FinanceAPI/feeFine',
-                                method : 'DELETE',
-                                params:{'id':id},
-                                headers: { 'access_token':$localStorage.access_token},
-                            }).success(function(response) {
-                                console.log(response,'success111');
-                                $scope.viewData.splice($index, 1);
-                                $scope.refreshTable();
-                            }).error(function(data){
-                                console.log('error');
-                            });
-                        }
-                    },function(){
-                        // console.log("false");
-                    }, {
-                        labels: {
-                            'Ok': 'Ok'
-                        }
-                    });
+                    $http({
+                    method : "GET",
+                    url: $localStorage.service+'FinanceAPI/checkFeeFine',
+                    params : {id : id},
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function mySucces(response) {
+                        UIkit.modal.alert('This fee fine assigned to a fee structure, remove the feestructure to continue removing this fee fine');
+                    },function myError(response) {
+                        console.log(response,'error');
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                    url: $localStorage.service+'FinanceAPI/feeFine',
+                                    method : 'DELETE',
+                                    params:{'id':id},
+                                    headers: { 'access_token':$localStorage.access_token},
+                                }).success(function(response) {
+                                    console.log(response,'success111');
+                                    $scope.viewData.splice($index, 1);
+                                    $scope.refreshTable();
+                                }).error(function(data){
+                                    console.log('error');
+                                });
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    })
                 }
             }
         }

@@ -9,6 +9,7 @@ angular
     '$resource',
     '$filter','$localStorage','$http','$state',
     function ($scope,$rootScope,$window,$timeout,$stateParams,$resource,$filter,$localStorage,$http,$state) {
+        $scope.defaultDueDays = 30;
         $scope.backBtn = function(){
             window.history.back();
         }

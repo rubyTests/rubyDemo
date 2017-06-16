@@ -24,7 +24,7 @@
                                             <i class="md-list-addon-icon material-icons" >person</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Nitheesh</span>
+                                            <span class="md-list-heading">{{studentDetails.STUDENT_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Student Name</span>
                                         </div>
                                     </li>
@@ -37,7 +37,7 @@
                                             <i class="md-list-addon-icon material-icons" >insert_comment</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">82310132052</span>
+                                            <span class="md-list-heading">{{studentDetails.ADMISSION_NO}}</span>
                                             <span class="uk-text-small uk-text-muted">Admission Number</span>
                                         </div>
                                     </li>
@@ -50,7 +50,7 @@
                                             <i class="md-list-addon-icon material-icons" >import_contacts</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Computer Science and Engineering</span>
+                                            <span class="md-list-heading">{{studentDetails.COURSE_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Course</span>
                                         </div>
                                     </li>
@@ -63,7 +63,7 @@
                                             <i class="md-list-addon-icon material-icons" >contacts</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">Cse - B</span>
+                                            <span class="md-list-heading">{{studentDetails.BATCH_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Batch</span>
                                         </div>
                                     </li>
@@ -78,7 +78,7 @@
                                             <i class="md-list-addon-icon material-icons" >date_range</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">03.01.2017</span>
+                                            <span class="md-list-heading">{{studentDetails.PAYMENT_DATE}}</span>
                                             <span class="uk-text-small uk-text-muted">Payment Date</span>
                                         </div>
                                     </li>
@@ -91,20 +91,20 @@
                                             <i class="md-list-addon-icon material-icons" >receipt</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">RE1000</span>
+                                            <span class="md-list-heading">{{studentDetails.RECIEPT_NO}}</span>
                                             <span class="uk-text-small uk-text-muted">Receipt Number</span>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="uk-width-medium-1-4">
+                            <!-- <div class="uk-width-medium-1-4">
                                 <ul class="md-list md-list-addon">
                                     <li>
                                         <div class="md-list-addon-element">
                                             <i class="md-list-addon-icon material-icons" >attach_money</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">15000</span>
+                                            <span class="md-list-heading">{{studentDetails.STUDENT_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Total Amount</span>
                                         </div>
                                     </li>
@@ -117,12 +117,12 @@
                                             <i class="md-list-addon-icon material-icons" >monetization_on</i>
                                         </div>
                                         <div class="md-list-content">
-                                            <span class="md-list-heading">500</span>
+                                            <span class="md-list-heading">{{studentDetails.STUDENT_NAME}}</span>
                                             <span class="uk-text-small uk-text-muted">Due Amount</span>
                                         </div>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -146,47 +146,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>Tution Fee</td>
-                            <td>15000</td>
-                            <td>13500</td>
-                            <td>1500</td>
+                        <tr ng-repeat="feelist in studentDetailsList[0].feelist">
+                            <td>{{feelist.ITEM_NAME}}</td>
+                            <td>{{feelist.AMOUNT}}</td>
+                            <td>{{feelist.PAID_AMOUNT}}</td>
+                            <td>{{feelist.AMOUNT-feelist.PAID_AMOUNT}}</td>
                         </tr>
-                        <tr>
-                            <td>Book Fee</td>
-                            <td>14852</td>
-                            <td>14500</td>
-                            <td>352</td>
-                        </tr>
-                        <tr>
-                            <td>Bus Fee</td>
-                            <td>84200</td>
-                            <td>75000</td>
-                            <td>1800</td>
-                            
-                        </tr>
-                        <tr>
-                            <td>Hostel Fee</td>
-                            <td>65420</td>
-                            <td>65000</td>
-                            <td>420</td>
-                            
-                        </tr>
-                        <tr>
-                            <td>Exam Fee</td>
-                            <td>35420</td>
-                            <td>35420</td>
-                            <td>0</td>
-                           
-                        </tr>
-                        <!-- <tr>
-                            <td colspan="2" style="text-align: right;font-weight: bold;">Total Amount</td>
-                            <td>50000</td>
-                        </tr> -->
                         </tbody>
                     </table>
                 </div>
-                <div class="md-card-content">
+                <!-- <div class="md-card-content">
                     <div class="uk-grid" data-uk-grid-margin>
                         
                         <div class="uk-width-medium-1-3">
@@ -203,7 +172,7 @@
                         </div>
                     </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
