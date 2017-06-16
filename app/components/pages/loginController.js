@@ -104,7 +104,11 @@ angular
 						$localStorage.role_id=response.data.message[0].USER_ROLE_ID;
 						$localStorage.userProfile_id=response.data.message[0].USER_PROFILE_ID;
 						//$location.path('/dashboard');
-						$state.go('restricted.dashboard');
+						if($localStorage.role=='student'){
+							$state.go('restricted.studentDashboard');
+						}else{
+							$state.go('restricted.dashboard');
+						}
 					}else{
 						UIkit.notify({
 							message : response.data.message,
