@@ -434,6 +434,10 @@ angular
                                     link: 'restricted.finance.fee.feeStructureDetails'
                                 },
                                 {
+                                    title:'Assign Fees',
+                                    link: 'restricted.finance.fee.assignedFeeStructure'
+                                },
+                                {
                                     title:'Fee Collection',
                                     link: 'restricted.finance.fee.feeCollectionDetails'
                                 },
@@ -446,7 +450,7 @@ angular
                                         },
                                         {
                                             title:'Fee Defaulter',
-                                            link: 'restricted.finance.fee.feeReport'
+                                            link: 'restricted.finance.fee.feeDefaulter'
                                         }
                                     ]
                                     // title:'Fee Report',
@@ -472,6 +476,27 @@ angular
                                 {
                                     title:'Payslip Report',
                                     link: 'restricted.finance.payslipReport'
+                                }
+                            ]
+                        },
+                        {
+                            title:'Transaction',
+                            submenu:[
+                                {
+                                    title:'Category',
+                                    link: 'restricted.finance.fee.category'
+                                },
+                                {
+                                    title:'Income',
+                                    link: 'restricted.finance.fee.income'
+                                },
+                                {
+                                    title:'Expense',
+                                    link: 'restricted.finance.fee.expense'
+                                },
+                                {
+                                    title:'Report',
+                                    link: 'restricted.finance.fee.transactionreport'
                                 }
                             ]
                         }

@@ -1,0 +1,73 @@
+<style type="text/css">
+  .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+    font-size: 16px !important;
+  }
+</style>
+<div id="page_content">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Category</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" ng-click="addCategory()" data-uk-modal="{target:'#modal_overflow'}">
+                        <i class="uk-icon-plus"></i>  Add Category
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr ng-repeat="row in viewData">
+                        <td>{{$index+1}}</td>
+                        <td>{{row.NAME}}</td>
+                        <td>{{row.DESCRIPTION}}</td>
+                        <td class="">
+                            <a ng-click="editCategory(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a class="ts_remove_row" ng-click="deleteCategory(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+     <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h3 class="uk-modal-title">{{titCaption}} Category </h3><br>
+            <div class="md-card-content">
+              <form id="form_validation" name="inputform" ng-submit="saveCategory()" novalidate>
+                <div class="parsley-row uk-form-row">
+                  <input type="hidden" ng-model="category_id">
+                  <label class="uk-form-label">Category Name<span class="req">*</span></label>
+                  <input type="text" ng-model="category_name" class="md-input" required md-input>
+                </div>
+                 <div class="uk-form-row">
+                   <label>Description</label>
+                  <input type="text" ng-model="description" class="md-input" md-input>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                      <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                      <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                </div>
+              </form>
+            </div>        
+         </div>
+      </div>
+
+</div>

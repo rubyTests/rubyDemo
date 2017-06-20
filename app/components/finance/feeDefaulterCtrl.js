@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('feeReportCtrl', [
+    .controller('feeDefaulterCtrl', [
         '$compile',
         '$scope',
         '$window',
@@ -115,7 +115,7 @@ angular
 
             $scope.getStudentFeedetails=function(courseVal){
                 $http({
-                    url: $localStorage.service+'FinanceAPI/getStudentFeeReport',
+                    url: $localStorage.service+'FinanceAPI/fetchFeeDefaulterDetails',
                     method : 'GET',
                     params:{'course_id':courseVal},
                     headers: { 'access_token':$localStorage.access_token},
@@ -184,7 +184,7 @@ angular
 
             $scope.getStudentFeedetails_batch=function(batchID){
                  $http({
-                    url: $localStorage.service+'FinanceAPI/getStudentFeeReport',
+                    url: $localStorage.service+'FinanceAPI/fetchFeeDefaulterDetails',
                     method : 'GET',
                     params:{'batch_id':batchID},
                     headers: { 'access_token':$localStorage.access_token},
@@ -227,7 +227,7 @@ angular
 
             $scope.getPartucularStudentFeedetails=function(student_id){
                 $http({
-                    url: $localStorage.service+'FinanceAPI/getStudentFeeReport',
+                    url: $localStorage.service+'FinanceAPI/fetchFeeDefaulterDetails',
                     method : 'GET',
                     params:{'student_id':student_id},
                     headers: { 'access_token':$localStorage.access_token},
@@ -239,3 +239,5 @@ angular
             }
         }
     ]);
+
+// fetchFeeDefaulterDetails

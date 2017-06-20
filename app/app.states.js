@@ -2288,6 +2288,24 @@ rubycampusApp
                     }
                 })
 
+                .state("restricted.finance.fee.feeDefaulter", {
+                    url: "/feeDefaulter",
+                    templateUrl: 'app/components/finance/feeDefaulter.html',
+                    controller: 'feeDefaulterCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/feeDefaulterCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Report'
+                    }
+                })
+
                 .state("restricted.finance.fee.totalFeeView", {
                     url: "/totalFeeView/{profile_id}",
                     templateUrl: 'app/components/finance/totalFeeView.html',
@@ -2360,8 +2378,8 @@ rubycampusApp
 
                 // Added By Senthil 17/04/2017
 
-                .state("restricted.parentReceiptDetailView", {
-                    url: "/parentReceiptDetailView",
+                .state("restricted.finance.fee.parentReceiptDetailView", {
+                    url: "/parentReceiptDetailView/{PAYMENT_ID}",
                     templateUrl: 'app/components/finance/parentReceiptDetailView.html',
                     controller: 'parentReceiptViewCtrl',
                     resolve: {
@@ -2373,10 +2391,11 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Fee Reciept Details'
-                    }
+                    },
+                    params:{PAYMENT_ID:null}
                 })
 
-                .state("restricted.parentReceiptView", {
+                .state("restricted.finance.fee.parentReceiptView", {
                     url: "/parentReceiptView",
                     templateUrl: 'app/components/finance/parentReceiptView.html',
                     controller: 'parentReceiptViewCtrl',
@@ -2388,13 +2407,7 @@ rubycampusApp
                                 'lazy_tablesorter',
                                 'app/components/finance/parentReceiptViewCtrl.js'
                             ]);
-                        }],
-                        notes_data: function($http){
-                            return $http({ method: 'GET', url: 'app/components/finance/parentreceipt.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
+                        }]
                     },
                     data: {
                         pageTitle: 'Fee Reciept Details'
@@ -5746,6 +5759,85 @@ rubycampusApp
                         pageTitle: 'Leave Entitlement Edit'
                     },
                     params:{empid:null}
+                })
+
+                // created by vijayaraj on 17-06-17 finance transaction
+                // .state("restricted.finance.fee.transaction", {
+                //     url: "/transaction",
+                //     template: '<div ui-view autoscroll="false"/>',
+                //     abstract: true
+                // })
+                .state("restricted.finance.fee.category", {
+                    url: "/category",
+                    templateUrl: 'app/components/finance/financeCategory.html',
+                    controller: 'financeCategoryCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/financeCategoryCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Category'
+                    }
+                })
+                .state("restricted.finance.fee.income", {
+                    url: "/income",
+                    templateUrl: 'app/components/finance/income.html',
+                    controller: 'incomeCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/incomeCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'income'
+                    }
+                })
+                .state("restricted.finance.fee.expense", {
+                    url: "/expense",
+                    templateUrl: 'app/components/finance/expense.html',
+                    controller: 'expense',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_parsleyjs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/expense.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Expense'
+                    }
+                })
+                
+                .state("restricted.finance.fee.transactionreport",{
+                    url: "/transactionreport",
+                    templateUrl: 'app/components/finance/TransactionReport.html',
+                    controller : 'TransactionReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/finance/TransactionReportCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Report'
+                    }                  
                 })
         }
     ]);

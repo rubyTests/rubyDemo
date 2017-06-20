@@ -30,28 +30,29 @@ td.editable_updated {
                         <thead>
                         <tr>
                             <th data-priority="critical">S.No</th>
-                            <th data-priority="critical">FeeStructure Name</th>
                             <th data-priority="critical">Payment Date</th>
                             <th data-priority="critical">Receipt Number</th>
                             <th data-priority="critical">Amount</th>
+                            <th data-priority="critical">Paid Amount</th>
                         </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th>S.No</th>
-                                <th>FeeStructure Name</th>
                                 <th>Payment Date</th>
                                 <th>Receipt Number</th>
                                 <th>Amount</th>
+                                <th>Paid Amount</th>
                             </tr>
                         </tfoot>
                         <tbody>
-                            <tr ng-repeat="item in notes_data" on-last-repeat>
+                            <tr ng-repeat="item in studentFeeList" on-last-repeat>
                                 <td>{{$index+1}}</td>
-                                <td><a ui-sref="restricted.parentReceiptDetailView">{{item.feestructure}}</a></td>
-                                <td>{{item.payment_date}}</td>
-                                <td>{{item.Receipt_num}}</td>
-                                <td>{{item.amount}}</td>
+                                <!-- <td><a ui-sref="restricted.parentReceiptDetailView">{{item.feestructure}}</a></td> -->
+                                <td><a ui-sref="restricted.finance.fee.parentReceiptDetailView({'PAYMENT_ID':{{item.PAYMENT_ID}}})">{{item.PAYMENT_DATE}}</a></td>
+                                <td>{{item.RECIEPT_NO}}</td>
+                                <td>{{item.AMOUNT}}</td>
+                                <td>{{item.PAID_AMOUNT}}</td>
                             </tr>
                         </tbody>
                     </table>

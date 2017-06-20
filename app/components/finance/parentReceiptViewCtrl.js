@@ -4,17 +4,16 @@ angular
         '$rootScope',
         '$scope',
         '$window',
-        'notes_data',
         '$timeout',
         'variables',
         '$http',
         '$stateParams',
         '$filter',
         '$localStorage',
-        function ($rootScope,$scope,$window,notes_data,$timeout,variables,$http,$stateParams,$filter,$localStorage) {
+        function ($rootScope,$scope,$window,$timeout,variables,$http,$stateParams,$filter,$localStorage) {
 
             // get note data
-            $scope.notes_data = notes_data;
+        
 
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
 
@@ -377,6 +376,28 @@ angular
                 }
 
             });
+            
 
+            $http({
+                url: $localStorage.service+'FinanceAPI/fetchStudentBasicDetails',
+                method : 'GET',
+                params:{'profileID':2},
+                headers: { 'access_token':$localStorage.access_token},
+            }).success(function(response) {
+                $scope.basicDetails=response.message[0];
+            }).error(function(data){
+                console.log('error');
+            });
+
+            $http({
+                url: $localStorage.service+'FinanceAPI/fetchStudentFeesDetails',
+                method : 'GET',
+                params:{'profileID':2},
+                headers: { 'access_token':$localStorage.access_token},
+            }).success(function(response) {
+                $scope.studentFeeList=response.message;
+            }).error(function(data){
+                console.log('error');
+            });
         }
     ]);

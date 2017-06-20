@@ -79,20 +79,6 @@
                                         <div class="uk-width-medium-3-10 parsley-row">
                                             <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="forms_advanced.selectize_planets"></selectize>
                                         </div>
-                                       <!--  <div class="uk-width-medium-3-10">
-                                            <div class="uk-input-group">
-                                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
-                                                <label for="uk_dp_1">From Date</label>
-                                                <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker">
-                                            </div>
-                                        </div>
-                                        <div class="uk-width-medium-3-10">
-                                            <div class="uk-input-group">
-                                                <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
-                                                <label for="uk_dp_1">To Date</label>
-                                                <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="forms_advanced.datepicker1">
-                                            </div>
-                                        </div> -->
                                     </div>
                                 </div>
                             </div>
@@ -113,9 +99,9 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
-                            <th>Total Fee</th>
+                            <!-- <th>Total Fee</th> -->
                             <th>Fee Due</th>
-                            <th>Action</th>
+                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tfoot>
@@ -125,26 +111,26 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
-                            <th>Total Fee</th>
+                            <!-- <th>Total Fee</th> -->
                             <th>Fee Due</th>
-                            <th></th>
+                            <!-- <th></th> -->
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in viewTable">
-                            <td>{{$index+1}}</td>
-                            <td>{{row.STUDENT_NAME}}</td>
-                            <td>{{row.ADMISSION_NO}}</td>
-                            <td>{{row.COURSE_NAME}}</td>
-                            <td>{{row.BATCH_NAME}}</td>
-                            <td>{{(row.Total_Amount+row.Total_Fine)}}</td>
-                            <td>{{(row.Total_Amount+row.Total_Fine) - (row.Total_Paid+row.Total_Paid_Fine)}}</td>
-                            <td>
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.totalFeeView({profile_id:{{row.STUDENT_PROFILE_ID}}})">
+                            <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{$index+1}}</td>
+                            <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.profileName}}</td>
+                            <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.AdmissionNo}}</td>
+                            <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.courseName}}</td>
+                            <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.batchName}}</td>
+                            <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.amount-row.PaidAmount}}</td>
+                            <!-- <td>{{row.PaidAmount}}</td> -->
+                            <!-- <td>
+                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.totalFeeView({profile_id:{{row.profileId}}})">
                                 <i class="uk-icon-money"></i>
                                 Fee Details
                                 </a>
-                            </td>
+                            </td> -->
                         </tr>
                     </tbody>
                 </table>
