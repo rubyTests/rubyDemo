@@ -734,7 +734,7 @@ angular
                         },
                         {
                             title: 'Assignments',
-                            link: 'restricted.academics.assignment'
+                            link: 'restricted.academics.stuassignment'
                         }
                     ]
                 },
