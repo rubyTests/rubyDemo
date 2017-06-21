@@ -168,10 +168,11 @@ angular
                 // console.log(parseInt($scope.forms_advanced.startTime.split(":")[1])+12);
                 var day=$scope.forms_advanced.day;
                 var weeks1 = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+                 var s = new Date();
                 eventData = {
                     title : $scope.input_default,
-                    start : $scope.forms_advanced.startTime,
-                    end : $scope.forms_advanced.endTime,
+                    start : moment($scope.forms_advanced.startTime, ["hh:mm A"]).format("hh:mm"),
+                    end : moment($scope.forms_advanced.endTime, ["hh:mm A"]).format("hh:mm"),
                     dow : [weeks1.indexOf(day)],
                     color: eventColor ? eventColor : ''
 
@@ -221,6 +222,9 @@ angular
                     selectable: true,
                     selectHelper: true,
                     theme:false,
+                    eventClick: function(event, jsEvent){
+                        uiCalendarConfig.calendars.myCalendar.fullCalendar('changeView', 'listWeek')
+                    },
                     eventRender: function(event, element) {
                         element.bind('dblclick', function() {
                             var message;
@@ -269,9 +273,10 @@ angular
                             if ( modal.isActive() ) {
                                 modal.hide();
                             } else {
+                                $scope.forms_advanced.day = [weeks[start._d.getDay()].value];
                                 $scope.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
-                                // console.log($scope.dp_start);
                                 end_date.options.minDate = $scope.dp_start;
+                                $scope.forms_advanced.startTime = moment(start._d).format("hh:mm A");
                                 $scope.dp_end=end._d.getDate()+"."+eval(end._d.getMonth()+1)+"."+end._d.getFullYear();
                                 $scope.addEvents={};
                                 $scope.addEvents={start_date : start, end : end};
@@ -321,7 +326,8 @@ angular
                     },
                     editable: true,
                     eventLimit: true,
-                    timeFormat: '(HH)(:mm)'
+                    timeFormat: '(hh:mm a)',
+                    timezone:'local'
                 }
             };
 
