@@ -67,6 +67,23 @@ angular
                         }
                     ]
                 })
+                .withButtons([
+                    {
+                        extend:    'print',
+                        text:      '<i class="uk-icon-print"></i> Print',
+                        titleAttr: 'Print'
+                    },
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
+                        titleAttr: ''
+                    },
+                    {
+                        extend:    'pdfHtml5',
+                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF'
+                    }
+                ])
                 .withOption('initComplete', function() {
                     $timeout(function() {
                         $compile($('.dt-uikit .md-input'))($scope);
@@ -79,8 +96,7 @@ angular
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Admission Number'),
                 DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Batch'),
-                DTColumnDefBuilder.newColumnDef(5).withTitle('Total Fee'),
-                DTColumnDefBuilder.newColumnDef(6).withTitle('Fee Due')
+                DTColumnDefBuilder.newColumnDef(5).withTitle('Fee Due')
             ];
             
             $scope.courseList=[];

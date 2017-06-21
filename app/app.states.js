@@ -2291,7 +2291,7 @@ rubycampusApp
                 .state("restricted.finance.fee.feeDefaulter", {
                     url: "/feeDefaulter",
                     templateUrl: 'app/components/finance/feeDefaulter.html',
-                    controller: 'feeDefaulterCtrl',
+                    // controller: 'feeDefaulterCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -5770,7 +5770,7 @@ rubycampusApp
                 .state("restricted.finance.fee.category", {
                     url: "/category",
                     templateUrl: 'app/components/finance/financeCategory.html',
-                    controller: 'financeCategoryCtrl',
+                    // controller: 'financeCategoryCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -5788,7 +5788,7 @@ rubycampusApp
                 .state("restricted.finance.fee.income", {
                     url: "/income",
                     templateUrl: 'app/components/finance/income.html',
-                    controller: 'incomeCtrl',
+                    // controller: 'incomeCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -5806,7 +5806,7 @@ rubycampusApp
                 .state("restricted.finance.fee.expense", {
                     url: "/expense",
                     templateUrl: 'app/components/finance/expense.html',
-                    controller: 'expense',
+                    // controller: 'expense',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([

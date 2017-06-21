@@ -54,21 +54,7 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        }
+                        null
                     ]
                 })
                 .withButtons([
@@ -127,7 +113,9 @@ angular
                     $http.get($localStorage.service+'FinanceAPI/categoryDetail',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(return_data){
                         console.log(return_data,'return_data');
-                        $scope.viewData=[].concat(return_data.message);
+                        if(return_data.status==true){
+                            $scope.viewData=[].concat(return_data.message);
+                        }
                     });    
                 }
                 $scope.getdata();

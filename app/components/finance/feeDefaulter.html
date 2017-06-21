@@ -9,7 +9,7 @@
             padding: 24px 24px 0;
         }
     </style>
-    <div id="page_content">
+    <div id="page_content" ng-controller="feeDefaulterCtrl as showCase">
         <div id="page_content_inner">
         <h2 class="heading_a uk-margin-bottom">
             Fee Report
@@ -88,7 +88,7 @@
             </div>
         </div>
     </div>
-    <div id="page_content_inner" >
+    <div id="page_content_inner">
         <div class="md-card uk-margin-medium-bottom">
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
@@ -99,9 +99,7 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
-                            <!-- <th>Total Fee</th> -->
                             <th>Fee Due</th>
-                            <!-- <th>Action</th> -->
                         </tr>
                     </thead>
                     <tfoot>
@@ -111,9 +109,7 @@
                             <th>Admission Number</th>
                             <th>Course</th>
                             <th>Batch</th>
-                            <!-- <th>Total Fee</th> -->
                             <th>Fee Due</th>
-                            <!-- <th></th> -->
                         </tr>
                     </tfoot>
                     <tbody>
@@ -124,13 +120,6 @@
                             <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.courseName}}</td>
                             <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.batchName}}</td>
                             <td ng-hide="{{row.amount-row.PaidAmount==0}}">{{row.amount-row.PaidAmount}}</td>
-                            <!-- <td>{{row.PaidAmount}}</td> -->
-                            <!-- <td>
-                                <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.totalFeeView({profile_id:{{row.profileId}}})">
-                                <i class="uk-icon-money"></i>
-                                Fee Details
-                                </a>
-                            </td> -->
                         </tr>
                     </tbody>
                 </table>
