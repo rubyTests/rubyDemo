@@ -164,7 +164,8 @@ angular
                             $timeout(function(){
                                 $scope.shouldBeOpen = true;    
                             },500);
-                            UIkit.modal("#course_modal").show();
+                            UIkit.modal("#course_modal",{bgclose: false, keyboard:false}).show();
+                            //UIkit.modal("#course_modal").show();
                         };
                     });
                 }
@@ -336,7 +337,7 @@ angular
                             $timeout(function(){
                                 $scope.shouldBeOpen = true;    
                             },500);
-                            UIkit.modal("#department_Modal").show();
+                            UIkit.modal("#department_Modal",{bgclose: false, keyboard:false}).show();
                         } 
                         
                     });
@@ -378,21 +379,7 @@ angular
                             pos     : 'top-center'
                         });
                         $scope.course_cleardata();
-                        // $scope.titCaption="Add";
-                        // $scope.btnStatus="Save";
-                        // $scope.dept_id='';
-                        // $scope.dept_name='';
-                        // $scope.dept_code='';
-                        // $scope.hod_prof_id='';
-                        // $scope.room_id='';
-                        // $scope.phone_no='';
-                        // $scope.course_id='';
-                        // $scope.course_name='';
-                        // $scope.dept_id='';
-                        // $scope.attendance_type='';
-                        // $scope.percentage='';
-                        // $scope.grade_type='';
-                        // $('.uk-modal').find('input').trigger('blur');
+                        UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false}).show();
                     }else {
                         // UIkit.notify('Course Name Already Exists','danger');
                         UIkit.modal.alert('Course Name Already Exists');
@@ -454,24 +441,7 @@ angular
                             pos     : 'top-center'
                         });
                         $scope.department_clearData();
-                        // $scope.dept_id='';
-                        // $scope.titCaption="Add";
-                        // $scope.btnStatus="Save";
-                        // $scope.dept_id='';
-                        // $scope.dept_name='';
-                        // $scope.dept_code='';
-                        // $scope.hod_prof_id='';
-                        // $scope.room_id='';
-                        // $scope.phone_no='';
-                        // $scope.titCaption="Add";
-                        // $scope.btnStatus='Save';
-                        // $scope.course_id='';
-                        // $scope.course_name='';
-                        // $scope.dept_id='';
-                        // $scope.attendance_type='';
-                        // $scope.percentage='';
-                        // $scope.grade_type='';
-                        // $('.uk-modal').find('input').trigger('blur');
+                        UIkit.modal("#course_modal",{bgclose: false, keyboard:false}).show();
                     }else {
                         UIkit.modal.alert('Department Name Already Exists');
                     }
