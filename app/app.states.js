@@ -1963,6 +1963,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
                                 'app/components/setting/institution_tableViewCtrl.js'
                             ], {serie:true});
                         }]
@@ -1978,9 +1979,11 @@ rubycampusApp
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                'lazy_masked_inputs',
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.js',
+                                'ng-pattern',
+                                'assets/js/custom/uikit_profileFileinput.js',
                                 'app/components/setting/instDetailCtrl.js'
                             ], {serie:true});
                         }]
@@ -1998,6 +2001,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_wizard',
+                                'ng-pattern',
                                 'assets/js/custom/uikit_fileinput.js',
                                 'app/components/setting/institution_detailsViewCtrl.js'
                             ], {serie:true});
@@ -2017,6 +2021,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
+                                'ng-pattern',
                                 'assets/js/custom/uikit_fileinput.js',
                                 'app/components/setting/insteditCtrl.js'
                             ], {serie:true});
@@ -2038,6 +2043,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
 								'lazy_parsleyjs',
                                 'app/components/setting/building/buildingCtrl.js'
                             ], {serie:true});
@@ -2056,6 +2062,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
 								'lazy_parsleyjs',
                                 'app/components/setting/building/buildingblockCtrl.js'
                             ], {serie:true});
@@ -2074,6 +2081,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
 								'lazy_parsleyjs',
                                 'app/components/setting/building/roomCtrl.js'
                             ], {serie:true});
@@ -3153,6 +3161,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
                                 'app/components/academics/syllabusviewCtrl.js'
                             ],{serie: true});
                         }]
@@ -3170,6 +3179,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
                                 'lazy_parsleyjs',
                                 'lazy_tinymce',
                                 'app/components/academics/syllabusaddCtrl.js'
@@ -3189,6 +3199,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
                                 'lazy_tinymce',
                                 'lazy_parsleyjs',
                                 'app/components/academics/syllabuseditCtrl.js'
@@ -3232,6 +3243,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'ng-pattern',
                                 'app/components/academics/student_syllabusCtrl.js'
                             ],{serie: true});
                         }]
@@ -3348,35 +3360,16 @@ rubycampusApp
                 // })
                 .state("restricted.academics.course", {
                     url: "/course",
-                    // templateUrl: 'app/components/academics/courseBatch/course.html',
-                    views:{
-                        '':{
-                            template: '<div><div ui-view="page"></div><div ui-view="modal1"></div><div ui-view="modal2"></div></div>',
-                            controller:'courseCtrl',
-                            controllerAs:'showCase'
-                        },
-                        "page@restricted.academics.course":{
-                            templateUrl: 'app/components/academics/courseBatch/course.html'
-                            
-                        },
-                        "modal1@restricted.academics.course":{
-                            templateUrl: 'app/components/academics/courseBatch/courseModal.html'
-                        },
-                        "modal2@restricted.academics.course":{
-                            templateUrl: 'app/components/academics/courseBatch/departmentModal.html',
-                            controller:'departmentCtrl'
-                        }
-                    },
-                    
+                    templateUrl: 'app/components/academics/courseBatch/course.html',
                     // controller: 'courseCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
+                                'ng-pattern',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/academics/courseBatch/courseCtrl.js',
-                                'app/components/academics/courseBatch/departmentCtrl.js'
+                                'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -3384,36 +3377,22 @@ rubycampusApp
                         pageTitle: 'Course'
                     }
                 })
-                .state("restricted.academics.courseBatches", {
+                 .state("restricted.academics.courseBatches", {
                     url: "/courseBatches",
-                    views:{
-                        '':{
-                            template: '<div><div ui-view="page"></div><div ui-view="modal1"></div><div ui-view="modal2"></div></div>',
-                            controller:'courseBatchCtrl',
-                            controllerAs:'showCase'
-                        },
-                        "page@restricted.academics.courseBatches":{
-                            templateUrl: 'app/components/academics/courseBatch/courseBatch.html'
-                            
-                        },
-                        "modal1@restricted.academics.courseBatches":{
-                            templateUrl: 'app/components/academics/courseBatch/batchModal.html'
-                        },
-                        "modal2@restricted.academics.courseBatches":{
-                            templateUrl: 'app/components/academics/courseBatch/courseModal.html',
-                            controller:'courseCtrl'
-                        }
-                    },
-                    
-                    // controller: 'courseBatchCtrl',
-                   resolve: {
+                    templateUrl: 'app/components/academics/courseBatch/courseBatch.html',
+                    //controller: 'courseBatchCtrl',
+                    resolve: {
+                           
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                //'xeditable',
+                                //'smart-table',
+                                'ng-pattern',
                                 'lazy_parsleyjs',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
-                                'app/components/academics/courseBatch/courseBatchCtrl.js',
-                                'app/components/academics/courseBatch/courseCtrl.js'
+                                'app/components/academics/courseBatch/courseBatchCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -3423,34 +3402,16 @@ rubycampusApp
                 })
                 .state("restricted.academics.subjects", {
                     url: "/subjects",
-                    views:{
-                        '':{
-                            template: '<div><div ui-view="page"></div><div ui-view="modal1"></div><div ui-view="modal2"></div></div>',
-                            controller:'subjectCtrl',
-                            controllerAs:'showCase'
-                        },
-                        "page@restricted.academics.subjects":{
-                            templateUrl: 'app/components/academics/courseBatch/subject.html'
-                            
-                        },
-                        "modal1@restricted.academics.subjects":{
-                            templateUrl: 'app/components/academics/courseBatch/subjectModal.html'
-                        },
-                        "modal2@restricted.academics.subjects":{
-                            templateUrl: 'app/components/academics/courseBatch/courseModal.html',
-                            controller:'courseCtrl'
-                        }
-                    },
-                    
-                    // controller: 'subjectCtrl',
-                   resolve: {
+                    templateUrl: 'app/components/academics/courseBatch/subject.html',
+                    //controller: 'subjectCtrl',
+                    resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_parsleyjs',
+                                'ng-pattern',
                                 'lazy_datatables',
-                                'app/components/academics/courseBatch/subjectCtrl.js',
-                                'app/components/academics/courseBatch/courseCtrl.js',
+                                'app/components/academics/courseBatch/subjectCtrl.js'
                             ], {serie:true});
                         }],
                     },
@@ -3458,23 +3419,6 @@ rubycampusApp
                         pageTitle: 'Subjects'
                     }
                 })
-                // .state("restricted.academics.subjects", {
-                //     url: "/subjects",
-                //     templateUrl: 'app/components/academics/courseBatch/subject.html',
-                //     resolve: {
-                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                //             return $ocLazyLoad.load([
-                //                 'bower_components/angular-resource/angular-resource.min.js',
-                //                 'lazy_parsleyjs',
-                //                 'lazy_datatables',
-                //                 'app/components/academics/courseBatch/subjectCtrl.js'
-                //             ], {serie:true});
-                //         }],
-                //     },
-                //     data: {
-                //         pageTitle: 'Subjects'
-                //     }
-                // })
                 .state("restricted.academics.syllabus", {
                     url: "/syllabus",
                     templateUrl: 'app/components/academics/courseBatch/syllabus.html',
@@ -3485,7 +3429,8 @@ rubycampusApp
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 //'app/components/academics/forms/wysiwyg_ckeditorController.min.js',
                                 'lazy_datatables',
-								'lazy_parsleyjs',
+                                'ng-pattern',
+                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/syllabusCtrl.js'
                             ], {serie:true});
                         }]
@@ -3502,7 +3447,8 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_ckeditor',
-								'lazy_parsleyjs',
+                                'ng-pattern',
+                                'lazy_parsleyjs',
                                 'app/components/academics/courseBatch/addSyllabus.js'
                             ], {serie:true});
                         }]
@@ -3513,31 +3459,13 @@ rubycampusApp
                 })
                 .state("restricted.academics.department", {
                     url: "/department",
-                    views:{
-                        '':{
-                            template: '<div> \
-                                        <div ui-view="page"></div> \
-                                        <div ui-view="modal1"></div>\
-                                        <div ui-view="modal2"></div>\
-                                       </div>',
-                            controller:'departmentCtrl',
-                            controllerAs:'showCase'
-                        },
-                        "page@restricted.academics.department":{
-                            templateUrl: 'app/components/academics/courseBatch/department.html',
-                        },
-                        "modal1@restricted.academics.department":{
-                            templateUrl: 'app/components/academics/courseBatch/departmentModal.html',
-                        },
-                        "modal2@restricted.academics.department":{
-                        }
-                    },
-                    
+                    templateUrl: 'app/components/academics/courseBatch/department.html',
                     // controller: 'departmentCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
+                                'ng-pattern',
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
                                 'app/components/academics/courseBatch/departmentCtrl.js'

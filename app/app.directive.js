@@ -1883,4 +1883,39 @@ rubycampusApp
             }
         }
     ])
+    .directive('focusMe', ['$timeout', '$parse', function ($timeout, $parse) {
+    return {
+        //scope: true,   // optionally create a child scope
+        link: function (scope, element, attrs) {
+            var model = $parse(attrs.focusMe);
+            scope.$watch(model, function (value) {
+                console.log('value=', value);
+                if (value === true) {
+                    $timeout(function () {
+                        element[0].focus();
+                    });
+                }
+            });
+            element.bind('blur', function () {
+                //console.log('blur');
+                scope.$apply(model.assign(scope, false));
+            });
+        }
+    };
+    }])
+  //   .directive('myFocus', function () {
+  //   return {
+  //     restrict: 'A',
+  //     link: function(scope, element, attrs) {
+  //       // console.log(element,'scopescope');
+  //       var elemObj = scope.$eval(attrs.ukModal).target+" input";
+  //       // element.bind('click', function(){
+  //       //     console.log(document.querySelector(elemObj));
+  //       //     document.querySelector(elemObj)[0].focus();
+  //       // });
+       
+  //     }
+  //   };
+  // });
+
 ;

@@ -482,7 +482,14 @@ rubycampusApp
                             'assets/js/angular-smart-table/dist/smart-table.js'
                         ],
                         serie: true
-                     },
+                    },
+                    {
+                        name: 'ng-pattern',
+                        files: [
+                            'assets/js/ng-pattern/ng-pattern-restrict.js'
+                        ],
+                        serie: true
+                    },
 
 
                     // ----------- THEMES -------------------
