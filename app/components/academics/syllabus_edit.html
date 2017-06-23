@@ -64,13 +64,13 @@
         <div class="md-card">
             <div class="md-card-content large-padding">
                 <!-- <form class="uk-form" method="post"> -->
-                    <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
+                    <div class="uk-grid uk-grid-medium form_hr parsley-row" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
                         <div class="uk-width-9-10 uk-width-medium-9-10 uk-width-small-5">
                             <div class="uk-grid">
                                 <div class="uk-width-1-1">
                                     <div class="md-card" style="99.99%">
                                         <div class="md-card-content" style="height: 26px !important;">
-                                            <textarea  style="line-height: 0px !important;" class="md-input" ng-model="section.syllabus_title" md-input textarea-autosize placeholder="Title"></textarea>
+                                            <textarea  style="line-height: 0px !important;" class="md-input" ng-model="section.syllabus_title" md-input textarea-autosize placeholder="Title" required></textarea>
                                             <input type="hidden" ng-model="section.syllabus_ID">
                                         </div>
                                     </div>

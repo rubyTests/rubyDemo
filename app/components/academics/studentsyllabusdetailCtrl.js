@@ -18,6 +18,7 @@ angular
             // $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchAllSubjectSyllabusData')
             $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{params:{roleId:$localStorage.role_id,profileId:$localStorage.userProfile_id},headers:{'access_token':$localStorage.access_token}})
             .success(function(syllabus_data){
+               console.log(syllabus_data,'syllabus_data');
                 var data1=$filter('filter')(syllabus_data.data, {SUBJECT_ID : $stateParams.id},true);
                 $scope.currentActive=syllabus_data.data.indexOf(data1[0]);
                 $scope.notes_data=syllabus_data.data;
