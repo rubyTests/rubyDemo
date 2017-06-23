@@ -3,9 +3,12 @@ angular
     .controller('instDetailCtrl', [
         '$scope',
         'utils',
-        '$http','$rootScope', '$filter','$compile', '$scope', '$timeout','$state','$localStorage',
-        function ($scope,utils,$http,$rootScope, $filter,$compile, $scope, $timeout,$state,$localStorage) {
+        '$http','$rootScope', '$filter','$compile', '$scope', '$timeout','$state','$localStorage','WizardHandler',
+        function ($scope,utils,$http,$rootScope, $filter,$compile, $scope, $timeout,$state,$localStorage,WizardHandler) {
             var $wizard_advanced_form = $('#wizard_advanced_form');
+                $timeout(function(){
+                    $scope.shouldBeOpen = true;    
+                },500);
             $scope.IinstLIST=[];
             $scope.CountryLIST=[];
             $scope.CurrncyLIST=[];
@@ -32,6 +35,7 @@ angular
 
             $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
             .success(function(profileData){
+                console.log(profileData,'profileDataprofileData');
                 $scope.returnProfile.push(profileData.data);
             });
 
@@ -40,7 +44,7 @@ angular
                 create: false,
                 maxItems: 1,
                 placeholder: 'Admin In-Charge',
-                valueField: 'ID',
+                valueField: 'PROFILE_ID',
                 labelField: 'FULLNAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
@@ -91,7 +95,7 @@ angular
             $scope.selectize_country_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Country',
+                placeholder: 'Country*',
                 valueField: 'ID',
                 labelField: 'NAME',
 				searchField: 'NAME',
@@ -110,34 +114,55 @@ angular
                 }else {
                     var data=$('.user_heading_avatar img:last').attr('src');
                 }
-                $http({
-                    method:'POST',
-                    url: $localStorage.service+'InstitutionAPI/institutionDetails',
-                    data: {
-                        'file_image' : data,
-                        'institute_name' : $scope.Basic.institute_name,
-                        'code' : $scope.Basic.institute_code,
-                        'type' : $scope.Basic.institute_type,
-                        'time_zone' : $scope.Basic.time_zone,
-                        'currency' : $scope.Basic.currency,
-                        'profile_id' : $scope.contact.prof_id,
-                        'institution_id' : $scope.Basic.institution_id
-                    },
-                    headers:{'access_token':$localStorage.access_token}
-                }).then(function(return_data){
-                    console.log(return_data.data.data.message);
-                    $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
-                    $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
-                    if(return_data.data.data.status==true){
-                        UIkit.notify({
-                            message : return_data.data.data.message,
-                            status  : 'success',
-                            timeout : 2000,
-                            pos     : 'top-center'
+                // $http.get($localStorage.service+'InstitutionAPI/institutionId',{params:{institutionID:$scope.Basic.institution_id,institutionName:$scope.Basic.institute_name},headers:{'access_token':$localStorage.access_token}})
+                // .success(function(result){
+                //     console.log(result,"result");
+                //     if(result.status==false){
+                //         UIkit.notify({
+                //             message : result.message,
+                //             status  : 'danger',
+                //             timeout : 2000,
+                //             pos     : 'top-center'
+                //         });
+                //     }else{
+                        
+                        $scope.content_preloader_show('regular',$('.md-card-single'));
+                        $http({
+                            method:'POST',
+                            url: $localStorage.service+'InstitutionAPI/institutionDetails',
+                            data: {
+                                'file_image' : data,
+                                'institute_name' : $scope.Basic.institute_name,
+                                'code' : $scope.Basic.institute_code,
+                                'type' : $scope.Basic.institute_type,
+                                'time_zone' : $scope.Basic.time_zone,
+                                'currency' : $scope.Basic.currency,
+                                'profile_id' : $scope.contact.prof_id,
+                                'institution_id' : $scope.Basic.institution_id
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).then(function(return_data){
+                            console.log(return_data.data.data.message);
+                            $scope.Basic.institution_id=return_data.data.data.PROFILE_ID;
+                            $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
+                            console.log($scope.Basic.institution_id,'$scope.Basic.institution_id');
+                            if(return_data.data.data.status==true){
+                                UIkit.notify({
+                                    message : return_data.data.data.message,
+                                    status  : 'success',
+                                    timeout : 2000,
+                                    pos     : 'top-center'
+                                });
+                            }
+                            $timeout(function() {
+                                $scope.content_preloader_hide();
+                                WizardHandler.wizard().next();
+                                
+                            }, 1000);
                         });
                     }
-                });
-            };
+            //     });
+            // }
 
             $scope.saveInstitutionContact=function(){
                 var data=$('.fileinput-preview').find('img').attr('src');
@@ -238,7 +263,14 @@ angular
                     }); 
             },500);
 
-            $scope.exitValidation = function(){
+            // $scope.exitValidation = function(){
+            //     if($scope.Basic.institution_id==undefined || $scope.Basic.institute_name==undefined || $scope.Basic.institute_type==undefined || $scope.Basic.time_zone==undefined || $scope.Basic.currency==undefined ){
+            //         return false;
+            //     }else{
+            //         return true;
+            //     }
+            // }
+             $scope.exitValidation = function(){
                 if($scope.Basic.institute_name==undefined){
                     return false;
                 }else{
