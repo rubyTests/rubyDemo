@@ -2,24 +2,59 @@ angular
     .module('rubycampusApp')
     .controller('courseBatchCtrl',
        
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage,$state) {
-             var vm = this;
-            $timeout(function(){
-                var $formValidate = $('#form_validation');
-                $formValidate
-                .parsley()
-                .on('form:validated',function() {
-                    $scope.$apply();
-                })
-                .on('field:validated',function(parsleyField) {
-                    if($(parsleyField.$element).hasClass('md-input')) {
-                        $scope.$apply();
-                    }
-                });    
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
+            //Batch
+            var $formValidate = $('#form_validation');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
             })
-                $scope.clearValidation=function(){
-                    $('#form_validation').parsley().reset();
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
                 }
+            });
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+                $scope.courseID="";
+                $scope.dept_id="";
+            }
+            //Course
+            var $formValidate = $('#form_validation1');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+            $scope.clearValidation1=function(){
+                $('#form_validation1').parsley().reset();
+                $scope.courseID="";
+                $scope.dept_id="";
+            }
+            //Department
+            var $formValidate = $('#form_validation2');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+            $scope.clearValidation2=function(){
+                $('#form_validation2').parsley().reset();
+                $scope.courseID="";
+                $scope.dept_id="";
+            }
+            var vm = this;  
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
                 .newOptions()
@@ -69,44 +104,43 @@ angular
                         }
                     ]
                 })
-                .withButtons([
-                    {
-                        extend:    'print',
-                        text:      '<i class="uk-icon-print"></i> Print',
-                        titleAttr: 'Print'
-                    },
-                    {
-                        extend:    'excelHtml5',
-                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                        titleAttr: ''
-                    },
-                    {
-                        extend:    'pdfHtml5',
-                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                        titleAttr: 'PDF'
-                    }
-                ])
                  .withOption('initComplete', function() {
                     $timeout(function() {
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-
                 
-                var modal = UIkit.modal("#batch_modal",{bgclose: false, keyboard:false});
+                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
 
                  $scope.addBatch = function() {
+                    academicsAPI_courseData();
+                    academicsAPI_departmentList();
                     $scope.clearValidation();
                     $scope.titCaption="Add";
                     $scope.btnStatus="Save";
-                     $scope.batchdata={
-                            batch_id:"",
-                            course_id:"",
-                            batch_name:"",
-                            period_from:"",
-                            period_to:"",
-                            incharge_id:""
-                        };
+                    $scope.batch_id='';
+                    $scope.course_id='';
+                    $scope.batch_name='';
+                    $scope.incharge_id='';
+                    $scope.period_from='';
+                    $scope.period_to='';
+                    $scope.course_id='';
+                    $scope.course_name='';
+                    $scope.dept_id='';
+                    $scope.attendance_type='';
+                    $scope.percentage='';
+                    $scope.grade_type='';
+                    $scope.titCaption="Add";
+                    $scope.btnStatus="Save";
+                    $scope.dept_id='';
+                    $scope.dept_name='';
+                    $scope.dept_code='';
+                    $scope.hod_prof_id='';
+                    $scope.room_id='';
+                    $scope.phone_no='';
+                    $timeout(function(){
+                        $scope.shouldBeOpen = true;    
+                    },500);
                     $('.uk-modal').find('input').trigger('blur');
                 };
                 $scope.editBatch= function(res){
@@ -114,14 +148,12 @@ angular
                     $scope.titCaption="Edit";
                     $scope.btnStatus="Update";
                     if(res){
-                        $scope.batchdata={
-                            batch_id:res.ID,
-                            course_id:res.COURSE_ID,
-                            batch_name:res.NAME,
-                            period_from:res.PERIOD_FROM,
-                            period_to:res.PERIOD_TO,
-                            incharge_id:res.empData[0].ID
-                        };
+                        $scope.batch_id=res.ID;
+                        $scope.course_id=res.COURSE_ID;
+                        $scope.batch_name=res.NAME;
+                        $scope.period_from=res.PERIOD_FROM;
+                        $scope.period_to=res.PERIOD_TO;  
+                        $scope.incharge_id=res.empData[0].ID;
                     }                    
                 }
 
@@ -135,32 +167,25 @@ angular
                     });
                 }
                 $scope.refreshTable();
-                $scope.setCourseId=function(cor_data){
-                    if (cor_data.status==false) {
-                       $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
-                    }else{
-                        $scope.courseData.push(cor_data.data);
-                        $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
-                    }
-                }
-                $scope.refreshcourse=function(){
-                    $scope.courseData=[];
+                var academicsAPI_courseData = function(){
                     $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(cor_data){
                         console.log(cor_data,'cor_data');
-                        $scope.setCourseId(cor_data);
+                        if(cor_data.status==false){
+                            $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                        }else{
+                            $scope.courseData.push(cor_data.data);
+                            $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                        }
                     }).error(function(cor_data){
-                        $scope.setCourseId(cor_data);
                     })
-                };
-                $scope.refreshcourse();
-
+                }
+                academicsAPI_courseData();
                 $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(emp_data){
                     //console.log(emp_data.data[0],'incharge');
                     $scope.EmpLIST.push(emp_data.data[0]);
                 });
-
 
                 $scope.selectize_courseId_options =$scope.courseData;
                 $scope.selectize_courseId_config = {
@@ -168,6 +193,7 @@ angular
                     maxItems: 1,
                     placeholder: 'Course',
                     valueField: 'ID',
+                    sortField: [{field: 'ID', direction: 'desc'}],
                     labelField: 'NAME',
                     searchField: 'NAME',
                     render: {
@@ -191,6 +217,9 @@ angular
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             if (value==0 && value!='') {
+                                $timeout(function(){
+                                    $scope.shouldBeOpen = true;    
+                                },500);
                                 UIkit.modal("#course_modal").show();
                             };
                             
@@ -218,25 +247,23 @@ angular
                         });
                     }
                 };
-
-                $scope.batchdata ={};
                 $scope.saveCourseBatch=function(){
                     $http({
                         method:'POST',
                         url: $localStorage.service+'AcademicsAPI/batchDetail',
                         data: {
-                            'batch_id' : $scope.batchdata.batch_id,
-                            'course_id' : $scope.batchdata.course_id,
-                            'batch_name' :$scope.batchdata.batch_name,
-                            'incharge' : $scope.batchdata.incharge_id,
-                            'period_from' : $scope.batchdata.period_from,
-                            'period_to' : $scope.batchdata.period_to
+                            'batch_id' : $scope.batch_id,
+                            'course_id' : $scope.course_id,
+                            'batch_name' : $scope.batch_name,
+                            'incharge' : $scope.incharge_id,
+                            'period_from' : $scope.period_from,
+                            'period_to' : $scope.period_to
                         },
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                     console.log(return_data.data.message.message);
                     if(return_data.data.message.status==true){
-                        UIkit.modal("#batch_modal").hide();
+                        UIkit.modal("#modal_overflow").hide();
                         UIkit.notify({
                             message : return_data.data.message.message,
                             status  : 'success',
@@ -247,31 +274,6 @@ angular
                     }else {
                         UIkit.modal.alert('Course & Batch Name Already Exists');
                     }
-                    // var course=$filter('filter')($scope.courseData,{ID:$scope.course_id},true);
-                    // if(course.length == 0){
-                    //     var COUSRENAME='';
-                    // }else {
-                    //     var COUSRENAME=course[0].NAME;
-                    // }
-                    // var employeeData=$filter('filter')($scope.EmpLIST,{ID:$scope.incharge_id},true);
-                    // if(employeeData.length == 0){
-                    //     var EMPLOYEENAME='';
-                    // }else {
-                    //     var EMPLOYEENAME=employeeData[0].EMP_NAME;
-                    // }
-                    // if($scope.batch_id){
-                    //     var data1=$filter('filter')($scope.viewData,{ID:$scope.batch_id},true);
-                    //     // console.log(data1,'data1');
-                    //     data1[0].NAME=$scope.batch_name;
-                    //     data1[0].COURSE_ID=$scope.course_id;
-                    //     data1[0].COURSE_NAME=COUSRENAME;
-                    //     data1[0].INCHARGE_ID=$scope.incharge_id;
-                    //     data1[0].INCHARGE_NAME=EMPLOYEENAME;
-                    //     data1[0].PERIOD_FROM=$scope.period_from;
-                    //     data1[0].PERIOD_TO=$scope.period_to;
-                    // }else{
-                    //     $scope.viewData.push({ID:return_data.data.message.BATCH_ID,NAME:$scope.batch_name,COURSE_ID:$scope.course_id,COURSE_NAME:COUSRENAME,INCHARGE_ID:$scope.incharge_id,INCHARGE_NAME:EMPLOYEENAME,PERIOD_FROM:$scope.period_from,PERIOD_TO:$scope.period_to});
-                    // }
                 });
             }
 
@@ -310,5 +312,178 @@ angular
                     });
                 }
             }
+            // Course js
+            $scope.deptData=[];
+            var academicsAPI_departmentList=function(){
+                $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(dept_data){
+                    if(dept_data.status==false){
+                        $scope.deptData.push([{ID:0,NAME:"Add Department"}]);
+                    }else{
+                        $scope.deptData.push(dept_data.message);
+                        $scope.deptData.push([{ID:0,NAME:"Add Department"}]);
+                    }
+                });
+            }
+            academicsAPI_departmentList();
+            $scope.selectize_gradingType_options = ['Weighted','UnWeighted'];
+            $scope.selectize_gradingType_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Grade'
+            };
+            $scope.selectize_attdnceType_options = ["Subject-Wise", "Daily"];
+            $scope.selectize_attdnceType_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Attendance Type'
+            };
+            $scope.selectize_deptId_options =$scope.deptData;
+            $scope.selectize_deptId_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Department',
+                valueField: 'ID',
+                sortField: [{field: 'ID', direction: 'desc'}],
+                labelField: 'NAME',
+                searchField: 'NAME',
+                render: {
+                    option: function (item, escape) {
+                        if(item.ID==0){
+                            return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                        }else{
+                             return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<span class="name">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                        }
+                       
+                    }
+                },
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        console.log(value,'valuevalue');
+                        if(value==0){
+                             $timeout(function(){
+                                $scope.shouldBeOpen = true;    
+                            },500);
+                            UIkit.modal("#department_Modal").show();
+                        } 
+                        
+                    });
+                }
+            };
+            $scope.titCaption="Add";
+            $scope.btnStatus='Save';
+            // $scope.addCourse = function() {
+            //     $scope.clearValidation();
+            //     $scope.titCaption="Add";
+            //     $scope.btnStatus='Save';
+            //     $scope.course_id='';
+            //     $scope.course_name='';
+            //     $scope.dept_id='';
+            //     $scope.attendance_type='';
+            //     $scope.percentage='';
+            //     $scope.grade_type='';
+            //     $('.uk-modal').find('input').trigger('blur');
+            // };
+            // Save Data
+            $scope.saveCourse=function(){
+                $http({
+                method:'POST',
+                url: $localStorage.service+'AcademicsAPI/courseDetail',
+                data: {
+                    // 'COURSE_ID' : $scope.course_id,
+                    'COURSE_NAME' : $scope.course_name,
+                    'COURSE_DEPT_ID' : $scope.dept_id,
+                    'COURSE_ATTENDANCE_TYPE' : $scope.attendance_type,
+                    'COURSE_PERCENTAGE' : $scope.percentage,
+                    'COURSE_GARDE_TYPE' : $scope.grade_type
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message.message);
+                    if(return_data.data.message.status==true){
+                        UIkit.modal("#course_modal").hide();
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }else {
+                        // UIkit.notify('Course Name Already Exists','danger');
+                        UIkit.modal.alert('Course Name Already Exists');
+                    }
+                });
+            }
+            //Department js
+            // $scope.addDepartment = function() {
+            //         $scope.clearValidation();
+            //         $scope.titCaption="Add";
+            //         $scope.btnStatus="Save";
+            //         $scope.dept_id='';
+            //         $scope.dept_name='';
+            //         $scope.dept_code='';
+            //         $scope.hod_prof_id='';
+            //         $scope.room_id='';
+            //         $scope.phone_no='';
+            //         $('.uk-modal').find('input').trigger('blur');
+            //          $scope.deptFORM.$setPristine();
+            //     };
+                $scope.empList=[];
+                $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(return_data){
+                    $scope.empList.push(return_data.data);
+                });
+
+                $scope.selectize_hodProfieId_options =$scope.empList;
+                $scope.selectize_hodProfieId_config = {
+                    create: false,
+                    maxItems: 1,
+                    placeholder: 'Select HOD',
+                    valueField: 'PROFILE_ID',
+                    labelField: 'FULLNAME',
+                    searchField: 'FULLNAME',
+                    onInitialize: function(selectize){
+                        selectize.on('change', function(value) {
+                            console.log(value);
+                        });
+                    }
+                };
+                $scope.saveDeaprtment=function(){
+                    $http({
+                    method:'POST',
+                    url: $localStorage.service+'AcademicsAPI/departmentDetail',
+                    data: {
+                        'DEPT_NAME' : $scope.dept_name,
+                        'DEPT_CODE' : $scope.dept_code,
+                        'DEPT_ROOM_ID' : $scope.room_id,
+                        'DEPT_HOD' : $scope.hod_prof_id,
+                        'DEPT_PHONE' : $scope.phone_no
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function(return_data){
+                        if(return_data.data.message.status==true){
+                            console.log(return_data.data.message.message);
+                            UIkit.modal("#department_Modal").hide();
+                            UIkit.notify({
+                                message : return_data.data.message.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                            $scope.dept_id='';
+                        }else {
+                            UIkit.modal.alert('Department Name Already Exists');
+                        }
+                    });
+                }
+                // End Department
         }
     );

@@ -1,11 +1,11 @@
 angular
     .module('rubycampusApp')
     .controller('departmentCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage) {
-            $timeout(function(){
-                var $formValidate = $('#form_validation');
-                // console.log($formValidate);
-                $formValidate
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$rootScope, $filter,$localStorage,$state) {
+            
+            var $formValidate = $('#form_validation');
+
+            $formValidate
                 .parsley()
                 .on('form:validated',function() {
                     $scope.$apply();
@@ -14,13 +14,11 @@ angular
                     if($(parsleyField.$element).hasClass('md-input')) {
                         $scope.$apply();
                     }
-                });    
-            });
-            
+                });
 
-            $scope.clearValidation=function(){
-                $('#form_validation').parsley().reset();
-            }
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -71,66 +69,41 @@ angular
                         }
                     ]
                 })
-                .withButtons([
-                    {
-                        extend:    'print',
-                        text:      '<i class="uk-icon-print"></i> Print',
-                        titleAttr: 'Print'
-                    },
-                    {
-                        extend:    'excelHtml5',
-                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                        titleAttr: ''
-                    },
-                    {
-                        extend:    'pdfHtml5',
-                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                        titleAttr: 'PDF'
-                    }
-                ])
-                 .withOption('initComplete', function() {
+                .withOption('initComplete', function() {
                     $timeout(function() {
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
 
-
-                var modal = UIkit.modal("#department_modal",{bgclose: false, keyboard:false});
-                $scope.titCaption="Add";
-                $scope.btnStatus="Save";
+                var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
+                
                 $scope.addDepartment = function() {
-                    // $scope.scopeVar="Manivannan A Cse";
                     $scope.clearValidation();
                     $scope.titCaption="Add";
                     $scope.btnStatus="Save";
-                    $scope.formdata={
-                            dept_id:"",
-                            dept_name:"",
-                            dept_code:"",
-                            phone_no:"",
-                            hod_prof_id:"",
-                            room_id:""
-                        };
+                    $scope.dept_id='';
+                    $scope.dept_name='';
+                    $scope.dept_code='';
+                    $scope.hod_prof_id='';
+                    $scope.room_id='';
+                    $scope.phone_no='';
+                    $timeout(function(){
+                        $scope.shouldBeOpen = true;    
+                    },500);
                     $('.uk-modal').find('input').trigger('blur');
-                    console.log($scope,"scope");
-                    // $scope.deptFORM.$setPristine();
+                    $scope.deptFORM.$setPristine();
                 };
-                $scope.formdata={};
                 $scope.editDepartment= function(res){
-                    console.log(res,'resres');
                     $scope.clearValidation();
                     $scope.titCaption="Edit";
                     $scope.btnStatus="Update";
                     if(res){
-                        $scope.formdata={
-                            dept_id:res.ID,
-                            dept_name:res.NAME,
-                            dept_code:res.CODE,
-                            phone_no:res.PHONE,
-                            hod_prof_id:res.empProfile[0].ID || '',
-                            room_id:res.roomData[0].ID || ''
-                        };
-                       
+                        $scope.dept_id=res.ID;
+                        $scope.dept_name=res.NAME;
+                        $scope.dept_code=res.CODE;
+                        $scope.phone_no=res.PHONE;
+                        $scope.hod_prof_id=res.empProfile[0].ID || '';
+                        $scope.room_id=res.roomData[0].ID || '';
                         
                     }
                 }
@@ -141,13 +114,7 @@ angular
                 $scope.getdata=function(){
                     $http.get($localStorage.service+'AcademicsAPI/departmentDetail',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(return_data){
-                        $scope.viewData=[].concat(return_data.message);
-                        // angular.extend($scope.viewData, return_data.message);
-                        // console.log($scope.viewData,"$scope.viewData")
-                        // angular.forEach(return_data.message, function(value, key){
-                        //     // console.log(key,'key');    
-                        //     $scope.viewData.push(value);
-                        // })
+                        $scope.viewData=return_data.message;
                         // console.log(return_data,'return_data');
                     });    
                 }
@@ -191,25 +158,24 @@ angular
                         });
                     }
                 };
-                $scope.formdata={};
-                $scope.saveDeaprtment=function(formdata){
-                    console.log(formdata,"formdata");
+
+                $scope.saveDeaprtment=function(){
                     $http({
                     method:'POST',
                     url: $localStorage.service+'AcademicsAPI/departmentDetail',
                     data: {
-                        'DEPT_ID' : $scope.formdata.dept_id,
-                        'DEPT_NAME' : $scope.formdata.dept_name,
-                        'DEPT_CODE' : $scope.formdata.dept_code,
-                        'DEPT_ROOM_ID' : $scope.formdata.room_id,
-                        'DEPT_HOD' : $scope.formdata.hod_prof_id,
-                        'DEPT_PHONE' : $scope.formdata.phone_no
+                        'DEPT_ID' : $scope.dept_id,
+                        'DEPT_NAME' : $scope.dept_name,
+                        'DEPT_CODE' : $scope.dept_code,
+                        'DEPT_ROOM_ID' : $scope.room_id,
+                        'DEPT_HOD' : $scope.hod_prof_id,
+                        'DEPT_PHONE' : $scope.phone_no
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
                         if(return_data.data.message.status==true){
-                            // console.log(return_data.data.message.message);
-                            UIkit.modal("#department_modal").hide();
+                            console.log(return_data.data.message.message);
+                            UIkit.modal("#modal_overflow").hide();
                             UIkit.notify({
                                 message : return_data.data.message.message,
                                 status  : 'success',
@@ -217,60 +183,63 @@ angular
                                 pos     : 'top-center'
                             });
                             $scope.getdata();
+                            // console.log($localStorage.coursePath,'path');
+                            if($localStorage.coursePath==true){
+                                $localStorage.coursePath=false;
+                                $state.go('restricted.academics.course');
+                            }
+
                         }else {
                             UIkit.modal.alert('Department Name Already Exists');
                         }
-
                     });
                 }
-
-                $scope.deleteDepartment=function(id,$index){
-                    $http({
-                        method : "get",
-                        url : $localStorage.service+"AcademicsAPI/departmentDetailCheck",
-                        params : {id : id},
-                        headers:{'access_token':$localStorage.access_token}
-                        }).then(function mySucces(response) {
-                            if(response.data.status==true){
-                                if(id){
-                                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                                        if(id){
-                                            $http({
-                                            method : "DELETE",
-                                            url : $localStorage.service+"AcademicsAPI/departmentDetail",
-                                            params : {id : id},
-                                            headers:{'access_token':$localStorage.access_token}
-                                            }).then(function mySucces(response) {
-                                                
-                                                if(response.data.status==true){
-                                                    UIkit.notify({
-                                                        message : response.data.message,
-                                                        status  : 'success',
-                                                        timeout : 2000,
-                                                        pos     : 'top-center'
-                                                    });
-                                                    $scope.viewData.splice($index, 1);
-                                                    $scope.getdata();
-                                                }
-                                                
-                                            },function myError(response) {
-                                            })
-                                        }
-                                    },function(){
-                                         console.log("false");
-                                    }, {
-                                        labels: {
-                                            'Ok': 'Ok'
-                                        }
-                                    });
-                                }
-
+                   $scope.deleteDepartment=function(id,$index){
+                $http({
+                    method : "get",
+                    url : $localStorage.service+"AcademicsAPI/departmentDetailCheck",
+                    params : {id : id},
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function mySucces(response) {
+                        if(response.data.status==true){
+                            if(id){
+                                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                    if(id){
+                                        $http({
+                                        method : "DELETE",
+                                        url : $localStorage.service+"AcademicsAPI/departmentDetail",
+                                        params : {id : id},
+                                        headers:{'access_token':$localStorage.access_token}
+                                        }).then(function mySucces(response) {
+                                            
+                                            if(response.data.status==true){
+                                                UIkit.notify({
+                                                    message : response.data.message,
+                                                    status  : 'success',
+                                                    timeout : 2000,
+                                                    pos     : 'top-center'
+                                                });
+                                                $scope.viewData.splice($index, 1);
+                                                  $scope.getdata();
+                                            }
+                                            
+                                        },function myError(response) {
+                                        })
+                                    }
+                                },function(){
+                                    console.log("false");
+                                    $scope.getdata();
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
                             }
-                        },function myError(response) {
-                            //console.log(response,'errr');
-                            UIkit.modal.alert(response.data.message);
-                        })
-                   
-                }
+
+                        }
+                    },function myError(response) {
+                        UIkit.modal.alert(response.data.message);
+                    })
             }
+        }
     );
