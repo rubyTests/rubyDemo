@@ -87,6 +87,7 @@ angular
 
                 var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
                 $scope.openModel = function() {
+                    InstitutionAPI_building();
                     $scope.clearValidation();
                     $scope.btnStatus="Save";
                     $scope.hidden_id=null;
@@ -108,28 +109,46 @@ angular
                     $scope.refreshTable=function(){
                         $http.get($localStorage.service+'HostelAPI/hostelView',{headers:{'access_token':$localStorage.access_token}})
                         .success(function(view_data){
-                            //console.log(view_data,'testttttt');
-                            $scope.viewData=view_data.message;
+                            console.log(view_data,'view_data');
+                            console.log(angular.isArray(view_data.message),'testttttt');
+                            if (angular.isArray(view_data.message)) {
+                                $scope.viewData = view_data.message;    
+                            }else{
+                                $scope.viewData=[];
+                            }
+                            // Object.key(view_data.message);
+                            
                         });
                     }
                 $scope.refreshTable();
                 $scope.buildingId =[];
-                $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
-                .success(function(user_data){
-                    //console.log(user_data,'building');
-                    if(user_data.status==false){
-                        $scope.buildingId.push({ID:0, NAME:"Add Building"});
-                    }else{
+                var InstitutionAPI_building = function(){
+                    $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
+                    .success(function(user_data){
                         $scope.buildingId.push(user_data.data);
-                    }
-                });
-
+                        $scope.buildingId.push({ID:0, NAME:"Add Building"});
+                        // var data = $filter('orderBy')($scope.buildingId, 'ID', false);
+                        // $scope.buildingId.push(data);
+                        // console.log($scope.buildingId,"buildingId");
+                    });
+                }
+                InstitutionAPI_building();
+                // $scope.functionCall = function(){
+                //     alert("fxgdfg");
+                //     $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
+                //     .success(function(user_data){
+                //         $scope.buildingId.push(user_data.data);
+                //         $scope.buildingId.push({ID:0, NAME:"Add Building"});
+                //         console.log($scope.buildingId,"buildingId");
+                //     });
+                // }
                 $scope.selectize_buildingId_options =$scope.buildingId;
                 $scope.selectize_buildingId_config = {
                     create: false,
                     maxItems: 1,
                     placeholder: 'Building',
                     valueField: 'ID',
+                    sortField: [{field: 'ID', direction: 'desc'}],
                     labelField: 'NAME',
                     searchField: 'NAME',
                     render: {
@@ -155,14 +174,35 @@ angular
                         selectize.on('change', function(value) {
                             if(value==0){
                                 var modal = UIkit.modal("#addBuilding_modal",{bgclose: false, keyboard:false});
-                                modal.show();
+                                if ( modal.isActive() ) {
+                                    modal.hide();
+                                } else {
+                                    modal.show();
+                                }
                                 //$state.go('restricted.academics.course')
                             } 
                             
                         });
                     }
                 };
+                // $('#addBuilding_modal').on({
+                //     'show.uk.modal': function(){
+                //         console.log("Modal is visible.");
+                //     },
 
+                //     'hide.uk.modal': function(){
+                //         // console.log("Element is not visible.");
+                //         // InstitutionAPI_building();
+                //         if ( modal.isActive() ) {
+                //             modal.show();
+                //         } else {
+                //             console.log("Element is not visible.");
+                //             // InstitutionAPI_building();
+                //             $scope.functionCall();
+                //             modal.hide();
+                //         }
+                //     }
+                // });
                  $scope.saveHostelSettings=function(){  
                     $http({
                     method:'POST',
@@ -251,7 +291,7 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.message);
+                    // console.log(return_data.data.message);
                     if(return_data.data.status==true){
                         UIkit.modal("#addBuilding_modal").hide();
                         UIkit.notify({

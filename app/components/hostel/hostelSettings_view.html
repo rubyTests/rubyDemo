@@ -40,7 +40,7 @@
                         </tr>
                     </tfoot>
                     <tbody>
-                        <tr ng-repeat="row in viewData">
+                        <tr ng-repeat="row in viewData track by $index">
                             <td>{{$index+1}}</td>
                             <td>{{row.NAME}}</td>
                             <td>{{row.building}}</td>
