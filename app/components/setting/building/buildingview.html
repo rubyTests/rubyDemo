@@ -13,13 +13,13 @@
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}" ng-click="addBuilding()">
+                        <button  class="md-btn md-btn-primary md-btn-small" ng-click="addBuilding()">
                         <i class="uk-icon-plus"></i>  Add Building
                         </button>
                     </div>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            <th>S.No</th>
                             <th>Name</th>
                             <th>Number</th>
                             <th>Landmark</th>
@@ -32,12 +32,11 @@
                             <th>Name</th>
                             <th>Number</th>
                             <th>Landmark</th>
-                            <th></th>
                         </tr>
                     </tfoot>
                     <tbody>
                         <tr ng-repeat="row in viewData">
-                            <td>{{row.ID}}</td>
+                            <td>{{$index+1}}</td>
                             <td>{{row.NAME}}</td>
                             <td>{{row.NUMBER}}</td>
                             <td>{{row.LANDMARK}}</td>
@@ -59,16 +58,16 @@
             <form id="form_validation" name="inputForm" ng-submit="saveBuildingData()" novalidate>
                   <div class="uk-form-row parsley-row" >
                     <label class="uk-form-label">Building Name<span class="req">*</span></label>
-                    <input type="text" ng-model="building_name" class="md-input" required md-input>
+                    <input type="text" ng-pattern-restrict="^[A-Za-z]*$" ng-model="building_name" class="md-input" required md-input focus-me="shouldBeOpen">
                     <input type="hidden" ng-model="building_id">
                   </div>
                     <div class="uk-form-row">
                       <label>Building Number</label>
-                      <input type="text" ng-model="build_no" class="md-input" md-input>
+                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" ng-model="build_no" class="md-input" md-input>
                     </div>
                     <div class="uk-form-row">
                       <label>Landmark</label>
-                      <input type="text" ng-model="landmark" class="md-input" md-input>
+                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-/]*$" ng-model="landmark" class="md-input" md-input>
                     </div>
                     <div class="uk-modal-footer uk-text-right">
                       <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>

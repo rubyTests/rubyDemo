@@ -91,14 +91,12 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-
-                
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Landmark')
-            ];
+            // vm.dtColumnDefs = [
+            //     DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
+            //     DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
+            //     DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
+            //     DTColumnDefBuilder.newColumnDef(3).withTitle('Landmark')
+            // ];
 
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
 
@@ -110,6 +108,10 @@ angular
                 $scope.building_name='';
                 $scope.build_no='';
                 $scope.landmark='';
+                $timeout(function(){
+                    $scope.shouldBeOpen = true;    
+                },500);
+                modal.show();
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editBuilding=function(res){
@@ -142,11 +144,13 @@ angular
                     if(return_data.data.status==true){
                         UIkit.modal("#modal_header_footer").hide();
                         UIkit.notify({
-                            message : return_data.data.message,
+                            message : return_data.data.message.message,
                             status  : 'success',
                             timeout : 2000,
                             pos     : 'top-center'
                         });
+                    }else{
+                        UIkit.modal.alert(return_data.data.message);
                     }
                     $scope.refreshTable();
                     // if($scope.building_id){
@@ -187,7 +191,7 @@ angular
                                             params : {id : id},
                                             headers:{'access_token':$localStorage.access_token}
                                             }).then(function mySucces(response) {
-                                                
+                                                //console.log(response,'responseresponse');
                                                 if(response.data.status==true){
                                                     UIkit.notify({
                                                         message : response.data.message.message,
@@ -211,10 +215,10 @@ angular
                                     });
                                 }
 
+                            }else{
+                                UIkit.modal.alert(response.data.message);
                             }
                         },function myError(response) {
-                            //console.log(response,'errr');
-                            UIkit.modal.alert(response.data.message);
                         })
                    
                 }

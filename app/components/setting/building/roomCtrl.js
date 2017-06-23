@@ -108,37 +108,55 @@ angular
             .success(function(building_data){
                 $scope.buildingList.push(building_data.data);
             });
-            $http.get($localStorage.service+'InstitutionAPI/block',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(block_data){
-                $scope.blockList.push(block_data.data);
-            });
+           
 
             $scope.selectize_buildingId_options =$scope.buildingList;
             $scope.selectize_buildingId_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Building',
+                placeholder: 'Building*',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
-                        $('#form_validation').parsley().validate();
+                         $scope.getBlocks(value);
+                        //$('#form_validation').parsley().validate();
                     });
                 }
             };
+            // $scope.getBlocks = function(){
+            //     $http.get($localStorage.service+'InstitutionAPI/block',{ params : {id : id},headers:{'access_token':$localStorage.access_token}})
+            //     .success(function(block_data){
+            //             $scope.blockList.push(block_data.data);
+            //     });
+            // }
+             $scope.getBlocks=function(id){
+                // alert(id);
+                    $http({
+                    method:'get',
+                    url: $localStorage.service+'InstitutionAPI/block',
+                    params: {
+                        'id' : id
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function(block_data){
+                        //console.log(block_data.data.data,'return_datareturn_data');
+                        $scope.selectize_block_options=block_data.data.data;
+                        //console.log($scope.selectize_block_options);
+                    });
+                }
 
-            $scope.selectize_blockId_options =$scope.blockList;
+            $scope.selectize_block_options =[];
             $scope.selectize_blockId_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Block',
+                placeholder: 'Block*',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
-                        $('#form_validation').parsley().validate();
+                        //$('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -148,10 +166,14 @@ angular
                 $scope.titleCaption="Add";
                 $scope.room_id='';
                 $scope.room_name='';
-                $scope.room_no='';
+                // $scope.room_no='';
                 $scope.floor='';
                 $scope.selectize_buildingId='';
                 $scope.selectize_blockId='';
+                $timeout(function(){
+                    $scope.shouldBeOpen = true;    
+                },500);
+                // modal.show();
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editRoom=function(result){
@@ -161,7 +183,7 @@ angular
                 if(result){
                     $scope.room_id=result.ID;
                     $scope.room_name=result.NAME;
-                    $scope.room_no=result.NUMBER;
+                    // $scope.room_no=result.NUMBER;
                     $scope.floor=result.FLOOR;
                     $scope.selectize_buildingId=result.BUILDING_ID;
                     $scope.selectize_blockId=result.BLOCK_ID;
@@ -176,23 +198,27 @@ angular
                 data: {
                     'room_id' : $scope.room_id,
                     'room_name' : $scope.room_name,
-                    'room_no' : $scope.room_no,
+                    // 'room_no' : $scope.room_no,
                     'floor' : $scope.floor,
                     'building_id' : $scope.selectize_buildingId,
                     'block_id' : $scope.selectize_blockId
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
+                    console.log(return_data,'return_data');
                     if(return_data.data.status==true){
                         UIkit.modal("#modal_header_footer").hide();
                         UIkit.notify({
-                            message : return_data.data.message,
+                            message : return_data.data.message.message,
                             status  : 'success',
                             timeout : 2000,
                             pos     : 'top-center'
                         });
+                    }else{
+                        UIkit.modal.alert(return_data.data.message); 
                     }
                     $scope.refreshTable();
+                    $scope.clearValidation();
                     // console.log(return_data.data.message);
                     // var build=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
                     // var block=$filter('filter')($scope.blockList,{ID:$scope.selectize_blockId},true);
@@ -251,11 +277,10 @@ angular
                                     }
                                 });
                             }
-
+                        }else{
+                            UIkit.modal.alert(response.data.message);
                         }
                     },function myError(response) {
-                        //console.log(response,'errr');
-                        UIkit.modal.alert(response.data.message);
                     })
                
             }

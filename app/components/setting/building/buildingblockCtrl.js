@@ -80,12 +80,12 @@ angular
                 });
 
                 
-            vm.dtColumnDefs = [
-                DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
-                DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
-                DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Building')
-            ];
+            // vm.dtColumnDefs = [
+            //     DTColumnDefBuilder.newColumnDef(0).withTitle('Id'),
+            //     DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
+            //     DTColumnDefBuilder.newColumnDef(2).withTitle('Number'),
+            //     DTColumnDefBuilder.newColumnDef(3).withTitle('Building')
+            // ];
 
             var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
             
@@ -97,6 +97,10 @@ angular
                 $scope.block_name='';
                 $scope.block_no='';
                 $scope.selectize_buildingId='';
+                $timeout(function(){
+                    $scope.shouldBeOpen = true;    
+                },500);
+                // modal.show();
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editBlock=function(result){
@@ -130,13 +134,13 @@ angular
             $scope.selectize_buildingId_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Building',
+                placeholder: 'Building*',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
-                        $('#form_validation').parsley().validate();
+                        //$('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -159,11 +163,13 @@ angular
                     if(return_data.data.status==true){
                         UIkit.modal("#modal_header_footer").hide();
                         UIkit.notify({
-                            message : return_data.data.message,
+                            message : return_data.data.message.message,
                             status  : 'success',
                             timeout : 2000,
                             pos     : 'top-center'
                         });
+                    }else{
+                        UIkit.modal.alert(return_data.data.message); 
                     }
                     $scope.refreshTable();
                     // var data=$filter('filter')($scope.buildingList,{ID:$scope.selectize_buildingId},true);
@@ -183,7 +189,7 @@ angular
             $scope.deleteBlock=function(id,$index){
                     $http({
                         method : "get",
-                        url : $localStorage.service+"InstitutionAPI/block",
+                        url : $localStorage.service+"InstitutionAPI/checkBlockDetails",
                         params : {id : id},
                         headers:{'access_token':$localStorage.access_token}
                         }).then(function mySucces(response) {
@@ -221,11 +227,10 @@ angular
                                         }
                                     });
                                 }
-
+                            }else{
+                                UIkit.modal.alert(response.data.message);
                             }
                         },function myError(response) {
-                            //console.log(response,'errr');
-                            UIkit.modal.alert(response.data.message);
                         })
                    
                 }
