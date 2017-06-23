@@ -10,7 +10,7 @@
                             <li class="heading_list" style="color: #e53935">Subject</li>
                             <li ng-repeat="note in notes_data" ng-class="{'md-list-item-active': $index == currentActive}">
                                 <a href="#" class="md-list-content note_link" ng-click="openNote($event,$parent.$index,$index,note)">
-                                    <span class="md-list-heading uk-text-truncate">{{note.NAME}}</span>
+                                    <span class="md-list-heading uk-text-truncate">{{note.SUBJECT_NAME}}</span>
                                 </a>
                             </li>
                         </ul>
@@ -23,7 +23,7 @@
                                 <i class="md-icon material-icons" id="toggleAll" ng-click="toggleAll($event)">&#xe8f2;</i>
                             </div>
                             <h3 class="md-card-toolbar-heading-text large">
-                                {{notes_preview.NAME}}
+                                {{notes_preview.SUBJECT_NAME}}
                             </h3>
                         </div>
                         <div class="md-card-content padding-reset" id="help_content">

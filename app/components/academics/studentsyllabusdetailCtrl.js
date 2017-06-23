@@ -16,10 +16,11 @@ angular
             $rootScope.headerDoubleHeightActive = true;
             var test;
             // $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchAllSubjectSyllabusData')
-            $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{params:{roleId:$localStorage.role_id,profileId:$localStorage.userProfile_id},headers:{'access_token':$localStorage.access_token}})
+            $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{headers:{'access_token':$localStorage.access_token}})
             .success(function(syllabus_data){
                console.log(syllabus_data,'syllabus_data');
-                var data1=$filter('filter')(syllabus_data.data, {SUBJECT_ID : $stateParams.id},true);
+                var data1=$filter('filter')(syllabus_data.data, {ID : $stateParams.id},true);
+                // console.log(syllabus_data.data.indexOf(data1[0]),'data');
                 $scope.currentActive=syllabus_data.data.indexOf(data1[0]);
                 $scope.notes_data=syllabus_data.data;
                 $scope.notes_preview=data1[0];
