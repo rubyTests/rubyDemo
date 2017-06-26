@@ -5,6 +5,13 @@
   .uk-modal.uk-modal-dialog-replace .uk-modal-content{
     font-size: 16px !important;
   }
+  .linkClr{
+    color: rgb(94,100,255) !important;
+  }
+  .linkClrtxt{
+    color: rgb(94,100,255) !important;
+    margin-left: 10px !important;
+  }
 </style>
 <div id="page_content" ng-controller="buildingblockCtrl as showCase">
     <div id="page_content_inner">
@@ -13,7 +20,7 @@
             <div class="md-card-content large-padding">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#modal_header_footer'}" ng-click="addBlock()">
+                        <button  class="md-btn md-btn-primary md-btn-small" data-uk-modal="{target:'#block_modal'}" ng-click="addBlock()">
                         <i class="uk-icon-plus"></i>  Add Block
                         </button>
                     </div>
@@ -41,7 +48,7 @@
                             <td>{{row.NUMBER}}</td>
                             <td>{{row.BUILDING_NAME}}</td>
                             <td>
-                                <a class="ts_remove_row" data-uk-modal="{target:'#modal_header_footer'}" ng-click="editBlock(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" data-uk-modal="{target:'#block_modal'}" ng-click="editBlock(row)"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a class="ts_remove_row" ng-click="deleteBlock(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
                                  <!-- <a class="ts_remove_row" onclick="deleteBlock(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a> -->
                             </td>
@@ -52,9 +59,9 @@
         </div>
     </div>
 
-    <div class="uk-modal" id="modal_header_footer">
+    <div class="uk-modal" id="block_modal">
       <div class="uk-modal-dialog">
-      <button type="button" class="uk-modal-close uk-close"></button>
+      <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation()"></button>
               <h3 class="uk-modal-title">{{titleCaption}} Block</h3><br>
           <div class="md-card-content">
             <form id="form_validation" name="inputForm" ng-submit="saveBlockData()" novalidate>
@@ -66,7 +73,7 @@
                   </div>
                     <div class="uk-form-row">
                       <label>Block Number</label>
-                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" ng-model="block_no" class="md-input" md-input>
+                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" ng-model="block_no" class="md-input inputName" md-input>
                     </div>
                     <div class="uk-form-row parsley-row">
                         <label class="uk-form-label" ng-show="selectize_buildingId" style="font-size: 12px;color: #727272;">Building<span class="req"> *</span></label>
@@ -76,6 +83,33 @@
                         <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
                          <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" >{{btnStatus}}</button>
                     </div>
+            </form>
+          </div>
+      </div>
+    </div>
+    <div class="uk-modal" id="building_modal">
+      <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation1()"></button>
+          <h3 class="uk-modal-title">{{titleCaption}} Building</h3><br>
+          <div class="md-card-content">
+            <form id="form_validation1" name="inputForm" ng-submit="saveBuildingData()" novalidate>
+                  <div class="uk-form-row parsley-row" >
+                    <label class="uk-form-label">Building Name<span class="req">*</span></label>
+                    <input type="text" ng-pattern-restrict="^[A-Za-z ]*$" ng-model="building_name" class="md-input" required md-input focus-me="shouldBeOpen">
+                    <input type="hidden" ng-model="building_id">
+                  </div>
+                    <div class="uk-form-row">
+                      <label>Building Number</label>
+                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" ng-model="build_no" class="md-input inputName" md-input>
+                    </div>
+                    <div class="uk-form-row">
+                      <label>Landmark</label>
+                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-/]*$" ng-model="landmark" class="md-input inputName" md-input>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                      <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation1()">Cancel</button>
+                      <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                  </div>
             </form>
           </div>
       </div>

@@ -17,6 +17,22 @@ angular
                 $scope.clearValidation=function(){
                     $('#form_validation').parsley().reset();
                 }
+                var $formValidate = $('#form_validation1');
+                $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    // $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        // $scope.$apply();
+                    }
+                });
+                
+                $scope.clearValidation1=function(){
+                    $('#form_validation1').parsley().reset();
+                     $scope.clear_buildData();
+                }
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -106,24 +122,68 @@ angular
 
             $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(building_data){
-                $scope.buildingList.push(building_data.data);
+                //$scope.buildingList.push(building_data.data);
+                if(building_data.status==false){
+                    $scope.buildingList.push([{ID:0, NAME:"Add Building"}]);
+                }else{
+                    $scope.buildingList.push(building_data.data);
+                    $scope.buildingList.push([{ID:0, NAME:"Add Building"}]);
+                }
             });
            
-
             $scope.selectize_buildingId_options =$scope.buildingList;
             $scope.selectize_buildingId_config = {
                 create: false,
                 maxItems: 1,
                 placeholder: 'Building*',
                 valueField: 'ID',
+                sortField: [{field: 'ID', direction: 'desc'}],
                 labelField: 'NAME',
+                render: {
+                        option: function (item, escape) {
+                            if(item.ID==0){
+                                return '<div class="option">' +
+                                            '<div class="text">' +
+                                                '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                           '</div>' +
+                                        '</div>';
+                            }else{
+                                 return '<div class="option">' +
+                                            '<div class="text">' +
+                                                '<span class="name">' + escape(item.NAME) + '</span>' +
+                                           '</div>' +
+                                        '</div>';
+                            }
+                           
+                        }
+                    },
                 onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                         $scope.getBlocks(value);
-                        //$('#form_validation').parsley().validate();
-                    });
-                }
+                        selectize.on('change', function(value) {
+                            if (value==0) {
+                                $timeout(function(){
+                                    $scope.shouldBeOpen = true;    
+                                },500);
+                                UIkit.modal("#building_modal",{bgclose: false, keyboard:false}).show(); 
+                            };
+                            $scope.getBlocks(value);
+                        });
+                    }
             };
+
+            // $scope.selectize_buildingId_options =$scope.buildingList;
+            // $scope.selectize_buildingId_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Building*',
+            //     valueField: 'ID',
+            //     labelField: 'NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(value) {
+            //              $scope.getBlocks(value);
+            //             //$('#form_validation').parsley().validate();
+            //         });
+            //     }
+            // };
             // $scope.getBlocks = function(){
             //     $http.get($localStorage.service+'InstitutionAPI/block',{ params : {id : id},headers:{'access_token':$localStorage.access_token}})
             //     .success(function(block_data){
@@ -160,6 +220,20 @@ angular
                     });
                 }
             };
+            $scope.clear_buildData=function(){
+                $scope.titleCaption="Add";
+                $scope.btnStatus="Save";
+                $scope.building_id='';
+                $scope.building_name='';
+                $scope.build_no='';
+                $scope.landmark='';
+                $scope.selectize_buildingId=''
+                $('.inputName').trigger('blur'); 
+                $timeout(function(){
+                    $scope.shouldBeOpen = true;
+                },500);
+                //modal.show();
+            }
             $scope.addRoom=function(){
                 $scope.clearValidation();
                 $scope.btnStatus="Save";
@@ -170,11 +244,10 @@ angular
                 $scope.floor='';
                 $scope.selectize_buildingId='';
                 $scope.selectize_blockId='';
+                $('.inputName').trigger('blur'); 
                 $timeout(function(){
                     $scope.shouldBeOpen = true;    
                 },500);
-                // modal.show();
-                $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editRoom=function(result){
                 $scope.clearValidation();
@@ -284,40 +357,39 @@ angular
                     })
                
             }
-            // delete block
-            //  $scope.deleteRoom=function(id, $index){
-            //     if(id){
-            //         $http({
-            //             method : "DELETE",
-            //             url : $localStorage.service+"InstitutionAPI/room",
-            //             params : {id : id},
-            //             headers:{'access_token':$localStorage.access_token}
-            //         }).then(function mySucces(response) {
-            //             UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-            //             if(id){
-            //                 if(response.data.status==true){
-            //                     UIkit.notify({
-            //                         message : response.data.message,
-            //                         status  : 'success',
-            //                         timeout : 2000,
-            //                         pos     : 'top-center'
-            //                     });
-            //                 }
-            //                 $scope.viewData.splice($index, 1);
-            //                 $scope.refreshTable();
-            //                 }
-            //             },function(){
-            //                 // console.log("false");
-            //             }, {
-            //                 labels: {
-            //                     'Ok': 'Ok'
-            //                 }
-            //             })
-            //         },function myError(response) {
-            //             UIkit.modal.alert(response.data.message);
-
-            //         })
-            //     }
-            // }
+            //Building js
+            // Save Data
+            $scope.saveBuildingData=function(){
+                $http({
+                method:'POST',
+                // url: 'http://localhost/smartedu/test/InstitutionAPI/building',
+                url: $localStorage.service+'InstitutionAPI/building',
+                data: {
+                    'build_id' : $scope.building_id,
+                    'build_name' : $scope.building_name,
+                    'bulid_no' : $scope.build_no,
+                    'landmark' : $scope.landmark
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message);
+                    if(return_data.data.status==true){
+                        UIkit.modal("#building_modal").hide();
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.buildingList.push({ID:return_data.data.message.BUILDING_ID,NAME:return_data.data.message.BUILDING_NAME});
+                        $timeout(function(){
+                            UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false}).show();    
+                        },100);
+                        $scope.clear_buildData(); 
+                    }else{
+                        UIkit.modal.alert(return_data.data.message);
+                    }
+                });
+            }
         }
     );

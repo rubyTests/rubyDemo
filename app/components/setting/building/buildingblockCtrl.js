@@ -16,6 +16,21 @@ angular
                         // $scope.$apply();
                     }
                 });
+            $scope.clearValidation1=function(){
+                $('#form_validation1').parsley().reset();
+                $scope.clear_buildData();
+            }
+            var $formValidate = $('#form_validation1');
+            $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    // $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        // $scope.$apply();
+                    }
+                });
             var vm = this;
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -87,25 +102,39 @@ angular
             //     DTColumnDefBuilder.newColumnDef(3).withTitle('Building')
             // ];
 
-            var modal = UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false});
-            
+            var modal = UIkit.modal("#block_modal",{bgclose: false, keyboard:false});
+            $scope.clear_buildData=function(){
+                $scope.titleCaption="Add";
+                $scope.btnStatus="Save";
+                $scope.building_id='';
+                $scope.building_name='';
+                $scope.build_no='';
+                $scope.landmark='';
+                $scope.selectize_buildingId=''
+                 $('.inputName').trigger('blur'); 
+                $timeout(function(){
+                    $scope.shouldBeOpen = true;
+                },500);
+                //modal.show();
+            }
             $scope.addBlock=function(){
                 $scope.clearValidation();
+                $scope.clearValidation1();
+                $scope.clear_buildData();
                 $scope.titleCaption="Add";
                 $scope.btnStatus="Save";
                 $scope.block_id='';
                 $scope.block_name='';
                 $scope.block_no='';
                 $scope.selectize_buildingId='';
+                $('.inputName').trigger('blur');
                 $timeout(function(){
-                    $scope.shouldBeOpen = true;    
+                    $scope.shouldBeOpen = true;
                 },500);
-                // modal.show();
-                $('.uk-modal').find('input').trigger('blur');
+                
             }
             $scope.editBlock=function(result){
                 $scope.clearValidation();
-                // console.log(result,'result');
                 $scope.titleCaption="Edit";
                 $scope.btnStatus="Update";
                 if(result){
@@ -122,13 +151,17 @@ angular
                     $scope.viewData=response.data;
                 });
             }
-            
             $scope.refreshTable();
             // Get building data
             $scope.buildingList=[];
             $http.get($localStorage.service+'InstitutionAPI/building',{headers:{'access_token':$localStorage.access_token}})
             .success(function(building_data){
-                $scope.buildingList.push(building_data.data);
+                if(building_data.status==false){
+                    $scope.buildingList.push([{ID:0, NAME:"Add Building"}]);
+                }else{
+                    $scope.buildingList.push(building_data.data);
+                    $scope.buildingList.push([{ID:0, NAME:"Add Building"}]);
+                }
             });
             $scope.selectize_buildingId_options =$scope.buildingList;
             $scope.selectize_buildingId_config = {
@@ -136,13 +169,36 @@ angular
                 maxItems: 1,
                 placeholder: 'Building*',
                 valueField: 'ID',
+                sortField: [{field: 'ID', direction: 'desc'}],
                 labelField: 'NAME',
+                render: {
+                        option: function (item, escape) {
+                            if(item.ID==0){
+                                return '<div class="option">' +
+                                            '<div class="text">' +
+                                                '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                           '</div>' +
+                                        '</div>';
+                            }else{
+                                 return '<div class="option">' +
+                                            '<div class="text">' +
+                                                '<span class="name">' + escape(item.NAME) + '</span>' +
+                                           '</div>' +
+                                        '</div>';
+                            }
+                           
+                        }
+                    },
                 onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        console.log(value);
-                        //$('#form_validation').parsley().validate();
-                    });
-                }
+                        selectize.on('change', function(value) {
+                            if (value==0) {
+                                $timeout(function(){
+                                    $scope.shouldBeOpen = true;    
+                                },500);
+                                UIkit.modal("#building_modal",{bgclose: false, keyboard:false}).show(); 
+                            };
+                        });
+                    }
             };
 
             // Save Data
@@ -161,7 +217,7 @@ angular
                 }).then(function(return_data){
                     console.log(return_data.data.message);
                     if(return_data.data.status==true){
-                        UIkit.modal("#modal_header_footer").hide();
+                        UIkit.modal("#block_modal").hide();
                         UIkit.notify({
                             message : return_data.data.message.message,
                             status  : 'success',
@@ -187,85 +243,86 @@ angular
 
             // delete block
             $scope.deleteBlock=function(id,$index){
-                    $http({
-                        method : "get",
-                        url : $localStorage.service+"InstitutionAPI/checkBlockDetails",
-                        params : {id : id},
-                        headers:{'access_token':$localStorage.access_token}
-                        }).then(function mySucces(response) {
-                            //console.log(response,'responseresponse');
-                            if(response.data.status==true){
-                                if(id){
-                                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                                        if(id){
-                                            $http({
-                                            method : "DELETE",
-                                            url : $localStorage.service+"InstitutionAPI/block",
-                                            params : {id : id},
-                                            headers:{'access_token':$localStorage.access_token}
-                                            }).then(function mySucces(response) {
-                                                
-                                                if(response.data.status==true){
-                                                    UIkit.notify({
-                                                        message : response.data.message.message,
-                                                        status  : 'success',
-                                                        timeout : 2000,
-                                                        pos     : 'top-center'
-                                                    });
-                                                }
-                                                $scope.viewData.splice($index, 1);
-                                                $scope.refreshTable();
-                                                
-                                            },function myError(response) {
-                                            })
-                                        }
-                                    },function(){
-                                         console.log("false");
-                                    }, {
-                                        labels: {
-                                            'Ok': 'Ok'
-                                        }
-                                    });
-                                }
-                            }else{
-                                UIkit.modal.alert(response.data.message);
+                $http({
+                    method : "get",
+                    url : $localStorage.service+"InstitutionAPI/checkBlockDetails",
+                    params : {id : id},
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function mySucces(response) {
+                        //console.log(response,'responseresponse');
+                        if(response.data.status==true){
+                            if(id){
+                                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                    if(id){
+                                        $http({
+                                        method : "DELETE",
+                                        url : $localStorage.service+"InstitutionAPI/block",
+                                        params : {id : id},
+                                        headers:{'access_token':$localStorage.access_token}
+                                        }).then(function mySucces(response) {
+                                            
+                                            if(response.data.status==true){
+                                                UIkit.notify({
+                                                    message : response.data.message.message,
+                                                    status  : 'success',
+                                                    timeout : 2000,
+                                                    pos     : 'top-center'
+                                                });
+                                            }
+                                            $scope.viewData.splice($index, 1);
+                                            $scope.refreshTable();
+                                            
+                                        },function myError(response) {
+                                        })
+                                    }
+                                },function(){
+                                     console.log("false");
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
                             }
-                        },function myError(response) {
-                        })
-                   
-                }
-            // $scope.deleteBlock=function(id, $index){
-            //     if(id){
-            //         UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-            //             if(id){
-            //                 $http({
-            //                 method : "DELETE",
-            //                 url : $localStorage.service+"InstitutionAPI/block",
-            //                 params : {id : id},
-            //                 headers:{'access_token':$localStorage.access_token}
-            //                 }).then(function mySucces(return_data) {
-            //                     if(return_data.data.status==true){
-            //                         UIkit.notify({
-            //                             message : return_data.data.message.message,
-            //                             status  : 'success',
-            //                             timeout : 2000,
-            //                             pos     : 'top-center'
-            //                         });
-            //                     }
-            //                     $scope.viewData.splice($index, 1);
-            //                     $scope.refreshTable();
-            //                 },function myError(return_data) {
-            //                     UIkit.modal.alert('Block details are assigned to hostel settings');
-            //                 })
-            //             }
-            //         },function(){
-            //             // console.log("false");
-            //         }, {
-            //             labels: {
-            //                 'Ok': 'Ok'
-            //             }
-            //         });
-            //     }
-            // }
+                        }else{
+                            UIkit.modal.alert(response.data.message);
+                        }
+                    },function myError(response) {
+                    })
+            }
+            //Building js
+            // Save Data
+            $scope.saveBuildingData=function(){
+                $http({
+                method:'POST',
+                // url: 'http://localhost/smartedu/test/InstitutionAPI/building',
+                url: $localStorage.service+'InstitutionAPI/building',
+                data: {
+                    'build_id' : $scope.building_id,
+                    'build_name' : $scope.building_name,
+                    'bulid_no' : $scope.build_no,
+                    'landmark' : $scope.landmark
+                },
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message);
+                    if(return_data.data.status==true){
+                        UIkit.modal("#building_modal").hide();
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.buildingList.push({ID:return_data.data.message.BUILDING_ID,NAME:return_data.data.message.BUILDING_NAME});
+                        $timeout(function(){
+                            UIkit.modal("#block_modal",{bgclose: false, keyboard:false}).show();    
+                        },100);
+                        $scope.clear_buildData(); 
+                    }else{
+                        UIkit.modal.alert(return_data.data.message);
+                    }
+                });
+            }
+           
         }
     );

@@ -108,11 +108,12 @@ angular
                 $scope.building_name='';
                 $scope.build_no='';
                 $scope.landmark='';
+                $('.inputName').trigger('blur'); 
                 $timeout(function(){
                     $scope.shouldBeOpen = true;    
                 },500);
                 modal.show();
-                $('.uk-modal').find('input').trigger('blur');
+                // $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editBuilding=function(res){
                 $scope.clearValidation();
