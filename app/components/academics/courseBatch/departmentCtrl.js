@@ -87,10 +87,11 @@ angular
                     $scope.hod_prof_id='';
                     $scope.room_id='';
                     $scope.phone_no='';
+                    $('.inputName').trigger('blur'); 
                     $timeout(function(){
                         $scope.shouldBeOpen = true;    
                     },500);
-                    $('.uk-modal').find('input').trigger('blur');
+                    // $('.uk-modal').find('input').trigger('blur');
                     $scope.deptFORM.$setPristine();
                 };
                 $scope.editDepartment= function(res){
