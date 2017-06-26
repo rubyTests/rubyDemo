@@ -42,6 +42,7 @@ angular
                 $scope.dept_id="";
                 $scope.subjectID="";
                 $scope.course_id="";
+                $scope.course_clearData();
             }
             //Department
             var $formValidate = $('#form_validation2');
@@ -61,25 +62,26 @@ angular
                 $scope.dept_id="";
                 $scope.subjectID="";
                 $scope.course_id="";
+                $scope.dept_clearData();
             }
             //Subject
-            var $formValidate = $('#form_validation3');
-            $formValidate
-            .parsley()
-            .on('form:validated',function() {
-                $scope.$apply();
-            })
-            .on('field:validated',function(parsleyField) {
-                if($(parsleyField.$element).hasClass('md-input')) {
-                    $scope.$apply();
-                }
-            });
-            $scope.clearValidation3=function(){
-                $('#form_validation3').parsley().reset();
-                $scope.courseID="";
-                $scope.dept_id="";
-                $scope.subjectID="";
-            }
+            // var $formValidate = $('#form_validation3');
+            // $formValidate
+            // .parsley()
+            // .on('form:validated',function() {
+            //     $scope.$apply();
+            // })
+            // .on('field:validated',function(parsleyField) {
+            //     if($(parsleyField.$element).hasClass('md-input')) {
+            //         $scope.$apply();
+            //     }
+            // });
+            // $scope.clearValidation3=function(){
+            //     $('#form_validation3').parsley().reset();
+            //     $scope.courseID="";
+            //     $scope.dept_id="";
+            //     $scope.subjectID="";
+            // }
             $scope.courseData=[];
             var academicsAPI_courseData = function(){
                 $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
@@ -515,6 +517,7 @@ angular
                 $scope.subjectID="";
                 $scope.course_id="";
                 $scope.deptFORM.$setPristine();
+                $('.inputName').trigger('blur'); 
             };
              $scope.course_clearData = function(){
                 academicsAPI_courseData();
@@ -526,6 +529,7 @@ angular
                 $scope.grade_type='';
                 $scope.courseID='';
                 $scope.subjectID="";
+                $('.inputName').trigger('blur'); 
              }
                         
             // Save Data
