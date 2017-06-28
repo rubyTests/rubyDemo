@@ -81,7 +81,7 @@
                       <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" ng-model="floor" class="md-input inputName" md-input>
                     </div>
                     <div class="uk-form-row parsley-row">
-                      <label class="uk-form-label" ng-show="selectize_buildingId" style="font-size: 12px;color: #727272;">Building<span class="req">*</span></label>
+                      <label class="uk-form-label" ng-show="selectize_buildingId" style="font-size: 12px;color: #727272;">Building {{selectize_buildingId}}<span class="req">*</span></label>
                       <input type="text" config="selectize_buildingId_config" options="selectize_buildingId_options" ng-model="selectize_buildingId" required selectize/>
                     </div>
                     <div class="uk-form-row parsley-row">
@@ -96,7 +96,7 @@
           </div>
       </div>
     </div>
-        <div class="uk-modal" id="building_modal">
+    <div class="uk-modal" id="building_modal">
       <div class="uk-modal-dialog">
         <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation1()"></button>
           <h3 class="uk-modal-title">{{titleCaption}} Building</h3><br>
@@ -123,4 +123,33 @@
           </div>
       </div>
     </div>
+    <div class="uk-modal" id="block_modal">
+      <div class="uk-modal-dialog">
+      <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation3()"></button>
+              <h3 class="uk-modal-title">{{titleCaption}} Block</h3><br>
+          <div class="md-card-content">
+            <form id="form_validation3" name="inputForm" ng-submit="saveBlockData()" novalidate>
+                  <div class="uk-form-row parsley-row">
+                    <label class="uk-form-label">Block Name<span class="req"> *</span></label>
+                    <input type="text" ng-pattern-restrict="^[A-Za-z]*$" ng-model="block_name" class="md-input" focus-me="shouldBeOpen" required md-input>
+                    <input type="hidden" ng-model="block_id">
+
+                  </div>
+                    <div class="uk-form-row">
+                      <label>Block Number</label>
+                      <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" ng-model="block_no" class="md-input inputName" md-input>
+                    </div>
+                    <div class="uk-form-row parsley-row">
+                        <label class="uk-form-label" ng-show="selectize_buildingId" style="font-size: 12px;color: #727272;">Building<span class="req"> *</span></label>
+                        <input type="text" config="selectize_buildingId_config" required options="selectize_buildingId_options" ng-model="selectize_buildingId" selectize/>
+                    </div>
+                    <div class="uk-modal-footer uk-text-right">
+                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation3()">Cancel</button>
+                         <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" >{{btnStatus}}</button>
+                    </div>
+            </form>
+          </div>
+      </div>
+    </div>
+
 </div>
