@@ -143,7 +143,7 @@ angular
                             headers:{'access_token':$localStorage.access_token}
                         }).then(function(return_data){
                             console.log(return_data.data.data.message);
-                            $scope.Basic.institution_id=return_data.data.data.PROFILE_ID;
+                            $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
                             $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
                             console.log($scope.Basic.institution_id,'$scope.Basic.institution_id');
                             if(return_data.data.data.status==true){
