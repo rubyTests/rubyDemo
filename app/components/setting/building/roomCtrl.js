@@ -31,7 +31,9 @@ angular
                 
                 $scope.clearValidation1=function(){
                     $('#form_validation1').parsley().reset();
-                     $scope.clear_buildData();
+                    $scope.clear_buildData();
+                    $scope.selectize_buildingId='';
+                  
                 }
                 var $formValidate = $('#form_validation3');
                 $formValidate
@@ -48,6 +50,7 @@ angular
                 $scope.clearValidation3=function(){
                     $('#form_validation3').parsley().reset();
                     $scope.clear_blockData();
+                    $scope.selectize_blockId='';
                 }
             var vm = this;
             vm.dt_data = [];
@@ -140,10 +143,10 @@ angular
             .success(function(building_data){
                 //$scope.buildingList.push(building_data.data);
                 if(building_data.status==false){
-                    $scope.buildingList.push([{ID:0, NAME:"Add Building"}]);
+                    $scope.buildingList.push([{ID:-10, NAME:"Add Building"}]);
                 }else{
                     $scope.buildingList.push(building_data.data);
-                    $scope.buildingList.push([{ID:0, NAME:"Add Building"}]);
+                    $scope.buildingList.push([{ID:-10, NAME:"Add Building"}]);
                 }
             });
            
@@ -157,7 +160,7 @@ angular
                 labelField: 'NAME',
                 render: {
                         option: function (item, escape) {
-                            if(item.ID==0){
+                            if(item.ID==-10){
                                 return '<div class="option">' +
                                             '<div class="text">' +
                                                 '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
@@ -176,7 +179,7 @@ angular
                 onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                              $scope.selectize_blockId='';
-                            if (value==0) {
+                            if (value==-10) {
                                 $timeout(function(){
                                     $scope.shouldBeOpen = true;    
                                 },500);
@@ -223,20 +226,20 @@ angular
                         //console.log(block_data.data.data,'return_datareturn_data');
                         //$scope.selectize_block_options=block_data.data.data;
                         // $scope.blockList.push(block_data.data.data);
-                        // $scope.blockList.push([{ID:0, NAME:"Add Block"}]);
+                        // $scope.blockList.push([{ID:-10, NAME:"Add Block"}]);
                         //$scope.blockList=[];
                         if(block_data.data.status==false){
                             // $scope.selectize_blockId="";
-                            console.log('test--',block_data.data.status);
+                            //console.log('test--',block_data.data.status);
                             // $scope.selectize_block_options=[];
-                            // $scope.blockList.push([{ID:0, NAME:"Add Block"}]);
-                            $scope.selectize_block_options=[].concat([{ID:0, NAME:"Add Block"}]);
+                            // $scope.blockList.push([{ID:-10, NAME:"Add Block"}]);
+                            $scope.selectize_block_options=[].concat([{ID:-10, NAME:"Add Block"}]);
                         }else{
                             // $scope.selectize_blockId="";
                             //$scope.blockList=[];
                             // $scope.blockList.push(block_data.data.data);
                             $scope.selectize_block_options=[].concat(block_data.data.data);
-                            $scope.selectize_block_options.push([{ID:0, NAME:"Add Block"}]);
+                            $scope.selectize_block_options.push([{ID:-10, NAME:"Add Block"}]);
                         }
                     })
                 }
@@ -250,9 +253,9 @@ angular
                 labelField: 'NAME',
                 render: {
                         option: function (item, escape) {
-                            if(item.ID==0){
+                            if(item.ID==-10){
                                 return '<div class="option">' +
-                                            '<div class="text">' +
+                                            '<div class="text" >' +
                                                 '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
                                            '</div>' +
                                         '</div>';
@@ -267,14 +270,23 @@ angular
                         }
                     },
                 onInitialize: function(selectize){
+                    // console.log(selectize.$wrapper.find('.option:hidden'),"selectizeselectizeselectize");
+                    // console.log(selectize.$wrapper.next('div'),"selectizeselectizeselectize")
+                    //selectize.parents('.selectize-control').find('.option').on('change',function(){
+                   // $(".linkClr").bind( "change", function( event ) {
+                   //      alert();
+                   
+                   //  })
                     selectize.on('change', function(value) {
-                        if (value==0) {
+                        // alert(value);
+                        if (value==-10) {
                             $timeout(function(){
-                                $scope.shouldBeOpen = true;    
+                                $scope.shouldBeOpen = true; 
                             },500);
-                            UIkit.modal("#block_modal",{bgclose: false, keyboard:false}).show(); 
-
-                        };
+                            UIkit.modal("#block_modal",{bgclose: false, keyboard:false}).show();
+                            $scope.clear_blockData();
+                            //$('#form_validation').parsley().validate();    
+                        }
                     });
                 }
             };
@@ -285,7 +297,7 @@ angular
                 $scope.building_name='';
                 $scope.build_no='';
                 $scope.landmark='';
-                $scope.selectize_buildingId=''
+                // $scope.selectize_buildingId=''
                 $('.inputName').trigger('blur'); 
                 $timeout(function(){
                     $scope.shouldBeOpen = true;
@@ -298,7 +310,7 @@ angular
                 $scope.block_id='';
                 $scope.block_name='';
                 $scope.block_no='';
-                $scope.selectize_buildingId='';
+                //$scope.selectize_buildingId='';
                 $('.inputName').trigger('blur');
                 $timeout(function(){
                     $scope.shouldBeOpen = true;
@@ -454,10 +466,11 @@ angular
                         });
                         $scope.buildingList.push({ID:return_data.data.message.BUILDING_ID,NAME:return_data.data.message.BUILDING_NAME});
                         $timeout(function(){
-                            UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false}).show();    
+                            UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false}).show();
+                            $('#form_validation').parsley().validate();    
                         },100);
                         $scope.selectize_buildingId=return_data.data.message.BUILDING_ID;
-                        //$scope.clear_buildData(); 
+                        $scope.clear_buildData(); 
                         
                     }else{
                         UIkit.modal.alert(return_data.data.message);
@@ -490,11 +503,14 @@ angular
                     }else{
                         UIkit.modal.alert(return_data.data.message); 
                     }
-                    $scope.blockList.push({ID:return_data.data.message.BUILDING_ID,NAME:return_data.data.message.BUILDING_NAME});
+                    $scope.selectize_block_options.push({ID:return_data.data.message.BLOCK_ID,NAME:return_data.data.message.BLOCK_NAME});
                     $timeout(function(){
-                        UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false}).show();    
+                        UIkit.modal("#modal_header_footer",{bgclose: false, keyboard:false}).show();
+                        $('#form_validation').parsley().validate();    
                     },100);
-                    $scope.clear_blockData();
+                    $scope.selectize_blockId=return_data.data.message.BLOCK_ID;
+                    
+                    //$scope.clear_blockData();
                    
                 });
             }

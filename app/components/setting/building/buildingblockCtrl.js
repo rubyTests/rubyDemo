@@ -19,6 +19,7 @@ angular
             $scope.clearValidation1=function(){
                 $('#form_validation1').parsley().reset();
                 $scope.clear_buildData();
+                $scope.selectize_buildingId=''
             }
             var $formValidate = $('#form_validation1');
             $formValidate
@@ -110,7 +111,6 @@ angular
                 $scope.building_name='';
                 $scope.build_no='';
                 $scope.landmark='';
-                $scope.selectize_buildingId=''
                  $('.inputName').trigger('blur'); 
                 $timeout(function(){
                     $scope.shouldBeOpen = true;
@@ -315,9 +315,12 @@ angular
                         });
                         $scope.buildingList.push({ID:return_data.data.message.BUILDING_ID,NAME:return_data.data.message.BUILDING_NAME});
                         $timeout(function(){
-                            UIkit.modal("#block_modal",{bgclose: false, keyboard:false}).show();    
+                            UIkit.modal("#block_modal",{bgclose: false, keyboard:false}).show();
+                            $('#form_validation').parsley().validate();    
                         },100);
+                        $scope.selectize_buildingId=return_data.data.message.BUILDING_ID;
                         $scope.clear_buildData(); 
+
                     }else{
                         UIkit.modal.alert(return_data.data.message);
                     }
