@@ -15,7 +15,9 @@ angular
                 });
                 
                 $scope.clearValidation=function(){
+                    // $scope.selectize_buildingId='';
                     $('#form_validation').parsley().reset();
+
                 }
                 var $formValidate = $('#form_validation1');
                 $formValidate
@@ -33,8 +35,6 @@ angular
                     $('#form_validation1').parsley().reset();
                     $scope.clear_buildData();
                     $scope.selectize_buildingId='';
-                    $scope.selectize_blockId='';
-
                   
                 }
                 var $formValidate = $('#form_validation3');
@@ -53,7 +53,6 @@ angular
                     $('#form_validation3').parsley().reset();
                     $scope.clear_blockData();
                     $scope.selectize_blockId='';
-                    $scope.selectize_block_options = [];
                 }
             var vm = this;
             vm.dt_data = [];
@@ -179,6 +178,15 @@ angular
                            
                         }
                     },
+                // score: function (search) {
+                //     // alert("score");
+                //     $scope.getBlocks(-10);
+                //     // var score = this.getScoreFunction(search);
+                //     // return function (item) {
+                //     //     return 1;
+                //     // };
+                // },
+
                 onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                              $scope.selectize_blockId='';
@@ -190,7 +198,14 @@ angular
                             };
                             // $scope.selectize_blockId="";
                             //$scope.selectize_block_options=[];
-                            $scope.getBlocks(value);
+                            if (value != '') {                                
+                                // alert(value);
+                                $scope.getBlocks(value);
+                            }else{
+                                // alert(value);
+                                $scope.getBlocks(-10);
+                            }
+                            
                         });
                     }
             };

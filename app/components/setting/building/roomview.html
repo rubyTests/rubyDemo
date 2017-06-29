@@ -63,7 +63,7 @@
 
     <div class="uk-modal" id="modal_header_footer">
       <div class="uk-modal-dialog">
-      <button type="button" class="uk-modal-close uk-close"></button>
+      <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation()"></button>
           <h3 class="uk-modal-title">{{titleCaption}} Room</h3><br>
           <div class="md-card-content">
             <form id="form_validation" name="inputForm" ng-submit="saveRoomData()" novalidate>
