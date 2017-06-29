@@ -33,6 +33,8 @@ angular
                     $('#form_validation1').parsley().reset();
                     $scope.clear_buildData();
                     $scope.selectize_buildingId='';
+                    $scope.selectize_blockId='';
+
                   
                 }
                 var $formValidate = $('#form_validation3');
@@ -51,6 +53,7 @@ angular
                     $('#form_validation3').parsley().reset();
                     $scope.clear_blockData();
                     $scope.selectize_blockId='';
+                    $scope.selectize_block_options = [];
                 }
             var vm = this;
             vm.dt_data = [];
