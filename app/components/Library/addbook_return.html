@@ -1,0 +1,144 @@
+<style type="text/css">
+    .parsley-row{
+        margin-top: 24px;
+    }
+    .adjustAutoComplete{
+        width:95%;
+        height: 37px !important;
+    }
+    .uk-autocomplete.uk-open .uk-dropdown {
+        width: 95%;
+    }
+    .uk-nav > li > a {
+        padding-bottom: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 5px;
+    }
+    #page_content_inner {
+        padding: 24px 24px 0;
+    }
+</style>
+<div id="page_content">
+    <form id="form_validation" name="inputForm" ng-submit="saveBookReturn()" novalidate>
+    <div id="page_content_inner">
+        <h3 class="heading_a">Book Return</h3><br>
+        <div class="md-card">
+            <div class="md-card-content large-padding">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-2-5 parsley-row">
+                    <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" id="autocomplete">
+                    <input type="text" class="adjustAutoComplete" ng-focus-out ng-model="item_name" placeholder="Search by Bood Id / Book Name" required>
+                    <script type="text/autocomplete">
+                        <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results"  id="autocomplete_template_results">
+                            {{~items}}
+                            <li data-value="{{ $item.BOOK_ID +' - '+ $item.BOOK_NAME}}" data-id="{{ $item.BOOK_ID }}">
+                                <a class="item">
+                                    {{ $item.value }}<br>
+                                    <!-- <span class="uk-text-muted uk-text-small">{{{ $item.text }}}</span> -->
+                                </a>
+                            </li>
+                            {{/items}}
+                        </ul>
+                    </script>
+                    </div>
+                    </div>
+                    <div class="uk-width-medium-3-5 parsley-row">
+                        <div class="">
+                            <a ng-click="getBookNames(item_name)"  class="md-btn md-btn-primary md-btn-wave-light waves-effect waves-button waves-light">
+                            <i class="uk-icon-search"></i> Search</a>
+                        </div>
+                        <input type="hidden" ng-model="bookIssue.ID"/>
+                        <input type="hidden" ng-model="book_return_id"/>
+                        <input type="hidden" ng-model="book_code"/>
+                    </div>
+                    <div class="uk-width-medium-1-1 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <span class="uk-text-large uk-text-middle ng-binding">Book Issue Details</span>
+                        <hr>
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Book Title :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.BOOK_NAME}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Book ID :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.BOOK_ID}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Author :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.AUTHOR}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Issued To :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.TYPE}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Name :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.profileName}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true' && bookIssue.TYPE == 'Student'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Course Name :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.COURSE_NAME}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true' && bookIssue.TYPE == 'Student'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Batch Name :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.BATCH_NAME}}</span>
+                        </label> 
+                    </div>
+                     <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true' && bookIssue.TYPE == 'Employee'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Department :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.DEPT_NAME}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Issue Date :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.ISSUED_DATETIME}}</span>
+                        </label> 
+                    </div>
+                    <div class="uk-width-medium-1-3 parsley-row uk-text-left" ng-show="showData == 'true'">
+                        <label style="font-size: 14px;color: #727272;">
+                            <span class="uk-text-muted uk-text-small">Due Date :</span> &nbsp; <span class="uk-text-large uk-text-middle ng-binding">{{bookIssue.DUE_DATETIME}}</span>
+                        </label> 
+                    </div>
+                </div><br>
+                <!-- <div class="uk-text-right">
+                    <button class="md-btn md-btn-danger md-btn-small md-btn-wave-light" ng-click="backBtn()">Cancel</button>
+                    <button type="submit" class="md-btn md-btn-primary md-btn-small md-btn-wave-light">Issue</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div id="page_content_inner" ng-show="showData == 'true'">
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-3 parsley-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                            <label for="uk_dp_1">Return Date</label>
+                            <input class="md-input" type="text" id="return_date" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input required ng-model="return_date">
+                        </div>
+                    </div>
+                    <div class="uk-width-medium-2-3 parsley-row">
+                        <label for="prev_state">Remarks<span class="req"></span></label>
+                        <input type="text" name="remark" id="remark"  class="md-input" md-input ng-model="remark" required/>
+                    </div>
+                    <div class="uk-width-medium-1-1 parsley-row">
+                        <div class="uk-text-right">
+                            <button class="md-btn md-btn-danger md-btn-small md-btn-wave-light" ng-click="backBtn()">Cancel</button>
+                            <button type="submit" class="md-btn md-btn-primary md-btn-small md-btn-wave-light">Return</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>

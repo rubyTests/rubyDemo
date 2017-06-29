@@ -2,102 +2,109 @@
     <div id="page_content_inner">
         <h3 class="heading_a">Add Book</h3><br>
         <div class="md-card">
-            <div class="md-card-content large-padding">
-                <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-1-1">
-                        <div class="uk-form-row">
-                            <div class="uk-grid">
-                                <div class="uk-width-medium-1-3">
-                                    <label>Book Name</label>
-                                    <input type="text" class="md-input" md-input />
+            <form id="form_validation" ng-submit="saveBookDetails()">
+                <div class="md-card-content large-padding">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-medium-1-1">
+                            <div class="uk-form-row">
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-3">
+                                        <label>Book Name</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_name"/>
+                                        <input type="hidden" ng-model="book_id">
+                                    </div>
+                                    <div class="uk-width-medium-1-3">
+                                        <label>Book Code</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_code" disabled />
+                                    </div>
+                                    <div class="uk-width-medium-1-3">
+                                        <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="selectize_category" selectize/>
+                                    </div>
                                 </div>
-                                <div class="uk-width-medium-1-3">
-                                    <input type="text" config="selectize_dept_config" options="selectize_dept_options" ng-model="selectize_nation" selectize/>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-medium-1-1">
+                            <div class="uk-form-row">
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Author</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_author"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4">
+                                        <label>ISBN Number</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_isbn_no"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Regulation</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_regulation"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Year Of Published</label>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="book_publish_year"/>
+                                    </div>
                                 </div>
-                                <div class="uk-width-medium-1-3">
-                                    <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="selectize_category" selectize/>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-medium-1-1">
+                            <div class="uk-form-row">
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Publisher</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_publisher"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Edition</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_edition"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Rack Number</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_rack_no"/>
+                                    </div>
+                                    <div class="uk-width-medium-1-4">
+                                        <label>Price</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_price"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-medium-1-1">
+                            <div class="uk-form-row">
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-3">
+                                        <input type="text" config="selectize_dept_config" options="selectize_dept_options" ng-model="selectize_dept" selectize/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3">
+                                        <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="selectize_subject" selectize/>
+                                    </div>
+                                    <div class="uk-width-medium-1-3">
+                                        <label>Total Quantity</label>
+                                        <input type="text" class="md-input" md-input ng-model="book_quantity"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="uk-width-medium-1-2">
+                            <div class="md-card">
+                                <div class="md-card-content">
+                                    <label class="heading_a uk-margin-small-bottom">
+                                        Book Image
+                                    </label>
+                                    <input type="file" id="input-file-a" class="dropify" ng-model="book_image"/>
                                 </div>
                             </div>
                         </div>
                     </div>
-
-                    <div class="uk-width-medium-1-1">
-                        <div class="uk-form-row">
-                            <div class="uk-grid">
-                                <div class="uk-width-medium-1-3">
-                                    <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="selectize_subject" selectize/>
-                                </div>
-                                <div class="uk-width-medium-1-3">
-                                    <label>Author</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                                <div class="uk-width-medium-1-3">
-                                    <label>ISBN Number</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="uk-width-medium-1-1">
-                        <div class="uk-form-row">
-                            <div class="uk-grid">
-                                <div class="uk-width-medium-1-3">
-                                    <label>Regulation</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                                <div class="uk-width-medium-1-3">
-                                    <label>Year Of Published</label>
-                                    <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="publish_year"/>
-                                </div>
-                                <div class="uk-width-medium-1-3">
-                                    <label>Publisher</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="uk-width-medium-1-1">
-                        <div class="uk-form-row">
-                            <div class="uk-grid">
-                                <div class="uk-width-medium-1-4">
-                                    <label>Edition</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <label>Rack Number</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <label>Price</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                                <div class="uk-width-medium-1-4">
-                                    <label>Current Quantity</label>
-                                    <input type="text" class="md-input" md-input />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="uk-width-medium-1-2">
-                        <div class="md-card">
-                            <div class="md-card-content">
-                                <label class="heading_a uk-margin-small-bottom">
-                                    Book Image
-                                </label>
-                                <input type="file" id="input-file-a" class="dropify" />
-                            </div>
-                        </div>
+                    <br>
+                    <div class="uk-text-right">
+                        <button class="md-btn md-btn-danger md-btn-small md-btn-wave-light" ng-click="backBtn()">Cancel</button>
+                        <button type="submit" class="md-btn md-btn-primary md-btn-small md-btn-wave-light">Save</button>
                     </div>
                 </div>
-                <br>
-                <div class="uk-text-right">
-                    <button class="md-btn md-btn-danger md-btn-small md-btn-wave-light" ng-click="backBtn()">Cancel</button>
-                    <button class="md-btn md-btn-primary md-btn-small md-btn-wave-light">Save</button>
-                </div>
-            </div>
+            </form>
         </div>
     </div>
 </div>

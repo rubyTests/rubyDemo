@@ -41,20 +41,20 @@
                     <div class="md-card-content large-padding">
 
                         <div class="uk-grid" data-uk-grid-margin>
-                            <div class="uk-width-medium-1-4">
+                            <div class="uk-width-medium-1-4 parsley-row">
                                 <label for="prev_state">Invoice No.<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="invoice_no" />
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="invoice_no" required />
                                 <input type="hidden" ng-model="billing_id">
                             </div>
-                            <div class="uk-width-medium-1-4">
+                            <div class="uk-width-medium-1-4 parsley-row">
                                 <div class="uk-input-group">
                                     <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                                     <label for="uk_dp_1">Invoice Date</label>
-                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="invoice_date">
+                                    <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="invoice_date" required>
                                 </div>
                             </div>
-                            <div class="uk-width-medium-1-4">
-                                <input type="text" config="selectize_store_config" options="selectize_store_options" ng-model="selectize_store" name="selectize_store" selectize />
+                            <div class="uk-width-medium-1-4 parsley-row">
+                                <input type="text" config="selectize_store_config" options="selectize_store_options" ng-model="selectize_store" name="selectize_store" selectize/>
                             </div>
                             <!-- <div class="uk-width-medium-1-4">
                                 <input type="text" config="selectize_issuedTo_config" options="selectize_issuedTo_options" ng-model="selectize_issuedTo" name="selectize_issuedTo" selectize />
@@ -101,12 +101,12 @@
                                 <td class="uk-text-middle">{{$index+1}}</td>
                                 <!-- <td class="uk-text-middle"><input type="text" name="fee_1" id="fee_1" ng-model="x.feesItem1"/></td> -->
                                 <td>
-                                    <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" id="autocomplete">
-                                        <input type="text" class="" ng-model="item.item_name" placeholder="Item Name">
+                                    <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" id="autocomplete_{{$index}}">
+                                        <input type="text" class="" ng-model="item.item_name" placeholder="Item Name" required>
                                         <script type="text/autocomplete">
                                             <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results"  id="autocomplete_template_results">
                                                 {{~items}}
-                                                <li data-value="{{ $item.ITEM_ID }}">
+                                                <li data-value="{{ $item.ITEM_NAME }}" data-id="{{ $item.ITEM_ID }}">
                                                     <a class="item">
                                                         {{ $item.ITEM_NAME }}<br>
                                                         <!-- <span class="uk-text-muted uk-text-small">{{{ $item.text }}}</span> -->
@@ -119,24 +119,24 @@
                                 </td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
-                                    <input type="text" name="item_code" id="item_code" ng-model="item.item_code"/>
+                                    <input type="text" name="item_code" id="item_code" ng-model="item.item_code" required/>
                                     </div>
                                 </td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
-                                    <input type="text" name="quantity" id="quantity" ng-model="item.quantity"/>
+                                    <input type="text" name="quantity" id="quantity" ng-model="item.quantity" required/>
                                     </div>
                                 </td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
-                                    <input type="text" name="unitprice" id="unitprice" ng-model="item.unitprice"/>
+                                    <input type="text" name="unitprice" id="unitprice" ng-model="item.unitprice" required/>
                                     </div>
                                 </td>
                                 <td class="uk-text-middle">
                                     {{item.unitprice * item.quantity | currency : " "}}
                                 </td>
                                 <td class="uk-text-right uk-text-middle">
-                                    <a ng-click="addRow();" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
+                                    <a ng-click="addRow($event,$index,item);" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
                                     <a ng-click="removeRow($index);" ng-if="$last && $index != 0 "><i class="md-icon material-icons md-24">&#xE872;</i></a>
                                     <a ng-click="removeRow($index);" ng-if="!$last"><i class="md-icon material-icons md-24 AdjIconMargin">&#xE872;</i></a>
                                 </td>

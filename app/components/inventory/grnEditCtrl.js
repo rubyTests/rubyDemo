@@ -1,23 +1,27 @@
 angular
     .module('rubycampusApp')
-    .controller('grnAddCtrl',
-        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $http, $state, $rootScope, $localStorage) {
-            // var vm = this;
-            // vm.dt_data = [];
-
-            // $resource('data/finance/fine.json')
-            //     .query()
-            //     .$promise
-            //     .then(function(dt_data) {
-            //         vm.dt_data = dt_data;
-            //     });
-
-            //     $scope.selectize_purchaseOrder_options = ["PO_1", "PO_2", "PO_3"];
-            //     $scope.selectize_purchaseOrder_config = {
-            //         create: false,
-            //         maxItems: 1,
-            //         placeholder: 'Purchase Order'
-            //     };
+    .controller('grnEditCtrl',
+        function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder, $http, $state, $rootScope, $stateParams, $localStorage) {
+            
+            $scope.grn_data = [];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'inventoryApi/GRN',
+                params: {
+                    'id' : $stateParams.id,
+                },
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(grn_data){
+                console.log(grn_data,'grn_data');
+                $scope.grn_data = grn_data.data.data[0];
+                // $scope.grn_id = $scope.grn_data.ID;
+                // $scope.grn_number = $scope.grn_data.GRN_NUMBER;
+                // $scope.grn_date = $scope.grn_data.GRN_DATE;
+                // $scope.selectize_purchaseOrder = $scope.grn_data.PURCHASE_ORDER_ID;
+                // $scope.invoice_number = $scope.grn_data.INVOICE_NO;
+                // $scope.invoice_date = $scope.grn_data.INVOICE_DATE;
+                // $scope.purchaseOrderItem_options = $scope.grn_data.grn_items;
+            });
 
             $scope.purchse_order_name = [];
             $http.get($localStorage.service+'inventoryApi/purchaseOrder',{headers:{'access_token':$localStorage.access_token}})
@@ -35,7 +39,7 @@ angular
                 labelField: 'PO_NUMBER',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        $scope.purchaseOrderItem_options = [];
+                        $scope.grn_data.grn_items = [];
                         $scope.getItems(value);
                     });
                 }
@@ -44,19 +48,20 @@ angular
             $scope.getItems = function(id){
                 $http({
                     method : 'GET',
-                    url : $localStorage.service+'inventoryApi/purchaseOrderIdItems',
+                    url : $localStorage.service+'inventoryApi/purchaseOrderIdUpdateItems',
                     params : {'id' : id},
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-
-                    $scope.purchaseOrderItem_options = return_data.data.data;
-                    console.log($scope.purchaseOrderItem_options,'return_data');
+                    console.log(return_data,'Datareturn_data');
+                    $scope.grn_data.grn_items = return_data.data.data;
+                    console.log($scope.grn_data.grn_items,'return_data');
                 });               
             }
 
             $scope.total = function(){
                 var total = 0;
-                angular.forEach($scope.purchaseOrderItem_options, function(item){
+                angular.forEach($scope.grn_data.grn_items, function(item){
+                    console.log(item,'itemitem');
                     total += item.QUANTITY * item.PRICE;
                 });
                 $scope.totalAmount = total;
@@ -68,19 +73,19 @@ angular
                 item.totalPriceVal = total;
             }
 
-            $scope.saveGRN = function(){
+            $scope.updateGRN = function(grn_data){
                 $http({
                     method : 'POST',
                     url : $localStorage.service+'inventoryApi/GRN',
                     data : {
-                        'grn_id' : $scope.grn_id,
-                        'grn_number' : $scope.grn_number,
-                        'grn_date' : $scope.grn_date,
-                        'po_id' : $scope.selectize_purchaseOrder,
-                        'invoice_number' : $scope.invoice_number,
-                        'invoice_date' : $scope.invoice_date,
+                        'grn_id' : $scope.grn_data.ID,
+                        'grn_number' : $scope.grn_data.GRN_NUMBER,
+                        'grn_date' : $scope.grn_data.GRN_DATE,
+                        'po_id' : $scope.grn_data.PURCHASE_ORDER_ID,
+                        'invoice_number' : $scope.grn_data.INVOICE_NO,
+                        'invoice_date' : $scope.grn_data.INVOICE_DATE,
                         'total_amount' : $scope.totalAmount,
-                        'itemData' : $scope.purchaseOrderItem_options
+                        'itemData' : $scope.grn_data.grn_items
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -114,7 +119,7 @@ angular
             // }
 
             $scope.removeRow = function(index){
-                $scope.purchaseOrderItem_options.splice(index,1);
+                $scope.grn_data.grn_items.splice(index,1);
             }
 
             $scope.backBtn = function(){

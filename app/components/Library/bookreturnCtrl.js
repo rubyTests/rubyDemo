@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('bookissueCtrl',
+    .controller('bookreturnCtrl',
         function($compile, $scope, $timeout, $resource, DTOptionsBuilder, DTColumnDefBuilder,$filter,$http,$localStorage) {
             var vm = this;
             //$scope.viewData=[];
@@ -49,6 +49,11 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
                         }
                     ]
                 })
@@ -61,7 +66,7 @@ angular
             $scope.viewData=[];
             $http({
                 method:'GET',
-                url: $localStorage.service+'LibraryAPI/lBookIssue',
+                url: $localStorage.service+'LibraryAPI/lBookReturn',
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 console.log(return_data,'ViewData');

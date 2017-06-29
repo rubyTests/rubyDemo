@@ -1,0 +1,113 @@
+<style>
+.selectize-dropdown [data-selectable] {
+    font-size: 13px !important;
+    padding-bottom: 10px;
+    padding-top: 11px;
+}
+.md-list-content.AdjListCon {
+            padding-top: 10px;
+        }
+.md-hr{
+         margin: 24px 0 !important;
+    }
+.mce-menubar.mce-toolbar{
+    display: none !important;
+}
+.dropify-wrapper {
+    height: 100px !important;
+}
+    /*.selectize-control.single {
+    margin-top: 0px !important;
+}*/
+</style>
+<div id="page_content" ng-controller="postEditCtrl as showCase">
+    <div id="page_content_inner">
+    <h2 class="heading_a">
+        Add Post
+    </h2>
+        <div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-width-large-1-1">
+                <div class="md-card">
+                    <div class="md-card-content large-padding">
+                        <form id="form_validation" ng-submit="updateRepPostDetails()">
+                            <div class="uk-grid uk-grid-medium form_hr">
+                                <div class="uk-width-10-10 uk-width-medium-10-10">
+                                    <div class="uk-grid" data-uk-grid-margin>
+                                        <div class="uk-width-medium-2-10 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >import_contacts</i>
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Course</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-4-10 parsley-row">
+                                            <input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="selectize_courseId" name="selectize_courseId" selectize />
+                                        </div>
+                                        
+                                        <div class="uk-width-medium-2-10 parsley-row">
+                                            <ul class="md-list md-list-addon">
+                                                <li>
+                                                    <div class="md-list-addon-element">
+                                                        <i class="md-list-addon-icon material-icons" >settings</i>
+                                                        <!-- <i class="material-icons">developer_board</i> -->
+                                                    </div>
+                                                    <div class="md-list-content AdjListCon">
+                                                        <span class="md-list-heading">Category</span>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="uk-width-medium-2-10 parsley-row">
+                                            <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="selectize_category" name="selectize_category" selectize />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <h2 class="heading_a">
+                            <br>
+                                Post Details
+                            </h2>
+                            <hr class="md-hr"/>
+                            <div class="uk-grid" data-uk-grid-margin>
+                                <div class="uk-width-medium-5-10 parsley-row">
+                                    <label for="Fee_Structure"> Title<span class="req"></span></label>
+                                    <input type="text" name="rep_title" id="rep_title" class="md-input" md-input ng-model="rep_title" />
+                                    <input type="hidden" ng-model="rep_id">
+                                </div>
+                                <div class="uk-width-medium-2-10 parsley-row uk-text-right">
+                                  <label for="Fee_Structure">Upload a File here :<span class="req"></span></label>
+                                </div>
+                                <div class="uk-width-medium-3-10 parsley-row">
+                                    <div class="md-card">
+                                        <div class="md-card-content">
+                                            <!-- <h3 class="heading_a uk-margin-small-bottom">
+                                                File Upload
+                                            </h3> -->
+                                            <input type="file" id="input-file-a" class="dropify" ng-model="rep_upload_file"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="uk-width-medium-1-1 parsley-row">
+                                    <!-- <span><label> Content</label></span>
+                                    <p></p> -->
+                                    <textarea ui-tinymce="tinymce_options" ng-model="rep_content" cols="4" rows="6"></textarea>
+                                </div>
+                            </div>
+                            <p></p>
+                            <div class="uk-text-right">
+                                <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
+                                <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Update</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <course-directive></course-directive>
+</div>

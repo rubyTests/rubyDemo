@@ -64,11 +64,11 @@ angular
                 var $fileInput = document.getElementById('input-file-a').files[0];
                 var formdata = new FormData();
                 formdata.append('file', $fileInput);
-                formdata.append('rep_id', $scope.rep_id);
+                // formdata.append('rep_id', $scope.rep_id);
                 formdata.append('rep_title', $scope.rep_title);
                 formdata.append('rep_content', $scope.rep_content);
-                formdata.append('courseId', $scope.selectize_category);
-                formdata.append('categoryId', $scope.selectize_courseId);
+                formdata.append('courseId', $scope.selectize_courseId);
+                formdata.append('categoryId', $scope.selectize_category);
                 console.log(formdata,"formdata");
                 $http({
                     method : 'POST',
@@ -110,13 +110,61 @@ angular
 
             $scope.tinymce_options = {
                 skin_url: 'assets/skins/tinymce/material_design',
-                plugins: [
-                    "advlist autolink lists link image charmap print preview anchor",
-                    "searchreplace visualblocks code fullscreen",
-                    "insertdatetime media table contextmenu paste"
-                ],
-                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image",
-                file_picker_callback : elFinderBrowser
+                plugins : 'advlist autolink link image lists charmap print preview',
+                inline: false,
+                menubar:false,
+                statusbar: false,
+                // plugins: [
+                //     "advlist autolink lists link image charmap print preview anchor",
+                //     "searchreplace visualblocks code fullscreen",
+                //     "insertdatetime media table contextmenu paste"
+                // ],
+                toolbar: "insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | images",
+                // file_picker_callback : elFinderBrowser
+                setup: function(editor) {
+                    editor.addButton('images', {
+                        text:"",
+                        icon: "image",
+                        onclick: function(e) {
+                            if($(e.target).prop("tagName") == 'BUTTON'){
+                                console.log($(e.target).parent().parent().find('input').attr('id'));
+                                if($(e.target).parent().parent().find('input').attr('id') != 'tinymce-uploader') {
+                                    $(e.target).parent().parent().append('<input id="tinymce-uploader" type="file" name="pic" accept="image/*" style="display:none">');
+                                }
+                                $('#tinymce-uploader').trigger('click');
+                                $('#tinymce-uploader').change(function(){
+                                    var input, file, fr, img;
+
+                                    if (typeof window.FileReader !== 'function') {
+                                        write("The file API isn't supported on this browser yet.");
+                                        return;
+                                    }
+
+                                    input = document.getElementById('tinymce-uploader');
+                                    if (!input) {
+                                        write("Um, couldn't find the imgfile element.");
+                                    } else if (!input.files) {
+                                        write("This browser doesn't seem to support the `files` property of file inputs.");
+                                    } else if (!input.files[0]) {
+                                        write("Please select a file before clicking 'Load'");
+                                    } else {
+                                        file = input.files[0];
+                                        fr = new FileReader();
+                                        fr.onload = createImage;
+                                        fr.readAsDataURL(file);
+                                    }
+
+                                    function createImage() {
+                                        img = new Image();
+                                        img.src = fr.result;
+                                        editor.insertContent('<img src="'+img.src+'"/>');
+                                    }
+                                });
+
+                            }
+                        }
+                    });
+                }
             }
 
             function elFinderBrowser (callback, value, meta) {

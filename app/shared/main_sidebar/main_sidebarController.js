@@ -548,11 +548,11 @@ angular
                         },
                         {
                             title: 'Return Books',
-                            // link: ''
+                            link: 'restricted.library.bookreturn_view'
                         },
                         {
                             title: 'Report',
-                            // link: ''
+                            link: 'restricted.library.reportView'
                         },
                         // {
                         //     title:"Library View",
@@ -621,7 +621,62 @@ angular
                 {
                     id: 11,
                     title: 'Inventory',
-                    icon: '&#xE8D1;'
+                    icon: '&#xE8D1;',
+                    submenu: [
+                        {
+                            title:'Settings',
+                            submenu:[
+                                {
+                                    title: 'Store Category',
+                                    link: 'restricted.inventory.storeCategory'
+                                },
+                                {
+                                    title: 'Item Category',
+                                    link: 'restricted.inventory.itemCategory'
+                                },
+                                {
+                                    title: 'Supplier Type',
+                                    link: 'restricted.inventory.supplierType'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Store',
+                            link: 'restricted.inventory.store'
+                        },
+                        {
+                            title: 'Item',
+                            link: 'restricted.inventory.item'
+                        },
+                        {
+                            title: 'Store Item',
+                            link: 'restricted.inventory.storeItem'
+                        },
+                        {
+                            title: 'Supplier',
+                            link: 'restricted.inventory.supplier'
+                        },
+                        {
+                            title: 'Material Request',
+                            link: 'restricted.inventory.materialRequestView'
+                        },
+                        {
+                            title: 'Purchase Order',
+                            link: 'restricted.inventory.purchaseOrderView'
+                        },
+                        {
+                            title: 'Billing',
+                            link: 'restricted.inventory.billingView'
+                        },
+                        {
+                            title: 'GRN',
+                            link: 'restricted.inventory.grnView'
+                        },
+                        {
+                            title: 'Reports',
+                            link: 'restricted.inventory.reportView'
+                        }
+                    ]
                     // link: 'restricted.Library'
                 },
                 // {

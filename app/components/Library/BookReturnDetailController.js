@@ -1,26 +1,25 @@
 angular
     .module('rubycampusApp')
-    .controller('BookDetailController', [
+    .controller('BookReturnDetailController', [
         '$scope',
         '$rootScope',
         'utils',
         '$stateParams',
-        'Book_Details',
         '$filter',
         '$state',
         '$localStorage',
         '$http',
-        function ($scope,$rootScope,utils,$stateParams,Book_Details,$filter,$state,$localStorage,$http) {
+        function ($scope,$rootScope,utils,$stateParams,$filter,$state,$localStorage,$http) {
             $scope.id=$stateParams.id;
-            $scope.indexid=$stateParams.indexId;
-            // alert($scope.indexid);
-            $scope.Book_Details=Book_Details;
-            $scope.currentBookdata=$scope.Book_Details[$scope.indexid];
+            // $scope.indexid=$stateParams.indexId;
+            // // alert($scope.indexid);
+            // $scope.Book_Details=Book_Details;
+            // $scope.currentBookdata=$scope.Book_Details[$scope.indexid];
 
             $scope.book_data = [];
             $http({
                 method:'GET',
-                url: $localStorage.service+'LibraryAPI/fetchBookIdViewData',
+                url: $localStorage.service+'LibraryAPI/fetchBookReturnIdViewData',
                 params: {
                     'id' : $stateParams.id,
                 },

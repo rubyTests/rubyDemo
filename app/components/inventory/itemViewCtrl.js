@@ -51,6 +51,7 @@ angular
                 $('.uk-modal').find('input').trigger('blur');
             }
             $scope.editItem=function(data){
+                console.log(data,'datadatadatadatadata');
                 $scope.tit_caption="Edit";
                 $scope.status="update";
                 if (data) {
@@ -78,6 +79,7 @@ angular
 
             // Save Data
             $scope.saveItemData=function(){
+                var $fileInput = $('.dropify-preview').find('img').attr('src');
                 $http({
                 method:'POST',
                 url: $localStorage.service+'inventoryApi/item',
@@ -87,7 +89,7 @@ angular
                     'item_code' : $scope.item_code,
                     'item_unit' : $scope.item_unit,
                     'item_part_no' : $scope.item_part_no,
-                    'item_image' : $scope.item_image,
+                    'item_image' : $fileInput,
                     'item_category_id' : $scope.selectize_itemCategory
                 },
                 headers:{'access_token':$localStorage.access_token}

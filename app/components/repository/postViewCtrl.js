@@ -109,12 +109,45 @@ angular
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 $scope.viewData=return_data.data.message;
+                console.log($scope.viewData,'$scope.viewData');
             });
 
-            $scope.remove_Category = function(index){
-                if (typeof index=="undefined") return false;
-                vm.category_data.splice(index,1);
-            }
+            // $scope.remove_Category = function(index){
+            //     if (typeof index=="undefined") return false;
+            //     vm.category_data.splice(index,1);
+            // }
+            $scope.deleteRepPostData=function(id, $index){
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+'RepositoryAPI/Rep_Post',
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function mySucces(response) {
+                                    if(response.data.status==true){
+                                        UIkit.notify({
+                                            message : response.data.message,
+                                            status  : 'success',
+                                            timeout : 2000,
+                                            pos     : 'top-center'
+                                        });
+                                    }
+                                    $scope.viewData.splice($index, 1);
+                                },function myError(response) {
+                                  // console.log(response,'response');
+                                })
+                            }
+                        },function(){
+                            // console.log("false");
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    }
+                }
 
         }
     ]);

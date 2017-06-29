@@ -2642,6 +2642,7 @@ rubycampusApp
                                 'lazy_datatables',
                                 'lazy_tinymce',
                                 'lazy_dropify',
+                                'lazy_parsleyjs',
                                 'app/components/repository/postAddCtrl.js',
                                 'app/components/academics/courseBatch/courseCtrl.js'
                             ], {serie:true});
@@ -2650,6 +2651,27 @@ rubycampusApp
                     data: {
                         pageTitle: 'Repository Post View'
                     }
+                })
+
+                .state("restricted.repository.postEdit", {
+                    url: "/postEdit/{id}",
+                    templateUrl: 'app/components/repository/postEdit.html',
+                    controller: 'postEditCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_dropify',
+                                'lazy_tinymce',
+                                'lazy_parsleyjs',
+                                'app/components/repository/postEditCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Add Books'
+                    },
+                    params:{id:null}
                 })
 
                 .state("restricted.repository.repositoryView", {
@@ -4617,6 +4639,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/inventory/purchaseOrderAddCtrl.js'
                             ], {serie:true});
                         }]
@@ -4694,6 +4717,24 @@ rubycampusApp
                     }
                 })
 
+                .state("restricted.inventory.grnEdit", {
+                    url: "/grnEdit/{id}",
+                    templateUrl: 'app/components/inventory/grnEdit.html',
+                    controller: 'grnEditCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/inventory/grnEditCtrl.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Purchase Order Add'
+                    }
+                })
+
                 .state("restricted.inventory.grnDetail", {
                     url: "/grnDetail",
                     templateUrl: 'app/components/inventory/grnDetail.html',
@@ -4739,6 +4780,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/inventory/billingAddCtrl.js'
                             ], {serie:true});
                         }],
@@ -4813,6 +4855,7 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'app/components/inventory/materialRequestAddCtrl.js'
                             ], {serie:true});
                         }]
@@ -5400,12 +5443,6 @@ rubycampusApp
                             'app/components/Library/editbookDetailCtrl.js'
                         ], {serie:true});
                     }],
-                    notes_data: function($http){
-                            return $http({ method: 'GET', url: 'app/components/Library/book_details.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
                 },
                 data: {
                     pageTitle: 'Add Books'
@@ -5443,6 +5480,92 @@ rubycampusApp
                 },
                 data: {
                     pageTitle: 'Book Issue'
+                }
+            })
+
+            .state("restricted.library.editBookIssue", {
+                url: "/editBookIssue/{id}",
+                templateUrl: 'app/components/Library/editbook_issue.html',
+                controller: 'editbookissueCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'app/components/Library/editbookissueCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book Issue'
+                }
+            })
+
+            // Book Return Added by Senthil 31/05/2017
+
+            .state("restricted.library.bookreturn_view", {
+                url: "/bookreturn_view",
+                templateUrl: 'app/components/Library/bookreturn_view.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/bookreturnCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book Return'
+                }
+            })
+
+            .state("restricted.library.addbookreturn", {
+                url: "/addbookreturn",
+                templateUrl: 'app/components/Library/addbook_return.html',
+                controller: 'addbookreturnCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'app/components/Library/addbookreturnCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book Issue'
+                }
+            })
+
+            .state("restricted.library.BookReturnDetail", {
+                url: "/BookReturnDetail/{id}",
+                templateUrl: 'app/components/Library/Book_ReturnDetailsView.html',
+                controller: 'BookReturnDetailController',
+                parmas:{
+                'id': {value: null},
+                'indexId':{value:null}
+                },
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load('app/components/Library/BookReturnDetailController.js');
+                    }]
+                }
+            })
+
+            .state("restricted.library.reportView", {
+                url: "/reportView",
+                templateUrl: 'app/components/Library/reportView.html',
+                controller: 'reportViewCtrl',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/reportViewCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Report View'
                 }
             })
 			

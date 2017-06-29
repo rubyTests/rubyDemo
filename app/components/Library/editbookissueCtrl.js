@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('addbookissueCtrl', [
+    .controller('editbookissueCtrl', [
         '$scope',
         '$rootScope',
         '$timeout',
@@ -11,111 +11,8 @@ angular
         '$http',
         '$state',
         '$localStorage',
-        function ($scope, $rootScope, $timeout, $resource, $filter, $compile, $location, $http, $state, $localStorage) {
-            
-            // $scope.bookDetails=[];
-            // $scope.tableView_data=[];
-            // $scope.employee_data=[];
-            // $resource('app/components/Library/book_details.json')
-            // .query()
-            // .$promise
-            // .then(function(book_data) {
-            //     $scope.bookDetails.push(book_data);
-            // });
-
-            // $resource('app/components/employeemanagement/employee_list.json')
-            // .query()
-            // .$promise
-            // .then(function(emp_data) {
-            //     $scope.employee_data.push(emp_data);
-            // });
-
-            // $scope.selectize_dept_options = ["Computer Science and Engineering", "Information Technology","Electrical and Electronics Engineering","Civil Engineering","Mechanical Engineering"];
-            // $scope.selectize_dept_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select Department'
-            // };
-            // $scope.selectize_category_options = ["Student","Employee"];
-            // $scope.selectize_category_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Student / Employee'
-            // };
-            // $scope.selectize_course_options = ["Computer Science and Engineering", "Information Technology","Electrical and Electronics Engineering","Civil Engineering","Mechanical Engineering"];
-            // $scope.selectize_course_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select Course'
-            // };
-            // $scope.selectize_batch_options = ["Batch 1", "Batch 2","Batch 3","Batch 4","Batch 5","Batch 6"];
-            // $scope.selectize_batch_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select Batch'
-            // };
-
-            // $scope.selectize_employee_option = $scope.bookDetails;
-            // $scope.selectize_employee_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select Employee',
-            //     valueField: 'id',
-            //     labelField: 'user_name',
-            //     onInitialize: function(selectize){
-            //         selectize.on('change', function(val) {
-            //             var empReturndata=$filter('filter')($scope.employee_data[0], {id : parseInt(val)}, true);
-            //             // console.log(empReturndata,'fsdfsd');
-            //             if(empReturndata[0]){
-            //              $scope.selectize_dept=[empReturndata[0].Dept];
-            //              $scope.selectize_subject=[empReturndata[0].batch];
-            //              $scope.book_taken=0;
-            //             }
-            //             $('#page_content_inner').trigger('click');
-            //         });
-            //     }
-            // };
-            // $scope.selectize_student_option = $scope.bookDetails;
-            // $scope.selectize_student_config = {
-            //     create: false,
-            //     maxItems: 1,
-            //     placeholder: 'Select Student',
-            //     valueField: 'id',
-            //     labelField: 'user_name',
-            //     onInitialize: function(selectize){
-            //         selectize.on('change', function(val) {
-                        
-            //         });
-            //     }
-            // };
-
-            // $scope.backBtn=function(){
-            //     window.history.back();
-            // }
-
-            $scope.items=[];
-            $http({
-                method:'GET',
-                url: $localStorage.service+'LibraryAPI/lBook',
-                headers:{'access_token':$localStorage.access_token}
-            }).then(function(return_data){
-                console.log(return_data,'return_data');
-                $scope.items.push(return_data.data.message);
-
-                angular.forEach($scope.items[0], function(values, keys){
-                    values.value=values.CODE+" - "+values.NAME;
-                });
-
-                UIkit.on('domready.uk.dom', function(){
-                    UIkit.autocomplete($('#autocomplete'), {
-                      source: $scope.items[0],
-                      minLength:1,
-                      flipDropdown:true
-                    }).on('selectitem.uk.autocomplete', function (e, data, ac) {
-                        console.log(data);
-                    });
-                });
-            });
+        '$stateParams',
+        function ($scope, $rootScope, $timeout, $resource, $filter, $compile, $location, $http, $state, $localStorage, $stateParams) {
 
             $scope.selectize_usertype_options = ['Student','Employee'];
             $scope.selectize_usertype_config = {
@@ -253,9 +150,38 @@ angular
                 }
             };
 
-            $scope.saveBookIssue = function(){
-                var $code = $scope.book_code.split(" - ")[0];
-                console.log($code);
+            $scope.book_data = [];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'LibraryAPI/lBookIssue',
+                params: {
+                    'id' : $stateParams.id,
+                },
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                console.log(return_data,'return_datareturn_data');
+                $scope.book_data = return_data.data.message[0];
+                $scope.book_id = $scope.book_data.ID;
+                $scope.book_code = $scope.book_data.BOOK_ID;
+                $scope.selectize_usertype = $scope.book_data.TYPE;
+                $scope.issue_date = $scope.book_data.ISSUED_DATETIME;
+                $scope.due_date = $scope.book_data.DUE_DATETIME;
+                if(return_data.data.message[0].TYPE == "Student"){
+                    $timeout(function(){
+                        $scope.selectize_batchId = $scope.book_data.batchId;
+                        $scope.selectize_courseId = $scope.book_data.courseId;
+                        $scope.selectize_student = $scope.book_data.PROFILE_ID;
+                    },200);
+                }else if(return_data.data.message[0].TYPE == "Employee"){
+                    $timeout(function(){
+                        $scope.selectize_deptId = $scope.book_data.deptId;
+                        $scope.selectize_employee = $scope.book_data.PROFILE_ID;
+                    },200);
+                }
+            });
+
+            $scope.updateBookIssue = function(){
+                
                 if($scope.selectize_usertype=='Student'){
                     $scope.selectize_profileId=$scope.selectize_student;
                 }else{
@@ -266,8 +192,8 @@ angular
                     method:'POST',
                     url: $localStorage.service+'LibraryAPI/lBookIssue',
                     data: {
-                        'book_issue_id' : $scope.book_issue_id,
-                        'code' : $code,
+                        'bookId' : $scope.book_id,
+                        'code' : $scope.book_code,
                         'type' : $scope.selectize_usertype,
                         'profileId' : $scope.selectize_profileId,
                         'issued_date' : $scope.issue_date,
@@ -294,14 +220,4 @@ angular
                 window.history.back();
             }
         }
-    ]).directive('ngFocusOut', function( $timeout ) {
-        return function( $scope, elem, attrs ) {
-            elem.bind('blur',function(){
-                var data = $scope.items[0] || []; 
-                var index = data.findIndex(x => x.NAME == $scope.book_code);
-                if (index==-1) {
-                    $scope.book_code="";
-                }
-            });
-        };
-    });
+    ]);

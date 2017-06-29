@@ -17,10 +17,10 @@
 }
 </style>
 <div id="page_content">
-    <form id="inputForm" ng-submit="saveGRN()">
+    <form id="inputForm" ng-submit="updateGRN(grn_data)">
     <div id="page_content_inner">
       <h3 class="heading_a uk-margin-bottom">
-          GRN Add
+          GRN Edit
       </h3>
         <div class="uk-grid" data-uk-grid-margin>
             <div class="uk-width-large-1-1">
@@ -30,26 +30,26 @@
                                 <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>GRN No.</label>
-                                        <input type="text" ng-model="grn_number" class="md-input" md-input />
-                                        <input type="hidden" ng-model="grn_id">
+                                        <input type="text" ng-model="grn_data.GRN_NUMBER" class="md-input" md-input />
+                                        <input type="hidden" ng-model="grn_data.ID">
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>GRN Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="grn_date"/>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="grn_data.GRN_DATE"/>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
-                                        <input type="text" config="selectize_purchaseOrder_config" options="selectize_purchaseOrder_options" ng-model="selectize_purchaseOrder" selectize/>
+                                        <input type="text" config="selectize_purchaseOrder_config" options="selectize_purchaseOrder_options" ng-model="grn_data.PURCHASE_ORDER_ID" selectize/>
                                     </div>
                                     
                                 </div>
                                 <div class="uk-grid uk-margin-medium-top uk-margin-bottom" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Invoice No.</label>
-                                        <input type="text" ng-model="invoice_number" class="md-input" md-input />
+                                        <input type="text" ng-model="grn_data.INVOICE_NO" class="md-input" md-input />
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Invoice Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="invoice_date"/>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="grn_data.INVOICE_DATE"/>
                                     </div>
                                     <!-- <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Other Charges</label>
@@ -105,7 +105,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="item in purchaseOrderItem_options track by $index">
+                            <tr ng-repeat="item in grn_data.grn_items track by $index">
                                 <td class="uk-text-middle">{{$index+1}}</td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
@@ -124,7 +124,7 @@
                                 </td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
-                                        <input type="text" name="totalPrice" id="totalPrice" ng-value="{{item.QUANTITY * item.PRICE}}"  ng-model="item.totalPriceVal" disabled/>
+                                        <input type="text" name="totalPrice" id="totalPrice" ng-value="{{item.QUANTITY * item.PRICE}}"  ng-model="item.totalPriceVal" readonly/>
                                     </div>
                                     <!-- {{item.QUANTITY * item.PRICE | currency : ""}} -->
                                 </td>
@@ -160,7 +160,7 @@
                         <div class="uk-width-medium-2-6 parsley-row uk-text-right uk-margin-top">
                             <!-- <a class="md-btn md-btn-small md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="margin-top: 25px;">Pay Fee</a> -->
                             <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="backBtn()">Cancel</button>
-                            <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Save</button>
+                            <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small uk-modal-close">Update</button>
                         </div>
                     </div>
                     </div>

@@ -5,6 +5,15 @@ angular
             var vm = this;
             vm.dt_data = [];
 
+            var $formValidate = $('#inputForm');
+            $formValidate.parsley().on('form:validated',function() {
+                    // $scope.$apply();
+            }).on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    // $scope.$apply();
+                }
+            });
+
             $scope.store_name = [];
             $http.get($localStorage.service+'inventoryApi/store',{headers:{'access_token':$localStorage.access_token}})
             .success(function(store_data){
@@ -26,6 +35,34 @@ angular
                 }
             };
 
+            $scope.reInitializeAutoComplete=function(){
+                var tempdata=$scope.storeItem_options.length;
+                angular.forEach($scope.storeItem_options, function(values, keys){
+                    values.value=values.ITEM_NAME;
+                });
+                for (var i = 0; i < tempdata; i++) {
+                    UIkit.on('domready.uk.dom', function(){
+                        UIkit.autocomplete($('#autocomplete_'+i), {
+                          source: $scope.storeItem_options,
+                          minLength:0,
+                          flipDropdown:true
+                        }).on('selectitem.uk.autocomplete', function (e, data, ac) {
+                            var index = e.target.id.split("_")[1];
+                            $scope.items[index]['item_id']=data.id;
+                            var id = data.id;
+                            $http({
+                                method : 'GET',
+                                url : $localStorage.service+'inventoryApi/getItemCode',
+                                params : {'id' : id},
+                                headers:{'access_token':$localStorage.access_token}
+                            }).then(function(item_code){
+                                $scope.items[index]['item_code'] = item_code.data.data[0]["CODE"];
+                            });
+                        });
+                    });
+                }
+            }
+
             $scope.getItems = function(id){
                 $http({
                     method : 'GET',
@@ -34,27 +71,7 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     $scope.storeItem_options = return_data.data.data;
-                    angular.forEach($scope.storeItem_options, function(values, keys){
-                        values.value=values.ITEM_NAME;
-                        console.log(values,"values");
-                    });
-                    UIkit.on('domready.uk.dom', function(){
-                        UIkit.autocomplete($('#autocomplete'), {
-                          source: $scope.storeItem_options,
-                          minLength:0,
-                          flipDropdown:true
-                        }).on('selectitem.uk.autocomplete', function (e, data, ac) {
-                            var id = data.value;
-                            $http({
-                                method : 'GET',
-                                url : $localStorage.service+'inventoryApi/getItemCode',
-                                params : {'id' : id},
-                                headers:{'access_token':$localStorage.access_token}
-                            }).then(function(item_code){
-                                $scope.items[0]['item_code'] = item_code.data.data[0]["CODE"];
-                            });
-                        });
-                    });
+                    $scope.reInitializeAutoComplete();
                 });
             }
 
@@ -356,8 +373,24 @@ angular
             };
             $scope.items=[];
             $scope.items.push($scope.newRowObj);
-            $scope.addRow = function(){
-                $scope.items.push({ 'item_name': '', 'unitprice' : '', 'quantity' : '', 'totalprice' : '' });
+            $scope.addRow = function(event,index,arrayVal){
+                if(arrayVal.item_name != "" && arrayVal.quantity != "" && arrayVal.unitprice != ""){
+                    $scope.items.push({ 'item_name': '', 'unitprice' : '', 'quantity' : '', 'totalprice' : '' });
+                    setTimeout(function(){
+                        $scope.reInitializeAutoComplete();    
+                    },500);
+                }else{
+                    fillForm();
+                }
+            }
+
+            function fillForm(){
+                UIkit.notify({
+                    message : 'Please Fill current form',
+                    status  : 'warning',
+                    timeout : 1000,
+                    pos     : 'top-center'
+                });
             }
 
             $scope.removeRow = function(index){

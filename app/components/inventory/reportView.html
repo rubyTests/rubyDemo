@@ -6,26 +6,26 @@
                 <div class="uk-width-10-10 uk-width-medium-10-10">
                     <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                         <div class="uk-width-medium-1-4 parsley-row">
-                            <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="selectize_category" selectize/>
+                            <input type="text" config="selectize_category_config" options="selectize_category_options" ng-model="report.selectize_category" selectize/>
                         </div>
                         <div class="uk-width-medium-1-4 parsley-row">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                             <label for="uk_dp_start">Start Date</label>
-                            <input class="md-input" type="text" id="uk_dp_start" md-input ng-model="forms_advanced.dp_start">
+                            <input class="md-input" type="text" id="uk_dp_start" md-input ng-model="report.fromDate">
                             </div>
                         </div>
                         <div class="uk-width-medium-1-4 parsley-row">
                         <div class="uk-input-group">
                             <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                             <label for="uk_dp_end">End Date</label>
-                            <input class="md-input" type="text" id="uk_dp_end" md-input ng-model="forms_advanced.dp_end">
+                            <input class="md-input" type="text" id="uk_dp_end" md-input ng-model="report.toDate">
                             </div>
                         </div>
                         <div class="uk-width-medium-1-4 parsley-row">
                             <!-- <a ui-sref="restricted.inventory.grnAdd"  class="md-btn md-btn-primary md-btn-small">
                             <i class="uk-icon-search"></i> Search</a> -->
-                            <button style="margin-top: 10px;" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" ng-click="getPayslipdetail()"><i class="uk-icon-search"></i> Search</a></button>
+                            <button style="margin-top: 10px;" class="md-btn md-btn-primary md-btn-small md-btn-wave-light" ng-click="getPayslipdetail(report)"><i class="uk-icon-search"></i> Search</a></button>
                         </div>
                     </div>
                 </div>  
@@ -55,9 +55,9 @@
                     <tbody>
                         <tr ng-repeat="row in tableView_data track by $index">
                             <td>{{$index+1}}</td>
-                            <td>{{row.request_no}}</td>
-                            <td>{{row.date}}</td>
-                            <td>{{row.store}}</td>
+                            <td>{{row.REQ_NUMBER}}</td>
+                            <td>{{row.REQ_DATE}}</td>
+                            <td>{{row.STORE_NAME}}</td>
                             <!-- <td><a ui-sref="restricted.hr.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
                             <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
                         </tr>
@@ -92,10 +92,10 @@
                     <tbody>
                         <tr ng-repeat="row in tableView_data1 track by $index">
                             <td>{{$index+1}}</td>
-                            <td>{{row.po_number}}</td>
-                            <td>{{row.date}}</td>
-                            <td>{{row.store_name}}</td>
-                            <td>{{row.supplier}}</td>
+                            <td>{{row.PO_NUMBER}}</td>
+                            <td>{{row.PO_DATE}}</td>
+                            <td>{{row.STORE_NAME}}</td>
+                            <td>{{row.SUPPLIER_NAME}}</td>
                             <!-- <td><a ui-sref="restricted.hr.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
                             <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
                         </tr>
@@ -136,13 +136,13 @@
                     <tbody>
                         <tr ng-repeat="row in tableView_data2 track by $index">
                             <td>{{$index+1}}</td>
-                            <td>{{row.grn_no}}</td>
-                            <td>{{row.grn_date}}</td>
-                            <td>{{row.supplier}}</td>
-                            <td>{{row.po_number}}</td>
-                            <td>{{row.invoice_no}}</td>
-                            <td>{{row.invoice_date}}</td>
-                            <td>{{row.store}}</td>
+                            <td>{{row.GRN_NUMBER}}</td>
+                            <td>{{row.GRN_DATE}}</td>
+                            <td>{{row.SUPP_NAME}}</td>
+                            <td>{{row.PO_NUMBER}}</td>
+                            <td>{{row.INVOICE_NO}}</td>
+                            <td>{{row.INVOICE_DATE}}</td>
+                            <td>{{row.STORE_NAME}}</td>
                             <!-- <td><a ui-sref="restricted.hr.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
                             <!-- <td ng-if="urlname=='finance'"><a ui-sref="restricted.finance.payslipdetails_view({id:{{row.id}}})">View</a></td> -->
                         </tr>

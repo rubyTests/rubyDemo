@@ -52,7 +52,7 @@
                                 </thead>
                                 <tbody>
                                     <tr dir-paginate="product in viewData | filter: filter | multiSelectFilter: multiSelectData | itemsPerPage: pageSize">
-                                        <td class="uk-width-1-10"><img class="img_thumb" ng-src="{{ product.image }}" alt=""></td>
+                                        <td class="uk-width-1-10"><img class="img_thumb" ng-src="{{ product.IMAGE }}" alt=""></td>
                                         <td class="uk-width-3-10 uk-text-large"><a>{{ product.NAME }}</a></td>
                                         <td class="uk-width-1-10 uk-text-nowrap">{{ product.CODE}}</td>
                                         <td class="uk-width-1-10">{{ product.UNIT }}</td>
@@ -114,7 +114,8 @@
                                 <h3 class="heading_a uk-margin-small-bottom">
                                     Upload Image
                                 </h3>
-                                <input type="file" id="input-file-b" class="dropify" data-default-file="assets/img/gallery/Image08.jpg" ng-model="item_image"/>
+                                <!-- <input type="file" id="input-file-b" class="dropify" data-default-file="assets/img/gallery/Image08.jpg" ng-model="item_image"/> -->
+                                <input type="file" id="input-file-b" class="dropify" ng-model="item_image"/>
                             </div>
                         </div>
                     </div>

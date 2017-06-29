@@ -1,6 +1,6 @@
 <div id="page_content">
     <div id="page_heading">
-        <h1>{{book_data.NAME}} , {{book_data.AUTHOR}} </h1>
+        <h1>Return Book Detail </h1>
         <!-- <span class="uk-text-muted uk-text-upper uk-text-small">{{product.sn}}</span> -->
     </div>
     <div id="page_content_inner">
@@ -15,13 +15,8 @@
                     </div>
                     <div class="md-card-content">
                         <div class="uk-margin-bottom uk-text-center">
-                            <img ng-src="{{book_data.IMAGE}}" alt="" class="img_medium" />
+                            <img ng-src="{{book_data.BOOK_IMAGE}}" alt="" class="img_medium" />
                         </div>
-                        <!-- <ul class="uk-grid uk-grid-width-small-1-3 uk-text-center" data-uk-grid-margin>
-                            <li ng-repeat="image in product.other_img">
-                                <img ng-src="{{image}}" alt="" class="img_small"/>
-                            </li>
-                        </ul> -->
                     </div>
                 </div>
             </div>
@@ -40,7 +35,7 @@
                                         <span class="uk-text-muted uk-text-medium">Book Name</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        <span class="uk-text-large uk-text-middle">{{book_data.NAME}}</span>
+                                        <span class="uk-text-large uk-text-middle">{{book_data.BOOK_NAME}}</span>
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
@@ -49,37 +44,38 @@
                                         <span class="uk-text-muted uk-text-medium">Book Id</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        <span class="uk-text-large uk-text-middle">{{book_data.CODE}}</span>
+                                        <span class="uk-text-large uk-text-middle">{{book_data.BOOK_ID}}</span>
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Category</span>
+                                        <span class="uk-text-muted uk-text-medium">Author</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        <span class="uk-text-large uk-text-middle">{{book_data.CATEGORY_NAME}}</span>
+                                        <span class="uk-text-large uk-text-middle">{{book_data.AUTHOR}}</span>
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Department</span>
+                                        <span class="uk-text-muted uk-text-medium">Issue Date</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        {{book_data.DEPARTMENT_NAME}}
+                                        {{book_data.issue_date}}
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Subject</span>
+                                        <span class="uk-text-muted uk-text-medium">Due Date</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        {{book_data.SUBJECT_NAME}}
+                                        {{book_data.due_date}}
                                     </div>
                                 </div>
-                                <hr class="uk-grid-divider">
+
+                                <!-- <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
                                         <span class="uk-text-muted uk-text-medium">Author</span>
@@ -96,71 +92,71 @@
                                     <div class="uk-width-large-2-3">
                                         {{book_data.REGULATION}}
                                     </div>
-                                </div>
+                                </div> -->
                                 <hr class="uk-grid-divider uk-hidden-large">
                                 
                             </div>
                             <div class="uk-width-large-1-2">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Year Of Published</span>
+                                        <span class="uk-text-muted uk-text-medium">Issued To</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        <span class="uk-text-large uk-text-middle">{{book_data.YEAROFPUBLISHED}}</span>
+                                        <span class="uk-text-large uk-text-middle">{{book_data.user_type}}</span>
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">ISBN</span>
+                                        <span class="uk-text-muted uk-text-medium">Name</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        <span class="uk-text-large uk-text-middle">{{book_data.ISBN}}</span>
+                                        <span class="uk-text-large uk-text-middle">{{book_data.profileName}}</span>
+                                    </div>
+                                </div>
+                                <hr class="uk-grid-divider" ng-show="book_data.user_type == 'Student'">
+                                <div class="uk-grid uk-grid-small" ng-show="book_data.user_type == 'Student'">
+                                    <div class="uk-width-large-1-3">
+                                        <span class="uk-text-muted uk-text-medium">Course</span>
+                                    </div>
+                                    <div class="uk-width-large-2-3">
+                                        {{book_data.COURSE_NAME}}
+                                    </div>
+                                </div>
+                                <hr class="uk-grid-divider" ng-show="book_data.user_type == 'Student'">
+                                <div class="uk-grid uk-grid-small" ng-show="book_data.user_type == 'Student'">
+                                    <div class="uk-width-large-1-3">
+                                        <span class="uk-text-muted uk-text-medium">Batch</span>
+                                    </div>
+                                    <div class="uk-width-large-2-3">
+                                        {{book_data.BATCH_NAME}}
+                                    </div>
+                                </div>
+                                <hr class="uk-grid-divider" ng-show="book_data.user_type == 'Employee'">
+                                <div class="uk-grid uk-grid-small" ng-show="book_data.user_type == 'Employee'">
+                                    <div class="uk-width-large-1-3">
+                                        <span class="uk-text-muted uk-text-medium">Department</span>
+                                    </div>
+                                    <div class="uk-width-large-2-3">
+                                        {{book_data.DEPT_NAME}}
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Publisher</span>
+                                        <span class="uk-text-muted uk-text-medium">Return Date</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        {{book_data.PUBLISHER}}
+                                        {{book_data.RETURN_DATE}}
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider">
                                 <div class="uk-grid uk-grid-small">
                                     <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Edition</span>
+                                        <span class="uk-text-muted uk-text-medium">Remarks</span>
                                     </div>
                                     <div class="uk-width-large-2-3">
-                                        {{book_data.EDITION}}
-                                    </div>
-                                </div>
-                                <hr class="uk-grid-divider">
-                                <div class="uk-grid uk-grid-small">
-                                    <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Price</span>
-                                    </div>
-                                    <div class="uk-width-large-2-3">
-                                        {{book_data.PRICE}}
-                                    </div>
-                                </div>
-                                <hr class="uk-grid-divider">
-                                <div class="uk-grid uk-grid-small">
-                                    <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Rack No</span>
-                                    </div>
-                                    <div class="uk-width-large-2-3">
-                                        {{book_data.RACKNO}}
-                                    </div>
-                                </div>
-                                <hr class="uk-grid-divider">
-                                <div class="uk-grid uk-grid-small">
-                                    <div class="uk-width-large-1-3">
-                                        <span class="uk-text-muted uk-text-medium">Current Quantity</span>
-                                    </div>
-                                    <div class="uk-width-large-2-3">
-                                        {{book_data.C_QUANTITY}}
+                                        {{book_data.REMARK}}
                                     </div>
                                 </div>
                                 <hr class="uk-grid-divider uk-hidden-large">

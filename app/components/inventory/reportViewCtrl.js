@@ -10,12 +10,12 @@ angular
         'DTColumnDefBuilder',
         '$compile',
         '$location',
-        function ($scope,$rootScope,$timeout,$resource,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile,$location) {
+        '$http',
+        '$localStorage',
+        function ($scope,$rootScope,$timeout,$resource,$filter,DTOptionsBuilder, DTColumnDefBuilder,$compile,$location,$http,$localStorage) {
             $scope.deptArray=[];
             $scope.tableArray=[];
-            $scope.materialData = [];
-            $scope.purchaseData = [];
-            $scope.grnData = [];
+            
             var path=$location.path().split( '/' );
             $scope.urlname=path[1];
             // $resource('app/components/employeemanagement/employee_list.json')
@@ -24,24 +24,38 @@ angular
             //     .then(function(return_data) {
             //         $scope.tableArray=return_data;
             //     });
-            $resource('app/components/inventory/materialRequest.json')
-                .query()
-                .$promise
-                .then(function(return_data) {
-                    $scope.materialData=return_data;
-                });
-            $resource('app/components/inventory/purchaseOrder.json')
-                .query()
-                .$promise
-                .then(function(return_data) {
-                    $scope.purchaseData=return_data;
-                });
-            $resource('app/components/inventory/grn.json')
-                .query()
-                .$promise
-                .then(function(return_data) {
-                    $scope.grnData=return_data;
-                });
+
+
+            
+            // $http.get($localStorage.service+'inventoryApi/purchaseOrder',{headers:{'access_token':$localStorage.access_token}})
+            // .success(function(dept_data){
+            //     $scope.purchaseData = dept_data;
+            // });
+
+            
+            // $http.get($localStorage.service+'inventoryApi/GRN',{headers:{'access_token':$localStorage.access_token}})
+            // .success(function(dept_data){
+            //     $scope.grnData = dept_data;
+            // });
+
+            // $resource('app/components/inventory/materialRequest.json')
+            //     .query()
+            //     .$promise
+            //     .then(function(return_data) {
+            //         $scope.materialData=return_data;
+            //     });
+            // $resource('app/components/inventory/purchaseOrder.json')
+            //     .query()
+            //     .$promise
+            //     .then(function(return_data) {
+            //         $scope.purchaseData=return_data;
+            //     });
+            // $resource('app/components/inventory/grn.json')
+            //     .query()
+            //     .$promise
+            //     .then(function(return_data) {
+            //         $scope.grnData=return_data;
+            //     });
 
             // $scope.selectize_category_options = ["Material request", "Purchase Order", "GRN"];
             // $scope.selectize_category_config = {
@@ -50,21 +64,21 @@ angular
             //     placeholder: 'Select Category'
             // };
 
-            $scope.selectize_category_options =["Material request", "Purchase Order", "GRN"];
+            $scope.selectize_category_options =["Material Request", "Purchase Order", "GRN"];
             $scope.selectize_category_config = {
                 create: false,
                 maxItems: 1,
                 placeholder: 'Select Category',
                 onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        if(value == 'Material request'){
-                            var deptReturn_Data = $scope.materialData;
-                        } else if(value == 'Purchase Order'){
-                            var deptReturn_Data = $scope.purchaseData;
-                        } else if(value == 'GRN'){
-                            var deptReturn_Data = $scope.grnData;
-                        }
-                    });
+                    // selectize.on('change', function(value) {
+                    //     if(value == 'Material request'){
+                    //         var deptReturn_Data = $scope.materialData;
+                    //     } else if(value == 'Purchase Order'){
+                    //         var deptReturn_Data = $scope.purchaseData;
+                    //     } else if(value == 'GRN'){
+                    //         var deptReturn_Data = $scope.grnData;
+                    //     }
+                    // });
                 }
             };
 
@@ -150,36 +164,77 @@ angular
                     })
                 });
 
-                 $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json')
-                .query()
-                .$promise
-                .then(function(return_paydata) {
-                    $scope.return_paydata=return_paydata;
-                });
+                //  $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayStructure.json')
+                // .query()
+                // .$promise
+                // .then(function(return_paydata) {
+                //     $scope.return_paydata=return_paydata;
+                // });
 
-                $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json')
-                .query()
-                .$promise
-                .then(function(payitemstruc_data) {
-                    $scope.payitemstruc_data=payitemstruc_data;
-                }); 
+                // $resource('app/components/Hr/Payroll_Payslip/Payroll_temData/PayItemStructure.json')
+                // .query()
+                // .$promise
+                // .then(function(payitemstruc_data) {
+                //     $scope.payitemstruc_data=payitemstruc_data;
+                // }); 
 
-                 $scope.getPayslipdetail=function(){
-                    
-                    var deptReturn_Data = $scope.selectize_category;
+                $scope.materialData = [];
+                $scope.purchaseData = [];
+                $scope.grnData = [];
 
-                    if(deptReturn_Data == 'Material request'){
-                        $scope.tableView_data = $scope.materialData;
-                        $scope.tableView_data1 = '';
-                        $scope.tableView_data2 = '';
-                    }else if(deptReturn_Data == 'Purchase Order'){
-                        $scope.tableView_data1 = $scope.purchaseData;
-                        $scope.tableView_data = '';
-                        $scope.tableView_data2 = '';
-                    }else if(deptReturn_Data == 'GRN'){
-                        $scope.tableView_data2 = $scope.grnData;
-                        $scope.tableView_data = '';
-                        $scope.tableView_data1 = '';
+                $scope.getPayslipdetail=function(value){
+
+                    if(value.selectize_category == 'Material Request'){
+                        $http({
+                            method:'GET',
+                            url: $localStorage.service+'inventoryApi/materialRequestReport',
+                            params: {
+                                'id' : value.selectize_category,
+                                'fromDate' : value.fromDate,
+                                'toDate' : value.toDate,
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).success(function(material_data){
+                           $scope.tableView_data = material_data.data;
+                           $scope.tableView_data1 = '';
+                           $scope.tableView_data2 = '';
+                        }).error(function(material_data){
+                            $scope.tableView_data = [];
+                        });
+                    }else if(value.selectize_category == 'Purchase Order'){
+                        $http({
+                            method:'GET',
+                            url: $localStorage.service+'inventoryApi/purchaseOrderReport',
+                            params: {
+                                'id' : value.selectize_category,
+                                'fromDate' : value.fromDate,
+                                'toDate' : value.toDate,
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).success(function(purchaseOrder_data){
+                           $scope.tableView_data1 = purchaseOrder_data.data;
+                           $scope.tableView_data = '';
+                           $scope.tableView_data2 = '';
+                        }).error(function(purchaseOrder_data){
+                            $scope.tableView_data = [];
+                        });
+                    }else if(value.selectize_category == 'GRN'){
+                        $http({
+                            method:'GET',
+                            url: $localStorage.service+'inventoryApi/GRNReport',
+                            params: {
+                                'id' : value.selectize_category,
+                                'fromDate' : value.fromDate,
+                                'toDate' : value.toDate,
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).success(function(grn_data){
+                           $scope.tableView_data2 = grn_data.data;
+                           $scope.tableView_data = '';
+                           $scope.tableView_data1 = '';
+                        }).error(function(grn_data){
+                            $scope.tableView_data = [];
+                        });
                     }
 
                         //$scope.tableView_data = deptReturn_Data;

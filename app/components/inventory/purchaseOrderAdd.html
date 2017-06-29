@@ -44,15 +44,15 @@
                                     </div> -->
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Purchase Order No.</label>
-                                        <input type="text" ng-model="po_number" class="md-input" md-input />
+                                        <input type="text" ng-model="po_number" class="md-input" md-input required />
                                         <input type="hidden" ng-model="purchaseOrder_id">
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label>Purchase Order Date</label>
-                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="po_date"/>
+                                        <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="po_date"/>
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
-                                        <input type="text" config="selectize_store_config" options="selectize_store_options" ng-model="selectize_store" selectize/>
+                                        <input type="text" config="selectize_store_config" options="selectize_store_options" ng-model="selectize_store" name="selectize_store" selectize/>
                                     </div>
                                 </div>
                                 <div class="uk-grid uk-margin-medium-top uk-margin-bottom" data-uk-grid-margin>
@@ -96,12 +96,12 @@
                                 <td class="uk-text-middle">{{$index+1}}</td>
                                 <!-- <td class="uk-text-middle"><input type="text" config="selectize_storeItem_config" options="selectize_storeItem_options" ng-model="item.selectize_storeItem" name="selectize_storeItem" selectize /></td> -->
                                 <td>
-                                    <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" id="autocomplete">
-                                        <input type="text" class="" ng-model="item.item_name" placeholder="Item Name">
+                                    <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" id="autocomplete_{{$index}}">
+                                        <input type="text" class="" ng-model="item.item_name" placeholder="Item Name" required>
                                         <script type="text/autocomplete">
                                             <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results"  id="autocomplete_template_results">
                                                 {{~items}}
-                                                <li data-value="{{ $item.ITEM_ID }}">
+                                                <li data-value="{{ $item.ITEM_NAME }}" data-id="{{ $item.ITEM_ID }}">
                                                     <a class="item">
                                                         {{ $item.ITEM_NAME }}<br>
                                                         <!-- <span class="uk-text-muted uk-text-small">{{{ $item.text }}}</span> -->
@@ -114,19 +114,19 @@
                                 </td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
-                                        <input type="text" name="unitPrice" id="unitPrice" placeholder="Unit Price" ng-model="item.unitprice"/>
+                                        <input type="text" name="unitPrice" id="unitPrice" placeholder="Unit Price" ng-model="item.unitprice" required/>
                                     </div>
                                 </td>
                                 <td class="uk-text-middle">
                                     <div class="uk-form">
-                                        <input type="text" name="quantity" id="quantity" placeholder="Quantity" ng-model="item.quantity"/>
+                                        <input type="text" name="quantity" id="quantity" placeholder="Quantity" ng-model="item.quantity" required/>
                                     </div>
                                 </td>
                                 <!-- <td class="uk-text-middle"><input type="text" name="totalprice" id="totalprice" ng-model="item.totalprice" value="{{item.unitprice * item.quantity}}" disabled /></td> -->
                                 <td class="uk-text-middle">{{item.unitprice * item.quantity | currency : " "}}</td>
                                 <!-- <td class="uk-text-middle"><input type="text" name="fee_2" id="fee_2" ng-model="feesItem5"/></td> -->
                                 <td class="uk-text-right uk-text-middle">
-                                    <a ng-click="addRow();" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
+                                    <a ng-click="addRow($event,$index,item);" ng-if="$last"><i class="md-icon material-icons md-24">&#xE145;</i></a>
                                     <a ng-click="removeRow($index);" ng-if="$last && $index != 0 "><i class="md-icon material-icons md-24">&#xE872;</i></a>
                                     <a ng-click="removeRow($index);" ng-if="!$last"><i class="md-icon material-icons md-24 AdjIconMargin">&#xE872;</i></a>
                                 </td>
