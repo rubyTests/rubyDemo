@@ -31,6 +31,7 @@ angular
             });
             $scope.clearValidation1=function(){
                 $('#form_validation1').parsley().reset();
+                $scope.courDept_name='';
             }
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -176,6 +177,12 @@ angular
                     });
                 }
                 };
+                 $scope.clear_deptData = function(){
+                    $scope.dept_name='';
+                    $scope.dept_code='';
+                    $scope.hod_prof_id='';
+                    $scope.phone_no='';
+                 }
                 $scope.addCourse = function() {
                     //AcademicsAPI_departmentlist();
                     $scope.titCaption="Add";
@@ -189,7 +196,6 @@ angular
                     $scope.dept_name='';
                     $scope.dept_code='';
                     $scope.hod_prof_id='';
-                    $scope.courDept_name='';
                     $scope.phone_no='';
                     $scope.clearValidation();
                     $('.inputName').trigger('blur'); 
@@ -395,8 +401,8 @@ angular
                         $timeout(function(){
                             UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false}).show();    
                         },100); 
-                        $scope.courDept_name='';
-                        $scope.addCourse();    
+                        $scope.courDept_name=return_data.data.message.DEPT_ID;
+                        $scope.clear_deptData();    
                         // $scope.courDept_name=return_data.data.message.DEPT_NAME;                       
                         //$scope.deptData.push({ID:100,NAME:"Add "});
                         //console.log(return_data.data.message.DEPT_NAME,'return_data22');
