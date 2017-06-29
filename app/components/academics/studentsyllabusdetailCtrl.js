@@ -15,17 +15,28 @@ angular
             $rootScope.page_full_height = true;
             $rootScope.headerDoubleHeightActive = true;
             var test;
+
             // $http.get('http://localhost/smartedu/test/AcademicsAPI/fetchAllSubjectSyllabusData')
-            $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{headers:{'access_token':$localStorage.access_token}})
+            // $http.get($localStorage.service+'AcademicsAPI/fetchAllSubjectSyllabusData',{headers:{'access_token':$localStorage.access_token}})
+            // .success(function(syllabus_data){
+            //    console.log(syllabus_data,'syllabus_data');
+            //     var data1=$filter('filter')(syllabus_data.data, {ID : $stateParams.id},true);
+            //     // console.log(syllabus_data.data.indexOf(data1[0]),'data');
+            //     $scope.currentActive=syllabus_data.data.indexOf(data1[0]);
+            //     $scope.notes_data=syllabus_data.data;
+            //     $scope.notes_preview=data1[0];
+            // });  
+            
+            // Modified on 27-06-17 by Gnanamani
+             $http.get($localStorage.service+'AcademicsAPI/fetchSyllabusListbasedonCourse',{params:{'courseid':$stateParams.courseid},headers:{'access_token':$localStorage.access_token}})
             .success(function(syllabus_data){
                console.log(syllabus_data,'syllabus_data');
                 var data1=$filter('filter')(syllabus_data.data, {ID : $stateParams.id},true);
-                // console.log(syllabus_data.data.indexOf(data1[0]),'data');
+                console.log(syllabus_data.data.indexOf(data1[0]),'data');
                 $scope.currentActive=syllabus_data.data.indexOf(data1[0]);
                 $scope.notes_data=syllabus_data.data;
                 $scope.notes_preview=data1[0];
             });
-            
 
             $scope.$on('$destroy', function() {
                 $rootScope.page_full_height = false;

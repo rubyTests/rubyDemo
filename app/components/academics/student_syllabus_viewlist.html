@@ -29,7 +29,7 @@
                         <div class="md-card-content padding-reset" id="help_content">
                             <h4 class="heading_c full_width_in_card">Syllabus</h4>
                             <div class="uk-accordion uk-accordion-alt help_accordion hierarchical_slide" hierarchical-slide slide-children="h3" slide-context=".md-card-content">
-                                <h3 class="uk-accordion-title uk-animation-slide-bottom" ng-repeat-start="item in notes_preview.syllabus" on-last-repeat>{{item.NAME}}</h3>
+                                <h3 class="uk-accordion-title " ng-repeat-start="item in notes_preview.syllabus" on-last-repeat>{{item.NAME}}</h3>
                                 <div class="uk-accordion-content" ng-repeat-end>
                                     <p ng-bind-html="item.DESC"></p>
                                 </div>
