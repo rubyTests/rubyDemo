@@ -15,6 +15,7 @@ angular
             });
             $scope.clearValidation=function(){
                 $('#form_validation').parsley().reset();
+                
             }
             //Course
             var $formValidate = $('#form_validation1');
@@ -30,6 +31,7 @@ angular
             });
             $scope.clearValidation1=function(){
                 $('#form_validation1').parsley().reset();
+                $scope.course_id="";
             }
             //Department
             var $formValidate = $('#form_validation2');
@@ -45,6 +47,7 @@ angular
             });
             $scope.clearValidation2=function(){
                 $('#form_validation2').parsley().reset();
+                $scope.dept_id='';
             }
             var vm = this;
             vm.dt_data = [];
@@ -348,16 +351,16 @@ angular
             $scope.titCaption="Add";
             $scope.btnStatus='Save';
             $scope.course_cleardata = function() {
-                $scope.clearValidation1();
-                $scope.course_id='';
+                // $scope.clearValidation1();
                 $scope.course_name='';
                 $scope.dept_id='';
                 $scope.attendance_type='';
                 $scope.percentage='';
                 $scope.grade_type='';
+                $('.inputName').trigger('blur'); 
                 $timeout(function(){
                     $scope.shouldBeOpen = true;
-                    $('.uk-modal').find('input').trigger('blur');    
+                    //$('.uk-modal').find('input').trigger('blur');    
                 },500);
             };
             // Save Data
@@ -386,8 +389,10 @@ angular
                         });
                         $scope.courseData.push({ID:return_data.data.message.COURSE_ID,NAME:return_data.data.message.COURSE_NAME});
                         $timeout(function(){
-                            UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false}).show();       
+                            UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false}).show();
+                            $('#form_validation').parsley().validate();         
                         },100); 
+                        $scope.course_id=return_data.data.message.COURSE_ID;
                         $scope.course_cleardata();
                         // UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false}).show();
                     }else {
@@ -398,15 +403,15 @@ angular
             }
             //Department js
             $scope.department_clearData= function() {
-                $scope.clearValidation2();
-                $scope.dept_id='';
+                // $scope.clearValidation2();
                 $scope.dept_name='';
                 $scope.dept_code='';
                 $scope.hod_prof_id='';
                 $scope.phone_no='';
+                $('.inputName').trigger('blur'); 
                 $timeout(function(){
                     $scope.shouldBeOpen = true;
-                    $('.uk-modal').find('input').trigger('blur');    
+                    //$('.uk-modal').find('input').trigger('blur');    
                 },500);
                 // $('.uk-modal').find('input').trigger('blur');
                 //  $scope.deptFORM.$setPristine();
@@ -454,9 +459,10 @@ angular
                             pos     : 'top-center'
                         });
                         $scope.deptData.push({ID:return_data.data.message.DEPT_ID,NAME:return_data.data.message.DEPT_NAME});
-                            $timeout(function(){
-                                UIkit.modal("#course_modal",{bgclose: false, keyboard:false}).show();    
-                            },100); 
+                        $timeout(function(){
+                            UIkit.modal("#course_modal",{bgclose: false, keyboard:false}).show();    
+                        },100);
+                        $scope.dept_id=return_data.data.message.DEPT_ID;
                         $scope.department_clearData();
                     }else {
                         UIkit.modal.alert('Department Name Already Exists');
