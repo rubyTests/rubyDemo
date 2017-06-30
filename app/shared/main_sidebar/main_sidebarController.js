@@ -164,6 +164,11 @@ angular
                                 }
                             ]
                         },
+                        //Modified
+                        {
+                            title: 'Assign Teacher',
+                            link: 'restricted.student.assignTeacher'
+                        },
                         {
                             title: 'Attendance',
                             submenu: [
@@ -314,10 +319,10 @@ angular
                             title:'Students',
                             link: 'restricted.student.student_list'
                         },
-                        {
-                            title: 'Assign Teacher',
-                            link: 'restricted.student.assignTeacher'
-                        },
+                        // {
+                        //     title: 'Assign Teacher',
+                        //     link: 'restricted.student.assignTeacher'
+                        // },
                         {
                             title: 'Leaves',
                             submenu: [
