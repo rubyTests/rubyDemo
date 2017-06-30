@@ -31,7 +31,7 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="fullname">Institution Name<span class="req">*</span></label>
-                                    <input type="text" ng-pattern-restrict="^[A-Za-z]*$" class="md-input" md-input ng-model="Basic.institute_name" name="institute_name" fouc-me="shouldBeOpen" required>
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" md-input ng-model="Basic.institute_name" name="institute_name" fouc-me="shouldBeOpen" required>
                                     <input type="hidden" ng-model="Basic.institution_id">
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
@@ -110,7 +110,7 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-1 parsley-row">
                                     <label for="Addrress">Addrress<span class="req">*</span></label>
-                                    <input type="text" class="md-input" required md-input ng-model="contact.address" />
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z-0-9-/, ]*$" class="md-input" required md-input ng-model="contact.address" focus-me="shouldBeOpen"/>
                                     <input type="hidden" ng-model="contact.prof_id">
                                     <input type="hidden" ng-model="contact.locationId">
                                 </div>
@@ -124,12 +124,12 @@
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <br>
                                     <label for="city">City</label>
-                                    <input type="text" ng-pattern-restrict="^[A-Za-z]*$" class="md-input" md-input ng-model="contact.city" />
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" md-input ng-model="contact.city" />
                                 </div>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <br>
                                     <label for="state">State<span class="req">*</span></label>
-                                    <input type="text" ng-pattern-restrict="^[A-Za-z]*$" class="md-input" required md-input ng-model="contact.state" />
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" required md-input ng-model="contact.state" />
                                 </div>
                             </div>
                             <div class="uk-grid" data-uk-grid-margin>
