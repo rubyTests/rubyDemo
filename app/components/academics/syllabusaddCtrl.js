@@ -23,6 +23,7 @@ angular
                 $scope.courseID="";
                 $scope.dept_id="";
                 $scope.course_id="";
+                $('.inputName').trigger('blur'); 
             }
             //Course
             var $formValidate = $('#form_validation1');
@@ -65,37 +66,36 @@ angular
                 $scope.dept_clearData();
             }
             //Subject
-            // var $formValidate = $('#form_validation3');
-            // $formValidate
-            // .parsley()
-            // .on('form:validated',function() {
-            //     $scope.$apply();
-            // })
-            // .on('field:validated',function(parsleyField) {
-            //     if($(parsleyField.$element).hasClass('md-input')) {
-            //         $scope.$apply();
-            //     }
-            // });
-            // $scope.clearValidation3=function(){
-            //     $('#form_validation3').parsley().reset();
-            //     $scope.courseID="";
-            //     $scope.dept_id="";
-            //     $scope.subjectID="";
-            // }
+            var $formValidate = $('#form_validation3');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+            $scope.clearValidation3=function(){
+                $('#form_validation3').parsley().reset();
+                $scope.courseID="";
+                $scope.dept_id="";
+                $scope.subjectID="";
+            }
             $scope.courseData=[];
-            var academicsAPI_courseData = function(){
+             // var academicsAPI_courseData = function(){
                 $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(cor_data){
-                    console.log(cor_data,'ciueeeerer');
                     if(cor_data.status==false){
-                        $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                        $scope.courseData.push([{ID:-10, NAME:"Add Course"}]);
                     }else{
                         $scope.courseData.push(cor_data.data);
-                        $scope.courseData.push([{ID:0, NAME:"Add Course"}]);
+                        $scope.courseData.push([{ID:-10, NAME:"Add Course"}]);
                     }
                 });
-            }
-            academicsAPI_courseData();
+            // }
+            // academicsAPI_courseData();
             $scope.selectize_course_options = $scope.courseData;
             $scope.selectize_course_config = {
                 create: false,
@@ -107,7 +107,7 @@ angular
                 searchField: 'NAME',
                 render: {
                     option: function (item, escape) {
-                        if(item.ID==0){
+                        if(item.ID==-10){
                             return '<div class="option">' +
                                         '<div class="text">' +
                                             '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
@@ -125,49 +125,156 @@ angular
                 },
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        if (value == 0) {
+                        if (value == -10) {
                             $timeout(function(){
                                 $scope.shouldBeOpen = true;    
                             },500);
                             var modal = UIkit.modal("#course_modal",{bgclose: false, keyboard:false});
+                            $('.uk-modal').find('input').trigger('blur');
+                            $scope.course_clearData();
+                            if ( modal.isActive() ) {
+                                modal.hide();
+                            } else {
+                                modal.show();
+                            }
+                        }
+                        if(value !=''){
+                            $scope.subjectData(value);
+                        }else{
+                            $scope.subjectData(-10);
+                        }
+                    });
+                }
+            };
+            $scope.courseSubData=[];
+            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+                .success(function(cor_data){
+                    $scope.courseSubData.push(cor_data.data);
+                });
+            $scope.selectize_courseSub_options = $scope.courseSubData;
+            $scope.selectize_courseSub_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Course',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+               
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                       
+                    });
+                }
+            };
+            //subject course
+        //     $scope.selectize_courseSub_options = $scope.courseData;
+        //     $scope.selectize_courseSub_config = {
+        //         create: false,
+        //         maxItems: 1,
+        //         placeholder: 'Course',
+        //         valueField: 'ID',
+        //         labelField: 'NAME',
+        //         searchField: 'NAME',
+        //         onInitialize: function(selectize){
+        //             selectize.on('change', function(value) {
+        //         }
+        //     }
+        // };
+           $scope.selectize_subject_options=[];
+            $scope.subjectData = function(id){
+                
+                $http.get($localStorage.service+'AcademicsAPI/getSubjectData',{params:{'courseId':id},headers:{'access_token':$localStorage.access_token}})
+                .success(function(subject_data){
+                    //console.log(subject_data,'subject_datasubject_data');
+                  
+                    if(subject_data.status==false){
+                        $scope.selectize_subject_options=[].concat([{SUBJECT_ID:-10,NAME:"Add Sbuject"}]);
+                    }else{
+                         //$scope.subjectList.push(subject_data.message);
+                        $scope.selectize_subject_options=[].concat(subject_data.message);
+                        $scope.selectize_subject_options.push([{SUBJECT_ID:-10, NAME:"Add Sbuject"}]);
+                    }
+                   
+                });
+            }
+           
+            // $scope.selectize_subject_options = $scope.subjectList;
+            // $scope.selectize_subject_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Subject',
+            //     valueField: 'SUBJECT_ID',
+            //     labelField: 'SUBJECT_NAME',
+            //     searchField: 'SUBJECT_NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(value) {
+            //             console.log(value,'valuevalue');
+                       
+            //         });
+            //     }
+            // };
+            //  // var academicsAPI_subjectData = function(){
+            //     $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$localStorage.access_token}})
+            //     .success(function(subject_data){
+            //         //console.log(subject_data,'subject_datasubject_data');
+            //         //$scope.subjectList.push(subject_data.data);
+            //         if(subject_data.status==false){
+            //             $scope.subjectList.push([{ID:-2, NAME:"Add Sbuject"}]);
+            //         }else{
+            //             $scope.subjectList.push(subject_data.data);
+            //             $scope.subjectList.push([{ID:-2, NAME:"Add Sbuject"}]);
+            //         }
+            //     });
+            // // }
+            // // academicsAPI_subjectData();
+
+            // $scope.selectize_subject_options =$scope.subjectList;
+            $scope.selectize_subject_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Subject',
+                valueField: 'SUBJECT_ID',
+                sortField: [{field: 'SUBJECT_ID', direction: 'desc'}],
+                labelField: 'NAME',
+                searchField: 'NAME',
+               render: {
+                    option: function (item, escape) {
+                        if(item.SUBJECT_ID==-10){
+                            return '<div class="option">' +
+                                        '<div class="text">' +
+                                            '<i class="uk-icon-plus linkClr"></i>' + '<span class="linkClrtxt">' + escape(item.NAME) + '</span>' +
+                                       '</div>' +
+                                    '</div>';
+                        }else{
+                            return '<div class="option">' +
+                                    '<div class="text">' +
+                                        '<span class="name">' + escape(item.NAME) + '</span>' +
+                                   '</div>' +
+                                '</div>';
+                        }
+                       
+                    }
+                },
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        console.log(value,'valuevalue');
+                        if (value==-10) {
+                            $timeout(function(){
+                                $scope.shouldBeOpen = true;    
+                            },500);
+                           // UIkit.modal("#subject_modal").show();
+                            var modal = UIkit.modal("#subject_modal",{bgclose: false, keyboard:false});
                             $('.uk-modal').find('input').trigger('blur');
                             if ( modal.isActive() ) {
                                 modal.hide();
                             } else {
                                 modal.show();
                             }
-                        }else{
-                            $scope.subjectData(value);
-                        }
+                        } 
+                        
                     });
                 }
             };
-            $scope.subjectData = function(id){
-                
-                $http.get($localStorage.service+'AcademicsAPI/getSubjectData',{params:{'courseId':id},headers:{'access_token':$localStorage.access_token}})
-                .success(function(subject_data){
-                    //console.log(subject_data,'subject_datasubject_data');
-                    $scope.subjectList.push(subject_data.message);
-                   
-                });
-            }
-           
-            $scope.selectize_subject_options = $scope.subjectList;
-            $scope.selectize_subject_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Subject',
-                valueField: 'SUBJECT_ID',
-                labelField: 'SUBJECT_NAME',
-                searchField: 'SUBJECT_NAME',
-                onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        console.log(value,'valuevalue');
-                       
-                    });
-                }
-            };
-
             $scope.selectize_clone_config = {
                 plugins: {
                     'tooltip': ''
@@ -507,33 +614,31 @@ angular
             $scope.titCaption="Add";
             $scope.btnStatus='Save';
             $scope.dept_clearData = function() {
-                academicsAPI_departmentList();
-                $scope.dept_id='';
+                //academicsAPI_departmentList();
                 $scope.dept_name='';
                 $scope.dept_code='';
                 $scope.hod_prof_id='';
                 $scope.phone_no='';
-                $scope.courseID='';
+                // $scope.courseID='';
                 $scope.subjectID="";
                 $scope.course_id="";
                 $scope.deptFORM.$setPristine();
                 $('.inputName').trigger('blur'); 
             };
              $scope.course_clearData = function(){
-                academicsAPI_courseData();
-                $scope.course_id='';
+                //academicsAPI_courseData();
                 $scope.course_name='';
                 $scope.dept_id='';
                 $scope.attendance_type='';
                 $scope.percentage='';
                 $scope.grade_type='';
-                $scope.courseID='';
                 $scope.subjectID="";
                 $('.inputName').trigger('blur'); 
              }
                         
             // Save Data
-            $scope.saveCourse=function(){
+    
+             $scope.saveCourse=function(){
                 $http({
                 method:'POST',
                 url: $localStorage.service+'AcademicsAPI/courseDetail',
@@ -547,8 +652,8 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.message.message);
-                        if(return_data.data.message.status==true){
+                    console.log(return_data,'course_clearData');
+                    if(return_data.data.message.status==true){
                         UIkit.modal("#course_modal").hide();
                         UIkit.notify({
                             message : return_data.data.message.message,
@@ -556,12 +661,22 @@ angular
                             timeout : 2000,
                             pos     : 'top-center'
                         });
-                        $scope.course_clearData();
+                            $scope.courseData.push({ID:return_data.data.message.COURSE_ID,NAME:return_data.data.message.COURSE_NAME});
+                            console.log( $scope.courseData,'dddddddd');
+                            $scope.courseID=return_data.data.message.COURSE_ID;
+                            $scope.courseSubData=return_data.data.message.COURSE_ID;
+                            $scope.course_clearData();
+                        //   $timeout(function() {
+                        //     $scope.courseData.push({ID:return_data.data.message.COURSE_ID,NAME:return_data.data.message.COURSE_NAME});
+                        //       console.log( $scope.courseData,'dddddddd');
+                        //     $scope.courseID=return_data.data.message.COURSE_ID;
+                        // }, 5000);
+                        // $scope.course_clearData();
+                        // UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false}).show();
                     }else {
                         // UIkit.notify('Course Name Already Exists','danger');
                         UIkit.modal.alert('Course Name Already Exists');
                     }
-                   
                 });
             }
             //Department js
@@ -619,8 +734,12 @@ angular
                             timeout : 2000,
                             pos     : 'top-center'
                         });
+                        $scope.deptData.push({ID:return_data.data.message.DEPT_ID,NAME:return_data.data.message.DEPT_NAME});
+                        $timeout(function(){
+                            UIkit.modal("#course_modal",{bgclose: false, keyboard:false}).show();    
+                        },100);
+                        $scope.dept_id=return_data.data.message.DEPT_ID;
                         $scope.dept_clearData();
-                        UIkit.modal("#course_modal").show();
                     }else {
                         UIkit.modal.alert('Department Name Already Exists');
                     }
@@ -628,17 +747,15 @@ angular
             }
             // End Department
             // //subject js
-            // $scope.sub_clear = function(){
-            //     academicsAPI_subjectData();
-            //     $scope.subjectID="";
-            //     $scope.cou_sub_id='';
-            //     $scope.sub_id='';
-            //     $scope.subject_name='';
-            //     $scope.sub_code='';
-            //     $scope.course_id='';
-            //     $scope.total_hours='';
-            //     $scope.sub_type='';
-            // }
+            $scope.sub_clear = function(){
+                //academicsAPI_subjectData();
+                $scope.cou_sub_id='';
+                $scope.sub_id='';
+                $scope.subject_name='';
+                $scope.sub_code='';
+                $scope.course_id='';
+                $scope.total_hours='';
+            }
             // // $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
             // //     .success(function(cor_data){
             // //         //console.log(cor_data,'fetchCourseData');
@@ -691,37 +808,40 @@ angular
             //     maxItems: 1,
             //     placeholder: 'Select Type',
             // };
-            // $scope.saveSubjectData=function(){
-            //     $http({
-            //         method:'POST',
-            //         url: $localStorage.service+'AcademicsAPI/subjectDetail',
-            //         data: {
-            //             'cou_sub_id' : $scope.cou_sub_id,
-            //             'sub_id' : $scope.sub_id,
-            //             'subject_name' : $scope.subject_name,
-            //             'sub_code' : $scope.sub_code,
-            //             // 'sub_type' : $scope.sub_type,
-            //             'course_id' : $scope.course_id,
-            //             'total_hours' : $scope.total_hours,
-            //             // 'credit_hours' : $scope.credit_hours
-            //         },
-            //         headers:{'access_token':$localStorage.access_token}
-            //     }).then(function(return_data){
-            //         console.log(return_data.data.message.message);
-            //         if(return_data.data.message.status==true){
-            //             UIkit.modal("#subject_modal").hide();
-            //             UIkit.notify({
-            //                 message : return_data.data.message.message,
-            //                 status  : 'success',
-            //                 timeout : 2000,
-            //                 pos     : 'top-center'
-            //             });
-            //            $scope.sub_clear();
-            //         }else {
-            //             UIkit.modal.alert('Course & Subject Name Already Exists');
-            //         }
-            //     });
-            // }
+            $scope.saveSubjectData=function(){
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'AcademicsAPI/subjectDetail',
+                    data: {
+                        'cou_sub_id' : $scope.cou_sub_id,
+                        'sub_id' : $scope.sub_id,
+                        'subject_name' : $scope.subject_name,
+                        'sub_code' : $scope.sub_code,
+                        // 'sub_type' : $scope.sub_type,
+                        'course_id' : $scope.courseID,
+                        'total_hours' : $scope.total_hours,
+                        // 'credit_hours' : $scope.credit_hours
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data.data.message.message);
+                    if(return_data.data.message.status==true){
+                        UIkit.modal("#subject_modal").hide();
+                        UIkit.notify({
+                            message : return_data.data.message.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.selectize_subject_options=[].concat({SUBJECT_ID:return_data.data.message.SUBJECT_ID,NAME:return_data.data.message.SUBJECT_NAME});
+                        $scope.subjectID=return_data.data.message.SUBJECT_ID;
+                        $('#form_validation').parsley().validate();
+                        $scope.sub_clear();
+                    }else {
+                        UIkit.modal.alert('Course & Subject Name Already Exists');
+                    }
+                });
+            }
             // // Subject End
         }
     ]);

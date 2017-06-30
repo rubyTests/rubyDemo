@@ -54,15 +54,15 @@
                     <div class="uk-grid" data-uk-grid-margin>
                         <div class="uk-width-medium-1-2">
                             <div class="parsley-row">
-                                <br ng-show="subjectID">
-                                <label class="uk-form-label" ng-show="courseID" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
+                                <br ng-if="!courseID">
+                                <label class="uk-form-label" ng-if="courseID" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
                                 <input type="text" config="selectize_course_config" required options="selectize_course_options" ng-model="courseID" selectize />
                             </div>
                         </div>
                         <div class="uk-width-medium-1-2">
                             <div class="parsley-row">
-                                <br ng-show="courseID">
-                                <label class="uk-form-label" ng-show="subjectID" style="font-size: 12px;color: #727272;">Subject<span class="req">*</span></label>
+                                <br ng-if="!subjectID">
+                                <label class="uk-form-label" ng-if="subjectID" style="font-size: 12px;color: #727272;">Subject<span class="req">*</span></label>
                                 <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" required selectize />
                             </div>
                         </div>
@@ -119,7 +119,7 @@
               <form id="form_validation1" class="" name="inputForm" ng-submit="saveCourse()" novalidate>
                 <div class="uk-form-row parsley-row">
                   <label class="uk-form-label">Course Name<span class="req">*</span></label>
-                  <input type="text" ng-pattern-restrict="^[A-Za-z]*$" ng-model="course_name" class="md-input" focus-me="shouldBeOpen" required md-input>
+                  <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" ng-model="course_name" class="md-input" focus-me="shouldBeOpen" required md-input>
                   <input type="hidden" ng-model="course_id">
                 </div>
                  <div class="uk-form-row">
@@ -132,7 +132,7 @@
                 </div>
                 <div class="uk-form-row">
                   <label>Min Attendance Percentage</label>
-                  <input type="text" ng-model="percentage" class="md-input inputName" md-input>
+                  <input type="text" ng-pattern-restrict="^[0-9.]*$" ng-model="percentage" class="md-input inputName" md-input>
                 </div>
               <!--   <div class="uk-form-row">
                   <label class="uk-form-label" ng-show="grade_type" style="font-size: 12px;color: #727272;">Grade<span class="req"></span></label>
@@ -152,14 +152,14 @@
      <div class="uk-width-medium-1-3">
       <div id="department_Modal" class="uk-modal">
         <div class="uk-modal-dialog">
-          <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation2()"></button>
+          <button type="button" class="uk-modal-close uk-close" data-uk-modal="{target:'#course_modal'}" ng-click="clearValidation2()"></button>
           <h3 class="uk-modal-title">{{titCaption}} Department </h3><br>
             <div class="md-card-content">
               <form id="form_validation2" class="" name="deptFORM" ng-submit="saveDeaprtment()" novalidate>
                 <div class="parsley-row uk-form-row">
                   <input type="hidden" ng-model="dept_id">
                   <label class="uk-form-label">Department Name<span class="req">*</span></label>
-                  <input type="text" ng-pattern-restrict="^[A-Za-z]*$" ng-model="dept_name" class="md-input" name="dept_name" focus-me="shouldBeOpen" required md-input>
+                  <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" ng-model="dept_name" class="md-input" name="dept_name" focus-me="shouldBeOpen" required md-input>
                 </div>
                  <div class="uk-form-row">
                    <label>Department Code</label>
@@ -178,7 +178,7 @@
                   <input type="text" ng-pattern-restrict="^[0-9]*$" ng-model="phone_no" name="phone_no" class="md-input inputName" md-input numeric-only>
                 </div>
                 <div class="uk-modal-footer uk-text-right">
-                  <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation2()">Cancel</button>
+                  <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" data-uk-modal="{target:'#course_modal'}" ng-click="clearValidation2()">Cancel</button>
                   <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
                 </div>
               </form>
@@ -188,7 +188,7 @@
     </div>
 <!-- Department End -->
  <!-- Subject Modal -->
-  <!--   <div id="subject_modal" class="uk-modal">
+    <div id="subject_modal" class="uk-modal">
         <div class="uk-modal-dialog">
             <button type="button" class="uk-modal-close uk-close" ng-click="clearValidation3()"></button>
             <h3 class="uk-modal-title"> {{titCaption}} Subjects </h3><br>
@@ -198,7 +198,7 @@
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label class="uk-form-label">Subject Name<span class="req">*</span></label>
-                                <input type="text" ng-pattern-restrict="^[A-Za-z]*$" ng-model="subject_name" focus-me="shouldBeOpen" required class="md-input" md-input />
+                                <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" ng-model="subject_name" focus-me="shouldBeOpen" required class="md-input" md-input />
                                 <input type="hidden" ng-model="sub_id">
                                 <input type="hidden" ng-model="cou_sub_id">
                             </div>
@@ -212,19 +212,19 @@
                             </div>
                         </div>          
                     </div>
-                    <div class="uk-form-row">
+                    <!-- <div class="uk-form-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label class="uk-form-label" ng-show="sub_type" style="font-size: 12px;color: #727272;">Subject Type<span class="req"></span></label>
                                 <input type="text" config="selectize_subType_config" options="selectize_subType_options" ng-model="sub_type" selectize/>
                             </div>
                         </div>          
-                    </div>
+                    </div> -->
                     <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                  <label class="uk-form-label" ng-show="course_id" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
-                                <input type="text" config="selectize_course_config" options="selectize_course_options" required ng-model="course_id" selectize/>
+                                <input type="text" config="selectize_courseSub_config" options="selectize_courseSub_options" required ng-model="courseID" selectize/>
                             </div>
                         </div>          
                     </div>
@@ -232,7 +232,7 @@
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
                                 <label>Total Hours</label>
-                                <input type="text" class="md-input" ng-pattern-restrict="^[0-9/]*$" ng-model="total_hours" md-input />
+                                <input type="text" class="md-input" ng-pattern-restrict="^[0-9.]*$" ng-model="total_hours" md-input />
                             </div>
                         </div>          
                     </div>
@@ -243,6 +243,6 @@
                 </form>
             </div>
         </div>
-    </div> -->
+    </div>
     <!-- Subject End -->
 
