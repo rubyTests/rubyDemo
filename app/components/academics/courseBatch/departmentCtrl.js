@@ -61,11 +61,6 @@ angular
                             type: 'text',
                             bRegex: true,
                             bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
                         }
                     ]
                 })
