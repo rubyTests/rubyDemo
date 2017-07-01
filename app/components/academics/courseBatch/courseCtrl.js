@@ -184,7 +184,7 @@ angular
                     $scope.btnStatus='Save';
                     $scope.course_id='';
                     $scope.course_name='';
-                    $scope.dept_id='';
+                    $scope.courDept_name='';
                     $scope.attendance_type='';
                     $scope.percentage='';
                     $scope.grade_type='';

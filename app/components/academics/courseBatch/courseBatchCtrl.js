@@ -110,7 +110,26 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-                
+                $timeout(function(){
+                // date range
+                    var $dp_start = $('#uk_dp_start'),
+                    $dp_end = $('#uk_dp_end');
+                    var start_date = UIkit.datepicker($dp_start, {
+                        format:'DD.MM.YYYY'
+                    });
+
+                    var end_date = UIkit.datepicker($dp_end, {
+                        format:'DD.MM.YYYY'
+                    });
+
+                    $dp_start.on('change',function() {
+                        end_date.options.minDate = $dp_start.val();
+                    });
+
+                    $dp_end.on('change',function() {
+                        start_date.options.maxDate = $dp_end.val();
+                    });
+                },600);
                 var modal = UIkit.modal("#modal_overflow",{bgclose: false, keyboard:false});
                 $scope.clear_courseData = function() {
                     $scope.course_name='';
