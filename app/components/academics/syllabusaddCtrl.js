@@ -836,7 +836,7 @@ angular
                         });
                         $scope.selectize_subject_options=[].concat({SUBJECT_ID:return_data.data.message.SUBJECTID,NAME:return_data.data.message.SUBJECT_NAME});
                         $scope.subjectID=return_data.data.message.SUBJECTID;
-                        $('#form_validation').parsley().validate();
+                        //$('#form_validation').parsley().validate();
                         $scope.sub_clear();
                     }else {
                         UIkit.modal.alert('Course & Subject Name Already Exists');
