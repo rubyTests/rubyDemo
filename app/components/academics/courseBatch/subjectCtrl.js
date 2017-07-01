@@ -117,6 +117,7 @@ angular
             $scope.refreshTable=function(){
                 $http.get($localStorage.service+'AcademicsAPI/subjectDetail',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(course_data){
+                    console.log(course_data,'course_data');
                     $scope.viewData=course_data.message;
                 });
             }
