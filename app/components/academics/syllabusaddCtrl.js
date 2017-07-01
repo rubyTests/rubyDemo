@@ -270,6 +270,7 @@ angular
                             } else {
                                 modal.show();
                             }
+                            $scope.sub_clear();
                         } 
                         
                     });
