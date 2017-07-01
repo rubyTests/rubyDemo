@@ -74,11 +74,6 @@ angular
                             type: 'number',
                             bRegex: true,
                             bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
                         }
                     ]
                 })
