@@ -103,7 +103,8 @@
                                     <input type="text" ng-pattern-restrict="^[A-Za-z ]*$" name="religion" class="md-input" md-input ng-model="wizard.religion" />
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
-                                    <label for="mother_tongue">Nationality<span class="req"></span></label>
+                                <br ng-if="!wizard.nationality">
+                                    <label ng-if="wizard.nationality" style="font-size: 12px;color: #727272;font-weight: 400;">Nationality<span class="req">*</span></label>
 									<input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="wizard.nationality" selectize/>
                                 </div>
                             </div>
