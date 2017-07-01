@@ -223,7 +223,8 @@
                     <div class="uk-form-row parsley-row">
                         <div class="uk-grid">
                             <div class="uk-width-medium-1-1">
-                                 <label class="uk-form-label" ng-show="course_id" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
+                                <br ng-if="!courseID">
+                                 <label class="uk-form-label" ng-if="courseID" style="font-size: 12px;color: #727272;">Course<span class="req">*</span></label>
                                 <input type="text" config="selectize_courseSub_config" options="selectize_courseSub_options" required ng-model="courseID" selectize/>
                             </div>
                         </div>          
