@@ -4,8 +4,8 @@ angular
         '$timeout',
         '$scope',
         '$rootScope',
-		'$http',
-		'$localStorage',
+        '$http',
+        '$localStorage',
         '$filter',
         function ($timeout,$scope,$rootScope,$http,$localStorage,$filter) {
     
@@ -14,7 +14,7 @@ angular
                     if(!$rootScope.miniSidebarActive) {
                         // activate current section
                         $('#sidebar_main').find('.current_section > a').trigger('click');
-						$('#sidebar_main').find('.act_item').parents('li:first').find('a:first').trigger('click');
+                        $('#sidebar_main').find('.act_item').parents('li:first').find('a:first').trigger('click');
                     } else {
                         // add tooltips to mini sidebar
                         var tooltip_elem = $('#sidebar_main').find('.menu_tooltip');
@@ -63,9 +63,9 @@ angular
                     $('#lang_switcher').next().children('.selectize-input').find('input').attr('readonly',true);
                 }
             };
-			
-			
-			var userLov = [
+            
+            
+            var userLov = [
                 {
                     id: 0,
                     title: 'Dashboard',
@@ -96,7 +96,7 @@ angular
                         }
                     ]
                 }];
-			
+            
             // menu entries
             var adminLov = [
                 {
@@ -164,6 +164,11 @@ angular
                                 }
                             ]
                         },
+                        //Modified
+                        {
+                            title: 'Assign Teacher',
+                            link: 'restricted.student.assignTeacher'
+                        },
                         {
                             title: 'Attendance',
                             submenu: [
@@ -183,27 +188,7 @@ angular
                         },
                         {
                             title: 'Timetable'
-                            // submenu: [
-                            //     {
-                            //         title: 'Configuration',
-                            //         submenu: [
-                            //         {
-                            //             title: 'Class Room Allocation',
-                            //         },
-                            //         {
-                            //             title: 'Create Week Days',
-                            //         },
-                            //         {
-                            //             title: 'Set Class Timing',
-                            //         },
-                            //     ]
-                            //     },
-                            //     {
-                            //         title: 'Manage Time Table',
-                            //     }
-                            // ]
                         },
-                       
                         {
                             title: 'Discipline',
                             submenu: [
@@ -212,47 +197,7 @@ angular
                                 }
                             ]
                         },
-                        // {
-                            // title: 'Examination',
-                            // submenu: [
-								// {
-                                    // title: 'Set Grading',
-                                    // link: 'restricted.academics.examination.setgrading'
-                                // },
-                                // {
-                                    // title: 'Set Exam',
-                                    // link: 'restricted.academics.examination.setexam'
-                                // },
-                                // {
-                                    // title: 'Set Assessment',
-									// link: 'restricted.academics.examination.setassessment'
-                                // },
-								// {
-                                    // title: 'Set Weightages',
-                                    // link: 'restricted.academics.examination.setweightage'
-                                // },
-                                // {
-                                    // title: 'Assign Exam',
-									// link: 'restricted.academics.examination.assign'
-                                // },
-								// {
-                                    // title: 'Mark List',
-									// link: 'restricted.academics.examination.markDetails'
-                                // }
-                                // // {
-                                    // // title:'Online Exam',
-                                    // // submenu: [
-                                        // // {
-                                            // // title: 'Add Online Exam',
-                                        // // },
-                                        // // {
-                                            // // title: 'View Exam Result',
-                                        // // }
-                                    // // ]
-                                // // }
-                            // ]
-                        // },
-						{
+                        {
 							title: 'Examination',
 							submenu: [
 								{
@@ -314,19 +259,6 @@ angular
                         {
                             title:'Students',
                             link: 'restricted.student.student_list'
-                        },
-                        {
-                            title: 'Assign Teacher',
-                            link: 'restricted.student.assignTeacher'
-                        },
-                        {
-                            title: 'Leaves',
-                            submenu: [
-                                {
-                                    title: 'Apply Leaves',
-                                    link: 'restricted.student.stuApplyLeave'
-                                }
-                            ]
                         }
                     ]
                 },
@@ -378,11 +310,11 @@ angular
 
                                 {
                                     title: 'Attendance Register',
-									link : 'restricted.academics.empattendancemark'
+                                    link : 'restricted.academics.empattendancemark'
                                 },
                                 {
                                     title: 'Attendance Report',
-									link: 'restricted.plugins.employeereport'
+                                    link: 'restricted.plugins.employeereport'
                                 },
                             ]
                         },
@@ -527,7 +459,7 @@ angular
                     id: 7,
                     title: 'Email Template',
                     icon: '&#xE158;',
-					link : 'restricted.emailTemplate.template'
+                    link : 'restricted.emailTemplate.template'
                 },
                 {
                     id: 8,
@@ -549,11 +481,11 @@ angular
                         },
                         {
                             title: 'Return Books',
-                            // link: ''
+                            link: 'restricted.library.bookreturn_view'
                         },
                         {
                             title: 'Report',
-                            // link: ''
+                            link: 'restricted.library.reportView'
                         },
                         // {
                         //     title:"Library View",
@@ -566,27 +498,27 @@ angular
                     title: 'Transport',
                     icon: '&#xE530;',
                     submenu: [
-						{
-							title: 'Vehicle',
-							link : 'restricted.transport.vehicleDetail'
-						},
-						{
-							title: 'Route',
-							link : 'restricted.transport.routeDetail'
-						},
-						{
-							title: 'Route Timing',
-							link : 'restricted.transport.routeTiming'
-						},
-						{
-							title: 'Route Stops',
-							link : 'restricted.transport.routeStops'
-						},
-						{
-							title: 'Route Allocation',
-							link : 'restricted.transport.routeAllocation'
-						}
-					]
+                        {
+                            title: 'Vehicle',
+                            link : 'restricted.transport.vehicleDetail'
+                        },
+                        {
+                            title: 'Route',
+                            link : 'restricted.transport.routeDetail'
+                        },
+                        {
+                            title: 'Route Timing',
+                            link : 'restricted.transport.routeTiming'
+                        },
+                        {
+                            title: 'Route Stops',
+                            link : 'restricted.transport.routeStops'
+                        },
+                        {
+                            title: 'Route Allocation',
+                            link : 'restricted.transport.routeAllocation'
+                        }
+                    ]
                 },
                 {
                     id: 10,
@@ -622,7 +554,62 @@ angular
                 {
                     id: 11,
                     title: 'Inventory',
-                    icon: '&#xE8D1;'
+                    icon: '&#xE8D1;',
+                    submenu: [
+                        {
+                            title:'Settings',
+                            submenu:[
+                                {
+                                    title: 'Store Category',
+                                    link: 'restricted.inventory.storeCategory'
+                                },
+                                {
+                                    title: 'Item Category',
+                                    link: 'restricted.inventory.itemCategory'
+                                },
+                                {
+                                    title: 'Supplier Type',
+                                    link: 'restricted.inventory.supplierType'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Store',
+                            link: 'restricted.inventory.store'
+                        },
+                        {
+                            title: 'Item',
+                            link: 'restricted.inventory.item'
+                        },
+                        {
+                            title: 'Store Item',
+                            link: 'restricted.inventory.storeItem'
+                        },
+                        {
+                            title: 'Supplier',
+                            link: 'restricted.inventory.supplier'
+                        },
+                        {
+                            title: 'Material Request',
+                            link: 'restricted.inventory.materialRequestView'
+                        },
+                        {
+                            title: 'Purchase Order',
+                            link: 'restricted.inventory.purchaseOrderView'
+                        },
+                        {
+                            title: 'Billing',
+                            link: 'restricted.inventory.billingView'
+                        },
+                        {
+                            title: 'GRN',
+                            link: 'restricted.inventory.grnView'
+                        },
+                        {
+                            title: 'Reports',
+                            link: 'restricted.inventory.reportView'
+                        }
+                    ]
                     // link: 'restricted.Library'
                 },
                 // {
@@ -656,17 +643,17 @@ angular
                     // icon: '&#xE158;',
                     // link : 'restricted.studentDashboard'
                 // },
-				// {
+                // {
                     // id: 14,
                     // title: 'User Privileges',
                     // icon: '&#xE8E8;',
                     // link : 'restricted.user_privileges.userView'
                 // }
             ];
-			
-			// Student Role
-			
-			var studentRole = [
+            
+            // Student Role
+            
+            var studentRole = [
                 {
                     id: 0,
                     title: 'Dashboard',
@@ -686,18 +673,18 @@ angular
                     submenu: [
                         {
                             title: 'Subjects & Syllabus',
-							link:'restricted.academics.studentSubjectView'
+                            link:'restricted.academics.studentSubjectView'
                         },
                         {
                             title: 'Attendance',
                             submenu: [
                                 {
                                     title: 'Attendance Report',
-									link: 'restricted.academics.reportforstudent'
+                                    link: 'restricted.plugins.studentreport'
                                 },
-								{
+                                {
                                     title: 'My Leaves',
-									link: 'restricted.student.stuApplyLeave'
+                                    link: 'restricted.student.stuApplyLeave'
                                 }
                             ]
                         },
@@ -707,7 +694,7 @@ angular
                         {
                             title: 'Examination',
                             submenu: [
-								{
+                                {
                                     title: 'Set Grading',
                                     link: 'restricted.academics.examination.setgrading'
                                 },
@@ -717,19 +704,19 @@ angular
                                 },
                                 {
                                     title: 'Set Assessment',
-									link: 'restricted.academics.examination.setassessment'
+                                    link: 'restricted.academics.examination.setassessment'
                                 },
-								{
+                                {
                                     title: 'Set Weightages',
                                     link: 'restricted.academics.examination.setweightage'
                                 },
                                 {
                                     title: 'Assign Exam',
-									link: 'restricted.academics.examination.assign'
+                                    link: 'restricted.academics.examination.assign'
                                 },
-								{
+                                {
                                     title: 'Mark List',
-									link: 'restricted.academics.examination.markDetails'
+                                    link: 'restricted.academics.examination.markDetails'
                                 }
                             ]
                         },
@@ -743,7 +730,7 @@ angular
                     id: 3,
                     title: 'My Profile',
                     icon: '&#xE7FD;',
-					link: 'restricted.student.student_profile'
+                    link: 'restricted.student.student_profile'
                 },
                 {
                     id: 6,
@@ -777,8 +764,8 @@ angular
                     ]
                 }
             ];
-			
-			var parentRole = [
+            
+            var parentRole = [
                 {
                     id: 0,
                     title: 'Dashboard',
@@ -798,7 +785,7 @@ angular
                     submenu: [
                         {
                             title: 'Subjects & Syllabus',
-							link:'restricted.academics.studentSubjectView'
+                            link:'restricted.academics.studentSubjectView'
                         },
                         {
                             title: 'Attendance',
@@ -808,7 +795,7 @@ angular
                                 },
                                 {
                                     title: 'Student Attendance Report',
-									link: 'restricted.plugins.studentreport'
+                                    link: 'restricted.plugins.studentreport'
                                 },
                                 {
                                     title: 'Student Attendance Marking',
@@ -831,7 +818,7 @@ angular
                         {
                             title: 'Examination',
                             submenu: [
-								{
+                                {
                                     title: 'Set Grading',
                                     link: 'restricted.academics.examination.setgrading'
                                 },
@@ -841,19 +828,19 @@ angular
                                 },
                                 {
                                     title: 'Set Assessment',
-									link: 'restricted.academics.examination.setassessment'
+                                    link: 'restricted.academics.examination.setassessment'
                                 },
-								{
+                                {
                                     title: 'Set Weightages',
                                     link: 'restricted.academics.examination.setweightage'
                                 },
                                 {
                                     title: 'Assign Exam',
-									link: 'restricted.academics.examination.assign'
+                                    link: 'restricted.academics.examination.assign'
                                 },
-								{
+                                {
                                     title: 'Mark List',
-									link: 'restricted.academics.examination.markDetails'
+                                    link: 'restricted.academics.examination.markDetails'
                                 },
                                 {
                                     title:'Online Exam',
@@ -907,27 +894,27 @@ angular
                     title: 'Transport',
                     icon: '&#xE530;',
                     submenu: [
-						{
-							title: 'Vehicle',
-							link : 'restricted.transport.vehicleDetail'
-						},
-						{
-							title: 'Route',
-							link : 'restricted.transport.routeDetail'
-						},
-						{
-							title: 'Route Timing',
-							link : 'restricted.transport.routeTiming'
-						},
-						{
-							title: 'Route Stops',
-							link : 'restricted.transport.routeStops'
-						},
-						{
-							title: 'Route Allocation',
-							link : 'restricted.transport.routeAllocation'
-						}
-					]
+                        {
+                            title: 'Vehicle',
+                            link : 'restricted.transport.vehicleDetail'
+                        },
+                        {
+                            title: 'Route',
+                            link : 'restricted.transport.routeDetail'
+                        },
+                        {
+                            title: 'Route Timing',
+                            link : 'restricted.transport.routeTiming'
+                        },
+                        {
+                            title: 'Route Stops',
+                            link : 'restricted.transport.routeStops'
+                        },
+                        {
+                            title: 'Route Allocation',
+                            link : 'restricted.transport.routeAllocation'
+                        }
+                    ]
                 },
                 {
                     id: 10,
@@ -972,17 +959,17 @@ angular
                     ]
                 }
             ];
-			
-			
-			if($localStorage.role_id==1){
-				$scope.sections = adminLov;
-			}else if($localStorage.role_id==2){
-				$scope.sections = userLov;
-			}else if($localStorage.role_id==3){
-				$scope.sections = studentRole;
-			}else if($localStorage.role_id==4){
-				$scope.sections = parentRole;
-			}
+            
+            
+            if($localStorage.role_id==1){
+                $scope.sections = adminLov;
+            }else if($localStorage.role_id==2){
+                $scope.sections = userLov;
+            }else if($localStorage.role_id==3){
+                $scope.sections = studentRole;
+            }else if($localStorage.role_id==4){
+                $scope.sections = parentRole;
+            }
            
         }
     ])
