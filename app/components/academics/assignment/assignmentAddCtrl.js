@@ -5,56 +5,120 @@ angular
         '$rootScope',
         '$timeout','$filter','$compile','$stateParams','$state','$localStorage','$http',
         function ($scope,$rootScope,$timeout, $filter,$compile,$stateParams,$state,$localStorage,$http) {
-            $scope.syllabus=[];
-            $scope.courseList=[];
-            $scope.subjectList=[];
-            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(course_data){
-                $scope.courseList.push(course_data.data);
-            });
-            $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(subject_data){
-                $scope.subjectList.push(subject_data.data);
-            });
+            // $scope.syllabus=[];
+            // $scope.courseList=[];
+            // $scope.subjectList=[];
+            // $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+            // .success(function(course_data){
+            //     $scope.courseList.push(course_data.data);
+            // });
+            // $http.get($localStorage.service+'AcademicsAPI/fetchSubjectData',{headers:{'access_token':$localStorage.access_token}})
+            // .success(function(subject_data){
+            //     $scope.subjectList.push(subject_data.data);
+            // });
 
-            $scope.selectize_course_options = $scope.courseList;
+            // $scope.selectize_course_options = $scope.courseList;
+            // $scope.selectize_course_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Select Course',
+            //     valueField: 'ID',
+            //     labelField: 'NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(value) {
+            //             console.log(value);
+            //         });
+            //     }
+            // };
+
+            // $scope.selectize_batch_options = $scope.courseList;
+            // $scope.selectize_batch_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Select Batch',
+            //     valueField: 'ID',
+            //     labelField: 'NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(value) {
+            //             console.log(value);
+            //         });
+            //     }
+            // };
+
+            // $scope.selectize_subject_options = $scope.subjectList;
+            // $scope.selectize_subject_config = {
+            //     create: false,
+            //     maxItems: 1,
+            //     placeholder: 'Select Subject',
+            //     valueField: 'ID',
+            //     labelField: 'NAME',
+            //     onInitialize: function(selectize){
+            //         selectize.on('change', function(value) {
+            //             console.log(value);
+            //         });
+            //     }
+            // };
+
+            $scope.courseData=[];
+            $scope.batchData=[];
+            $scope.getSub_id = [];
+            $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(data){
+                $scope.courseData.push(data.message);
+            });
+            
+            $scope.fetchBatch=function(id){
+                $http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+                .success(function(batch_data){
+                    $scope.selectize_batch_options=batch_data.data;
+                });
+                
+                $http.get($localStorage.service+'AcademicsAPI/fetchSubjectDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+                .success(function(return_data){
+                    $scope.selectize_subject_options = return_data.data;
+                });
+            }
+            
+            $scope.selectize_course_options =$scope.courseData;
             $scope.selectize_course_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course',
+                placeholder: 'Select Course...',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        console.log(value);
+                   selectize.on('change', function(value) {
+                        $scope.fetchBatch(value);
+                        //$scope.fetchSubject(value);
                     });
+                    
                 }
             };
-
-            $scope.selectize_batch_options = $scope.courseList;
+            
+            $scope.selectize_batch_options=[];
             $scope.selectize_batch_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Batch',
+                placeholder: 'Select Batch...',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        console.log(value);
+                   selectize.on('change', function(value) {
+                    console.log(value,'Batch');
                     });
                 }
             };
 
-            $scope.selectize_subject_options = $scope.subjectList;
+            $scope.selectize_subject_options = [];
             $scope.selectize_subject_config = {
                 create: false,
                 maxItems: 1,
                 placeholder: 'Select Subject',
-                valueField: 'ID',
-                labelField: 'NAME',
+                valueField: 'COU_ID',
+                labelField: 'COURSE_NAME',
                 onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-                        console.log(value);
+                    selectize.on('change', function(val) {
+                        console.log(val,'Subject');
                     });
                 }
             };
@@ -71,130 +135,130 @@ angular
             
             // Clone functionality
 
-            $scope.form_template = [
-                [
-                    {
-                        'type': 'text',
-                        'name': 'firstName',
-                        'label': 'First Name'
-                    },
-                    {
-                        'type': 'text',
-                        'name': 'lastName',
-                        'label': 'Last Name'
-                    }
-                ],
-                [
-                    {
-                        'type': 'text',
-                        'name': 'company',
-                        'label': 'Company'
-                    }
-                ],
-                [
-                    {
-                        'type': 'radio',
-                        'label': 'Gender',
-                        'name': 'gender',
-                        'inputs': [
-                            {
-                                'label': 'Man',
-                                'value': 'man'
-                            },
-                            {
-                                'label': 'Woman',
-                                'value': 'woman'
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'switch',
-                        'label': 'Contact',
-                        'inputs': [
-                            {
-                                'label': 'Email',
-                                'name': 'switch_email'
-                            },
-                            {
-                                'label': 'Phone',
-                                'name': 'switch_phone'
-                            }
-                        ]
-                    }
-                ],
-                [
-                    {
-                        'type': 'selectize',
-                        'name': 'city',
-                        'position': 'bottom',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'placeholder': 'City...'
-                        },
-                        'data': [
-                            {
-                                "value": "city_a",
-                                "title": "City A"
-                            },
-                            {
-                                "value": "city_b",
-                                "title": "City B"
-                            },
-                            {
-                                "value": "city_c",
-                                "title": "City C"
-                            },
-                            {
-                                "value": "city_d",
-                                "title": "City D"
-                            },
-                            {
-                                "value": "city_e",
-                                "title": "City E"
-                            }
-                        ]
-                    },
-                    {
-                        'type': 'selectize',
-                        'name': 'country',
-                        'config': {
-                            'valueField': 'value',
-                            'labelField': 'title',
-                            'create': false,
-                            'maxItems': 1,
-                            'placeholder': 'Country...'
-                        },
-                        'data': [
-                            {
-                                "value": "country_a",
-                                "title": "Country A"
-                            },
-                            {
-                                "value": "country_b",
-                                "title": "Country B"
-                            },
-                            {
-                                "value": "country_c",
-                                "title": "Country C"
-                            },
-                            {
-                                "value": "country_d",
-                                "title": "Country D"
-                            },
-                            {
-                                "value": "country_e",
-                                "title": "Country E"
-                            }
-                        ]
-                    }
-                ]
-            ];
+            // $scope.form_template = [
+            //     [
+            //         {
+            //             'type': 'text',
+            //             'name': 'firstName',
+            //             'label': 'First Name'
+            //         },
+            //         {
+            //             'type': 'text',
+            //             'name': 'lastName',
+            //             'label': 'Last Name'
+            //         }
+            //     ],
+            //     [
+            //         {
+            //             'type': 'text',
+            //             'name': 'company',
+            //             'label': 'Company'
+            //         }
+            //     ],
+            //     [
+            //         {
+            //             'type': 'radio',
+            //             'label': 'Gender',
+            //             'name': 'gender',
+            //             'inputs': [
+            //                 {
+            //                     'label': 'Man',
+            //                     'value': 'man'
+            //                 },
+            //                 {
+            //                     'label': 'Woman',
+            //                     'value': 'woman'
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             'type': 'switch',
+            //             'label': 'Contact',
+            //             'inputs': [
+            //                 {
+            //                     'label': 'Email',
+            //                     'name': 'switch_email'
+            //                 },
+            //                 {
+            //                     'label': 'Phone',
+            //                     'name': 'switch_phone'
+            //                 }
+            //             ]
+            //         }
+            //     ],
+            //     [
+            //         {
+            //             'type': 'selectize',
+            //             'name': 'city',
+            //             'position': 'bottom',
+            //             'config': {
+            //                 'valueField': 'value',
+            //                 'labelField': 'title',
+            //                 'placeholder': 'City...'
+            //             },
+            //             'data': [
+            //                 {
+            //                     "value": "city_a",
+            //                     "title": "City A"
+            //                 },
+            //                 {
+            //                     "value": "city_b",
+            //                     "title": "City B"
+            //                 },
+            //                 {
+            //                     "value": "city_c",
+            //                     "title": "City C"
+            //                 },
+            //                 {
+            //                     "value": "city_d",
+            //                     "title": "City D"
+            //                 },
+            //                 {
+            //                     "value": "city_e",
+            //                     "title": "City E"
+            //                 }
+            //             ]
+            //         },
+            //         {
+            //             'type': 'selectize',
+            //             'name': 'country',
+            //             'config': {
+            //                 'valueField': 'value',
+            //                 'labelField': 'title',
+            //                 'create': false,
+            //                 'maxItems': 1,
+            //                 'placeholder': 'Country...'
+            //             },
+            //             'data': [
+            //                 {
+            //                     "value": "country_a",
+            //                     "title": "Country A"
+            //                 },
+            //                 {
+            //                     "value": "country_b",
+            //                     "title": "Country B"
+            //                 },
+            //                 {
+            //                     "value": "country_c",
+            //                     "title": "Country C"
+            //                 },
+            //                 {
+            //                     "value": "country_d",
+            //                     "title": "Country D"
+            //                 },
+            //                 {
+            //                     "value": "country_e",
+            //                     "title": "Country E"
+            //                 }
+            //             ]
+            //         }
+            //     ]
+            // ];
 
-            $scope.form_dynamic = [];
-            $scope.form_dynamic.push($scope.form_template);
+            // $scope.form_dynamic = [];
+            // $scope.form_dynamic.push($scope.form_template);
 
-            $scope.form_dynamic_model = [];
+            // $scope.form_dynamic_model = [];
 
             // clone section
             $scope.cloneSection = function($event,$index) {
@@ -269,21 +333,24 @@ angular
             }
 
             // $scope.syllabus=[];
-            $scope.saveSyllabusDetails=function(){
+            $scope.saveAssignmentDetails=function(){
                 $http({
                     method:'POST',
-                    url: $localStorage.service+'AcademicsAPI/syllabusDetail',
+                    url: $localStorage.service+'AssignmentAPI/assignmentDetail',
                     data: {
-                        'syllabus_ID':$scope.syllabus_ID,
-                        'course_id' : $scope.courseID,
-                        'subject_id' : $scope.subjectID,
-                        'syllabus_data' : $scope.syllabus
+                        'name' : $scope.assign_name,
+                        'content' : $scope.assign_content,
+                        'course_id' : $scope.assign_courseID,
+                        'batch_id' : $scope.assign_batchID,
+                        'subject_id' : $scope.assign_subjectID,
+                        'due_date' : $scope.assign_dueDate,
+						'userId' : $localStorage.user_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     console.log(return_data.data.message);
                     if(return_data.data.status==true){
-                        $state.go('restricted.academics.syllabus_view');
+                        $state.go('restricted.academics.assignment');
                     }
                 });
             }

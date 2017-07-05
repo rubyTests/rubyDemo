@@ -40,24 +40,25 @@
 <div id="page_content">
     <div id="page_content_inner">
     <h3 class="heading_a uk-margin-bottom">Add Assignment</h3>
+    <form id="form_validation" name="inputForm" ng-submit="saveAssignmentDetails()" novalidate>
         <div class="md-card">
             <div class="md-card-content">
                 
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-medium-1-3">
-                        <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="courseID" selectize />
+                        <input type="text" config="selectize_course_config" options="selectize_course_options" ng-model="assign_courseID" selectize />
                     </div>
                     <div class="uk-width-medium-1-3">
-                        <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="batchID" selectize />
+                        <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="assign_batchID" selectize />
                     </div>
                     <div class="uk-width-medium-1-3">
-                        <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="subjectID" selectize />
+                        <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="assign_subjectID" selectize />
                     </div>
                 </div>
                 <div class="uk-grid uk-margin-bottom" data-uk-grid-margin>
                     <div class="uk-width-medium-1-3">
                         <label for="from_date">Due Date<span class="req"></span></label>
-                        <input type="text" name="join_date" id="join_date" required class="md-input"  data-uk-datepicker="{format:'MM.DD.YYYY'}" md-input ng-model="wizard.join_date"/>
+                        <input type="text" name="join_date" id="join_date" required class="md-input"  data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="assign_dueDate"/>
                     </div>
                 </div>
             </div>
@@ -65,38 +66,27 @@
 
         <div class="md-card">
             <div class="md-card-content large-padding">
-                <form class="uk-form" method="post">
-                    <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match ng-repeat="(topParent,section) in form_dynamic track by $index">
-                        <div class="uk-width-10-10 uk-width-medium-10-10 uk-width-small-5">
-                            <div class="uk-grid" ng-repeat="fields in section" on-last-repeat>
-                                <div class="uk-width-1-1" ng-if="$parent.$index == 1" ng-repeat="input in fields" >
-                                    <div class="md-card" style="99.99%">
-                                        <div class="md-card-content" style="height: 26px !important;">
-                                            <textarea  style="line-height: 0px !important;" class="md-input" ng-model="syllabus[topParent].syllabus_title" md-input textarea-autosize placeholder="Title"></textarea>
-                                            <input type="hidden" ng-model="syllabus[topParent].syllabus_ID">
-                                        </div>
+                <div class="uk-grid uk-grid-medium form_hr" data-uk-grid-match>
+                    <div class="uk-width-10-10 uk-width-medium-10-10 uk-width-small-5">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-1" >
+                                <div class="md-card" style="99.99%">
+                                    <div class="md-card-content" style="height: 26px !important;">
+                                        <textarea  style="line-height: 0px !important;" class="md-input" ng-model="assign_name" md-input textarea-autosize placeholder="Title"></textarea>
+                                        <input type="hidden" ng-model="assign_id">
                                     </div>
-                                    <textarea ui-tinymce="tinymce_options" ng-model="syllabus[topParent].syllabus_content" cols="4" rows="6"></textarea>
                                 </div>
+                                <textarea ui-tinymce="tinymce_options" ng-model="assign_content" cols="4" rows="6"></textarea>
                             </div>
                         </div>
-                        <!-- <div class="uk-width-small-6" style="margin-left: 0px;margin-top: -80px;" id="addButton">
-                            <div class="uk-width-2-10 uk-width-medium-1-10 uk-text-center" style="float: right !important;">
-                                <div class="uk-vertical-align uk-height-1-1">
-                                    <div class="uk-vertical-align-middle">
-                                        <a href="javascript:void(0)" config="selectize_clone_config" data-uk-tooltip="{pos:'top'}" ng-click="cloneSection($event,$index)" ng-if="$last" title="add row"><i class="material-icons md-36">&#xE146;</i></a>
-                                        <a href="javascript:void(0)" data-uk-tooltip="{pos:'top'}" ng-click="deleteSection($event,$index)" title="Remove row" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
-                    <div class="uk-text-right">
-                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small" ng-click="backBtn()">Cancel</button>
-                        <button type="button" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" ng-click="saveSyllabusDetails()">Save</button>
-                    </div>
-                </form>
+                </div>
+                <div class="uk-text-right uk-margin-top">
+                    <button type="button" class="md-btn md-btn-flat md-btn md-btn-danger md-btn-small" ng-click="backBtn()">Cancel</button>
+                    <button type="submit" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small">Save</button>
+                </div>
             </div>
         </div>
+    </form>
     </div>
 </div>

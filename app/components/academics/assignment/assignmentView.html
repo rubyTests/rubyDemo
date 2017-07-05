@@ -90,11 +90,11 @@ td.editable_updated {
                         </tfoot>
                         <tbody>
                             <tr ng-repeat="item in table_data" on-last-repeat>
-                                <td><input type="checkbox" class="ts_checkbox" ng-change="statusChange();" data-md-icheck icheck ng-model="item.row_select"></td>
-                                <td><img class="md-user-image" ng-src="{{item.photo1_path}}" alt=""/></td>
-                                <td>{{item.firstname+" "+item.lastname}}</td>
-                                <td>{{item.id}}</td>
-                                <td>{{item.Admission_No}}</td>
+                                <td><input type="checkbox" class="ts_checkbox" ng-change="statusChange();" data-md-icheck icheck ng-model="item.row_select" ng-value="{{item.PROFILE_ID}}"></td>
+                                <td><img class="md-user-image" ng-src="{{item.IMAGE}}" alt=""/></td>
+                                <td>{{item.STUDENT_NAME}}</td>
+                                <td>{{item.ROLL_NO}}</td>
+                                <td>{{item.ADMISSION_NUM}}</td>
                             </tr>
                         </tbody>
                     </table>

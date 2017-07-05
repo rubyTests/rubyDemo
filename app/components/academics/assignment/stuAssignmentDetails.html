@@ -1,6 +1,6 @@
 <style type="text/css">
     .uk-modal.uk-modal-dialog-replace .uk-modal-content{
-      font-size: 16px !IMPORTANT;
+      font-size: 16px !important;
     }
 </style>
 <div id="page_content">
@@ -13,29 +13,27 @@
             <div class="md-card-content large-padding" ng-controller="assignmentDetailsCtrl as showCase">
                 <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
                     <div class="uk-text-right">
-                        <a class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.assignmentAdd">
-                        <i class="uk-icon-plus"></i>  Add Assignment
-                        </a>
+                        <!-- <a class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.academics.assignmentAdd"> -->
+                        <!-- <i class="uk-icon-plus"></i>  Add Assignment -->
+                        <!-- </a> -->
                     </div>
                     <thead>
                         <tr>
                             <th>S.No</th>
-                            <th>Name</th>
+                            <th>Title</th>
                             <th>Subject</th>
-                            <th>Course</th>
-                            <th>Batch</th>
-                            <th>Status</th>
+                            <th>Due Date</th>
+                            <th>Created By</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
                             <th></th>
-                            <th>Name</th>
+                            <th>Title</th>
                             <th>Subject</th>
-                            <th>Course</th>
-                            <th>Batch</th>
-                            <th>Status</th>
+                            <th>Due Date</th>
+                            <th>Created By</th>
                             <th></th>
                         </tr>
                     </tfoot>
@@ -44,13 +42,11 @@
                             <td>{{$index+1}}</td>
                             <td>{{row.NAME}}</td>
                             <td>{{row.SUBJECT_NAME}}</td>
-                            <td>{{row.COURSE_NAME}}</td>
-                            <td>{{row.BATCH_NAME}}</td>
-                            <td><span ng-style="row.STATUS=='Completed' && {'color':'green'} || row.STATUS=='Pending' && {'color':'orange'} ">{{row.STATUS}}</span></td>
-                            <td>
-                                <a ui-sref="restricted.academics.assignmentEdit({id:{{row.ID}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="deleteAssignment(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
-                                <a ng-show="{{row.STATUS!='Completed'}}" ui-sref="restricted.academics.assignmentView({id:{{row.BATCH_ID}},assess:{{row.ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
+                            <td>{{row.DUE_DATE}}</td>
+                            <td>{{row.profileName}}</td>
+                            <td class="uk-text-center">
+                                <!-- <a ui-sref="restricted.academics.assignmentView({id:{{row.BATCH_ID}},assess:{{row.ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a> -->
+                                <a ui-sref="restricted.academics.stuAssignmentViewDetail({id:{{row.ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
                             </td>
                         </tr>
                     </tbody>

@@ -44,30 +44,25 @@ angular
                         type: 'text',
                         bRegex: true,
                         bSmart: true
-                    },
-                    {
-                        type: 'text',
-                        bRegex: true,
-                        bSmart: true
                     }
                 ]
             })
             .withButtons([
-                {
-                    extend:    'print',
-                    text:      '<i class="uk-icon-print"></i> Print',
-                    titleAttr: 'Print'
-                },
-                {
-                    extend:    'excelHtml5',
-                    text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
-                    titleAttr: ''
-                },
-                {
-                    extend:    'pdfHtml5',
-                    text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
-                    titleAttr: 'PDF'
-                }
+                // {
+                    // extend:    'print',
+                    // text:      '<i class="uk-icon-print"></i> Print',
+                    // titleAttr: 'Print'
+                // },
+                // {
+                    // extend:    'excelHtml5',
+                    // text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
+                    // titleAttr: ''
+                // },
+                // {
+                    // extend:    'pdfHtml5',
+                    // text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
+                    // titleAttr: 'PDF'
+                // }
                 // {
                 //     text:      '<a href="" class="md-btn md-btn-primary">Add Syllabus</a>',
                 //     titleAttr: 'Add Syllabus'
@@ -94,12 +89,13 @@ angular
             $scope.ViewData=[];
             $http({
                 method:'GET',
-                url: $localStorage.service+'AssignmentAPI/assignmentDetail',
-                headers:{'access_token':$localStorage.access_token}
+                url: $localStorage.service+'AssignmentAPI/stuAssignmentDetail',
+                params:{profileId:$localStorage.userProfile_id},
+				headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
-                //console.log(return_data,';return_data');
+                console.log(return_data,';return_data');
                 $scope.ViewData=return_data.data.data;
-                //console.log($scope.ViewData,'$scope.ViewData$scope.ViewData');
+                console.log($scope.ViewData,'$scope.ViewData$scope.ViewData');
             });
 
             $scope.deleteAssignment=function(id,$index){

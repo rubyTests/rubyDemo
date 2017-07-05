@@ -9,9 +9,23 @@ angular
         'ts_data',
         '$resource',
         '$filter',
-        function ($scope,$rootScope,$timeout,$compile,variables,ts_data,$resource,$filter) {
+        '$http',
+        '$localStorage',
+        '$stateParams',
+        '$state',
+        function ($scope,$rootScope,$timeout,$compile,variables,ts_data,$resource,$filter,$http,$localStorage,$stateParams,$state) {
 
-            $scope.table_data = ts_data;
+            $scope.table_data=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'AssignmentAPI/getStuDetailBatchID',
+                params :{id : $stateParams.id,assess:$stateParams.assess},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                console.log(return_data,';return_data');
+                $scope.table_data=return_data.data.data;
+            });
+
             $scope.markedStudent=[];
             $scope.getData=function(item){
                 console.log(item.row_select,"item.row_select")
@@ -117,6 +131,8 @@ angular
                 $scope.markedStudent.push($scope.modalData);
                 console.log($scope.markedStudent,"added");
             }
+            $scope.studentData=[];
+            $scope.batchData=[];
             $scope.showConfimation=function(){
                  var modal = UIkit.modal("#listofmarkedStudent");
                 if ( modal.isActive() ) {
@@ -124,7 +140,31 @@ angular
                 } else {
                     if ($scope.markedStudent.length <= 0) {
                         UIkit.modal.confirm('Are you sure to continue ?', function() {
-                                
+                                angular.forEach($scope.table_data, function(value, key) {
+                                    if (value.row_select==true) {
+                                        $scope.studentData.push(value.PROFILE_ID);
+                                        $scope.batchData.push(value.COURSEBATCH_ID);
+                                    }
+                                });
+
+                                 $http({
+                                    method:'POST',
+                                    url: $localStorage.service+'AssignmentAPI/assignmentStatus',
+                                    data: {
+                                        'profileId' : $scope.studentData,
+                                        'batch_id' : $scope.batchData,
+                                        'assignment_id':$stateParams.assess
+                                    },
+                                    headers:{'access_token':$localStorage.access_token}
+                                }).then(function(return_data){
+                                    //console.log(return_data.data.status);
+                                    if (return_data.data.status==true) {
+                                        $scope.studentData=[];
+                                        $scope.batchData=[];
+                                        $state.go('restricted.academics.assignment');
+                                    }
+                                });
+
                             },function(){
                                 // item.row_select=true;
                             }, {
