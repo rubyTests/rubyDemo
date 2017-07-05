@@ -68,9 +68,10 @@ angular
 			$scope.selectize_courseNew_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course...',
+                placeholder: 'Course...',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                    selectize.on('change', function(value) {
 						$scope.assessmentList.batch='';
@@ -90,6 +91,7 @@ angular
                 placeholder: 'Select Batch...',
                 valueField: 'ID',
                 labelField: 'NAME',
+				searchField: 'NAME',
 				onInitialize: function(selectize){
                    selectize.on('change', function(value) {
 					   $scope.getStuData();
@@ -137,9 +139,10 @@ angular
 			$scope.selectize_term_config = {
 				create: false,
 				maxItems: 1,
-				placeholder: 'Select Term',
+				placeholder: 'Term',
 				valueField: 'ID',
 				labelField: 'NAME',
+				searchField: 'NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(val) {
 						$scope.fetchTerm(val);
@@ -153,9 +156,10 @@ angular
 			$scope.selectize_exam_config = {
 				create: false,
 				maxItems: 1,
-				placeholder: 'Select Exam',
+				placeholder: 'Exam',
 				valueField: 'ID',
 				labelField: 'NAME',
+				searchField: 'NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(val) {
 						$scope.fetchAssessment(val);
@@ -168,9 +172,10 @@ angular
 			$scope.selectize_assessment_config = {
 				create: false,
 				maxItems: 1,
-				placeholder: 'Select Assessment',
+				placeholder: 'Assessment',
 				valueField: 'ID',
 				labelField: 'NAME',
+				searchField: 'NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(val) {
 						$scope.getStuData();
@@ -182,9 +187,10 @@ angular
 			$scope.selectize_subject_config = {
 				create: false,
 				maxItems: 1,
-				placeholder: 'Select Subject',
+				placeholder: 'Subject',
 				valueField: 'COU_ID',
 				labelField: 'COURSE_NAME',
+				searchField: 'COURSE_NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(val) {
 						$scope.getStuData();
