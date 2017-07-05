@@ -92,7 +92,8 @@ angular
 			$scope.getLogin=function(){
 				$http({
 					method : "GET",
-					url : "http://localhost/rubyServices/api/GeneralAPI/login",
+					// url : "http://localhost/rubyServices/api/GeneralAPI/login",
+					url : "http://192.168.1.139/rubyServices/api/GeneralAPI/login",
 					// url : "http://campusenter.com/services/api/GeneralAPI/login",
 					params : {"USER_EMAIL": $scope.login_username, "USER_PASSWORD": $scope.login_password},
 				}).then(function(response){
@@ -103,6 +104,7 @@ angular
 						$localStorage.role=response.data.message[0].role_name;
 						$localStorage.role_id=response.data.message[0].USER_ROLE_ID;
 						$localStorage.userProfile_id=response.data.message[0].USER_PROFILE_ID;
+						// $localStorage.user_privileges=response.data.message[0].user_privileges;
 						//$location.path('/dashboard');
 						if($localStorage.role=='student'){
 							$state.go('restricted.studentDashboard');
@@ -127,7 +129,7 @@ angular
 			$scope.recoveryData=function(){
 				//console.log($scope.recovery,"recovery");
 				if($scope.recovery!='' || $scope.recovery!=undefined){
-					$http.get('http://localhost/rubyServices/api/GeneralAPI/passwordReset',{params:{userData:$scope.recovery.data}})
+					$http.get('http://192.168.1.139/rubyServices/api/GeneralAPI/passwordReset',{params:{userData:$scope.recovery.data}})
 					.success(function(data){
 						//console.log(data,"data");
 						if(data.status==true){
@@ -143,7 +145,12 @@ angular
 			if($localStorage.access_token=='' || $localStorage.access_token==undefined){
 				$location.path('/');
 			}else{
-				$location.path('/dashboard');
+				//$location.path('/dashboard');
+				if($localStorage.role=='student'){
+					$state.go('restricted.studentDashboard');
+				}else{
+					$state.go('restricted.dashboard');
+				}
 			}
 
         }
