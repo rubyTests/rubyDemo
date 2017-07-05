@@ -9,11 +9,10 @@ angular
         'user_data',
         'sale_chart_data',
         'variables',
-        'todo_data',
         '$http',
         '$localStorage',
-        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables,todo_data, $http, $localStorage) {
-
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables, $http, $localStorage) {
+			$scope.todo_data=[];
         // circular statistics
             $scope.stat_conversions_data = [5,3,9,6,5,9,7];
             $scope.stat_conversions_options = {
@@ -112,10 +111,23 @@ angular
 
         // countUp update
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
-                $scope.dynamicStats[0].count = '1500';
-                $scope.dynamicStats[1].count = '85';
-                $scope.dynamicStats[2].count = '10';
-                $scope.dynamicStats[3].count = '1501';
+                
+				$http({
+				method:'get',
+				url: $localStorage.service+'DashboardAPI/adminDashboard',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					// console.log(return_data.data.message.studentCount[0].stuCount,"msg");
+					$scope.dynamicStats[0].count = return_data.data.message.studentCount[0].stuCount;
+					$scope.dynamicStats[1].count = return_data.data.message.employeeCount[0].empCount;
+					$scope.dynamicStats[2].count = return_data.data.message.courseCount[0].courseCount;
+					$scope.dynamicStats[3].count = return_data.data.message.admissionCount[0].admission;
+				});
+				
+				// $scope.dynamicStats[0].count = '1500';
+                // $scope.dynamicStats[1].count = '85';
+                // $scope.dynamicStats[2].count = '10';
+                // $scope.dynamicStats[3].count = '1501';
 
                 // update live statistics
                 // function getRandomVal(min, max) {
@@ -424,9 +436,34 @@ angular
 
             //todo list added by senthil
 
-            $scope.todo_data = todo_data;
-            console.log($scope.todo_data);
-            $scope.todo_length = $scope.todo_data.length;
+			$scope.getTodolist=function(){
+				$http({
+				method:'get',
+				url: $localStorage.service+'DashboardAPI/todoAdmin',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					//console.log(return_data.data.message,"msg");
+					$scope.todo_data = return_data.data.message;
+					angular.forEach($scope.todo_data,function(value,key){
+						if(value.IMPORTANT=='ture'){
+							$scope.todo_data[key].IMPORTANT=true;
+						}else{
+							$scope.todo_data[key].IMPORTANT=false;
+						}
+						
+						if(value.CLOSED=='true'){
+							$scope.todo_data[key].CLOSED=true;
+						}else{
+							$scope.todo_data[key].CLOSED=false;
+						}
+					})
+					$scope.todo_length = $scope.todo_data.length;
+				});
+			}
+			$scope.getTodolist();
+            // $scope.todo_data = todo_data;
+            // //console.log($scope.todo_data);
+            // $scope.todo_length = $scope.todo_data.length;
 
             // add todo list modal
             $scope.todolist_modal = UIkit.modal("#new_todolist", {
@@ -438,27 +475,71 @@ angular
                 } else {
                     $scope.todolist_modal.show();
                     $scope.todoTitle = null;
-                    $scope.todoDesc = null;
+                    $scope.todoDate = null;
+					$scope.todoDesc = null;
+					$scope.important = null;
                     // hide events panel
                     // $clndr_todolist.removeClass('events_visible');
                 }
             };
 
-            // $scope.todo_data.tasks=[];
-            $scope.addTodo = function($event){                
-                var todoDataVal = {
-                    title: $scope.todoTitle,
-                    description: $scope.todoDesc,
-                    closed: false,
-                    important: false
-                }
-                todo_data.push(todoDataVal);
+            
+            $scope.addTodo = function($event){
+                
+				// var todoDataVal = {
+                    // TITLE: $scope.todoTitle,
+                    // DESCRIPTION: $scope.todoDesc,
+                    // DATE: $scope.todoDate,
+                    // CLOSED: false,
+                    // IMPORTANT: $scope.important
+                // }
+				// console.log(todo_data,'todo_data');
+                // todo_data.push(todoDataVal);
+				
+				if($scope.important==1){
+					$scope.important='true';
+				}else{
+					$scope.important='false';
+				}
+				
+				$http({
+				method:'POST',
+				url: $localStorage.service+'DashboardAPI/todoAdmin',
+				data: {title: $scope.todoTitle,description: $scope.todoDesc,date: $scope.todoDate,important: $scope.important},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+				}).then(function(response){
+					if(response.data.status==true){
+						$scope.getTodolist();
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$scope.todoTitle = null;
+						$scope.todoDate = null;
+						$scope.todoDesc = null;
+						$scope.important = null;
+					}
+				});
+				
                 $scope.todolist_modal.hide();
             }
 
-            $scope.removeTodo = function(index){
-                console.log($scope.todo_data);
+            $scope.removeTodo = function(index,id){
+                //console.log($scope.todo_data);
                 $scope.todo_data.splice(index,1);
+				$http({
+				method:'delete',
+				url: $localStorage.service+'DashboardAPI/todoAdmin',
+				headers:{'access_token':$localStorage.access_token},
+				params:{id:id}
+				}).then(function(return_data){
+					//console.log(return_data.data.message,"msg");
+					$scope.getTodolist();
+					$scope.todo_data = return_data.data.message;
+					$scope.todo_length = $scope.todo_data.length;
+				});
             }
 
             $scope.posts_data=[];

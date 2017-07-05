@@ -137,14 +137,14 @@
                                 <div ng-class="{ 'uk-margin-large-bottom': ($index+1) != todo_length }">
                                     <!-- <h2 class="heading_list uk-text-upper">{{list.list_name}}</h2> -->
                                     <ul class="md-list md-list-addon uk-margin-small-bottom uk-nestable" data-uk-nestable="{ maxDepth: 2, handleClass: 'md-list-content' }">
-                                        <li class="uk-nestable-item" ng-class="{'md-list-item-disabled': task.closed}" ng-repeat="task in todo_data">
+                                        <li class="uk-nestable-item" ng-class="{'md-list-item-disabled': task.CLOSED}" ng-repeat="task in todo_data">
                                             <div class="md-list-addon-element">
-                                                <input type="checkbox" icheck ng-model="task.closed" />
+                                                <input type="checkbox" icheck ng-model="task.CLOSED" />
                                             </div>
                                             <div class="md-list-content">
-                                                <a href="#" class="md-list-action" ng-click="removeTodo($index)"><i class="md-icon material-icons">&#xE872;</i></a>
-                                                <span class="md-list-heading" ng-class="{'uk-text-danger': task.important}">{{task.title}}</span>
-                                                <span class="uk-text-small" ng-class="{'uk-text-danger': task.important, 'uk-text-muted': !task.important}">{{task.description}}</span>
+                                                <a class="md-list-action" ng-click="removeTodo($index,task.ID)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                                <span class="md-list-heading" ng-class="{'uk-text-danger': task.IMPORTANT}">{{task.TITLE}}</span>
+                                                <span class="uk-text-small" ng-class="{'uk-text-danger': task.IMPORTANT, 'uk-text-muted': !task.IMPORTANT}">{{task.DESCRIPTION}}</span>
                                             </div>
                                         </li>
                                     </ul>
@@ -165,8 +165,26 @@
                                 <label for="clndr_event_link_control">Todo Description</label>
                                 <input type="text" class="md-input" id="clndr_event_link_control" md-input ng-model="todoDesc" />
                             </div>
+							<!-- <div class="uk-margin-medium-bottom"> -->
+                                <!-- <label for="clndr_event_link_control">Todo Date</label> -->
+                                <!-- <input type="text" class="md-input" id="clndr_event_link_control" md-input ng-model="todoDate" /> -->
+                            <!-- </div> -->
+							<div class="uk-grid" data-uk-grid-margin>
+								<div class="uk-width-medium-1-2">
+									<div class="uk-input-group">
+										<span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+										<label for="clndr_event_date_control">Todo Date</label>
+										<input class="md-input" type="text" id="clndr_event_date_control" ng-model="todoDate" data-uk-datepicker="{format:'YYYY-MM-DD', addClass: 'dropdown-modal' }" md-input>
+									</div>
+								</div>
+								<div class="uk-width-medium-1-2">
+									<label class="inline-label">Important</label>
+									<input type="checkbox" ui-switch ng-model="important" color="#d32f2f" id="switch_demo_danger" />
+								</div>
+							</div>
                             <div class="uk-modal-footer uk-text-right">
-                                <button type="button" class="md-btn md-btn-flat uk-modal-close">Close</button><button type="button" class="md-btn md-btn-flat md-btn-flat-primary" id="clndr_new_event_submit" ng-click="addTodo($event)">Add Todo</button>
+                                <button type="button" class="md-btn md-btn-flat uk-modal-close">Close</button>
+								<button type="button" class="md-btn md-btn-flat md-btn-flat-primary" id="clndr_new_event_submit" ng-click="addTodo($event)">Add Todo</button>
                             </div>
                         </div>
                     </div>
