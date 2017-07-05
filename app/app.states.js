@@ -3152,12 +3152,15 @@ rubycampusApp
 
                 .state("restricted.student.stuApplyLeave", {
                     url: "/stuApplyLeave",
-                    controller: 'stuApplyLeaveCtrl',
-                    templateUrl: 'app/components/student/stuApplyLeave.html',
+                    // controller: 'stuApplyLeaveCtrl',
+                    templateUrl: 'app/components/academics/attendance/stuApplyLeave.html',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
-                                'app/components/student/stuApplyLeaveCtrl.js'
+								'lazy_parsleyjs',
+								'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/attendance/stuApplyLeaveCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -3328,15 +3331,15 @@ rubycampusApp
 				
                 .state("restricted.academics.markattendance", {
                     url: "/attendance",
-                    templateUrl: 'app/components/plugins/studentAttendanceView.html',
-                    controller: 'tablesorterCtrl',
+                    templateUrl: 'app/components/academics/attendance/studentAttendanceView.html',
+                    controller: 'markattendanceCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_ionRangeSlider',
                                 'lazy_tablesorter',
-                                'app/components/plugins/studentAttendanceController.js'
+                                'app/components/academics/attendance/studentAttendanceController.js'
                             ],{serie:true});
                         }],
                         ts_data: function($http){
@@ -3347,9 +3350,104 @@ rubycampusApp
                         }
                     },
                     data: {
-                        pageTitle: 'Tablesorter'
+                        pageTitle: 'Mark Attendance'
                     }
                 })
+				
+				// Student Attendance Report
+				.state("restricted.academics.studentreport", {
+					url: "/student-report",
+					templateUrl: 'app/components/academics/attendance/studentReportView.html',
+					controller: 'studentreportCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {
+							return $ocLazyLoad.load([
+								'bower_components/angular-resource/angular-resource.min.js',
+								'lazy_ionRangeSlider',
+								'lazy_tablesorter',
+								'app/components/academics/attendance/studentReportController.js'
+							],{serie:true});
+						}],
+						ts_data: function($http){
+							return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+								.then(function (data) {
+									return data.data;
+								});
+						}
+					},
+					data: {
+						pageTitle: 'Overall Attendance Report'
+					}
+				})
+				.state("restricted.academics.reportforstudent", {
+					url: "/reportforstudent/{id:[0-9]{1,4}}",
+					templateUrl: 'app/components/academics/attendance/singlestudentReport.html',
+					controller: 'reportforstudentCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {
+							return $ocLazyLoad.load([
+								'bower_components/angular-resource/angular-resource.min.js',
+								'lazy_ionRangeSlider',
+								'lazy_tablesorter',
+								'lazy_charts_chartist',
+								'lazy_charts_c3',
+								'app/components/academics/attendance/singlestudentReportController.js'
+							],{serie:true});
+						}]
+					},
+					data: {
+						pageTitle: 'Attendance Report'
+					},
+					params:{id:null}
+				})
+				
+				.state("restricted.academics.studentleaveapprove", {
+					url: "/student-leaveApprove",
+					templateUrl: 'app/components/academics/attendance/studentleaveapprove.html',
+					controller: 'studentleaveapproveCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {
+							return $ocLazyLoad.load([
+								'bower_components/angular-resource/angular-resource.min.js',
+								'lazy_ionRangeSlider',
+								'lazy_tablesorter',
+								'app/components/academics/attendance/studentleaveapprove.js'
+							],{serie:true});
+						}],
+						ts_data: function($http){
+							return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
+								.then(function (data) {
+									return data.data;
+								});
+						}
+					},
+					data: {
+						pageTitle: 'Approve Leave'
+					}
+				})
+				
+				.state("restricted.academics.approveforstudentleave", {
+					url: "/approveforstudentleave/{id:[0-9]{1,4}}",
+					templateUrl: 'app/components/academics/attendance/approveforstudentleave.html',
+					controller: 'approveforstudentleaveCtrl',
+					resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {
+							return $ocLazyLoad.load([
+								'bower_components/angular-resource/angular-resource.min.js',
+								'lazy_ionRangeSlider',
+								'lazy_tablesorter',
+								'lazy_charts_chartist',
+								'lazy_charts_c3',
+								'app/components/academics/attendance/approveforstudentleave.js'
+							],{serie:true});
+						}]
+					},
+					data: {
+						pageTitle: 'Attendance Report'
+					},
+					params:{id:null}
+				})
+				
                 .state("restricted.academics.empattendancemark", {
                     url: "/empolyee-attendance",
                     templateUrl: 'app/components/plugins/employeeAttendance.html',
@@ -3863,6 +3961,49 @@ rubycampusApp
                         pageTitle: 'Assignment Details'
                     }
                 })
+				
+				.state("restricted.academics.stuassignment", {
+                    url: "/stuassignment",
+                    templateUrl: 'app/components/academics/assignment/stuAssignmentDetails.html',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/assignment/stuAssignmentDetails.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Assignment Details'
+                    }
+                })
+				
+				.state("restricted.academics.stuAssignmentViewDetail", {
+                    url: "/stuAssignmentViewDetail/{id}",
+                    templateUrl: 'app/components/academics/assignment/stuAssignmentViewDetail.html',
+                    controller: 'stuAssignmentViewDetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/academics/assignment/stuAssignmentViewDetailCtrl.js'
+                            ]);
+                        }],
+                        notes_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/student/stuAssignment.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Assignment View'
+                    },
+                    params:{id:null}
+                })
 
                 .state("restricted.academics.assignmentAdd", {
                     url: "/assignmentAdd",
@@ -3904,7 +4045,7 @@ rubycampusApp
                 })
 
                 .state("restricted.academics.assignmentView", {
-                    url: "/assignmentView",
+                    url: "/assignmentView/{id}/{assess}",
                     templateUrl: 'app/components/academics/assignment/assignmentView.html',
                     controller: 'assignmentViewCtrl',
                     resolve: {
@@ -3925,7 +4066,8 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Tablesorter'
-                    }
+                    },
+                    params:{id:null,assess:null}
                 })
 
                 .state("restricted.stuAssignmentView", {
@@ -3971,17 +4113,30 @@ rubycampusApp
                 //     }
                 // })
 
-                // .state("restricted.academics.stuAssignmentView.detail", {
-                //     url: "/detail",
-                //     views: {
-                //         'ivoice_content': {
-                //             templateUrl: 'app/components/student/stuAssignmentDetail.html',
-                //             controller: 'stuAssignmentViewCtrl'
-                //         }
-                //     },
-                //     data: {
-                //         pageTitle: 'Assignment View'
-                //     }
+                // .state("restricted.stuAssignmentViewDetail", {
+                    // url: "/stuAssignmentViewDetail",
+                    // templateUrl: 'app/components/student/stuAssignmentViewDetail.html',
+                    // controller: 'stuAssignmentViewDetailCtrl',
+                    // resolve: {
+                        // deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            // return $ocLazyLoad.load([
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                // 'lazy_ionRangeSlider',
+                                // 'lazy_tablesorter',
+                                // 'app/components/student/stuAssignmentViewDetailCtrl.js'
+                            // ]);
+                        // }],
+                        // notes_data: function($http){
+                            // return $http({ method: 'GET', url: 'app/components/student/stuAssignment.json' })
+                                // .then(function (data) {
+                                    // return data.data;
+                                // });
+                        // }
+                    // },
+                    // data: {
+                        // pageTitle: 'Syllabus View'
+                    // },
+                    // params:{id:null}
                 // })
 
                 // HR Module Added by Vijayaraj 17-03-17
@@ -5078,57 +5233,7 @@ rubycampusApp
 					pageTitle: 'Tablesorter'
 				}
 			})
-			.state("restricted.plugins.studentreport", {
-				url: "/student-report",
-				templateUrl: 'app/components/plugins/Report/studentReportView.html',
-				controller: 'tablesorterCtrl',
-				resolve: {
-					deps: ['$ocLazyLoad', function($ocLazyLoad) {
-						return $ocLazyLoad.load([
-							'bower_components/angular-resource/angular-resource.min.js',
-							'lazy_ionRangeSlider',
-							'lazy_tablesorter',
-							'app/components/plugins/Report/studentReportController.js'
-						],{serie:true});
-					}],
-					ts_data: function($http){
-						return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
-							.then(function (data) {
-								return data.data;
-							});
-					}
-				},
-				data: {
-					pageTitle: 'Tablesorter'
-				}
-			})
-			.state("restricted.plugins.reportforstudent", {
-				url: "/reportforstudent/{id:[0-9]{1,4}}",
-				templateUrl: 'app/components/plugins/Report/singlestudentReport.html',
-				controller: 'tablesorterCtrl',
-				resolve: {
-					deps: ['$ocLazyLoad', function($ocLazyLoad) {
-						return $ocLazyLoad.load([
-							'bower_components/angular-resource/angular-resource.min.js',
-							'lazy_ionRangeSlider',
-							'lazy_tablesorter',
-                            'lazy_charts_chartist',
-                            'lazy_charts_c3',
-							'app/components/plugins/Report/singlestudentReportController.js'
-						],{serie:true});
-					}],
-					ts_data: function($http){
-						return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
-							.then(function (data) {
-								return data.data;
-							});
-					}
-				},
-				data: {
-					pageTitle: 'Tablesorter'
-				}
-			})
-
+			
             // Hostel Module Started on 28-03-17 by Vijayarj
             .state("restricted.hostel", {
                 template: '<div ui-view autoscroll="false"/>',
