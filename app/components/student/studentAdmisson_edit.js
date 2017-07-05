@@ -99,8 +99,8 @@ angular
 						angular.forEach(data.result[0].user_parents, function(data) {
 							
 							if(data.p_relation=="Father"){
-								$localStorage.frelationId=data.pPro_id;
-								$scope.father={p_first_name:data.p_first_name,relationId:data.pPro_id,first_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin,availabe:data.availabe};
+								$localStorage.frelationId=data.pRel_id;
+								$scope.father={p_first_name:data.p_first_name,relationId:data.pRel_id,first_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin,availabe:data.availabe};
 								if(data.availabe=='Y'){
 									$scope.checkbox_demo_11=true;
 									$('.first_details').show();
@@ -109,8 +109,8 @@ angular
 									$('.first_details').hide();
 								}
 							}else if(data.p_relation=="Mother"){
-								$localStorage.mrelationId=data.pPro_id;
-								$scope.mother={p_first_name:data.p_first_name,relationId:data.pPro_id,second_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin,availabe:data.availabe};
+								$localStorage.mrelationId=data.pRel_id;
+								$scope.mother={p_first_name:data.p_first_name,relationId:data.pRel_id,second_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin,availabe:data.availabe};
 								if(data.availabe=='Y'){
 									$scope.checkbox_demo_2=true;
 									$('.second_details').show();
@@ -119,10 +119,10 @@ angular
 									$('.second_details').hide();
 								}
 							}else if(data.p_relation=="Guardian"){
-								$localStorage.grelationId=data.pPro_id;
+								$localStorage.grelationId=data.pRel_id;
 								$scope.guardianCon=true;
 								$scope.rmBtnGuardian=false;
-								$scope.guardian={p_first_name:data.p_first_name,relationId:data.pPro_id,third_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin};
+								$scope.guardian={p_first_name:data.p_first_name,relationId:data.pRel_id,third_relation:data.p_relation,p_last_name:data.p_last_name,p_dob:data.p_dob,p_education:data.p_education,occupation:data.occupation,p_income:data.p_income,pr_address:data.pr_address,pr_city:data.pr_city,pr_state:data.pr_state,pr_pincode:data.pr_pincode,country:data.pr_country,p_phone:data.p_phone,p_mobile_no:data.p_mobile_no,p_email:data.p_email,facebook:data.p_facebook,google:data.p_google,linkedin:data.p_linkedin};
 							}
 						});
 					},500);
@@ -765,7 +765,7 @@ angular
 							timeout : 2000,
 							pos     : 'top-center'
 						});
-						$state.go('restricted.student.student_list');
+						//$state.go('restricted.student.student_list');
 					}
                 });
 			}

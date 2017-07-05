@@ -11,14 +11,82 @@ angular
         'variables',
         'todo_data',
         'assign_data',
-        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables,todo_data,assign_data) {
+        '$http',
+        '$localStorage',
+        '$filter',
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables,todo_data,assign_data,$http,$localStorage,$filter) {
 
-            $scope.assign_data = assign_data;
+            // $scope.assign_data = assign_data;
+			
+			$http({
+			method:'get',
+			url: $localStorage.service+'DashboardAPI/stuAssignmentShow',
+			params:{'profileId':$localStorage.userProfile_id},
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				//console.log(return_data.data.message,"msg");
+				$scope.assign_data = return_data.data.message;
+			});
 
             $scope.applyLeave = function(){
                 var modal = UIkit.modal("#open_leavecategory",{bgclose: false, keyboard:false});
                 modal.show();
             }
+			
+			// date range
+            var $dp_start = $('#uk_dp_start'),
+                $dp_end = $('#uk_dp_end');
+
+            var start_date = UIkit.datepicker($dp_start, {
+                format:'DD.MM.YYYY'
+            });
+
+            var end_date = UIkit.datepicker($dp_end, {
+                format:'DD.MM.YYYY'
+            });
+
+            $dp_start.on('change',function() {
+                end_date.options.minDate = $dp_start.val();
+            });
+
+            $dp_end.on('change',function() {
+                start_date.options.maxDate = $dp_end.val();
+            });
+			
+			$scope.duration_config = {
+                create: false,
+                maxItems: 1
+            };
+            $scope.durationsdata=['Full Day', 'Half Day', 'Multiple Days'];
+			
+			
+			$scope.saveData= function(){
+				$scope.startDate = $filter('date')($scope.leave.startDate,'yyyy-MM-dd');
+				$scope.endDate = $filter('date')($scope.leave.endDate,'yyyy-MM-dd');
+				$http({
+				method:'POST',
+				url: $localStorage.service+'StuAttendanceAPI/stuApplyLeave',
+				data: {profileId:$localStorage.userProfile_id,duration:$scope.leave.duration,reason:$scope.leave.reason,startDate:$scope.startDate,endDate:$scope.endDate,userId:$localStorage.userProfile_id},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+				}).then(function(response){
+					console.log(response,"response");
+					if(response.data.status==true){
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$scope.clearData();
+					}
+				});
+			}
+			
+			$scope.clearData=function(){
+				$scope.leave={};
+			}
+			
+			
 
             var $toggleAll_btn = $('#toggleAll'),
                 $help_accordion = $('.help_accordion');
@@ -166,10 +234,26 @@ angular
 
         // countUp update
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
-                $scope.dynamicStats[0].count = '85';
-                $scope.dynamicStats[1].count = '75';
-                $scope.dynamicStats[2].count = '10';
-                $scope.dynamicStats[3].count = '54';
+                // $scope.dynamicStats[0].count = '85';
+                // $scope.dynamicStats[1].count = '75';
+                // $scope.dynamicStats[2].count = '10';
+                // $scope.dynamicStats[3].count = '54';
+				
+				$http({
+				method:'get',
+				url: $localStorage.service+'DashboardAPI/studentDashboard',
+				params:{'profileId':$localStorage.userProfile_id},
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					// console.log(return_data.data.message.studentCount[0].stuCount,"msg");
+					$scope.dynamicStats[0].count = return_data.data.message.attendance[0].Percentage;
+					$scope.dynamicStats[1].count = '75';
+					$scope.dynamicStats[2].count = '10';
+					$scope.dynamicStats[3].count = '54';
+					// $scope.dynamicStats[1].count = return_data.data.message.employeeCount[0].empCount;
+					// $scope.dynamicStats[2].count = return_data.data.message.courseCount[0].courseCount;
+					// $scope.dynamicStats[3].count = return_data.data.message.admissionCount[0].admission;
+				});
 
                 // update live statistics
                 // function getRandomVal(min, max) {
@@ -478,41 +562,138 @@ angular
 
             //todo list added by senthil
 
-            $scope.todo_data = todo_data;
-            console.log($scope.todo_data);
-            $scope.todo_length = $scope.todo_data.length;
+            // $scope.todo_data = todo_data;
+            // console.log($scope.todo_data);
+            // $scope.todo_length = $scope.todo_data.length;
+			
+			
+			
+			$scope.getTodolist=function(){
+				$http({
+				method:'get',
+				url: $localStorage.service+'DashboardAPI/todoStudent',
+				headers:{'access_token':$localStorage.access_token}
+				}).then(function(return_data){
+					//console.log(return_data.data.message,"msg");
+					$scope.todo_data = return_data.data.message;
+					angular.forEach($scope.todo_data,function(value,key){
+						if(value.IMPORTANT=='ture'){
+							$scope.todo_data[key].IMPORTANT=true;
+						}else{
+							$scope.todo_data[key].IMPORTANT=false;
+						}
+						
+						if(value.CLOSED=='true'){
+							$scope.todo_data[key].CLOSED=true;
+						}else{
+							$scope.todo_data[key].CLOSED=false;
+						}
+					})
+					$scope.todo_length = $scope.todo_data.length;
+				});
+			}
+			$scope.getTodolist();
+			
 
             // add todo list modal
-            $scope.todolist_modal = UIkit.modal("#new_todolist", {
+            
+			// $scope.todolist_modal = UIkit.modal("#new_todolist", {
+                // target: '#new_todolist'
+            // });
+            // $scope.addTodoForm = function($event) {
+                // if ( $scope.todolist_modal.isActive() ) {
+                    // todolist_modal.hide();
+                // } else {
+                    // $scope.todolist_modal.show();
+                    // $scope.todoTitle = null;
+                    // $scope.todoDesc = null;
+                    // // hide events panel
+                    // // $clndr_todolist.removeClass('events_visible');
+                // }
+            // };
+
+            // $scope.todo_data.tasks=[];
+            // $scope.addTodo = function($event){                
+                // var todoDataVal = {
+                    // title: $scope.todoTitle,
+                    // description: $scope.todoDesc,
+                    // closed: false,
+                    // important: false
+                // }
+                // todo_data.push(todoDataVal);
+                // $scope.todolist_modal.hide();
+            // }
+
+            // $scope.removeTodo = function(index){
+                // console.log($scope.todo_data);
+                // $scope.todo_data.splice(index,1);
+            // }
+			
+			$scope.todolist_modal = UIkit.modal("#new_todolist", {
                 target: '#new_todolist'
             });
-            $scope.addTodoForm = function($event) {
+			
+			$scope.addTodoForm = function($event) {
                 if ( $scope.todolist_modal.isActive() ) {
                     todolist_modal.hide();
                 } else {
                     $scope.todolist_modal.show();
                     $scope.todoTitle = null;
-                    $scope.todoDesc = null;
+                    $scope.todoDate = null;
+					$scope.todoDesc = null;
+					$scope.important = null;
                     // hide events panel
                     // $clndr_todolist.removeClass('events_visible');
                 }
             };
 
-            // $scope.todo_data.tasks=[];
-            $scope.addTodo = function($event){                
-                var todoDataVal = {
-                    title: $scope.todoTitle,
-                    description: $scope.todoDesc,
-                    closed: false,
-                    important: false
-                }
-                todo_data.push(todoDataVal);
+            
+            $scope.addTodo = function($event){
+                
+				if($scope.important==1){
+					$scope.important='true';
+				}else{
+					$scope.important='false';
+				}
+				
+				$http({
+				method:'POST',
+				url: $localStorage.service+'DashboardAPI/todoStudent',
+				data: {title: $scope.todoTitle,description: $scope.todoDesc,date: $scope.todoDate,important: $scope.important},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+				}).then(function(response){
+					if(response.data.status==true){
+						$scope.getTodolist();
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+						$scope.todoTitle = null;
+						$scope.todoDate = null;
+						$scope.todoDesc = null;
+						$scope.important = null;
+					}
+				});
+				
                 $scope.todolist_modal.hide();
             }
 
-            $scope.removeTodo = function(index){
-                console.log($scope.todo_data);
+            $scope.removeTodo = function(index,id){
+                //console.log($scope.todo_data);
                 $scope.todo_data.splice(index,1);
+				$http({
+				method:'delete',
+				url: $localStorage.service+'DashboardAPI/todoStudent',
+				headers:{'access_token':$localStorage.access_token},
+				params:{id:id}
+				}).then(function(return_data){
+					//console.log(return_data.data.message,"msg");
+					$scope.getTodolist();
+					$scope.todo_data = return_data.data.message;
+					$scope.todo_length = $scope.todo_data.length;
+				});
             }
 
 

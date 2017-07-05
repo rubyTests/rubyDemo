@@ -48,7 +48,7 @@ td.editable_updated {
                         <tbody>
                             <tr ng-repeat="item in notes_data" on-last-repeat>
                                 <td>{{$index+1}}</td>
-                                <td>{{item.syllabus_title}}</td>
+                                <td><a ui-sref="restricted.stuAssignmentViewDetail">{{item.syllabus_title}}</a></td>
                                 <td>{{item.subject}}</td>
                                 <td>{{item.status}}</td>
                                 <td>{{item.due_date}}</td>
