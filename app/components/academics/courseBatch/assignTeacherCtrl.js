@@ -130,14 +130,12 @@ angular
                 $scope.selectize_deptId_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Department',
+                    placeholder: 'Department',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
-                            $scope.selectize_courseName_options=[];
-                            $scope.getCourseList(value);
                             $scope.getEmployeeList(value);
                         });
                     }
@@ -147,7 +145,7 @@ angular
                 $scope.selectize_courseName_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Course',
+                    placeholder: 'Course',
                     valueField: 'ID',
                     labelField: 'NAME',
                     searchField: 'NAME',
@@ -164,7 +162,7 @@ angular
                 $scope.selectize_subject_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Select Subject',
+                    placeholder: 'Subject',
                     valueField: 'COU_ID',
                     labelField: 'COURSE_NAME',
                     searchField: 'COURSE_NAME',
@@ -190,18 +188,14 @@ angular
                     }
                 };
 
-                $scope.getCourseList=function(id){
-                    $http({
-                    method:'get',
-                    url: $localStorage.service+'AcademicsAPI/fetchcourseDetailList',
-                    params: {
-                        'id' : id
-                    },
-                    headers:{'access_token':$localStorage.access_token}
-                    }).then(function(return_data){
-                        $scope.selectize_courseName_options=return_data.data.data;
-                    });
-                }
+                $http({
+                method:'get',
+                url: $localStorage.service+'AcademicsAPI/courseDetail',
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(courselist){
+                    // console.log(courselist,'courselist');
+                    $scope.selectize_courseName_options=courselist.data.message;
+                });
                 $scope.getSubjectList=function(id){
                     $http({
                     method:'get',
@@ -223,6 +217,7 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
+                        console.log(return_data,'employeelis');
                         $scope.selectize_empName_options=return_data.data.data;
                     });
                 }

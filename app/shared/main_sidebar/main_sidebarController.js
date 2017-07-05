@@ -99,11 +99,17 @@ angular
             
             // menu entries
             var adminLov = [
+                // {
+                //     id: 0,
+                //     title: 'Dashboard',
+                //     icon: '&#xE871;',
+                //     link: 'restricted.dashboard'
+                // },
                 {
                     id: 0,
-                    title: 'Dashboard',
+                    title: 'Email Sending',
                     icon: '&#xE871;',
-                    link: 'restricted.dashboard'
+                    link: 'restricted.emailsending.sendmail'
                 },
                 {
                     id: 1,
@@ -187,7 +193,27 @@ angular
                             ]
                         },
                         {
-                            title: 'Timetable'
+                            title: 'Timetable',
+                            submenu: [
+                                {
+                                    title: 'View Timetable',
+                                    // link:'restricted.academics.timetable.viewtimetable'
+                                    link:'restricted.academics.timetable.timetableView'
+                                },
+                                {
+                                    title: 'Manage Timetable',
+                                    submenu: [
+                                        {
+                                            title: 'Create Timetable',
+                                            link:'restricted.academics.timetable.managetimetable.createcalendar'
+                                        },
+                                        {
+                                            title: 'Setting',
+                                            link:'restricted.academics.timetable.managetimetable.setting'
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             title: 'Discipline',
@@ -293,11 +319,13 @@ angular
                             submenu: [
                                 {
                                     title: 'Leave Type',
-                                    link:'restricted.hr.leave_category'
+                                    // link:'restricted.hr.leave_category'
+                                    link:'restricted.hr.leavetype'
                                 },
                                 {
                                     title: 'Leave Entitlement',
-                                    link : 'restricted.hr.assignleave_categoryView'
+                                    // link : 'restricted.hr.assignleave_categoryView'
+                                    link : 'restricted.hr.leave_entitlement_View'
                                 },
                                 {
                                     title: 'Apply Leave',

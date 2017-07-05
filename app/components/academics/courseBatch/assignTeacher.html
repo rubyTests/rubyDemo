@@ -58,14 +58,14 @@
             <div class="md-card-content">
               <form id="form_validation" name="inputForm" ng-submit="saveAssignteacher()" novalidate>
                 <div class="uk-form-row parsley-row">
-                  <input type="text" config="selectize_deptId_config" required options="selectize_deptId_options" ng-model="dept_id" selectize/>
-                  <input type="hidden" ng-model="hidden_id">
-                </div>
-                <div class="uk-form-row parsley-row">
                   <input type="text" config="selectize_courseName_config" options="selectize_courseName_options" ng-model="course_id" required selectize/>
                 </div>
                 <div class="uk-form-row parsley-row">
                   <input type="text" config="selectize_subject_config" required options="selectize_subject_options" ng-model="subject_id" selectize/>
+                </div>
+                <div class="uk-form-row parsley-row">
+                  <input type="text" config="selectize_deptId_config" required options="selectize_deptId_options" ng-model="dept_id" selectize/>
+                  <input type="hidden" ng-model="hidden_id">
                 </div>
                 <div class="uk-form-row parsley-row">
                   <input type="text" config="selectize_empName_config" required options="selectize_empName_options" ng-model="employee_id" selectize/>

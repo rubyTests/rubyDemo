@@ -1,0 +1,112 @@
+    <div id="page_content">
+        <div id="page_content_inner">
+            <h3 class="heading_b uk-margin-bottom">Time Table</h3>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <!-- <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                            <div class="parsley-row">
+                                <selectize config="type_config" options="type_option" position="bottom" ng-model="table_type"></selectize>
+                            </div>
+                        </div> -->
+                        <!-- <div class="uk-width-large-1-3 uk-width-medium-1-1" ng-show="table_type=='Employee'">
+                            <div class="parsley-row">
+                                <selectize config="dept_config" options="dept_option" position="bottom" ng-model="departmant" required ></selectize>
+                            </div>
+                        </div>
+                        <div class="uk-width-large-1-3 uk-width-medium-1-1" ng-show="table_type=='Employee'">
+                            <div class="parsley-row">
+                                <selectize  config="emp_config" options="emp_option" position="bottom" ng-model="employee_id" required ></selectize>
+                            </div>
+                        </div> -->
+                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                            <div class="parsley-row">
+                                <selectize config="course_config" options="course_option" position="bottom" ng-model="course" name="course" required placeholder='Select Course'></selectize>
+                            </div>
+                        </div>
+                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                            <div class="parsley-row">
+                                <selectize config="batch_config" options="batch_option" position="bottom" ng-model="batch" required ></selectize>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md-card">
+                <div class="md-card-content">
+                    <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+<div class="uk-modal" id="modal_header_footer">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h3 class="uk-modal-title">Time Table <i class="material-icons" data-uk-tooltip="{pos:'top'}" title="headline tooltip">&#xE862;</i></h3>
+        <div class="uk-margin-medium-bottom" id="calendar_colors">
+            <div id="calendar_colors_wrapper">
+                <div class="cp_altair" id="T1489421677871">
+                    <span data-color="#e53935" style="background:#e53935"></span>
+                    <span data-color="#d81b60" style="background:#d81b60"></span>
+                    <span data-color="#8e24aa" style="background:#8e24aa"></span>
+                    <span data-color="#5e35b1" style="background:#5e35b1"></span>
+                    <span data-color="#3949ab" style="background:#3949ab"></span>
+                    <span data-color="#1e88e5" style="background:#1e88e5"></span>
+                    <span data-color="#039be5" style="background:#039be5"></span>
+                    <span data-color="#0097a7" style="background:#0097a7"></span>
+                    <span data-color="#00897b" style="background:#00897b"></span>
+                    <span data-color="#43a047" style="background:#43a047"></span>
+                    <span data-color="#689f38" style="background:#689f38"></span>
+                    <span data-color="#ef6c00" style="background:#ef6c00"></span>
+                    <span data-color="#f4511e" style="background:#f4511e"></span>
+                    <span data-color="#6d4c41" style="background:#6d4c41"></span>
+                    <span data-color="#757575" style="background:#757575"></span>
+                    <span data-color="#546e7a" style="background:#546e7a"></span>
+                    <input type="hidden">
+                </div>
+            </div> 
+        </div>
+        <form id="timetable" ng-submit="updateTimetable()" class="uk-form-stacked" novalidate>
+        <input type="hidden" ng-model="table_id">
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                    <div class="parsley-row">
+                        <selectize config="subject_config" options="subject_option" position="bottom" ng-model="subject" required ></selectize>
+                    </div>    
+                </div>
+                <div class="uk-width-large-1-2 uk-width-medium-1-1">
+                    <div class="parsley-row">
+                        <selectize id="selec_adv_2" config="employee_config" options="employee_option" position="bottom" ng-model="employee_id" required></selectize>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-grid" data-uk-grid-margin>
+                <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                    <div class="parsley-row">
+                        <div class="uk-input-group">
+                            <span class="uk-input-group-addon"><i class="material-icons">&#xE878;</i></span>
+                            <selectize id="selec_adv_2" config="selectize_config" options="selectize_options" position="bottom" ng-model="day" required></selectize>
+                        </div>
+                    </div>
+                </div>
+                <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                    <div class="parsley-row">
+                        <check-start-time start-time-data="startTimeData1" end-time-data="endTimeData1" set-time-start="TimeStart" set-time-end="TimeEnd"></check-start-time>
+                    </div>
+                </div>
+                <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                    <div class="parsley-row">
+                        <check-end-time start-time-data="startTimeData1" end-time-data="endTimeData1" set-time-start="TimeStart" set-time-end="TimeEnd"></check-end-time>
+                    </div>
+                </div>
+            </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn" ng-click="modelhide();">Cancel</button>
+                <button type="submit" class="md-btn md-btn md-btn-primary">Add</button>
+            </div>
+        </form>
+    </div>
+</div>

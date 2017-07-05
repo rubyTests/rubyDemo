@@ -5995,5 +5995,155 @@ rubycampusApp
                         pageTitle: 'Report'
                     }                  
                 })
+
+                // Written by Vijayaraj ON 21-06-17
+
+                .state("restricted.academics.timetable", {
+                    url: "/timetable",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+
+                .state("restricted.academics.timetable.managetimetable", {
+                    url: "/managetimetable",
+                    template: '<div ui-view autoscroll="false"/>',
+                    abstract: true
+                })
+                .state("restricted.academics.timetable.managetimetable.setting",{
+                    url: "/setting",
+                    templateUrl: 'app/components/academics/timetable/timetablesetting.html',
+                    controller : 'timetablesetting',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_masked_inputs',
+                                'lazy_parsleyjs',
+                                'app/components/academics/timetable/timetablesettingCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Timetable Setting'
+                    }                  
+                })
+
+                .state("restricted.academics.timetable.managetimetable.createcalendar", {
+                    url: "/createcalendar",
+                    templateUrl: 'app/components/academics/timetable/calendarView.html',
+                    controller: 'calendarCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_masked_inputs',
+                                'lazy_parsleyjs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/academics/timetable/calendarController.js'
+                            ]);
+                        }],
+                        setting_data: function($http,$localStorage){
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                    },
+                    data: {
+                        pageTitle: 'Create Calendar'
+                    }
+                })
+                .state("restricted.academics.timetable.viewtimetable", {
+                    url: "/viewtimetable/{courseID}/{batchID}",
+                    templateUrl: 'app/components/academics/timetable/timetableview.html',
+                    controller: 'timetableviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/academics/timetable/timetableviewCtrl.js'
+                            ]);
+                        }],
+                        setting_data: function($http,$localStorage){
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                    },
+                    data: {
+                        pageTitle: 'Create Calendar'
+                    },
+                    params:{courseID:null,batchID:null}
+                })
+
+                .state("restricted.academics.timetable.timetableView", {
+                    url: "/timetableView",
+                    templateUrl: 'app/components/academics/timetable/timetableviewDetails.html',            
+                    // controller: 'timetableviewdetailCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/academics/timetable/timetableviewdetailCtrl.js',
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'view table'
+                    }
+                })
+
+                .state("restricted.academics.timetable.timetable_edit", {
+                    url: "/timetable_edit/{courseID}/{batchID}",
+                    templateUrl: 'app/components/academics/timetable/editTimetable.html',
+                    controller: 'editTimetableCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/academics/timetable/editTimetableCtrl.js'
+                            ]);
+                        }],
+                        setting_data: function($http,$localStorage){
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting'})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                    },
+                    data: {
+                        pageTitle: 'Timetable Edit'
+                    },
+                    params:{courseID:null,batchID:null}
+                })
+
+                .state("restricted.emailsending", {
+                    template: '<div ui-view autoscroll="false"/>',
+                    url :"/hr",
+                    abstract: true
+                })
+
+                .state("restricted.emailsending.sendmail", {
+                    url: "/sendmail",
+                    templateUrl: 'app/components/emailsending/emailsending.html',
+                    controller: 'emailsendingCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/emailsending/emailsendingCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Email Sending'
+                    }
+                })
         }
     ]);

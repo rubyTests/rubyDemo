@@ -1,0 +1,45 @@
+<style type="text/css">
+  .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+    font-size: 16px !important;
+  }
+</style>
+<div id="page_content" ng-controller="timetableviewdetailCtrl">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Timetable</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th class="uk-text-center">Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>Course</th>
+                            <th>Batch</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr ng-repeat="row in viewData">
+                        <td>{{$index+1}}</td>
+                        <td>{{row.COURSE_NAME}}</td>
+                        <td>{{row.BATCH_NAME}}</td>
+                        <td class="uk-text-center">
+                            <a ui-sref="restricted.academics.timetable.timetable_edit({courseID:{{row.COURSE_ID}},batchID:{{row.BATCH_ID}}})" data-uk-modal="{target:'#department_modal'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a class="ts_remove_row" ng-click="deleteTimetable(row.COURSE_ID,row.BATCH_ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                             <a class="ts_remove_row" ui-sref="restricted.academics.timetable.viewtimetable({courseID:{{row.COURSE_ID}},batchID:{{row.BATCH_ID}}})"><i class="md-icon material-icons">&#xE417;</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+  
+</div>
