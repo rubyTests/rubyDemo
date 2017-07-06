@@ -39,7 +39,8 @@
                     <li ng-repeat="postVal in viewData | limitTo:8 ">
                         <div class="md-list-content">
                             <!-- <span class="md-list-heading uk-text-truncate"><a ui-sref="restricted.repository.repositoryDetail({ ReposId:{{postVal.id}} })">{{postVal.Repository_Title}}</a></span> -->
-                            <span class="md-list-heading uk-text-truncate"><a ng-click="getDetails(postVal)">{{postVal.TITLE}}</a></span>
+                            <!-- <span class="md-list-heading uk-text-truncate"><a ng-click="getDetails(postVal)">{{postVal.TITLE}}</a></span> -->
+                            <span class="md-list-heading uk-text-truncate"><a ui-sref="restricted.repository.repositoryDetail({ ReposId:{{postVal.ID}} })">{{postVal.TITLE}}</a></span>
                             <span class="uk-text-small uk-text-muted">{{postVal.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'MMMM DD, YYYY'}}</span>
                         </div>
                     </li>
