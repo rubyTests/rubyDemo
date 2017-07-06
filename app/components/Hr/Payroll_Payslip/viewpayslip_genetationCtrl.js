@@ -104,11 +104,13 @@ angular
                 angular.forEach($scope.PaySrtuctureData,function(value, keys){
                      if (value.ITEM_TYPE=='Earnings') {
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalEarn+=parseFloat(value.changedAmount);
                     }else if (value.ITEM_TYPE=='Deductions'){
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalDeduct+=parseFloat(value.changedAmount);
                     }
                     
@@ -116,15 +118,12 @@ angular
 
                 var totalADDEarn=0;
                 var totalADDDeduct=0;
-                // var basicVal=$scope.tableData.BASIC_PAY;
                 angular.forEach($scope.PaySrtuctureData1,function(value, keys){
                     if (value.TYPE=='Earnings') {
                         value.AMOUNT= value.AMOUNT || 0;
-                        // value.AMOUNT=(basicVal/value.AMOUNT).toFixed(2);
                         totalADDEarn+=parseFloat(value.AMOUNT);
                     }else if (value.TYPE=='Deductions'){
                         value.AMOUNT= value.AMOUNT || 0;
-                        // value.AMOUNT=(basicVal/value.AMOUNT).toFixed(2);
                         totalADDDeduct+=parseFloat(value.AMOUNT);
                     }
                     
@@ -154,6 +153,7 @@ angular
                 $scope.showTotalNetpay=parseFloat($scope.Total_Earning-$scope.total_deduction).toFixed(2);
                 $scope.NetpayAmount=parseFloat($scope.Total_Earning-$scope.total_deduction).toFixed(2);
             }
+
             $scope.addEarnVal = [];
             $scope.addDeductVal = [];
             $scope.saveAddonData=function(){

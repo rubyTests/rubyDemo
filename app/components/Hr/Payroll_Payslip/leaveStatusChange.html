@@ -113,8 +113,8 @@
                         </div>
                         <div class="uk-text-right">
                         <br>
-                            <button type="button" ng-if="leaveList.STATUS=='Pending'" class="md-btn md-btn-success md-btn-small" ng-click="changeStatus(leaveList.ID,'Approved')">Approve</button>
-                            <button type="button" ng-if="leaveList.STATUS!='Reject'" class="md-btn md-btn-warning md-btn-small" ng-click="changeStatus(leaveList.ID,'Reject')">Reject</button>
+                            <button type="button" ng-if="leaveList.STATUS=='Pending'" class="md-btn md-btn-success md-btn-small" ng-click="changeStatus(leaveList.ID,leaveList.EMP_PROFILE_ID,'Approved')">Approve</button>
+                            <button type="button" ng-if="leaveList.STATUS!='Reject'" class="md-btn md-btn-warning md-btn-small" ng-click="changeStatus(leaveList.ID,leaveList.EMP_PROFILE_ID,'Reject')">Reject</button>
                             <button type="button"  class="md-btn md-btn-danger md-btn-small uk-modal-close" ui-sref="restricted.hr.leave_application">Cancel</button>
                         </div>
                     </div>

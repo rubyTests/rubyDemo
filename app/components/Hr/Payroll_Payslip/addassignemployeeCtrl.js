@@ -34,39 +34,7 @@ angular
                     value.changedAmount=data.toFixed(2);
                 });
             });
-            console.log($localStorage.structureName,'$localStorage.structureName');
-            // $scope.basic_val=0;
-            // $timeout(function(){
-            //     // var totalEarn=0;
-            //     // var totalDeduction=0;
-            //     // $('[name="earningAmount"]').each(function(){
-            //     //     totalEarn+=parseFloat($(this).val());
-            //     // })
-
-            //     //  $('[name="deductionAmount"]').each(function(){
-            //     //     totalDeduction+=parseFloat($(this).val());
-            //     // })
-            //     // // console.log(totalEarn,'totalEarn');
-            //     // // console.log(totalDeduction,'totalDeduction');
-            //     // $scope.Total_Earning=totalEarn.toFixed(2);
-            //     // $scope.total_deduction=totalDeduction.toFixed(2);
-            //     // $scope.showTotalNetpay=parseFloat(totalEarn-totalDeduction).toFixed(2);
-            //     var basicVal=0;
-            //     var perOfTotalEarn=0;
-            //     var perOfTotalDeduc=0;
-            //     $('[name="earningAmount"]').each(function(){
-            //         perOfTotalEarn+=parseFloat(basicVal)/parseFloat($(this).val());
-            //     })
-
-            //      $('[name="deductionAmount"]').each(function(){
-            //         perOfTotalDeduc+=parseFloat(basicVal)/parseFloat($(this).val());
-            //     })
-            //     var SUMTotal_Earning=parseFloat(basicVal) + parseFloat(perOfTotalEarn);
-            //     $scope.Total_Earning=SUMTotal_Earning.toFixed(2);
-            //     $scope.total_deduction=parseFloat(perOfTotalDeduc).toFixed(2);
-            //     $scope.showTotalNetpay=parseFloat($scope.Total_Earning-$scope.total_deduction).toFixed(2);
-
-            // },1500);
+            
             var initValue=0;
             $scope.Total_Earning=initValue.toFixed(2);
             $scope.total_deduction=initValue.toFixed(2);
@@ -77,11 +45,13 @@ angular
                 angular.forEach($scope.PaySrtuctureData,function(value, keys){
                     if (value.ITEM_TYPE=='Earnings') {
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalEarn+=parseFloat(value.changedAmount);
                     }else if (value.ITEM_TYPE=='Deductions'){
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalDeduct+=parseFloat(value.changedAmount);
                     }
                     

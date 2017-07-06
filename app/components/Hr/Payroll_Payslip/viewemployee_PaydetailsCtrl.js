@@ -66,11 +66,13 @@ angular
                 angular.forEach($scope.PaySrtuctureData,function(value, keys){
                     if (value.ITEM_TYPE=='Earnings') {
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=($scope.basic_val/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=($scope.basic_val/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*$scope.basic_val).toFixed(2);
                         totalEarn+=parseFloat(value.changedAmount);
                     }else if (value.ITEM_TYPE=='Deductions'){
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=($scope.basic_val/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=($scope.basic_val/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*$scope.basic_val).toFixed(2);
                         totalDeduct+=parseFloat(value.changedAmount);
                     }
                     
@@ -109,11 +111,13 @@ angular
                 angular.forEach($scope.PaySrtuctureData,function(value, keys){
                     if (value.ITEM_TYPE=='Earnings') {
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalEarn+=parseFloat(value.changedAmount);
                     }else if (value.ITEM_TYPE=='Deductions'){
                         value.AMOUNT= value.AMOUNT || 0;
-                        value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
+                        value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalDeduct+=parseFloat(value.changedAmount);
                     }
                     

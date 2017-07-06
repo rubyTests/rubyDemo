@@ -174,7 +174,7 @@ angular
                         },
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(return_data){
-                        console.log(return_data.data.data.message,'return_data');
+                        console.log(return_data.data.data,'return_data');
                         if(return_data.data.data.status==true){
                             UIkit.modal("#open_leavecategory").hide();
                             UIkit.notify({
@@ -183,9 +183,27 @@ angular
                                 timeout : 2000,
                                 pos     : 'top-center'
                             });
+                            $scope.emailSending(1);
                             $scope.refreshTable();
+                            // $scope.emailSending(return_data.data.data.APPLY_ID);
+                            
                         }
                     });
                 }
+
+                $timeout(function(){
+                    $scope.emailSending=function(Emp_PROF_ID){
+                        $http({
+                            method:'POST',
+                            url: $localStorage.service+'EmployeemgmntAPI/sendEmail',
+                            data:{
+                                'emp_prof_Id':Emp_PROF_ID,
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).then(function(response){
+                            console.log(response,'response');
+                        });
+                    }
+                },200);
         }
     );
