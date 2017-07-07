@@ -690,7 +690,7 @@ angular
 								$scope.content_preloader_hide();
 								WizardHandler.wizard().next();
 								
-							}, 3000);
+							}, 300);
 					
 							
 						});
@@ -724,15 +724,28 @@ angular
 						}
 						$scope.wizard2.profileId=$scope.wizard1.profileId;
 						//WizardHandler.wizard().next();
-						$timeout(function() {
+						// $timeout(function() {
 							$scope.content_preloader_hide();
 							WizardHandler.wizard().next();
 							
-						}, 3000);
+						// }, 10);
+						$timeout(function() {
+							$scope.emailSending($scope.wizard.profileId);
+						}, 100);
 					}
                 });
 			}
 			
+			$scope.emailSending=function(profileID){
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/emailSendingtoStudent',
+                data: {'profileId':profileID},
+				headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                	console.log(response,'res');
+                });
+			}
 			// Academics Details
 			
 			$scope.academicsDetails=function(){
@@ -758,7 +771,7 @@ angular
 							$scope.content_preloader_hide();
 							WizardHandler.wizard().next();
 							
-						}, 3000);
+						}, 1000);
 					}
                 });
 			}
@@ -792,9 +805,22 @@ angular
 							pos     : 'top-center'
 						});
 						$state.go('restricted.student.student_list');
+						$timeout(function(){
+							$scope.sendEmailtoParents();
+						},1100)
 					}
                 });
 			}
 			
+			$scope.sendEmailtoParents=function(){
+				$http({
+	                method:'POST',
+	                url: $localStorage.service+'ProfileAPI/sendEmailtoParents',
+	                data: {father:$scope.father,mother:$scope.mother,guardian:$scope.guardian},
+					headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                   console.log(response,'parentsResponse');
+                });
+			}
         }
     ]);
