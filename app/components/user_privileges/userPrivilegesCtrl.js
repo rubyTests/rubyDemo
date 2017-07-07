@@ -176,13 +176,13 @@ angular
                     console.log(data);
                 });
             }
-            $http({
-                method:'GET',
-                url: $localStorage.service+"UserMenuAPI/menuDetails",
-                headers:{'access_token':$localStorage.access_token}
-            }).then(function(data){
-                console.log(data);
-            });
+            // $http({
+            //     method:'GET',
+            //     url: $localStorage.service+"UserMenuAPI/menuDetails",
+            //     headers:{'access_token':$localStorage.access_token}
+            // }).then(function(data){
+            //     console.log(data);
+            // });
             $scope.selctedCheckBox="Test";
             $scope.menus=[];
             $("#tree").fancytree({
