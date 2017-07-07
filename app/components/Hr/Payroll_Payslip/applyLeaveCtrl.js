@@ -183,8 +183,9 @@ angular
                                 timeout : 2000,
                                 pos     : 'top-center'
                             });
-                            $scope.emailSending(1);
+                            
                             $scope.refreshTable();
+                            $scope.emailSending(1);
                             // $scope.emailSending(return_data.data.data.APPLY_ID);
                             
                         }

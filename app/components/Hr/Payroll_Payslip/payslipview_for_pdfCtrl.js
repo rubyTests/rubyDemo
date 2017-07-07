@@ -136,7 +136,7 @@ angular
                });
             }
             $scope.changeStatus=function(payslip_id,pay_status){
-                console.log(payslip_id,pay_status,'dsds');
+                // $scope.emailSend(payslip_id);
                 $http({
                     method:'POST',
                     url: $localStorage.service+'PayrollPayslipAPI/updatePayslipStatus',
@@ -146,7 +146,6 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.status,'return_data.data');
                     if(return_data.data.status==true){
                         UIkit.notify({
                             message : return_data.data.message.message,
@@ -155,7 +154,23 @@ angular
                             pos     : 'top-center'
                         });
                         $state.go('restricted.finance.payslipGenaration_view');
+                        $timeout(function(){
+                            $scope.emailSend(payslip_id,pay_status);
+                        },1100);
                     }
+                });
+            }
+            $scope.emailSend=function(payslip_id,pay_status){
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'PayrollPayslipAPI/sendStatusEmail',
+                    data:{
+                        'payslipID':payslip_id,
+                        'status':pay_status
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data,'return_data');
                 });
             }
             console.log($localStorage.GenDate,'$localStorage.GenDate');

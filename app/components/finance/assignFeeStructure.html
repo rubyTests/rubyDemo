@@ -1,5 +1,18 @@
 <style type="text/css">
-
+.pagecount > .current:hover {
+    color: #ffffff !important;
+}
+.pagecount > .current {
+    color: #ffffff !important;
+    background-attachment: scroll !important;
+    background-clip: border-box !important;
+    background-color: #7cb342 !important;
+    background-image: none !important;
+    background-origin: padding-box !important;
+    background-position: 0 0 !important;
+    background-repeat: repeat !important;
+    background-size: auto auto !important;
+}
 
 .tablesorter tbody > tr > td[contenteditable=true]:focus {
   outline: #08f 1px solid;
@@ -54,6 +67,32 @@ td.editable_updated {
                 </div>
                 <div class="uk-overflow-container uk-margin-bottom">
                     <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
+                    <!-- <tfoot>
+                        <tr>
+                          <td colspan="4">
+                            <div class="pager">
+                              <nav class="right">
+                                <ul class="uk-pagination uk-margin-medium-top">
+                                    <li><a href="javascript:void(0)">
+                                        <span class="prev">
+                                          <i class="uk-icon-angle-double-left"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+                                    <li class="pagecount">
+                                    </li>
+                                    <li><a href="javascript:void(0)">
+                                        &nbsp;<span class="next">
+                                        <i class="uk-icon-angle-double-right"></i>
+                                        </span>
+                                        </a>
+                                    </li>
+                                </ul>
+                              </nav>
+                            </div>
+                          </td>
+                        </tr>
+                      </tfoot> -->
                         <thead>
                         <tr>
                             <th data-name="Select" data-priority="critical" style="width: 5% !important;"><input type="checkbox" class="ts_checkbox_all"></th>
@@ -63,12 +102,42 @@ td.editable_updated {
                         </tr>
                         </thead>
                         <tfoot>
-                            <tr>
+                           <!--  <tr>
                                 <th></th>
                                 <th>Image</th>
                                 <th>Name</th>
                                 <th>Adminssion No</th>
-                            </tr>
+                            </tr> -->
+                            <tr>
+                                  <td colspan="4">
+                                    <div class="pager">
+                                        <nav class="left">
+                                        <a href="#" class="current">10</a> |
+                                        <a href="#">25</a> |
+                                        <a href="#">50</a> |
+                                        <a href="#">100</a>
+                                      </nav>
+                                      <nav class="right">
+                                        <ul class="uk-pagination uk-margin-medium-top">
+                                            <li><a href="javascript:void(0)">
+                                                <span class="prev">
+                                                  <i class="uk-icon-angle-double-left"></i>
+                                                </span>
+                                                </a>
+                                            </li>
+                                            <li class="pagecount">
+                                            </li>
+                                            <li><a href="javascript:void(0)">
+                                                &nbsp;<span class="next">
+                                                <i class="uk-icon-angle-double-right"></i>
+                                                </span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                      </nav>
+                                    </div>
+                                  </td>
+                                </tr>
                         </tfoot>
                         <tbody>
                             <!-- <tr>
@@ -93,8 +162,24 @@ td.editable_updated {
                         </tbody>
                     </table>
                 </div>
-                <div class="ts_pager">
-                    <ul class="uk-pagination ts_pager">
+                <!-- <div class="pager">
+                    <ul class="uk-pagination uk-margin-medium-top">
+                        <li><a href="javascript:void(0)">
+                            <span class="prev">
+                              <i class="uk-icon-angle-double-left"></i>
+                            </span>
+                            </a>
+                        </li>
+                        <li class="pagecount">
+                        </li>
+                        <li><a href="javascript:void(0)">
+                            &nbsp;<span class="next">
+                            <i class="uk-icon-angle-double-right"></i>
+                            </span>
+                            </a>
+                        </li>
+                    </ul> -->
+                   <!--  <ul class="uk-pagination ts_pager">
                         <li data-uk-tooltip title="Select Page">
                             <select class="ts_gotoPage ts_selectize"></select>
                         </li>
@@ -111,8 +196,8 @@ td.editable_updated {
                                 <option value="50">50</option>
                             </select>
                         </li>
-                    </ul>
-                </div>
+                    </ul> -->
+                <!-- </div> -->
             </div>
         </div>
     </div>

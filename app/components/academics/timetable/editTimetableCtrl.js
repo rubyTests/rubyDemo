@@ -432,8 +432,8 @@ angular
                     eventClick: function(event, jsEvent){
                         // uiCalendarConfig.calendars.myCalendar.fullCalendar('changeView', 'listWeek')
                         console.log(event,'event');
-                        $scope.endTime = event.endtime;
-                        $scope.startTime = event.starttime;
+                        $scope.endTimeData1 = event.endtime;
+                        $scope.startTimeData1 = event.starttime;
                         $scope.table_id=event.tableid;
                         $scope.employee_id=event.profileid;
                         $scope.subject=event.subjectid;
@@ -645,9 +645,12 @@ angular
                     $scope.$watch('startTimeData', function(newval, oldval){
                         if (typeof newval!="undefined"  && newval!="") {
                             $scope.startTimeData1 = moment(newval,["hh:mm:ss"]).format('hh:mm A');
-                            // alert($scope.startTimeData1+"-->start");
+                            alert($scope.startTimeData1+"-->start if");
                             // console.log($scope.startTimeData1,"$scope.startTimeData");
-                        }                        
+                        }else{
+                            $scope.startTimeData1 = "";
+                            alert($scope.startTimeData1+"-->start");
+                        }
                     });
                     element.bind('change',function(){
                         // $scope.$apply(function(){ 
@@ -662,12 +665,17 @@ angular
                             console.log(minTime, "===", currentTime,"datadatadata");
                             if (minTime.getTime() <= currentTime.getTime()  && currentTime.getTime() <= maxTime.getTime() && currentTime.getTime() < endTime.getTime()) {
                                 console.log(element.find('input'),"correct");
+                                $scope.startTimeData = "";
+                                $scope.startTimeData = currentTime;
                             }else{
-                                element.find('input').val("");
+                                console.log(element.find('input'),"element");
+                                // $('check-start-time').find('input').val("")
+                                // element.find('input').val("");
+                                $scope.startTimeData="";
                                 console.log(currentTime,"wrong");
                             }
                             sendStartTime=$scope.startTime;
-                            $scope.$apply();
+                            // $scope.$apply();
                             // console.log(maxTime,'---',minTime,"maxTimemaxTimemaxTimemaxTimemaxTime");
                             // if (data.getTime() >= 1498447800000 && data.getTime() <= 1498478400000 && data.getTime() < endTime.getTime()) {
                             //     console.log(element.find('input'),"correct");
@@ -696,6 +704,10 @@ angular
                 $scope.$watch('endTimeData', function(newval, oldval){
                     if (typeof newval!="undefined" && newval!="") {
                         $scope.endTimeData1 = moment(newval,["HH:mm:ss"]).format('hh:mm A');
+                        alert("end if");
+                    }else{
+                        $scope.endTimeData = "";
+                        alert($scope.endTimeData+"-->End");
                     }
                 });
                 element.find('input').inputmask();
@@ -713,12 +725,15 @@ angular
                         console.log(minTime, "===", data,"datadatadata");
                         if (minTime.getTime() <= data.getTime()  && data.getTime() <= maxTime.getTime() && data.getTime() > startTime.getTime()) {
                             console.log(element.find('input'),"correct");
+                            $scope.endTimeData = currentTime;
+                            $scope.endTimeData = $scope.endTimeData;
                         }else{
-                            element.find('input').val("");
+                            // element.find('input').val("");
+                            $scope.endTimeData = "";
                             console.log(currentTime,"wrong");
                         }
                     // });
-                     $scope.$apply();
+                     // $scope.$apply();
                 });
             }
         }

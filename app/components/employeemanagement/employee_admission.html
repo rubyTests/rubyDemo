@@ -5,6 +5,13 @@
     .selectize-dropdown{
         margin-top: 0px;
     }
+
+    .adjustAutoComplete{
+        height: 50px !important;
+    }
+    .uk-autocomplete.uk-open .uk-dropdown {
+        width: 90%;
+    }
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -123,6 +130,24 @@
                                          <label for="position" ng-if="EMP_ADM.position" style="font-size: 12px;color: #727272;">Position </label>
                                         <input type="text" config="selectize_position_config" options="selectize_position_options" ng-model="EMP_ADM.position" selectize />
                                     </div>
+                                    <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template uk-width-medium-1-3" id="autocomplete" style="margin-top: 14px !important;">
+                                    
+                                        <input type="text" class="md-input adjustAutoComplete" ng-model="EMP_ADM.report_to" placeholder="Reporting manager" md-input>
+                                        <script type="text/autocomplete">
+                                            <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results"  id="autocomplete_template_results">
+                                                {{~items}}
+                                                <!-- <li data-value="{{ $item.ID +' - '+ $item.EMPLOYEE_NAME}}" data-id="{{ $item.ID }}"> -->
+                                                <li data-value="{{$item.EMPLOYEE_NAME}}" data-id="{{ $item.ID }}">
+                                                    <a class="item">
+                                                        {{ $item.EMPLOYEE_NAME }}<br>
+                                                        <span class="uk-text-muted uk-text-small">{{{ $item.ADMISSION_NO }}}</span>
+                                                    </a>
+                                                </li>
+                                                {{/items}}
+                                            </ul>
+                                        </script>
+                                    </div>
+
                                 </div>
                                 <div class="uk-clearfix uk-margin-large-top">
                                     <button class="md-btn md-btn-primary uk-float-right" ng-click="saveAdmissionDetails()" ng-if="basicForm.$valid" type="submit" wz-next>Save & Continue</button>
@@ -206,7 +231,7 @@
                                                 <span class="uk-input-group-addon">
                                                     <i class="material-icons">&#xE0CD;</i>
                                                 </span>
-                                                <label for="wizard_phone">Phone Number</label>
+                                                <label for="wizard_phone">Mobile 1</label>
                                                 <input type="text" class="md-input"  md-input ng-model="ADDITIONAl.phone_no" />
                                             </div>
                                         </div>
@@ -215,7 +240,7 @@
                                                 <span class="uk-input-group-addon">
                                                     <i class="material-icons">&#xE324;</i>
                                                 </span>
-                                                <label for="mobile_no">Mobile</label>
+                                                <label for="mobile_no">Mobile 2</label>
                                                 <input type="text" class="md-input" name="mobile_no"  id="mobile_no" md-input ng-model="ADDITIONAl.mobile_no" />
                                             </div>
                                         </div>

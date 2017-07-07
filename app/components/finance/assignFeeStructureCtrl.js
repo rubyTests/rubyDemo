@@ -198,6 +198,35 @@ angular
                     $ts_align = $('#ts_align'),
                     $ts_customFilters = $('#ts_custom_filters'),
                     $columnSelector = $('#columnSelector');
+                 var $pager = $('.pager');
+                 $.tablesorter.customPagerControls({
+                    table          : $ts_pager_filter,                   // point at correct table (string or jQuery object)
+                    pager          : $pager,                   // pager wrapper (string or jQuery object)
+                    pageSize       : '.left a',                // container for page sizes
+                    currentPage    : '.right a',               // container for page selectors
+                    // ends           : 2,                        // number of pages to show of either end
+                    // aroundCurrent  : 1,                        // number of pages surrounding the current page
+                    link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
+                    currentClass   : 'current',                // current page class name
+                    adjacentSpacer : '<span> | </span>',       // spacer for page numbers next to each other
+                    distanceSpacer : '<span> &#133; <span>',   // spacer for page numbers away from each other (ellipsis = &#133;)
+                    addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
+                    pageKeyStep    : 10                        // page step to use for pageUp and pageDown
+                  });
+                  // $.tablesorter.customPagerControls({
+                  //   table          : $ts_pager_filter,         // point at correct table (string or jQuery object)
+                  //   pager          : $pager,                   // pager wrapper (string or jQuery object)
+                  //   pageSize       : '.left a',                // container for page sizes
+                  //   currentPage    : '.right a',               // container for page selectors
+                  //   ends           : 2,                        // number of pages to show of either end
+                  //   aroundCurrent  : 1,                        // number of pages surrounding the current page
+                  //   link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
+                  //   currentClass   : 'current',                // current page class name
+                  //   adjacentSpacer : '',                       // spacer for page numbers next to each other
+                  //   distanceSpacer : '',                       // spacer for page numbers away from each other (ellipsis = &#133;)
+                  //   addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
+                  //   pageKeyStep    : 10                        // page step to use for pageUp and pageDown
+                  // });
 
                 // pager + filter
                 if($(element).closest($ts_pager_filter).length) {
@@ -205,17 +234,19 @@ angular
                     // define pager options
                     var pagerOptions = {
                         // target the pager markup - see the HTML block below
-                        container: $(".ts_pager"),
+                        container: $(".pager"),
                         // output string - default is '{page}/{totalPages}'; possible variables: {page}, {totalPages}, {startRow}, {endRow} and {totalRows}
                         output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
+                        // output: 'showing: {startRow} to {endRow} ({filteredRows})',
+                        size: 5
                         // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
                         // table row set to a height to compensate; default is false
-                        fixedHeight: true,
+                        // fixedHeight: true,
                         // remove rows from the table to speed up the sort of large tables.
                         // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
-                        removeRows: false,
+                        // removeRows: false,
                         // go to page selector - select dropdown that sets the current page
-                        cssGoto: '.ts_gotoPage'
+                        // cssGoto: '.ts_gotoPage'
                     };
 
                     // change popup print & close button text
@@ -233,38 +264,38 @@ angular
                         .tablesorter({
                             theme: 'altair',
                             widthFixed: true,
-                            widgets: ['zebra', 'filter','print','columnSelector'],
-                            headers: {
-                                0: {
-                                    sorter: false,
-                                    parser: false
-                                }
-                            },
-                            widgetOptions : {
-                                // column selector widget
-                                columnSelector_container : $columnSelector,
-                                columnSelector_name : 'data-name',
-                                columnSelector_layout : '<li class="padding_md"><input type="checkbox"><label class="inline-label">{name}</label></li>',
-                                columnSelector_saveColumns: false,
-                                // print widget
-                                print_title      : '',          // this option > caption > table id > "table"
-                                print_dataAttrib : 'data-name', // header attrib containing modified header name
-                                print_rows       : 'f',         // (a)ll, (v)isible, (f)iltered, or custom css selector
-                                print_columns    : 's',         // (a)ll, (v)isible or (s)elected (columnSelector widget)
-                                print_extraCSS   : '',          // add any extra css definitions for the popup window here
-                                print_styleSheet : '',          // add the url of your print stylesheet
-                                print_now        : true,        // Open the print dialog immediately if true
-                                // callback executed when processing completes - default setting is null
-                                print_callback   : function(config, $table, printStyle){
-                                    // hide sidebar
-                                    $rootScope.primarySidebarActive = false;
-                                    $rootScope.primarySidebarOpen = false;
-                                    $timeout(function () {
-                                        // print the table using the following code
-                                        $.tablesorter.printTable.printOutput( config, $table.html(), printStyle );
-                                    }, 300);
-                                }
-                            }
+                            widgets: ['zebra','print','columnSelector'],
+                            // headers: {
+                            //     0: {
+                            //         sorter: false,
+                            //         parser: false
+                            //     }
+                            // },
+                            // widgetOptions : {
+                            //     // column selector widget
+                            //     columnSelector_container : $columnSelector,
+                            //     columnSelector_name : 'data-name',
+                            //     columnSelector_layout : '<li class="padding_md"><input type="checkbox"><label class="inline-label">{name}</label></li>',
+                            //     columnSelector_saveColumns: false,
+                            //     // print widget
+                            //     print_title      : '',          // this option > caption > table id > "table"
+                            //     print_dataAttrib : 'data-name', // header attrib containing modified header name
+                            //     print_rows       : 'f',         // (a)ll, (v)isible, (f)iltered, or custom css selector
+                            //     print_columns    : 's',         // (a)ll, (v)isible or (s)elected (columnSelector widget)
+                            //     print_extraCSS   : '',          // add any extra css definitions for the popup window here
+                            //     print_styleSheet : '',          // add the url of your print stylesheet
+                            //     print_now        : true,        // Open the print dialog immediately if true
+                            //     // callback executed when processing completes - default setting is null
+                            //     print_callback   : function(config, $table, printStyle){
+                            //         // hide sidebar
+                            //         $rootScope.primarySidebarActive = false;
+                            //         $rootScope.primarySidebarOpen = false;
+                            //         $timeout(function () {
+                            //             // print the table using the following code
+                            //             $.tablesorter.printTable.printOutput( config, $table.html(), printStyle );
+                            //         }, 300);
+                            //     }
+                            // }
                         })
                         // initialize the pager plugin
                         .tablesorterPager(pagerOptions)

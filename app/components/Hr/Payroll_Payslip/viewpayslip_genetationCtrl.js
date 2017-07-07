@@ -269,9 +269,24 @@ angular
                             pos     : 'top-center'
                         });
                         $state.go('restricted.hr.payslipGenaration_view');
+                        $timeout(function() {
+                            $scope.emailSending();
+                        }, 1000);
                     }else {
                         UIkit.modal.alert('Payslip already generated for this month');
                     }
+                });
+            }
+            $scope.emailSending=function(){
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'PayrollPayslipAPI/mailSendAfterGeneration',
+                    data: {
+                        'empid' : $scope.employeeID
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    console.log(return_data,'return_data');
                 });
             }
             $scope.checkStatus=function(){

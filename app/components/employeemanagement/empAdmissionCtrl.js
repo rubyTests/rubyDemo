@@ -213,6 +213,7 @@ angular
 
 
             $scope.saveAdmissionDetails=function(){
+                // console.log($scope.EMP_ADM.report_toID,'report_to');
                 // console.log($scope.EMP_ADM.admission_no,'$scope.EMP_ADM');
                 var img_file=$('.fileinput-preview').find('img').attr('src');
                 $http({
@@ -233,7 +234,8 @@ angular
                         'department' : $scope.EMP_ADM.department,
                         'category' : $scope.EMP_ADM.category,
                         'position' : $scope.EMP_ADM.position,
-                        'ProfileID' : $scope.ProfileID
+                        'ProfileID' : $scope.ProfileID,
+                        'report_to' : $scope.EMP_ADM.report_toID
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -248,6 +250,7 @@ angular
                         $scope.employee_id=return_data.data.data.EMP_PROFILE_ID;
                         $scope.ProfileID=return_data.data.data.PROFILE_ID;
                         $scope.DummyProfileID=return_data.data.data.PROFILE_ID;
+                        $scope.backGroundEmail(return_data.data.data.EMP_PROFILE_ID);
                         WizardHandler.wizard().next();
                     }else {
                         UIkit.modal.alert('Admission No Already Exists');
@@ -255,6 +258,22 @@ angular
                     
                 });
             };
+
+             $timeout(function(){
+                $scope.backGroundEmail=function(emp_profileID){
+                    $http({
+                        method:'POST',
+                        url: $localStorage.service+'EmployeemgmntAPI/sendEmail',
+                        data:{
+                            'emp_prof_Id':emp_profileID,
+                        },
+                        headers:{'access_token':$localStorage.access_token}
+                    }).then(function(response){
+                        console.log(response,'response');
+                    });
+                }
+            },2000);
+
 
             $scope.saveConatctDetails=function(){
                 $http({
@@ -471,5 +490,31 @@ angular
                 }
             }
         },1100);
+
+        $scope.items=[];
+        $http({
+            method:'GET',
+            url: $localStorage.service+'EmployeemgmntAPI/employeeProfileView',
+            headers:{'access_token':$localStorage.access_token}
+        }).then(function(return_data){
+            $scope.items.push(return_data.data.data);
+            $timeout(function() {
+                angular.forEach($scope.items[0], function(values, keys){
+                    values.value=values.EMPLOYEE_NAME+" - "+values.EMPLOYEE_NAME;
+                });
+                UIkit.on('domready.uk.dom', function(){
+                    UIkit.autocomplete($('#autocomplete'), {
+                      source: $scope.items[0],
+                      minLength:1,
+                      flipDropdown:true
+                    }).on('selectitem.uk.autocomplete', function (e, data, ac) {
+                        console.log(data.id);
+                        $scope.EMP_ADM.report_toID=data.id;
+                    });
+                });
+            }, 700);
+        });
+
+            
         }
     ]);

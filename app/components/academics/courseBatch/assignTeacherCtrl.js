@@ -100,15 +100,18 @@ angular
                 $scope.edit_data= function(res){
                     $scope.btnStatus="Update";
                     if(res){
-                        $scope.getAllCourseList(res.COURSE_ID);
-                        $timeout(function(){
+                        // $scope.getAllCourseList(res.COURSE_ID);
                             $scope.hidden_id=res.ID;
-                            $scope.course_id=res.COURSE_ID;                            
-                            $scope.employee_id=res.EMP_ID;
-                        },400);
+                            $scope.course_id=res.COURSE_ID;
                         $timeout(function(){
                             $scope.subject_id=res.SUBJECT_ID;
+                            $scope.getDepartment(res.EMP_ID);
                         },600);
+                        // $timeout(function(){                         
+                        //     $scope.employee_id=res.EMP_ID;
+                        //     // $scope.dept_id=res.
+                        // },900);
+                        // $scope.getDepartment(res.EMP_ID);
                     }
                 }
                 $scope.viewData=[];
@@ -125,7 +128,23 @@ angular
                     $scope.deptData.push(dept_data.message);
                 });
 
-                   
+                $scope.getDepartment=function(empID){
+                    $http({
+                        method:'GET',
+                        url: $localStorage.service+'AcademicsAPI/fecthDepartmentData',
+                        params: {
+                            'empID' : empID
+                        },
+                        headers:{'access_token':$localStorage.access_token}
+                    }).then(function(return_data){
+                        // console.log(return_data.data.data[0],'return_data');
+                        $scope.dept_id=return_data.data.data[0].DEPT_ID;
+                        $timeout(function(){                            
+                            $scope.employee_id=empID;
+                        },500);
+                    });
+                }
+
                 $scope.selectize_deptId_options =$scope.deptData;
                 $scope.selectize_deptId_config = {
                     create: false,
