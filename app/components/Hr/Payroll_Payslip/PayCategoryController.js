@@ -99,8 +99,14 @@ angular
                 $event.preventDefault();
                 $scope.form_dynamic_model.splice($index,1);
                 $scope.form_dynamic.splice($index,1);
+                $scope.itemType_array.splice($index,1);
             };
 
+            $scope.cloneSection1=function($event,$index,currentE,ITemArray) {
+                $event.preventDefault();
+                $scope.form_dynamic.push({'itemType':'','percentage':''});
+            }
+            
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
                 altair_uikit.reinitialize_grid_margin();
             })
@@ -120,6 +126,7 @@ angular
             // },1000);
 
             $scope.savePayStructure=function(){
+                // console.log($scope.itemType_array.length,'$scope.itemType_array');
                 $http({
                     method:'POST',
                     url: $localStorage.service+'PayrollPayslipAPI/payStructureDetail',

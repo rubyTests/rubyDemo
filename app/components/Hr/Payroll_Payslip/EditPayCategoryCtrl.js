@@ -162,6 +162,7 @@ angular
                                             $event.preventDefault();
                                             $scope.form_dynamic_model.splice($index,1);
                                             $scope.form_dynamic.splice($index,1);
+                                            $scope.itemType_array.splice($index,1);
                                         }
                                     },function myError(response) {
                                     })
@@ -193,6 +194,7 @@ angular
                                             $event.preventDefault();
                                             $scope.form_dynamic_model.splice($index,1);
                                             $scope.form_dynamic.splice($index,1);
+                                            $scope.itemType_array.splice($index,1);
                                         }
                                     },function myError(response) {
                                     })
@@ -246,7 +248,7 @@ angular
                         'id':$scope.paystru_id,
                         'structure_name' : $scope.paystruc_name,
                         'frequency' : $scope.PayFrequency,
-                        'paydata' : $scope.form_dynamic
+                        'paydata' : $scope.itemType_array
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){

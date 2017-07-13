@@ -18,7 +18,11 @@
         <h3 class="heading_a uk-margin-bottom">Add Pay Structure</h3>
         <div class="md-card uk-margin-medium-bottom"> 
           <form id="inputForm" ng-submit="savePayStructure()">
+
             <div class="md-card-content large-padding">
+                <div class="uk-text-right" >
+                  <button type="button" ng-show="form_dynamic.length==0" class="md-btn md-btn-flat md-btn md-btn-primary md-btn-small" ng-click="cloneSection1($event,$index,currentE)">Add Pay item</button> 
+                </div>
                 <div class="uk-width-9-10 uk-width-medium-9-10">
                   <div class="uk-grid uk-margin-medium-top" data-uk-grid-margin>
                     <div class="uk-width-medium-1-2 parsley-row">
@@ -54,6 +58,7 @@
                     <div class="uk-vertical-align uk-height-1-1 alignBtn">
                       <div class="uk-vertical-align-middle">
                           <a href="javascript:void(0)" ng-click="cloneSection($event,$index,section,itemType_array)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
+                          <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="$last"><i class="material-icons md-36">&#xE872;</i></a>
                           <a href="javascript:void(0)" ng-click="deleteSection($event,$index)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
                       </div>
                     </div>
