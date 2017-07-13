@@ -285,7 +285,7 @@ angular
                     var img_file=$('.user_heading_avatar img:last').attr('src');
                 }
 
-                 $http({
+                $http({
                     method:'POST',
                     url: $localStorage.service+'EmployeemgmntAPI/updateEmployeeAdmission',
                     data: {
@@ -327,12 +327,42 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.data.message);
+                    console.log(return_data,'update');
                     if(return_data.data.data.status==true){
-                        $timeout(function(){
-                            $state.go('restricted.employeemanagement.employee_profile_tableview');
-                        },200);
+                        UIkit.notify({
+                            message : return_data.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $state.go('restricted.employeemanagement.employee_profile_tableview');
+                        if(return_data.data.data.check=='New'){
+                            $timeout(function(){
+                                $scope.backGroundEmail($scope.user_data.EMAIL);
+                            },1000);
+                        }
+
+                    }else{
+                        UIkit.notify({
+                            message : 'Email already exists',
+                            status  : 'danger',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
                     }
+                });
+            }
+
+            $scope.backGroundEmail=function(emailID){
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'EmployeemgmntAPI/sendEmail',
+                    data:{
+                        'mail_id':emailID,
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                    console.log(response,'response');
                 });
             }
 

@@ -250,7 +250,6 @@ angular
                         $scope.employee_id=return_data.data.data.EMP_PROFILE_ID;
                         $scope.ProfileID=return_data.data.data.PROFILE_ID;
                         $scope.DummyProfileID=return_data.data.data.PROFILE_ID;
-                        $scope.backGroundEmail(return_data.data.data.EMP_PROFILE_ID);
                         WizardHandler.wizard().next();
                     }else {
                         UIkit.modal.alert('Admission No Already Exists');
@@ -260,12 +259,12 @@ angular
             };
 
              $timeout(function(){
-                $scope.backGroundEmail=function(emp_profileID){
+                $scope.backGroundEmail=function(emailID){
                     $http({
                         method:'POST',
                         url: $localStorage.service+'EmployeemgmntAPI/sendEmail',
                         data:{
-                            'emp_prof_Id':emp_profileID,
+                            'mail_id':emailID,
                         },
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(response){
@@ -303,18 +302,28 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.data.message);
-                    UIkit.notify({
-                        message : return_data.data.data.message,
-                        status  : 'success',
-                        timeout : 2000,
-                        pos     : 'top-center'
-                    });
-                    $scope.mailing_id=return_data.data.data.MAILING_ADDRESS_ID;
-                    $scope.permanant_id=return_data.data.data.PERM_ADDRESS_ID;
-                    $scope.employee_profileID=return_data.data.data.EMP_PROFILE_ID;
-                    $scope.ThirdProfileID=return_data.data.data.EMP_PROFILE_ID;
-                    WizardHandler.wizard().next();
+                    // console.log(return_data,'444444444444');
+                    if(return_data.data.status==true){
+                        UIkit.notify({
+                            message : return_data.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.mailing_id=return_data.data.data.MAILING_ADDRESS_ID;
+                        $scope.permanant_id=return_data.data.data.PERM_ADDRESS_ID;
+                        $scope.employee_profileID=return_data.data.data.EMP_PROFILE_ID;
+                        $scope.ThirdProfileID=return_data.data.data.EMP_PROFILE_ID;
+                        WizardHandler.wizard().next();
+                        $scope.backGroundEmail($scope.ADDITIONAl.email);
+                    }else {
+                        UIkit.notify({
+                            message : 'Email Already Exists',
+                            status  : 'danger',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                    }
                 });
             }
             $scope.savePreviousInstituteDetails=function(){

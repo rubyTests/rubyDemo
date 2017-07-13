@@ -58,11 +58,12 @@
             <div class="md-card-content">
                 <form id="form_validation" ng-submit="savePayItem()" novalidate>
                     <div class="uk-form-row parsley-row">
-                        <label>Name</label>
+                        <label>Name <span class="req">*</span></label>
                         <input type="text" ng-model="item_name" required class="md-input" md-input>
                         <input type="hidden" ng-model="item_id">
                     </div>
                     <div class="uk-form-row parsley-row">
+                        <label ng-if="item_type" style="font-size: 12px;color: #727272;">Type <span class="req">*</span></label>
                         <input type="text" config="selectize_item_config" required options="selectize_item_options" ng-model="item_type" selectize/>
                     </div>
                     <div class="uk-modal-footer uk-text-right">

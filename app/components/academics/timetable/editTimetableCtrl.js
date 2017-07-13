@@ -639,51 +639,30 @@ angular
                 },
                 // require: 'ngModel',
                 templateUrl:'app/components/academics/timetable/startTimeTemplate.html',
+                controller:function($scope){
+                   
+                    $scope.checkValidData = function(){
+                        var endTime = moment($scope.endTimeData,["hh:mm A"])._d;
+                        var currentTime = $scope.startTimeData1;
+                        $scope.startTimeData = currentTime;
+                        currentTime = moment(currentTime,["hh:mm A"])._d;
+                        console.log($scope.setTimeStart,"currentTime");
+                        var minTime = moment($scope.setTimeStart,["HH:mm:ss"])._d;
+                        var maxTime = moment($scope.setTimeEnd,["HH:mm:ss"])._d;
+                        console.log(minTime, "===", currentTime,"datadatadata");
+                        if (minTime.getTime() <= currentTime.getTime()  && currentTime.getTime() <= maxTime.getTime() && currentTime.getTime() < endTime.getTime()) {
+                            console.log(currentTime,"correct");
+                        }else{
+                            $scope.startTimeData1="";
+                            console.log(currentTime,"wrong");
+                        }
+                    }
+                },
                 link:function($scope, element, attr){
                     element.find('input').inputmask();
-                    // console.log($scope.setTimeStart,$scope.setTimeEnd,"testest");
-                    $scope.$watch('startTimeData', function(newval, oldval){
-                        if (typeof newval!="undefined"  && newval!="") {
-                            $scope.startTimeData1 = moment(newval,["hh:mm:ss"]).format('hh:mm A');
-                            alert($scope.startTimeData1+"-->start if");
-                            // console.log($scope.startTimeData1,"$scope.startTimeData");
-                        }else{
-                            $scope.startTimeData1 = "";
-                            alert($scope.startTimeData1+"-->start");
-                        }
-                    });
-                    element.bind('change',function(){
-                        // $scope.$apply(function(){ 
-                            // console.log($scope.startTimeData,$scope.endTimeData,"setTimeEndsetTimeEnd");
-                            var endTime = moment($scope.endTimeData,["hh:mm A"])._d;
-                            var currentTime = element.find('input').val();
-                            $scope.startTimeData = currentTime;
-                            currentTime = moment(currentTime,["hh:mm A"])._d;
-                            console.log($scope.setTimeStart,"currentTime");
-                            var minTime = moment($scope.setTimeStart,["HH:mm:ss"])._d;
-                            var maxTime = moment($scope.setTimeEnd,["HH:mm:ss"])._d;
-                            console.log(minTime, "===", currentTime,"datadatadata");
-                            if (minTime.getTime() <= currentTime.getTime()  && currentTime.getTime() <= maxTime.getTime() && currentTime.getTime() < endTime.getTime()) {
-                                console.log(element.find('input'),"correct");
-                                $scope.startTimeData = "";
-                                $scope.startTimeData = currentTime;
-                            }else{
-                                console.log(element.find('input'),"element");
-                                // $('check-start-time').find('input').val("")
-                                // element.find('input').val("");
-                                $scope.startTimeData="";
-                                console.log(currentTime,"wrong");
-                            }
-                            sendStartTime=$scope.startTime;
-                            // $scope.$apply();
-                            // console.log(maxTime,'---',minTime,"maxTimemaxTimemaxTimemaxTimemaxTime");
-                            // if (data.getTime() >= 1498447800000 && data.getTime() <= 1498478400000 && data.getTime() < endTime.getTime()) {
-                            //     console.log(element.find('input'),"correct");
-                            // }else{
-                            //     element.find('input').val("");
-                            //     console.log(currentTime,"wrong");
-                            // }
-                        // });                        
+                    $scope.$watch('startTimeData',function(newVal, oldVal){
+                        var currentTime = moment(newVal,["HH:mm:ss"]).format("hh:mm A");
+                        $scope.startTimeData1=currentTime;
                     });
                 }
             }
@@ -700,40 +679,29 @@ angular
                 },
             // require: 'ngModel',
             templateUrl:'app/components/academics/timetable/endTimeTemplate.html',
-            link:function($scope, element, attr){
-                $scope.$watch('endTimeData', function(newval, oldval){
-                    if (typeof newval!="undefined" && newval!="") {
-                        $scope.endTimeData1 = moment(newval,["HH:mm:ss"]).format('hh:mm A');
-                        alert("end if");
-                    }else{
-                        $scope.endTimeData = "";
-                        alert($scope.endTimeData+"-->End");
-                    }
-                });
-                element.find('input').inputmask();
-                element.bind('change',function(){
-                    // $scope.$apply(function(){
-                        // console.log($scope.startTime,"$scope");
-                        var currentTime = element.find('input').val();
-                        $scope.endTimeData = currentTime;
-                        // currentTime = moment(currentTime,["hh:mm A"])._d;
-                        var data = moment(currentTime,["hh:mm A"])._d;
-                        var startTime = moment($scope.startTimeData,["hh:mm A"])._d;
+            controller:function($scope){
+                $scope.checkValidData = function(){
+                    var currentTime = $scope.endTimeData1;
+                    $scope.endTimeData = currentTime;
+                    var data = moment(currentTime,["hh:mm A"])._d;
+                    var startTime = moment($scope.startTimeData,["hh:mm A"])._d;
 
-                        var minTime = moment($scope.setTimeStart,["HH:mm:ss"])._d;
-                        var maxTime = moment($scope.setTimeEnd,["HH:mm:ss"])._d;
-                        console.log(minTime, "===", data,"datadatadata");
-                        if (minTime.getTime() <= data.getTime()  && data.getTime() <= maxTime.getTime() && data.getTime() > startTime.getTime()) {
-                            console.log(element.find('input'),"correct");
-                            $scope.endTimeData = currentTime;
-                            $scope.endTimeData = $scope.endTimeData;
-                        }else{
-                            // element.find('input').val("");
-                            $scope.endTimeData = "";
-                            console.log(currentTime,"wrong");
-                        }
-                    // });
-                     // $scope.$apply();
+                    var minTime = moment($scope.setTimeStart,["HH:mm:ss"])._d;
+                    var maxTime = moment($scope.setTimeEnd,["HH:mm:ss"])._d;
+                    console.log(minTime, "===", data,"datadatadata");
+                    if (minTime.getTime() <= data.getTime()  && data.getTime() <= maxTime.getTime() && data.getTime() > startTime.getTime()) {
+                        console.log(currentTime,"correct");
+                    }else{
+                        $scope.endTimeData1 = "";
+                        console.log(currentTime,"wrong");
+                    }
+                }
+            },
+            link:function($scope, element, attr){
+                element.find('input').inputmask();
+                $scope.$watch('endTimeData',function(newVal, oldVal){
+                    var currentTime = moment(newVal,["HH:mm:ss"]).format("hh:mm A");
+                    $scope.endTimeData1=currentTime;
                 });
             }
         }

@@ -98,7 +98,7 @@ angular
                 $scope.selectize_item_config = {
                     create: false,
                     maxItems: 1,
-                    placeholder: 'Type',
+                    placeholder: 'Type *',
                     onInitialize: function(selectize){
                         selectize.on('change', function(value) {
                             console.log(value);
