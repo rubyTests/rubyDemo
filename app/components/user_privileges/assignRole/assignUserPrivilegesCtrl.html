@@ -1,0 +1,78 @@
+<style type="text/css">
+  .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+    font-size: 16px !important;
+  }
+</style>
+<div id="page_content" ng-controller="assignRolePrivilegesCtrl as showCase">
+    <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Assign Role</h3>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <div class="uk-text-right">
+                        <button  class="md-btn md-btn-primary md-btn-small" ng-click="addassignRole()" data-uk-modal="{target:'#modal_overflow'}">
+                        <i class="uk-icon-plus"></i>  Add Role
+                        </button>
+                    </div>
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>User Name</th>
+                            <th>Role Name</th>
+                            <th>Department</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th>User Name</th>
+                            <th>Role Name</th>
+                            <th>Department</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                      <tr ng-repeat="row in roleList">
+                        <td>{{$index+1}}</td>
+                        <td>{{row.PROFILE_NAME}}</td>
+                        <td>{{row.ROLL_NAME}}</td>
+                        <td>{{row.DEPT_NAME}}</td>
+                        <td class="">
+                            <a ng-click="assignRoleEdit(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
+                            <a class="ts_remove_row" ng-click="assignRoleDelete(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-medium-1-3">
+      <div id="modal_overflow" class="uk-modal">
+        <div class="uk-modal-dialog">
+          <button type="button" class="uk-modal-close uk-close"></button>
+          <h3 class="uk-modal-title">{{titCaption}} Role </h3><br>
+            <div class="md-card-content">
+              <form id="form_validation" class="" name="roleForm" ng-submit="saveAssignRole()" novalidate>
+                <div class="parsley-row uk-form-row">
+                  <input type="hidden" ng-model="dept_id">
+                  <label class="uk-form-label">Role Name<span class="req">*</span></label>
+                  <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" ng-model="user_role.roleName" class="md-input" name="roleName" focus-me="shouldBeOpen" required md-input>
+                </div>
+                <div class="uk-form-row">
+                  <input type="text" config="department_config" options="department_options" ng-model="user_role.dept_name" selectize placeholder="Select Department"/>
+                </div>
+                <div class="uk-form-row">
+                  <input type="text" config="employee_config" options="employee_options" ng-model="user_role.employee" selectize placeholder='Select User'/>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                      <button type="button" class="md-btn md-btn-danger md-btn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                      <button type="submit" class="md-btn md-btn-primary md-btn-small">{{btnStatus}}</button>
+                </div>
+                </form>
+            </div>
+         </div>
+      </div>
+    </div> 
+</div>
