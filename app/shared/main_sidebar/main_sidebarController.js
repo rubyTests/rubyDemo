@@ -64,52 +64,14 @@ angular
                 }
             };
             
-            
-            var userLov = [
+                       
+            // menu entries
+            var adminLov = [
                 {
                     id: 0,
                     title: 'Dashboard',
                     icon: '&#xE871;',
                     link: 'restricted.dashboard'
-                },
-                {
-                    id: 1,
-                    title: 'Institution',
-                    icon: '&#xE84F;',
-                    submenu: [
-                        {
-                            title: 'Institution Details',
-                            link: 'restricted.setting.institutionDetails'
-                            // link:'restricted.setting.institution_view'
-                        },
-                        {
-                            title: 'Building',
-                            link: 'restricted.setting.building'
-                        },
-                        {
-                            title: 'Building Block',
-                            link: 'restricted.setting.buildingblock'
-                        },
-                        {
-                            title: 'Room',
-                            link: 'restricted.setting.room'
-                        }
-                    ]
-                }];
-            
-            // menu entries
-            var adminLov = [
-                // {
-                //     id: 0,
-                //     title: 'Dashboard',
-                //     icon: '&#xE871;',
-                //     link: 'restricted.dashboard'
-                // },
-                {
-                    id: 0,
-                    title: 'Email Sending',
-                    icon: '&#xE871;',
-                    link: 'restricted.emailsending.sendmail'
                 },
                 {
                     id: 1,
@@ -193,27 +155,7 @@ angular
                             ]
                         },
                         {
-                            title: 'Timetable',
-                            submenu: [
-                                {
-                                    title: 'View Timetable',
-                                    // link:'restricted.academics.timetable.viewtimetable'
-                                    link:'restricted.academics.timetable.timetableView'
-                                },
-                                {
-                                    title: 'Manage Timetable',
-                                    submenu: [
-                                        {
-                                            title: 'Create Timetable',
-                                            link:'restricted.academics.timetable.managetimetable.createcalendar'
-                                        },
-                                        {
-                                            title: 'Setting',
-                                            link:'restricted.academics.timetable.managetimetable.setting'
-                                        }
-                                    ]
-                                }
-                            ]
+                            title: 'Timetable'
                         },
                         {
                             title: 'Discipline',
@@ -319,13 +261,11 @@ angular
                             submenu: [
                                 {
                                     title: 'Leave Type',
-                                    // link:'restricted.hr.leave_category'
-                                    link:'restricted.hr.leavetype'
+                                    link:'restricted.hr.leave_category'
                                 },
                                 {
                                     title: 'Leave Entitlement',
-                                    // link : 'restricted.hr.assignleave_categoryView'
-                                    link : 'restricted.hr.leave_entitlement_View'
+                                    link : 'restricted.hr.assignleave_categoryView'
                                 },
                                 {
                                     title: 'Apply Leave',
@@ -679,6 +619,181 @@ angular
                 // }
             ];
             
+			// Employee Role 
+			
+			var employeeLov = [
+                {
+                    id: 0,
+                    title: 'Dashboard',
+                    icon: '&#xE871;',
+                    link: 'restricted.dashboard'
+                },
+                {
+                    id: 1,
+                    title: 'Institution',
+                    icon: '&#xE84F;',
+                    link:'restricted.setting.institutionDetailsView'
+                },
+                {
+                    id: 2,
+                    title: 'Academics',
+                    icon: 'school',
+                    submenu: [
+                        {
+                            title: 'Subjects & Syllabus',
+                            submenu: [
+                                {
+                                    title: 'Subjects',
+                                    link: 'restricted.academics.subjects'
+                                },
+                                {
+                                    title: 'Syllabus',
+                                    link: 'restricted.academics.syllabus_view'
+                                }
+                            ]
+                        },
+                        //Modified
+                        {
+                            title: 'Assign Teacher',
+                            link: 'restricted.student.assignTeacher'
+                        },
+                        {
+                            title: 'Attendance',
+                            submenu: [
+                                {
+                                    title: 'Student Attendance Report',
+									link: 'restricted.academics.studentreport'
+                                },
+                                {
+                                    title: 'Student Attendance Marking',
+                                    link: 'restricted.academics.markattendance'
+                                },
+								{
+                                    title: 'Student Leave Approve',
+                                    link: 'restricted.academics.studentleaveapprove'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Timetable',
+                            submenu: [
+                                {
+                                    title: 'View Timetable',
+                                    // link:'restricted.academics.timetable.viewtimetable'
+                                    link:'restricted.academics.timetable.timetableView'
+                                },
+                                {
+                                    title: 'Manage Timetable',
+                                    submenu: [
+                                        {
+                                            title: 'Create Timetable',
+                                            link:'restricted.academics.timetable.managetimetable.createcalendar'
+                                        },
+                                        {
+                                            title: 'Setting',
+                                            link:'restricted.academics.timetable.managetimetable.setting'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+							title: 'Examination',
+							submenu: [
+								{
+                                    title: 'Set Grading',
+                                    link: 'restricted.academics.examination.setgrading'
+                                },
+                                {
+                                    title: 'Set Term',
+                                    link: 'restricted.academics.examination.setTerm'
+                                },
+								{
+                                    title: 'Create Exam',
+                                    link: 'restricted.academics.examination.createExam'
+                                },
+                                {
+                                    title: 'Assessment',
+									submenu: [
+										{
+											title: 'Set Assessment',
+											link: 'restricted.academics.examination.setassessment'
+										},
+										{
+											title: 'Assessment MarkList',
+											// link: 'restricted.academics.examination.assessmentList'
+											link: 'restricted.academics.examination.assessmentMark'
+										},
+									]
+                                },
+								{
+                                    title: 'Exam',
+									submenu: [
+										{
+											title: 'Set Exam',
+											link: 'restricted.academics.examination.setexamination'
+										},
+										{
+											title: 'Exam MarkList',
+											link: 'restricted.academics.examination.markDetails'
+										},
+									]
+                                }
+							]
+						},
+                        {
+                            title: 'Assignments',
+                            link: 'restricted.academics.assignment'
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'Student',
+                    icon: '&#xE7FD;',
+                    submenu:[
+                        {
+                            title:'Students',
+                            link: 'restricted.student.student_list'
+                        }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: 'Profile',
+					icon: '&#xE7FD;',
+                    submenu: [
+                        {
+                            title: 'My Profile',
+							link:'restricted.employeemanagement.profile'
+                        },
+						{
+                            title: 'Apply Leave',
+							link:'restricted.hr.applyLeave'
+                        },
+                        {
+                            title: 'Payslip Report',
+							link : 'restricted.hr.payslipReport'
+                        }
+                    ]
+                },
+                {
+                    id: 6,
+                    title: 'Repository',
+                    icon: '&#xE2CC;',
+                    submenu:[
+                        {
+                            title:'Category',
+                            link: 'restricted.repository.categoryView'
+                        },
+                        {
+                            title:'Post',
+                            link: 'restricted.repository.postView'
+                        }
+                    ]
+                }
+            ];
+			
             // Student Role
             
             var studentRole = [
@@ -708,7 +823,7 @@ angular
                             submenu: [
                                 {
                                     title: 'Attendance Report',
-                                    link: 'restricted.plugins.studentreport'
+                                    link: 'restricted.academics.reportforstudent'
                                 },
                                 {
                                     title: 'My Leaves',
@@ -722,22 +837,6 @@ angular
                         {
                             title: 'Examination',
                             submenu: [
-                                {
-                                    title: 'Set Grading',
-                                    link: 'restricted.academics.examination.setgrading'
-                                },
-                                {
-                                    title: 'Set Exam',
-                                    link: 'restricted.academics.examination.setexam'
-                                },
-                                {
-                                    title: 'Set Assessment',
-                                    link: 'restricted.academics.examination.setassessment'
-                                },
-                                {
-                                    title: 'Set Weightages',
-                                    link: 'restricted.academics.examination.setweightage'
-                                },
                                 {
                                     title: 'Assign Exam',
                                     link: 'restricted.academics.examination.assign'
@@ -770,7 +869,17 @@ angular
                     id: 8,
                     title: 'Library',
                     icon: '&#xE02F;',
-                    link: 'restricted.Library'
+					submenu: [
+						{
+							title: 'Library',
+							link: 'restricted.Library'
+						},
+						{
+							title: 'Books Taken',
+							link: 'restricted.library.booktaken'
+						}
+					]
+                    
                 },
                 {
                     id: 12,
@@ -834,7 +943,6 @@ angular
                         {
                             title: 'Timetable'
                         },
-                       
                         {
                             title: 'Discipline',
                             submenu: [
@@ -988,15 +1096,519 @@ angular
                 }
             ];
             
+			// HR Role
+			
+			var hrLov = [
+                {
+                    id: 2,
+                    title: 'Academics',
+                    icon: 'school',
+                    submenu: [
+                        {
+                            title: 'Subjects & Syllabus',
+                            submenu: [
+                                {
+                                    title: 'Subjects',
+                                    link: 'restricted.academics.subjects'
+                                },
+                                {
+                                    title: 'Syllabus',
+                                    link: 'restricted.academics.syllabus_view'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Assign Teacher',
+                            link: 'restricted.student.assignTeacher'
+                        },
+                        {
+                            title: 'Attendance',
+                            submenu: [
+                                {
+                                    title: 'Student Attendance Report',
+									link: 'restricted.academics.studentreport'
+                                },
+                                {
+                                    title: 'Student Attendance Marking',
+                                    link: 'restricted.academics.markattendance'
+                                },
+								{
+                                    title: 'Student Leave Approve',
+                                    link: 'restricted.academics.studentleaveapprove'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Timetable',
+                            submenu: [
+                                {
+                                    title: 'View Timetable',
+                                    link:'restricted.academics.timetable.timetableView'
+                                },
+                                {
+                                    title: 'Manage Timetable',
+                                    submenu: [
+                                        {
+                                            title: 'Create Timetable',
+                                            link:'restricted.academics.timetable.managetimetable.createcalendar'
+                                        },
+                                        {
+                                            title: 'Setting',
+                                            link:'restricted.academics.timetable.managetimetable.setting'
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+							title: 'Examination',
+							submenu: [
+								{
+                                    title: 'Set Grading',
+                                    link: 'restricted.academics.examination.setgrading'
+                                },
+                                {
+                                    title: 'Set Term',
+                                    link: 'restricted.academics.examination.setTerm'
+                                },
+								{
+                                    title: 'Create Exam',
+                                    link: 'restricted.academics.examination.createExam'
+                                },
+                                {
+                                    title: 'Assessment',
+									submenu: [
+										{
+											title: 'Set Assessment',
+											link: 'restricted.academics.examination.setassessment'
+										},
+										{
+											title: 'Assessment MarkList',
+											link: 'restricted.academics.examination.assessmentMark'
+										},
+									]
+                                },
+								{
+                                    title: 'Exam',
+									submenu: [
+										{
+											title: 'Set Exam',
+											link: 'restricted.academics.examination.setexamination'
+										},
+										{
+											title: 'Exam MarkList',
+											link: 'restricted.academics.examination.markDetails'
+										},
+									]
+                                }
+							]
+						},
+                        {
+                            title: 'Assignments',
+                            link: 'restricted.academics.assignment'
+                        }
+                    ]
+                },
+                {
+                    id: 3,
+                    title: 'Student',
+                    icon: '&#xE7FD;',
+                    submenu:[
+                        {
+                            title:'Students',
+                            link: 'restricted.student.student_list'
+                        }
+                    ]
+                },
+                {
+                    id: 4,
+                    title: 'Profile',
+					icon: '&#xE7FD;',
+                    submenu: [
+                        {
+                            title: 'My Profile',
+							link:'restricted.employeemanagement.profile'
+                        },
+						{
+                            title: 'Apply Leave',
+							link:'restricted.hr.applyLeave'
+                        },
+                        {
+                            title: 'Payslip Report',
+							link : 'restricted.hr.payslipReport'
+                        }
+                    ]
+                },
+				{
+                    id: 5,
+                    title: 'HR',
+                    icon: '&#xE7EF;',
+                    submenu: [
+                        {
+                            title: 'Employee Management',
+                            submenu: [
+                                {
+                                    title: 'Employee Category',
+                                    link: 'restricted.hr.config.category'
+                                },
+                                {
+                                    title: 'Employee Position',
+                                    link: 'restricted.hr.config.position'
+                                },
+                                {
+                                    title: 'Employee Admission',
+                                    link: 'restricted.employeemanagement.admission'
+                                },
+                                {
+                                    title: 'Employees',
+                                    link: 'restricted.employeemanagement.employee_view'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Leave Management',
+                            submenu: [
+                                {
+                                    title: 'Leave Type',
+                                    link:'restricted.hr.leave_category'
+                                },
+                                {
+                                    title: 'Leave Entitlement',
+                                    link : 'restricted.hr.assignleave_categoryView'
+                                },
+                                {
+                                    title: 'Apply Leave',
+                                    link:'restricted.hr.applyLeave'
+                                },
+                                {
+                                    title: 'Leave Applications',
+                                    link : 'restricted.hr.leave_application'
+                                },
+
+                                {
+                                    title: 'Attendance Register',
+                                    link : 'restricted.academics.empattendancemark'
+                                },
+                                {
+                                    title: 'Attendance Report',
+                                    link: 'restricted.plugins.employeereport'
+                                },
+                            ]
+                        },
+                        {
+                            title: 'Payroll & Payslip',
+                            submenu: [
+                                {
+                                    title: 'Pay Item',
+                                    link : 'restricted.hr.payitem_details'
+                                },
+                                {
+                                    title: 'Pay Structure',
+                                    link : 'restricted.hr.StructureGroup'
+                                },
+                                {
+                                    title: 'Payslip',
+                                    link : 'restricted.hr.payslipGenaration_view'
+                                },
+                                {
+                                    title: 'Payslip Report',
+                                    link : 'restricted.hr.payslipReport'
+                                },
+                                {
+                                    title:'Rejected Payslips',
+                                    link : 'restricted.hr.rejectpayslip'  
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 6,
+                    title: 'Repository',
+                    icon: '&#xE2CC;',
+                    submenu:[
+                        {
+                            title:'Category',
+                            link: 'restricted.repository.categoryView'
+                        },
+                        {
+                            title:'Post',
+                            link: 'restricted.repository.postView'
+                        }
+                    ]
+                },
+                {
+                    id: 7,
+                    title: 'Email Template',
+                    icon: '&#xE158;',
+                    link : 'restricted.emailTemplate.template'
+                },
+                {
+                    id: 8,
+                    title: 'Library',
+                    icon: '&#xE02F;',
+                    submenu: [
+                        {
+                            title: 'Category',
+                            link: 'restricted.library.category'
+                        },
+                        {
+                            title: 'Books',
+                            link: 'restricted.library.bookviewdetails'
+                        },
+                        {
+                            title: 'Issue Books',
+                            link: 'restricted.library.bookissue_view'
+                        },
+                        {
+                            title: 'Return Books',
+                            link: 'restricted.library.bookreturn_view'
+                        },
+                        {
+                            title: 'Report',
+                            link: 'restricted.library.reportView'
+                        }
+                    ]
+                }
+            ];
             
+			var financeLov = [
+                {
+                    id: 5,
+                    title: 'Finance',
+                    icon: '&#xE263;',
+                    submenu: [
+                        {
+                            title:'Fees',
+                            submenu:[
+                                    
+                                {
+                                    title:'Fee Item',
+                                    link: 'restricted.finance.fee.feeitemDetails'
+                                },
+                                {
+                                    title:'Fine',
+                                    link: 'restricted.finance.fee.fineDetails'
+                                },
+                                {
+                                    title:'Fee Structure',
+                                    link: 'restricted.finance.fee.feeStructureDetails'
+                                },
+                                {
+                                    title:'Assign Fees',
+                                    link: 'restricted.finance.fee.assignedFeeStructure'
+                                },
+                                {
+                                    title:'Fee Collection',
+                                    link: 'restricted.finance.fee.feeCollectionDetails'
+                                },
+                                {
+                                    title:'Report',
+                                    submenu:[
+                                        {
+                                            title:'Student Fee Report',
+                                            link: 'restricted.finance.fee.feeReport'
+                                        },
+                                        {
+                                            title:'Fee Defaulter',
+                                            link: 'restricted.finance.fee.feeDefaulter'
+                                        }
+                                    ]
+                                    // title:'Fee Report',
+                                    // link: 'restricted.finance.fee.feeReport'
+                                },
+                                {
+                                    title:'Parent Receipt View',
+                                    link: 'restricted.finance.fee.parentReceiptView'
+                                }
+                            ]
+                        },
+                        {
+                            title:'Payslip Management',
+                            submenu:[
+                                {
+                                    title:'Payslip',
+                                    link: 'restricted.finance.payslipGenaration_view'
+                                },
+                                {
+                                    title:'Approve Payslips',
+                                    link: 'restricted.hr.approvepayslip'
+                                },
+                                {
+                                    title:'Payslip Report',
+                                    link: 'restricted.finance.payslipReport'
+                                }
+                            ]
+                        },
+                        {
+                            title:'Transaction',
+                            submenu:[
+                                {
+                                    title:'Category',
+                                    link: 'restricted.finance.fee.category'
+                                },
+                                {
+                                    title:'Income',
+                                    link: 'restricted.finance.fee.income'
+                                },
+                                {
+                                    title:'Expense',
+                                    link: 'restricted.finance.fee.expense'
+                                },
+                                {
+                                    title:'Report',
+                                    link: 'restricted.finance.fee.transactionreport'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ];
+			
+			
+			var transportLov = [
+                {
+                    id: 9,
+                    title: 'Transport',
+                    icon: '&#xE530;',
+                    submenu: [
+                        {
+                            title: 'Vehicle',
+                            link : 'restricted.transport.vehicleDetail'
+                        },
+                        {
+                            title: 'Route',
+                            link : 'restricted.transport.routeDetail'
+                        },
+                        {
+                            title: 'Route Timing',
+                            link : 'restricted.transport.routeTiming'
+                        },
+                        {
+                            title: 'Route Stops',
+                            link : 'restricted.transport.routeStops'
+                        },
+                        {
+                            title: 'Route Allocation',
+                            link : 'restricted.transport.routeAllocation'
+                        }
+                    ]
+                }
+            ];
+			
+			var hostelLov = [
+                {
+                    id: 10,
+                    title: 'Hostel',
+                    icon: '&#xE88A;',
+                    submenu: [
+                        {
+                            title: 'Settings',
+                            link: 'restricted.hostel.settings'
+                        },
+                        {
+                            title: 'Allocation',
+                            link: 'restricted.hostel.allocation'
+                        },
+                        {
+                            title: 'Transfer',
+                            link: 'restricted.hostel.transfer'
+                        },
+                        {
+                            title: 'Vacate',
+                            link: 'restricted.hostel.vacate'
+                        },
+                        {
+                            title: 'Visitors',
+                            link: 'restricted.hostel.visitors'
+                        }
+                    ]
+                }
+            ];
+			
+			var inventoryLov = [
+                {
+                    id: 11,
+                    title: 'Inventory',
+                    icon: '&#xE8D1;',
+                    submenu: [
+                        {
+                            title:'Settings',
+                            submenu:[
+                                {
+                                    title: 'Store Category',
+                                    link: 'restricted.inventory.storeCategory'
+                                },
+                                {
+                                    title: 'Item Category',
+                                    link: 'restricted.inventory.itemCategory'
+                                },
+                                {
+                                    title: 'Supplier Type',
+                                    link: 'restricted.inventory.supplierType'
+                                }
+                            ]
+                        },
+                        {
+                            title: 'Store',
+                            link: 'restricted.inventory.store'
+                        },
+                        {
+                            title: 'Item',
+                            link: 'restricted.inventory.item'
+                        },
+                        {
+                            title: 'Store Item',
+                            link: 'restricted.inventory.storeItem'
+                        },
+                        {
+                            title: 'Supplier',
+                            link: 'restricted.inventory.supplier'
+                        },
+                        {
+                            title: 'Material Request',
+                            link: 'restricted.inventory.materialRequestView'
+                        },
+                        {
+                            title: 'Purchase Order',
+                            link: 'restricted.inventory.purchaseOrderView'
+                        },
+                        {
+                            title: 'Billing',
+                            link: 'restricted.inventory.billingView'
+                        },
+                        {
+                            title: 'GRN',
+                            link: 'restricted.inventory.grnView'
+                        },
+                        {
+                            title: 'Reports',
+                            link: 'restricted.inventory.reportView'
+                        }
+                    ]
+                }
+            ];
+			
+			
             if($localStorage.role_id==1){
                 $scope.sections = adminLov;
             }else if($localStorage.role_id==2){
-                $scope.sections = userLov;
+                $scope.sections = employeeLov;
+                // $scope.sections = employeeLov.concat(financeLov);
             }else if($localStorage.role_id==3){
                 $scope.sections = studentRole;
             }else if($localStorage.role_id==4){
                 $scope.sections = parentRole;
+            }else if($localStorage.role_id==5){
+                $scope.sections = hrLov;
+            }else if($localStorage.role_id==6){
+                $scope.sections = financeLov;
+            }else if($localStorage.role_id==7){
+                $scope.sections = transportLov;
+            }else if($localStorage.role_id==8){
+                $scope.sections = hostelLov;
+            }else if($localStorage.role_id==9){
+                $scope.sections = inventoryLov;
             }
            
         }
