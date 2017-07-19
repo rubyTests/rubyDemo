@@ -141,7 +141,10 @@
                                                 </tr>
                                                 <tr ng-repeat="row in PaySrtuctureData | filter:{ITEM_TYPE:'Earnings'}" ng-if="!payslipId">
                                                     <td class="tdStyle">{{row.ITEM_NAME}}</td>
-                                                    <td class="tdStyle"><input type="text" ng-model="row.changedAmount" name="earningAmount" ng-disabled=true></td>
+                                                    <td class="tdStyle">
+                                                        <input type="text" ng-model="row.changedAmount" name="earningAmount" ng-disabled=true>
+                                                        <input type="hidden" ng-model="row.payitemVal">
+                                                    </td>
                                                 </tr>
                                                 <tr ng-repeat="x in PaySrtuctureData1 | filter:{TYPE:'Earnings'}">
                                                     <td class="tdStyle">{{x.NAME}}</td>
@@ -163,7 +166,10 @@
                                             <tbody>
                                                 <tr ng-repeat="row in PaySrtuctureData" ng-if="!payslipId">
                                                     <td class="tdStyle" ng-if="row.ITEM_TYPE=='Deductions'">{{row.ITEM_NAME}}</td>
-                                                    <td class="tdStyle" ng-if="row.ITEM_TYPE=='Deductions'"><input type="text" ng-change="getTotalDeduction()" ng-disabled=true ng-model="row.changedAmount" name="deductionAmount"></td>
+                                                    <td class="tdStyle" ng-if="row.ITEM_TYPE=='Deductions'">
+                                                        <input type="text" ng-change="getTotalDeduction()" ng-disabled=true ng-model="row.changedAmount" name="deductionAmount">
+                                                        <input type="hidden" ng-model="row.payitemVal">
+                                                    </td>
                                                 </tr>
                                                 <tr ng-repeat="x in PaySrtuctureData1">
                                                     <td class="tdStyle" ng-if="x.TYPE=='Deductions'">{{x.NAME}}</td>
@@ -214,7 +220,7 @@
                 </div>
                 <div class="uk-form-row parsley-row">
                     <label>Amount</label>
-                    <input type="text" ng-model="pay_amount" required class="md-input" md-input>
+                    <input type="text" ng-model="pay_amount" required class="md-input" md-input numeric-only>
                 </div>
                 <div class="uk-modal-footer uk-text-right">
                     <button type="button" class="md-btn md-btn-danger md-btntn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>

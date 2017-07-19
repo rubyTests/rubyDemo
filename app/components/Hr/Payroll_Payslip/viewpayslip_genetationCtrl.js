@@ -91,6 +91,7 @@ angular
                     $scope.PaySrtuctureData = return_data.data.message;
                     angular.forEach($scope.PaySrtuctureData, function(value, keys){
                         value.changedAmount=parseFloat(value.AMOUNT).toFixed(2);
+                        value.payitemVal=value.PAYITEM_ID;
                     });
                     $scope.getCalculation();       
                 });
@@ -104,11 +105,13 @@ angular
                 angular.forEach($scope.PaySrtuctureData,function(value, keys){
                      if (value.ITEM_TYPE=='Earnings') {
                         value.AMOUNT= value.AMOUNT || 0;
+                        value.payitemVal= value.PAYITEM_ID;
                         // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
                         value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalEarn+=parseFloat(value.changedAmount);
                     }else if (value.ITEM_TYPE=='Deductions'){
                         value.AMOUNT= value.AMOUNT || 0;
+                        value.payitemVal= value.PAYITEM_ID;
                         // value.changedAmount=(basicVal/value.AMOUNT).toFixed(2);
                         value.changedAmount=((value.AMOUNT/100)*basicVal).toFixed(2);
                         totalDeduct+=parseFloat(value.changedAmount);
@@ -231,6 +234,7 @@ angular
 
             $scope.generatePayslip=function(){
                 var date=moment($scope.generation_date,["YYYY-MM-DD"])._d;
+                console.log(date,'dateee');
                 var y = date.getFullYear(), m = date.getMonth();
                 var firstDay = moment([y, m, 1]);
                 var lastDay = moment(firstDay).endOf('month');
@@ -256,7 +260,8 @@ angular
                         'addon_data' : $scope.PaySrtuctureData1,
                         'Net_pay' : $scope.showTotalNetpay,
                         'fromdate' : fromDate,
-                        'enddate' : toDate
+                        'enddate' : toDate,
+                        'basicPay' : $scope.tableData.BASIC_PAY
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){

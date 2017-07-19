@@ -113,13 +113,16 @@
         </div>
         <br>
         <h3 class="heading_a uk-margin-bottom">Payroll Details
-        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayslip()">Edit</button></span>
+        <span style="float: right;"><button class="md-btn md-btn-primary md-btn-small md-btn-wave-light waves-effect waves-button waves-light" ng-click="editPayslip()" ng-show="editBTN">Edit</button></span>
         </h3>
          <div class="md-card-content uk-width-medium-1-1 large-padding">
             <div class="md-card uk-margin-medium-bottom">
                 <div class="md-card-content large-padding">
                 <form ng-submit="GeneratePayslip()">
                     <input type="hidden" ng-model="PAYSLIP_ID">
+                    <input type="hidden" ng-model="employeeID">
+                    <input type="hidden" ng-model="structureID">
+                    <input type="hidden" ng-model="genDates">
                     <div class="uk-overflow-container">
                         <table class="uk-table">
                             <thead>
@@ -133,12 +136,23 @@
                                             <tbody>
                                                 <tr>
                                                     <td class="tdStyle">Basic</td>
-                                                    <td class="tdStyle"> <input type="text" ng-model="viewData.BASIC_PAY" ng-disabled="true" id="basicpay" ng-change="earningCalculation(viewData.BASIC_PAY)" required></td>
+                                                    <td class="tdStyle"> <input type="text" ng-model="basicAMount" ng-disabled="true" id="basicpay" ng-change="getCalculation()" required></td>
                                                 </tr>
                                                 <tr ng-repeat="row in payslipList | filter:{TYPE:'Earnings'}">
                                                     <td class="tdStyle">{{row.NAME}}</td>
-                                                    <td class="tdStyle"> <input type="text" ng-model="row.AMOUNT" ng-disabled="true" name="earningAmount"></td>
+                                                    <td class="tdStyle"> <input type="text" ng-model="row.changedAmount" ng-disabled="true" name="earningAmount"></td>
                                                 </tr>
+
+                                                <tr ng-repeat="x in PaySrtuctureData1 | filter:{TYPE:'Earnings'}">
+                                                    <td class="tdStyle">{{x.NAME}}</td>
+                                                    <td class="tdStyle"><input type="text" ng-model="x.AMOUNT" ng-change="earningCalculation(viewData.BASIC_PAY)" name="earningAmount" ng-disabled=true> <input type="hidden" ng-model="x.TYPE"><span ng-hide="x.ID" ng-click="removeEarningItem($index)"><i class="md-list-addon-icon material-icons uk-text-info">remove_circle</i></span></td>
+                                                </tr>
+                                                <tr ng-show='addonData'>
+                                                    <td style="border-bottom: none;">&nbsp;</td>
+                                                    <td class="tdStyle"><a data-uk-modal="{target:'#open_Model'}" ng-click="addEarning()"><i class="md-list-addon-icon material-icons uk-text-info">add_circle</i> Add Earning</a></td>
+                                                </tr>
+
+
                                                 <tr>
                                                     <td class="tdStyle"><b>Total Earnings</b></td>
                                                     <td class="tdStyle"> <input type="text" ng-model="Total_Earning" ng-disabled="true">
@@ -152,8 +166,19 @@
                                             <tbody>
                                                 <tr ng-repeat="row in payslipList | filter:{TYPE:'Deductions'}">
                                                     <td class="tdStyle" >{{row.NAME}}</td>
-                                                    <td class="tdStyle" ><input type="text" ng-model="row.AMOUNT" ng-disabled="true" name="deductionAmount"></td>
+                                                    <td class="tdStyle" ><input type="text" ng-model="row.changedAmount" ng-disabled="true" name="deductionAmount"></td>
                                                 </tr>
+
+                                                <tr ng-repeat="x in PaySrtuctureData1">
+                                                    <td class="tdStyle" ng-if="x.TYPE=='Deductions'">{{x.NAME}}</td>
+                                                    <td class="tdStyle" ng-if="x.TYPE=='Deductions'"><input type="text" ng-model="x.AMOUNT" ng-change="earningCalculation(viewData.BASIC_PAY)" name="deductionAmount" ng-disabled=true> <input type="hidden" ng-model="x.TYPE"><span ng-hide="x.ID" ng-click="removeDeductionItem($index)"><i class="md-list-addon-icon material-icons uk-text-info">remove_circle</i></span></td>
+                                                </tr>
+                                                <tr ng-show='addonData'>
+                                                    <td style="border-bottom: none;">&nbsp;</td>
+                                                    <td class="tdStyle"><a data-uk-modal="{target:'#open_Model'}" ng-click="addDeduction()"><i class="md-list-addon-icon material-icons uk-text-info">add_circle</i> Add Deduction</a></td>
+                                                </tr>
+
+
                                                 <tr>
                                                     <td class="tdStyle"><b>Total Deduction</b> </td>
                                                     <td class="tdStyle"> <input type="text" ng-model="toatl_deduction" ng-disabled="true"></td>
@@ -178,6 +203,31 @@
                 </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="open_Model" class="uk-modal">
+    <div class="uk-modal-dialog">
+        <button type="button" class="uk-modal-close uk-close"></button>
+        <h3 class="uk-modal-title">{{tit_caption}} </h3>
+        <div class="md-card-content">
+            <form id="form_validation" ng-submit="saveAddonData()">
+                <div class="uk-form-row parsley-row">
+                    <label>Name</label>
+                    <input type="text" ng-model="pay_name" required class="md-input" md-input>
+                    <input type="hidden" ng-model="pay_type">
+                </div>
+                <div class="uk-form-row parsley-row">
+                    <label>Amount</label>
+                    <input type="text" ng-model="pay_amount" required class="md-input" md-input>
+                </div>
+                <div class="uk-modal-footer uk-text-right">
+                    <button type="button" class="md-btn md-btn-danger md-btntn-small uk-modal-close" ng-click="clearValidation()">Cancel</button>
+                    <button type="submit" class="md-btn md-btn-primary md-btntn-small">Add</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

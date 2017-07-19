@@ -1,0 +1,159 @@
+<style type="text/css">
+    .uk-tab {
+        margin-top: 27px;
+    }
+    .uk-tab > li {
+        padding:10px;
+    }
+</style>
+    <div id="page_content">
+        <div id="page_content_inner">
+
+            
+            <h4 class="heading_a uk-margin-bottom">Payment process</h4>
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content">
+
+                    <!-- <form>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Card Number <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">Expiry date <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">CVV <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Name on Card<span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div><br>
+                                                <div class="uk-text-center">
+                                                    <button class="md-btn md-btn-primary md-btn-small">Proceed to Pay</button>
+                                                </div>
+                                            </form> -->
+
+
+
+                                            <h2>Total Amount : {{PayAMounts | currency :''}}</h2>
+                    <div class="uk-grid uk-grid-divider" data-uk-grid-margin>
+                        <div class="uk-width-large-1-1">
+                            <div class="uk-grid uk-grid-medium" data-uk-grid-margin>
+                                <div class="uk-width-1-6">
+                                    <ul class="uk-tab uk-tab-left" data-uk-tab="{connect:'#tabs_6'}">
+                                        <li class="uk-active"><a href="#">Credit Card</a></li>
+                                        <li><a href="#">Atm Card</a></li>
+                                        <li><a href="#">Debit Card</a></li>
+                                    </ul>
+                                </div>
+                                <div class="uk-width-2-6">
+                                    <ul id="tabs_6" class="uk-switcher uk-margin-small-top">
+                                        <li><br>
+                                            <form>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Card Number <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">Expiry date <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">CVV <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Name on Card<span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div><br>
+                                                <div class="uk-text-center">
+                                                    <button class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.student.paymentforparents">Go Back</button>
+                                                    <button class="md-btn md-btn-success md-btn-small">Proceed to Pay</button>
+                                                </div>
+                                            </form>
+                                        </li>
+                                         <li><br>
+                                            <form>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Card Number <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">Expiry date <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">CVV <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Name on Card<span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div><br>
+                                                <div class="uk-text-center">
+                                                    <button class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.student.paymentforparents">Go Back</button>
+                                                    <button class="md-btn md-btn-success md-btn-small">Proceed to Pay</button>
+                                                </div>
+                                            </form>
+                                        </li>
+                                         <li><br>
+                                            <form>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Card Number <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">Expiry date <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                    <div class="uk-width-medium-1-2 parsley-row">
+                                                        <label for="admission_no">CVV <span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div>
+                                                <div class="uk-grid" data-uk-grid-margin>
+                                                    <div class="uk-width-medium-1-1 parsley-row">
+                                                        <label for="admission_no">Name on Card<span class="req">*</span></label>
+                                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                                    </div>
+                                                </div><br>
+                                                <div class="uk-text-center">
+                                                    <button class="md-btn md-btn-primary md-btn-small" ui-sref="restricted.student.paymentforparents">Go Back</button>
+                                                    <button class="md-btn md-btn-success md-btn-small">Proceed to Pay</button>
+                                                </div>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

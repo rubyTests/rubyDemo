@@ -686,11 +686,11 @@ angular
 								//WizardHandler.wizard().next();
 							}
 
-			  				$timeout(function() {
+			  				// $timeout(function() {
 								$scope.content_preloader_hide();
 								WizardHandler.wizard().next();
 								
-							}, 300);
+							// }, 300);
 					
 							
 						});
@@ -729,9 +729,9 @@ angular
 							WizardHandler.wizard().next();
 							
 						// }, 10);
-						$timeout(function() {
+						// $timeout(function() {
 							$scope.emailSending($scope.wizard.profileId);
-						}, 100);
+						// }, 100);
 					}
                 });
 			}
@@ -767,11 +767,11 @@ angular
 						});
 						$scope.wizard3.profileId=$scope.wizard2.profileId;
 						//WizardHandler.wizard().next();
-						$timeout(function() {
+						// $timeout(function() {
 							$scope.content_preloader_hide();
 							WizardHandler.wizard().next();
 							
-						}, 1000);
+						// }, 1000);
 					}
                 });
 			}

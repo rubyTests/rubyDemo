@@ -1,0 +1,201 @@
+<style type="text/css">
+    .tdStyle {
+        width:50%;
+        padding: 10px !important;
+        border-bottom:none !important;
+    }
+    .uk-modal-dialog {
+        width: 450px !important;
+    }
+    .uk-modal.uk-modal-dialog-replace .uk-modal-content{
+      font-size: 16px !important;
+    }
+    table,th,td{
+        border : 1px solid rgb(224,224,224);
+        border-collapse: collapse;
+        padding: 5px;
+    }
+</style>
+<div id="page_content">
+    <!-- <div id="page_content_inner" ng-controller="paymentParentsCtrl as showCase"> -->
+    <div id="page_content_inner" >
+        <h3 class="heading_a uk-margin-bottom">Fee Payment</h3>
+        <div class="md-card">
+            <div class="md-card-content large-padding">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-3">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info">person</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{viewData.STUDENT_NAME}}</span>
+                                    <span class="uk-text-small uk-text-muted">Student Name</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-3">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >assignment_ind</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{viewData.ADMISSION_NO}}</span>
+                                    <span class="uk-text-small uk-text-muted">Student Number</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-3">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >import_contacts</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{viewData.COURSE_NAME}}</span>
+                                    <span class="uk-text-small uk-text-muted">Course</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-3">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >school</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{viewData.BATCH_NAME}}</span>
+                                    <span class="uk-text-small uk-text-muted">Batch</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="uk-width-medium-1-3">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >attach_money</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{viewData.TOTAL_AMOUNT}}</span>
+                                    <span class="uk-text-small uk-text-muted">Total Amount</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="uk-width-medium-1-3">
+                        <ul class="md-list md-list-addon">
+                            <li>
+                                <div class="md-list-addon-element">
+                                    <i class="md-list-addon-icon material-icons uk-text-info" >attach_money</i>
+                                </div>
+                                <div class="md-list-content">
+                                    <span class="md-list-heading">{{viewData.PAID_AMOUNT}}</span>
+                                    <span class="uk-text-small uk-text-muted">Paid Amount</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- <h3 class="heading_a uk-margin-bottom">Payment Due
+        </h3> -->
+        <div class="md-card-content uk-width-medium-1-1 large-padding">
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content large-padding">
+                    <h3 class="heading_a uk-margin-bottom">Next Due</h3>
+                    <table class="uk-table uk-table-hover">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Due Date</th>
+                                <th>Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat='row in nextDueList' ng-if="(row.AMOUNT - row.PAID_AMOUNT) > 0">
+                                <td>{{$index+1}}</td>
+                                <td>{{row.DUE_DATE}}</td>
+                                <td>{{(row.AMOUNT * 1) - (row.PAID_AMOUNT *1) |  currency :''}}</td>
+                                <td><a class="md-btn md-btn-primary md-btn-mini" ng-click="payAmount(row.AMOUNT,row.PAID_AMOUNT)"> View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3 class="heading_a uk-margin-bottom">Payment History</h3>
+                    <table class="uk-table uk-table-hover">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Payment Date</th>
+                                <th>Receipt No</th>
+                                <th>Paid Amount</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in Payment_History">
+                                <td>{{$index+1}}</td>
+                                <td>{{row.PAYMENT_DATE}}</td>
+                                <td>{{row.RECIEPT_NO}}</td>
+                                <td>{{row.TOTAL_AMOUNT}}</td>
+                                <td><a class="md-btn md-btn-primary md-btn-mini" ui-sref="restricted.student.paymenthistoryview({FEE_PAYMENT_ID:{{row.ID}}})"> View</a></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <br>
+        <h3 class="heading_a uk-margin-bottom">Payment History
+        </h3>
+        <div class="md-card-content uk-width-medium-1-1 large-padding">
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content large-padding">
+                    <table class="uk-table uk-table-hover">
+                        <thead>
+                            <tr>
+                                <th>S.No</th>
+                                <th>Payment Date</th>
+                                <th>Transaction Id</th>
+                                <th>Paid Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr >
+                                <td>1</td>
+                                <td>10/12/2017</td>
+                                <td>Trans0012</td>
+                                <td>2,000</td>
+                            </tr>
+                            <tr >
+                                <td>2</td>
+                                <td>07/02/2017</td>
+                                <td>Trans00126</td>
+                                <td>500</td>
+                            </tr>
+                            <tr >
+                                <td>3</td>
+                                <td>07/02/2017</td>
+                                <td>Trans00126</td>
+                                <td>500</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> -->
+
+    </div>
+</div>

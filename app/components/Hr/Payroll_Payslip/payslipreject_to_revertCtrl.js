@@ -18,7 +18,21 @@ angular
                 var path=$location.path().split( '/' );
                 $scope.urlname=path[1];
 
-            
+            var $formValidate = $('#form_validation');
+            $formValidate
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+
+            $scope.clearValidation=function(){
+                $('#form_validation').parsley().reset();
+            }
 
             $scope.viewData=[];
             $scope.payslipList=[];
@@ -29,6 +43,8 @@ angular
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 $scope.viewData=return_data.data.message[0];
+                $scope.employeeID=return_data.data.message[0].ID;
+                $scope.structureID=return_data.data.message[0].PAY_STRUCTURE_ID;
                 $scope.getPayslipDetail(return_data.data.message[0].ID,return_data.data.message[0].PAY_STRUCTURE_ID,return_data.data.message[0].BASIC_PAY);
             });
 
@@ -44,17 +60,19 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     $scope.checkStatus=return_data.data.message;
+                    $scope.basicAMount=return_data.data.message.BASIC_PAY_AMOUNT;
+                    $scope.genDates=return_data.data.message.GEN_DATE;
                     $scope.PAYSLIP_ID=return_data.data.message.PAYSLIP_ID;
                     $scope.payslipList=return_data.data.message.addon;
                     var TotalEarns=0;
                     var TotalDeduc=0;
                     angular.forEach(return_data.data.message.addon, function(value , key) {
                         if(value.TYPE=='Earnings'){
-                            value.AMOUNT=value.AMOUNT || 0;
-                            TotalEarns+=parseFloat(value.AMOUNT);
+                            value.changedAmount=value.AMOUNT || 0;
+                            TotalEarns+=parseFloat(value.changedAmount);
                         }else if(value.TYPE=='Deductions'){
-                            value.AMOUNT= value.AMOUNT || 0;
-                            TotalDeduc+=parseFloat(value.AMOUNT);
+                            value.changedAmount= value.AMOUNT || 0;
+                            TotalDeduc+=parseFloat(value.changedAmount);
                         }
                     })
                     $scope.Total_Earning=(parseFloat(basicPay)+parseFloat(TotalEarns)).toFixed(2);
@@ -62,6 +80,73 @@ angular
                     $scope.TotalNetPay=parseFloat($scope.Total_Earning-$scope.toatl_deduction).toFixed(2);
                 });
             }
+
+            $scope.addEarning=function(){
+                $scope.tit_caption="Add Earning";
+                $scope.pay_type='Earnings';
+                $scope.pay_name='';
+                $scope.pay_amount='';
+                $('.uk-modal').find('input').trigger('blur');
+            }
+            $scope.addDeduction=function(){
+                $scope.tit_caption="Add Deduction";
+                $scope.pay_type='Deductions';
+                $scope.pay_name='';
+                $scope.pay_amount='';
+                $('.uk-modal').find('input').trigger('blur');
+            }
+
+            $scope.getCalculation=function(){ 
+                var totalEarn=0;
+                var totalDeduct=0;
+                var basicVal=$scope.basicAMount;
+                angular.forEach($scope.payslipList,function(value, keys){
+                     if (value.TYPE=='Earnings') {
+                        console.log(value.ITEM_AMOUNT,'ITEM_AMOUNT');
+                        // value.AMOUNT= value.AMOUNT || 0;
+                        if(value.ITEM_AMOUNT==null){
+                            value.AMOUNT= value.AMOUNT || 0;
+                            value.changedAmount=parseFloat(value.AMOUNT);
+                            totalEarn+=parseFloat(value.changedAmount);
+                        }else {
+                            value.changedAmount=((value.ITEM_AMOUNT/100)*basicVal).toFixed(2);
+                            totalEarn+=parseFloat(value.changedAmount);
+                        }
+
+                    }else if (value.TYPE=='Deductions'){
+
+                        if(value.ITEM_AMOUNT==null){
+                            value.AMOUNT= value.AMOUNT || 0;
+                            value.changedAmount=parseFloat(value.AMOUNT);
+                            totalDeduct+=parseFloat(value.changedAmount);
+                        }else {
+                            value.changedAmount=((value.ITEM_AMOUNT/100)*basicVal).toFixed(2);
+                            totalDeduct+=parseFloat(value.changedAmount);
+                        }
+                    }
+                    
+                });
+
+                var totalADDEarn=0;
+                var totalADDDeduct=0;
+                angular.forEach($scope.PaySrtuctureData1,function(value, keys){
+                    if (value.TYPE=='Earnings') {
+                        value.AMOUNT= value.AMOUNT || 0;
+                        totalADDEarn+=parseFloat(value.AMOUNT);
+                    }else if (value.TYPE=='Deductions'){
+                        value.AMOUNT= value.AMOUNT || 0;
+                        totalADDDeduct+=parseFloat(value.AMOUNT);
+                    }
+                    
+                });
+                var TotalNumberE=(parseFloat(basicVal)+parseFloat(totalEarn)+parseFloat(totalADDEarn)).toFixed(2);
+                $scope.Total_Earning=(angular.isNumber(TotalNumberE)? 0.00:TotalNumberE);
+                var TotalNumberD=parseFloat(totalDeduct)+parseFloat(totalADDDeduct);
+                $scope.total_deduction=(angular.isNumber(TotalNumberD)? TotalNumberD:0.00).toFixed(2);
+                var totalNetpay=parseFloat($scope.Total_Earning) - parseFloat($scope.total_deduction);
+                $scope.TotalNetPay = totalNetpay.toFixed(2);
+            }
+
 
             $scope.generatePdf = function(id) {
               $http({
@@ -134,22 +219,60 @@ angular
                 }
             }
             $scope.genBtn=false;
+            $scope.editBTN=true;
+            $scope.addonData=false;
             $scope.editPayslip=function(){
                $('#basicpay') .attr('disabled',false);
                $scope.genBtn=true;
+               $scope.editBTN=false;
+               $scope.addonData=true;
             }
             $scope.GeneratePayslip=function(){
-                // console.log('test');
-                // console.log($scope.payslipList,'payslipList',$scope.PAYSLIP_ID);
-                // console.log($scope.PAYSLIP_ID,'basic');
-                // console.log($scope.TotalNetPay,'netpay');
+
+                // var date=moment($scope.genDates,["YYYY-MM-DD"])._d;
+                // console.log(date,'dateee');
+                // var y = date.getFullYear(), m = date.getMonth();
+                // var firstDay = moment([y, m, 1]);
+                // var lastDay = moment(firstDay).endOf('month');
+                // var locale = "en-us";
+                // var currMonth=firstDay._d.getMonth()+1;
+                // var currMonth1=lastDay._d.getMonth()+1;
+                // var firstDate= firstDay._d.getDate() < 10 ? '0' + firstDay._d.getDate() : '' + firstDay._d.getDate();
+                // var firstmonth= currMonth < 10 ? '0' + currMonth : '' + currMonth;
+                // var lastDataofmonth= currMonth1 < 10 ? '0' + currMonth1 : '' + currMonth1;
+                // var fromDate=y+"-"+firstmonth+"-"+firstDate;
+                // var toDate=y+"-"+lastDataofmonth+"-"+lastDay._d.getDate();
+                // console.log(fromDate,'fromDate',toDate);
+
+
                 $http({
                     url: $localStorage.service+'PayrollPayslipAPI/updatePayslipGeneration',
+                    // url: $localStorage.service+'PayrollPayslipAPI/generateRejectedPayslip',
                     method : 'POST',
                     data : { 
                         'payslipid':$scope.PAYSLIP_ID,
-                        'netpay':$scope.TotalNetPay
+                        'netpay':$scope.TotalNetPay,
+                        'basicpay':$scope.basicAMount,
+                        'addonDetails':$scope.PaySrtuctureData1,
+                        'basicDetail':$scope.payslipList,
+                        'empid' : $scope.employeeID,
+                        'struc_id' : $scope.structureID,
+                        'generatoin_date' : $scope.genDates,
                     },
+
+                    // data: {
+                    //     'empid' : $scope.employeeID,
+                    //     'struc_id' : $scope.structureID,
+                    //     'payslipId':$scope.payslipId,
+                    //     'generatoin_date' : $scope.genDates,
+                    //     'default_data' : $scope.payslipList,
+                    //     'addon_data' : $scope.PaySrtuctureData1,
+                    //     'Net_pay' : $scope.TotalNetPay,
+                    //     'fromdate' : fromDate,
+                    //     'enddate' : toDate,
+                    //     'basicPay' : $scope.basicAMount
+                    // },
+
                     headers:{'access_token':$localStorage.access_token}
                 }).success(function(result) {
                     console.log(result,'success');
@@ -184,5 +307,32 @@ angular
                 $scope.TotalNetPay=$scope.NetpayAmount;
                 // console.log($scope.NetpayAmount,'$scope.NetpayAmount');
             }
+
+            $scope.PaySrtuctureData1=[];
+            $scope.saveAddonData=function(){
+                if($scope.pay_type=='Earnings'){
+                    $scope.PaySrtuctureData1.push({'NAME':$scope.pay_name,'AMOUNT':$scope.pay_amount,'TYPE':'Earnings'});
+                }else if($scope.pay_type=='Deductions'){
+                    $scope.PaySrtuctureData1.push({'NAME':$scope.pay_name,'AMOUNT':$scope.pay_amount,'TYPE':'Deductions'});
+                }
+                $timeout(function(){
+                    $scope.getCalculation();
+                },200);
+                UIkit.modal("#open_Model").hide();
+            }
+
+            $scope.removeEarningItem=function($index){
+                $scope.PaySrtuctureData1.splice($index, 1);
+                $timeout(function(){
+                    $scope.getCalculation();
+                },200);
+            }
+            $scope.removeDeductionItem=function($index){
+                $scope.PaySrtuctureData1.splice($index, 1);
+                $timeout(function(){
+                    $scope.getCalculation();
+                },200);
+            }
+
         }
     ]);

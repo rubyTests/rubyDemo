@@ -707,23 +707,74 @@ angular
 				//$scope.wizard.profileId=120;
 				//console.log($scope.mailling,"mailling");
 				//console.log($scope.permanent,"permanent");
-				
+
 				$http({
-                method:'POST',
-                url: $localStorage.service+'ProfileAPI/contactDetails',
-                data: {profileId:$scope.wizard.profileId,addressId:$scope.mailling.addressId,addressId1:$scope.permanent.addressId,address:$scope.mailling.address,city:$scope.mailling.city,state:$scope.mailling.state,pincode:$scope.mailling.pincode,country:$scope.mailling.country,address1:$scope.permanent.address,city1:$scope.permanent.city,state1:$scope.permanent.state,pincode1:$scope.permanent.pincode,country1:$scope.permanent.country,phone:$scope.contact.phone,mobile_no:$scope.contact.mobile_no,email:$scope.contact.email,facebook:$scope.social.facebook,google:$scope.social.google,linkedin:$scope.social.linkedin,sameAddress:$scope.sameAddress},
-				headers:{'access_token':$localStorage.access_token}
-                }).then(function(response){
-                    //console.log(response.data);
-					//console.log($scope.sameAddress);
-					if($scope.sameAddress=="Yes"){
-						$scope.mailling.addressId=response.data.locationId[0];
-						$scope.permanent.addressId=response.data.locationId[0];
-					}else{
-						$scope.mailling.addressId=response.data.locationId[0];
-						$scope.permanent.addressId=response.data.locationId[1];
-					}
+	                method:'GET',
+	                url: $localStorage.service+'ProfileAPI/studentEmailCheck',
+	                params: {'profileId':$scope.wizard.profileId,'email':$scope.contact.email},
+					headers:{'access_token':$localStorage.access_token}
+                }).then(function(response1){
+                	console.log(response1,'response1');
+                	if (response1.data.status==true) {
+                		$http({
+			                method:'POST',
+			                url: $localStorage.service+'ProfileAPI/contactDetails',
+			                data: {profileId:$scope.wizard.profileId,addressId:$scope.mailling.addressId,addressId1:$scope.permanent.addressId,address:$scope.mailling.address,city:$scope.mailling.city,state:$scope.mailling.state,pincode:$scope.mailling.pincode,country:$scope.mailling.country,address1:$scope.permanent.address,city1:$scope.permanent.city,state1:$scope.permanent.state,pincode1:$scope.permanent.pincode,country1:$scope.permanent.country,phone:$scope.contact.phone,mobile_no:$scope.contact.mobile_no,email:$scope.contact.email,facebook:$scope.social.facebook,google:$scope.social.google,linkedin:$scope.social.linkedin,sameAddress:$scope.sameAddress},
+							headers:{'access_token':$localStorage.access_token}
+		                }).then(function(response){
+		                    console.log(response,'ssssssss');
+							//console.log($scope.sameAddress);
+							if($scope.sameAddress=="Yes"){
+								$scope.mailling.addressId=response.data.locationId[0];
+								$scope.permanent.addressId=response.data.locationId[0];
+							}else{
+								$scope.mailling.addressId=response.data.locationId[0];
+								$scope.permanent.addressId=response.data.locationId[1];
+							}
+							if(response.data.status==true && response1.data.message.check=='New'){
+								$timeout(function() {
+									$scope.emailSending($scope.wizard.profileId);
+								},500);
+							}
+		                });
+
+                	}else {
+                		UIkit.notify({
+							message : "Email already exists",
+							status  : 'danger',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+                	}
                 });
+
+				$scope.emailSending=function(profileID){
+					$http({
+	                method:'POST',
+	                url: $localStorage.service+'ProfileAPI/emailSendingtoStudent',
+	                data: {'profileId':profileID},
+					headers:{'access_token':$localStorage.access_token}
+	                }).then(function(response){
+	                	console.log(response,'res');
+	                });
+				}
+
+				// $http({
+    //             method:'POST',
+    //             url: $localStorage.service+'ProfileAPI/contactDetails',
+    //             data: {profileId:$scope.wizard.profileId,addressId:$scope.mailling.addressId,addressId1:$scope.permanent.addressId,address:$scope.mailling.address,city:$scope.mailling.city,state:$scope.mailling.state,pincode:$scope.mailling.pincode,country:$scope.mailling.country,address1:$scope.permanent.address,city1:$scope.permanent.city,state1:$scope.permanent.state,pincode1:$scope.permanent.pincode,country1:$scope.permanent.country,phone:$scope.contact.phone,mobile_no:$scope.contact.mobile_no,email:$scope.contact.email,facebook:$scope.social.facebook,google:$scope.social.google,linkedin:$scope.social.linkedin,sameAddress:$scope.sameAddress},
+				// headers:{'access_token':$localStorage.access_token}
+    //             }).then(function(response){
+    //                 //console.log(response.data);
+				// 	//console.log($scope.sameAddress);
+				// 	if($scope.sameAddress=="Yes"){
+				// 		$scope.mailling.addressId=response.data.locationId[0];
+				// 		$scope.permanent.addressId=response.data.locationId[0];
+				// 	}else{
+				// 		$scope.mailling.addressId=response.data.locationId[0];
+				// 		$scope.permanent.addressId=response.data.locationId[1];
+				// 	}
+    //             });
 			}
 			
 			// Parents Details

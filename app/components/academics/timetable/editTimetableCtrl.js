@@ -313,8 +313,10 @@ angular
                     params:{
                         'employee_id':$scope.employee_id,
                         'setday':$scope.day,
-                        'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
-                        'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
+                        // 'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
+                        // 'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
+                        'starttime':moment($scope.startTimeData1, ["hh:mm A"]).format("HH:mm:ss"),
+                        'endtime':moment($scope.endTimeData1, ["hh:mm A"]).format("HH:mm:ss")
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(response){
@@ -342,8 +344,8 @@ angular
                                 'subject_id':$scope.subject,
                                 'employee_id':$scope.employee_id,
                                 'day':$scope.day,
-                                'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
-                                'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
+                                'starttime':moment($scope.startTimeData1, ["hh:mm A"]).format("HH:mm:ss"),
+                                'endtime':moment($scope.endTimeData1, ["hh:mm A"]).format("HH:mm:ss")
                             },
                             headers:{'access_token':$localStorage.access_token}
                         }).then(function(response){
@@ -431,9 +433,10 @@ angular
                     theme:false,
                     eventClick: function(event, jsEvent){
                         // uiCalendarConfig.calendars.myCalendar.fullCalendar('changeView', 'listWeek')
-                        console.log(event,'event');
-                        $scope.endTimeData1 = event.endtime;
-                        $scope.startTimeData1 = event.starttime;
+                        // console.log(event,'event');
+                        $scope.endTimeData1 = moment(event.endtime,["HH:mm:ss"]).format("hh:mm A");
+                        $scope.startTimeData1 = moment(event.starttime,["HH:mm:ss"]).format("hh:mm A");
+                        // alert(event.starttime);
                         $scope.table_id=event.tableid;
                         $scope.employee_id=event.profileid;
                         $scope.subject=event.subjectid;
@@ -642,18 +645,21 @@ angular
                 controller:function($scope){
                    
                     $scope.checkValidData = function(){
-                        var endTime = moment($scope.endTimeData,["hh:mm A"])._d;
-                        var currentTime = $scope.startTimeData1;
+                        var minTime = moment($scope.setTimeStart,["HH:mm:ss"])._d;
+                        var maxTime = moment($scope.setTimeEnd,["HH:mm:ss"])._d;
+                        $scope.endTimeData1 = $scope.endTimeData || $scope.setTimeEnd;
+                        // alert($scope.endTimeData);
+                        var endTime = moment($scope.endTimeData1,["hh:mm A"])._d;
+                        var currentTime = $scope.startTimeData;
                         $scope.startTimeData = currentTime;
                         currentTime = moment(currentTime,["hh:mm A"])._d;
                         console.log($scope.setTimeStart,"currentTime");
-                        var minTime = moment($scope.setTimeStart,["HH:mm:ss"])._d;
-                        var maxTime = moment($scope.setTimeEnd,["HH:mm:ss"])._d;
+                        
                         console.log(minTime, "===", currentTime,"datadatadata");
                         if (minTime.getTime() <= currentTime.getTime()  && currentTime.getTime() <= maxTime.getTime() && currentTime.getTime() < endTime.getTime()) {
                             console.log(currentTime,"correct");
                         }else{
-                            $scope.startTimeData1="";
+                            $scope.startTimeData="";
                             console.log(currentTime,"wrong");
                         }
                     }
@@ -681,7 +687,7 @@ angular
             templateUrl:'app/components/academics/timetable/endTimeTemplate.html',
             controller:function($scope){
                 $scope.checkValidData = function(){
-                    var currentTime = $scope.endTimeData1;
+                    var currentTime = $scope.endTimeData;
                     $scope.endTimeData = currentTime;
                     var data = moment(currentTime,["hh:mm A"])._d;
                     var startTime = moment($scope.startTimeData,["hh:mm A"])._d;
@@ -692,7 +698,7 @@ angular
                     if (minTime.getTime() <= data.getTime()  && data.getTime() <= maxTime.getTime() && data.getTime() > startTime.getTime()) {
                         console.log(currentTime,"correct");
                     }else{
-                        $scope.endTimeData1 = "";
+                        $scope.endTimeData = "";
                         console.log(currentTime,"wrong");
                     }
                 }
