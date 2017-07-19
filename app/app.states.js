@@ -3034,7 +3034,7 @@ rubycampusApp
                                 'lazy_wizard',
                                 'assets/js/custom/uikit_fileinput.js',
                                 'app/components/student/studentAdmisson_edit.js',
-                                'app/components/student/cameraCtrl.js'
+                                // 'app/components/student/cameraCtrl.js'
                             ], {serie:true});
                         }]
                     },
@@ -4299,6 +4299,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/payslipview_for_pdfCtrl.js'
                             ]);
                         }]
@@ -4316,6 +4317,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/payslipreject_to_revertCtrl.js'
                             ]);
                         }]
@@ -4420,6 +4422,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'app/components/Hr/Payroll_Payslip/payslipview_for_pdfCtrl.js'
                             ]);
                         }]
@@ -6143,6 +6146,76 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Email Sending'
+                    }
+                })
+                .state("restricted.student.paymentforparents",{
+                    url: "/paymentforparents",
+                    templateUrl: 'app/components/student/paymentviewforParents.html',
+                    controller : 'paymentParentsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/student/paymentParentsCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Fee Payment'
+                    }
+                })
+                .state("restricted.student.paymentdetailsview",{
+                    url: "/paymentdetailsview",
+                    templateUrl: 'app/components/student/viewpaymentdetails.html',
+                    controller : 'viewpaymentDetails',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/student/viewpaymentDetails.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Payment View'
+                    }
+                })
+
+                .state("restricted.student.paymenthistoryview",{
+                    url: "/paymenthistoryview/{FEE_PAYMENT_ID}",
+                    templateUrl: 'app/components/student/paymentHistory.html',
+                    controller : 'paymentHistory',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/student/paymentHistory.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Payment View'
+                    },
+                    params:{FEE_PAYMENT_ID:null}
+                })
+
+                .state("restricted.student.paymentPay", {
+                    url: "/paymentPay",
+                    templateUrl: 'app/components/student/paymentPage.html',
+                    controller : 'paymentCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/student/paymentCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'payment'
                     }
                 })
         }
