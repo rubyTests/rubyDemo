@@ -94,6 +94,10 @@ angular
                         {
                             title: 'Room',
                             link: 'restricted.setting.room'
+                        },
+                        {
+                            title: 'Setting',
+                            link: 'restricted.setting.institutionsetting'
                         }
                     ]
                 },
@@ -155,13 +159,25 @@ angular
                             ]
                         },
                         {
-                            title: 'Timetable'
-                        },
-                        {
-                            title: 'Discipline',
+                            title: 'Timetable',
                             submenu: [
                                 {
-                                    title: 'Add Compliant',
+                                    title: 'View Timetable',
+                                    // link:'restricted.academics.timetable.viewtimetable'
+                                    link:'restricted.academics.timetable.timetableView'
+                                },
+                                {
+                                    title: 'Manage Timetable',
+                                    submenu: [
+                                        {
+                                            title: 'Create Timetable',
+                                            link:'restricted.academics.timetable.managetimetable.createcalendar'
+                                        },
+                                        {
+                                            title: 'Setting',
+                                            link:'restricted.academics.timetable.managetimetable.setting'
+                                        }
+                                    ]
                                 }
                             ]
                         },
