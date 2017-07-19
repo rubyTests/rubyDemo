@@ -227,6 +227,10 @@ angular
                         {
                             title:'Students',
                             link: 'restricted.student.student_list'
+                        },
+                        {
+                            title:'Parents Feepayment',
+                            link: 'restricted.student.paymentforparents'
                         }
                     ]
                 },
@@ -372,7 +376,7 @@ angular
                                 },
                                 {
                                     title:'Approve Payslips',
-                                    link: 'restricted.hr.approvepayslip'
+                                    link: 'restricted.finance.approvepayslip'
                                 },
                                 {
                                     title:'Payslip Report',
