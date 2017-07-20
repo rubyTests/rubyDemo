@@ -13,7 +13,9 @@ angular
             $scope.$on('$destroy', function() {
                 $rootScope.toBarActive = false;
             });
-
+			
+			$scope.uploadUrl=$localStorage.uploadUrl;
+			
 			if($localStorage.role_id==3 || $localStorage.role_id==4){
 				$scope.userRole=false;
 			}else{
@@ -25,7 +27,8 @@ angular
             $scope.viewData=[];
             $http({
                 method:'GET',
-                url: $localStorage.service+'RepositoryAPI/Rep_Post',
+                url: $localStorage.service+'RepositoryAPI/mGetCourseBased',
+				params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 $scope.viewData=return_data.data.message;
