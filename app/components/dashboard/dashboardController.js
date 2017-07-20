@@ -578,12 +578,20 @@ angular
             var $video_player = $('#video_player'),
                 $video_playlist = $('#video_player_playlist'),
                 active_class = 'md-list-item-active';
-
+            $scope.test = function() {
+                $state.go('restricted.repository.repositoryDetail', '{ ReposId:{{posts_data[0].ID}} }');
+            }
             $scope.videoChange = function($event,post_url) {
 
                 var $this = $($event.currentTarget);
                 if(!$this.hasClass(active_class)) {
-                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="assets/uploads/' + post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
+                    // var extention = post_url.split(".").pop().toLowerCase();
+                    // if (extention=='mp4') {
+                        var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="assets/uploads/' + post_url.UPLOAD_FILE + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
+                    // }else if(extention=='png' && extention=='jpg'){
+                    //     var iframe_embed = '<img height="150" width="300" data-uk-cover src="assets/uploads/' + post_url + '" frameborder="0" allowfullscreen style="max-height:100%"/>';    
+                    // }
+                    
 
                     $video_playlist.children('li').removeClass(active_class);
                     $this.addClass(active_class);

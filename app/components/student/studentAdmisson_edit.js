@@ -214,6 +214,10 @@ angular
                     $scope.permanent.pincode=$scope.mailling.pincode;
                     $scope.permanent.country=$scope.mailling.country;
                     $('.motherDetails').find('input').attr('disabled',true);
+                    $timeout(function() {
+                    	$('#contact_details').parsley().validate();
+                    	$('.motherDetails').find('.cls').attr('pointer-events','none');
+                    }, 100);
                 }else {
 					$scope.sameAddress="No";
 					$scope.permanent.addressId='';
@@ -232,72 +236,132 @@ angular
 			$scope.course_data=[];
 			$scope.batch_data=[];
 			
-			$http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
-			.success(function(dept_data){
-				$scope.deptData.push(dept_data.message);
+			// $http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
+			// .success(function(dept_data){
+			// 	$scope.deptData.push(dept_data.message);
+			// });
+			
+			// $scope.selectize_deptId_options =$scope.deptData;
+			// $scope.selectize_deptId_config = {
+			// 	create: false,
+			// 	maxItems: 1,
+			// 	placeholder: 'Department',
+			// 	valueField: 'ID',
+			// 	labelField: 'NAME',
+			// 	onInitialize: function(selectize){
+			// 		selectize.on('change', function(value) {
+			// 			//console.log(value);
+			// 			$scope.courseData(value);
+			// 		});
+			// 	}
+			// };
+			
+			// $scope.courseData=function(id){
+			// 	//console.log(id,"deptId")
+			// 	$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+			// 	.success(function(course_data){
+			// 		// console.log(course_data.data,"course");
+			// 		$scope.selectize_courseId_options=course_data.data;
+			// 	});
+			// }
+			
+			// $scope.selectize_courseId_options =[];
+			// $scope.selectize_courseId_config = {
+			// 	create: false,
+			// 	maxItems: 1,
+			// 	placeholder: 'Course*',
+			// 	valueField: 'ID',
+			// 	labelField: 'NAME',
+			// 	onInitialize: function(selectize){
+			// 		selectize.on('change', function(value) {
+			// 			//console.log(value);
+			// 			$scope.batchData(value);
+			// 		});
+			// 	}
+			// };
+			//Modified
+			$http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(course_data){
+				//console.log(course_data,"course");
+				$scope.course_data.push(course_data.message);
 			});
 			
-			$scope.selectize_deptId_options =$scope.deptData;
-			$scope.selectize_deptId_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Department',
-				valueField: 'ID',
-				labelField: 'NAME',
-				onInitialize: function(selectize){
-					selectize.on('change', function(value) {
-						//console.log(value);
-						$scope.courseData(value);
-					});
-				}
-			};
-			
-			$scope.courseData=function(id){
-				//console.log(id,"deptId")
-				$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(course_data){
-					// console.log(course_data.data,"course");
-					$scope.selectize_courseId_options=course_data.data;
-				});
-			}
-			
-			$scope.selectize_courseId_options =[];
+			$scope.selectize_courseId_options =$scope.course_data;
 			$scope.selectize_courseId_config = {
 				create: false,
 				maxItems: 1,
-				placeholder: 'Course',
+				placeholder: 'Course*',
 				valueField: 'ID',
 				labelField: 'NAME',
 				onInitialize: function(selectize){
 					selectize.on('change', function(value) {
 						//console.log(value);
-						$scope.batchData(value);
+						if(value !=''){
+							$scope.batchData(value);
+						}else{
+							$scope.batchData('');
+						}
+						
 					});
 				}
 			};
 			
-			$scope.selectize_batchId_options =[];
-			$scope.selectize_batchId_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Batch',
-				valueField: 'ID',
-				labelField: 'NAME',
-				onInitialize: function(selectize){
-					selectize.on('change', function(value) {
-						//console.log(value);
-					});
-				}
-			};
+			$scope.selectize_batchId_options=[];
+            $scope.batchData = function(id){
+                
+                $http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{'id':id},headers:{'access_token':$localStorage.access_token}})
+                .success(function(batch_data){
+                    //console.log(subject_data,'subject_datasubject_data');
+                    
+                    if(batch_data.status==false){
+                        $scope.selectize_batchId_options=[];
+
+                    }else{
+                        $scope.selectize_batchId_options=[].concat(batch_data.data);
+                    }
+                   
+                });
+            }
+			    $scope.selectize_batchId_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Batch*',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                        console.log(value,'valuevalue');
+                        // $scope.wizard.batchId="";
+                        // if (value==-10) {
+                        //     //$scope.sub_clear();
+                        // } 
+                        
+                    });
+                }
+            };
+			// $scope.selectize_batchId_options =[];
+			// $scope.selectize_batchId_config = {
+			// 	create: false,
+			// 	maxItems: 1,
+			// 	placeholder: 'Batch',
+			// 	valueField: 'ID',
+			// 	labelField: 'NAME',
+			// 	onInitialize: function(selectize){
+			// 		selectize.on('change', function(value) {
+			// 			//console.log(value);
+			// 		});
+			// 	}
+			// };
 			
-			$scope.batchData=function(id){
-				//console.log(id,"deptId")
-				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(batch_data){
-					// console.log(batch_data.data,"batch");
-					$scope.selectize_batchId_options=batch_data.data;
-				});
-			}
+			// $scope.batchData=function(id){
+			// 	//console.log(id,"deptId")
+			// 	$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+			// 	.success(function(batch_data){
+			// 		// console.log(batch_data.data,"batch");
+			// 		$scope.selectize_batchId_options=batch_data.data;
+			// 	});
+			// }
 			
 			$http.get($localStorage.service+'InstitutionAPI/country',{headers:{'access_token':$localStorage.access_token}})
             .success(function(country_list){
@@ -328,7 +392,7 @@ angular
             $scope.selectize_nation_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Nationality',
+                placeholder: 'Nationality*',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
@@ -413,14 +477,14 @@ angular
             $scope.selectize_styType_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Student Type'
+                placeholder: 'Student Type*'
             };
 
             $scope.selectize_studentLive_options = ["Parents", "Father", "Mother","Guardian"];
             $scope.selectize_studentLive_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Lives With'
+                placeholder: 'Lives With*'
             };
             $scope.selectize_relation_options = ["Father", "Mother", "Guardian"];
             $scope.selectize_relation_config = {

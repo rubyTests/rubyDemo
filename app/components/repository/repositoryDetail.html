@@ -7,23 +7,42 @@
                     <div class="md-card-content large-padding">
                         <div class="uk-article">
                             <!-- {{article_content}} -->
-                            <h1 class="uk-article-title">{{Rep_data.TITLE}}</h1>
-                            <p class="uk-article-meta">
-                                Written by Junaid on {{Rep_data.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'MMMM DD, YYYY' }}
-                                <br>Posted in <a href="#">{{Rep_data.CATEGORY_NAME}}</a>
-                            </p>
-                            <!-- <p class="uk-article-lead">{{article.subtitle}}</p> -->
+                            <div class="uk-grid blog_article" data-uk-grid-margin>
+                                <div class="uk-width-medium-2-3">
+                                    <h1 class="uk-article-title">
+                                        <img ng-if="Rep_data.extention=='mp4'" ng-src="assets/uploads/file/youtube.png" width="11%" height="50%" alt="">
+                                        <img ng-if="Rep_data.extention=='png' || Rep_data.extention=='jpg'" ng-src="assets/uploads/file/image.png" width="11%" height="50%" alt="">
+                                        <img ng-if="Rep_data.extention=='pdf'" ng-src="assets/uploads/file/pdf.png" width="11%" height="10%" alt="">
+                                        <img ng-if="Rep_data.extention=='doc' || Rep_data.extention=='docs'" ng-src="assets/uploads/file/docs.png" width="11%" height="10%" alt="">
+                                        <img ng-if="Rep_data.extention=='zip'" ng-src="assets/uploads/file/zip.jpg" width="11%" height="10%" alt="">
+                                        <img ng-if="Rep_data.extention=='rar'" ng-src="assets/uploads/file/rar.png" width="11%" height="10%" alt="">
+                                        {{Rep_data.TITLE}}
+                                         <p class="uk-article-meta">
+                                        Written by Junaid on {{Rep_data.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'MMMM DD, YYYY' }}
+                                        <br>Posted in <a href="#">{{Rep_data.CATEGORY_NAME}}</a>
+                                    </p>
+                                    </h1>
+                                   <!--  <p class="uk-article-meta">
+                                        Written by Junaid on {{Rep_data.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'MMMM DD, YYYY' }}
+                                        <br>Posted in <a href="#">{{Rep_data.CATEGORY_NAME}}</a>
+                                    </p> -->
+                                </div>
+                                <div class="uk-width-medium-2-6 uk-text-right">
+                                    <a href="{{'assets/uploads/'+Rep_data.UPLOAD_FILE}}" class="md-btn md-btn-primary" download><i class="material-icons">file_download</i> Download</a>
+                                </div>
+                            </div>
                             <hr class="uk-article-divider">
                             <p>
-                                <figure class="uk-thumbnail uk-thumbnail-medium thumbnail_left" style="width: 400px">
+                                <figure class="uk-thumbnail uk-thumbnail-medium thumbnail_left" ng-show="Rep_data.extention=='mp4' || Rep_data.extention=='png' || Rep_data.extention=='jpg'">
                                     <!-- <iframe src="{{Rep_data.UPLOAD_FILESrc}}" style="width: 100%"></iframe> -->
-                                    <video controls autoplay ng-if="Rep_data.extention=='mp4' && Rep_data.extention=='ogg'"></video>
+                                    <!-- {{Rep_data.extention}} -->
+                                    <video ng-show="Rep_data.extention=='mp4'"></video>
                                     <img ng-if="Rep_data.extention=='png' || Rep_data.extention=='jpg'" ng-src="{{'assets/uploads/'+Rep_data.UPLOAD_FILE}}" width="100%" height="50%" alt="">
-                                    <img ng-if="Rep_data.extention=='pdf'" ng-src="assets/uploads/file/pdf.png" width="100%" height="50%" alt="">
-                                    <img ng-if="Rep_data.extention=='docs'" ng-src="assets/uploads/file/docs.png" width="100%" height="50%" alt="">
-                                    <img ng-if="Rep_data.extention=='zip'" ng-src="assets/uploads/file/zip.jpg" width="100%" height="50%" alt="">
-                                    <img ng-if="Rep_data.extention=='rar'" ng-src="assets/uploads/file/rar.png" width="100%" height="50%" alt="">
-                                    <figcaption class="uk-thumbnail-caption">Some caption</figcaption>
+                                   <!--  <img ng-if="Rep_data.extention=='pdf'" ng-src="assets/uploads/file/pdf.png" width="10%" height="10%" alt="">
+                                    <img ng-if="Rep_data.extention=='docs'" ng-src="assets/uploads/file/docs.png" width="10%" height="10%" alt="">
+                                    <img ng-if="Rep_data.extention=='zip'" ng-src="assets/uploads/file/zip.jpg" width="10%" height="10%" alt="">
+                                    <img ng-if="Rep_data.extention=='rar'" ng-src="assets/uploads/file/rar.png" width="10%" height="10%" alt=""> -->
+                                    <!-- <figcaption class="uk-thumbnail-caption">Some caption</figcaption> -->
                                 </figure>
                                 <!-- {{Rep_data.CONTENT}} -->
                                 <div ng-bind-html="Rep_data.CONTENT">

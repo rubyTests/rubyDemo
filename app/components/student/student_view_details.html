@@ -62,7 +62,7 @@
                             <a ui-sref="restricted.student.student_profile({stu_id:user.profileId})"><img class="md-card-head-avatar" ng-src="{{user.image || default_image}}" alt=""/></a>
                         </div>
                         <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.featured}">
-                            <a ui-sref="restricted.student.student_profile({stu_id:user.profileId})" style="color:rgb(33,33,70);">{{user.fname}} {{user.lname}}</a>
+                            <a ui-sref="restricted.student.student_profile({stu_id:user.profileId})" style="color:rgb(33,33,70);">{{user.fname}} {{user.lname.trunc(6)}}</a>
                             <span class="uk-text-truncate">{{user.adm_no}}</span>
                         </h3>
                     </div>

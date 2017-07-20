@@ -57,7 +57,7 @@
                             <td class="uk-text-center">
                                 <!-- <a ui-sref="restricted.student.student_editprofile({stu_id:{{row.profileId}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a> -->
                                 <a ng-click="adminEditProfile(row.profileId)" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteStudents(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
                             </td>
                         </tr>
                     </tbody>

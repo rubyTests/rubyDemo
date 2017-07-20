@@ -37,11 +37,15 @@ angular
             // console.log(return_data,'return_datareturn_data');
             $scope.Rep_data = return_data.data.message[0];
             $scope.Rep_data.extention = $scope.Rep_data.UPLOAD_FILE.split(".").pop().toLowerCase();
-            if($scope.Rep_data.extention=='mp4' || $scope.Rep_data.extention=='ogg'){
+            if($scope.Rep_data.extention=='mp4'){
                 var myVideo = document.getElementsByTagName('video')[0];
-                myVideo.src = 'assets/uploads/'+$scope.Rep_data.UPLOAD_FILE;
-                myVideo.load();
-                myVideo.play();    
+                // if (myVideo) {
+                    myVideo.src = 'assets/uploads/'+$scope.Rep_data.UPLOAD_FILE;
+                    myVideo.load();
+                    myVideo.play();        
+                // }
+                // console.log(myVideo)
+                
             }
             
             $scope.recentpost = return_data.data.message;
@@ -56,8 +60,20 @@ angular
             $scope.viewData=return_data.data.message;
         });
 
-        // $scope.getDetails = function(data){
-        //     $scope.repData = data;
-        // }
+        $scope.getDetails = function(data){
+            console.log(data,"datadatadatadatadata");
+            $scope.Rep_data = data;
+            $scope.Rep_data.extention = $scope.Rep_data.UPLOAD_FILE.split(".").pop().toLowerCase();
+            if($scope.Rep_data.extention=='mp4'){
+                var myVideo = document.getElementsByTagName('video')[0];
+                // if (myVideo) {
+                    myVideo.src = 'assets/uploads/'+$scope.Rep_data.UPLOAD_FILE;
+                    myVideo.load();
+                    myVideo.play();        
+                // }
+                // console.log(myVideo)
+                
+            }
+        }
     }
 ]);

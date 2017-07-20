@@ -107,5 +107,52 @@ angular
 						$state.go('restricted.student.admissionEdit');
 					}
 				}
+                $scope.deleteStudents=function(id,$index){
+                $http({
+                    method : "get",
+                    url : $localStorage.service+"AcademicsAPI/courseDetailCheck",
+                    params : {id : id},
+                    headers:{'access_token':$localStorage.access_token}
+                    }).then(function mySucces(response) {
+                        if(response.data.status==true){
+                            if(id){
+                                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                                    if(id){
+                                        $http({
+                                        method : "DELETE",
+                                        url : $localStorage.service+"AcademicsAPI/courseDetail",
+                                        params : {id : id},
+                                        headers:{'access_token':$localStorage.access_token}
+                                        }).then(function mySucces(response) {
+                                            
+                                            if(response.data.status==true){
+                                                UIkit.notify({
+                                                    message : response.data.message,
+                                                    status  : 'success',
+                                                    timeout : 2000,
+                                                    pos     : 'top-center'
+                                                });
+                                                $scope.viewData.splice($index, 1);
+                                                $scope.refreshTable();
+                                            }
+                                            
+                                        },function myError(response) {
+                                        })
+                                    }
+                                },function(){
+                                     //console.log("false");
+                                    $scope.refreshTable();
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
+                            }
+
+                        }
+                    },function myError(response) {
+                        UIkit.modal.alert(response.data.message);
+                    })
+                }
         }
     );

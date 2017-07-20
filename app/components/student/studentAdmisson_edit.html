@@ -8,6 +8,9 @@
     .selectize-dropdown-content {
         max-height: 153px !important;
     }
+    body > .content-preloader.preloader-active {
+        top: 303px !important;
+    }
 </style>
 <div id="page_content">
     <div id="page_content_inner">
@@ -24,7 +27,7 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 20px;">
                                     <label for="admission_no">Admission No<span class="req">*</span></label>
-                                    <input type="text" name="admission_no" class="md-input" md-input ng-model="wizard.admission_no" required/>
+                                    <input type="text" name="admission_no" ng-pattern-restrict="^[A-Za-z0-9-]*$" class="md-input" md-input ng-model="wizard.admission_no" required/>
                                     <input type="hidden" name="profileId" ng-model="wizard.profileId" ng-value="{{wizard.profileId}}"/>
                                     <input type="hidden" name="stuPro_id" ng-model="wizard.stuPro_id" ng-value="{{wizard.stuPro_id}}"/>
                                 </div>
@@ -63,11 +66,11 @@
                              <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="first_name">First Name<span class="req">*</span></label>
-                                    <input type="text" name="first_name" required class="md-input" md-input ng-model="wizard.first_name" />
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" name="first_name" required class="md-input" md-input ng-model="wizard.first_name" />
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row">
                                     <label for="last_name">Last Name<span class="req">*</span></label>
-                                    <input type="text" name="last_name" required class="md-input" md-input ng-model="wizard.last_name" />
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" name="last_name" required class="md-input" md-input ng-model="wizard.last_name" />
                                 </div>
                                  <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 15px;">
                                     <label class="uk-form-label">Gender<span class="req">*</span></label>
@@ -98,7 +101,8 @@
                                     <input type="text" name="religion" class="md-input" md-input ng-model="wizard.religion" />
                                 </div>
                                 <div class="uk-width-medium-1-4 parsley-row">
-                                    <label for="mother_tongue">Nationality<span class="req"></span></label>
+                                    <br ng-if="!wizard.nationality">
+                                    <label ng-if="wizard.nationality" style="font-size: 12px;color: #727272;font-weight: 400;">Nationality<span class="req">*</span></label>
 									<input type="text" config="selectize_nation_config" options="selectize_nation_options" ng-model="wizard.nationality" selectize/>
                                 </div>
                             </div>
@@ -110,24 +114,20 @@
                                 <!-- <hr class="md-hr"/> -->
                             </div><br>
                             <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <label>Department<span class="req">*</span></label>
-                                    <input type="text" config="selectize_deptId_config" options="selectize_deptId_options" ng-model="wizard.dept_id" selectize required/>
+                                <div class="uk-width-medium-1-3 parsley-row">
+                                    <br ng-if="!wizard.course_id">
+                                    <label ng-if="wizard.course_id" style="font-size: 12px;color: #727272;font-weight: 400;">Course<span class="req">*</span></label>
+                                    <input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="wizard.course_id" selectize required/>
                                 </div>
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <label for="religion">Course<span class="req">*</span></label>
-									<input type="text" config="selectize_courseId_config" options="selectize_courseId_options" ng-model="wizard.course_id" selectize required/>
+                                <div class="uk-width-medium-1-3 parsley-row">
+                                    <br ng-if="!wizard.batchId">
+                                    <label ng-if="wizard.batchId" style="font-size: 12px;color: #727272;font-weight: 400;">Batch<span class="req">*</span></label>
+                                    <input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="wizard.batchId" selectize required/>
                                 </div>
-                            </div>
-                            <div class="uk-grid" data-uk-grid-margin>
-                                <div class="uk-width-medium-1-2 parsley-row">
-                                    <label for="religion">Batch<span class="req">*</span></label>
-									<input type="text" config="selectize_batchId_config" options="selectize_batchId_options" ng-model="wizard.batchId" selectize required/>
-                                </div>
-                                <div class="uk-width-medium-1-2 parsley-row">
+                                <div class="uk-width-medium-1-3 parsley-row">
                                 <br>
                                     <label for="roll_no">Roll No<span class="req"></span></label>
-                                    <input type="text" name="roll_no" id="roll_no" class="md-input" md-input ng-model="wizard.roll_no" />
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" name="roll_no" id="roll_no" class="md-input" md-input ng-model="wizard.roll_no" />
                                 </div>
                             </div>
                             <br>
@@ -149,24 +149,29 @@
 											<div class="uk-grid" data-uk-grid-margin>
 												<div class="uk-width-medium-1-1 parsley-row">
 													<label for="address">Address<span class="req">*</span></label>
-													<input type="text" name="address" id="address" required class="md-input" md-input ng-model="mailling.address" />
+													<input type="text" ng-pattern-restrict="^[A-Za-z0-9-,. ]*$" name="address" id="address" required class="md-input" md-input ng-model="mailling.address" />
 													<input type="hidden"  ng-model="mailling.addressId" />
 												</div>
 											</div>
 											<div class="uk-grid" data-uk-grid-margin>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<label for="stu_city">City<span class="req">*</span></label>
-													<input type="text" required class="md-input" md-input ng-model="mailling.city" />
+                                                    <br>
+													<label for="stu_city">City</label>
+													<input type="text" ng-pattern-restrict="^[A-Za-z ]*$" class="md-input" md-input ng-model="mailling.city" />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<label for="stu_state">State<span class="req">*</span></label>
-													<input type="text" name="stu_state" id="stu_state" required class="md-input" md-input ng-model="mailling.state" />
+                                                    <br>
+													<label for="stu_state">State</label>
+													<input type="text" ng-pattern-restrict="^[A-Za-z ]*$"  name="stu_state" id="stu_state" required class="md-input" md-input ng-model="mailling.state" />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<label for="pincode">ZipCode<span class="req">*</span></label>
-													<input type="text" name="pincode" id="pincode" required class="md-input" md-input ng-model="mailling.pincode" numeric-only />
+                                                    <br>
+													<label for="pincode">ZipCode</label>
+													<input type="text" ng-pattern-restrict="^[0-9]*$" name="pincode" id="pincode" required class="md-input" md-input ng-model="mailling.pincode" numeric-only />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
+                                                    <br ng-if="!mailling.country">
+                                                    <label ng-if="mailling.country" style="font-size: 12px;color: #727272;font-weight: 400;">Country<span class="req">*</span></label>
 													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mailling.country" selectize required/>
 												</div>
 											</div>
@@ -187,24 +192,29 @@
 											<div class="uk-grid" data-uk-grid-margin>
 												<div class="uk-width-medium-1-1 parsley-row">
 													<label for="address">Address<span class="req">*</span></label>
-													<input type="text" name="address" id="address" required class="md-input" md-input ng-model="permanent.address" />
+													<input type="text" ng-pattern-restrict="^[A-Za-z0-9-., ]*$" name="address" id="address" required class="md-input" md-input ng-model="permanent.address" />
 													<input type="hidden"  ng-model="permanent.addressId" />
 												</div>
 											</div>
 											<div class="uk-grid" data-uk-grid-margin>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<label for="stu_city">City<span class="req">*</span></label>
-													<input type="text" required class="md-input" md-input ng-model="permanent.city" />
+                                                    <br>
+													<label for="stu_city">City</label>
+													<input type="text" ng-pattern-restrict="^[A-Za-z ]*$" class="md-input" md-input ng-model="permanent.city" />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<label for="stu_state">State<span class="req">*</span></label>
-													<input type="text" required class="md-input" md-input ng-model="permanent.state" />
+                                                    <br>
+													<label for="stu_state">State</label>
+													<input type="text" ng-pattern-restrict="^[A-Za-z ]*$" class="md-input" md-input ng-model="permanent.state" />
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
-													<label for="pincode">ZipCode<span class="req">*</span></label>
-													<input type="text" required class="md-input" md-input ng-model="permanent.pincode" numeric-only/>
+                                                    <br>
+													<label for="pincode">ZipCode</label>
+													<input type="text" ng-pattern-restrict="^[0-9]*$" class="md-input" md-input ng-model="permanent.pincode" numeric-only/>
 												</div>
 												<div class="uk-width-medium-1-4 parsley-row">
+                                                    <br ng-if="!permanent.country">
+                                                    <label ng-if="permanent.country" style="font-size: 12px;color: #727272;font-weight: 400;">Country<span class="req">*</span></label>
 													<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="permanent.country" selectize required/>
 												</div>
 											</div>
@@ -224,8 +234,8 @@
 												<span class="uk-input-group-addon">
 													<i class="material-icons">&#xE0CD;</i>
 												</span>
-												<label for="wizard_phone">Phone Number</label>
-												<input type="text" class="md-input" name="wizard_phone" id="wizard_phone" md-input ng-model="contact.phone" numeric-only/>
+												<label for="wizard_phone">Phone Number<span class="req">*</span></label>
+												<input type="text" ng-pattern-restrict="^[0-9]*$" class="md-input" name="wizard_phone" id="wizard_phone" md-input ng-model="contact.phone" numeric-only required />
 											</div>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
@@ -234,7 +244,7 @@
 													<i class="material-icons">&#xE324;</i>
 												</span>
 												<label for="mobile_no">Mobile</label>
-												<input type="text" class="md-input" name="mobile_no" id="mobile_no" md-input ng-model="contact.mobile_no" numeric-only/>
+												<input type="text" ng-pattern-restrict="^\d{0,10}?$" class="md-input" name="mobile_no" id="mobile_no" md-input ng-model="contact.mobile_no" numeric-only/>
 											</div>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
@@ -242,8 +252,8 @@
 												<span class="uk-input-group-addon">
 													<i class="material-icons">&#xE0BE;</i>
 												</span>
-												<label for="">Email</label>
-												<input type="email" class="md-input" md-input ng-model="contact.email" />
+												<label for="">Email<span class="req">*</span></label>
+												<input type="email" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="contact.email" required />
 											</div>
 										</div>
 									</div>
@@ -258,29 +268,29 @@
 										<div class="uk-width-medium-1-3 parsley-row">
 											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
-													<a href="#"><i class="uk-icon-facebook"></i></a>
+													<i class="uk-icon-facebook"></i>
 												</span>
 												<label for="facebook">Facebook</label>
-												<input type="text" class="md-input" name="facebook" id="facebook" md-input ng-model="social.facebook" />
+												<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" name="facebook" id="facebook" md-input ng-model="social.facebook" />
 											</div>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
 											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
-													<a href="#"><i class="uk-icon-google-plus"></i></a>
+													<i class="uk-icon-google-plus"></i></a>
 												</span>
 												<label for="google">Google</label>
-												<input type="text" class="md-input" name="google" id="google" md-input ng-model="social.google" />
+												<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" name="google" id="google" md-input ng-model="social.google" />
 											</div>
 
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
 											<div class="uk-input-group">
 												<span class="uk-input-group-addon">
-													<a href="#"><i class="uk-icon-linkedin"></i></a>
+													<i class="uk-icon-linkedin"></i>
 												</span>
 												<label for="linkedin">Linkedin</label>
-												<input type="text" class="md-input" name="linkedin" id="linkedin" md-input ng-model="social.linkedin" />
+												<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" name="linkedin" id="linkedin" md-input ng-model="social.linkedin" />
 											</div>
 										</div>
 									</div>  
@@ -310,12 +320,12 @@
                                                 <div class="uk-grid" data-uk-grid-margin>
                                                     <div class="uk-width-medium-1-4 parsley-row">
                                                         <label for="institute">Institution Name<span class="req"></span></label>
-                                                        <input type="text" required class="md-input" md-input ng-model="previous.institute" />
+                                                        <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="previous.institute" />
                                                         <input type="hidden" ng-model="previous.preEdu_id" ng-value="{{previous.preEdu_id}}" />
                                                     </div>
                                                     <div class="uk-width-medium-1-4 parsley-row">
                                                         <label for="course_name">Course Name<span class="req"></span></label>
-                                                        <input type="text" required class="md-input" md-input ng-model="previous.course_name" />
+                                                        <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="previous.course_name" />
                                                     </div>
                                                     <div class="uk-width-medium-1-4 parsley-row">
                                                         <label for="year">Year of completion<span class="req"></span></label>
@@ -323,7 +333,7 @@
                                                     </div>
                                                     <div class="uk-width-medium-1-4 parsley-row">
                                                         <label for="total_mark">Total marks<span class="req"></span></label>
-                                                        <input type="text" required class="md-input" md-input ng-model="previous.total_mark" numeric-only/>
+                                                        <input type="text" ng-pattern-restrict="^[A-Za-z0-9+, ]*$" required class="md-input" md-input ng-model="previous.total_mark"/>
                                                     </div>
                                                 </div>
                                             </div>
@@ -333,7 +343,7 @@
                                         <div class="uk-vertical-align uk-height-1-1" style="margin-top:10px">
                                             <div class="uk-vertical-align-middle">
                                                 <a href="javascript:void(0)" ng-click="cloneSection1($event,$index,previous)" ng-if="$last"><i class="material-icons md-36">&#xE146;</i></a>
-                                                <a href="javascript:void(0)" ng-click="deleteSection1($event,$index,previous)" ng-if="!$last"><i class="material-icons md-36">&#xE872;</i></a>
+                                                <a href="javascript:void(0)" ng-click="deleteSection1($event,$index,previous)" ng-if=" form_dynamic1.length > 1"><i class="material-icons md-36">&#xE872;</i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -346,16 +356,19 @@
 									</h2><br>
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-3 parsley-row">
-											<label>Course</label>
+											<br ng-if="!sibling.courseId">
+                                            <label ng-if="sibling.courseId" style="font-size: 12px;color: #727272;font-weight: 400;">Course</label>
 											<input type="text" config="sibling_courseId_config" options="sibling_courseId_options" ng-model="sibling.courseId" selectize/>
 										</div>
 										<div class="uk-width-medium-1-3 data-parsley-americandateley-row">
-											<label>Batch</label>
+											<br ng-if="!sibling.batchId">
+                                            <label ng-if="sibling.batchId" style="font-size: 12px;color: #727272;font-weight: 400;">Batch</label>
 											<!-- <input type="text" config="selectize_a_config" options="selectize_batchId_options.options" ng-model="previous.selectize_a" name="selectize_a" selectize /> -->
 											<input type="text" config="sibling_batchId_config" options="sibling_batchId_options" ng-model="sibling.batchId" selectize/>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
-											<label>Search Student</label>
+											<br ng-if="!sibling.studentId">
+                                            <label ng-if="sibling.studentId" style="font-size: 12px;color: #727272;font-weight: 400;">Search Student</label>
 											<!-- <selectize id="selec_adv_1" config="selectize_planets_config" options="selectize_planets_options" position="bottom" ng-model="previous.selectize_planets"></selectize> -->
 											<input type="text" config="sibling_studentId_config" options="sibling_studentId_options" ng-model="sibling.studentId" selectize/>
 										</div>
@@ -371,24 +384,28 @@
 										<div class="uk-width-medium-1-3 parsley-row">
 											<br>
 											<label for="birthplace">Birth Place<span class="req"></span></label>
-											<input type="text" name="birthplace" id="birthplace" class="md-input" md-input ng-model="previous.birthplace" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" name="birthplace" id="birthplace" class="md-input" md-input ng-model="previous.birthplace" />
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
-											<label>Blood Group</label>
+											<br ng-if="!previous.selectize_blood">
+                                            <label ng-if="previous.selectize_blood" style="font-size: 12px;color: #727272;font-weight: 400;">Blood Group</label>
 											<input type="text" config="selectize_blood_config" options="selectize_blood_options" ng-model="previous.selectize_blood" name="selectize_blood" selectize/>
 										</div>
-										<div class="uk-width-medium-1-3 parsley-row">
+										<!-- <div class="uk-width-medium-1-3 parsley-row">
 											<label>Category</label>
 											<input type="text" config="selectize_cat_config" options="selectize_cat_options" ng-model="previous.selectize_cat" name="selectize_cat" selectize/>
-										</div>
+										</div> -->
+                                        <div class="uk-width-medium-1-3 parsley-row">
+                                            <br ng-if="!previous.selectize_styType">
+                                            <label ng-if="previous.selectize_styType" style="font-size: 12px;color: #727272;font-weight: 400;">Student Type<span class="req">*</span></label>
+                                            <input type="text" required config="selectize_styType_config" options="selectize_stuType_data" ng-model="previous.selectize_styType" selectize/>
+                                        </div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
+										
 										<div class="uk-width-medium-1-3 parsley-row">
-											<label>Student Type<span class="req">*</span></label>
-											<input type="text" required config="selectize_styType_config" options="selectize_stuType_data" ng-model="previous.selectize_styType" selectize/>
-										</div>
-										<div class="uk-width-medium-1-3 parsley-row">
-											<label>Student Lives<span class="req">*</span></label>
+											<br ng-if="!previous.student_lives">
+                                            <label ng-if="previous.student_lives" style="font-size: 12px;color: #727272;font-weight: 400;">Student Lives<span class="req">*</span></label>
 											<input type="text" required config="selectize_studentLive_config" options="selectize_studentLive_options" ng-model="previous.student_lives" selectize/>
 										</div>
 									</div>
@@ -409,7 +426,7 @@
 								<div class="uk-grid" data-uk-grid-margin>
 									<div class="uk-width-medium-1-3 parsley-row"><br>
 										<label>First name<span class="req">*</span></label>
-										<input type="text" required class="md-input" md-input ng-model="father.p_first_name">
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="father.p_first_name">
 										<input type="hidden" value="{{father.relationId}}" ng-model="father.relationId" />
 										<input type="hidden" value="{{wizard.stuPro_id}}" ng-model="wizard.stuPro_id" />
 										<input type="hidden" value="{{wizard.profileId}}" ng-model="wizard.profileId" />
@@ -417,7 +434,7 @@
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row"><br>
 										<label >Last Name<span class="req">*</span></label>
-										<input type="text" required class="md-input" md-input ng-model="father.p_last_name">
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="father.p_last_name">
 									</div>
 									<!-- <div class="uk-width-medium-1-4 parsley-row"> -->
 										<!-- <label >Relation<span class="req">*</span></label> -->
@@ -438,37 +455,42 @@
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
 										<label >Education<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.p_education" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z-. ]*$" class="md-input" md-input ng-model="father.p_education" />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
 										<label >Occupation<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.occupation" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" md-input ng-model="father.occupation" />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
 										<label >Income<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.p_income" numeric-only/>
+										<input type="text" ng-pattern-restrict="^[0-9-,]*$" class="md-input" md-input ng-model="father.p_income" numeric-only/>
 									</div>
 								</div>
 								<div class="uk-grid first_details" data-uk-grid-margin>
 									<div class="uk-width-medium-1-1 parsley-row">
 										<label >Address<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.pr_address" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z0-9,- ]*$" class="md-input" md-input ng-model="father.pr_address" />
 									</div>
 								</div>
 								<div class="uk-grid first_details" data-uk-grid-margin>
 									<div class="uk-width-medium-1-4 parsley-row">
+                                        <br>
 										<label >City<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.pr_city" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z ]*$" class="md-input" md-input ng-model="father.pr_city" />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
-										<label >State<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.pr_state" />
+                                        <br>
+										<label >State<span class="req">*</span></label>
+										<input type="text" ng-pattern-restrict="^[A-Za-z0-9.]*$" class="md-input" md-input ng-model="father.pr_state" required />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
+                                        <br>
 										<label >ZipCode<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="father.pr_pincode" numeric-only/>
+										<input type="text" ng-pattern-restrict="^[0-9]*$" class="md-input" md-input ng-model="father.pr_pincode" numeric-only/>
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
+                                        <br ng-if="!father.country">
+                                        <label ng-if="father.country" style="font-size: 12px;color: #727272;font-weight: 400;">Country<span class="req">*</span></label>
 										<input type="number" config="selectize_country_config" options="selectize_country_options" ng-model="father.country" selectize />
 									</div>
 								</div>
@@ -479,7 +501,7 @@
 												<i class="material-icons">&#xE0CD;</i>
 											</span>
 											<label >Phone Number<span class="req">*</span></label>
-											<input type="text" ng-required="checkbox_demo_11" class="md-input" md-input ng-model="father.p_phone" numeric-only/>
+											<input type="text" ng-pattern-restrict="^[0-9]*$" ng-required="checkbox_demo_11" class="md-input" md-input ng-model="father.p_phone" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
@@ -488,7 +510,7 @@
 												<i class="material-icons">&#xE324;</i>
 											</span>
 											<label >Mobile<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="father.p_mobile_no" numeric-only/>
+											<input type="text" ng-pattern-restrict="^\d{0,10}?$" class="md-input" md-input ng-model="father.p_mobile_no" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
@@ -497,7 +519,7 @@
 												<i class="material-icons">&#xE0BE;</i>
 											</span>
 											<label >Email</label>
-											<input type="email" class="md-input" md-input ng-model="father.p_email">
+											<input type="email" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="father.p_email">
 										</div>
 									</div>
 								</div>
@@ -505,29 +527,29 @@
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-facebook"></i></a>
+												<i class="uk-icon-facebook"></i>
 											</span>
 											<label for="facebook">Facebook</label>
-											<input type="text" class="md-input" md-input ng-model="father.facebook" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="father.facebook" />
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-google-plus"></i></a>
+												<i class="uk-icon-google-plus"></i>
 											</span>
 											<label for="google">Google</label>
-											<input type="text" class="md-input" md-input ng-model="father.google" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="father.google" />
 										</div>
 
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-linkedin"></i></a>
+												<i class="uk-icon-linkedin"></i>
 											</span>
 											<label for="linkedin">Linkedin</label>
-											<input type="text" class="md-input" md-input ng-model="father.linkedin" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="father.linkedin" />
 										</div>
 									</div>
 								</div>
@@ -540,13 +562,13 @@
 								<div class="uk-grid" data-uk-grid-margin>
 									<div class="uk-width-medium-1-3 parsley-row"><br>
 										<label>First name<span class="req">*</span></label>
-										<input type="text" name="p_first_name" required class="md-input" md-input ng-model="mother.p_first_name">
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" name="p_first_name" required class="md-input" md-input ng-model="mother.p_first_name">
 										<input type="hidden" value="{{mother.relationId}}" ng-model="mother.relationId" />
 										<input type="hidden" value="{{mother.second_relation}}" ng-model="mother.second_relation" />
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row"><br>
 										<label for="p_last_name">Last Name<span class="req">*</span></label>
-										<input type="text" required class="md-input" md-input ng-model="mother.p_last_name">
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="mother.p_last_name">
 									</div>
 									<!-- <div class="uk-width-medium-1-4 parsley-row"> -->
 										<!-- <label for="p_relation">Relation<span class="req">*</span></label> -->
@@ -567,37 +589,42 @@
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
 										<label for="p_education">Education<span class="req"></span></label>
-										<input type="text" name="p_education" id="p_education" class="md-input" md-input ng-model="mother.p_education" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z-. ]*$" name="p_education" id="p_education" class="md-input" md-input ng-model="mother.p_education" />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
 										<label for="occupation">Occupation<span class="req"></span></label>
-										<input type="text" name="occupation_[topParent]" class="md-input" md-input ng-model="mother.occupation" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" name="occupation_[topParent]" class="md-input" md-input ng-model="mother.occupation" />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
 										<label for="p_income">Income<span class="req"></span></label>
-										<input type="text" name="p_income_[topParent]" class="md-input" md-input ng-model="mother.p_income" numeric-only/>
+										<input type="text" ng-pattern-restrict="^[0-9,]*$" name="p_income_[topParent]" class="md-input" md-input ng-model="mother.p_income" numeric-only/>
 									</div>
 								</div>
 								<div class="uk-grid second_details" data-uk-grid-margin>
 									<div class="uk-width-medium-1-1 parsley-row">
 										<label>Address<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="mother.pr_address" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z0-9,- ]*$" class="md-input" md-input ng-model="mother.pr_address" />
 									</div>
 								</div>
 								<div class="uk-grid second_details" data-uk-grid-margin>
 									<div class="uk-width-medium-1-4 parsley-row">
+                                        <br>
 										<label >City<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="mother.pr_city" />
+										<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" md-input ng-model="mother.pr_city" />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
-										<label >State<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="mother.pr_state" />
+                                        <br>
+										<label >State<span class="req">*</span></label>
+										<input type="text" class="md-input" ng-pattern-restrict="^[A-Za-z- ]*$" md-input ng-model="mother.pr_state" required />
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
+                                        <br>
 										<label >ZipCode<span class="req"></span></label>
-										<input type="text" class="md-input" md-input ng-model="mother.pr_pincode" numeric-only/>
+										<input type="text" ng-pattern-restrict="^[0-9]*$" class="md-input" md-input ng-model="mother.pr_pincode" numeric-only/>
 									</div>
 									<div class="uk-width-medium-1-4 parsley-row">
+                                        <br ng-if="!mother.country">
+                                        <label ng-if="mother.country" style="font-size: 12px;color: #727272;font-weight: 400;">Country<span class="req">*</span></label>
 										<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="mother.country" selectize />
 									</div>
 								</div>
@@ -608,7 +635,7 @@
 												<i class="material-icons">&#xE0CD;</i>
 											</span>
 											<label >Phone Number<span class="req">*</span></label>
-											<input type="text" ng-required="checkbox_demo_2" class="md-input"  md-input ng-model="mother.p_phone" numeric-only/>
+											<input type="text" ng-pattern-restrict="^[0-9]*$" ng-required="checkbox_demo_2" class="md-input"  md-input ng-model="mother.p_phone" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
@@ -617,7 +644,7 @@
 												<i class="material-icons">&#xE324;</i>
 											</span>
 											<label>Mobile<span class="req"></span></label>
-											<input type="text" class="md-input" md-input ng-model="mother.p_mobile_no" numeric-only/>
+											<input type="text" ng-pattern-restrict="^\d{0,10}?$" class="md-input" md-input ng-model="mother.p_mobile_no" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
@@ -626,7 +653,7 @@
 												<i class="material-icons">&#xE0BE;</i>
 											</span>
 											<label >Email</label>
-											<input type="email" class="md-input" md-input ng-model="mother.p_email">
+											<input type="email" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="mother.p_email">
 										</div>
 									</div>
 								</div>
@@ -634,29 +661,29 @@
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-facebook"></i></a>
+												<i class="uk-icon-facebook"></i>
 											</span>
 											<label for="facebook">Facebook</label>
-											<input type="text" class="md-input" md-input ng-model="mother.facebook" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="mother.facebook" />
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-google-plus"></i></a>
+												<i class="uk-icon-google-plus"></i>
 											</span>
 											<label for="google">Google</label>
-											<input type="text" class="md-input" md-input ng-model="mother.google" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="mother.google" />
 										</div>
 
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-linkedin"></i></a>
+												<i class="uk-icon-linkedin"></i>
 											</span>
 											<label for="linkedin">Linkedin</label>
-											<input type="text" class="md-input" md-input ng-model="mother.linkedin" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="mother.linkedin" />
 										</div>
 									</div>
 								</div>
@@ -675,13 +702,13 @@
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-3 parsley-row"><br>
 											<label>First name<span class="req">*</span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.p_first_name">
+											<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="guardian.p_first_name">
 											<input type="hidden" value="{{guardian.relationId}}" ng-model="guardian.relationId" />
 											<input type="hidden" value="{{guardian.third_relation}}" ng-model="guardian.third_relation" />
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row"><br>
 											<label >Last Name<span class="req">*</span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.p_last_name">
+											<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" required class="md-input" md-input ng-model="guardian.p_last_name">
 										</div>
 										<!-- <div class="uk-width-medium-1-3 parsley-row"> -->
 											<!-- <label >Relation<span class="req">*</span></label> -->
@@ -695,38 +722,43 @@
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Education<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.p_education" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z-. ]*$" class="md-input" md-input ng-model="guardian.p_education" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Occupation<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.occupation" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" md-input ng-model="guardian.occupation" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
 											<label >Income<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.p_income" numeric-only/>
+											<input type="text" ng-pattern-restrict="^[0-9,]*$" class="md-input" md-input ng-model="guardian.p_income" numeric-only/>
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-1 parsley-row">
 											<label >Address<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.pr_address" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9,- ]*$" class="md-input" md-input ng-model="guardian.pr_address" />
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
 										<div class="uk-width-medium-1-4 parsley-row">
+                                            <br>
 											<label >City<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.pr_city" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" class="md-input" md-input ng-model="guardian.pr_city" />
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
-											<label >State<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.pr_state" />
+                                            <br>
+											<label >State<span class="req">*</span></label>
+                                            <input type="text" class="md-input" ng-pattern-restrict="^[A-Za-z- ]*$" md-input ng-model="guardian.pr_state" required/>
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
+                                            <br>
 											<label >ZipCode<span class="req"></span></label>
-											<input type="text" required class="md-input" md-input ng-model="guardian.pr_pincode" numeric-only/>
+											<input type="text" ng-pattern-restrict="^[0-9]*$" class="md-input" md-input ng-model="guardian.pr_pincode" numeric-only/>
 										</div>
 										<div class="uk-width-medium-1-4 parsley-row">
-											<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="guardian.country" selectize />
+                                            <br ng-if="!guardian.country">
+                                            <label ng-if="guardian.country" style="font-size: 12px;color: #727272;font-weight: 400;">Country<span class="req">*</span></label>
+											<input type="text" config="selectize_country_config" options="selectize_country_options" ng-model="guardian.country" selectize required/>
 										</div>
 									</div>
 									<div class="uk-grid" data-uk-grid-margin>
@@ -736,7 +768,7 @@
 													<i class="material-icons">&#xE0CD;</i>
 												</span>
 												<label >Phone Number<span class="req">*</span></label>
-												<input type="text" ng-required="guardianCon" class="md-input" md-input ng-model="guardian.p_phone" numeric-only/>
+												<input type="text" ng-pattern-restrict="^[0-9]*$" ng-required="guardianCon" class="md-input" md-input ng-model="guardian.p_phone" numeric-only/>
 											</div>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
@@ -745,7 +777,7 @@
 													<i class="material-icons">&#xE324;</i>
 												</span>
 												<label >Mobile<span class="req"></span></label>
-												<input type="text" class="md-input" md-input ng-model="guardian.p_mobile_no" numeric-only />
+												<input type="text" ng-pattern-restrict="^\d{0,10}?$" class="md-input" md-input ng-model="guardian.p_mobile_no" numeric-only />
 											</div>
 										</div>
 										<div class="uk-width-medium-1-3 parsley-row">
@@ -754,7 +786,7 @@
 													<i class="material-icons">&#xE0BE;</i>
 												</span>
 												<label for="">Email</label>
-												<input type="email" class="md-input" md-input ng-model="guardian.p_email">
+												<input type="email" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="guardian.p_email">
 											</div>
 										</div>
 									</div>
@@ -762,29 +794,29 @@
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-facebook"></i></a>
+												<i class="uk-icon-facebook"></i>
 											</span>
 											<label for="facebook">Facebook</label>
-											<input type="text" class="md-input" md-input ng-model="guardian.facebook" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="guardian.facebook" />
 										</div>
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-google-plus"></i></a>
+												<i class="uk-icon-google-plus"></i>
 											</span>
 											<label for="google">Google</label>
-											<input type="text" class="md-input" md-input ng-model="guardian.google" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="guardian.google" />
 										</div>
 
 									</div>
 									<div class="uk-width-medium-1-3 parsley-row">
 										<div class="uk-input-group">
 											<span class="uk-input-group-addon">
-												<a href="#"><i class="uk-icon-linkedin"></i></a>
+												<i class="uk-icon-linkedin"></i>
 											</span>
 											<label for="linkedin">Linkedin</label>
-											<input type="text" class="md-input" md-input ng-model="guardian.linkedin" />
+											<input type="text" ng-pattern-restrict="^[A-Za-z0-9@.]*$" class="md-input" md-input ng-model="guardian.linkedin" />
 										</div>
 									</div>
 								</div>
@@ -822,7 +854,7 @@
       <!-- <div id="modal_overflow" class="uk-modal"> -->
         <!-- <div class="uk-modal-dialog"> -->
           <!-- <button type="button" class="uk-modal-close uk-close"></button> -->
-          <!-- <h3 class="uk-modal-title"><!-- <i class="uk-icon-institution"></i>&nbsp; --> Add Grades </h3> -->
+          <!-- <h3 class="uk-modal-title"><!<i class="uk-icon-institution"></i>&nbsp; --> <!-- Add Grades </h3> --> 
             <!-- <ng-camera -->
             <!-- capture-message="Cheeeese!" -->
             <!-- countdown="3" -->
