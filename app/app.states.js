@@ -6221,5 +6221,22 @@ rubycampusApp
                         pageTitle: 'payment'
                     }
                 })
+
+                .state("restricted.setting.institutionsetting", {
+                    url: "/institutionsetting",
+                    templateUrl: 'app/components/setting/institution_setting.html',
+                    controller: 'institution_setting',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/setting/institution_setting.js'
+                            ], {serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Institiution Setting'
+                    }
+                })
         }
     ]);
