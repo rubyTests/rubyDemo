@@ -33,7 +33,8 @@
                             <th>S.No</th>
                             <th>Title</th>
                             <th>Category</th>
-                            <th>Date</th>
+                            <th>Course</th>
+							<th>Date</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -42,6 +43,7 @@
                             <th></th>
                             <th>Title</th>
                             <th>Category</th>
+                            <th>Course</th>
                             <th>Date</th>
                             <th></th>
                         </tr>
@@ -51,6 +53,7 @@
                             <td>{{row.ID}}</td>
                             <td>{{row.TITLE}}</td>
                             <td>{{row.CATEGORY_NAME}}</td>
+                            <td>{{row.COURSE_NAME}}</td>
                             <td>{{row.CRT_DT}}</td>
                             <td>
                                 <a href="#" class="ts_remove_row" ui-sref="restricted.repository.repositoryDetail({ ReposId:{{row.ID}} })"><i class="md-icon material-icons">&#xE8F4;</i></a>
