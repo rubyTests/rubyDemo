@@ -243,10 +243,6 @@ angular
                         {
                             title:'Students',
                             link: 'restricted.student.student_list'
-                        },
-                        {
-                            title:'Parents Feepayment',
-                            link: 'restricted.student.paymentforparents'
                         }
                     ]
                 },
@@ -879,6 +875,12 @@ angular
                     icon: '&#xE7FD;',
                     link: 'restricted.student.student_profile'
                 },
+				{
+					id: 4,
+					title:'My Fees',
+                    icon: '&#xE263;',
+					link: 'restricted.student.paymentforparents'
+				},
                 {
                     id: 6,
                     title: 'Repository',
@@ -1030,6 +1032,10 @@ angular
                                     link: 'restricted.student.stuApplyLeave'
                                 }
                             ]
+                        },
+						{
+                            title:'Parents Feepayment',
+                            link: 'restricted.student.paymentforparents'
                         }
                     ]
                 },
