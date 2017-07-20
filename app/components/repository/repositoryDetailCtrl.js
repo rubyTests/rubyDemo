@@ -24,7 +24,9 @@ angular
         // });
 
         // $scope.repData = [];
-
+		
+		$scope.uploadUrl=$localStorage.uploadUrl;
+		
         $scope.Rep_data = [];
         $http({
             method:'GET',
