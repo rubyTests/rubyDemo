@@ -3012,7 +3012,9 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.js',
+                                'ng-pattern',
+                                // 'assets/js/custom/uikit_fileinput.js',
+                                'assets/js/custom/uikit_profileFileinput.js',
                                 'app/components/student/studentadmisionCtrl.js',
                                 // 'app/components/student/cameraCtrl.js'
                             ], {serie:true});
@@ -3032,7 +3034,8 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'lazy_parsleyjs',
                                 'lazy_wizard',
-                                'assets/js/custom/uikit_fileinput.js',
+                                // 'assets/js/custom/uikit_fileinput.js',
+                                'assets/js/custom/uikit_profileFileinput.js',
                                 'app/components/student/studentAdmisson_edit.js',
                                 // 'app/components/student/cameraCtrl.js'
                             ], {serie:true});
@@ -3278,7 +3281,7 @@ rubycampusApp
                     }
                 })
                 .state("restricted.academics.view_syllabusDetails", {
-                    url: "/view_syllabusDetails/{id}",
+                    url: "/view_syllabusDetails/{id}/{courseid}",
                     templateUrl: 'app/components/academics/student_syllabus_viewlist.html',
                     controller: 'studentsyllabusdetailCtrl',
                     resolve: {
@@ -3303,7 +3306,7 @@ rubycampusApp
                     data: {
                         pageTitle: 'Syllabus View'
                     },
-                    params:{id:null}
+                    params:{id:null,courseid:null}
                 })
 				
 				// Student and parent view of subject
