@@ -439,7 +439,8 @@ angular
 			$scope.getTodolist=function(){
 				$http({
 				method:'get',
-				url: $localStorage.service+'DashboardAPI/todoAdmin',
+				url: $localStorage.service+'DashboardAPI/todoList',
+				params:{profileId:$localStorage.userProfile_id,role_id:$localStorage.role_id},
 				headers:{'access_token':$localStorage.access_token}
 				}).then(function(return_data){
 					//console.log(return_data.data.message,"msg");
@@ -504,8 +505,8 @@ angular
 				
 				$http({
 				method:'POST',
-				url: $localStorage.service+'DashboardAPI/todoAdmin',
-				data: {title: $scope.todoTitle,description: $scope.todoDesc,date: $scope.todoDate,important: $scope.important},
+				url: $localStorage.service+'DashboardAPI/todoList',
+				data: {title: $scope.todoTitle,description: $scope.todoDesc,date: $scope.todoDate,important: $scope.important,profileId:$localStorage.userProfile_id,role_id:$localStorage.role_id},
 				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
 				}).then(function(response){
 					if(response.data.status==true){
@@ -531,7 +532,7 @@ angular
                 $scope.todo_data.splice(index,1);
 				$http({
 				method:'delete',
-				url: $localStorage.service+'DashboardAPI/todoAdmin',
+				url: $localStorage.service+'DashboardAPI/todoList',
 				headers:{'access_token':$localStorage.access_token},
 				params:{id:id}
 				}).then(function(return_data){
@@ -541,7 +542,9 @@ angular
 					$scope.todo_length = $scope.todo_data.length;
 				});
             }
-
+			
+			
+			$scope.videoPath="http://192.168.1.139/rubyServices/upload/appRelease.png";
             $scope.posts_data=[];
             $http({
                 method:'GET',
@@ -549,6 +552,8 @@ angular
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 $scope.posts_data=return_data.data.message;
+				$scope.videoPath=$localStorage.uploadUrl+$scope.posts_data[0].UPLOAD_FILE;
+				//console.log($scope.videoPath,"Path");
             });
 
                     // video player
@@ -578,20 +583,11 @@ angular
             var $video_player = $('#video_player'),
                 $video_playlist = $('#video_player_playlist'),
                 active_class = 'md-list-item-active';
-            $scope.test = function() {
-                $state.go('restricted.repository.repositoryDetail', '{ ReposId:{{posts_data[0].ID}} }');
-            }
+			// $scope.videoPath=$localStorage.uploadUrl;
             $scope.videoChange = function($event,post_url) {
-
                 var $this = $($event.currentTarget);
                 if(!$this.hasClass(active_class)) {
-                    // var extention = post_url.split(".").pop().toLowerCase();
-                    // if (extention=='mp4') {
-                        var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="assets/uploads/' + post_url.UPLOAD_FILE + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
-                    // }else if(extention=='png' && extention=='jpg'){
-                    //     var iframe_embed = '<img height="150" width="300" data-uk-cover src="assets/uploads/' + post_url + '" frameborder="0" allowfullscreen style="max-height:100%"/>';    
-                    // }
-                    
+                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="' + $localStorage.uploadUrl+post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
 
                     $video_playlist.children('li').removeClass(active_class);
                     $this.addClass(active_class);
