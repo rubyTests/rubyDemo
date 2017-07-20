@@ -57,6 +57,11 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
+						{
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
                         {
                             type: 'text',
                             bRegex: true,
@@ -74,7 +79,8 @@ angular
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Title'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Category'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Date')
+                DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
+                DTColumnDefBuilder.newColumnDef(4).withTitle('Date')
             ];
             function toggleAll (selectAll, selectedItems) {
                 for (var id in selectedItems) {
