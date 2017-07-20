@@ -248,8 +248,8 @@ angular
 					// console.log(return_data.data.message.studentCount[0].stuCount,"msg");
 					$scope.dynamicStats[0].count = return_data.data.message.attendance[0].Percentage;
 					$scope.dynamicStats[1].count = '75';
-					$scope.dynamicStats[2].count = '10';
-					$scope.dynamicStats[3].count = '54';
+					$scope.dynamicStats[2].count = return_data.data.message.assignment[0].AssignCount;
+					$scope.dynamicStats[3].count = return_data.data.message.repository[0].RepoCount;
 					// $scope.dynamicStats[1].count = return_data.data.message.employeeCount[0].empCount;
 					// $scope.dynamicStats[2].count = return_data.data.message.courseCount[0].courseCount;
 					// $scope.dynamicStats[3].count = return_data.data.message.admissionCount[0].admission;
@@ -571,7 +571,8 @@ angular
 			$scope.getTodolist=function(){
 				$http({
 				method:'get',
-				url: $localStorage.service+'DashboardAPI/todoStudent',
+				url: $localStorage.service+'DashboardAPI/todoList',
+				params:{profileId:$localStorage.userProfile_id,role_id:$localStorage.role_id},
 				headers:{'access_token':$localStorage.access_token}
 				}).then(function(return_data){
 					//console.log(return_data.data.message,"msg");
@@ -594,41 +595,6 @@ angular
 			}
 			$scope.getTodolist();
 			
-
-            // add todo list modal
-            
-			// $scope.todolist_modal = UIkit.modal("#new_todolist", {
-                // target: '#new_todolist'
-            // });
-            // $scope.addTodoForm = function($event) {
-                // if ( $scope.todolist_modal.isActive() ) {
-                    // todolist_modal.hide();
-                // } else {
-                    // $scope.todolist_modal.show();
-                    // $scope.todoTitle = null;
-                    // $scope.todoDesc = null;
-                    // // hide events panel
-                    // // $clndr_todolist.removeClass('events_visible');
-                // }
-            // };
-
-            // $scope.todo_data.tasks=[];
-            // $scope.addTodo = function($event){                
-                // var todoDataVal = {
-                    // title: $scope.todoTitle,
-                    // description: $scope.todoDesc,
-                    // closed: false,
-                    // important: false
-                // }
-                // todo_data.push(todoDataVal);
-                // $scope.todolist_modal.hide();
-            // }
-
-            // $scope.removeTodo = function(index){
-                // console.log($scope.todo_data);
-                // $scope.todo_data.splice(index,1);
-            // }
-			
 			$scope.todolist_modal = UIkit.modal("#new_todolist", {
                 target: '#new_todolist'
             });
@@ -642,8 +608,6 @@ angular
                     $scope.todoDate = null;
 					$scope.todoDesc = null;
 					$scope.important = null;
-                    // hide events panel
-                    // $clndr_todolist.removeClass('events_visible');
                 }
             };
 
@@ -658,8 +622,8 @@ angular
 				
 				$http({
 				method:'POST',
-				url: $localStorage.service+'DashboardAPI/todoStudent',
-				data: {title: $scope.todoTitle,description: $scope.todoDesc,date: $scope.todoDate,important: $scope.important},
+				url: $localStorage.service+'DashboardAPI/todoList',
+				data: {title: $scope.todoTitle,description: $scope.todoDesc,date: $scope.todoDate,important: $scope.important,profileId:$localStorage.userProfile_id,role_id:$localStorage.role_id},
 				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
 				}).then(function(response){
 					if(response.data.status==true){
@@ -685,7 +649,7 @@ angular
                 $scope.todo_data.splice(index,1);
 				$http({
 				method:'delete',
-				url: $localStorage.service+'DashboardAPI/todoStudent',
+				url: $localStorage.service+'DashboardAPI/todoList',
 				headers:{'access_token':$localStorage.access_token},
 				params:{id:id}
 				}).then(function(return_data){
@@ -789,6 +753,18 @@ angular
                 // }
             ];
 
+			// Library Book Taken counts
+			
+			$http({
+                method:'GET',
+                url: $localStorage.service+'LibraryAPI/bookTaken',
+				params:{profileId:$localStorage.userProfile_id},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.viewData=return_data.data.message;
+				$scope.bookTakenCount=$scope.viewData.length;
+            });
+			
 
         }
     ])
