@@ -170,8 +170,12 @@ angular
             };
             $scope.myProfile=function(){
                 //alert();
-                $localStorage.myProfile="myProfile";
-                $state.go("restricted.student.student_profile"); 
+				if($localStorage.role_id==2){
+					$state.go("restricted.employeemanagement.profile"); 
+				}else{
+					$localStorage.myProfile="myProfile";
+					$state.go("restricted.student.student_profile"); 
+				}
             }
 			// $scope.user_prof=$localStorage.userProfile_id;
             // console.log($scope.user_prof,'user_prof');
