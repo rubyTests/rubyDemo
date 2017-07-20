@@ -22,7 +22,7 @@ angular
             $http({
                 method:'GET',
                 url: $localStorage.service+'ProfileAPI/studentBasicandPaymentDetails',
-                params:{stud_id:1},
+                params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(response_data){
                 console.log(response_data.data.message,'response_data');
@@ -34,7 +34,7 @@ angular
             $http({
                 method:'GET',
                 url: $localStorage.service+'ProfileAPI/studentFeePaymentHistory',
-                params:{stud_id:1},
+                params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(response_history){
                 console.log(response_history.data.message,'response_history');
@@ -45,7 +45,7 @@ angular
             $http({
                 method:'GET',
                 url: $localStorage.service+'ProfileAPI/getNextDueList',
-                params:{stud_id:1},
+                params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(response_history){
                 console.log(response_history.data.message,'response_history');
