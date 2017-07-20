@@ -13,10 +13,17 @@ angular
             // var paramsData=$filter('filter')(user_data, {id : $stateParams.emp_id});
             // $scope.user_data = paramsData[0];
 
+			$scope.proId=$stateParams.emp_id;
+			$scope.empProtype='overAll';
+            if($scope.proId==null){
+        		$scope.proId=$localStorage.userProfile_id;
+				$scope.empProtype='myProfile';
+        	}
+			
             $http({
               method : "GET",
               url : $localStorage.service+"EmployeemgmntAPI/fetchEmployeeData",
-              params :{id : $stateParams.emp_id},
+              params :{id : $scope.proId,empProtype:$scope.empProtype},
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 $scope.user_data = response.data.data[0];
@@ -56,7 +63,7 @@ angular
             $http({
               method : "GET",
               url : $localStorage.service+"EmployeemgmntAPI/previousInstitute",
-              params :{id : $stateParams.emp_id},
+              params :{id : $scope.proId,empProtype:$scope.empProtype},
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 console.log(response.data.data,'previous_Inst');
