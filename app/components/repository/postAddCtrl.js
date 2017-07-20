@@ -62,13 +62,15 @@ angular
             $scope.saveRepPostDetails = function(){
                 // var $fileInput = $('.dropify-preview').find('img').attr('src');
                 var $fileInput = document.getElementById('input-file-a').files[0];
-                var formdata = new FormData();
+                // console.log($fileInput);
+				var formdata = new FormData();
                 formdata.append('file', $fileInput);
                 // formdata.append('rep_id', $scope.rep_id);
                 formdata.append('rep_title', $scope.rep_title);
                 formdata.append('rep_content', $scope.rep_content);
                 formdata.append('courseId', $scope.selectize_courseId);
                 formdata.append('categoryId', $scope.selectize_category);
+                formdata.append('userProfileId', $localStorage.userProfile_id);
                 console.log(formdata,"formdata");
                 $http({
                     method : 'POST',
