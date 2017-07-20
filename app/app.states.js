@@ -62,6 +62,29 @@ rubycampusApp
 						}]
 					}
 				})
+				
+				// Email and verification  
+				
+				.state("verification", {
+                    url: "/verification/{token}",
+                    templateUrl: 'app/components/pages/verification/verification.html',
+					controller: 'verificationCtrl',
+                    resolve: {
+						deps: ['$ocLazyLoad', function($ocLazyLoad) {   
+							return $ocLazyLoad.load([
+								'lazy_uikit',
+								'lazy_iCheck',
+								'lazy_parsleyjs',
+								'app/components/pages/verification/verificationCtrl.js'
+							]);
+						}]
+					},
+					data: {
+                        pageTitle: 'Verification'
+                    },
+					params:{token:null}
+                })
+				
             // -- RESTRICTED --
                 .state("restricted", {
                     abstract: true,
@@ -3475,6 +3498,7 @@ rubycampusApp
                         pageTitle: 'Tablesorter'
                     }
                 })
+				
                 //Added by gnanamani
                 //  .state("restricted.academics", {
                 //     url: "/academics",
@@ -5677,6 +5701,23 @@ rubycampusApp
                 },
                 data: {
                     pageTitle: 'Report View'
+                }
+            })
+			
+			.state("restricted.library.booktaken", {
+                url: "/booktaken",
+                templateUrl: 'app/components/Library/booktaken.html',
+                resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([
+                            'bower_components/angular-resource/angular-resource.min.js',
+                            'lazy_datatables',
+                            'app/components/Library/booktakenCtrl.js'
+                        ], {serie:true});
+                    }]
+                },
+                data: {
+                    pageTitle: 'Book Return'
                 }
             })
 			
