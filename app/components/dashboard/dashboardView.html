@@ -352,7 +352,8 @@
                     <div class="md-card">
                         <div class="md-card-head">
                             <div class="uk-cover uk-position-relative uk-height-1-1 transform-origin-50" id="video_player">
-                                <iframe height="150" width="300" data-uk-cover ng-src="{{'assets/uploads/'+posts_data[0].UPLOAD_FILE}}" frameborder="0" allowfullscreen style="max-height:100%"></iframe>
+                                <iframe height="150" width="300" data-uk-cover ng-src="http://192.168.1.139/rubyServices/upload/appRelease.png" frameborder="0" allowfullscreen style="max-height:100%"></iframe>
+                                <!-- <iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/-CYs99M7hzA?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe> -->
                                 <!-- <video controls autoplay ng-if="Rep_data.extention=='mp4' && Rep_data.extention=='ogg'"></video>
                                 <img ng-if="Rep_data.extention=='png' || Rep_data.extention=='jpg'" ng-src="{{'assets/uploads/'+Rep_data.UPLOAD_FILE}}" width="100%" height="50%" alt="">
                                 <img ng-if="Rep_data.extention=='pdf'" ng-src="assets/uploads/file/pdf.png" width="100%" height="50%" alt="">
@@ -363,6 +364,7 @@
                         </div>
                         <div class="md-card-content">
                             <ul class="md-list md-list-addon md-list-interactive" id="video_player_playlist">
+                                <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:4" ng-class="{'md-list-item-active': $index == 0 }">
                                 <li ng-click="videoChange($event,post)" ng-repeat="post in posts_data | limitTo:3" ng-class="{'md-list-item-active': $index == 0 }">
                                     <div class="md-list-addon-element">
                                         <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='png' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='jpg'">collections</i>
