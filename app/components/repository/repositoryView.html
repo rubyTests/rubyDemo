@@ -46,7 +46,7 @@
             <div ng-repeat="teaser in viewData | filter: q">
                 <div class="md-card md-card-hover-img">
                     <div class="md-card-head uk-text-center uk-position-relative">
-                        <img class="md-card-head-img" ng-src="{{'assets/uploads/'+teaser.UPLOAD_FILE}}" alt=""/>
+                        <img class="md-card-head-img" ng-src="{{uploadUrl+teaser.UPLOAD_FILE}}" alt=""/>
                     </div>
                     <div class="md-card-content small-padding">
                         <!-- <img ng-if="teaser.Repository_File" ng-src="{{teaser.Repository_File}}" alt=""> -->
