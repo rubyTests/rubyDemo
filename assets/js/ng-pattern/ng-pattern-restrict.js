@@ -14,7 +14,7 @@ angular.module('ngPatternRestrict', [])
     'use strict';
 
     function showDebugInfo() {
-      $log.debug("[ngPatternRestrict] " + Array.prototype.join.call(arguments, ' '));
+      //$log.debug("[ngPatternRestrict] " + Array.prototype.join.call(arguments, ' '));
     }
 
     return {
