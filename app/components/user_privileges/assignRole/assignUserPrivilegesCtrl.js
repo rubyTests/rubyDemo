@@ -17,7 +17,7 @@ angular
                     }
                 });
 
-                $scope.clearValidation=function(){
+                $scope.clearValidation = function(){
                     $('#form_validation').parsley().reset();
                 }
             var vm = this;
@@ -82,7 +82,7 @@ angular
                     $scope.btnStatus="Update";
                     if(res){
                         $scope.user_role.id=res.ID;
-                        $scope.user_role.roleName=res.ROLL_NAME;
+                        $scope.user_role.roleName=res.ROLL_NAME.split(",");
                         $scope.user_role.dept_name=res.DEPT_ID;
                         $scope.user_role.employee=res.USER_ID;                        
                     }
@@ -91,6 +91,18 @@ angular
                 $scope.viewData=[];
                 $scope.empList=[];
                 $scope.roleList=[];
+                $scope.rolesDetails=[{"id":"1","role_name":"admin"},{"id":"2","role_name":"empolyee"},{"id":"3"
+,"role_name":"HR"},{"id":"4","role_name":"Admin 1"}];
+                // $http.get($localStorage.service+'AcademicsAPI/getRoles',{headers:{'access_token':$localStorage.access_token}})
+                //     .success(function(return_data){
+                //         $scope.rolesDetails=return_data.message;
+                // });
+                $scope.rolesDetails_config = {
+                    create: false,
+                    valueField: 'id',
+                    labelField: 'role_name',
+                    searchField: 'role_name'
+                }  
                 $scope.getdata=function(){
                     $http.get($localStorage.service+'AcademicsAPI/assignRoleDetail',{headers:{'access_token':$localStorage.access_token}})
                     .success(function(return_data){
@@ -195,5 +207,11 @@ angular
 	                    }
 	                });
 	            }
+            $scope.mapVal = function(data){
+                var result = data.map(function(elem){
+                    return elem.role_name;
+                }).join(",");
+                return result;
+            }
         }
     );

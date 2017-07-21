@@ -36,7 +36,7 @@
                       <tr ng-repeat="row in roleList">
                         <td>{{$index+1}}</td>
                         <td>{{row.PROFILE_NAME}}</td>
-                        <td>{{row.ROLL_NAME}}</td>
+                        <td>{{mapVal(row.role_name)}}</td>
                         <td>{{row.DEPT_NAME}}</td>
                         <td class="">
                             <a ng-click="assignRoleEdit(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
@@ -58,7 +58,7 @@
                 <div class="parsley-row uk-form-row">
                   <input type="hidden" ng-model="dept_id">
                   <label class="uk-form-label">Role Name<span class="req">*</span></label>
-                  <input type="text" ng-pattern-restrict="^[A-Za-z- ]*$" ng-model="user_role.roleName" class="md-input" name="roleName" focus-me="shouldBeOpen" required md-input>
+                  <input type="text" ng-model="user_role.roleName" config="rolesDetails_config" options="rolesDetails" class="md-input" name="roleName" required selectize>
                 </div>
                 <div class="uk-form-row">
                   <input type="text" config="department_config" options="department_options" ng-model="user_role.dept_name" selectize placeholder="Select Department"/>
