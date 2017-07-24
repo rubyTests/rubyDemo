@@ -80,7 +80,8 @@ angular
                         'invoice_number' : $scope.invoice_number,
                         'invoice_date' : $scope.invoice_date,
                         'total_amount' : $scope.totalAmount,
-                        'itemData' : $scope.purchaseOrderItem_options
+                        'itemData' : $scope.purchaseOrderItem_options,
+                        'institute_id':$scope.institute_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -120,6 +121,23 @@ angular
             $scope.backBtn = function(){
                 window.history.back();
             }
+
+
+            // added by vijayaraj 24-07-17
+            $http({
+                method:'GET',
+                url: $localStorage.service+'ProfileAPI/getAutoincrementNo',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(profile_data){
+               $scope.grn_number=profile_data.data.message[0].GOODS_RECEIPT_PREFIX +''+ profile_data.data.message[0].GRN_NO;
+               $scope.institute_id=profile_data.data.message[0].ID;
+               if(profile_data.data.message[0].GOODS_RECEIPT==null || profile_data.data.message[0].GOODS_RECEIPT=='undefined' || profile_data.data.message[0].GOODS_RECEIPT==''){
+                    $scope.grn_Status=false;
+               }else{
+                    $scope.grn_Status=true;
+               }
+            });
+
 
             // var d=new Date();
             // var year=d.getFullYear();

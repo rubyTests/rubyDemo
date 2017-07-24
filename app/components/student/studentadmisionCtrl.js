@@ -723,7 +723,7 @@ angular
 						$http({
 						method:'POST',
 						url: $localStorage.service+'ProfileAPI/admissionDetails',
-						data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),gender:$scope.wizard.gender,wizard_birth:$scope.wizard.wizard_birth,nationality:$scope.wizard.nationality,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,batchId:$scope.wizard.batchId,roll_no:$scope.wizard.roll_no},
+						data: {profileId:$scope.wizard.profileId,admission_no:$scope.wizard.admission_no,admission_date:$scope.wizard.admission_date,first_name:$scope.wizard.first_name,last_name:$scope.wizard.last_name,filename:$('.fileinput-filename').val(),gender:$scope.wizard.gender,wizard_birth:$scope.wizard.wizard_birth,nationality:$scope.wizard.nationality,mother_tongue:$scope.wizard.mother_tongue,religion:$scope.wizard.religion,batchId:$scope.wizard.batchId,roll_no:$scope.wizard.roll_no,inst_id:$scope.institute_id},
 						headers:{'access_token':$localStorage.access_token}
 						}).then(function(response){
 							console.log(response,'responsetest');
@@ -918,5 +918,20 @@ angular
                    console.log(response,'parentsResponse');
                 });
 			}
+
+			$http({
+                method:'GET',
+                url: $localStorage.service+'ProfileAPI/getAutoincrementNo',
+				headers:{'access_token':$localStorage.access_token}
+            }).then(function(profile_data){
+               // console.log(profile_data.data.message[0],'profile_data');
+               $scope.wizard.admission_no=profile_data.data.message[0].STUDENT_PREFIX +''+ profile_data.data.message[0].STU_ADM_NO;
+               $scope.institute_id=profile_data.data.message[0].ID;
+               if(profile_data.data.message[0].STUDENT_ADM_NO==null || profile_data.data.message[0].STUDENT_ADM_NO=='undefined' || profile_data.data.message[0].STUDENT_ADM_NO==''){
+               		$scope.Student_Status=false;
+               }else{
+               		$scope.Student_Status=true;
+               }
+            });
         }
     ]);

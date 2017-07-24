@@ -36,8 +36,9 @@
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="prev_state">Request No.<span class="req"></span></label>
-                                        <input type="text" name="request_no" id="request_no"  class="md-input" md-input ng-model="request_no" required/>
+                                        <input type="text" name="request_no" id="request_no"  class="md-input" md-input ng-model="request_no" required ng-disabled="material_Status"/>
                                         <input type="hidden" ng-model="materialReq_id">
+                                        <input type="hidden" ng-model="institute_id">
                                     </div>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <div class="uk-input-group">

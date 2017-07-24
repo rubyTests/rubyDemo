@@ -43,8 +43,9 @@
                         <div class="uk-grid" data-uk-grid-margin>
                             <div class="uk-width-medium-1-4 parsley-row">
                                 <label for="prev_state">Invoice No.<span class="req"></span></label>
-                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="invoice_no" required />
+                                <input type="text" name="prev_state" id="prev_state"  class="md-input" md-input ng-model="invoice_no" required ng-disabled="invoice_Status"/>
                                 <input type="hidden" ng-model="billing_id">
+                                <input type="hidden" ng-model="institute_id">
                             </div>
                             <div class="uk-width-medium-1-4 parsley-row">
                                 <div class="uk-input-group">

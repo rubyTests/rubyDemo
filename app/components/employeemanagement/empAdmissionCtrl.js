@@ -235,7 +235,8 @@ angular
                         'category' : $scope.EMP_ADM.category,
                         'position' : $scope.EMP_ADM.position,
                         'ProfileID' : $scope.ProfileID,
-                        'report_to' : $scope.EMP_ADM.report_toID
+                        'report_to' : $scope.EMP_ADM.report_toID,
+                        'inst_id':$scope.inst_setting_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -524,6 +525,18 @@ angular
             }, 700);
         });
 
-            
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'ProfileAPI/getAutoincrementNo',
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(profile_data){
+                   $scope.EMP_ADM.admission_no=profile_data.data.message[0].EMPLOYEE_PREFIX +''+ profile_data.data.message[0].EMP_ADM_NO;
+                   $scope.inst_setting_id=profile_data.data.message[0].ID;
+                   if(profile_data.data.message[0].EMPLOYEE_ADM_NO==null || profile_data.data.message[0].EMPLOYEE_ADM_NO=='undefined' || profile_data.data.message[0].EMPLOYEE_ADM_NO==''){
+                        $scope.employee_Status=false;
+                   }else{
+                        $scope.employee_Status=true;
+                   }
+                });
         }
     ]);

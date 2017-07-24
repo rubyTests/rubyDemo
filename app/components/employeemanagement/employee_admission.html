@@ -29,8 +29,9 @@
                                 <div class="uk-grid" data-uk-grid-margin>
                                     <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="admission_no">Employee No <span class="req">*</span></label>
-                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" />
+                                        <input type="text" class="md-input" required md-input ng-model="EMP_ADM.admission_no" ng-disabled="employee_Status"/>
                                         <input type="hidden" ng-model="employee_id">
+                                        <input type="hidden" ng-model="inst_id">
                                     </div>
                                      <div class="uk-width-medium-1-3 parsley-row">
                                         <label for="join_date">Joining Date <span class="req">*</span></label>

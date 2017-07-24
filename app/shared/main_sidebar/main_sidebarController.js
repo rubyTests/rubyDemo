@@ -277,11 +277,11 @@ angular
                             submenu: [
                                 {
                                     title: 'Leave Type',
-                                    link:'restricted.hr.leave_category'
+                                    link:'restricted.hr.leavetype'
                                 },
                                 {
                                     title: 'Leave Entitlement',
-                                    link : 'restricted.hr.assignleave_categoryView'
+                                    link : 'restricted.hr.leave_entitlement_View'
                                 },
                                 {
                                     title: 'Apply Leave',

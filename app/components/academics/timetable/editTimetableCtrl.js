@@ -307,33 +307,28 @@ angular
                 $('#calendar_colors_wrapper').find('input').val("")
             }
             $scope.updateTimetable=function(){
-                $http({
-                    method:'GET',
-                    url: $localStorage.service+'TimetableAPI/timetableDetails',
-                    params:{
-                        'employee_id':$scope.employee_id,
-                        'setday':$scope.day,
-                        // 'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
-                        // 'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
-                        'starttime':moment($scope.startTimeData1, ["hh:mm A"]).format("HH:mm:ss"),
-                        'endtime':moment($scope.endTimeData1, ["hh:mm A"]).format("HH:mm:ss")
-                    },
-                    headers:{'access_token':$localStorage.access_token}
-                }).then(function(response){
-                    console.log(response,'response');
-                    if(response.data.status==true){
-                        UIkit.modal.confirm('Timetable Already created', function(e) {
-                        },function(){
-                        }, {
-                            labels: {
-                                'Ok': 'Ok'
-                            }
-                        });
-                    }else {
-                        // console.log($scope.startTime,'$scope.startTime-',$scope.endTime,'$scope.endTime');
-                        // var st_time=moment($scope.startTime, ["hh:mm A"]).format("HH:mm");
-                        // var end_times=moment($scope.endTime, ["hh:mm A"]).format("HH:mm");
-                        // console.log(st_time,'st_time-',end_times,'end_times');
+                // $http({
+                //     method:'GET',
+                //     url: $localStorage.service+'TimetableAPI/timetableDetails',
+                //     params:{
+                //         'employee_id':$scope.employee_id,
+                //         'setday':$scope.day,
+                //         'starttime':moment($scope.startTimeData1, ["hh:mm A"]).format("HH:mm:ss"),
+                //         'endtime':moment($scope.endTimeData1, ["hh:mm A"]).format("HH:mm:ss")
+                //     },
+                //     headers:{'access_token':$localStorage.access_token}
+                // }).then(function(response){
+                //     console.log(response,'response');
+                //     if(response.data.status==true){
+                //         UIkit.modal.confirm('Timetable Already created', function(e) {
+                //         },function(){
+                //         }, {
+                //             labels: {
+                //                 'Ok': 'Ok'
+                //             }
+                //         });
+                //     }else {
+                        
                         $http({
                             method:'POST',
                             url: $localStorage.service+'TimetableAPI/timetableDetails',
@@ -365,28 +360,19 @@ angular
                                 };
                                 uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', eventData, true); // stick? = true
                                 $scope.modelhide();
+                            }else {
+                                UIkit.modal.confirm('Timetable Already created', function(e) {
+                                    
+                                },function(){
+                                }, {
+                                    labels: {
+                                        'Ok': 'Ok'
+                                    }
+                                });
                             }
                         });
-                    }
-                });
-
-                
-
-
-                // var eventData,eventColor = $('#calendar_colors_wrapper').find('input').val();
-                // var day=$scope.day;
-                // var weeks1 = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-                //  var s = new Date();
-                // eventData = {
-                //     title : $scope.subject,
-                //     start : moment($scope.startTime, ["hh:mm A"]).format("hh:mm"),
-                //     end : moment($scope.endTime, ["hh:mm A"]).format("hh:mm"),
-                //     dow : [weeks1.indexOf(day)],
-                //     color: eventColor ? eventColor : ''
-
-                // };
-                // uiCalendarConfig.calendars.myCalendar.fullCalendar('renderEvent', eventData, true); // stick? = true
-                // $scope.modelhide();
+                    // }
+                // });
             }
             $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
             setStartDay = setting_data.result[0].START_TIME;

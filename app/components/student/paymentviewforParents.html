@@ -116,6 +116,7 @@
                         <thead>
                             <tr>
                                 <th>S.No</th>
+                                <th>Item Name</th>
                                 <th>Due Date</th>
                                 <th>Amount</th>
                                 <th>Action</th>
@@ -124,9 +125,13 @@
                         <tbody>
                             <tr ng-repeat='row in nextDueList' ng-if="(row.AMOUNT - row.PAID_AMOUNT) > 0">
                                 <td>{{$index+1}}</td>
+                                <td>{{row.ITEM_NAME}}</td>
                                 <td>{{row.DUE_DATE}}</td>
                                 <td>{{(row.AMOUNT * 1) - (row.PAID_AMOUNT *1) |  currency :''}}</td>
-                                <td><a class="md-btn md-btn-primary md-btn-mini" ng-click="payAmount(row.AMOUNT,row.PAID_AMOUNT)"> View</a></td>
+                                <td><a class="md-btn md-btn-primary md-btn-mini" ng-click="payAmount(row.AMOUNT,row.PAID_AMOUNT)"> Pay</a></td>
+                            </tr>
+                            <tr ng-show="nextDueList.length > 0">
+                                <td colspan="4" align="center">No data found</td>
                             </tr>
                         </tbody>
                     </table>
@@ -149,6 +154,9 @@
                                 <td>{{row.RECIEPT_NO}}</td>
                                 <td>{{row.TOTAL_AMOUNT}}</td>
                                 <td><a class="md-btn md-btn-primary md-btn-mini" ui-sref="restricted.student.paymenthistoryview({FEE_PAYMENT_ID:{{row.ID}}})"> View</a></td>
+                            </tr>
+                            <tr ng-show="Payment_History.length > 0">
+                                <td colspan="4" align="center">No data found</td>
                             </tr>
                         </tbody>
                     </table>

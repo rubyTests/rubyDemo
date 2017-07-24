@@ -99,7 +99,8 @@ angular
                         // 'po_reference' : $scope.po_reference,
                         'notes' : $scope.billing_notes,
                         'total_amount' : $scope.totalAmount,
-                        'itemData' : $scope.items
+                        'itemData' : $scope.items,
+                        'institute_id' : $scope.institute_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -235,5 +236,19 @@ angular
                 window.history.back();
             }
 
+            // added by vijayaraj 24-07-17
+            $http({
+                method:'GET',
+                url: $localStorage.service+'ProfileAPI/getAutoincrementNo',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(profile_data){
+               $scope.invoice_no=profile_data.data.message[0].INVOICE_PREFIX +''+ profile_data.data.message[0].INVOICE_NO;
+               $scope.institute_id=profile_data.data.message[0].ID;
+               if(profile_data.data.message[0].INVOICE==null || profile_data.data.message[0].INVOICE=='undefined' || profile_data.data.message[0].INVOICE==''){
+                    $scope.invoice_Status=false;
+               }else{
+                    $scope.invoice_Status=true;
+               }
+            });
         }
     ]);

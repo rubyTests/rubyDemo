@@ -148,7 +148,8 @@ angular
                         'supplier_id' : $scope.selectize_supplier,
                         'po_reference' : $scope.po_reference,
                         'total_amount' : $scope.totalAmount,
-                        'itemData' : $scope.items
+                        'itemData' : $scope.items,
+                        'institute_id':$scope.institute_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -414,5 +415,19 @@ angular
             //     return $scope.totalPrice;
             // }
 
+            // added by vijayaraj 24-07-17
+            $http({
+                method:'GET',
+                url: $localStorage.service+'ProfileAPI/getAutoincrementNo',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(profile_data){
+               $scope.po_number=profile_data.data.message[0].PURCHASE_ORDER_PREFIX +''+ profile_data.data.message[0].ORDER_NO;
+               $scope.institute_id=profile_data.data.message[0].ID;
+               if(profile_data.data.message[0].PURCHASE_ORDER==null || profile_data.data.message[0].PURCHASE_ORDER=='undefined' || profile_data.data.message[0].PURCHASE_ORDER==''){
+                    $scope.order_Status=false;
+               }else{
+                    $scope.order_Status=true;
+               }
+            });
         }
     );

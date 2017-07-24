@@ -6272,6 +6272,7 @@ rubycampusApp
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_parsleyjs',
                                 'app/components/setting/institution_setting.js'
                             ], {serie:true});
                         }]

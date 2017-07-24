@@ -29,7 +29,7 @@
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row" style="margin-top: 20px;">
                                     <label for="admission_no">Admission No<span class="req">*</span></label>
-                                    <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" name="admission_no" class="md-input" ng-change="checkAdmisionNo(wizard.admission_no)" md-input ng-model="wizard.admission_no" required/>
+                                    <input type="text" ng-pattern-restrict="^[A-Za-z0-9-]*$" name="admission_no" class="md-input" ng-change="checkAdmisionNo(wizard.admission_no)" md-input ng-model="wizard.admission_no" required ng-disabled='Student_Status'/>
                                     <input type="hidden" name="profileId" ng-model="wizard.profileId" ng-value="{{wizard.profileId}}"/>
                                     <input type="hidden" name="stuPro_id" ng-model="wizard.stuPro_id" ng-value="{{wizard.stuPro_id}}"/>
                                 </div>
@@ -146,6 +146,7 @@
                             </div>
                             <br>
                             <div class="uk-clearfix uk-margin-large-top">
+                                <input type="hidden" ng-model="institute_id">
                                 <button ng-if="!admission_details.$valid" class="md-btn md-btn-primary uk-float-right" type="submit">Save & Continue</button>
                                 <button ng-if="admission_details.$valid" value="test" class="md-btn md-btn-primary uk-float-right" ng-click="admissionDetails()">Save & Continue</button>
                             </div>
