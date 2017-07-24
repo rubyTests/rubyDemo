@@ -12,6 +12,22 @@ angular
 		'$localStorage',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage) {
 
+			// $scope.hr ='hr';
+			var hr='';
+			var hr1 = 11;
+			var hr2 = 22;
+			var hr3 = 33;
+			$scope.test='';
+			$scope.tes='1,2,3';
+			$scope.res=$scope.tes.split(',');
+			console.log($scope.res.length,"Get Split");
+			// setTimeout(function(){
+				for(var i=0;i<$scope.res.length;i++){
+					$scope.test=hr.concat($scope.res[i]);
+					console.log($scope.test,"-loop");
+				}
+			// },500);
+			
 			$scope.stuAttendance={};
             // $scope.table_data = ts_data;
             $scope.markedStudent=[];
