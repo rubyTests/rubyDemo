@@ -3896,7 +3896,7 @@ rubycampusApp
 				// Student Exam Report 
 				
 				.state("restricted.academics.examination.stuExamReport", {
-                    url: "/stuExamReport",
+                    url: "/stuExamReport/{id:[0-9]{1,4}}",
                     templateUrl: 'app/components/academics/examination/stuExamReport.html',
                     controller: 'stuExamReportCtrl',
                     resolve: {
@@ -3919,7 +3919,8 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Fee Reciept Details'
-                    }
+                    },
+					params:{id:null}
                 })
 
                 // Added By Senthil 20/04/2017 
@@ -6277,6 +6278,27 @@ rubycampusApp
                     },
                     data: {
                         pageTitle: 'Institiution Setting'
+                    }
+                })
+				
+				// Bulk SMS Sending
+				
+				.state("restricted.bulksms", {
+                    url: "/bulksms",
+                    templateUrl: 'app/components/bulksms/bulksms.html',
+                    controller: 'bulksmsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'app/components/bulksms/bulksmsCtrl.js'
+                            ],{serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Bulk SMS'
                     }
                 })
         }
