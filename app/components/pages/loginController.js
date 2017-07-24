@@ -103,6 +103,7 @@ angular
 						$localStorage.access_token=response.data.access_token;
 						$localStorage.role=response.data.message[0].role_name;
 						$localStorage.role_id=response.data.message[0].USER_ROLE_ID;
+						$localStorage.Additional_RoleId=response.data.message[0].Additional_RoleId;
 						$localStorage.userProfile_id=response.data.message[0].USER_PROFILE_ID;
 						// $localStorage.user_privileges=response.data.message[0].user_privileges;
 						//$location.path('/dashboard');
