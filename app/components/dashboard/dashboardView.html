@@ -364,8 +364,8 @@
                         </div>
                         <div class="md-card-content">
                             <ul class="md-list md-list-addon md-list-interactive" id="video_player_playlist">
-                                <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:4" ng-class="{'md-list-item-active': $index == 0 }">
-                                <li ng-click="videoChange($event,post)" ng-repeat="post in posts_data | limitTo:3" ng-class="{'md-list-item-active': $index == 0 }">
+                                <!-- <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:4" ng-class="{'md-list-item-active': $index == 0 }"> -->
+                                <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:3" ng-class="{'md-list-item-active': $index == 0 }">
                                     <div class="md-list-addon-element">
                                         <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='png' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='jpg'">collections</i>
                                         <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='mp4' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='ogg'">&#xE037;</i>
