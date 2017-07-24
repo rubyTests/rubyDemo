@@ -621,6 +621,12 @@ angular
                         }
                     ]
                 },
+				{
+					id:13,
+					title: 'Bulk SMS',
+					icon: '&#xE8E8;',
+					link: 'restricted.bulksms'
+				}
                 // {
                     // id: 13,
                     // title: 'Student Dashboard',
