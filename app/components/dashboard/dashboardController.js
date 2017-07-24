@@ -11,7 +11,8 @@ angular
         'variables',
         '$http',
         '$localStorage',
-        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables, $http, $localStorage) {
+		'$filter',
+        function ($rootScope,$scope,$interval,$window,$timeout,user_data,sale_chart_data,variables, $http, $localStorage,$filter) {
 			$scope.todo_data=[];
         // circular statistics
             $scope.stat_conversions_data = [5,3,9,6,5,9,7];
@@ -57,6 +58,7 @@ angular
                 size: 110,
                 easing: variables.bez_easing_swiftOut
             };
+			$scope.currentYear=$filter('date')(new Date(),'yyyy');
 
         // statistics
             $scope.dynamicStats = [
@@ -97,7 +99,7 @@ angular
                 },
                 {
                     id: '4',
-                    title: 'Admission',
+                    title: 'New Admission ('+ $scope.currentYear+')',
                     count: '1',
                     chart_data: [ 5,3,9,6,5,9,7,3,5,2,5,3,9,6,5,9,7,3,5,2 ],
                     chart_options: {
@@ -544,17 +546,7 @@ angular
             }
 			
 			
-			$scope.videoPath="http://192.168.1.139/rubyServices/upload/appRelease.png";
-            $scope.posts_data=[];
-            $http({
-                method:'GET',
-                url: $localStorage.service+'RepositoryAPI/Rep_Post',
-                headers:{'access_token':$localStorage.access_token}
-            }).then(function(return_data){
-                $scope.posts_data=return_data.data.message;
-				$scope.videoPath=$localStorage.uploadUrl+$scope.posts_data[0].UPLOAD_FILE;
-				//console.log($scope.videoPath,"Path");
-            });
+			
 
                     // video player
             // $scope.video_data = [
@@ -585,14 +577,9 @@ angular
                 active_class = 'md-list-item-active';
 			// $scope.videoPath=$localStorage.uploadUrl;
             $scope.videoChange = function($event,post_url) {
-                var $this = $($event.currentTarget);
-                if(!$this.hasClass(active_class)) {
-                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="' + $localStorage.uploadUrl+post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
-
-                    $video_playlist.children('li').removeClass(active_class);
-                    $this.addClass(active_class);
-
-                    $video_player.velocity({
+				if($event=='start'){
+					var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="' + $localStorage.uploadUrl+post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
+					$video_player.velocity({
                             translateZ: 0,
                             scale: 0,
                             opacity: 0
@@ -608,10 +595,50 @@ angular
                             }
                         }
                     );
+				}else{
+					var $this = $($event.currentTarget);
+					if(!$this.hasClass(active_class)) {
+						var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="' + $localStorage.uploadUrl+post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
 
-                }
+						$video_playlist.children('li').removeClass(active_class);
+						$this.addClass(active_class);
+
+						$video_player.velocity({
+								translateZ: 0,
+								scale: 0,
+								opacity: 0
+							},
+							{
+								duration: 280,
+								easing: variables.easing_swiftOut,
+								complete: function() {
+									$video_player.html(iframe_embed);
+									setTimeout(function() {
+										$video_player.velocity('reverse');
+									},280)
+								}
+							}
+						);
+
+					}
+				}
 
             };
+			
+			// Get Data
+			
+			$scope.videoPath="http://192.168.1.139/rubyServices/upload/appRelease.png";
+            $scope.posts_data=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'RepositoryAPI/Rep_Post',
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.posts_data=return_data.data.message;
+				$scope.videoPath=$localStorage.uploadUrl+$scope.posts_data[0].UPLOAD_FILE;
+				$scope.videoChange("start",$scope.posts_data[0].UPLOAD_FILE);
+				//console.log($scope.videoPath,"Path");
+            });
 
         // weather
             $scope.weatherToday = {
