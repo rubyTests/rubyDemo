@@ -26,7 +26,7 @@ angular
 			$http({
 			method:'get',
 			url: $localStorage.service+'ExamAPI/stuExamReport',
-			params:{proId:2},
+			params:{proId:$stateParams.id},
 			headers:{'access_token':$localStorage.access_token}
 			}).then(function(return_data){
 				$scope.notes_data = return_data.data.message;
