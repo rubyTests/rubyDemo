@@ -873,6 +873,17 @@ angular
 				//$scope.wizard.profileId=35;
 				//$scope.wizard.stuPro_id=33;
 				
+				
+				
+				$http({
+                method:'POST',
+                url: $localStorage.service+'ProfileAPI/parentsEmailCheck',
+                data: {father:$scope.father,mother:$scope.mother,guardian:$scope.guardian},
+				headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                   
+                });
+				
 				$http({
                 method:'POST',
                 url: $localStorage.service+'ProfileAPI/parentsProfile',
