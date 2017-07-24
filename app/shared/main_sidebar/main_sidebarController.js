@@ -1131,146 +1131,6 @@ angular
 			// HR Role
 			
 			var hrLov = [
-                {
-                    id: 2,
-                    title: 'Academics',
-                    icon: 'school',
-                    submenu: [
-                        {
-                            title: 'Subjects & Syllabus',
-                            submenu: [
-                                {
-                                    title: 'Subjects',
-                                    link: 'restricted.academics.subjects'
-                                },
-                                {
-                                    title: 'Syllabus',
-                                    link: 'restricted.academics.syllabus_view'
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Assign Teacher',
-                            link: 'restricted.student.assignTeacher'
-                        },
-                        {
-                            title: 'Attendance',
-                            submenu: [
-                                {
-                                    title: 'Student Attendance Report',
-									link: 'restricted.academics.studentreport'
-                                },
-                                {
-                                    title: 'Student Attendance Marking',
-                                    link: 'restricted.academics.markattendance'
-                                },
-								{
-                                    title: 'Student Leave Approve',
-                                    link: 'restricted.academics.studentleaveapprove'
-                                }
-                            ]
-                        },
-                        {
-                            title: 'Timetable',
-                            submenu: [
-                                {
-                                    title: 'View Timetable',
-                                    link:'restricted.academics.timetable.timetableView'
-                                },
-                                {
-                                    title: 'Manage Timetable',
-                                    submenu: [
-                                        {
-                                            title: 'Create Timetable',
-                                            link:'restricted.academics.timetable.managetimetable.createcalendar'
-                                        },
-                                        {
-                                            title: 'Setting',
-                                            link:'restricted.academics.timetable.managetimetable.setting'
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-							title: 'Examination',
-							submenu: [
-								{
-                                    title: 'Set Grading',
-                                    link: 'restricted.academics.examination.setgrading'
-                                },
-                                {
-                                    title: 'Set Term',
-                                    link: 'restricted.academics.examination.setTerm'
-                                },
-								{
-                                    title: 'Create Exam',
-                                    link: 'restricted.academics.examination.createExam'
-                                },
-                                {
-                                    title: 'Assessment',
-									submenu: [
-										{
-											title: 'Set Assessment',
-											link: 'restricted.academics.examination.setassessment'
-										},
-										{
-											title: 'Assessment MarkList',
-											link: 'restricted.academics.examination.assessmentMark'
-										},
-									]
-                                },
-								{
-                                    title: 'Exam',
-									submenu: [
-										{
-											title: 'Set Exam',
-											link: 'restricted.academics.examination.setexamination'
-										},
-										{
-											title: 'Exam MarkList',
-											link: 'restricted.academics.examination.markDetails'
-										},
-									]
-                                }
-							]
-						},
-                        {
-                            title: 'Assignments',
-                            link: 'restricted.academics.assignment'
-                        }
-                    ]
-                },
-                {
-                    id: 3,
-                    title: 'Student',
-                    icon: '&#xE7FD;',
-                    submenu:[
-                        {
-                            title:'Students',
-                            link: 'restricted.student.student_list'
-                        }
-                    ]
-                },
-                {
-                    id: 4,
-                    title: 'Profile',
-					icon: '&#xE7FD;',
-                    submenu: [
-                        {
-                            title: 'My Profile',
-							link:'restricted.employeemanagement.profile'
-                        },
-						{
-                            title: 'Apply Leave',
-							link:'restricted.hr.applyLeave'
-                        },
-                        {
-                            title: 'Payslip Report',
-							link : 'restricted.hr.payslipReport'
-                        }
-                    ]
-                },
 				{
                     id: 5,
                     title: 'HR',
@@ -1351,54 +1211,6 @@ angular
                                     link : 'restricted.hr.rejectpayslip'  
                                 }
                             ]
-                        }
-                    ]
-                },
-                {
-                    id: 6,
-                    title: 'Repository',
-                    icon: '&#xE2CC;',
-                    submenu:[
-                        {
-                            title:'Category',
-                            link: 'restricted.repository.categoryView'
-                        },
-                        {
-                            title:'Post',
-                            link: 'restricted.repository.postView'
-                        }
-                    ]
-                },
-                {
-                    id: 7,
-                    title: 'Email Template',
-                    icon: '&#xE158;',
-                    link : 'restricted.emailTemplate.template'
-                },
-                {
-                    id: 8,
-                    title: 'Library',
-                    icon: '&#xE02F;',
-                    submenu: [
-                        {
-                            title: 'Category',
-                            link: 'restricted.library.category'
-                        },
-                        {
-                            title: 'Books',
-                            link: 'restricted.library.bookviewdetails'
-                        },
-                        {
-                            title: 'Issue Books',
-                            link: 'restricted.library.bookissue_view'
-                        },
-                        {
-                            title: 'Return Books',
-                            link: 'restricted.library.bookreturn_view'
-                        },
-                        {
-                            title: 'Report',
-                            link: 'restricted.library.reportView'
                         }
                     ]
                 }
@@ -1621,27 +1433,70 @@ angular
                 }
             ];
 			
+			var sidemenu=[];
+			var dummy=[];
+			sidemenu.push(dummy,adminLov,employeeLov,studentRole,parentRole,hrLov,financeLov,transportLov,hostelLov,inventoryLov);
+			//console.log(sidemenu.length,'sidemenu');
 			
-            if($localStorage.role_id==1){
-                $scope.sections = adminLov;
-            }else if($localStorage.role_id==2){
-                $scope.sections = employeeLov;
-                // $scope.sections = employeeLov.concat(financeLov);
-            }else if($localStorage.role_id==3){
-                $scope.sections = studentRole;
-            }else if($localStorage.role_id==4){
-                $scope.sections = parentRole;
-            }else if($localStorage.role_id==5){
-                $scope.sections = hrLov;
-            }else if($localStorage.role_id==6){
-                $scope.sections = financeLov;
-            }else if($localStorage.role_id==7){
-                $scope.sections = transportLov;
-            }else if($localStorage.role_id==8){
-                $scope.sections = hostelLov;
-            }else if($localStorage.role_id==9){
-                $scope.sections = inventoryLov;
-            }
+			$http.get($localStorage.service+'DashboardAPI/sidemenu',{params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},headers:{'access_token':$localStorage.access_token}})
+			.success(function(response){
+				// console.log(response.message[0]['Additional_RoleId'],"response");
+				
+				if($localStorage.role_id==1){
+					$scope.sections = sidemenu[1];
+				}else if($localStorage.role_id==2){
+					$scope.sections = sidemenu[2];
+					if(response.message[0]['Additional_RoleId']!=null){
+						$scope.AdRoleId=response.message[0]['Additional_RoleId'].split(',');
+						for(var i=0;i<$scope.AdRoleId.length;i++){
+							$scope.sections = $scope.sections.concat(sidemenu[$scope.AdRoleId[i]]);
+						}
+					}
+				}else{
+					$scope.sections = sidemenu[$localStorage.role_id];
+				}
+				
+			});
+			
+            // if($localStorage.role_id==1){
+                // // $scope.sections = adminLov;
+                // $scope.sections = sidemenu[1];
+            // }else if($localStorage.role_id==2){
+                // // $scope.sections = employeeLov;
+                // $scope.sections = sidemenu[2];
+				// if($localStorage.Additional_RoleId!=null){
+					// $scope.AdRoleId=$localStorage.Additional_RoleId.split(',');
+					// for(var i=0;i<$scope.AdRoleId.length;i++){
+						// $scope.sections = $scope.sections.concat(sidemenu[$scope.AdRoleId[i]]);
+						// // if($scope.AdRoleId[i]==5){
+							// // $scope.sections = employeeLov.concat(hrLov);
+						// // }else if($scope.AdRoleId[i]==6){
+							// // $scope.sections = employeeLov.concat(financeLov);
+						// // }else if($scope.AdRoleId[i]==7){
+							// // $scope.sections = employeeLov.concat(transportLov);
+						// // }else if($scope.AdRoleId[i]==8){
+							// // $scope.sections = employeeLov.concat(hostelLov);
+						// // }else if($scope.AdRoleId[i]==9){
+							// // $scope.sections = employeeLov.concat(inventoryLov);
+						// // }
+					// }
+				// }
+                // // $scope.sections = employeeLov.concat(financeLov);
+            // }else if($localStorage.role_id==3){
+                // $scope.sections = studentRole;
+            // }else if($localStorage.role_id==4){
+                // $scope.sections = parentRole;
+            // }else if($localStorage.role_id==5){
+                // $scope.sections = hrLov;
+            // }else if($localStorage.role_id==6){
+                // $scope.sections = financeLov;
+            // }else if($localStorage.role_id==7){
+                // $scope.sections = transportLov;
+            // }else if($localStorage.role_id==8){
+                // $scope.sections = hostelLov;
+            // }else if($localStorage.role_id==9){
+                // $scope.sections = inventoryLov;
+            // }
            
         }
     ])
