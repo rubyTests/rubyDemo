@@ -102,6 +102,21 @@ angular
                     ]
                 },
                 {
+                    id: 14,
+                    title: 'User Privileges',
+                    icon: '&#xE8DF;',
+                    submenu:[
+                        {
+                            title:'Assign Roles',
+                            link: 'restricted.user_privileges.assignRole'
+                        },
+                        {
+                            title:'Set Privileges',
+                            link:'restricted.user_privileges.userView'
+                        }
+                        ]
+                },
+                {
                     id: 2,
                     title: 'Academics',
                     icon: 'school',
