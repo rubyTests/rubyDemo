@@ -6302,5 +6302,57 @@ rubycampusApp
                         pageTitle: 'Bulk SMS'
                     }
                 })
+                .state("restricted.user_privileges", {
+                    template: '<div ui-view autoscroll="false"/>',
+                    url :"/user-privileges",
+                    abstract: true
+                })
+                .state("restricted.user_privileges.userView", {
+                    url: "/user",
+                    templateUrl: 'app/components/user_privileges/userPrivileges.html',
+                    controller: 'userPrivilegesCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'lazy_iCheck',
+                                'lazy_tree',
+                                'app/components/user_privileges/userPrivilegesCtrl.js'
+                            ],{serie:true});
+                        }],
+                        ts_data: function($http){
+                            return $http({ method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json' })
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        }
+                    },
+                    data: {
+                        pageTitle: 'Tablesorter'
+                    }
+                })
+                .state("restricted.user_privileges.assignRole", {
+                    url: "/assignRole",
+                    templateUrl: 'app/components/user_privileges/assignRole/assignUserPrivilegesCtrl.html',
+                    controller: 'assignRolePrivilegesCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_ionRangeSlider',
+                                'lazy_iCheck',
+                                'lazy_parsleyjs',
+                                'ng-pattern',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/user_privileges/assignRole/assignUserPrivilegesCtrl.js'
+                            ],{serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Tablesorter'
+                    }
+                })
         }
     ]);
