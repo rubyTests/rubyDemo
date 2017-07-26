@@ -164,17 +164,17 @@ angular
 				$scope.get_id.push(return_data.data.message);
 			});
 			
-			$scope.get_id1 = [];
-			$scope.fetchTerm=function(id){	
-				$http({
-				method:'get',
-				url: $localStorage.service+'ExamAPI/setCreateExam',
-				headers:{'access_token':$localStorage.access_token}
-				}).then(function(return_data){
-					// $scope.get_id1.push(return_data.data.message);
-					$scope.selectize_exam_options = return_data.data.message;
-				});
-			}
+			// $scope.get_id1 = [];
+			// $scope.fetchTerm=function(id){	
+			// 	$http({
+			// 	method:'get',
+			// 	url: $localStorage.service+'ExamAPI/setCreateExam',
+			// 	headers:{'access_token':$localStorage.access_token}
+			// 	}).then(function(return_data){
+			// 		// $scope.get_id1.push(return_data.data.message);
+			// 		$scope.selectize_exam_options = return_data.data.message;
+			// 	});
+			// }
 			
 			$scope.selectize_term_options = $scope.get_id;
 			$scope.selectize_term_config = {
@@ -183,17 +183,32 @@ angular
 				placeholder: 'Select Term',
 				valueField: 'ID',
 				labelField: 'NAME',
-				onInitialize: function(val){
-					$scope.fetchTerm(val);
+				onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+					   $scope.fetchExamList(value);    
+                    });
 				}
 			};
+
+            $scope.fetchExamList=function(id){  
+                $http({
+                    method:'get',
+                    url: $localStorage.service+'ExamAPI/examListBasedonTerms',
+                    params:{termid:id},
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    $scope.selectize_exam_options = [].concat(return_data.data.message);
+                    // console.log('dddd');
+                });
+            }
+
 
 			// $scope.selectize_exam_options = $scope.get_id1;
 			$scope.selectize_exam_options = [];
 			$scope.selectize_exam_config = {
 				create: false,
 				maxItems: 1,
-				placeholder: 'Select Exam',
+				placeholder: 'Exam',
 				valueField: 'ID',
 				labelField: 'NAME',
 				onInitialize: function(val){
@@ -288,25 +303,7 @@ angular
 				$scope.btnvalue="Add";
             }
             $scope.addEvent=function(){
-                // var COURSE_NAME=$filter('filter')($scope.course, {id: $scope.setExam.course});
-                // var BATCH_NAME=$filter('filter')($scope.batchArray, {id : $scope.setExam.batch});
-                // var eventData,eventColor = $('#calendar_colors_wrapper').find('input').val();
-                // var temp_start_date=$scope.setExam.dp_start.split(".");
-                // var start_dateWithTime=temp_start_date[2]+"-"+eval(temp_start_date[1])+"-"+ temp_start_date[0]+" "+$scope.setExam.startTime;
-                // var start_dateWithEnd=temp_start_date[2]+"-"+eval(temp_start_date[1])+"-"+ temp_start_date[0]+" "+$scope.setExam.endTime;
                 
-                // eventData = {
-                    // title : $scope.forms_advanced.input_default,
-                    // start : moment(start_dateWithTime, ['YYYY-MM-DD HH:mm A']).locale('en').format('YYYY-MM-DD HH:mm A'),
-                    // end : moment(start_dateWithEnd, ['YYYY-MM-DD HH:mm A']).locale('en').format('YYYY-MM-DD HH:mm A'),
-                    // _id : $scope.calendar_events.length+1,
-                    // course_id : $scope.setExam.course,
-                    // course_name : COURSE_NAME[0].NAME,
-                    // batch_id : $scope.setExam.batch,
-                    // batch_name : BATCH_NAME[0].NAME
-                // };
-                // $scope.calendar_events.push(eventData);
-                // uiCalendarConfig.calendars.myCalendar.fullCalendar('rerenderEvents'); // stick? = true
                 $scope.modelhide();
                 //console.log($scope.setExam,"data");
 				$http({
@@ -656,21 +653,7 @@ angular
             });
 			});
 			
-            // $scope.calendar_events=[];
-            // var count=1;
-            // angular.forEach($scope.events_list, function(value, keys){
-                // angular.forEach(value.events, function(val, key){
-                    // console.log(value,"foreachvalue")
-					// val._id=count;
-                    // val.course_id=value.course2;
-                    // val.course_name=value.course2_name;
-                    // val.batch_id=value.batch2;
-                    // val.batch_name=value.batch2_name;
-                    // $scope.calendar_events.push(val);
-                    // count++;
-                    // // console.log(val);
-                // })
-            // });
+            
             $scope.eventSources = [$scope.calendar_events];
 
         }
