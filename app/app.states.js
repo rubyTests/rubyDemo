@@ -319,7 +319,7 @@ rubycampusApp
                     url: "/ViewGroup Employee/{id}",
                     templateUrl: 'app/components/Hr/Payroll_Payslip/PayGroupEmployee.html',
                     // controller : 'PayGroupEmployeeCtrl',
-                    parmas :{id:null},
+                    params :{id:null},
                     resolve: {
                         // params:{'id': {value:null}},
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
@@ -435,8 +435,9 @@ rubycampusApp
                 })
                 .state("restricted.plugins.events", {
                     url: "/events",
-                    templateUrl: 'app/components/calender/calendarNewEventsView.html',
-                    controller: 'calendareventsCtrl',
+                    templateUrl: 'app/components/calender/newsandEvents.html',
+                    // controller: 'newsandEventsCtrl',
+                    controller: 'newsandEventsCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -446,12 +447,12 @@ rubycampusApp
                                 'lazy_masked_inputs',
                                 'lazy_datatables',
                                 'bower_components/angular-resource/angular-resource.min.js',
-                                'app/components/calender/calendarNewEventsView.js'
+                                'app/components/calender/newsandEventsCtrl.js'
                             ]);
                         }]
                     },
                     data: {
-                        pageTitle: 'Calendar'
+                        pageTitle: 'News and Events'
                     }
                 })
 
@@ -6302,6 +6303,77 @@ rubycampusApp
                         pageTitle: 'Bulk SMS'
                     }
                 })
+
+                // created on 26-07-17
+                .state("restricted.plugins.createEvents", {
+                    url: "/createEvents",
+                    templateUrl: 'app/components/calender/createEvents.html',
+                    controller: 'createEventsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_character_counter',
+                                'lazy_parsleyjs',
+                                'lazy_masked_inputs',
+                                'lazy_datatables',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/calender/createEventsCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'News and Events'
+                    }
+                })
+
+                .state("restricted.plugins.editEvents", {
+                    url: "/editEvents/{event_id}",
+                    templateUrl: 'app/components/calender/editEvents.html',
+                    controller: 'editEventsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_character_counter',
+                                'lazy_parsleyjs',
+                                'lazy_masked_inputs',
+                                'lazy_datatables',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/calender/editEventsCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'News and Events'
+                    },
+                    params:{event_id:null}  
+                })
+
+                .state("restricted.plugins.viewEvents", {
+                    url: "/viewEvents/{event_id}",
+                    templateUrl: 'app/components/calender/viewEvents.html',
+                    controller: 'viewEventsCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_character_counter',
+                                'lazy_parsleyjs',
+                                'lazy_masked_inputs',
+                                'lazy_datatables',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/calender/viewEventsCtrl.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Events View'
+                    },
+                    params:{event_id:null}  
+                })
+
+
                 .state("restricted.user_privileges", {
                     template: '<div ui-view autoscroll="false"/>',
                     url :"/user-privileges",
