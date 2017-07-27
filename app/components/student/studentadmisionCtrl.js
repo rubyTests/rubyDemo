@@ -927,7 +927,7 @@ angular
                // console.log(profile_data.data.message[0],'profile_data');
                $scope.wizard.admission_no=profile_data.data.message[0].STUDENT_PREFIX +''+ profile_data.data.message[0].STU_ADM_NO;
                $scope.institute_id=profile_data.data.message[0].ID;
-               if(profile_data.data.message[0].STUDENT_ADM_NO==null || profile_data.data.message[0].STUDENT_ADM_NO=='undefined' || profile_data.data.message[0].STUDENT_ADM_NO==''){
+               if(profile_data.data.message[0].STUDENT_ADM_NO==null || profile_data.data.message[0].STUDENT_ADM_NO=='undefined' || profile_data.data.message[0].STUDENT_ADM_NO=='' || profile_data.data.message[0].STUDENT_ADM_NO=='N'){
                		$scope.Student_Status=false;
                }else{
                		$scope.Student_Status=true;
