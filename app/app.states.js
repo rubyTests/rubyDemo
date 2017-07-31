@@ -2741,7 +2741,7 @@ rubycampusApp
                 // Added by Senthil 05-04-17
 
                 .state("restricted.mails", {
-                    url: "/mails",
+                    url: "/mails/{mailId:[0-9]{1,4}}",
                     templateUrl: 'app/components/message/mails.html',
                     controller: 'mailsCtrl',
                     resolve: {
