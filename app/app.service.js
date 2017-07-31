@@ -59,4 +59,31 @@ rubycampusApp
 
         }
     ])
-;
+    .service('getMessageList', [
+        '$rootScope',
+        '$timeout',
+        'utils',
+        '$localStorage',
+        '$http',
+        function($rootScope,$timeout,utils,$localStorage, $http) {
+            this.getMessage = function(){
+                return $http({
+                    method:'GET',
+                    url: $localStorage.service+'messageAPI/messageHeaderList',
+                    params : { id : $localStorage.userProfile_id},
+                    headers:{'access_token':$localStorage.access_token}
+                });
+            }
+           //$scope.messageList=[];
+            // $http({
+            //     method:'GET',
+            //     url: $localStorage.service+'messageAPI/messageHeaderList',
+            //     params : { id : $localStorage.userProfile_id},
+            //     headers:{'access_token':$localStorage.access_token}
+            // }).then(function(return_data){
+            //     console.log(return_data,'returnss_data');
+            //     $scope.messageList = return_data.data.message;
+            //     $scope.msgList = $scope.messageList.MESSAGE;
+            // });
+        }
+    ])
