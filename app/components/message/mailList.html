@@ -1,3 +1,21 @@
+<style type="text/css">
+    .parsley-row{
+        margin-top: 24px;
+    }
+    .adjustAutoComplete{
+        /*width:100%;*/
+        height: 37px !important;
+    }
+    .uk-autocomplete.uk-open .uk-dropdown {
+        width: 100%;
+    }
+    .uk-nav > li > a {
+        padding-bottom: 5px;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 5px;
+    }
+</style>
 <div class="md-card-list-wrapper" id="mailbox">
     <div class="uk-width-large-10-10 uk-container-center">
         <div class="md-card-list">
@@ -39,17 +57,37 @@
 <div class="uk-modal" id="mailbox_new_message">
     <div class="uk-modal-dialog">
         <button class="uk-modal-close uk-close" type="button"></button>
-        <form>
+        <form ng-submit="composeMsg(message_compose)">
             <div class="uk-modal-header">
                 <h3 class="uk-modal-title">Compose Message</h3>
             </div>
             <div class="uk-margin-medium-bottom">
-                <label for="mail_new_to">To</label>
-                <input type="text" class="md-input" id="mail_new_to" md-input ng-model="message_compose.recipient" />
+                <!-- <label for="mail_new_to">To</label>
+                <input type="text" class="md-input" id="mail_to" md-input ng-model="message_compose.recipient" /> -->
+
+                <div class="uk-autocomplete uk-form uk-position-relative autocomplete_template" id="autocomplete">
+                    <input type="text" class="md-input adjustAutoComplete" ng-focus-out ng-model="message_compose.recipient" placeholder="Search Students or Employees with their Names Or Number" required md-input>
+                    <script type="text/autocomplete">
+                        <ul class="uk-nav uk-nav-autocomplete uk-autocomplete-results"  id="autocomplete_template_results">
+                            {{~items}}
+                            <li data-value="{{ $item.FIRSTNAME +' - '+ $item.LASTNAME}}" data-id="{{ $item.ID }}">
+                                <a class="item">
+                                    {{ $item.value }}<br>
+                                    <span class="uk-text-muted uk-text-small">{{{ $item.EMAIL }}}</span>
+                                </a>
+                            </li>
+                            {{/items}}
+                        </ul>
+                    </script>
+                </div>
+            </div>
+            <div class="uk-margin-medium-bottom">
+                <label for="mail_new_to">Subject</label>
+                <input type="text" class="md-input" id="mail_subject" md-input ng-model="message_compose.subject" />
             </div>
             <div class="uk-margin-large-bottom">
                 <label for="mail_new_message">Message</label>
-                <textarea name="mail_new_message" id="mail_new_message" cols="30" rows="6" class="md-input" md-input ng-model="message_compose.message"></textarea>
+                <textarea name="mail_new_message" id="mail_message" cols="30" rows="4" class="md-input" md-input ng-model="message_compose.message"></textarea>
             </div>
             <div id="mail_upload-drop" class="uk-file-upload">
                 <p class="uk-text">Drop file to upload</p>
@@ -60,8 +98,8 @@
                 <div class="uk-progress-bar" style="width:0">0%</div>
             </div>
             <div class="uk-modal-footer">
-                <a href="#" class="md-icon-btn"><i class="md-icon material-icons">&#xE226;</i></a>
-                <button type="button" class="uk-float-right md-btn md-btn-flat md-btn-flat-primary">Send</button>
+                <!-- <a href="#" class="md-icon-btn"><i class="md-icon material-icons">&#xE226;</i></a> -->
+                <button type="submit" class="uk-float-right md-btn md-btn-flat md-btn-flat-primary">Send</button>
             </div>
         </form>
     </div>
