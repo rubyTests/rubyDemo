@@ -5,14 +5,11 @@ angular
         'uiCalendarConfig',
         '$filter',
         '$resource',
-        'user_data',
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
         '$compile',
-        '$timeout',
-        '$http',
-        '$localStorage',
-        function ($scope,uiCalendarConfig,$filter,$resource,user_data, DTOptionsBuilder, DTColumnDefBuilder,$compile,$timeout,$http,$localStorage) {
+        '$timeout','$localStorage','$http','$state',
+        function ($scope,uiCalendarConfig,$filter,$resource, DTOptionsBuilder, DTColumnDefBuilder,$compile,$timeout,$localStorage,$http,$state) {
             $scope.dtOptions = DTOptionsBuilder
                 .newOptions()
                 .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
@@ -64,7 +61,11 @@ angular
                             bRegex: true,
                             bSmart: true
                         },
-                        
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
                        null
                     ]
                 })
@@ -75,120 +76,90 @@ angular
                 });
                 $scope.dtColumnDefs = [
                     DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
-                    DTColumnDefBuilder.newColumnDef(1).withTitle('Exam'),
-                    DTColumnDefBuilder.newColumnDef(2).withTitle('Assessment'),
-                    DTColumnDefBuilder.newColumnDef(3).withTitle('Course'),
-                    DTColumnDefBuilder.newColumnDef(4).withTitle('Batch'),
-                    DTColumnDefBuilder.newColumnDef(5).withTitle('Subject'),
-                    DTColumnDefBuilder.newColumnDef(6).withTitle('Date'),
+                    DTColumnDefBuilder.newColumnDef(3).withTitle('Name'),
+                    DTColumnDefBuilder.newColumnDef(3).withTitle('Date'),
+                    DTColumnDefBuilder.newColumnDef(3).withTitle('From'),
+                    DTColumnDefBuilder.newColumnDef(3).withTitle('To'),
+                    DTColumnDefBuilder.newColumnDef(3).withTitle('Action'),
 
                 ];
-            $scope.user_data=user_data[0];
-            // masked inputs
-            var $maskedInput = $('.masked_input');
-            if($maskedInput.length) {
-                $maskedInput.inputmask();
-            }
 
-            $scope.department=[];
-            $scope.course = [];
-            $scope.batch = [];
+                var $formValidate = $('#form_validation');
+                $formValidate
+                .parsley()
+                .on('form:validated',function() {
+                    // $scope.$apply();
+                })
+                .on('field:validated',function(parsleyField) {
+                    if($(parsleyField.$element).hasClass('md-input')) {
+                        // $scope.$apply();
+                    }
+                });
+
+                $scope.clearValidation=function(){
+                    $('#form_validation').parsley().reset();
+                }
+
+                $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(data){
+                $scope.course = data.message;
+            });
+            $scope.fetchBatch=function(id){
+                $http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+                .success(function(batch_data){
+                    $scope.batchArray=batch_data.data;
+                    $scope.batch=batch_data.data;
+                });
+            }
             
-            $scope.selectize_config = {
-                create: false,
-                maxItems: 1
-            };
+            $scope.getSub_id = [];
+            $scope.fetchSubject=function(id){
+                $http({
+                method:'get',
+                url: $localStorage.service+'AcademicsAPI/fetchSubjectDetailList',
+                params:{id:id},
+                headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    $scope.getSub_id.push(return_data.data.data);
+                });
+            }
             
-			$http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
-			.success(function(data){
-				// $scope.deptData.push(dept_data.message);
-				$scope.course = data.message;
-			});
-			$scope.fetchBatch=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(batch_data){
-					$scope.batchArray=batch_data.data;
-					$scope.batch=batch_data.data;
-				});
-			}
-			
-			$scope.getSub_id = [];
-			$scope.fetchSubject=function(id){
-				$http({
-				method:'get',
-				url: $localStorage.service+'AcademicsAPI/fetchSubjectDetailList',
-				params:{id:id},
-				headers:{'access_token':$localStorage.access_token}
-				}).then(function(return_data){
-					$scope.getSub_id.push(return_data.data.data);
-				});
-			}
-			
-            $scope.course_config = {
+            $scope.batch_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course...',
+                placeholder: 'Batch',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                    selectize.on('change', function(value) {
-                        //console.log(value,"value");
-						$scope.fetchBatch(value);
-						$scope.fetchSubject(value)
+
                     });
                     
                 }
             };
-            $scope.batch_config = {
+            
+            $scope.get_id = [];
+            $http({
+            method:'get',
+            url: $localStorage.service+'ExamAPI/setTerm',
+            headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                $scope.get_id.push(return_data.data.message);
+            });
+
+            $scope.selectize_term_options = $scope.get_id;
+            $scope.selectize_term_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Batch...',
+                placeholder: 'Select Term',
                 valueField: 'ID',
                 labelField: 'NAME',
-				onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
-                        //console.log(value,"value");
-						//$scope.fetchSubject(value);
+                onInitialize: function(selectize){
+                    selectize.on('change', function(value) {
+                       $scope.fetchExamList(value);    
                     });
-                    
                 }
             };
-			
-			$scope.get_id = [];
-			$http({
-			method:'get',
-			url: $localStorage.service+'ExamAPI/setTerm',
-			headers:{'access_token':$localStorage.access_token}
-			}).then(function(return_data){
-				//console.log(return_data.data.message,'return_data');
-				$scope.get_id.push(return_data.data.message);
-			});
-			
-			// $scope.get_id1 = [];
-			// $scope.fetchTerm=function(id){	
-			// 	$http({
-			// 	method:'get',
-			// 	url: $localStorage.service+'ExamAPI/setCreateExam',
-			// 	headers:{'access_token':$localStorage.access_token}
-			// 	}).then(function(return_data){
-			// 		// $scope.get_id1.push(return_data.data.message);
-			// 		$scope.selectize_exam_options = return_data.data.message;
-			// 	});
-			// }
-			
-			$scope.selectize_term_options = $scope.get_id;
-			$scope.selectize_term_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Select Term',
-				valueField: 'ID',
-				labelField: 'NAME',
-				onInitialize: function(selectize){
-                    selectize.on('change', function(value) {
-					   $scope.fetchExamList(value);    
-                    });
-				}
-			};
 
             $scope.fetchExamList=function(id){  
                 $http({
@@ -198,55 +169,174 @@ angular
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
                     $scope.selectize_exam_options = [].concat(return_data.data.message);
-                    // console.log('dddd');
                 });
             }
 
 
-			// $scope.selectize_exam_options = $scope.get_id1;
-			$scope.selectize_exam_options = [];
-			$scope.selectize_exam_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Exam',
-				valueField: 'ID',
-				labelField: 'NAME',
-				onInitialize: function(val){
-					//console.log(val);
-				}
-			};
-			
-			$scope.selectize_subject_options = $scope.getSub_id;
-			$scope.selectize_subject_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Select Subject',
-				valueField: 'COU_ID',
-				labelField: 'COURSE_NAME',
-				onInitialize: function(val){
-					
-				}
-			};
-
-            var modal = UIkit.modal("#modal_header_footer");
-            $scope.selectize_config = {
+            $scope.selectize_exam_options = [];
+            $scope.selectize_exam_config = {
                 create: false,
-                maxItems: 1
+                maxItems: 1,
+                placeholder: 'Exam',
+                valueField: 'ID',
+                labelField: 'NAME',
+                onInitialize: function(val){
+                    //console.log(val);
+                }
             };
-            $scope.forms_advanced={
-                startTime:"00:00",
-                endTime:"00:00"
+            
+            $scope.selectize_subject_options = $scope.getSub_id;
+            $scope.selectize_subject_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Subject',
+                valueField: 'COU_ID',
+                labelField: 'COURSE_NAME',
+                onInitialize: function(val){
+                    
+                }
             };
-            $scope.modelhide=function(){
-                modal.hide();
-                $scope.forms_advanced={
-                    startTime:"00:00",
-                    endTime:"00:00"
-                };
-                $scope.input_default="";
-                $scope.forms_advanced.day="";
-                $('#calendar_colors_wrapper').find('input').val("")
+
+
+
+                $scope.eventSources=[];
+                $scope.getExamList=function(){
+                    $http({
+                        method:'GET',
+                        url: $localStorage.service+'ExamAPI/setExamination',
+                        headers:{'access_token':$localStorage.access_token}
+                    }).then(function(response){
+                        console.log(response.data,'response.data.message');
+                        if(response.data.status==true){
+                            var test=response.data.message;
+                            $scope.eventSources = [];
+                            // $scope.calendar_events=[];
+                            angular.forEach(test,function(value,key){
+                                var eventData,eventColor = $('#calendar_colors_wrapper').find('input').val();
+                                var start_dateWithTime=value.DATE+" "+moment(value.START_TIME, ["HH:mm A"]).format("HH:mm A");
+                                var start_dateWithEnd=value.DATE+" "+moment(value.END_TIME, ["HH:mm A"]).format("HH:mm A");
+                                eventData = {
+                                    title : value.TERM_NAME,
+                                    start : start_dateWithTime,
+                                    end : start_dateWithEnd,
+                                    _id : $scope.calendar_events.length+1,
+                                    color:eventColor,
+                                    exam_name:value.EXAM_NAME,
+                                    course_name:value.COURSE_NAME,
+                                    batch_name:value.BATCH_NAME,
+                                    subject_name:value.SUBJECT_NAME,
+                                    table_id:value.ID,
+                                    course_id:value.COURSE_ID,
+                                    batch_id:value.COURSEBATCH_ID,
+                                    term_id:value.SETTERM_ID,
+                                    exam_id:value.CREATEEXAM_ID,
+                                    subject_id:value.SUBJECT_ID,
+                                    pass_mark:value.PASS_MARK,
+                                    max_mark:value.MAX_MARK,
+                                    dum_startTime:value.START_TIME,
+                                    dum_endTime:value.END_TIME
+                                };
+                                $scope.calendar_events.push(eventData);
+                            });
+                            $scope.eventSources =[].concat([$scope.calendar_events]);
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('rerenderEvents');
+                        }else {
+                            $scope.calendar_events=[];
+                            $scope.eventSources =[].concat([$scope.calendar_events]);
+                            uiCalendarConfig.calendars.myCalendar.fullCalendar('rerenderEvents');
+                        }
+                    });
+                }
+
+            $scope.colorcode=["#d81b60","#8e24aa","#5e35b1","#3949ab","#1e88e5","#039be5","#0097a7","#00897b","#43a047","#689f38","#ef6c00","#f4511e","#6d4c41","#757575","#546e7a","red"];
+            $scope.toggle=true;
+            $scope.openTable=function(){
+                $scope.toggle=!$scope.toggle;
             }
+            // masked inputs
+            var $maskedInput = $('.masked_input');
+            if($maskedInput.length) {
+                $maskedInput.inputmask();
+            }
+            $scope.startTime="00:00";
+            $scope.endTime="00:00";
+
+            $scope.eventType=['News', 'Event'];
+            var modal = UIkit.modal("#modal_header_footer");
+
+            $scope.department=[];
+            $scope.course = [];
+            $scope.batch = [];
+            
+            $scope.user=['Student','Employee'];
+            $scope.user_config = {
+                create: false,
+                maxItems: 1,
+                placeholder:'User Type',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        console.log(value,'valuevalue');
+                        $scope.course_id='';
+                        $scope.department='';
+                    });
+                    
+                }
+            };
+            
+            $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(data){
+                $scope.course = data.message;
+                var allCourseID=[];
+                angular.forEach(data.message,function(value,key){
+                    allCourseID.push(value.ID);
+                });
+                console.log(allCourseID.length,'allCourseID');
+            });
+
+
+           
+            $scope.selectize_dept_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Department',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        console.log(value,'dept-value');
+                    });
+                    
+                }
+            };
+            $scope.selectize_dept_options=[];
+            $http.get($localStorage.service+'AcademicsAPI/departmentDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(dept_data){
+                console.log(dept_data,'dept_data');
+                $scope.selectize_dept_options=[].concat(dept_data.message);
+                var allDeptID=[];
+                angular.forEach(dept_data.message,function(value,key){
+                    allDeptID.push(value.ID);
+                });
+                $scope.selectize_dept_options.push([{ID:allDeptID,NAME:"All Department"}]);
+            });
+
+            $scope.course_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Course',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        $scope.fetchBatch(value);
+                        $scope.fetchSubject(value);
+                    });
+                    
+                }
+            };
+
             $scope.randID_generator = function() {
                 var randLetter = String.fromCharCode(65 + Math.floor(Math.random() * 26));
                 return randLetter + Date.now();
@@ -290,104 +380,177 @@ angular
 
             $dp_start.on('change',function() {
                 end_date.options.minDate = $dp_start.val();
-                //console.log($dp_start.val(),"$dp_start.val()")
+                console.log($dp_start.val(),"$dp_start.val()")
             });
 
             $dp_end.on('change',function() {
                 start_date.options.maxDate = $dp_end.val();
             });
-            $scope.toggle=true;
-			$scope.btnvalue="Add";
-            $scope.openTable=function(){
-                $scope.toggle=!$scope.toggle;
-				$scope.btnvalue="Add";
-            }
-            $scope.addEvent=function(){
-                
-                $scope.modelhide();
-                //console.log($scope.setExam,"data");
-				$http({
-				method:'POST',
-				url: $localStorage.service+'ExamAPI/setExamination',
-				data: {id:$scope.setExam.id,batchId:$scope.setExam.batch,examId:$scope.setExam.exam,subjectId:$scope.setExam.subject,examDate:$scope.setExam.dp_start,startTime:$scope.setExam.startTime,endTime:$scope.setExam.endTime,passMark:$scope.setExam.passMark,maxMark:$scope.setExam.maxMark},
-				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
-				}).then(function(response){
-					if(response.data.status==true){
-						UIkit.notify({
-							message : response.data.message,
-							status  : 'success',
-							timeout : 2000,
-							pos     : 'top-center'
-						});
-						//$scope.refreshTable();
-						//$scope.clearData();
-						$scope.setExam={id:'',course:'',batch:'',term:'',exam:'',subject:'',passMark:'',maxMark:'',dp_start:'',startTime:'00:00 am',endTime:'00:00 am'};
-					}
-				});
-			   
-                //$scope.input_default="";
-                // $('#calendar_colors_wrapper').find('input').val("")
-                // console.log($scope.calendar_events,"$scope.calendar_events");
-            }
-            $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
-            $scope.editEvent=function(event){
-				$scope.btnvalue="Update";
-                // console.log(typeof event!="undefined");
-                if (typeof event!="undefined"){
-                    $scope.forms_advanced.input_default=event.title;
-                    $scope.forms_advanced.dp_start= $filter('date')(new Date(event.start.split(" ")[0]), "dd.MM.yyyy");;
-                    $scope.forms_advanced.startTime=event.start.split(" ")[1]+" "+event.start.split(" ")[2];
-                    $scope.forms_advanced.endTime=event.end.split(" ")[1]+" "+event.end.split(" ")[2];
-                    $scope.course2=event.course_id;
-                    $scope.batch2=event.batch_id;
-                    $scope.checkValiddata();
-                }
-            }
-            $scope.deleteEvent=function(event){
-                // console.log(parentkey, childkey, event)
-                if (typeof event!="undefined") {
-                    UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                        // console.log("true");
-                        $scope.calendar_events.splice(event, 1);
-                        // console.log($scope.events_list,"$scope.events_list");
-                        uiCalendarConfig.calendars.myCalendar.fullCalendar('rerenderEvents');
-                        
-                    },function(){
-                    }, {
-                        labels: {
-                            'Ok': 'Ok'
-                        }
-                    });
-                }
-            }
-			$scope.setExam={id:'',course:'',batch:'',term:'',exam:'',subject:'',passMark:'',maxMark:'',dp_start:'',startTime:'00:00 am',endTime:'00:00 am'};
-            $scope.checkValiddata=function(start, end){
-                    $scope.course2=[];
-                    $scope.batch2=[];
-                    $scope.input_default="";
-                    $scope.forms_advanced.startTime="00:00 am";
-                    $scope.forms_advanced.endTime="00:00 am";
-                    var modal = UIkit.modal("#modal_header_footer");
-                    if ( modal.isActive() ) {
-                        modal.hide();
-                    } else {
-                        // $scope.dp_start='';
-                        // $scope.dp_end='';
-                        console.log($scope.dp_start._d,"dp_start");
-                        if ($scope.dp_start._d) {
-                            // console.log($scope.dp_start._d,"dp_start");
-                            var start={_d:$scope.dp_start._d};
-                            $scope.setExam.dp_start=start._d.getDate()+"."+eval(start._d.getMonth()+1)+"."+start._d.getFullYear();
-                            console.log($scope.dp_start);
-                            $scope.addEvents={};
-                            $scope.addEvents={start_date : start, end : end};    
-                        };
-                        modal.show();
-                    }
+            $scope.modelhide=function(){
+                modal.hide();
+                $('#calendar_colors_wrapper').find('input').val("")
             }
             $scope.getdateobject=function(date){
                 // console.log(moment(date));
                 return moment(date)._d;
+            }
+            $scope.getExamList();
+            $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
+            $scope.addExam=function(){
+                var strDate=$scope.dp_start.split(".");
+                var setStartDate=strDate[2]+"-"+strDate[1]+"-"+ strDate[0];
+                $http({
+                    method:'POST',
+                    url: $localStorage.service+'ExamAPI/setExamination',
+                    data:{
+                        'id':$scope.id,
+                        'batch_id':$scope.batch_id,
+                        'subject_id':$scope.subject_id,
+                        'exam_id':$scope.exam_id,
+                        'passMark':$scope.passMark,
+                        'maxMark':$scope.maxMark,
+                        'exam_date':setStartDate,
+                        'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
+                        'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(response){
+                    console.log(response,'ressssss');
+                    if(response.data.status==true){
+                        $scope.modelhide();
+                        uiCalendarConfig.calendars.myCalendar.fullCalendar('removeEventSources');  
+                        UIkit.notify({
+                            message : 'Record created successfully',
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.getExamList();
+                    }                
+                });
+            }
+            // $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
+            // }
+
+
+            $scope.editExam=function(event){
+                if (typeof event!="undefined"){
+                    $scope.dp_start= $filter('date')(new Date(event.start.split(" ")[0]), "dd.MM.yyyy");
+                    $scope.id=event.table_id;
+                    $scope.course_id=event.course_id;
+                    $scope.batch_id=event.batch_id;
+                    $scope.term_id=event.term_id;
+                    $scope.exam_id=event.exam_id;
+                    // $scope.subject_id=event.subject_id;
+                    $scope.passMark=event.pass_mark;
+                    $scope.maxMark=event.max_mark;
+                    $scope.startTime=moment(event.dum_startTime, ["HH:mm A"]).format("HH:mm A");
+                    $scope.endTime=moment(event.dum_endTime, ["HH:mm A"]).format("HH:mm A");
+                    modal.show();
+                    $timeout(function(){
+                        $scope.subject_id=event.subject_id;
+                    },800);
+                    // if (modal.isActive() ) {
+                    //     modal.hide();
+                    // } else {
+                    //     modal.show();
+                    // }
+                }
+            }
+
+
+            $scope.deleteEvent=function(CurrID,$index){
+                console.log(CurrID,'CurrID');
+                if(CurrID){
+                    var id=CurrID;
+                    if(id){
+                        UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                            if(id){
+                                $http({
+                                method : "DELETE",
+                                url : $localStorage.service+"ExamAPI/setExamination",
+                                params : {id : id},
+                                headers:{'access_token':$localStorage.access_token}
+                                }).then(function(response) {
+                                    console.log(response,'delete');
+                                    if(response.data.status==true){
+                                        UIkit.notify({
+                                            message : response.data.message,
+                                            status  : 'success',
+                                            timeout : 2000,
+                                            pos     : 'top-center'
+                                        });
+                                        $scope.calendar_events.splice($index, 1);
+                                        $scope.calendar_events=[];
+                                        uiCalendarConfig.calendars.myCalendar.fullCalendar('rerenderEvents');
+                                        $scope.getExamList();
+                                    }                                
+                                })
+                            }
+                        },function(){
+                             //console.log("false");
+                            $scope.getExamList();
+                        }, {
+                            labels: {
+                                'Ok': 'Ok'
+                            }
+                        });
+                    }
+                }
+            }
+            $scope.checkValiddata=function(start, end){
+                    $scope.id="";
+                    $scope.dp_start= '';
+                    $scope.startTime="00:00 am";
+                    $scope.endTime="00:00 am";
+                    $scope.term_id="";
+                    $scope.course_id="";
+                    $scope.batch_id="";
+                    $scope.subject_id="";
+                    $scope.passMark='';
+                    $scope.maxMark="";
+                    if ( modal.isActive() ) {
+                        modal.hide();
+                    } else {
+                        if (start || end) {
+
+                            var year=start._d.getFullYear();
+                            var month=eval(start._d.getMonth()+1);
+                            var day=start._d.getDate();
+                            if (month<10){
+                                month="0" + month;
+                            }else{
+                                month= month;
+                            };
+                            if (day<10){
+                                dayNew="0" + day;
+                            }else{
+                                dayNew = day;
+                            };
+
+                            var end_year=end._d.getFullYear();
+                            var end_month=eval(end._d.getMonth()+1);
+                            var end_day=end._d.getDate();
+                            if (end_month<10){
+                                end_month="0" + end_month;
+                            }else{
+                                end_month= end_month;
+                            };
+                            if (end_day<10){
+                                end_dayNew="0" + end_day;
+                            }else{
+                                end_dayNew = end_day;
+                            };
+
+
+                            $scope.dp_start=dayNew + "." + month + "." + year;
+                            end_date.options.minDate = $scope.dp_start;
+                            $scope.dp_end=end_dayNew + "." + end_month + "." + end_year;
+                            $scope.addEvents={};
+                            $scope.addEvents={start_date : start, end : end};
+                        };
+                        modal.show();
+                    }
             }
             $scope.uiConfig = {
                 calendar: {
@@ -396,10 +559,6 @@ angular
                         center: '',
                         right: 'month,agendaWeek,agendaDay,listWeek prev,next'
                     },
-                    // viewRender: function(view) {
-                    //     var title = "<h1 style='font-size:24px;line-height:48px'>Examination Schedules</h1>";
-                    //     $(".fc-left").html(title);
-                    // },
                     buttonIcons: {
                         prev: 'md-left-single-arrow',
                         next: 'md-right-single-arrow',
@@ -430,232 +589,32 @@ angular
                     eventResize: function(event, delta, revertFunc) {
                             revertFunc();
                     },
-                    eventClick: function(event, jsEvent){
-                        uiCalendarConfig.calendars.myCalendar.fullCalendar('changeView', 'listWeek')
+                    eventClick: function(event){
+                       uiCalendarConfig.calendars.myCalendar.fullCalendar('changeView', 'listWeek')
                     },
                     select: function (start, end) {
-                        $scope.dp_start=start;
                         $scope.checkValiddata(start, end);
                     },
                     eventDrop:function( event, delta, revertFunc, jsEvent, ui, view ) {
-                        UIkit.modal.confirm('Are you sure to move?', function(e) {
-                            // console.log("true");
-                        },function(){
-                            revertFunc();
-                        }, {
-                            labels: {
-                                'Ok': 'Ok'
-                            }
-                        });
+                            UIkit.modal.confirm('Are you sure to move?', function(e) {
+                                // console.log("true");
+                            },function(){
+                                revertFunc();
+                            }, {
+                                labels: {
+                                    'Ok': 'Ok'
+                                }
+                            });
                     },
                     editable: true,
                     eventLimit: true,
-                    disableDragging:true,
-                    timeFormat: '(hh:mm a)',
-                    timezone:'local'
+                    timeFormat: '(hh:mm a)'
                 }
             };
-            $scope.events_list=[
-            {
-                course2:1,
-                course2_name:"Information Technology",
-                batch2:1, 
-                batch2_name:'CSE A',events:[
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Applied Thermodynamics Engineering",
-                        "start": "2017-04-08 09:00 AM",
-                        "end": "2017-04-08 14:00 PM",
-                        "description": "Test World Hello 123",
-                        "_id": 1,
-                        "backgroundColor":"#ff0000"
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "English", 
-                        "start": "2017-03-31 09:00 AM", 
-                        "end": "2017-03-31 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 2 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Maths", 
-                        "start": "2017-04-01 09:00 AM", 
-                        "end": "2017-04-01 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 3 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Science", 
-                        "start": "2017-04-02 09:00 AM", 
-                        "end": "2017-04-02 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 4 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Social Science", 
-                        "start": "2017-04-03 09:00 AM", 
-                        "end": "2017-04-03 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 5 
-                    }]
-            },
-            {
-                course2:3,
-                course2_name:"Mechanical Engineering",
-                batch2:3, 
-                batch2_name:'CSE C',events:[
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Applied Thermodynamics Engineering",
-                        "start": "2017-04-08 09:00 AM",
-                        "end": "2017-04-08 14:00 PM",
-                        "description": "Test World Hello 123",
-                        "_id": 1,
-                        "backgroundColor":"#ff0000"
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "English", 
-                        "start": "2017-03-31 09:00 AM", 
-                        "end": "2017-03-31 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 2 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Maths", 
-                        "start": "2017-04-01 09:00 AM", 
-                        "end": "2017-04-01 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 3 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Science", 
-                        "start": "2017-04-02 09:00 AM", 
-                        "end": "2017-04-02 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 4 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Social Science", 
-                        "start": "2017-04-03 09:00 AM", 
-                        "end": "2017-04-03 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 5 
-                    }]
-            },
-            {
-                course2:2,
-                course2_name:"Computer Science Engineering",
-                batch2:2, 
-                batch2_name:'CSE B',events:[
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Applied Thermodynamics Engineering",
-                        "start": "2017-04-08 09:00 AM",
-                        "end": "2017-04-08 14:00 PM",
-                        "description": "Test World Hello 123",
-                        "_id": 1,
-                        "backgroundColor":"#ff0000"
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "English", 
-                        "start": "2017-03-31 09:00 AM", 
-                        "end": "2017-03-31 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 2 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Maths", 
-                        "start": "2017-04-01 09:00 AM", 
-                        "end": "2017-04-01 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 3 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Science", 
-                        "start": "2017-04-02 09:00 AM", 
-                        "end": "2017-04-02 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 4 
-                    },
-                    { 
-                        "exam": "Term 1",
-                        "assessment": "FA 1",
-                        "max_mark":100,
-                        "subject": "Social Science", 
-                        "start": "2017-04-03 09:00 AM", 
-                        "end": "2017-04-03 14:00 PM", 
-                        "description": "Test World Hello 123", 
-                        "_id": 5 
-                    }]
-            }];
-			
-			$scope.calendar_events=[];
-            var count=1;
-			
-			$http({
-			method:'get',
-			url: $localStorage.service+'ExamAPI/setExamCalendar',
-			headers:{'access_token':$localStorage.access_token}
-			}).then(function(return_data){
-				$scope.events_list = return_data.data.message;
-				angular.forEach(return_data.data.message, function(value, keys){
-                angular.forEach(value.events, function(val, key){
-                    //console.log(value,"foreachvalue")
-					val._id=count;
-                    val.course_id=value.COURSE_ID;
-                    val.course_name=value.COURSE_NAME;
-                    val.batch_id=value.COURSEBATCH_ID;
-                    val.batch_name=value.BATCH_NAME;
-                    // val.subject=value.SUBJECT_NAME;
-                    $scope.calendar_events.push(val);
-                    count++;
-                    // console.log(val);
-                })
-            });
-			});
-			
-            
-            $scope.eventSources = [$scope.calendar_events];
 
+            $scope.events_list=[];
+            $scope.calendar_events=[];
+            $scope.eventSources = [$scope.calendar_events];
         }
     ]);
 

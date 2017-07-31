@@ -18,22 +18,18 @@
         <div id="page_content_inner">
             <div class="uk-grid">
                 <div class="uk-width-1-2">
-                    <h3 class="heading_b">Examination</h3>
+                    <h3 class="heading_b uk-margin-bottom">Events</h3>
                 </div>
                 <div class="uk-width-1-2">
-                    <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="checkValiddata('','')"><i class="material-icons">add</i>Add Examination</button>
+                    <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="checkValiddata('','')"><i class="material-icons">add</i>Add Events</button>
                     <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="openTable()" ng-show="toggle"><i class="material-icons">list</i> Lists</button>
+                   <!--  <button class="md-btn md-btn-primary md-btn-small uk-align-right" ui-sref="restricted.academics.examination.examlistview" ng-show="toggle"><i class="material-icons">list</i> Lists</button> -->
                     <button class="md-btn md-btn-primary md-btn-small uk-align-right" ng-click="openTable()" ng-hide="toggle"><i class="material-icons">event</i> Calendar</button>
-                    <!-- <sidebar-secondary-toggle ng-class="{ 'uk-hidden-large': secondarySidebarHiddenLarge }"></sidebar-secondary-toggle> -->
                 </div>
             </div>
             <div class="md-card uk-margin-remove uk-animation-slide-bottom" ng-if="toggle">
                 <div class="md-card-content">
-                    <div class="uk-grid" data-uk-grid-margin>
-                        <div class="uk-width-1-1">
-                            <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
-                        </div>
-                    </div>        
+                    <div ui-calendar="uiConfig.calendar" ng-model="eventSources" calendar="myCalendar"></div>
                 </div>
             </div>
             <div class="md-card uk-margin-remove uk-animation-slide-bottom" ng-hide="toggle">
@@ -42,104 +38,117 @@
                         <thead>
                             <tr>
                                 <th>S.No</th>
+                                <th>Term</th>
                                 <th>Exam</th>
-                                <th>Assessment</th>
                                 <th>Course</th>
                                 <th>Batch</th>
                                 <th>Subject</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th></th>
+                                <th>Term</th>
                                 <th>Exam</th>
-                                <th>Assessment</th>
                                 <th>Course</th>
                                 <th>Batch</th>
                                 <th>Subject</th>
                                 <th>Date</th>
+                                <th>Time</th>
                                 <th></th>
                             </tr>
                         </tfoot>
                         <tbody>
-                          <tr ng-repeat="row in calendar_events">
-                            <td>{{row._id}}</td>
-                            <td>{{row.exam}}</td>
-                            <td>{{row.assessment}}</td>
+                          <tr ng-repeat="row in calendar_events track by $index">
+                            <td>{{$index+1}}</td>
+                            <td>{{row.title}}</td>
+                            <td>{{row.exam_name}}</td>
                             <td>{{row.course_name}}</td>
                             <td>{{row.batch_name}}</td>
-                            <td>{{row.subject}}</td>
+                            <td>{{row.subject_name}}</td>
                             <td>{{getdateobject(row.start) | date : 'dd.MM.yyyy'}}</td>
-                            <td class="uk-text-center">
-                                <a class="ts_remove_row" ng-click="editEvent(row)"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="deleteEvent($index)"><i class="md-icon material-icons">&#xE872;</i></a>
+                            <td>{{getdateobject(row.start) | date : 'shortTime'}} - {{getdateobject(row.end) | date : 'shortTime'}}</td>
+                            <td class="uk-text-center"> 
+                                <!-- <a class="ts_remove_row" ui-sref="restricted.plugins.viewEvents({event_id:{{row.table_id}}})"><i class="md-icon material-icons">visibility</i></a> -->
+                                <a ng-click="editExam(row)"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteEvent(row.table_id,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+
                             </td>
                           </tr>
                         </tbody>
                     </table>
-                    <!-- {{calendar_events | json}} -->
                 </div>
             </div>
 
         </div>
     </div>
 <div class="uk-modal" id="modal_header_footer">
-    <div class="uk-modal-dialog uk-modal-dialog-medium">
+    <div class="uk-modal-dialog">
         <div class="uk-modal-header">
-            <h3 class="uk-modal-title">Schedule Exam</h3>
+            <h3 class="uk-modal-title">Exam</h3>
         </div>
+        <div class="" id="calendar_colors">
+            <div id="calendar_colors_wrapper">
+                <div class="cp_altair" id="T1489421677871">
+                    <span ng-repeat="color in colorcode" ng-class="{active_color:active==color}" ng-click="active=color" data-color="{{color}}" style="background:{{color}}"></span>
+                    <input type="hidden">
+                </div>
+            </div> 
+        </div><br>
+        <form ng-submit="addExam()" id="form_validation">
+            <input type="hidden" ng-model="id">
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
-                        <input type="hidden" mg-model="setExam.id">
-                        <label ng-if="setExam.course" style="font-size: 12px;color: #727272;">Course <span class="req">*</span></label>
-						<selectize id="selec_adv_2" config="course_config" options="course" position="bottom" ng-model="setExam.course" name="course" required placeholder='Select Course'></selectize>
+                        <label ng-if="course_id" style="font-size: 12px;color: #727272;">Course <span class="req">*</span></label>
+                        <selectize id="selec_adv_2" config="course_config" options="course" position="bottom" ng-model="course_id" required placeholder='Select Course'></selectize>
                     </div>
                 </div>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
-                        <br ng-show='setExam.course && !setExam.batch'>
-                        <label ng-if="setExam.batch" style="font-size: 12px;color: #727272;">Batch <span class="req">*</span></label>
-                        <selectize id="selec_adv_2" config="batch_config" options="batch" position="bottom" ng-model="setExam.batch" name="batch" required placeholder='Select Batch'></selectize>
+                        <br ng-show='course_id && !batch_id'>
+                        <label ng-if="batch_id" style="font-size: 12px;color: #727272;">Batch <span class="req">*</span></label>
+                        <selectize id="selec_adv_2" config="batch_config" options="batch" position="bottom" ng-model="batch_id" name="batch" required placeholder='Select Batch'></selectize>
                     </div>
                 </div>
             </div>
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
-                        <label ng-if="setExam.term" style="font-size: 12px;color: #727272;">Term <span class="req">*</span></label>
-                        <selectize id="selec_adv_2" config="selectize_term_config" options="selectize_term_options" position="bottom" ng-model="setExam.term" name="batch" required placeholder='Select Assessment'></selectize>
+                        <label ng-if="term_id" style="font-size: 12px;color: #727272;">Term <span class="req">*</span></label>
+                        <selectize id="selec_adv_2" config="selectize_term_config" options="selectize_term_options" position="bottom" ng-model="term_id" required placeholder='Select Assessment'></selectize>
                     </div>
                 </div>
-				<div class="uk-width-large-1-2 uk-width-medium-1-2">
+                <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
-                        <br ng-show='setExam.term && !setExam.exam'>
-                        <label ng-if="setExam.exam" style="font-size: 12px;color: #727272;">Exam <span class="req">*</span></label>
-                        <selectize id="selec_adv_2" config="selectize_exam_config" options="selectize_exam_options" position="bottom" ng-model="setExam.exam" name="course" required placeholder='Select Exam'></selectize>
+                        <br ng-show='term_id && !exam_id'>
+                        <label ng-if="exam_id" style="font-size: 12px;color: #727272;">Exam <span class="req">*</span></label>
+                        <selectize id="selec_adv_2" config="selectize_exam_config" options="selectize_exam_options" position="bottom" ng-model="exam_id" required placeholder='Select Exam'></selectize>
                     </div>
                 </div>
             </div>
             <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-1-1 uk-width-medium-1-1">
                     <div class="parsley-row">
-                        <label ng-if="setExam.subject" style="font-size: 12px;color: #727272;">Subject <span class="req">*</span></label>
-                        <selectize id="selec_adv_2" config="selectize_subject_config" options="selectize_subject_options" position="bottom" ng-model="setExam.subject" name="batch" required placeholder='Select Subject'></selectize>
+                        <label ng-if="subject_id" style="font-size: 12px;color: #727272;">Subject <span class="req">*</span></label>
+                        <selectize id="selec_adv_2" config="selectize_subject_config" options="selectize_subject_options" position="bottom" ng-model="subject_id" required placeholder='Select Subject'></selectize>
                     </div>
                 </div>
             </div>
-			<div class="uk-grid" data-uk-grid-margin>
+            <div class="uk-grid" data-uk-grid-margin>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
                         <label for="uk_dp_start">Pass Mark</label>
-                        <input type="text" ng-model="setExam.passMark" class="md-input" required md-input>
+                        <input type="text" ng-model="passMark" class="md-input" required md-input numeric-only>
                     </div>
                 </div>
                 <div class="uk-width-large-1-2 uk-width-medium-1-2">
                     <div class="parsley-row">
                         <label for="uk_dp_start">Maximum Mark</label>
-                        <input type="text" ng-model="setExam.maxMark" class="md-input" required md-input>
+                        <input type="text" ng-model="maxMark" class="md-input" required md-input numeric-only>
                     </div>
                 </div>
             </div>
@@ -149,29 +158,28 @@
                      <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                         <label for="uk_dp_start">Exam Date</label>
-                        <input class="md-input" type="text" id="uk_dp_start" md-input ng-model="setExam.dp_start">
+                        <input class="md-input" type="text" id="uk_dp_start" md-input ng-model="dp_start" required>
                     </div>
                 </div>
                 <div class="uk-width-large-1-3 uk-width-medium-1-1">
                     <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
                         <label for="uk_tp_1">Start time</label>
-                        <input class="md-input masked_input" type="text" id="uk_tp_1" md-input ng-model="setExam.startTime" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false">
+                        <input class="md-input masked_input" type="text" id="uk_tp_1" md-input ng-model="startTime" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false" required>
                     </div>
                 </div>
                 <div class="uk-width-large-1-3 uk-width-medium-1-1">
                     <div class="uk-input-group">
                         <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-clock-o"></i></span>
                         <label for="uk_tp_1">End time</label>
-                        <input class="md-input masked_input" type="text" id="uk_tp_1" md-input ng-model="setExam.endTime" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false">
+                        <input class="md-input masked_input" type="text" id="uk_tp_1" md-input ng-model="endTime" data-inputmask="'alias': 'hh:mm t'" data-inputmask-showmaskonhover="false" required>
                     </div>
                 </div>
             </div>
-        <!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias, aliquid amet animi aspernatur aut blanditiis doloribus eligendi est fugiat iure iusto laborum modi mollitia nemo pariatur, rem tempore. Dolor, excepturi.</p> -->
-        <div class="uk-modal-footer uk-text-right">
-            <!-- <button type="button" class="md-btn md-btn md-btn-danger uk-modal-close">Close</button> -->
-            <button type="button" class="md-btn md-btn uk-modal-close">Close</button>
-            <button ng-click="addEvent()" type="button" class="md-btn md-btn md-btn-primary uk-modal-close">{{btnvalue}}</button>
-        </div>
+            <div class="uk-modal-footer uk-text-right">
+                <button type="button" class="md-btn md-btn" ng-click="modelhide();clearValidation()">Close</button>
+                <button type="submit" class="md-btn md-btn md-btn-primary">Add</button>
+            </div>
+        </form>
     </div>
 </div>
