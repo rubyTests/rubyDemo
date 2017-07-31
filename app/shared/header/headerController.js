@@ -9,7 +9,9 @@ angular
 		'$localStorage',
 		'$http',
         '$resource',
-        function ($timeout,$scope,$window,$state,$location,$localStorage,$http,$resource) {
+        '$rootScope',
+        function ($timeout,$scope,$window,$state,$location,$localStorage,$http,$resource,$rootScope) {
+            $scope.userProfile_id = $localStorage.userProfile_id;
             var vm = this;
             vm.dt_data = [];
             //$scope.messageData = [];
@@ -19,6 +21,32 @@ angular
             .then(function(dt_data) {
                 vm.dt_data = dt_data;
                // $scope.messageData.push(vm.dt_data);
+            });
+
+            $scope.messageHeader=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'messageAPI/messageHeaderList',
+                params : { id : $localStorage.userProfile_id},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+                console.log(return_data.data,'returnss_data1231231');
+                $scope.meesageNotification=[];
+                angular.forEach(return_data.data.message, function(value1, keys1){
+                    angular.forEach(value1.messages, function(value2, keys2){
+                        if (value2.STATUS=='CTD' && value2.NEW=='1' && $scope.userProfile_id!= value2.CRT_USER_ID) {
+                            $scope.meesageNotification.push(value1);
+                        }
+                    })
+                })
+                console.log($scope.meesageNotification, "$scope.meesageNotification");
+                $scope.messageHeader = return_data.data.message;
+                $scope.Id = $scope.messageHeader[0].ID;
+                $scope.Fname = $scope.messageHeader[0].FNAME;
+                $scope.msgList = $scope.messageHeader.MESSAGE;
+                console.log($scope.messageHeader,'$scope.messageHeader');
+                console.log($scope.Fname,'$scope.Fname');
+                console.log($scope.messageHeader.MESSAGE,'$scope.msgList');
             });
             
             
@@ -208,7 +236,12 @@ angular
 
             $scope.alerts_length = $scope.user_data.alerts.length;
             $scope.messages_length = $scope.user_data.messages.length;
-
+            $scope.dropNotofication = function(message){
+                var index = $scope.meesageNotification.indexOf(message);
+                $scope.meesageNotification.splice(index,1);
+                $state.go("restricted.mails",{mailId:message.C_ID});
+                // ui-sref="restricted.mails({ mailId:message.C_ID})"
+            }
 
             $('#menu_top').children('[data-uk-dropdown]').on('show.uk.dropdown', function(){
                 $timeout(function() {
@@ -222,7 +255,8 @@ angular
                 var $this = $(this);
                 $state.go($this.attr('href'));
                 $('.header_main_search_input').val('');
-            })
+            });
+
 
         }
     ])
