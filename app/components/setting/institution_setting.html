@@ -1,0 +1,139 @@
+<style type="text/css">
+    .uk-tab {
+        margin-top: 27px;
+    }
+    .uk-tab > li {
+        padding:10px;
+    }
+</style>
+    <div id="page_content">
+        <div id="page_content_inner">            
+            <h4 class="heading_a uk-margin-bottom">Settings</h4>
+            <div class="md-card uk-margin-medium-bottom">
+                <div class="md-card-content">
+                    <form ng-submit="saveData()" id="formdata">
+                        <input type="hidden" ng-model="setting_id">
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-medium-1-1">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-3"><br>
+                                            <input type="checkbox" name="checkbox_demo_1" id="checkbox_demo_1" icheck ng-model="student" ng-true-value="'Y'" ng-false-value="'N'" ng-change="checkData(student,'stu')"/>
+                                            <label for="checkbox_demo_1" class="inline-label">Auto increment for Student admission No ?</label>
+                                        </div>
+                                        <div class="uk-width-medium-1-4" ng-show="student=='Y'">
+                                            <label>Student Prefix</label>
+                                            <input type="text" class="md-input" ng-model="student_prefix" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row" ng-show="student=='Y'">
+                                            <label>Admission No</label>
+                                            <input type="text" class="md-input" ng-model="student_admissionno" ng-required="student=='Y'" numeric-only md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-3">
+                                            <br>
+                                            <input type="checkbox" name="checkbox_demo_2" id="checkbox_demo_2" icheck ng-model="employee" ng-true-value="'Y'" ng-false-value="'N'" ng-change="checkData(employee,'emp')"/>
+                                            <label for="checkbox_demo_2" class="inline-label">Auto increment for employee admission no ?</label>
+                                        </div>
+                                        <div class="uk-width-medium-1-4" ng-show="employee=='Y'">
+                                            <label>Employee prefix</label>
+                                            <input type="text" class="md-input" ng-model="employee_prefix" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row" ng-show="employee=='Y'">
+                                            <label>Admission No</label>
+                                            <input type="text" class="md-input" ng-model="employee_admissionno" ng-required="employee=='Y'" numeric-only md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-3">
+                                            <br>
+                                            <input type="checkbox" name="checkbox_demo_3" id="checkbox_demo_3" icheck ng-model="material" ng-true-value="'Y'" ng-false-value="'N'" ng-change="checkData(material,'material')"/>
+                                            <label for="checkbox_demo_3" class="inline-label">Auto increment for Material Request ?</label>
+                                        </div>
+                                        <div class="uk-width-medium-1-4" ng-show="material=='Y'">
+                                            <label>Prefix</label>
+                                            <input type="text" class="md-input" ng-model="material_prefix" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row" ng-show="material=='Y'">
+                                            <label>Material Request No</label>
+                                            <input type="text" class="md-input" ng-model="m_request_no" ng-required="material=='Y'" numeric-only md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-3">
+                                            <br>
+                                            <input type="checkbox" name="checkbox_demo_4" id="checkbox_demo_4" icheck ng-model="purchase" ng-true-value="'Y'" ng-false-value="'N'" ng-change="checkData(purchase,'purchase')"/>
+                                            <label for="checkbox_demo_4" class="inline-label">Auto increment for Purchase Order ?</label>
+                                        </div>
+                                        <div class="uk-width-medium-1-4" ng-show="purchase=='Y'">
+                                            <label>Prefix</label>
+                                            <input type="text" class="md-input" ng-model="purchase_prefix" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row" ng-show="purchase=='Y'">
+                                            <label>Purchase Order No</label>
+                                            <input type="text" class="md-input" ng-model="order_no" ng-required="purchase=='Y'" numeric-only md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-3">
+                                            <br>
+                                            <input type="checkbox" name="checkbox_demo_5" id="checkbox_demo_5" icheck ng-model="invoice" ng-true-value="'Y'" ng-false-value="'N'" ng-change="checkData(invoice,'invoice')"/>
+                                            <label for="checkbox_demo_5" class="inline-label">Auto increment for Invoice no ?</label>
+                                        </div>
+                                        <div class="uk-width-medium-1-4" ng-show="invoice=='Y'">
+                                            <label>Prefix</label>
+                                            <input type="text" class="md-input" ng-model="invoice_prefix" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row" ng-show="invoice=='Y'">
+                                            <label>Invoice No</label>
+                                            <input type="text" class="md-input" ng-model="invoice_no" ng-required="invoice=='Y'" numeric-only md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="uk-width-medium-1-1">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-medium-1-3">
+                                            <br>
+                                            <input type="checkbox" name="checkbox_demo_6" id="checkbox_demo_6" icheck ng-model="goodsreceipt" ng-true-value="'Y'" ng-false-value="'N'" ng-change="checkData(goodsreceipt,'goods')"/>
+                                            <label for="checkbox_demo_6" class="inline-label">Auto increment for Goods receipt no ?</label>
+                                        </div>
+                                        <div class="uk-width-medium-1-4" ng-show="goodsreceipt=='Y'">
+                                            <label>Prefix</label>
+                                            <input type="text" class="md-input" ng-model="goods_prefix" md-input />
+                                        </div>
+                                        <div class="uk-width-medium-1-4 parsley-row" ng-show="goodsreceipt=='Y'">
+                                            <label>Goods Receipt No</label>
+                                            <input type="text" class="md-input" ng-model="grn_no" ng-required="goodsreceipt=='Y'" numeric-only md-input />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-text-right">
+                            <button class="md-btn md-btn-small md-btn-primary" type="submit">Save</button>
+                        </div>
+                    </from>
+                </div>
+            </div>
+
+        </div>
+    </div>
