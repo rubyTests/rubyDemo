@@ -9,7 +9,9 @@ angular
 		'$localStorage',
 		'$timeout',
 		'$state',
-        function ($scope,$rootScope,utils,$http,$location,$localStorage,$timeout,$state) {
+		'variables',
+		'$window',
+        function ($scope,$rootScope,utils,$http,$location,$localStorage,$timeout,$state,variables, $window) {
 
             $scope.registerFormActive = false;
 
@@ -105,6 +107,9 @@ angular
 						$localStorage.role_id=response.data.message[0].USER_ROLE_ID;
 						$localStorage.Additional_RoleId=response.data.message[0].Additional_RoleId;
 						$localStorage.userProfile_id=response.data.message[0].USER_PROFILE_ID;
+						$window.localStorage.access_token = response.data.access_token;
+						console.log(variables,"variables");						
+						// expect(variables).toEqual(response.data.access_token);
 						// $localStorage.user_privileges=response.data.message[0].user_privileges;
 						//$location.path('/dashboard');
 						if($localStorage.role=='student'){
