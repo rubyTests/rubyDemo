@@ -304,7 +304,7 @@ angular
                         });
                         $scope.refreshTable();
                     }else {
-                        UIkit.modal.alert('Course & Batch Name Already Exists');
+                        UIkit.modal.alert('Batch name for selected course already exists in this period');
                     }
                 });
             }

@@ -142,23 +142,33 @@ angular
                             },
                             headers:{'access_token':$localStorage.access_token}
                         }).then(function(return_data){
-                            console.log(return_data.data.data.message);
-                            $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
-                            $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
-                            console.log($scope.Basic.institution_id,'$scope.Basic.institution_id');
-                            if(return_data.data.data.status==true){
+                            console.log(return_data.data.status,'ss');
+                            // $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
+                            // $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
+                            // console.log($scope.Basic.institution_id,'$scope.Basic.institution_id');
+                            if(return_data.data.status==true){
+                                $scope.contact.prof_id=return_data.data.data.PROFILE_ID;
+                                $scope.Basic.institution_id=return_data.data.data.INSTITUTION_ID;
+
                                 UIkit.notify({
                                     message : return_data.data.data.message,
                                     status  : 'success',
                                     timeout : 2000,
                                     pos     : 'top-center'
                                 });
-                            }
-                            $timeout(function() {
+                                $timeout(function() {
+                                    $scope.content_preloader_hide();
+                                    WizardHandler.wizard().next();                                    
+                                }, 1000);
+                            }else{
                                 $scope.content_preloader_hide();
-                                WizardHandler.wizard().next();
+                                UIkit.modal.alert('You have record based on current institution type,so cannot change institute type');
+                            }
+                            // $timeout(function() {
+                            //     $scope.content_preloader_hide();
+                            //     WizardHandler.wizard().next();
                                 
-                            }, 1000);
+                            // }, 1000);
                         });
                     }
             //     });

@@ -83,7 +83,7 @@ angular
             $scope.selectize_course_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course...',
+                placeholder: 'Course',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
@@ -99,11 +99,11 @@ angular
             $scope.selectize_batch_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Batch...',
+                placeholder: 'Batch',
                 valueField: 'ID',
-                labelField: 'NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
                 onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
+                    selectize.on('change', function(value) {
                     console.log(value,'Batch');
                     });
                 }
@@ -113,7 +113,7 @@ angular
             $scope.selectize_subject_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Subject',
+                placeholder: 'Subject',
                 valueField: 'COU_ID',
                 labelField: 'COURSE_NAME',
                 onInitialize: function(selectize){
