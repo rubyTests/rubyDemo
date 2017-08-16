@@ -3365,16 +3365,12 @@ rubycampusApp
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_ionRangeSlider',
+                                'lazy_datatables',
+                                'lazy_parsleyjs',
                                 'lazy_tablesorter',
                                 'app/components/academics/attendance/studentAttendanceController.js'
                             ],{serie:true});
-                        }],
-                        ts_data: function($http){
-                            return $http({ method: 'GET', url: 'app/components/Hr/Payroll_Payslip/Payroll_temData/profile.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
+                        }]
                     },
                     data: {
                         pageTitle: 'Mark Attendance'
@@ -3428,6 +3424,27 @@ rubycampusApp
 					params:{id:null}
 				})
 				
+                .state("restricted.academics.subjectwisereport", {
+                    url: "/subjectwisereport/{id:[0-9]{1,4}}",
+                    templateUrl: 'app/components/academics/attendance/subjectwiseReport.html',
+                    controller: 'subjectwiseReportCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'lazy_charts_chartist',
+                                'lazy_charts_c3',
+                                'app/components/academics/attendance/subjectwiseReportCtrl.js'
+                            ],{serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Attendance Report'
+                    },
+                    params:{id:null}
+                })
 				.state("restricted.academics.studentleaveapprove", {
 					url: "/student-leaveApprove",
 					templateUrl: 'app/components/academics/attendance/studentleaveapprove.html',
@@ -3475,31 +3492,67 @@ rubycampusApp
 					params:{id:null}
 				})
 				
-                .state("restricted.academics.empattendancemark", {
-                    url: "/empolyee-attendance",
-                    templateUrl: 'app/components/plugins/employeeAttendance.html',
-                    controller: 'tablesorterCtrl',
+                .state("restricted.hr.employee_attendancemarking", {
+                    url: "/employee_attendancemarking",
+                    templateUrl: 'app/components/employeemanagement/employeeAttendancemarking.html',
+                    controller: 'employeeAttendancemarkingCtrl',
+                    resolve: {      
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'lazy_parsleyjs',
+                                'app/components/employeemanagement/employeeAttendancemarkingCtrl.js'
+                            ],{serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Employee Attendance'
+                    }
+                })
+				
+                .state("restricted.hr.employeeattendancereport", {
+                    url: "/employeeattendancereport",
+                    templateUrl: 'app/components/employeemanagement/employeeAttendanceReportView.html',
+                    controller: 'employeeAttendanceReportCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
                                 'bower_components/angular-resource/angular-resource.min.js',
                                 'lazy_ionRangeSlider',
                                 'lazy_tablesorter',
-                                'app/components/plugins/employeeAttendanceController.js'
+                                'app/components/employeemanagement/employeeAttendanceReportCtrl.js'
                             ],{serie:true});
-                        }],
-                        ts_data: function($http){
-                            return $http({ method: 'GET', url: 'app/components/employeemanagement/employee_list.json' })
-                                .then(function (data) {
-                                    return data.data;
-                                });
-                        }
+                        }]
                     },
                     data: {
-                        pageTitle: 'Tablesorter'
+                        pageTitle: 'Employee Attendance Report'
                     }
                 })
-				
+
+                .state("restricted.hr.employeeReportView", {
+                    url: "/employeeReportView/{id}",
+                    templateUrl: 'app/components/employeemanagement/singleEmployeeReport.html',
+                    controller: 'reportforstudentCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_ionRangeSlider',
+                                'lazy_tablesorter',
+                                'lazy_charts_chartist',
+                                'lazy_charts_c3',
+                                'app/components/employeemanagement/singleEmployeeReportController.js'
+                            ],{serie:true});
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Attendance Report'
+                    },
+                    params:{id:null}
+                })
+                
                 //Added by gnanamani
                 //  .state("restricted.academics", {
                 //     url: "/academics",
@@ -3840,6 +3893,34 @@ rubycampusApp
                     }
                 })
 				
+                // .state("restricted.academics.examination.examlistview", {
+                //     url: "/examlistview",
+                //     templateUrl: 'app/components/academics/examination/examList.html',
+                //     controller: 'examListCtrl',
+                //     resolve: {
+                //          user_data: function($http){
+                //             return $http({ method: 'GET', url: 'data/user_data.json' })
+                //                 .then(function (data) {
+                //                     return data.data;
+                //                 });
+                //         },
+                //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                //             return $ocLazyLoad.load([
+                //                 'lazy_fullcalendar',
+                //                 'lazy_parsleyjs',
+                //                 'lazy_character_counter',
+                //                 'lazy_masked_inputs',
+                //                 'lazy_datatables',
+                //                 'lazy_charts_metricsgraphics',
+                //                 'bower_components/angular-resource/angular-resource.min.js',
+                //                 'app/components/academics/examination/examListCtrl.js'
+                //             ]);
+                //         }]
+                //     },
+                //     data: {
+                //         pageTitle: 'Exam Calendar'
+                //     }
+                // })
 				.state("restricted.academics.examination.assessmentList", {
                     url: "/assessmentList",
                     templateUrl: 'app/components/academics/examination/assessmentList.html',

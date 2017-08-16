@@ -18,27 +18,32 @@ angular
 			$scope.default_image='assets/img/man.png'
             //$scope.table_data = ts_data;
             
-			$scope.deptData=[];
 			$scope.courseData=[];
 			$scope.batchData=[];
 			$scope.getSub_id = [];
 			
-			$http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
-			.success(function(data){
-				$scope.deptData.push(data.message);
-			});
-			$scope.fetchCourse=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(data){
-					// $scope.courseData.push(data.message);
-					if(data.status==true){
-						$scope.selectize_courseNew_options =data.data;
-					}else{
-						$scope.selectize_courseNew_options =[];
-					}
-				});
-			}
+			// $scope.fetchCourse=function(id){
+			// 	$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+			// 	.success(function(data){
+			// 		// $scope.courseData.push(data.message);
+			// 		if(data.status==true){
+			// 			$scope.selectize_courseNew_options =data.data;
+			// 		}else{
+			// 			$scope.selectize_courseNew_options =[];
+			// 		}
+			// 	});
+			// }
 			
+            $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(data){
+                console.log(data,'courseeeee');
+                if(data.status==true){
+                    $scope.selectize_courseNew_options =data.data;
+                }else{
+                    $scope.selectize_courseNew_options =[];
+                }
+            });
+
 			$scope.fetchBatch=function(id){
 				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
 				.success(function(batch_data){
@@ -49,35 +54,38 @@ angular
 					}
 				});
 				
-				$http.get($localStorage.service+'AcademicsAPI/fetchSubjectDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(return_data){
-					if(return_data.status==true){
-						$scope.selectize_subject_options = return_data.data;
-					}else{
-						$scope.selectize_subject_options = [];
-					}
-				});
+				// $http.get($localStorage.service+'AcademicsAPI/fetchSubjectDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				// .success(function(return_data){
+				// 	if(return_data.status==true){
+				// 		$scope.selectize_subject_options = return_data.data;
+				// 	}else{
+				// 		$scope.selectize_subject_options = [];
+				// 	}
+				// });
 			}
 			
-			$scope.selectize_dept_options = $scope.deptData;
-			$scope.selectize_dept_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Department',
-                valueField: 'ID',
-                labelField: 'NAME',
-                searchField: 'NAME',
-                onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
-						$scope.stuAttendanceReport.course='';
-						$scope.stuAttendanceReport.batch='';
-						$scope.stuAttendanceReport.subject='';
-						$scope.getStuData();
-						$scope.fetchCourse(value);
-                    });
-                    
-                }
-            };
+
+            $scope.getAttandanceType=function(courseID){
+                $http({
+                    method : "GET",
+                    url : $localStorage.service+"AcademicsAPI/fetchAttandanceType",
+                    params : {id : courseID},
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(response) {
+                    console.log(response.data.message[0].ATTENDANCE_TYPE,'sssss');
+                    $scope.attendance_type=response.data.message[0].ATTENDANCE_TYPE;
+                    // if(response.data.message[0].ATTENDANCE_TYPE=='Subject-Wise'){
+                    //     $scope.showSubject=true;
+                    //     $scope.showDuration=false;
+                    //     $scope.showRemark=true;
+                    // }else {
+                    //     $scope.showSubject=false;
+                    //     $scope.showDuration=true;
+                    //     $scope.showRemark=false;
+                    // }
+                });
+            }
+
 			
             $scope.selectize_courseNew_options =[];
 			$scope.selectize_courseNew_config = {
@@ -93,6 +101,7 @@ angular
 						$scope.stuAttendanceReport.subject='';
 						$scope.getStuData();
 						$scope.fetchBatch(value);
+                        $scope.getAttandanceType(value);
                     });
                     
                 }
@@ -113,17 +122,6 @@ angular
                 }
             };
 			
-			$scope.selectize_attdnceType_options = ["Subject-Wise", "Daily"];
-			$scope.selectize_attdnceType_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Attendance Type',
-				onInitialize: function(selectize){
-					selectize.on('change', function(val) {
-						$scope.getStuData();
-                    });
-				}
-			};
 			
 			$scope.selectize_subject_options = [];
 			$scope.selectize_subject_config = {
@@ -141,57 +139,79 @@ angular
 			};
 			
 			$scope.getStuData=function(){
+                console.log('test',$scope.attendance_type);
 				$scope.table_data ='';
 				$scope.tableView=false;
-				if($scope.stuAttendanceReport.attendance_type=='Daily'){
+				if($scope.attendance_type=='Daily'){
 					$scope.stuAttendanceReport.subject='';
 					$localStorage.stuCourse='';
 					$localStorage.stuBatch='';
 					$localStorage.stuAttendanceType='';
-					if($scope.stuAttendanceReport.dept==undefined || $scope.stuAttendanceReport.dept==''){
-						//console.log('null');
-					}else if($scope.stuAttendanceReport.course==undefined || $scope.stuAttendanceReport.course==''){
-						//console.log('null');
-					}else if($scope.stuAttendanceReport.batch==undefined || $scope.stuAttendanceReport.batch==''){
+					if($scope.stuAttendanceReport.course==undefined || $scope.stuAttendanceReport.course==''){
 						//console.log('null');
 					}else{
 						$scope.tableView=true;
 						$scope.table_data = [];
-						$localStorage.stuCourse=$scope.stuAttendanceReport.course;
-						$localStorage.stuBatch=$scope.stuAttendanceReport.batch;
-						$localStorage.stuAttendanceType=$scope.stuAttendanceReport.attendance_type;
-						$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{course:$scope.stuAttendanceReport.course,batchId:$scope.stuAttendanceReport.batch,attendance_type:$scope.stuAttendanceReport.attendance_type},headers:{'access_token':$localStorage.access_token}})
-						.success(function(data){
-							$scope.table_data = data.message;
-						});
+						// $localStorage.stuCourse=$scope.stuAttendanceReport.course;
+						// $localStorage.stuBatch=$scope.stuAttendanceReport.batch;
+						// $localStorage.stuAttendanceType=$scope.stuAttendanceReport.attendance_type;
+						// $http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{course:$scope.stuAttendanceReport.course,batchId:$scope.stuAttendanceReport.batch,attendance_type:$scope.stuAttendanceReport.attendance_type},headers:{'access_token':$localStorage.access_token}})
+						// .success(function(data){
+						// 	$scope.table_data = data.message;
+						// });
+                        $http({
+                            method : "GET",
+                            url : $localStorage.service+"StuAttendanceAPI/stuAttendanceReport",
+                            params : {
+                                course:$scope.stuAttendanceReport.course,
+                                batchId:$scope.stuAttendanceReport.batch,
+                                attendance_type:$scope.attendance_type
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).then(function(response) {
+                            console.log(response,'response');
+                            $scope.table_data = response.data.message;
+                        });
 					}
 				}else{
 					$localStorage.stuCourse='';
 					$localStorage.stuBatch='';
 					$localStorage.stuAttendanceType='';
 					$localStorage.stuSubject='';
-					if($scope.stuAttendanceReport.dept==undefined || $scope.stuAttendanceReport.dept==''){
-						//console.log('null');
-					}else if($scope.stuAttendanceReport.course==undefined || $scope.stuAttendanceReport.course==''){
+					if($scope.stuAttendanceReport.course==undefined || $scope.stuAttendanceReport.course==''){
 						//console.log('null');
 					}else if($scope.stuAttendanceReport.batch==undefined || $scope.stuAttendanceReport.batch==''){
-						//console.log('null');
-					}else if($scope.stuAttendanceReport.subject==undefined || $scope.stuAttendanceReport.subject==''){
 						//console.log('null');
 					}else{
 						$scope.tableView=true;
 						$scope.table_data = [];
-						$localStorage.stuCourse=$scope.stuAttendanceReport.course;
-						$localStorage.stuBatch=$scope.stuAttendanceReport.batch;
-						$localStorage.stuAttendanceType=$scope.stuAttendanceReport.attendance_type;
-						$localStorage.stuSubject=$scope.stuAttendanceReport.subject;
-						$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{course:$scope.stuAttendanceReport.course,batchId:$scope.stuAttendanceReport.batch,attendance_type:$scope.stuAttendanceReport.attendance_type,subjectId:$scope.stuAttendanceReport.subject},headers:{'access_token':$localStorage.access_token}})
-						.success(function(data){
-							$scope.table_data = data.message;
-						});
+						// $localStorage.stuCourse=$scope.stuAttendanceReport.course;
+						// $localStorage.stuBatch=$scope.stuAttendanceReport.batch;
+						// $localStorage.stuAttendanceType=$scope.stuAttendanceReport.attendance_type;
+						// $localStorage.stuSubject=$scope.stuAttendanceReport.subject;
+						// $http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{course:$scope.stuAttendanceReport.course,batchId:$scope.stuAttendanceReport.batch,attendance_type:$scope.stuAttendanceReport.attendance_type,subjectId:$scope.stuAttendanceReport.subject},headers:{'access_token':$localStorage.access_token}})
+						// .success(function(data){
+						// 	$scope.table_data = data.message;
+						// });
+                        $http({
+                            method : "GET",
+                            url : $localStorage.service+"StuAttendanceAPI/stuAttendanceReport",
+                            params : {
+                                course:$scope.stuAttendanceReport.course,
+                                batchId:$scope.stuAttendanceReport.batch,
+                                attendance_type:$scope.attendance_type
+                            },
+                            headers:{'access_token':$localStorage.access_token}
+                        }).then(function(response) {
+                            console.log(response,'response');
+                            $scope.table_data = response.data.message;
+                        });
 					}
 				}
 			}
+            $scope.setCourseType=function(cousreType){
+                $localStorage.courseTypes=cousreType;
+            }
 			
             // initialize tables
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
@@ -552,6 +572,7 @@ angular
                         // slider reset
                         slider.reset();
                     })
+
 
                 }
 

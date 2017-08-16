@@ -1,6 +1,6 @@
 angular
     .module('rubycampusApp')
-    .controller('markattendanceCtrl', [
+    .controller('employeeAttendancemarkingCtrl', [
         '$scope',
         '$rootScope',
         '$timeout',
@@ -9,9 +9,8 @@ angular
         '$resource',
         '$filter',
         '$http',
-		'$localStorage',
+        '$localStorage',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage) {
-
             var $formValidate = $('#form_validation');
             $formValidate
             .parsley()
@@ -23,32 +22,149 @@ angular
                     $scope.$apply();
                 }
             });
+
+            var $formValidate1 = $('#form_validation1');
+            $formValidate1
+            .parsley()
+            .on('form:validated',function() {
+                $scope.$apply();
+            })
+            .on('field:validated',function(parsleyField) {
+                if($(parsleyField.$element).hasClass('md-input')) {
+                    $scope.$apply();
+                }
+            });
+
             $scope.clearValidation=function(){
                 $('#form_validation').parsley().reset();
             }
 
-			$scope.stuAttendance={};
-            $scope.markedStudent=[];
-			$scope.tableView=false;
-			$scope.default_image='assets/img/man.png'
-			$scope.stuAttendance.date = $filter('date')(new Date(),'dd.MM.yyyy');
+            $scope.department_options=[];
+            $scope.leaveTypesdata=[];
+            $scope.attendance_date = $filter('date')(new Date(),'dd.MM.yyyy');
+            $http({
+                method:'get',
+                url:$localStorage.service+"AcademicsAPI/departmentlist",
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(dept_data){
+                console.log(dept_data.data.message,'dept_data');
+                $scope.department_options=[].concat(dept_data.data.message);
+            });
 
-			$scope.getData=function(item){
-				item.remark= item.remark || '';
+            $http({
+                method:'get',
+                url:$localStorage.service+"LeavemgmntAPI/leaveType",
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(leavetype){
+                console.log(leavetype.data.data,'leavetype');
+                $scope.leaveTypesdata=[].concat(leavetype.data.data);
+            });
+
+            $scope.duration_config = {
+                create: false,
+                maxItems: 1
+            };
+            // $scope.leaveTypesdata=['CL', 'LOP', 'EL','SL'];
+            $scope.durationsdata=['Full Day', 'Half Day'];
+
+            $scope.department_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Department',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        // if(value){
+                           $scope.getEmployeeData(value);
+                        // }
+                    });
+                }
+            };
+
+            $scope.leavetype_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Leave type',
+                valueField: 'ID',
+                labelField: 'NAME',
+                searchField: 'NAME',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        
+                    });
+                }
+            };
+
+            $scope.markEmployeeData=function(item,pStatus){
+                console.log(item,"item");
+                var modal = UIkit.modal("#listofmarkedEmployee");
+                modal.hide();                
+                $http({
+                method:'POST',
+                url: $localStorage.service+'LeavemgmntAPI/employeeAttendance',
+                data: {
+                    attendance_date:$scope.attendance_date,
+                    dept_id:$scope.department,
+                    userId:$localStorage.userProfile_id,
+                    details:$scope.table_data,
+                },
+                headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+                }).then(function(response){
+                    // console.log(response,'rrrrrrrrr');
+                    if(response.data.status==true){
+                        UIkit.notify({
+                            message : response.data.data.message,
+                            status  : 'success',
+                            timeout : 2000,
+                            pos     : 'top-center'
+                        });
+                        $scope.stuAttendance={};
+                        $scope.dt_data='';
+                        $scope.markedStudent=[];
+                        // $scope.stuAttendance.date = $filter('date')(new Date(),'dd.MM.yyyy');
+                    }
+                });
+                
+            }
+
+            $scope.getEmployeeData=function(deptId){
+                $http({
+                    method:'get',
+                    url:$localStorage.service+"LeavemgmntAPI/employeeList",
+                    params:{
+                        deptId:deptId,
+                        att_date:$scope.attendance_date
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(employee_data){
+                    // console.log(employee_data.data.message,'emptysdsssssssssss');
+                    $scope.table_data=[].concat(employee_data.data.message);
+                });
+            }
+
+            $scope.table_data = '';
+            $scope.markedStudent=[];
+            $scope.getData=function(item){
+                console.log(item.row_select,"item.row_select")
+                item.remark= item.remark || '';
                 item.duration=item.duration || '';
+                item.leaveType=item.leaveType || '';
                 $scope.modalData=item;
                 var modal = UIkit.modal("#modal_header_footer");
-                if (modal.isActive()) {
+                if ( modal.isActive() ) {
                     modal.hide();
                 } else {
                     if(item.row_select=='Y'){
                         modal.show();
                     }else{
-                        UIkit.modal.confirm('Are you sure remove this student?', function(e) {
+                        UIkit.modal.confirm('Are you sure remove this employee?', function(e) {
                             var indexof=$scope.markedStudent.indexOf(item);
                             $scope.markedStudent.splice(indexof,1);
+                            console.log($scope.markedStudent,"removed");
                         },function(){
-                            item.row_select='N';
+                            item.row_select='Y';
                         }, {
                             labels: {
                                 'Ok': 'Ok'
@@ -56,188 +172,26 @@ angular
                         });
                     }
                 }
-            }
-            
-			
-			$scope.deptData=[];
-			$scope.courseData=[];
-			$scope.batchData=[];
-			$scope.getSub_id = [];
-			
-			// $scope.fetchCourse=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
-				.success(function(data){
-                    console.log(data,'courseeeee');
-					if(data.status==true){
-						$scope.selectize_courseNew_options =data.data;
-					}else{
-						$scope.selectize_courseNew_options =[];
-					}
-				});
-			// }
-			$scope.showSubject=false;
-            $scope.getAttandanceType=function(courseID){
-                $http({
-                    method : "GET",
-                    url : $localStorage.service+"AcademicsAPI/fetchAttandanceType",
-                    params : {id : courseID},
-                    headers:{'access_token':$localStorage.access_token}
-                }).then(function(response) {
-                    console.log(response.data.message[0].ATTENDANCE_TYPE,'sssss');
-                    if(response.data.message[0].ATTENDANCE_TYPE=='Subject-Wise'){
-                        $scope.showSubject=true;
-                        $scope.showDuration=false;
-                        $scope.showRemark=true;
-                    }else {
-                        $scope.showSubject=false;
-                        $scope.showDuration=true;
-                        $scope.showRemark=false;
-                    }
-                });
+                // $scope.row_select=false;
             }
 
-			$scope.fetchBatch=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(batch_data){
-					if(batch_data.status==true){
-						$scope.selectize_batch_options=batch_data.data;
-					}else{
-						$scope.selectize_batch_options=[];
-					}
-				});
-				
-				$http.get($localStorage.service+'AcademicsAPI/fetchSubjectDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(return_data){
-					if(return_data.status==true){
-						$scope.selectize_subject_options = return_data.data;
-					}else{
-						$scope.selectize_subject_options = [];
-					}
-				});
-			}
-			
-            $scope.selectize_courseNew_options =[];
-			$scope.selectize_courseNew_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Course',
-                valueField: 'ID',
-                labelField: 'NAME',
-                searchField: 'NAME',
-                onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
-						$scope.stuAttendance.batch='';
-						$scope.stuAttendance.subject='';
-						$scope.getStuData();
-						$scope.fetchBatch(value);
-                        $scope.getAttandanceType(value);
-                    });
-                    
-                }
-            };
-			
-			$scope.selectize_batch_options=[];
-            $scope.selectize_batch_config = {
-                create: false,
-                maxItems: 1,
-                placeholder: 'Batch',
-                valueField: 'ID',
-                labelField: 'NAME',
-				searchField: 'NAME',
-				onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
-					   $scope.getStuData();
-                    });
-                }
-            };
-			
-			$scope.selectize_attdnceType_options = ["Subject-Wise", "Daily"];
-			$scope.selectize_attdnceType_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Attendance Type'
-			};
-			
-			$scope.selectize_subject_options = [];
-			$scope.selectize_subject_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Subject',
-				valueField: 'COU_ID',
-				labelField: 'COURSE_NAME',
-				searchField: 'COURSE_NAME',
-				onInitialize: function(selectize){
-					selectize.on('change', function(val) {
-						// $scope.getStuData();
-                    });
-				}
-			};
-			
-			$scope.getStuData=function(){
-				$scope.table_data ='';
-				$scope.tableView=false;
-				if($scope.stuAttendance.course==undefined || $scope.stuAttendance.course==''){
-					
-				}else if($scope.stuAttendance.batch==undefined || $scope.stuAttendance.batch==''){
-
-				}else{
-					$scope.tableView=true;
-					$scope.table_data = [];
-					$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceData',{params:{course:$scope.stuAttendance.course,batchId:$scope.stuAttendance.batch,date:$scope.stuAttendance.date},headers:{'access_token':$localStorage.access_token}})
-					.success(function(data){
-						$scope.table_data = data.message;
-					});
-				}
-			}
-			
-			$scope.markStuAttendance=function(item,pStatus){
-				console.log(item,"item");
-				var modal = UIkit.modal("#listofmarkedStudent");
-				modal.hide();
-				
-				$http({
-				method:'POST',
-				url: $localStorage.service+'StuAttendanceAPI/stuAttendanceMark',
-				// data: {presentStatus:pStatus,studentList:item,courseId:$scope.stuAttendance.course,batchId:$scope.stuAttendance.batch,subjectId:$scope.stuAttendance.subject,date:$scope.stuAttendance.date,type:$scope.stuAttendance.attendance_type,userId:$localStorage.userProfile_id},
-                data: {
-                    details:$scope.table_data,
-                    courseId:$scope.stuAttendance.course,
-                    batchId:$scope.stuAttendance.batch,
-                    subjectId:$scope.stuAttendance.subject,
-                    date:$scope.stuAttendance.date,
-                    userId:$localStorage.userProfile_id
-                },
-				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
-				}).then(function(response){
-					if(response.data.status==true){
-						UIkit.notify({
-							message : response.data.message,
-							status  : 'success',
-							timeout : 2000,
-							pos     : 'top-center'
-						});
-						$scope.stuAttendance={};
-						$scope.dt_data='';
-						$scope.markedStudent=[];
-                        $scope.stuAttendance.date = $filter('date')(new Date(),'dd.MM.yyyy');
-					}
-				});
-				
-			}
-			
-            $scope.addstudent=function(){
-                // console.log($scope.table_data,"table_data")
+            // $scope.addstudent=function(){
+            //     $scope.markedStudent.push($scope.modalData);
+            //     console.log($scope.markedStudent,"added");
+            // }
+            $scope.addEmployeeData=function(){
                 $scope.markedStudent.push($scope.modalData);
-                //console.log($scope.markedStudent,"added");
+                console.log($scope.markedStudent,"added");
+                UIkit.modal("#modal_header_footer").hide();
             }
             $scope.showConfimation=function(item){
-                var modal = UIkit.modal("#listofmarkedStudent");
+                 var modal = UIkit.modal("#listofmarkedEmployee");
                 if ( modal.isActive() ) {
                     modal.hide();
                 } else {
                     if ($scope.markedStudent.length <= 0) {
                         UIkit.modal.confirm('Are you sure to continue ?', function() {
-								$scope.markStuAttendance(item,'AllPresent');
+                                $scope.markEmployeeData(item,'AllPresent');
                             },function(){
                                 // item.row_select=true;
                             }, {
@@ -254,9 +208,7 @@ angular
                 create: false,
                 maxItems: 1
             };
-            $scope.durationsdata=['Full Day', 'Half Day'];
-            
-			
+
             // initialize tables
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
 

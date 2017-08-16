@@ -12,25 +12,62 @@ angular
         '$http',
         '$localStorage',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$stateParams,$http,$localStorage) {
-            
+            console.log($localStorage.courseTypes,'$localStorage.courseTypes');
+
+            if($localStorage.courseTypes=='Daily'){
+                $scope.showDaily=true;
+                $scope.showSubject=false;
+            }else {
+                $scope.showDaily=false;
+                $scope.showSubject=true;
+            }
+
+            // $http({
+            //     method : "GET",
+            //     url : $localStorage.service+"StuAttendanceAPI/studentBasicandPercentageDetails",
+            //     params : {
+            //         'profileid':$stateParams.id
+            //     },
+            //     headers:{'access_token':$localStorage.access_token}
+            // }).then(function(response1) {
+            //     console.log(response1,'response');
+            //     // $scope.basic = response1.data.message;
+            // });
+
+            $scope.sendParams=function(subjectid){
+                $localStorage.subjectids=subjectid;
+            }
+            var percen=0;
 			if($stateParams.id){
-				$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{course:$localStorage.stuCourse,batchId:$localStorage.stuBatch,attendance_type:$localStorage.stuAttendanceType,subjectId:$localStorage.stuSubject,profileId:$stateParams.id},headers:{'access_token':$localStorage.access_token}})
+                $http({
+                    method : "GET",
+                    url : $localStorage.service+"StuAttendanceAPI/studentBasicandPercentageDetails",
+                    params : {
+                        'profileid':$stateParams.id
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(response1) {
+                    console.log(response1.data.message[0],'response');
+                    $scope.basic = response1.data.message[0];
+                    $scope.AttendancePercentage = response1.data.message[0].PERCENTAGE;
+                    percen=response1.data.message[0].PERCENTAGE;
+                });
+
+				$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{attendance_type:$localStorage.courseTypes,profileId:$stateParams.id},headers:{'access_token':$localStorage.access_token}})
 				.success(function(data){
 					console.log(data,'tttttt');
-					$scope.currentUser = data.message[0];
-					$scope.table_data = data.message[0].leaveDetails;
-					$scope.percentage=data.message[0].Percentage;
-					
+					// $scope.currentUser = data.message[0];
+					$scope.table_data = data.message;					
 				});
-			}else{
-				$http.get($localStorage.service+'StuAttendanceAPI/stuProfileAttendanceReport',{params:{profileId:$localStorage.userProfile_id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(data){
-					console.log(data,'tttttt');
-					$scope.currentUser = data.message[0];
-					$scope.table_data = data.message[0].leaveDetails;
-					$scope.percentage=data.message[0].Percentage;
+			// }else{
+			// 	$http.get($localStorage.service+'StuAttendanceAPI/stuProfileAttendanceReport',{params:{profileId:$localStorage.userProfile_id},headers:{'access_token':$localStorage.access_token}})
+			// 	.success(function(data){
+			// 		console.log(data,'tttttt');
+			// 		$scope.currentUser = data.message[0];
+			// 		$scope.table_data = data.message[0].leaveDetails;
+			// 		$scope.percentage=data.message[0].Percentage;
 					
-				});
+			// 	});
 			}
 			
 			$scope.AttendanceType=$localStorage.stuAttendanceType
@@ -44,7 +81,7 @@ angular
 						bindto: c3_server_load_id,
 						data: {
 							columns: [
-								['Overall Percentage', $scope.percentage]
+								['Overall Percentage', percen]
 							],
 							type: 'gauge',
 							onclick: function (d, i) { /*console.log("onclick", d, i);*/ },

@@ -309,11 +309,11 @@ angular
 
                                 {
                                     title: 'Attendance Register',
-                                    link : 'restricted.academics.empattendancemark'
+                                    link : 'restricted.hr.employee_attendancemarking'
                                 },
                                 {
                                     title: 'Attendance Report',
-                                    link: 'restricted.plugins.employeereport'
+                                    link: 'restricted.hr.employeeattendancereport'
                                 },
                             ]
                         },
@@ -1194,11 +1194,11 @@ angular
 
                                 {
                                     title: 'Attendance Register',
-                                    link : 'restricted.academics.empattendancemark'
+                                    link : 'restricted.hr.employee_attendancemarking'
                                 },
                                 {
                                     title: 'Attendance Report',
-                                    link: 'restricted.plugins.employeereport'
+                                    link: 'restricted.hr.employeeattendancereport'
                                 },
                             ]
                         },
