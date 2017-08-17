@@ -23,12 +23,12 @@ angular
 			$scope.batchData=[];
 			$scope.getSub_id = [];
 			
-			$http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
+			$http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
 			.success(function(data){
-				$scope.deptData.push(data.message);
+				$scope.courseData.push(data.data);
 			});
 			$scope.fetchCourse=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				$http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
 				.success(function(data){
 					// $scope.courseData.push(data.message);
 					if(data.status==true){
@@ -50,7 +50,7 @@ angular
 				});
 			}
 			
-			$scope.selectize_dept_options = $scope.deptData;
+			$scope.selectize_dept_options = $scope.courseData;
 			$scope.selectize_dept_config = {
                 create: false,
                 maxItems: 1,
@@ -69,7 +69,7 @@ angular
                 }
             };
 			
-            $scope.selectize_courseNew_options =[];
+            $scope.selectize_courseNew_options =$scope.courseData;
 			$scope.selectize_courseNew_config = {
                 create: false,
                 maxItems: 1,

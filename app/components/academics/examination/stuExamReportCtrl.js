@@ -12,16 +12,138 @@ angular
         '$filter',
         '$localStorage',
         function ($rootScope,$scope,$window,notes_data,$timeout,variables,$http,$stateParams,$filter,$localStorage) {
-
+			
+			$scope.newData=[];
+			$scope.newData1=[];
+			$scope.newexam=[];
+			$http({
+			method:'get',
+			url: $localStorage.service+'ExamAPI/stuExamReportChart',
+			params:{profileId:$stateParams.id},
+			headers:{'access_token':$localStorage.access_token}
+			}).then(function(return_data){
+				var labels= return_data.data.message.labels.map(function (element) {
+						  return element.NAME;
+						});
+				$scope.newData = labels;
+				// var series= return_data.data.message.series.map(function (res) {
+								// return res.map(function (ele) {
+									  // return parseInt(ele.value);
+								// });
+							// });
+				var ArrayData = return_data.data.message.series.map(function(arr) { 
+					return arr.length; 
+				});
+				
+				$scope.newexam = return_data.data.message.series;
+				var MaxLength = ArrayData.reduce(function(a, b) {return Math.max(a, b);});
+				angular.forEach($scope.newexam, function(value, key){
+					for(var i=0;i<MaxLength;i++){
+						if(!value[i]){
+							value[i] = {};
+						}
+					}					
+				});
+				console.log($scope.newexam, "$scope.newexam");
+				// $scope.examData = return_data.data.message;
+				// console.log($scope.examData,"TermName1");
+				// for (var i=0;i<$scope.examData.length;i++){
+					// // console.log($scope.examData[i].exam,"examData-"+i);
+					// $scope.newexam.push([{$scope.examData[i].exam},{$scope.examData[i+1].exam}]);
+				// }
+				// angular.forEach($scope.examData,function(data){
+					// $scope.newData.push(data.labels);
+					// // angular.forEach(data.exam,function(data){
+						// // $scope.newexam1=data;
+						// // //console.log($scope.newexam1,"$scope.newexam1");
+						// // // $scope.newexam.push({'meta':data.ExamName,'value':data.Total});
+					// // })
+					// // $scope.newData1.push(data.Total);
+				// })
+			});
+			
+			// console.log($scope.newData,"push");
+			// console.log($scope.newexam,"newexam");
+			
             // distributed series
-            $scope.chartist_distributed_data = {
-                labels: ['First Term', 'Second Term', 'Third Term', 'Fourth Term'],
-                series: [35, 85, 62, 10]
+            
+			 setTimeout(function(){
+				 
+				//console.log($scope.exam_data,"exam_data");
+				$scope.chartist_stat_data = {
+					//console.log($scope.newData1,'$scope.newData1');
+                // labels: ['Term 1', 'Term 2'],
+                labels: $scope.newData,
+				series:$scope.newexam
+			  // series: [
+				// [
+				  // {meta: 'description', value: 154 },
+				  // {meta: 'description', value: 54}
+				// ],
+				// [
+				  // {meta: 'other description', value: 452},
+				  // {meta: '', value: null}
+				// ]
+				// ]
+				
+				
+                // series: [
+                    // [{meta: 'other description', value: 82}, 74],
+                    // [63, 82],
+                    // [71, 55],
+                    // [92, 73],
+                    // [64, 91]
+                // ],
+				
+				//borderColor: [['blue','green','red','yellow','pink']],
+				//backgroundColor: [['blue','green','red','yellow','pink']]
             };
-            $scope.chartist_distributed_options = {
-                distributeSeries: true
+			 },1500);
+            $scope.chartist_stat_options = {
+                stackBars: true,
+				plugins: [
+					Chartist.plugins.tooltip()
+				],
+				high: 500,
+				low: 0,
+                axisX: {
+                    labelInterpolationFnc: function(value) {
+                        return value.split(/\s+/).map(function(word) {
+                            return word[0];
+                        }).join('');
+                    }
+                },
+                axisY: {
+                    offset: 20,
+					onlyInteger: true
+                }
             };
-
+			
+			$scope.chartist_stat_options_responsive = [
+                // Options override for media > 400px
+                ['screen and (min-width: 400px)', {
+                    reverseData: true,
+                    horizontalBars: true,
+                    axisX: {
+                        labelInterpolationFnc: Chartist.noop
+                    },
+                    axisY: {
+                        offset: 60
+                    }
+                }],
+                // Options override for media > 800px
+                ['screen and (min-width: 800px)', {
+                    stackBars: false,
+                    seriesBarDistance: 10
+                }],
+                // Options override for media > 1000px
+                ['screen and (min-width: 1000px)', {
+                    reverseData: false,
+                    horizontalBars: false,
+                    seriesBarDistance: 15
+                }]
+            ];
+			// },500);
 			
 			$http({
 			method:'get',

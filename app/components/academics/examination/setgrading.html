@@ -28,7 +28,7 @@
                             <th>S.No</th>
                             <th>Name</th>
                             <th>Percentage</th>
-                            <th>Credit Points</th>
+                            <!-- <th>Credit Points</th> -->
                             <th>Description</th>
                             <th>Action</th>
                         </tr>
@@ -38,7 +38,7 @@
                             <th></th>
                             <th>Name</th>
                             <th>Percentage</th>
-                            <th>Credit Points</th>
+                            <!-- <th>Credit Points</th> -->
                             <th>Description</th>
                             <th></th>
                         </tr>
@@ -48,7 +48,7 @@
                         <td>{{$index+1}}</td>
                         <td>{{row.NAME}}</td>
                         <td>{{row.MINI_PERCENTAGE}}</td>
-                        <td>{{row.CREDIT_POINTS}}</td>
+                        <!-- <td>{{row.CREDIT_POINTS}}</td> -->
                         <td>{{row.DESCRIPTION}}</td>
                         <td class="uk-text-center">
                             <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
@@ -76,10 +76,10 @@
                    <label>Minimum Percentage</label>
                   <input type="text" ng-model="grade.marks" class="md-input" required md-input>
                 </div>
-                <div class="uk-form-row">
-                   <label>Credit Points</label>
-                  <input type="text" ng-model="grade.credit" class="md-input" required md-input>
-                </div>
+                <!-- <div class="uk-form-row"> -->
+                   <!-- <label>Credit Points</label> -->
+                  <!-- <input type="text" ng-model="grade.credit" class="md-input" required md-input> -->
+                <!-- </div> -->
                 <div class="uk-form-row">
                   <label>Description</label>
                   <input type="text" ng-model="grade.description" class="md-input" required md-input>

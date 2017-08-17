@@ -8,7 +8,9 @@ angular
         '$resource',
         'DTOptionsBuilder',
         'DTColumnDefBuilder',
-        function ($compile,$scope,$window,$timeout,$resource, DTOptionsBuilder, DTColumnDefBuilder) {
+		'$http',
+        '$localStorage',
+        function ($compile,$scope,$window,$timeout,$resource, DTOptionsBuilder, DTColumnDefBuilder,$http,$localStorage) {
 
             var vm = this;
             vm.selected = {};
@@ -101,12 +103,70 @@ angular
                 vm.selectAll = true;
             }
 
-			$resource('app/components/academics/examination/marks.json')
-                .query()
-                .$promise
-                .then(function(dt_data) {
-                    vm.dt_data = dt_data;
-                });
+			// $resource('app/components/academics/examination/marks.json')
+                // .query()
+                // .$promise
+                // .then(function(dt_data) {
+                    // vm.dt_data = dt_data;
+                // });
+			
+			// Course and Batch Details
+			
+			$scope.course = [];
+            $scope.batch = [];
+			
+			$http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(data){
+				// $scope.deptData.push(dept_data.message);
+				$scope.course = data.message;
+			});
+			
+			$scope.fetchBatch=function(id){
+				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(batch_data){
+					$scope.batch=batch_data.data;
+				});
+			}
+			
+			$scope.fetchStudent=function(id){
+				$http.get($localStorage.service+'ExamAPI/studentDetails',{params:{course:$scope.setMarkView.course,batch:id,getStuDetails:'OverAllMarks'},headers:{'access_token':$localStorage.access_token}})
+				.success(function(response){
+					//console.log(response.message,"mark response");
+					vm.dt_data=response.message;
+					$scope.getVal=response.message;
+				});
+			}
+			
+			$scope.course_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Course...',
+                valueField: 'ID',
+                labelField: 'NAME',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        //console.log(value,"value");
+						$scope.fetchBatch(value);
+                    });
+                    
+                }
+            };
+			
+            $scope.batch_config = {
+                create: false,
+                maxItems: 1,
+                placeholder: 'Select Batch...',
+                valueField: 'ID',
+                labelField: 'NAME',
+				onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        //console.log(value,"value");
+						$scope.fetchStudent(value);
+                    });
+                    
+                }
+            };
+			
 			
             $scope.selectize_courseNew_options = ["Computer Science and Engineering", "Mechanical Engineering", "Electrical Communication Engineering", "Electrical and Electronics Engineering", "Aeronautical Engineering"];
             $scope.selectize_courseNew_config = {

@@ -64,7 +64,7 @@ angular
                     })
                 });
 
-                $http.get($localStorage.service+'AcademicsAPI/syllabusDetail',{headers:{'access_token':$localStorage.access_token}})
+                $http.get($localStorage.service+'AcademicsAPI/syllabusDetail',{params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},headers:{'access_token':$localStorage.access_token}})
                 .success(function(syllabus_details){
                     $scope.viewData=syllabus_details.message;
                 });

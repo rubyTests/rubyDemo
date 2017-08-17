@@ -23,13 +23,6 @@ td.editable_updated {
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
                     <div class="uk-width-large-1-2 uk-width-medium-1-1">
-                        <br ng-if="!stuAttendanceReport.dept">
-						<div class="parsley-row">
-							<label ng-if="stuAttendanceReport.dept">Department</label>
-							<input type="text" config="selectize_dept_config" options="selectize_dept_options" ng-model="stuAttendanceReport.dept" name="selectize_dept" selectize />
-                        </div>
-                    </div>
-                    <div class="uk-width-large-1-2 uk-width-medium-1-1">
                         <br ng-if="!stuAttendanceReport.course">
 						<div class="parsley-row">
 							<label ng-if="stuAttendanceReport.course">Course</label>

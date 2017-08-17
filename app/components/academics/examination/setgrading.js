@@ -31,17 +31,17 @@ angular
                             bSmart: true
                         },
                         {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
                             type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        // {
+                            // type: 'text',
+                            // bRegex: true,
+                            // bSmart: true
+                        // },
+                        {
+                            type: 'text',
                             bRegex: true,
                             bSmart: true
                         }
@@ -56,7 +56,7 @@ angular
                 DTColumnDefBuilder.newColumnDef(0).withTitle('S.No'),
                 DTColumnDefBuilder.newColumnDef(1).withTitle('Name'),
                 DTColumnDefBuilder.newColumnDef(2).withTitle('Percentage'),
-                DTColumnDefBuilder.newColumnDef(3).withTitle('Credit Points'),
+                // DTColumnDefBuilder.newColumnDef(3).withTitle('Credit Points'),
                 DTColumnDefBuilder.newColumnDef(4).withTitle('Description'),
 
             ];
