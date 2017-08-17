@@ -112,6 +112,7 @@ angular
             $http({
                 method:'GET',
                 url: $localStorage.service+'RepositoryAPI/Rep_Post',
+				params:{role_id:$localStorage.role_id,profileId:$localStorage.userProfile_id},
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 $scope.viewData=return_data.data.message;
