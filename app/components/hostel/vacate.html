@@ -40,7 +40,7 @@
                             <td>{{row.RESIDENT_TYPE}}</td>
                             <td>{{row.Name}}</td>
                             <td>{{row.REASON}}</td>
-                            <td>{{row.VacateDate}}</td>
+                            <td>{{row.VacateDate | momentDate:'DD.MM.YYYY':'DD-MMM-YYYY'}}</td>
                             <td class="">
                                 <a ui-sref="restricted.hostel.edit_vacate({id:{{row.ID}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <!-- <a class="ts_remove_row" data-uk-modal="{target:'#modal_overflow'}" ng-click="editVacate(row)"><i class="md-icon material-icons">&#xE254;</i></a> -->

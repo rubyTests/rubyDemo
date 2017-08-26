@@ -40,7 +40,7 @@
                             <td>{{row.Name}}</td>
                             <td>{{row.preHostelName}} - {{row.preRoomName}}</td>
                             <td>{{row.HostelName}} - {{row.roomName}}</td>
-                            <td>{{row.DATE}}</td>
+                            <td>{{row.DATE | momentDate:'DD.MM.YYYY':'DD-MMM-YYYY'}}</td>
                             <td class="">
                                 <a ui-sref="restricted.hostel.edit_transfer({id:{{row.PROFILE_ID}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
                                <!--  <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a> -->
