@@ -86,7 +86,7 @@ td.editable_updated {
                             <tbody>
                                 <tr ng-repeat="item in table_data">
                                     <td>{{$index+1}}</td>
-                                    <td>{{item.DATE}}</td>
+                                    <td>{{item.DATE | momentDate:'YYYY-MM-DD':'DD-MMM-YYYY'}}</td>
                                     <td>{{item.DURATION}}</td>
                                 </tr>
                             </tbody>

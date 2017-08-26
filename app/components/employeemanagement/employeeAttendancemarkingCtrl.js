@@ -41,7 +41,7 @@ angular
 
             $scope.department_options=[];
             $scope.leaveTypesdata=[];
-            $scope.attendance_date = $filter('date')(new Date(),'dd.MM.yyyy');
+            $scope.attendance_date = $filter('date')(new Date(),'dd-MMM-yyyy');
             $http({
                 method:'get',
                 url:$localStorage.service+"AcademicsAPI/departmentlist",
@@ -538,11 +538,11 @@ angular
                         $dp_end = $('#ts_dp_end');
 
                     var start_date = UIkit.datepicker($dp_start, {
-                        format:'MMM D, YYYY'
+                        format:'DD-MMM-YYYY'
                     });
 
                     var end_date = UIkit.datepicker($dp_end, {
-                        format:'MMM D, YYYY'
+                        format:'DD-MMM-YYYY'
                     });
 
                     $dp_start.on('change',function() {
