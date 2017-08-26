@@ -10,177 +10,195 @@ angular
         '$filter',
         '$http',
 		'$localStorage',
-        function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage) {
+		'DTOptionsBuilder',
+		'DTColumnDefBuilder',
+        function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage,DTOptionsBuilder, DTColumnDefBuilder) {
 
-			// $scope.hr ='hr';
-			var hr='';
-			var hr1 = 11;
-			var hr2 = 22;
-			var hr3 = 33;
-			$scope.test='';
-			$scope.tes='1,2,3';
-			$scope.res=$scope.tes.split(',');
-			console.log($scope.res.length,"Get Split");
-			// setTimeout(function(){
-				for(var i=0;i<$scope.res.length;i++){
-					$scope.test=hr.concat($scope.res[i]);
-					console.log($scope.test,"-loop");
-				}
-			// },500);
-			
-			$scope.stuAttendance={};
-            // $scope.table_data = ts_data;
-            $scope.markedStudent=[];
-			$scope.tableView=false;
-			$scope.default_image='assets/img/man.png'
-			$scope.stuAttendance.date = $filter('date')(new Date(),'dd.MM.yyyy');
-			$scope.getData=function(item){
-                //console.log(item.row_select,"item.row_select")
-                
-				item.remark= item.remark || '';
-                item.duration=item.duration || '';
-                $scope.modalData=item;
-                var modal = UIkit.modal("#modal_header_footer");
-                if (modal.isActive()) {
-                    modal.hide();
-                } else {
-					//console.log(item.row_select,"Select");
-                    if(item.row_select==true){
-                        modal.show();
-                    }else{
-                        UIkit.modal.confirm('Are you sure remove this student?', function(e) {
-                            var indexof=$scope.markedStudent.indexOf(item);
-                            $scope.markedStudent.splice(indexof,1);
-                            //console.log($scope.markedStudent,"removed");
-                        },function(){
-                            item.row_select=true;
-                        }, {
-                            labels: {
-                                'Ok': 'Ok'
-                            }
-                        });
+			var vm = this;
+            vm.dt_data = [];
+            vm.dtOptions = DTOptionsBuilder
+                .newOptions()
+                .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
+                    "<'uk-overflow-container'tr>" +
+                    "<'dt-uikit-footer'<'uk-grid'<'uk-width-medium-3-10'i><'uk-width-medium-7-10'p>>>")
+                .withOption('createdRow', function(row, data, dataIndex) {
+                    // Recompiling so we can bind Angular directive to the DT
+                    $compile(angular.element(row).contents())($scope);
+                })
+                .withOption('headerCallback', function(header) {
+                    if (!vm.headerCompiled) {
+                        // Use this headerCompiled field to only compile header once
+                        vm.headerCompiled = true;
+                        $compile(angular.element(header).contents())($scope);
                     }
-                }
-                // $scope.row_select=false;
-            }
+                })
+                .withPaginationType('full_numbers')
+                // Active Buttons extension
+                .withColumnFilter({
+                    aoColumns: [
+                        null,
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        }
+                        
+                    ]
+                })
+                .withButtons([
+                    {
+                        extend:    'print',
+                        text:      '<i class="uk-icon-print"></i> Print',
+                        titleAttr: 'Print'
+                    },
+                    {
+                        extend:    'excelHtml5',
+                        text:      '<i class="uk-icon-file-excel-o"></i> XLSX',
+                        titleAttr: ''
+                    },
+                    {
+                        extend:    'pdfHtml5',
+                        text:      '<i class="uk-icon-file-pdf-o"></i> PDF',
+                        titleAttr: 'PDF'
+                    }
+                ])
+                 .withOption('initComplete', function() {
+                    $timeout(function() {
+                        $compile($('.dt-uikit .md-input'))($scope);
+                    })
+                });
+			
+			// Get Details 
+			
+			$scope.department=[];
+            $scope.course = [];
+            $scope.batch = [];
             
-			
-			$scope.deptData=[];
-			$scope.courseData=[];
-			$scope.batchData=[];
-			$scope.getSub_id = [];
-			
-			$http.get($localStorage.service+'AcademicsAPI/departmentlist',{headers:{'access_token':$localStorage.access_token}})
-			.success(function(data){
-				$scope.deptData.push(data.message);
-			});
-			$scope.fetchCourse=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchcourseDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(data){
-					// $scope.courseData.push(data.message);
-					if(data.status==true){
-						$scope.selectize_courseNew_options =data.data;
-					}else{
-						$scope.selectize_courseNew_options =[];
-					}
-				});
-			}
-			
-			$scope.fetchBatch=function(id){
-				$http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(batch_data){
-					if(batch_data.status==true){
-						$scope.selectize_batch_options=batch_data.data;
-					}else{
-						$scope.selectize_batch_options=[];
-					}
-				});
-				
-				$http.get($localStorage.service+'AcademicsAPI/fetchSubjectDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(return_data){
-					if(return_data.status==true){
-						$scope.selectize_subject_options = return_data.data;
-					}else{
-						$scope.selectize_subject_options = [];
-					}
-				});
-			}
-			
-			$scope.selectize_dept_options = $scope.deptData;
-			$scope.selectize_dept_config = {
+            $scope.user=['Student','Employee','All'];
+            $scope.user_config = {
                 create: false,
                 maxItems: 1,
+                placeholder:'User Type',
+                onInitialize: function(selectize){
+                   selectize.on('change', function(value) {
+                        console.log(value,'valuevalue');
+						$scope.course_id='';
+						$scope.department='';
+						$scope.batch_id='';
+                    });
+                    
+                }
+            };
+            var allCourseID=[];
+            $http.get($localStorage.service+'AcademicsAPI/courseDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(data){
+                $scope.course = data.message;
+                angular.forEach(data.message,function(value,key){
+                    allCourseID.push(value.ID);
+                });
+                console.log(allCourseID.length,'allCourseID');
+                $scope.course.push([{ID:allCourseID,NAME:"All Course"}]);
+            });           
+            $scope.selectize_dept_config = {
+                create: false,
+                maxItems: null,
                 placeholder: 'Department',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                    selectize.on('change', function(value) {
-						$scope.stuAttendance.course='';
-						$scope.stuAttendance.batch='';
-						$scope.stuAttendance.subject='';
-						$scope.getStuData();
-						$scope.fetchCourse(value);
+                        console.log(value,'dept-value');
                     });
                     
                 }
             };
-			
-            $scope.selectize_courseNew_options =[];
-			$scope.selectize_courseNew_config = {
+            $scope.selectize_dept_options=[];
+            var allDeptID=[];
+            $http.get($localStorage.service+'AcademicsAPI/departmentDetail',{headers:{'access_token':$localStorage.access_token}})
+            .success(function(dept_data){
+                console.log(dept_data,'dept_data');
+                $scope.selectize_dept_options=[].concat(dept_data.message);
+                angular.forEach(dept_data.message,function(value,key){
+                    allDeptID.push(value.ID);
+                });
+                $scope.selectize_dept_options.push([{ID:allDeptID,NAME:"All Department"}]);
+            });
+
+            $scope.course_config = {
                 create: false,
-                maxItems: 1,
+                maxItems: null,
                 placeholder: 'Course',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                    selectize.on('change', function(value) {
-						$scope.stuAttendance.batch='';
-						$scope.stuAttendance.subject='';
-						$scope.getStuData();
-						$scope.fetchBatch(value);
+                        $scope.fetchBatch(value);
                     });
                     
                 }
             };
-			
-			$scope.selectize_batch_options=[];
-            $scope.selectize_batch_config = {
+
+            var allBatchID=[];
+            $scope.fetchBatch=function(id){
+                $http.get($localStorage.service+'AcademicsAPI/fetchbatchDetailList',{params:{id:id},headers:{'access_token':$localStorage.access_token}})
+                .success(function(batch_data){
+                    $scope.batch=[].concat(batch_data.data);
+                    angular.forEach(batch_data.data,function(value,key){
+                        allBatchID.push(value.ID);
+                    });
+                    $scope.batch.push([{ID:allBatchID,NAME:"All Batch"}]);
+                });
+            }
+
+            $scope.batch_config = {
                 create: false,
-                maxItems: 1,
+                maxItems: null,
                 placeholder: 'Batch',
                 valueField: 'ID',
                 labelField: 'NAME',
-				searchField: 'NAME',
-				onInitialize: function(selectize){
-                   selectize.on('change', function(value) {
-					   $scope.getStuData();
-                    });
-                }
+                searchField: 'NAME'
             };
 			
-			$scope.selectize_attdnceType_options = ["Subject-Wise", "Daily"];
-			$scope.selectize_attdnceType_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Attendance Type'
-			};
-			
-			$scope.selectize_subject_options = [];
-			$scope.selectize_subject_config = {
-				create: false,
-				maxItems: 1,
-				placeholder: 'Subject',
-				valueField: 'COU_ID',
-				labelField: 'COURSE_NAME',
-				searchField: 'COURSE_NAME',
-				onInitialize: function(selectize){
-					selectize.on('change', function(val) {
-						// $scope.getStuData();
-                    });
-				}
-			};
+			$scope.sendMsg=function(){
+				$http({
+                method:'POST',
+                url: $localStorage.service+'SettingAPI/bulkSms',
+                data: {usertype:$scope.usertype,dept:$scope.department,courseId:$scope.course_id,batchId:$scope.batch_id,msg:$scope.message},
+				headers:{'Content-Type':'application/json; charset=UTF-8','access_token':$localStorage.access_token}
+                }).then(function(response){
+                    //console.log(response,"student");
+					if(response.data.status==true){
+						UIkit.notify({
+							message : response.data.message,
+							status  : 'success',
+							timeout : 2000,
+							pos     : 'top-center'
+						});
+					}
+                });
+			}
 			
 			$scope.getStuData=function(){
 				$scope.table_data ='';
@@ -200,6 +218,11 @@ angular
 					});
 				}
 			}
+			$scope.table_data =[];
+			$http.get($localStorage.service+'SettingAPI/bulkSms',{headers:{'access_token':$localStorage.access_token}})
+			.success(function(data){
+				$scope.table_data = data.message;
+			});
 			
 			$scope.markStuAttendance=function(item,pStatus){
 				//console.log(item,"item");
