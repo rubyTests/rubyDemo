@@ -39,7 +39,7 @@
                             <td>{{row.LEAVE_NAME}}</td>
                             <td>{{row.EMPLOYEE_NAME}}</td>
                             <td>{{row.TOTAL_LEAVE}}</td>
-                            <td>{{row.FROM_DATE}}</td>
+                            <td>{{row.FROM_DATE | momentDate:'YYYY-MM-DD':'DD-MMM-YYYY'}}</td>
                             <td>{{row.STATUS}}</td>
                             <td class="">
                                 <a ui-sref="restricted.finance.leaveStatusChange({empid:{{row.EMP_PROFILE_ID}},id:{{row.ID}}})"><i class="md-icon material-icons">remove_red_eye</i></a>
