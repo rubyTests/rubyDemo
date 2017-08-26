@@ -179,6 +179,7 @@ angular
             
             $scope.date=dayNew + "." + month + "." + year;
             $scope.invoice_date = $scope.date;
+			$scope.invoice_date = $filter('date')(new Date(),'dd-MMM-yyyy');
            
 
             var $maskedInput = $('.masked_input');

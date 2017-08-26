@@ -101,7 +101,8 @@ angular
                 dayNew = day;
             };
             
-            $scope.request_date=dayNew + "." + monthNew + "." + year;
+            // $scope.request_date=dayNew + "-" + monthNew + "-" + year;
+			$scope.request_date = $filter('date')(new Date(),'dd-MMM-yyyy');
             //$scope.forms_advanced.datepicker = $scope.date;
            
 
