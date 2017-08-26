@@ -152,6 +152,8 @@ rubycampusApp
                         files: [
                             'bower_components/chartist/dist/chartist.min.css',
                             'bower_components/chartist/dist/chartist.min.js',
+                            'bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.css',
+                            'bower_components/chartist-plugin-tooltip/dist/chartist-plugin-tooltip.min.js',
                             'app/modules/angular-chartist.min.js'
                         ],
                         insertBefore: '#main_stylesheet',
