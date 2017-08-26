@@ -21,7 +21,7 @@ angular
 			.success(function(data){
 				$timeout(function(){
 					$scope.user_data=data.result[0].user_detail;
-					console.log($scope.user_data,"data")
+					// console.log($scope.user_data,"data")
 					$scope.profileId=$scope.user_data.id;
 					$scope.parents_data=data.result[0].user_parents;
 					$scope.pre_edu=data.result[0].pre_edu;
@@ -49,11 +49,11 @@ angular
 				$dp_end = $('#uk_dp_end');
 
 				var start_date = UIkit.datepicker($dp_start, {
-					format:'DD.MM.YYYY'
+					format:'DD-MMM-YYYY'
 				});
 
 				var end_date = UIkit.datepicker($dp_end, {
-					format:'DD.MM.YYYY'
+					format:'DD-MMM-YYYY'
 				});
 				
 				// $dp_start.on('change',function() {

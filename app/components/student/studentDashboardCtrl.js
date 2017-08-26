@@ -231,6 +231,37 @@ angular
                     }
                 }
             ];
+			
+			
+			// Profile view 
+			
+			$http.get($localStorage.service+'InstitutionAPI/institutionDetails',{headers: {'access_token':$localStorage.access_token} })
+            .success(function(data){
+                //console.log(data,"data");
+				if(data.status==true){
+					$scope.user_data=data.data[0];
+				}
+            }).error(function(err){
+            });
+			
+			// upcoming bday lists
+			$http.get($localStorage.service+'ProfileAPI/birthDayList',{params:{showcase:'dashboard'},headers: {'access_token':$localStorage.access_token}})
+            .success(function(data){
+				if(data.status==true){
+					$scope.noBdayList=true;
+					$scope.bdayData=data.result;
+					if($scope.bdayData.length==3){
+						$scope.bdayMoreBtn=true;
+					}else{
+						$scope.bdayMoreBtn=false;
+					}
+				}else{
+					$scope.noBdayList=false;
+				}
+            }).error(function(err){
+				$scope.noBdayList=false;
+            });
+			
 
         // countUp update
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
@@ -568,6 +599,8 @@ angular
 			
 			
 			
+			//todo list added by senthil
+
 			$scope.getTodolist=function(){
 				$http({
 				method:'get',
@@ -576,30 +609,38 @@ angular
 				headers:{'access_token':$localStorage.access_token}
 				}).then(function(return_data){
 					//console.log(return_data.data.message,"msg");
-					$scope.todo_data = return_data.data.message;
-					angular.forEach($scope.todo_data,function(value,key){
-						if(value.IMPORTANT=='ture'){
-							$scope.todo_data[key].IMPORTANT=true;
-						}else{
-							$scope.todo_data[key].IMPORTANT=false;
-						}
-						
-						if(value.CLOSED=='true'){
-							$scope.todo_data[key].CLOSED=true;
-						}else{
-							$scope.todo_data[key].CLOSED=false;
-						}
-					})
-					$scope.todo_length = $scope.todo_data.length;
+					if(return_data.data.status==false){
+						$scope.todoShow=false;
+					}else{
+						$scope.todoShow=true;
+						$scope.todo_data = return_data.data.message;
+						angular.forEach($scope.todo_data,function(value,key){
+							if(value.IMPORTANT=='ture'){
+								$scope.todo_data[key].IMPORTANT=true;
+							}else{
+								$scope.todo_data[key].IMPORTANT=false;
+							}
+							
+							if(value.CLOSED=='true'){
+								$scope.todo_data[key].CLOSED=true;
+							}else{
+								$scope.todo_data[key].CLOSED=false;
+							}
+						})
+						$scope.todo_length = $scope.todo_data.length;
+					}
 				});
 			}
 			$scope.getTodolist();
-			
-			$scope.todolist_modal = UIkit.modal("#new_todolist", {
+            // $scope.todo_data = todo_data;
+            // //console.log($scope.todo_data);
+            // $scope.todo_length = $scope.todo_data.length;
+
+            // add todo list modal
+            $scope.todolist_modal = UIkit.modal("#new_todolist", {
                 target: '#new_todolist'
             });
-			
-			$scope.addTodoForm = function($event) {
+            $scope.addTodoForm = function($event) {
                 if ( $scope.todolist_modal.isActive() ) {
                     todolist_modal.hide();
                 } else {
@@ -608,12 +649,24 @@ angular
                     $scope.todoDate = null;
 					$scope.todoDesc = null;
 					$scope.important = null;
+                    // hide events panel
+                    // $clndr_todolist.removeClass('events_visible');
                 }
             };
 
             
             $scope.addTodo = function($event){
                 
+				// var todoDataVal = {
+                    // TITLE: $scope.todoTitle,
+                    // DESCRIPTION: $scope.todoDesc,
+                    // DATE: $scope.todoDate,
+                    // CLOSED: false,
+                    // IMPORTANT: $scope.important
+                // }
+				// console.log(todo_data,'todo_data');
+                // todo_data.push(todoDataVal);
+				
 				if($scope.important==1){
 					$scope.important='true';
 				}else{
@@ -659,46 +712,21 @@ angular
 					$scope.todo_length = $scope.todo_data.length;
 				});
             }
-
-
-                    // video player
-            $scope.video_data = [
-                {
-                    id: '-CYs99M7hzA',
-                    name: 'Unboxing the HERO4',
-                    source: 'Mashable'
-                },
-                {
-                    id: 'te689fEo2pY',
-                    name: 'Apple Watch Unboxing & Setup',
-                    source: 'Unbox Therapy'
-                },
-                {
-                    id: '7AFJeaYojhU',
-                    name: 'Energous WattUp Power Transmitter',
-                    source: 'TechCrunch'
-                },
-                {
-                    id: 'hajnEpCq5SE',
-                    name: 'The new MacBook - Design',
-                    source: 'Apple'
-                }
-            ];
-
-            var $video_player = $('#video_player'),
+			
+			
+			 var $video_player = $('#video_player'),
                 $video_playlist = $('#video_player_playlist'),
                 active_class = 'md-list-item-active';
-
-            $scope.videoChange = function($event,videoID) {
-
-                var $this = $($event.currentTarget);
-                if(!$this.hasClass(active_class)) {
-                    var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/' + videoID + '?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
-
-                    $video_playlist.children('li').removeClass(active_class);
-                    $this.addClass(active_class);
-
-                    $video_player.velocity({
+			// $scope.videoPath=$localStorage.uploadUrl;
+            $scope.videoChange = function($event,post_url) {
+				var FileExtension=post_url.substr(post_url.lastIndexOf('.') + 1);
+				if(FileExtension=='jpg' || FileExtension=='jpeg' || FileExtension=='png'){
+					var iframe_embed = '<img src="' + $localStorage.uploadUrl+post_url + '" style="height:160px;width:337px" />';
+				}else{
+					var iframe_embed = '<iframe height="150" width="300" data-uk-cover src="' + $localStorage.uploadUrl+post_url + '" frameborder="0" allowfullscreen style="max-height:100%"></iframe>';
+				}
+				if($event=='start'){
+					$video_player.velocity({
                             translateZ: 0,
                             scale: 0,
                             opacity: 0
@@ -714,15 +742,73 @@ angular
                             }
                         }
                     );
+				}else{
+					var $this = $($event.currentTarget);
+					if(!$this.hasClass(active_class)) {
+						
+						$video_playlist.children('li').removeClass(active_class);
+						$this.addClass(active_class);
 
-                }
+						$video_player.velocity({
+								translateZ: 0,
+								scale: 0,
+								opacity: 0
+							},
+							{
+								duration: 280,
+								easing: variables.easing_swiftOut,
+								complete: function() {
+									$video_player.html(iframe_embed);
+									setTimeout(function() {
+										$video_player.velocity('reverse');
+									},280)
+								}
+							}
+						);
+
+					}
+				}
 
             };
+			
+			// Get Class
+			
+			$scope.whatClassIsIt=function(value){
+				if(value=="Today"){
+					return "md-list-item-active";
+				}
+			}
+			
+			// Get Data
+			$scope.postLength=false;
+			$scope.defaultImg=$localStorage.uploadUrl+"uploads/default/noData.jpg";
+            $scope.posts_data=[];
+            $http({
+                method:'GET',
+                url: $localStorage.service+'RepositoryAPI/Rep_Post',
+				params:{type:'dashboard',role_id:$localStorage.role_id,profileId:$localStorage.userProfile_id},
+                headers:{'access_token':$localStorage.access_token}
+            }).then(function(return_data){
+				if(return_data.data.status==true){
+					$scope.postLength=true;
+					$scope.posts_data=return_data.data.message;
+					$scope.videoPath=$localStorage.uploadUrl+$scope.posts_data[0].UPLOAD_FILE;
+					$scope.videoChange("start",$scope.posts_data[0].UPLOAD_FILE);
+					if($scope.posts_data.length==3){
+						$scope.repMoreBtn=true;
+					}else{
+						$scope.repMoreBtn=false;
+					}
+					//console.log($scope.videoPath,"Path");
+				}else{
+					$scope.postLength=false;
+				}
+            });
 
         // weather
             $scope.weatherToday = {
                 city: 'Some City',
-                backgroundImg: 'assets/img/gallery/Image17.jpg',
+                backgroundImg: 'assets/img/gallery/hbday.jpg',
                 icon: 'wi-day-sunny-overcast',
                 temperature: '14'
             };

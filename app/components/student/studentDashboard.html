@@ -194,7 +194,7 @@
                                     Todo List
                                 </h3>
                             </div>
-                            <div class="md-card-content adjCardHeightScroll" id="todo_list">
+                            <div ng-if="todoShow" class="md-card-content adjCardHeightScroll" id="todo_list">
                                 <div ng-class="{ 'uk-margin-large-bottom': ($index+1) != todo_length }">
                                     <!-- <h2 class="heading_list uk-text-upper">{{list.list_name}}</h2> -->
                                     <ul class="md-list md-list-addon uk-margin-small-bottom uk-nestable" data-uk-nestable="{ maxDepth: 2, handleClass: 'md-list-content' }">
@@ -211,6 +211,9 @@
                                     </ul>
                                 </div>
                             </div>
+							<div ng-if="!todoShow">
+								<img style="height:314px;" ng-src="{{defaultImg}}">
+							</div>
                     </div>
 
                     <div class="uk-modal" id="new_todolist">
@@ -253,119 +256,19 @@
 				
             </div>
 
-            <!-- <div class="uk-grid uk-grid-width-small-1-2 uk-grid-width-large-1-3 uk-grid-width-xlarge-1-5 uk-text-center     uk-sortable sortable-handler" id="dashboard_sortable_cards" data-uk-sortable data-uk-grid-margin>
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <div class="epc_chart" easypiechart options="epc_user_messages" percent="100">
-                                <span class="epc_chart_icon"><i class="material-icons">&#xE0BE;</i></span>
-                            </div>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <card-overlay-toggle></card-overlay-toggle>
-                                <h3>
-                                    User Messages
-                                </h3>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusamus alias consectetur.
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content uk-flex uk-flex-center uk-flex-middle">
-                            <peity-bar-chart data="stat_conversions_data" options="stat_conversions_options"></peity-bar-chart>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <card-overlay-toggle></card-overlay-toggle>
-                                <h3>
-                                    Conversions
-                                </h3>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay md-card-overlay-active">
-                        <div class="md-card-content" id="canvas_1">
-                            <div class="epc_chart" easypiechart options="epc_tasks_list" percent="37">
-                                <span class="epc_chart_icon"><i class="material-icons">&#xE85D;</i></span>
-                            </div>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <card-overlay-toggle></card-overlay-toggle>
-                                <h3>
-                                    Tasks List
-                                </h3>
-                            </div>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <button class="md-btn md-btn-primary">More</button>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <div class="epc_chart" easypiechart options="epc_orders" percent="53">
-                                <span class="epc_chart_text"><span class="countUpMe">53</span>%</span>
-                            </div>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <card-overlay-toggle></card-overlay-toggle>
-                                <h3>
-                                    Orders
-                                </h3>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <div class="md-card md-card-hover md-card-overlay">
-                        <div class="md-card-content">
-                            <div class="epc_chart" easypiechart options="epc_user_registrations" percent="37">
-                                <span class="epc_chart_icon"><i class="material-icons">&#xE7FE;</i></span>
-                            </div>
-                        </div>
-                        <div class="md-card-overlay-content">
-                            <div class="uk-clearfix md-card-overlay-header">
-                                <card-overlay-toggle></card-overlay-toggle>
-                                <h3>
-                                    User Registrations
-                                </h3>
-                            </div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                        </div>
-                    </div>
-                </div>
-            </div> -->
-
             <!-- info cards -->
             <div class="uk-grid uk-grid-medium uk-grid-width-medium-1-2 uk-grid-width-large-1-3" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
                 <div>
                     <div class="md-card">
                         <div class="md-card-head md-bg-light-blue-600">
                             <div class="md-card-head-menu" data-uk-dropdown="{pos:'bottom-right'}">
-                                <i class="md-icon material-icons md-icon-light">&#xE5D4;</i>
-                                <div class="uk-dropdown uk-dropdown-small">
-                                    <ul class="uk-nav">
-                                        <li><a href="#">User profile</a></li>
-                                        <li><a href="#">User permissions</a></li>
-                                        <li><a href="#" class="uk-text-danger">Delete user</a></li>
-                                    </ul>
-                                </div>
                             </div>
                             <div class="uk-text-center">
-                                <img class="md-card-head-avatar" src="assets/img/avatars/avatar_11.png" alt=""/>
+                                <img class="md-card-head-avatar" src="{{user_data.LOGO}}" alt=""/>
                             </div>
                             <h3 class="md-card-head-text uk-text-center md-color-white">
-                                Stella Fay
-                                <span>akreiger@yahoo.com</span>
+                                {{user_data.INST_NAME}}
+                                <span>{{user_data.ADMISSION_NO}}</span>
                             </h3>
                         </div>
                         <div class="md-card-content">
@@ -375,7 +278,7 @@
                                         <i class="md-list-addon-icon material-icons">&#xE158;</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">ufay@terrymueller.org</span>
+                                        <span class="md-list-heading">{{user_data.EMAIL}}</span>
                                         <span class="uk-text-small uk-text-muted">Email</span>
                                     </div>
                                 </li>
@@ -384,8 +287,17 @@
                                         <i class="md-list-addon-icon material-icons">&#xE0CD;</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">1-972-176-0641x0298</span>
+                                        <span class="md-list-heading">{{user_data.PHONE_NO_1}}</span>
                                         <span class="uk-text-small uk-text-muted">Phone</span>
+                                    </div>
+                                </li>
+								<li>
+                                    <div class="md-list-addon-element">
+                                        <i class="md-list-addon-icon material-icons">&#xE324;</i>
+                                    </div>
+                                    <div class="md-list-content">
+                                        <span class="md-list-heading">{{user_data.PHONE_NO_2}}</span>
+                                        <span class="uk-text-small uk-text-muted">Mobile</span>
                                     </div>
                                 </li>
                                 <li>
@@ -393,96 +305,86 @@
                                         <i class="md-list-addon-icon uk-icon-facebook-official"></i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">facebook.com/envato</span>
+                                        <span class="md-list-heading">{{user_data.FACEBOOK_LINK}}</span>
                                         <span class="uk-text-small uk-text-muted">Facebook</span>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon uk-icon-twitter"></i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">twitter.com/envato</span>
-                                        <span class="uk-text-small uk-text-muted">Twitter</span>
-                                    </div>
-                                </li>
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div>
+                <div ng-show="postLength">
                     <div class="md-card">
                         <div class="md-card-head">
                             <div class="uk-cover uk-position-relative uk-height-1-1 transform-origin-50" id="video_player">
-                                <iframe height="150" width="300" data-uk-cover src="https://www.youtube.com/embed/-CYs99M7hzA?rel=0" frameborder="0" allowfullscreen style="max-height:100%"></iframe>
                             </div>
                         </div>
-                        <div class="md-card-content">
+                        <div class="md-card-content" style="height:215px !important">
                             <ul class="md-list md-list-addon md-list-interactive" id="video_player_playlist">
-                                <li ng-click="videoChange($event,video.id)" ng-repeat="video in video_data | limitTo : 3" ng-class="{'md-list-item-active': $index == 0 }">
+                                <!-- <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:4" ng-class="{'md-list-item-active': $index == 0 }"> -->
+                                <li ng-click="videoChange($event,post.UPLOAD_FILE)" ng-repeat="post in posts_data | limitTo:3" ng-class="{'md-list-item-active': $index == 0 }">
                                     <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon material-icons">&#xE037;</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='png' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='jpg'">collections</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='mp4' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='ogg'">&#xE037;</i>
+                                        <i class="md-list-addon-icon material-icons" ng-if="post.UPLOAD_FILE.split('.').pop().toLowerCase()=='pdf' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='zip' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='rar' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='doc' || post.UPLOAD_FILE.split('.').pop().toLowerCase()=='docx'">file_download</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{video.name}}</span>
-                                        <span class="uk-text-small uk-text-muted">{{video.source}}</span>
+                                        <span class="md-list-heading">{{post.TITLE}}</span>
+                                        <span class="uk-text-small uk-text-muted">{{post.CRT_DT}}</span>
                                     </div>
                                 </li>
-                                <div class="uk-text-center uk-margin-top uk-margin-small-bottom">
-                                    <a class="md-btn md-btn-flat md-btn-flat-primary js-uk-prevent">Show All</a>
-                                </div>
+                                <li ng-click="test()" ng-if="repMoreBtn">
+                                    <div class="md-list-content uk-text-right">
+                                        <span class="md-list-heading">
+											<a ui-sref="restricted.repository.repositoryView" class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button"> More...</a>
+                                        </span>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                     </div>
+					<!-- <div class="md-card" ng-if="!postLength"> -->
+                       <!-- <img style="height:408px;" ng-src="{{defaultImg}}"> -->
+                    <!-- </div> -->
                 </div>
+				<div ng-show="!postLength">
+					<div class="md-card">
+                       <img style="height:408px;" ng-src="{{defaultImg}}">
+                    </div>
+				</div>
                 <div>
-                    <div class="md-card">
+                    <div class="md-card" ng-if="noBdayList">
                         <div class="md-card-head head_background" style="background-image: url({{ weatherToday.backgroundImg }})">
-                            <!-- <div class="md-card-head-menu">
-                                <i class="md-icon material-icons md-icon-light">&#xE5D5;</i>
-                            </div>
-                            <h3 class="md-card-head-text">
-                                {{ weatherToday.city }}
-                            </h3>
-                            <div class="md-card-head-subtext">
-                                <i class="md-card-head-icon wi {{ weatherToday.icon }} uk-margin-right"></i>
-                                <span>{{ weatherToday.temperature }}&deg;</span>
-                            </div> -->
                         </div>
-                        <!-- <div class="md-card-content">
-                            <ul class="md-list md-list-addon">
-                                <li ng-repeat="weather in weatherData">
-                                    <div class="md-list-addon-element">
-                                        <i class="md-list-addon-icon wi {{weather.icon}}"></i>
-                                    </div>
-                                    <div class="md-list-content">
-                                        <span class="md-list-heading">{{ weather.temperature }}&deg; {{ weather.description }}</span>
-                                        <span class="uk-text-small uk-text-muted">{{ weather.date }}</span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div> -->
                         <div class="md-card-content">
                             <ul class="md-list md-list-addon">
-                                <li ng-repeat="weather in weatherData">
+                                <li ng-repeat="bday in bdayData | limitTo:3" ng-class='[whatClassIsIt(bday.NAME)]'>
                                     <div class="md-list-addon-element">
-                                        <img ng-src="{{weatherToday.backgroundImg}}" class="md-card-list-item-avatar AdjImgRadius"/>
+                                        <!-- <i class="md-list-addon-icon wi {{weather.icon}}"></i> -->
+										<i class="material-icons">&#xE8DF;</i>
                                     </div>
                                     <div class="md-list-content">
-                                        <span class="md-list-heading">{{ weather.description }}</span>
-                                        <span class="uk-text-small uk-text-muted">{{ weather.date }}</span>
+                                        <span class="md-list-heading">{{ bday.NAME }}</span>
+                                        <span class="uk-text-small uk-text-muted">{{ bday.UpCdate }}</span>
                                     </div>
                                 </li>
-                                <div class="uk-text-center uk-margin-top uk-margin-small-bottom">
-                                    <a ui-sref="restricted.birthdayListView" class="md-btn md-btn-flat md-btn-flat-primary js-uk-prevent">Show All</a>
-                                </div>
+								<li ng-if="bdayMoreBtn">
+                                    <div class="md-list-content uk-text-right">
+                                        <span class="md-list-heading">
+                                            <a ui-sref="restricted.birthdayListView" class="md-btn md-btn-flat md-btn-flat-primary md-btn-wave waves-effect waves-button">More ...</a>
+                                        </span>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
+                    </div>
+					<div class="md-card" ng-if="!noBdayList">
+                       <img style="height:408px;" ng-src="{{defaultImg}}">
                     </div>
                 </div>
             </div>
 
-                        <div class="uk-grid" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
+            <div class="uk-grid" data-uk-grid-margin data-uk-grid-match="{target:'.md-card-content'}">
                 <div class="uk-width-medium-2-3">
                     <div class="md-card adjCardHeight">
                         <div class="md-card-toolbar">
@@ -490,7 +392,7 @@
                                 Assignments
                             </h3>
                         </div>
-                        <div class="md-card-content adjCardHeightScroll">
+                        <div class="md-card-content">
                             <div class="uk-overflow-container">
                                 <table class="uk-table">
                                     <thead>
@@ -503,7 +405,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr class="uk-table-middle" ng-repeat = "item in assign_data | limitTo : 6">
+                                    <tr class="uk-table-middle" ng-repeat = "item in assign_data | limitTo : 5">
                                         <td class="uk-width-3-10 uk-text-nowrap uk-text-uppercase">{{item.NAME}}</td>
                                         <td class="uk-width-2-10">{{item.SUBJECT_NAME}}</td>
                                         <td class="uk-width-2-10 uk-text-nowrap">

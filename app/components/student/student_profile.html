@@ -65,7 +65,7 @@
                                             <ul class="md-list">
                                                 <li >
                                                     <div class="md-list-content">
-                                                        <span class="md-list-heading">{{user_data.wizard_birth}}</span>
+                                                        <span class="md-list-heading">{{user_data.wizard_birth | date:'dd-MMM-yyyy'}}</span>
                                                         <span class="uk-text-small uk-text-muted">Date of Birth</span>
                                                     </div>
                                                 </li>
@@ -219,7 +219,7 @@
 													<ul class="md-list">
 														<li>
                                                             <div class="md-list-content">
-                                                                <span class="md-list-heading">{{pre_edu.completion}}</span>
+                                                                <span class="md-list-heading">{{pre_edu.completion | date:'dd-MMM-yyyy'}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Year of Completion</span>
                                                             </div>
 														</li>
@@ -317,7 +317,7 @@
                                                         </li>
                                                         <li ng-if="parents_data.p_dob">
                                                             <div class="md-list-content">
-                                                                <span class="md-list-heading">{{parents_data.p_dob}}</span>
+                                                                <span class="md-list-heading">{{parents_data.p_dob | date:'dd-MMM-yyyy'}}</span>
                                                                 <span class="uk-text-small uk-text-muted">Date of Birth</span>
                                                             </div>
                                                         </li>
