@@ -115,11 +115,11 @@ angular
                     var $dp_start = $('#uk_dp_start'),
                     $dp_end = $('#uk_dp_end');
                     var start_date = UIkit.datepicker($dp_start, {
-                        format:'DD.MM.YYYY'
+                        format:'DD-MMM-YYYY'
                     });
 
                     var end_date = UIkit.datepicker($dp_end, {
-                        format:'DD.MM.YYYY'
+                        format:'DD-MMM-YYYY'
                     });
 
                     $dp_start.on('change',function() {

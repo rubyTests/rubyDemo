@@ -49,8 +49,8 @@
                             <td>{{row.NAME}}</td>
                             <td>{{row.courseData[0].NAME}}</td>
                             <td>{{row.empData[0].EMP_NAME}}</td>
-                            <td>{{row.PERIOD_FROM}}</td>
-                            <td>{{row.PERIOD_TO}}</td>
+                            <td>{{row.PERIOD_FROM | date:'dd-MMM-yyyy'}}</td>
+                            <td>{{row.PERIOD_TO | date:'dd-MMM-yyyy'}}</td>
                             <td class="uk-text-center">
                                 <a ng-click="editBatch(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a class="ts_remove_row" ng-click="deleteBatch(row.ID, $index)"><i class="md-icon material-icons">&#xE872;</i></a>

@@ -92,7 +92,7 @@ td.editable_updated {
                             <tbody>
                                 <tr ng-repeat="item in table_data">
                                     <td>{{$index+1}}</td>
-                                    <td>{{item.DATE}}</td>
+                                    <td>{{item.DATE | date:'dd-MMM-yyyy'}}</td>
                                     <td>{{item.REASON}}</td>
                                 </tr>
                             </tbody>

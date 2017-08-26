@@ -31,7 +31,7 @@ angular
             $scope.markedStudent=[];
 			$scope.tableView=false;
 			$scope.default_image='assets/img/man.png'
-			$scope.stuAttendance.date = $filter('date')(new Date(),'dd.MM.yyyy');
+			$scope.stuAttendance.date = $filter('date')(new Date(),'dd-MMM-yyyy');
 
 			$scope.getData=function(item){
 				item.remark= item.remark || '';
