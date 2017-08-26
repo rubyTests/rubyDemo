@@ -94,11 +94,11 @@ angular
                         url: $localStorage.service+'TransportAPI/routeAllocation',
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(view_data){
-                        angular.forEach(view_data.data.message, function(value, key){
-                            var date = value.JOINING_DATE.split("-");
-                            value.JOINING_DATE = date[1]+"."+date[2]+"."+date[0];
-                        });
-                        console.log(view_data.data.message,"view_data.data.message");
+                        // angular.forEach(view_data.data.message, function(value, key){
+                            // var date = value.JOINING_DATE.split("-");
+                            // value.JOINING_DATE = date[1]+"."+date[2]+"."+date[0];
+                        // });
+                        // console.log(view_data.data.message,"view_data.data.message");
                         $scope.viewData=view_data.data.message;
                     });
                 }
@@ -192,7 +192,7 @@ angular
             $scope.openModel = function() {
                 $scope.refreshStudent();
                 var date = new Date();
-                var startDate=$filter('date')(date,'MM.dd.yyyy');  
+                var startDate=$filter('date')(date,'dd-MMM-yyyy');  
                 $scope.buttonStatus='Save';
                 $scope.clearValidation();
                 $scope.allocateData={
