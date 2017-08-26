@@ -335,7 +335,11 @@ angular
                             timeout : 2000,
                             pos     : 'top-center'
                         });
-                        $state.go('restricted.employeemanagement.employee_profile_tableview');
+                        if($localStorage.role_id==1){
+							$state.go('restricted.employeemanagement.employee_profile_tableview');
+						}else if($localStorage.role_id==2){
+							$state.go('restricted.dashboard');
+						}
                         if(return_data.data.data.check=='New'){
                             $timeout(function(){
                                 $scope.backGroundEmail($scope.user_data.EMAIL);
