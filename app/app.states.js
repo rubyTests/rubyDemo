@@ -4634,6 +4634,25 @@ rubycampusApp
                         pageTitle: 'Payslip Report'
                     }                  
                 })
+				
+				.state("restricted.hr.payslipReportEmp",{
+                    url: "/payslipReportEmp",
+                    templateUrl: 'app/components/Hr/Payroll_Payslip/payslipReportEmp.html',
+                    // controller : 'payslipReportEmpCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'lazy_datatables',
+                                'app/components/Hr/Payroll_Payslip/payslipReportEmp.js'
+                            ]);
+                        }]
+                    },
+                    data: {
+                        pageTitle: 'Payslip Report'
+                    }                  
+                })
+				
                 .state("restricted.hr.payitem_details", {
                     url: "/payitem_details",
                     templateUrl: 'app/components/Hr/configuration/payItem.html',
@@ -5816,7 +5835,7 @@ rubycampusApp
 			.state("restricted.transport.vehicleDetail", {
 				url: "/vehicleDetail",
 				templateUrl: 'app/components/transport/vehicleDetail.html',
-				controller: 'vehicleDetailCtrl',
+				//controller: 'vehicleDetailCtrl',
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
@@ -5872,7 +5891,7 @@ rubycampusApp
 			.state("restricted.transport.routeDetail", {
 				url: "/routeDetail",
 				templateUrl: 'app/components/transport/routeDetail.html',
-				controller: 'routeDetailCtrl',
+				//controller: 'routeDetailCtrl',
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
@@ -5891,7 +5910,7 @@ rubycampusApp
 			.state("restricted.transport.routeTiming", {
 				url: "/routeTiming",
 				templateUrl: 'app/components/transport/routeTiming.html',
-				controller: 'routeTimingCtrl',
+				//controller: 'routeTimingCtrl',
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
@@ -5911,7 +5930,7 @@ rubycampusApp
 			.state("restricted.transport.routeStops", {
 				url: "/routeStops",
 				templateUrl: 'app/components/transport/routeStops.html',
-				controller: 'routeStopsCtrl',
+				// controller: 'routeStopsCtrl',
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
@@ -5967,7 +5986,7 @@ rubycampusApp
 			.state("restricted.transport.routeAllocation", {
 				url: "/routeAllocation",
 				templateUrl: 'app/components/transport/allocation.html',
-				controller: 'routeAllocationCtrl',
+				// controller: 'routeAllocationCtrl',
 				resolve: {
 					deps: ['$ocLazyLoad', function($ocLazyLoad) {
 						return $ocLazyLoad.load([
@@ -6175,7 +6194,7 @@ rubycampusApp
                             ]);
                         }],
                         setting_data: function($http,$localStorage){
-                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting'})
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting',headers:{'access_token':$localStorage.access_token}})
                                 .then(function (data) {
                                     return data.data;
                                 });
@@ -6199,7 +6218,7 @@ rubycampusApp
                             ]);
                         }],
                         setting_data: function($http,$localStorage){
-                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting'})
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting',headers:{'access_token':$localStorage.access_token}})
                                 .then(function (data) {
                                     return data.data;
                                 });
@@ -6209,6 +6228,84 @@ rubycampusApp
                         pageTitle: 'Create Calendar'
                     },
                     params:{courseID:null,batchID:null}
+                })
+				
+				// Student Timetable View
+				
+				// .state("restricted.academics.timetable.stuviewtimetable", {
+                    // url: "/timetable",
+                    // templateUrl: 'app/components/academics/timetable/stutimetableview.html',
+                    // controller: 'timetableviewCtrl',
+                    // resolve: {
+                        // deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            // return $ocLazyLoad.load([
+                                // 'lazy_fullcalendar',
+                                // 'lazy_masked_inputs',
+                                // 'bower_components/angular-resource/angular-resource.min.js',
+                                // 'app/components/academics/timetable/stutimetableview.js'
+                            // ]);
+                        // }],
+						// setting_data: function($http,$localStorage){
+                            // return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting',headers:{'access_token':$localStorage.access_token}})
+                                // .then(function (data) {
+                                    // return data.data;
+                                // });
+                        // }
+                    // },
+                    // data: {
+                        // pageTitle: 'Calendar'
+                    // }
+                // })
+				
+				.state("restricted.academics.timetable.stuviewtimetable", {
+                    url: "/timetable",
+                    templateUrl: 'app/components/academics/timetable/stutimetableview.html',
+                    controller: 'timetableviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/academics/timetable/stutimetableview.js'
+                            ]);
+                        }],
+                        setting_data: function($http,$localStorage){
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting',headers:{'access_token':$localStorage.access_token}})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                    },
+                    data: {
+                        pageTitle: 'Time Table'
+                    }
+                })
+				
+				// Employee Timetable View
+				.state("restricted.academics.timetable.empviewtimetable", {
+                    url: "/viewtimetable",
+                    templateUrl: 'app/components/academics/timetable/emptimetableview.html',
+                    controller: 'timetableviewCtrl',
+                    resolve: {
+                        deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                            return $ocLazyLoad.load([
+                                'lazy_fullcalendar',
+                                'lazy_masked_inputs',
+                                'bower_components/angular-resource/angular-resource.min.js',
+                                'app/components/academics/timetable/emptimetableview.js'
+                            ]);
+                        }],
+                        setting_data: function($http,$localStorage){
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting',headers:{'access_token':$localStorage.access_token}})
+                                .then(function (data) {
+                                    return data.data;
+                                });
+                        },
+                    },
+                    data: {
+                        pageTitle: 'Create Calendar'
+                    }
                 })
 
                 .state("restricted.academics.timetable.timetableView", {
@@ -6243,7 +6340,7 @@ rubycampusApp
                             ]);
                         }],
                         setting_data: function($http,$localStorage){
-                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting'})
+                            return $http({method: 'GET', url: $localStorage.service+'TimetableAPI/timetableSetting',headers:{'access_token':$localStorage.access_token}})
                                 .then(function (data) {
                                     return data.data;
                                 });
