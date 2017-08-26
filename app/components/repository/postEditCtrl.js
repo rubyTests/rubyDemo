@@ -44,7 +44,7 @@ angular
                 labelField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        //console.log(value);
                     });
                 }
             };
@@ -62,13 +62,13 @@ angular
             $scope.selectize_category_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Category',
+                placeholder: 'Category',
                 valueField: 'ID',
                 labelField: 'NAME',
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        console.log(value);
+                        //console.log(value);
                     });
                 }
             };
@@ -83,13 +83,13 @@ angular
                 },
                 headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
-                console.log(return_data,'return_datareturn_data');
+                //console.log(return_data,'return_datareturn_data');
                 $scope.rep_data = return_data.data.message[0];
                 $scope.rep_id = $scope.rep_data.ID;
                 $scope.rep_title = $scope.rep_data.TITLE;
                 $scope.rep_content = $scope.rep_data.CONTENT;
-                $scope.rep_upload_file = $scope.rep_data.UPLOAD_FILE;
-                console.log($scope.rep_upload_file,'$scope.rep_upload_file');
+                $scope.rep_upload_file = $localStorage.uploadUrl+$scope.rep_data.UPLOAD_FILE;
+                //console.log($scope.rep_upload_file,'$scope.rep_upload_file');
                 $timeout(function(){
                     $scope.selectize_category = $scope.rep_data.REP_CATEGORY_ID;
                     $scope.selectize_courseId = $scope.rep_data.COURSE_ID;
