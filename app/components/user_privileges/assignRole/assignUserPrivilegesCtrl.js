@@ -91,12 +91,13 @@ angular
                 $scope.viewData=[];
                 $scope.empList=[];
                 $scope.roleList=[];
-                $scope.rolesDetails=[{"id":"1","role_name":"admin"},{"id":"2","role_name":"empolyee"},{"id":"3"
-,"role_name":"HR"},{"id":"4","role_name":"Admin 1"}];
-                // $http.get($localStorage.service+'AcademicsAPI/getRoles',{headers:{'access_token':$localStorage.access_token}})
-                //     .success(function(return_data){
-                //         $scope.rolesDetails=return_data.message;
-                // });
+				$scope.rolesDetails = [];
+                // $scope.rolesDetails=[{"id":"1","role_name":"admin"},{"id":"2","role_name":"empolyee"},{"id":"3"
+// ,"role_name":"HR"},{"id":"4","role_name":"Admin 1"}];
+                $http.get($localStorage.service+'AcademicsAPI/getRoles',{headers:{'access_token':$localStorage.access_token}})
+                    .success(function(return_data){
+                        $scope.rolesDetails=return_data.message;
+                });
                 $scope.rolesDetails_config = {
                     create: false,
                     valueField: 'id',
