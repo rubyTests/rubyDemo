@@ -224,12 +224,14 @@ angular
 
 			// LogOut function
 			$scope.logOut=function(){
-				$http.get($localStorage.service+"GeneralAPI/logout",{headers: {'access_token':$scope.access_token}})
+				$http.get($localStorage.service+"GeneralAPI/logout",{params: {'access_token':$localStorage.access_token}})
 				.success(function(data){
 					if(data.status==true){
 						$localStorage.user_id='';
 						$localStorage.access_token='';
-						$location.path('/');
+						$window.localStorage.access_token = "";
+						$state.go("login");
+						// $location.path('/');
 					}
 				})
 			}
