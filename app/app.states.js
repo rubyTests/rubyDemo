@@ -5120,7 +5120,7 @@ rubycampusApp
                 .state("restricted.inventory.materialRequestView", {
                     url: "/materialRequestView",
                     templateUrl: 'app/components/inventory/materialRequestView.html',
-                    controller: 'materialRequestViewCtrl',
+                    // controller: 'materialRequestViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
