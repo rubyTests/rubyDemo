@@ -4866,7 +4866,7 @@ rubycampusApp
                 .state("restricted.inventory.storeItem", {
                     url: "/StoreItemView",
                     templateUrl: 'app/components/inventory/storeItemView.html',
-                    controller: 'storeItemViewCtrl',
+                    //controller: 'storeItemViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -4885,7 +4885,7 @@ rubycampusApp
                 .state("restricted.inventory.supplier", {
                     url: "/SupplierView",
                     templateUrl: 'app/components/inventory/supplierView.html',
-                    controller: 'supplierViewCtrl',
+                    //controller: 'supplierViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -4904,7 +4904,7 @@ rubycampusApp
                 .state("restricted.inventory.purchaseOrderView", {
                     url: "/purchaseOrderView",
                     templateUrl: 'app/components/inventory/purchaseOrderView.html',
-                    controller: 'purchaseOrderViewCtrl',
+                    //controller: 'purchaseOrderViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -4973,7 +4973,7 @@ rubycampusApp
                 .state("restricted.inventory.grnView", {
                     url: "/grnView",
                     templateUrl: 'app/components/inventory/grnView.html',
-                    controller: 'grnViewCtrl',
+                    // controller: 'grnViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
@@ -5045,7 +5045,7 @@ rubycampusApp
                 .state("restricted.inventory.billingView", {
                     url: "/billingView",
                     templateUrl: 'app/components/inventory/billingView.html',
-                    controller: 'billingViewCtrl',
+                    //controller: 'billingViewCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
