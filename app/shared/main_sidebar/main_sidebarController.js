@@ -810,11 +810,11 @@ angular
                                 {
                                     title: 'Attendance Report',
                                     link: 'restricted.academics.reportforstudent'
-                                },
-                                {
-                                    title: 'My Leaves',
-                                    link: 'restricted.student.stuApplyLeave'
                                 }
+                                // {
+                                    // title: 'My Leaves',
+                                    // link: 'restricted.student.stuApplyLeave'
+                                // }
                             ]
                         },
                         {
