@@ -245,7 +245,7 @@ angular
             }).then(function(profile_data){
                $scope.invoice_no=profile_data.data.message[0].INVOICE_PREFIX +''+ profile_data.data.message[0].INVOICE_NO;
                $scope.institute_id=profile_data.data.message[0].ID;
-               if(profile_data.data.message[0].INVOICE==null || profile_data.data.message[0].INVOICE=='undefined' || profile_data.data.message[0].INVOICE==''){
+               if(profile_data.data.message[0].INVOICE==null || profile_data.data.message[0].INVOICE=='undefined' || profile_data.data.message[0].INVOICE=='N' || profile_data.data.message[0].INVOICE==''){
                     $scope.invoice_Status=false;
                }else{
                     $scope.invoice_Status=true;

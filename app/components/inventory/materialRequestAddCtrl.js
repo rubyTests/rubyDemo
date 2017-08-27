@@ -157,7 +157,8 @@ angular
                         'store_id' : $scope.selectize_store,
                         'notesData' : $scope.notesData,
                         'itemData' : $scope.items,
-                        'inst_id':$scope.institute_id
+                        'inst_id':$scope.institute_id,
+                        'profileId':$localStorage.userProfile_id
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
@@ -188,7 +189,7 @@ angular
                     // console.log(data, "data")
                     var index = data.findIndex(x => x.ITEM_NAME == value.item_name);
                     if (index==-1) {
-                        console.log(index, "index");    
+                        //console.log(index, "index");    
                         value.item_name="";
                         value.item_code="";
                     }
@@ -203,7 +204,7 @@ angular
             }).then(function(profile_data){
                $scope.request_no=profile_data.data.message[0].MATERIAL_REQUEST_PREFIX +''+ profile_data.data.message[0].MATERIAL_NO;
                $scope.institute_id=profile_data.data.message[0].ID;
-               if(profile_data.data.message[0].MATERIAL_REQUEST==null || profile_data.data.message[0].MATERIAL_REQUEST=='undefined' || profile_data.data.message[0].MATERIAL_REQUEST==''){
+               if(profile_data.data.message[0].MATERIAL_REQUEST==null || profile_data.data.message[0].MATERIAL_REQUEST=='undefined' || profile_data.data.message[0].MATERIAL_REQUEST=='' || profile_data.data.message[0].MATERIAL_REQUEST=='N'){
                     $scope.material_Status=false;
                }else{
                     $scope.material_Status=true;

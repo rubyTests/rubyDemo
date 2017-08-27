@@ -131,7 +131,7 @@ angular
             }).then(function(profile_data){
                $scope.grn_number=profile_data.data.message[0].GOODS_RECEIPT_PREFIX +''+ profile_data.data.message[0].GRN_NO;
                $scope.institute_id=profile_data.data.message[0].ID;
-               if(profile_data.data.message[0].GOODS_RECEIPT==null || profile_data.data.message[0].GOODS_RECEIPT=='undefined' || profile_data.data.message[0].GOODS_RECEIPT==''){
+               if(profile_data.data.message[0].GOODS_RECEIPT==null || profile_data.data.message[0].GOODS_RECEIPT=='undefined' || profile_data.data.message[0].GOODS_RECEIPT=='N' || profile_data.data.message[0].GOODS_RECEIPT==''){
                     $scope.grn_Status=false;
                }else{
                     $scope.grn_Status=true;
