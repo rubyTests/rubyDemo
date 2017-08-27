@@ -851,6 +851,7 @@ angular
 				$scope.bookTakenCount=$scope.viewData.length;
             });
 			
+			$scope.currDate = $filter('date')(new Date(),'dd-MMM-yyyy');
 
         }
     ])

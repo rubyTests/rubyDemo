@@ -412,7 +412,7 @@
                                         <span class="uk-badge uk-badge-success" ng-if="item.STATUS == 'Completed'">{{item.STATUS}}</span>
                                         <span class="uk-badge uk-badge-danger"  ng-if="item.STATUS == 'Pending'">{{item.STATUS}}</span>
                                         </td>
-                                        <td class="uk-width-2-10 uk-text-right uk-text-muted uk-text-small">{{item.DUE_DATE}}</td>
+                                        <td class="uk-width-2-10 uk-text-right uk-text-muted uk-text-small">{{item.DUE_DATE | date:'dd-MMM-yyyy'}}</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -434,18 +434,19 @@
                             <div class="uk-accordion uk-accordion-alt help_accordion hierarchical_slide" hierarchical-slide slide-children="h3" slide-context=".md-card-content">
                                 <h3 class="uk-accordion-title">Request Leave</h3>
                                 <div class="uk-accordion-content">
-                                    <p>Total Leaves Taken : 5 Days</p>
+                                    <p>Total Leaves Taken : <b>5 Days</b></p>
                                     <!-- <a ui-sref="restricted.student.stuApplyLeave"><p>Apply Leave</p></a> -->
-                                    <a ui-sref="#" ng-click="applyLeave()"><p>Apply Leave</p></a>
+                                    <!-- <a ui-sref="#" ng-click="applyLeave()"><p>Apply Leave</p></a> -->
                                 </div>
                                 <h3 class="uk-accordion-title">Library Details</h3>
                                 <div class="uk-accordion-content">
-                                    <p>{{bookTakenCount}} Books With Me</p>
+                                    <p><b>{{bookTakenCount}}</b> Books With Me</p>
                                     <a ui-sref="restricted.Library"><p>Search Book</p></a>
                                 </div>
                                 <h3 class="uk-accordion-title">Fee Details</h3>
                                 <div class="uk-accordion-content">
-                                    <p>Last Fee Paid : 25000 &nbsp&nbsp&nbsp&nbsp&nbsp Date : 25.05.2017</p>
+                                    <p>Last Fee Paid : <b>25000</b></p>
+									<p>Date : <b>{{currDate}}</b></p>
                                 </div>
                             </div>
                         </div>
