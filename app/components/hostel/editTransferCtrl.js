@@ -28,12 +28,13 @@ angular
                 // $scope.clearValidation=function(){
                 //     $('#form_validation').parsley().reset();
                 // }
+				var start_date;
                 $timeout(function(){
                     // date range
                     var $dp_end = $('#uk_dp_end');
 
                     var end_date = UIkit.datepicker($dp_end, {
-                        format:'DD.MM.YYYY'
+                        format:'DD-MMM-YYYY'
                     });
                     $dp_end.on('change',function() {
                         start_date.options.minDate = $dp_end.val();
