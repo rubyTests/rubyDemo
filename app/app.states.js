@@ -3535,7 +3535,7 @@ rubycampusApp
                 .state("restricted.hr.employeeReportView", {
                     url: "/employeeReportView/{id}",
                     templateUrl: 'app/components/employeemanagement/singleEmployeeReport.html',
-                    controller: 'reportforstudentCtrl',
+                    // controller: 'reportforstudentCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
                             return $ocLazyLoad.load([
