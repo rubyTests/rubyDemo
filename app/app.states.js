@@ -438,7 +438,6 @@ rubycampusApp
                 .state("restricted.plugins.events", {
                     url: "/events",
                     templateUrl: 'app/components/calender/newsandEvents.html',
-                    // controller: 'newsandEventsCtrl',
                     controller: 'newsandEventsCtrl',
                     resolve: {
                         deps: ['$ocLazyLoad', function($ocLazyLoad) {
