@@ -33,11 +33,11 @@ angular
                 $scope.TimeLIST.push(timeZone.data);
             });
 
-            $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
-            .success(function(profileData){
-                console.log(profileData,'profileDataprofileData');
-                $scope.returnProfile.push(profileData.data);
-            });
+            // $http.get($localStorage.service+'SettingAPI/employeeList',{headers:{'access_token':$localStorage.access_token}})
+            // .success(function(profileData){
+            //     console.log(profileData,'profileDataprofileData');
+            //     $scope.returnProfile.push(profileData.data);
+            // });
 
             $scope.selectize_contact_options = $scope.returnProfile;
             $scope.selectize_contact_config = {
@@ -60,6 +60,7 @@ angular
                 placeholder: 'Institute Type',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         console.log(value);
@@ -86,6 +87,7 @@ angular
                 placeholder: 'Currency',
                 valueField: 'ID',
                 labelField: 'NAME',
+                searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                     });
@@ -101,11 +103,30 @@ angular
 				searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        
+                        // console.log(value,'value');
+                        if(value){
+                            $scope.getCountryCode(value);
+                        }
                     });
                 }
             };
 
+            $scope.getCountryCode=function(countryId){
+                $scope.country_code='';
+                // $scope.contact.mobile_no='';
+                $http({
+                    method:'GET',
+                    url: $localStorage.service+'InstitutionAPI/countryCode',
+                    params: {
+                        'id' : countryId
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(return_data){
+                    // console.log(return_data.data.data[0].PHONE_CODE,'dsd');
+                    $scope.country_code=return_data.data.data[0].PHONE_CODE;
+                    // $scope.contact.mobile_no=return_data.data.data[0].PHONE_CODE;
+                })
+            }
 
             $scope.saveInstitutionData=function(){
                 var data=$('.fileinput-preview').find('img').attr('src');
@@ -135,7 +156,7 @@ angular
                                 'institute_name' : $scope.Basic.institute_name,
                                 'code' : $scope.Basic.institute_code,
                                 'type' : $scope.Basic.institute_type,
-                                'time_zone' : $scope.Basic.time_zone,
+                                // 'time_zone' : $scope.Basic.time_zone,
                                 'currency' : $scope.Basic.currency,
                                 'profile_id' : $scope.contact.prof_id,
                                 'institution_id' : $scope.Basic.institution_id
@@ -182,7 +203,7 @@ angular
                     url: $localStorage.service+'InstitutionAPI/institutionContactDetails',
                     data: {
                         'address' : $scope.contact.address,
-                        'contact_name' : $scope.contact.contact_name,
+                        // 'contact_name' : $scope.contact.contact_name,
                         'city' : $scope.contact.city,
                         'state' : $scope.contact.state,
                         'pincode' : $scope.contact.pincode,
@@ -208,6 +229,7 @@ angular
                             timeout : 2000,
                             pos     : 'top-center'
                         });
+                        $state.go('restricted.dashboard');
                     }
                 });
             };
@@ -229,7 +251,7 @@ angular
                     $scope.contact.prof_id=response.data.data[0].PROF_ID;
                     $scope.LOGO=response.data.data[0].LOGO;
                     $scope.contact.address=response.data.data[0].ADDRESS;
-                    $scope.contact.contact_name=response.data.data[0].CONTACT_PERSON;
+                    // $scope.contact.contact_name=response.data.data[0].CONTACT_PERSON;
                     $scope.contact.city=response.data.data[0].CITY;
                     $scope.contact.state=response.data.data[0].STATE;
                     $scope.contact.pincode=response.data.data[0].ZIP_CODE;

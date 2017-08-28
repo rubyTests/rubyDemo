@@ -34,23 +34,87 @@ angular
             });
             $scope.checkData=function(status,name){
                 if(status=='N' && name=='stu'){
-                    $scope.student_prefix='';
-                    $scope.student_admissionno='';
+                    UIkit.modal.confirm('Are you sure to uncheck student auto increment ?', function(e) {
+                        $scope.student_prefix='';
+                        $scope.student_admissionno='';
+                    },function(){
+                        $scope.student='Y';
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                    // $scope.student_prefix='';
+                    // $scope.student_admissionno='';
                 }else if(status=='N' && name=='emp'){
-                    $scope.employee_prefix='';
-                    $scope.employee_admissionno='';
+                    UIkit.modal.confirm('Are you sure to uncheck employee auto increment ?', function(e) {
+                        $scope.employee_prefix='';
+                        $scope.employee_admissionno='';
+                    },function(){
+                        $scope.employee='Y';
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+                    // $scope.employee_prefix='';
+                    // $scope.employee_admissionno='';
                 }else if(status=='N' && name=='material'){
-                    $scope.material_prefix='';
-                    $scope.m_request_no='';
+                    UIkit.modal.confirm('Are you sure to uncheck material auto increment ?', function(e) {
+                        $scope.material_prefix='';
+                        $scope.m_request_no='';
+                    },function(){
+                        $scope.material='Y';
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+
+                    // $scope.material_prefix='';
+                    // $scope.m_request_no='';
                 }else if(status=='N' && name=='purchase'){
-                    $scope.purchase_prefix='';
-                    $scope.order_no='';
+                    UIkit.modal.confirm('Are you sure to uncheck purchase order auto increment ?', function(e) {
+                        $scope.purchase_prefix='';
+                        $scope.order_no='';
+                    },function(){
+                        $scope.purchase='Y';
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+
+                    // $scope.purchase_prefix='';
+                    // $scope.order_no='';
                 }else if(status=='N' && name=='invoice'){
-                    $scope.invoice_prefix='';
-                    $scope.invoice_no='';
+                    UIkit.modal.confirm('Are you sure to uncheck invoice auto increment ?', function(e) {
+                         $scope.invoice_prefix='';
+                        $scope.invoice_no='';
+                    },function(){
+                        $scope.invoice='Y';
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+
+                    // $scope.invoice_prefix='';
+                    // $scope.invoice_no='';
                 }else if(status=='N' && name=='goods'){
-                    $scope.goods_prefix='';
-                    $scope.grn_no='';
+                    UIkit.modal.confirm('Are you sure to uncheck goods auto increment ?', function(e) {
+                        $scope.goods_prefix='';
+                        $scope.grn_no='';
+                    },function(){
+                        $scope.goodsreceipt='Y';
+                    }, {
+                        labels: {
+                            'Ok': 'Ok'
+                        }
+                    });
+
+                    // $scope.goods_prefix='';
+                    // $scope.grn_no='';
                 }
                 $('.uk-grid').find('input').trigger('blur');
             }
