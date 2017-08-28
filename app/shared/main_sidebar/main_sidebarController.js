@@ -151,11 +151,11 @@ angular
 								{
                                     title: 'Attendance Report',
 									link: 'restricted.academics.studentreport'
-                                },
-								{
-                                    title: 'Leave Applications',
-                                    link: 'restricted.academics.studentleaveapprove'
                                 }
+								// {
+                                    // title: 'Leave Applications',
+                                    // link: 'restricted.academics.studentleaveapprove'
+                                // }
                             ]
                         },
                         {
