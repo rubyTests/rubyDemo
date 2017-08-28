@@ -10,7 +10,8 @@ angular
         '$filter',
 		'$http',
 		'$localStorage',
-        function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage) {
+		'$state',
+        function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage,$state) {
             $scope.emptyImg=$localStorage.imageUrl;
 			$scope.stuAttendanceReport={};
 			$scope.tableView=false;
@@ -129,6 +130,11 @@ angular
             $scope.setCourseType=function(cousreType){
                 $localStorage.courseTypes=cousreType;
             }
+			
+			$scope.sendEmpDetails=function(empProfileId){
+				$localStorage.empProfileId=empProfileId;
+				$state.go('restricted.hr.employeeReportView');
+			}
 			
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
 

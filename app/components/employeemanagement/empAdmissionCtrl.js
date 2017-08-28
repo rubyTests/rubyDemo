@@ -304,7 +304,7 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data,'444444444444');
+                    // console.log(return_data,'444444444444');
                     if(return_data.data.status==true){
                         UIkit.notify({
                             message : return_data.data.data.message,

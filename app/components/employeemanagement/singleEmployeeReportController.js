@@ -12,7 +12,7 @@ angular
         '$http',
         '$localStorage','DTOptionsBuilder', 'DTColumnDefBuilder',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$stateParams,$http,$localStorage,DTOptionsBuilder, DTColumnDefBuilder) {
-            $scope.emptyImg=$localStorage.imageUrl;
+            // $scope.emptyImg=$localStorage.imageUrl;
             var vm = this;  
             vm.dt_data = [];
             vm.dtOptions = DTOptionsBuilder
@@ -37,21 +37,6 @@ angular
                     aoColumns: [
                         null,
                         {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'text',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
-                            type: 'number',
-                            bRegex: true,
-                            bSmart: true
-                        },
-                        {
                             type: 'number',
                             bRegex: true,
                             bSmart: true
@@ -68,7 +53,7 @@ angular
                         $compile($('.dt-uikit .md-input'))($scope);
                     })
                 });
-
+			console.log($stateParams.id,"$stateParams.id");
             var percen=0;
 			if($stateParams.id){
                 $http({

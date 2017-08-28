@@ -16,6 +16,8 @@ angular
 
             $scope.contact_list = contact_list;
 
+			$scope.default_image='assets/img/man.png'
+			
             // get all companies from array
             var all_companies = contact_list.map(function(a) {
 
