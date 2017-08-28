@@ -49,7 +49,7 @@ angular
             // });
             $http.get($localStorage.service+'LeavemgmntAPI/leaveType',{headers:{'access_token':$localStorage.access_token}})
             .success(function(leavetype_data){
-                console.log(leavetype_data,'leavetype_data');
+                //console.log(leavetype_data,'leavetype_data');
                 $scope.leaveType.push(leavetype_data.data);
             });
             $scope.getEmployeeList=function(id){
@@ -107,7 +107,7 @@ angular
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function() {
-                        console.log('on "change" event fired');
+                        //console.log('on "change" event fired');
                     });
                 }
             };
@@ -144,7 +144,7 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    console.log(return_data.data.data.message,'return_data');
+                    //console.log(return_data.data.data.message,'return_data');
                     if(return_data.data.data.status==true){
                         $state.go('restricted.hr.leave_entitlement_View');
                     }

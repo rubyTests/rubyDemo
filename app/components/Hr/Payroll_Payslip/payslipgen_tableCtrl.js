@@ -110,7 +110,8 @@ angular
                             data : { 'id':id,'genDate':genDate},
                             responseType : 'arraybuffer',
                             headers: {
-                             'Content-type' : 'application/pdf'
+                             'Content-type' : 'application/pdf',
+							 'access_token':$localStorage.access_token
                             },
                             cache: true,
                         }).success(function(data) {
