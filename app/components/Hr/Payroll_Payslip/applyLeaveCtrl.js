@@ -156,8 +156,8 @@ angular
                 $scope.applyLeaves=function(){
                     var fromdate=$scope.from_date;
                     var upto_date=$scope.upto_date;
-                    var start = moment(fromdate,["MM-DD-YYYY"]);
-                    var end = moment(upto_date,["MM-DD-YYYY"]);
+                    var start = moment(fromdate,["DD-MMM-YYYY"]);
+                    var end = moment(upto_date,["DD-MMM-YYYY"]);
                     var total_days=start.diff(end, "days");
                     console.log(total_days,'total_days');
                     $http({

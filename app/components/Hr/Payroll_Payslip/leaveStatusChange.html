@@ -88,7 +88,7 @@
                                     <span class="uk-text-muted uk-text-small">From Date</span>
                                 </div>
                                 <div class="uk-width-large-5-6">
-                                    {{leaveList.FROM_DATE}}
+                                    {{leaveList.FROM_DATE | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}
                                 </div>
                             </div>
                             <hr class="uk-grid-divider">
@@ -97,7 +97,7 @@
                                     <span class="uk-text-muted uk-text-small">To Date</span>
                                 </div>
                                 <div class="uk-width-large-5-6">
-                                    {{leaveList.TO_DATE}}
+                                    {{leaveList.TO_DATE | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}
                                 </div>
                             </div>
                             <hr class="uk-grid-divider">

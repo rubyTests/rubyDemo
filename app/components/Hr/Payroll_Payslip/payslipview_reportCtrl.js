@@ -71,7 +71,7 @@ angular
                 responseType : 'arraybuffer',
                 headers: {
                 'Content-type' : 'application/pdf',
-                'access_token':$localStorage.access_token
+                // 'access_token':$localStorage.access_token
                 },
                 cache: true,
                }).success(function(data) {
