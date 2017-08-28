@@ -66,9 +66,7 @@ angular
 
                 $http.get($localStorage.service+'AcademicsAPI/syllabusDetail',{params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},headers:{'access_token':$localStorage.access_token}})
                 .success(function(syllabus_details){
-                    // setTimeout(function(){
-						$scope.viewData=syllabus_details.message;
-					// },500);
+                    $scope.viewData=syllabus_details.message;
                 });
 
                 $scope.deleteSyllabus=function(id,syllabus_id,$index){
@@ -78,7 +76,7 @@ angular
                             $http({
                             method : "DELETE",
                             url : $localStorage.service+"AcademicsAPI/syllabusDetail",
-                            params : {id : id},
+                            params : {id : id,syllabus_id:syllabus_id},
                             headers:{'access_token':$localStorage.access_token}
                             }).then(function mySucces(response) {
                                 var data=response.data.message.message;

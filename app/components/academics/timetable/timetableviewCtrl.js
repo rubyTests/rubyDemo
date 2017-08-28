@@ -163,8 +163,8 @@ angular
                 maxItems: 1,
                 placeholder: 'Batch',
                 valueField: 'ID',
-                labelField: 'NAME',
-                searchField: 'NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
+                searchField: 'BATCH_DISPLAY_NAME',
                 onInitialize: function(selectize){
                	selectize.on('change', function(value) {
                         $scope.getTimetableAllocation(value);

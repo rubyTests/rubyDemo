@@ -1,29 +1,71 @@
     <div id="page_content">
         <div id="page_content_inner">
-            <h3 class="heading_b uk-margin-bottom">Time Table</h3>
+            <h3 class="heading_a uk-margin-bottom">Create Timetable</h3>
             <div class="md-card">
                 <div class="md-card-content">
+                    <div class="uk-text-right">
+                        <button class="md-btn md-btn-primary md-btn-small" ng-click="openTimetableModel()"><i class="uk-icon-plus"></i> Timetable Allocation</button>
+                    </div>
                     <div class="uk-grid" data-uk-grid-margin>
-                       <!--  <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                            <div class="parsley-row">
-                                <selectize id="selec_adv_2" config="department_config" options="department" position="bottom" ng-model="department1" name="department" required placeholder='Select Department'></selectize>
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-10 parsley-row">
+                                <br>
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >school</i>
+                                        </div>
+                                    </li>
+                                </ul>
                             </div>
-                        </div> -->
-                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                            <div class="uk-width-medium-4-10 parsley-row">
+                                <br ng-if="!course">
+                                <div class="parsley-row">
+                                    <label ng-if="course">Course</label>
+                                    <selectize id="selec_adv_2" config="course_config" options="course_option" position="bottom" ng-model="course" name="course" required placeholder='Select Course'></selectize>
+                                </div>
+                            </div>
+
+                            <div class="uk-width-medium-1-10 parsley-row">
+                                <br>
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >contacts</i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-3-10 parsley-row">
+                                <br ng-if="!batch">
+                                <div class="parsley-row">
+                                    <label ng-if="batch">Batch</label>
+                                    <selectize id="selec_adv_2" config="batch_config" options="batch_option" position="bottom" ng-model="batch" required ></selectize>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                        <!-- <div class="uk-width-large-1-3 uk-width-medium-1-1">
                             <div class="parsley-row">
+                                <br ng-show="batch && course">
+                                <label ng-show="course">Course</label>
                                 <selectize id="selec_adv_2" config="course_config" options="course_option" position="bottom" ng-model="course" name="course" required placeholder='Select Course'></selectize>
                             </div>
                         </div>
                         <div class="uk-width-large-1-3 uk-width-medium-1-1">
                             <div class="parsley-row">
+                                <br ng-show="course">
+                                <label ng-show="batch">Batch</label>
                                 <selectize id="selec_adv_2" config="batch_config" options="batch_option" position="bottom" ng-model="batch" required ></selectize>
                             </div>
-                        </div>
-                        <div class="uk-width-large-1-3 uk-width-medium-1-1">
+                        </div> -->
+                        <!-- <div class="uk-width-large-1-3 uk-width-medium-1-1">
                             <div class="uk-text-right">
-                                <button class="md-btn md-btn-primary" ng-click="openTimetableModel()">Timetable Allocation</button>
+                                <button class="md-btn md-btn-primary md-btn-small" ng-click="openTimetableModel()"><i class="uk-icon-plus"></i> Timetable Allocation</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>

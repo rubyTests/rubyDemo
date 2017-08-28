@@ -71,7 +71,7 @@ td.editable_updated {
                                 <td><img class="md-user-image" ng-src="{{item.IMAGE || default_image}}" alt=""/></td>
                                 <td><a ui-sref="restricted.academics.approveforstudentleave({id:{{item.PROFILE_ID}}})">{{item.PROFILE_NAME}}</td>
                                 <td>{{item.REASON}}</td>
-                                <td>{{item.FROMDATE | date:'dd-MMM-yyyy'}}</td>
+                                <td>{{item.FROMDATE}}</td>
                                 <td>{{item.TOTAL_LEAVE}}</td>
                                 <td>{{item.STATUS}}</td>
                             </tr>

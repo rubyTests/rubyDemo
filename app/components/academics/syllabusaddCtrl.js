@@ -88,14 +88,10 @@ angular
                 $http.get($localStorage.service+'AcademicsAPI/fetchCourseData',{headers:{'access_token':$localStorage.access_token}})
                 .success(function(cor_data){
                     if(cor_data.status==false){
-						if($localStorage.role_id==1){
-							$scope.courseData.push([{ID:-10, NAME:"Add Course"}]);
-						}
+                        $scope.courseData.push([{ID:-10, NAME:"Add Course"}]);
                     }else{
-						$scope.courseData.push(cor_data.data);
-                        if($localStorage.role_id==1){
-							$scope.courseData.push([{ID:-10, NAME:"Add Course"}]);
-						}
+                        $scope.courseData.push(cor_data.data);
+                        $scope.courseData.push([{ID:-10, NAME:"Add Course"}]);
                     }
                 });
             // }
@@ -192,15 +188,11 @@ angular
                     //console.log(subject_data,'subject_datasubject_data');
                   
                     if(subject_data.status==false){
-						if($localStorage.role_id==1){
-							$scope.selectize_subject_options=[].concat([{SUBJECT_ID:-10,NAME:"Add Sbuject"}]);
-						}
+                        $scope.selectize_subject_options=[].concat([{SUBJECT_ID:-10,NAME:"Add Sbuject"}]);
                     }else{
-						$scope.selectize_subject_options=[].concat(subject_data.message);
-						if($localStorage.role_id==1){
-							//$scope.subjectList.push(subject_data.message);
-							$scope.selectize_subject_options.push([{SUBJECT_ID:-10, NAME:"Add Sbuject"}]);
-						}
+                         //$scope.subjectList.push(subject_data.message);
+                        $scope.selectize_subject_options=[].concat(subject_data.message);
+                        $scope.selectize_subject_options.push([{SUBJECT_ID:-10, NAME:"Add Sbuject"}]);
                     }
                    
                 });

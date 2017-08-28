@@ -140,7 +140,7 @@ angular
 			$scope.course_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Course...',
+                placeholder: 'Course',
                 valueField: 'ID',
                 labelField: 'NAME',
                 onInitialize: function(selectize){
@@ -155,9 +155,10 @@ angular
             $scope.batch_config = {
                 create: false,
                 maxItems: 1,
-                placeholder: 'Select Batch...',
+                placeholder: 'Batch',
                 valueField: 'ID',
-                labelField: 'NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
 				onInitialize: function(selectize){
                    selectize.on('change', function(value) {
                         //console.log(value,"value");

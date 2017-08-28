@@ -66,11 +66,11 @@ angular
                 $dp_end = $('#uk_dp_end');
 
             var start_date = UIkit.datepicker($dp_start, {
-                format:'DD-MMM-YYYY'
+                format:'DD.MM.YYYY'
             });
 
             var end_date = UIkit.datepicker($dp_end, {
-                format:'DD-MMM-YYYY'
+                format:'DD.MM.YYYY'
             });
 
             $dp_start.on('change',function() {
@@ -115,8 +115,8 @@ angular
 				//console.log(res,"messsssssssssss");
 				$scope.Updatebutton=true;
 				$scope.Savebutton=false;
-				$scope.Fromdate = $filter('date')(res.STARTDATE,'dd-MMM-yyyy');
-				$scope.Todate = $filter('date')(res.ENDDATE,'dd-MMM-yyyy');
+				$scope.Fromdate = $filter('date')(res.STARTDATE,'dd.MM.yyyy');
+				$scope.Todate = $filter('date')(res.ENDDATE,'dd.MM.yyyy');
 				// $scope.exam={id:res.ID,name:res.NAME,termId:res.SETTERM_ID,startDate:res.STARTDATE,endDate:res.ENDDATE};
 				$scope.exam={id:res.ID,name:res.NAME,termId:res.SETTERM_ID,startDate:$scope.Fromdate,endDate:$scope.Todate};
 			}

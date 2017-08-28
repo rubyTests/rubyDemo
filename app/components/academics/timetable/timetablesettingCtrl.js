@@ -9,8 +9,8 @@ angular
         '$compile',
         '$location',
         '$http',
-        '$localStorage',
-        function ($scope,$rootScope,$timeout,$resource,$filter,$compile,$location,$http,$localStorage) {
+        '$localStorage','$state',
+        function ($scope,$rootScope,$timeout,$resource,$filter,$compile,$location,$http,$localStorage,$state) {
             $scope.selectize_start_options = ['Monday',' Tuesday','Wednesday','Thursday','Friday','Saturday'];
             $scope.selectize_start_config = {
                 create: false,
@@ -87,6 +87,7 @@ angular
                             timeout : 2000,
                             pos     : 'top-center'
                         });
+                        $state.go('restricted.academics.timetable.timetableView');
                     }else {
                         UIkit.notify({
                             message : 'Failed',

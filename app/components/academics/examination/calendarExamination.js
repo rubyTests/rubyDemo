@@ -129,7 +129,8 @@ angular
                 maxItems: 1,
                 placeholder: 'Batch',
                 valueField: 'ID',
-                labelField: 'NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
+                searchField: 'BATCH_DISPLAY_NAME',
                 onInitialize: function(selectize){
                    selectize.on('change', function(value) {
 
@@ -371,11 +372,11 @@ angular
                 $dp_end = $('#uk_dp_end');
 
             var start_date = UIkit.datepicker($dp_start, {
-                format:'DD-MMM-YYYY'
+                format:'DD.MM.YYYY'
             });
 
             var end_date = UIkit.datepicker($dp_end, {
-                format:'DD-MMM-YYYY'
+                format:'DD.MM.YYYY'
             });
 
             $dp_start.on('change',function() {

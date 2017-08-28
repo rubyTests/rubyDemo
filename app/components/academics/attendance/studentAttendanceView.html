@@ -19,39 +19,85 @@ td.editable_updated {
 </style>
 <div id="page_content">
     <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Attendance Marking</h3>
             <form id="form_validation" ng-submit="showConfimation(table_data)">
                 <div class="md-card">
                     <div class="md-card-content">
                         <div class="uk-grid" data-uk-grid-margin>
         					<div class="uk-width-large-1-1 uk-width-medium-1-1">
                                 <div class="uk-grid">
-                                    <div class="uk-width-large-1-3 uk-width-medium-1-3">
+                                    <div class="uk-width-medium-1-10 parsley-row">
                                         <br>
-        								<div class="uk-input-group">
-                                            <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
-                                            <label style="top:-17px !important;color:#000" for="uk_dp_1">Date</label>
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons" >date_range</i>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="uk-width-medium-3-10 parsley-row">
+                                        <br>
+                                        <div class="parsley-row">
+                                            <label style="top:-17px !important;color:#727272" for="uk_dp_1">Date</label>
                                             <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD-MMM-YYYY'}" md-input ng-model="stuAttendance.date" required>
                                         </div>
                                     </div>
-
-                                    <div class="uk-width-large-1-3 uk-width-medium-1-3">
+                                    <div class="uk-width-medium-1-10 parsley-row">
+                                        <br>
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons" >school</i>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="uk-width-medium-4-10 parsley-row">
                                         <br ng-if="!stuAttendance.course">
                                         <div class="parsley-row">
-                                            <label ng-if="stuAttendance.course">Course</label>
+                                            <label ng-if="stuAttendance.course" style="font-size: 12px;color: #727272;">Course</label>
                                             <input type="text" config="selectize_courseNew_config" options="selectize_courseNew_options" ng-model="stuAttendance.course" name="selectize_courseNew" selectize required/>
                                         </div>
                                     </div>
-                                    <div class="uk-width-large-1-3 uk-width-medium-1-3">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                                <div class="uk-grid">
+                                    <div class="uk-width-medium-1-10 parsley-row">
+                                        <br>
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons" >contacts</i>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="uk-width-medium-3-10 parsley-row">
                                         <br ng-if="!stuAttendance.batch">
                                         <div class="parsley-row">
-                                            <label ng-if="stuAttendance.batch">Course Batch</label>
+                                            <label ng-if="stuAttendance.batch" style="font-size: 12px;color: #727272;">Batch</label>
                                             <input type="text" config="selectize_batch_config" options="selectize_batch_options" ng-model="stuAttendance.batch" name="selectize_batch" selectize required/>
                                         </div>
                                     </div>
-                                    <div class="uk-width-large-1-3 uk-width-medium-1-3" ng-show='showSubject'>
+
+                                    <div class="uk-width-medium-1-10 parsley-row" ng-show='showSubject'>
                                         <br>
+                                        <ul class="md-list md-list-addon">
+                                            <li>
+                                                <div class="md-list-addon-element">
+                                                    <i class="md-list-addon-icon material-icons" >import_contacts</i>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="uk-width-medium-4-10 parsley-row" ng-show='showSubject'>
+                                        <br ng-if="!stuAttendance.subject">
                                         <div  class="parsley-row">
-                                            <label ng-if="stuAttendance.subject">Subject</label>
+                                            <label ng-if="stuAttendance.subject" style="font-size: 12px;color: #727272;">Subject</label>
                                             <input type="text" config="selectize_subject_config" options="selectize_subject_options" ng-model="stuAttendance.subject" name="selectize_subject" selectize ng-required='showSubject'/>
                                         </div>
                                     </div>
@@ -62,9 +108,8 @@ td.editable_updated {
                 </div>
                 <div class="md-card" ng-if="tableView">
                     <div class="md-card-content">
-                        <div class="uk-margin-bottom">
-                            <!-- <button class="md-btn uk-margin-right md-btn-primary" ng-click="showConfimation(table_data)">Save</button> -->
-                            <button class="md-btn uk-margin-right md-btn-primary" type="submit">Save</button>
+                        <div class="">
+                            <button class="md-btn md-btn-primary md-btn-small" type="submit"><i class="uk-icon-plus"></i> Save</button>
                         </div>
                         <div class="uk-overflow-container uk-margin-bottom">
                         <!-- <input class="search" data-column="all" type="search"><br> -->
@@ -77,12 +122,6 @@ td.editable_updated {
                             </div>
                             <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
                                 <thead>
-                                <!-- <tr>
-                                    <td colspan="3"></td>
-                                    <td colspan="3">
-                                        <input data-column="all" type="search" class="search md-input" md-input>
-                                    </td>
-                                </tr> -->
                                 <tr>
                                     <th data-name="Select" data-priority="5"><input type="checkbox" class="ts_checkbox_all"></th>
                                     <th class="filter-false remove sorter-false" data-priority="critical">Image</th>
@@ -91,15 +130,6 @@ td.editable_updated {
                                     <th data-priority="critical">Adminssion No</th>
                                 </tr>
                                 </thead>
-                                <!-- <tfoot>
-                                    <tr>
-                                        <th></th>
-                                        <th>Image</th>
-                                        <th>Student Name</th>
-                                        <th>Roll No</th>
-                                        <th>Adminssion No</th>
-                                    </tr>
-                                </tfoot> -->
                                 <tbody>
                                     <tr ng-repeat="item in table_data" on-last-repeat>
                                         <td><input type="checkbox" class="ts_checkbox" ng-change="getData(item)" data-md-icheck icheck ng-model="item.row_select" ng-checked="{{item.row_select=='Y'}}" ng-true-value="'Y'" ng-false-value="'N'"></td>
@@ -111,7 +141,7 @@ td.editable_updated {
                                 </tbody>
                             </table>
                         </div>
-                        <div class="ts_pager" ng-show="table_data.length > 10">
+                        <div class="ts_pager" ng-show="table_data.length > 1">
                             <ul class="uk-pagination uk-margin-medium-top ts_pager">
                                 <li data-uk-tooltip title="Select Page">
                                     <select class="ts_gotoPage ts_selectize"></select>

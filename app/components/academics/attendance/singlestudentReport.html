@@ -56,25 +56,6 @@ td.editable_updated {
                             <span class="uk-text-small uk-text-muted">{{basic.ADMISSION_NO}}</span>
                         </div>
                     </div>
-                    <!-- <div class="uk-width-medium-1-2">
-                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center"></div>
-                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Adminssion No : </span>
-                            <span class="uk-text-small uk-text-muted">{{currentUser.Admission_No}}</span>
-                        </div>
-                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Category : </span>
-                            <span class="uk-text-small uk-text-muted">{{currentUser.category}}</span>
-                        </div>
-                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Position : </span>
-                            <span class="uk-text-small uk-text-muted">{{currentUser.position}}</span>
-                        </div>
-                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Category : </span>
-                            <span class="uk-text-small uk-text-muted">{{currentUser.category}}</span>
-                        </div>
-                    </div> -->
                     <div class="uk-width-medium-1-3">
                         <div class="md-card">
                             <div class="md-card-content">
@@ -87,9 +68,11 @@ td.editable_updated {
                 </div>
 
                 <div ng-show="showDaily">
-                    <div class="uk-overflow-container uk-margin-bottom">
-                        <div class="uk-width-medium-1-1">
-                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                    <div class="uk-overflow-container uk-margin-bottom" ng-show="tblShow">
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-large-2-3 uk-width-medium-1-3"></div>
+                            <div class="uk-width-large-2-1 uk-width-medium-1-3">
+                                <input data-column="all" type="search" class="search md-input" md-input placeholder="Search">
                             </div>
                         </div>
                         <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
@@ -108,7 +91,7 @@ td.editable_updated {
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr ng-repeat="item in table_data">
+                                <tr ng-repeat="item in table_data track by $index" on-last-repeat">
                                     <td>{{$index+1}}</td>
                                     <td>{{item.DATE}}</td>
                                     <td>{{item.DURATION}}</td>
@@ -116,7 +99,27 @@ td.editable_updated {
                             </tbody>
                         </table>
                     </div>
-                    <div class="ts_pager">
+                    <!-- <div class="ts_pager" ng-show="tblShow">
+                        <ul class="uk-pagination ts_pager">
+                            <li data-uk-tooltip title="Select Page">
+                                <select class="ts_gotoPage ts_selectize"></select>
+                            </li>
+                            <li class="first"><a href="javascript:void(0)"><i class="uk-icon-angle-double-left"></i></a></li>
+                            <li class="prev"><a href="javascript:void(0)"><i class="uk-icon-angle-left"></i></a></li>
+                            <li><span class="pagedisplay"></span></li>
+                            <li class="next"><a href="javascript:void(0)"><i class="uk-icon-angle-right"></i></a></li>
+                            <li class="last"><a href="javascript:void(0)"><i class="uk-icon-angle-double-right"></i></a></li>
+                            <li data-uk-tooltip title="Page Size">
+                                <select class="pagesize ts_selectize">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="ts_pager" ng-show="table_data.length > 0">
                         <ul class="uk-pagination ts_pager">
                             <li data-uk-tooltip title="Select Page">
                                 <select class="ts_gotoPage ts_selectize"></select>
@@ -139,9 +142,11 @@ td.editable_updated {
                 </div>
 
                 <div ng-show="showSubject">
-                    <div class="uk-overflow-container uk-margin-bottom">
-                        <div class="uk-width-medium-1-1">
-                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                    <div class="uk-overflow-container uk-margin-bottom" ng-show="tblShow">
+                        <div class="uk-grid" data-uk-grid-margin>
+                            <div class="uk-width-large-2-3 uk-width-medium-1-3"></div>
+                            <div class="uk-width-large-2-1 uk-width-medium-1-3">
+                                <input data-column="all" type="search" class="search md-input" md-input placeholder="Search">
                             </div>
                         </div>
                         <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
@@ -160,7 +165,7 @@ td.editable_updated {
                                 </tr>
                             </tfoot>
                             <tbody>
-                                <tr ng-repeat="item in table_data">
+                                <tr ng-repeat="item in table_data track by $index" on-last-repeat">
                                     <td>{{$index+1}}</td>
                                     <td ng-click="sendParams(item.SUBJECT_ID)"><a ui-sref="restricted.academics.subjectwisereport({id:{{item.PROFILE_ID}}})">{{item.SUBJECT_NAME}}</a></td>
                                     <td>{{item.PERCENTAGE}}%</td>
@@ -168,7 +173,27 @@ td.editable_updated {
                             </tbody>
                         </table>
                     </div>
-                    <div class="ts_pager" ng-show="table_data.length > 10">
+                    <!-- <div class="ts_pager" ng-show="tblShow">
+                        <ul class="uk-pagination ts_pager">
+                            <li data-uk-tooltip title="Select Page">
+                                <select class="ts_gotoPage ts_selectize"></select>
+                            </li>
+                            <li class="first"><a href="javascript:void(0)"><i class="uk-icon-angle-double-left"></i></a></li>
+                            <li class="prev"><a href="javascript:void(0)"><i class="uk-icon-angle-left"></i></a></li>
+                            <li><span class="pagedisplay"></span></li>
+                            <li class="next"><a href="javascript:void(0)"><i class="uk-icon-angle-right"></i></a></li>
+                            <li class="last"><a href="javascript:void(0)"><i class="uk-icon-angle-double-right"></i></a></li>
+                            <li data-uk-tooltip title="Page Size">
+                                <select class="pagesize ts_selectize">
+                                    <option value="5">5</option>
+                                    <option value="10">10</option>
+                                    <option value="25">25</option>
+                                    <option value="50">50</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="ts_pager" ng-show="table_data.length > 1">
                         <ul class="uk-pagination ts_pager">
                             <li data-uk-tooltip title="Select Page">
                                 <select class="ts_gotoPage ts_selectize"></select>

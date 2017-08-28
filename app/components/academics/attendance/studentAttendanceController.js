@@ -142,8 +142,8 @@ angular
                 maxItems: 1,
                 placeholder: 'Batch',
                 valueField: 'ID',
-                labelField: 'NAME',
-				searchField: 'NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
+				searchField: 'BATCH_DISPLAY_NAME',
 				onInitialize: function(selectize){
                    selectize.on('change', function(value) {
 					   $scope.getStuData();
@@ -219,7 +219,7 @@ angular
 						$scope.stuAttendance={};
 						$scope.dt_data='';
 						$scope.markedStudent=[];
-                        $scope.stuAttendance.date = $filter('date')(new Date(),'dd.MM.yyyy');
+                        $scope.stuAttendance.date = $filter('date')(new Date(),'dd-MMM-yyyy');
 					}
 				});
 				
@@ -605,11 +605,11 @@ angular
                         $dp_end = $('#ts_dp_end');
 
                     var start_date = UIkit.datepicker($dp_start, {
-                        format:'MMM D, YYYY'
+                        format:'DD-MMM-YYYY'
                     });
 
                     var end_date = UIkit.datepicker($dp_end, {
-                        format:'MMM D, YYYY'
+                        format:'DD-MMM-YYYY'
                     });
 
                     $dp_start.on('change',function() {

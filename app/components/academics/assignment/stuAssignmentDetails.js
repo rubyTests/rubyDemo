@@ -90,7 +90,7 @@ angular
             $http({
                 method:'GET',
                 url: $localStorage.service+'AssignmentAPI/stuAssignmentDetail',
-                params:{profileId:$localStorage.userProfile_id,roleId:$localStorage.role_id},
+                params:{profileId:$localStorage.userProfile_id},
 				headers:{'access_token':$localStorage.access_token}
             }).then(function(return_data){
                 console.log(return_data,';return_data');
