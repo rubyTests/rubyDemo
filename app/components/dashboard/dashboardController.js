@@ -396,7 +396,7 @@ angular
 					// console.log(return_data,"return_data")
 					angular.forEach($scope.notes_data,function(data){
 						$scope.newData.push(data.stuTotal);
-						$scope.newDate.push(data.FROMDATE);
+						$scope.newDate.push(data.DATE);
 						//$scope.newData1.push(data.Total);
 					})
 				}else{
