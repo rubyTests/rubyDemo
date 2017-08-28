@@ -11,6 +11,7 @@ angular
         '$http',
         '$localStorage',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage) {
+            $scope.emptyImg=$localStorage.imageUrl;
             var $formValidate = $('#form_validation');
             $formValidate
             .parsley()
@@ -139,8 +140,19 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(employee_data){
-                    // console.log(employee_data.data.message,'emptysdsssssssssss');
+                    console.log(employee_data.data.message,'emptysdsssssssssss');
                     $scope.table_data=[].concat(employee_data.data.message);
+                    // if(employee_data.data.message=='Record Detail could not be found'){
+                    //     // $scope.tblHide=true;
+                    //     $scope.table_data=[];
+                    //     $scope.tblShow=true;
+                    //     $scope.tblHide=false;
+                    // }else{
+                    //     // $scope.tblHide=false;
+                    //     $scope.table_data=[].concat(employee_data.data.message);
+                    //     $scope.tblHide=true;
+                    //     $scope.tblShow=false;
+                    // }
                 });
             }
 
@@ -225,7 +237,7 @@ angular
                         // target the pager markup - see the HTML block below
                         container: $(".ts_pager"),
                         // output string - default is '{page}/{totalPages}'; possible variables: {page}, {totalPages}, {startRow}, {endRow} and {totalRows}
-                        output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
+                        output: '{startRow} - {endRow} of {filteredRows}',
                         // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
                         // table row set to a height to compensate; default is false
                         fixedHeight: true,
@@ -251,7 +263,7 @@ angular
                         .tablesorter({
                             theme: 'altair',
                             widthFixed: true,
-                            widgets: ['zebra', 'filter','print','columnSelector'],
+                            widgets: ['zebra', "filter", 'print','columnSelector'],
                             headers: {
                                 0: {
                                     sorter: false,
@@ -273,6 +285,14 @@ angular
                                 print_styleSheet : '',          // add the url of your print stylesheet
                                 print_now        : true,        // Open the print dialog immediately if true
                                 // callback executed when processing completes - default setting is null
+                                filter_external : '.search',
+                                // add a default type search to the first name column
+                                filter_defaultFilter: { 1 : '~{query}' },
+                                // include column filters
+                                filter_columnFilters: false,
+                                filter_placeholder: { search : 'Search...' },
+                                filter_saveFilters : true,
+                                filter_reset: '.reset',
                                 print_callback   : function(config, $table, printStyle){
                                     // hide sidebar
                                     $rootScope.primarySidebarActive = false;
@@ -293,6 +313,17 @@ angular
                                 selectizePage.setValue($('select.ts_gotoPage option:selected').index() + 1, false);
                             }
                         });
+                        $('button[data-column]').on('click', function(){
+                            var $this = $(this),
+                              totalColumns = $table[0].config.columns,
+                              col = $this.data('column'), // zero-based index or "all"
+                              filter = [];
+
+                            // text to add to filter
+                            filter[ col === 'all' ? totalColumns : col ] = $this.text();
+                            $table.trigger('search', [ filter ]);
+                            return false;
+                          });
 
                     // replace column selector checkboxes
                     $columnSelector.children('li').each(function(index) {

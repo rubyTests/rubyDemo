@@ -62,7 +62,7 @@
                             </div>
                         </div>
                         <div class="uk-text-center">
-                            <a ui-sref="restricted.employeemanagement.profile({emp_id:user.ID})"><img class="md-card-head-avatar" ng-src="{{user.IMAGE1 || default_image}}" alt=""/></a>
+                            <a ui-sref="restricted.employeemanagement.profile({emp_id:user.ID})"><img class="md-card-head-avatar" ng-src="{{user.IMAGE1}}" alt=""/></a>
                         </div>
                         <h3 class="md-card-head-text uk-text-center" ng-class="{'md-color-white' : user.featured}">
                             <a ui-sref="restricted.employeemanagement.profile({emp_id:user.ID})" style="color:rgb(33,33,70);">{{user.EMPLOYEE_NAME}}</a>
@@ -81,8 +81,6 @@
                                 <div class="md-list-content">
                                     <span class="md-list-heading">Department</span>
                                     <span class="uk-text-small uk-text-muted" style="height: 32px !important;">{{user.DEPT_NAME}}</span>
-                                    <span class="md-list-heading">Position</span>
-                                    <span class="uk-text-small uk-text-muted" style="height: 20px !important;">{{user.POSITION_NAME}}</span>
                                 </div>
                             </li>
                             <li>

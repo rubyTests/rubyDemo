@@ -139,7 +139,7 @@ angular
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         $timeout(function() {
-                            $('#contactForm').parsley().validate();
+                            // $('#contactForm').parsley().validate();
                         }, 200);
                         console.log(value);
                     });
@@ -260,12 +260,13 @@ angular
             };
 
              $timeout(function(){
-                $scope.backGroundEmail=function(emailID){
+                $scope.backGroundEmail=function(emailID,profileId){
                     $http({
                         method:'POST',
                         url: $localStorage.service+'EmployeemgmntAPI/sendEmail',
                         data:{
                             'mail_id':emailID,
+                            'profileid':profileId,
                         },
                         headers:{'access_token':$localStorage.access_token}
                     }).then(function(response){
@@ -303,7 +304,7 @@ angular
                     },
                     headers:{'access_token':$localStorage.access_token}
                 }).then(function(return_data){
-                    // console.log(return_data,'444444444444');
+                    console.log(return_data,'444444444444');
                     if(return_data.data.status==true){
                         UIkit.notify({
                             message : return_data.data.data.message,
@@ -316,7 +317,9 @@ angular
                         $scope.employee_profileID=return_data.data.data.EMP_PROFILE_ID;
                         $scope.ThirdProfileID=return_data.data.data.EMP_PROFILE_ID;
                         WizardHandler.wizard().next();
-                        $scope.backGroundEmail($scope.ADDITIONAl.email);
+                        if(return_data.data.data.EMAIL_CHECK=='New'){
+                            $scope.backGroundEmail($scope.ADDITIONAl.email,return_data.data.data.PROFILE_ID);
+                        }
                     }else {
                         UIkit.notify({
                             message : 'Email Already Exists',
@@ -472,21 +475,21 @@ angular
                 $dp_end = $('#uk_dp_end');
 
             var start_date = UIkit.datepicker($dp_start, {
-                format:'DD.MM.YYYY'
+                format:'DD-MMM-YYYY'
             });
 
             var end_date = UIkit.datepicker($dp_end, {
-                format:'DD.MM.YYYY'
+                format:'DD-MMM-YYYY'
             });
 
-            $dp_start.on('change',function() {
-                var customeDate=$dp_start.val().split(".");
-                end_date.options.maxDate = parseInt(customeDate[0])-1+"."+customeDate[1]+"."+customeDate[2];
-            });
+            // $dp_start.on('change',function() {
+            //     var customeDate=$dp_start.val().split(".");
+            //     end_date.options.maxDate = parseInt(customeDate[0])-1+"."+customeDate[1]+"."+customeDate[2];
+            // });
 
-            $dp_end.on('change',function() {
-                start_date.options.minDate = $dp_end.val();
-            });
+            // $dp_end.on('change',function() {
+            //     start_date.options.minDate = $dp_end.val();
+            // });
 
             $scope.checkDateValidation=function(data){
                 console.log(data,'data');

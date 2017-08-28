@@ -15,7 +15,7 @@
     <div id="page_content">
         <div id="page_content_inner">
             <div class="uk-grid" data-uk-grid-margin data-uk-grid-match id="user_profile">
-                <div class="uk-width-large-7-10">
+                <div class="uk-width-large-8-10">
                     <div class="md-card">
                         <div class="user_heading" style="background-color: rgb(231,231,231);padding: 20px !important;">
                             <!-- <div class="user_heading_menu" data-uk-dropdown="{pos:'bottom-right'}">
@@ -54,8 +54,8 @@
                             <ul id="user_profile_tabs" class="uk-tab" data-uk-tab="{connect:'#user_profile_tabs_content', animation:'slide-horizontal'}" data-uk-sticky="{ top: 48, media: 960 }">
                                 <li class="uk-active"><a href="#">About</a></li>
                                 <li><a href="#">Contact Information</a></li>
-                                <li><a href="#">Previous work info</a></li>
-                                <li><a href="#">Additional Details</a></li>
+                                <li ng-show="form_dynamic.length > 0"><a href="#">Previous work info</a></li>
+                                <li ng-show="user_data.ACCOUNT_NAME.length > 0 || user_data.ACCOUNT_NO.length > 0"><a href="#">Additional Details</a></li>
                             </ul>
                             <ul id="user_profile_tabs_content" class="uk-switcher uk-margin">
                                 <li>
@@ -76,13 +76,13 @@
                                                         <span class="uk-text-small uk-text-muted">Gender</span>
                                                     </div>
                                                 </li>
-                                                <li style="border: none;">
+                                                <li style="border: none;" ng-show="user_data.NATION_NAME">
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">{{user_data.NATION_NAME}}</span>
                                                         <span class="uk-text-small uk-text-muted">Nationality</span>
                                                     </div>
                                                 </li>
-                                                <li style="border: none;">
+                                                <li style="border: none;" ng-show="user_data.MARITAL_NAME">
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">{{user_data.MARITAL_NAME}}</span>
                                                         <span class="uk-text-small uk-text-muted">Marital Status</span>
@@ -100,7 +100,7 @@
                                                         <span class="uk-text-small uk-text-muted">Qualification</span>
                                                     </div>
                                                 </li>
-                                                <li style="border: none;">
+                                                <li style="border: none;" ng-show="user_data.CATEGORY_NAME">
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">{{user_data.CATEGORY_NAME}}</span>
                                                         <span class="uk-text-small uk-text-muted">Category</span>
@@ -177,7 +177,7 @@
                                                         <span class="uk-text-small uk-text-muted">Phone</span>
                                                     </div>
                                                 </li>
-                                                <li style="border: none;">
+                                                <!-- <li style="border: none;">
                                                     <div class="md-list-addon-element">
                                                         <i class="material-icons md-list-addon-icon">&#xE0BE;</i>
                                                     </div>
@@ -185,19 +185,28 @@
                                                         <span class="md-list-heading">{{user_data.EMAIL}}</span>
                                                         <span class="uk-text-small uk-text-muted">Email</span>
                                                     </div>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                         <div class="uk-width-large-1-2">
                                             <h4 class="heading_c uk-margin-small-bottom">&nbsp;</h4>
                                             <ul class="md-list md-list-addon">
-                                                <li style="border: none;">
+                                                <!-- <li style="border: none;">
                                                     <div class="md-list-addon-element">
                                                         <i class="material-icons md-list-addon-icon">&#xE324;</i>
                                                     </div>
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">{{user_data.PHONE_NO_2}}</span>
                                                         <span class="uk-text-small uk-text-muted">Mobile</span>
+                                                    </div>
+                                                </li> -->
+                                                <li style="border: none;">
+                                                    <div class="md-list-addon-element">
+                                                        <i class="material-icons md-list-addon-icon">&#xE0BE;</i>
+                                                    </div>
+                                                    <div class="md-list-content">
+                                                        <span class="md-list-heading">{{user_data.EMAIL}}</span>
+                                                        <span class="uk-text-small uk-text-muted">Email</span>
                                                     </div>
                                                 </li>
                                             </ul>
@@ -373,12 +382,12 @@
                                                         <span class="uk-text-small uk-text-muted">Passport Number</span>
                                                     </div>
                                                 </li>
-                                                <li style="border:none">
+                                                <!-- <li style="border:none">
                                                     <div class="md-list-content">
                                                         <span class="md-list-heading">{{user_data.WORK_PERMIT}}</span>
                                                         <span class="uk-text-small uk-text-muted">Work Permit</span>
                                                     </div>
-                                                </li>
+                                                </li> -->
                                             </ul>
                                         </div>
                                     </div>
@@ -387,7 +396,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="uk-width-large-3-10">
+                <!-- <div class="uk-width-large-3-10">
                     <div class="md-card">
                         <div class="md-card-content">
                             <div class="uk-margin-medium-bottom">
@@ -421,7 +430,7 @@
                             <a class="md-btn md-btn-flat md-btn-flat-primary" href="#">Show all</a>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>

@@ -161,8 +161,7 @@ angular
               headers:{'access_token':$localStorage.access_token}
             }).then(function mySucces(response) {
                 $timeout(function(){
-                    // console.log(response.data,'response.data');
-                    // $scope.previous_Inst = response.data.data;
+                    // console.log(response.data,'previousInstitute');
                     $scope.form_dynamic=response.data.data;
                 },2000); 
             },function myError(response){
@@ -335,11 +334,7 @@ angular
                             timeout : 2000,
                             pos     : 'top-center'
                         });
-                        if($localStorage.role_id==1){
-							$state.go('restricted.employeemanagement.employee_profile_tableview');
-						}else if($localStorage.role_id==2){
-							$state.go('restricted.dashboard');
-						}
+                        $state.go('restricted.employeemanagement.employee_profile_tableview');
                         if(return_data.data.data.check=='New'){
                             $timeout(function(){
                                 $scope.backGroundEmail($scope.user_data.EMAIL);
@@ -392,7 +387,11 @@ angular
                 // $event.preventDefault();
                 // $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
             };
-
+            
+            $scope.clonePreviousInstitute=function(){
+                $scope.form_dynamic=[];
+                $scope.form_dynamic.push({'ID':'','DESIGNATION':'','INST_NAME':'','ADDRESS': '','CITY': '','STATE':'','ZIP_CODE': '','COUNTRY': '','PERIOD_FROM': '','PERIOD_TO':''});
+            }
             // delete section
             $scope.deleteSection = function($event,$index,CurrForm) {
                 console.log(CurrForm,'CurrForm');

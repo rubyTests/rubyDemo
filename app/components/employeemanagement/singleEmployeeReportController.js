@@ -10,9 +10,65 @@ angular
         '$filter',
         '$stateParams',
         '$http',
-        '$localStorage',
-        function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$stateParams,$http,$localStorage) {
-        
+        '$localStorage','DTOptionsBuilder', 'DTColumnDefBuilder',
+        function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$stateParams,$http,$localStorage,DTOptionsBuilder, DTColumnDefBuilder) {
+            $scope.emptyImg=$localStorage.imageUrl;
+            var vm = this;  
+            vm.dt_data = [];
+            vm.dtOptions = DTOptionsBuilder
+                .newOptions()
+                .withDOM("<'dt-uikit-header'<'uk-grid'<'uk-width-medium-2-3'l><'uk-width-medium-1-3'f>>>" +
+                    "<'uk-overflow-container'tr>" +
+                    "<'dt-uikit-footer'<'uk-grid'<'uk-width-medium-3-10'i><'uk-width-medium-7-10'p>>>")
+                .withOption('createdRow', function(row, data, dataIndex) {
+                    // Recompiling so we can bind Angular directive to the DT
+                    $compile(angular.element(row).contents())($scope);
+                })
+                .withOption('headerCallback', function(header) {
+                    if (!vm.headerCompiled) {
+                        // Use this headerCompiled field to only compile header once
+                        vm.headerCompiled = true;
+                        $compile(angular.element(header).contents())($scope);
+                    }
+                })
+                .withPaginationType('full_numbers')
+                // Active Buttons extension
+                .withColumnFilter({
+                    aoColumns: [
+                        null,
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'text',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        },
+                        {
+                            type: 'number',
+                            bRegex: true,
+                            bSmart: true
+                        }
+                    ]
+                })
+                 .withOption('initComplete', function() {
+                    $timeout(function() {
+                        $compile($('.dt-uikit .md-input'))($scope);
+                    })
+                });
+
             var percen=0;
 			if($stateParams.id){
                 $http({
@@ -27,15 +83,21 @@ angular
                     $scope.basic = response1.data.message[0];
                     $scope.AttendancePercentage = response1.data.message[0].PERCENTAGE;
                     percen=response1.data.message[0].PERCENTAGE;
-                    $scope.table_data = response1.data.message[0].leave_list;   
+                    $scope.table_data = response1.data.message[0].leave_list;
+                    console.log('sass',response1.data.message[0].leave_list.length);
+                    if(response1.data.message[0].leave_list.length==0){
+                        $scope.tableStatus=true;
+                    }else{
+                        $scope.tableStatus=false;
+                    }
                 });
 
-				$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{attendance_type:$localStorage.courseTypes,profileId:$stateParams.id},headers:{'access_token':$localStorage.access_token}})
-				.success(function(data){
-					console.log(data,'tttttt');
-					// $scope.currentUser = data.message[0];
-					$scope.table_data = data.message;					
-				});
+				// $http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{attendance_type:$localStorage.courseTypes,profileId:$stateParams.id},headers:{'access_token':$localStorage.access_token}})
+				// .success(function(data){
+				// 	console.log(data,'tttttt');
+				// 	// $scope.currentUser = data.message[0];
+				// 	$scope.table_data = data.message;					
+				// });
 			// }else{
 			// 	$http.get($localStorage.service+'StuAttendanceAPI/stuProfileAttendanceReport',{params:{profileId:$localStorage.userProfile_id},headers:{'access_token':$localStorage.access_token}})
 			// 	.success(function(data){
@@ -90,7 +152,6 @@ angular
 			},1500)
               
 
-            // initialize tables
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
 
                 var $ts_pager_filter = $("#ts_pager_filter"),
@@ -106,7 +167,7 @@ angular
                         // target the pager markup - see the HTML block below
                         container: $(".ts_pager"),
                         // output string - default is '{page}/{totalPages}'; possible variables: {page}, {totalPages}, {startRow}, {endRow} and {totalRows}
-                        output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
+                        output: '{startRow} - {endRow} of {filteredRows}',
                         // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
                         // table row set to a height to compensate; default is false
                         fixedHeight: true,
@@ -132,7 +193,7 @@ angular
                         .tablesorter({
                             theme: 'altair',
                             widthFixed: true,
-                            widgets: ['zebra', 'filter','print','columnSelector'],
+                            widgets: ['zebra', "filter", 'print','columnSelector'],
                             headers: {
                                 0: {
                                     sorter: false,
@@ -141,7 +202,6 @@ angular
                             },
                             widgetOptions : {
                                 // column selector widget
-                                filter_external : '.search',
                                 columnSelector_container : $columnSelector,
                                 columnSelector_name : 'data-name',
                                 columnSelector_layout : '<li class="padding_md"><input type="checkbox"><label class="inline-label">{name}</label></li>',
@@ -155,6 +215,14 @@ angular
                                 print_styleSheet : '',          // add the url of your print stylesheet
                                 print_now        : true,        // Open the print dialog immediately if true
                                 // callback executed when processing completes - default setting is null
+                                filter_external : '.search',
+                                // add a default type search to the first name column
+                                filter_defaultFilter: { 1 : '~{query}' },
+                                // include column filters
+                                filter_columnFilters: false,
+                                filter_placeholder: { search : 'Search...' },
+                                filter_saveFilters : true,
+                                filter_reset: '.reset',
                                 print_callback   : function(config, $table, printStyle){
                                     // hide sidebar
                                     $rootScope.primarySidebarActive = false;
@@ -175,6 +243,17 @@ angular
                                 selectizePage.setValue($('select.ts_gotoPage option:selected').index() + 1, false);
                             }
                         });
+                        $('button[data-column]').on('click', function(){
+                            var $this = $(this),
+                              totalColumns = $table[0].config.columns,
+                              col = $this.data('column'), // zero-based index or "all"
+                              filter = [];
+
+                            // text to add to filter
+                            filter[ col === 'all' ? totalColumns : col ] = $this.text();
+                            $table.trigger('search', [ filter ]);
+                            return false;
+                          });
 
                     // replace column selector checkboxes
                     $columnSelector.children('li').each(function(index) {

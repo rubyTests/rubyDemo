@@ -26,12 +26,13 @@ td.editable_updated {
     width: 100%;
 }
 </style>
-<div id="page_content">
+<div id="page_content" ng-controller="reportforstudentCtrl as showCase">
     <div id="page_content_inner">
+        <h3 class="heading_a uk-margin-bottom">Attendance Report</h3>
         <div class="md-card">
             <div class="md-card-content">
                 <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-medium-2-3">
+                    <div class="uk-width-medium-1-6">
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
                             <div class="user_heading_avatar">
                                 <div class="thumbnail">
@@ -39,130 +40,62 @@ td.editable_updated {
                                 </div>
                             </div>
                         </div>
-                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Name : </span>
-                            <span class="uk-text-small uk-text-muted">{{basic.EMPLOYEE_NAME}}</span>
+                    </div>
+                    <div class="uk-width-medium-3-6">
+                        <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
+                            <span class="md-list-heading">Name: </span>
+                            <span class="heading_c ng-binding"> {{basic.EMPLOYEE_NAME}}</span>
                         </div>
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Adminssion No : </span>
-                            <span class="uk-text-small uk-text-muted">{{basic.ADM_NO}}</span>
+                            <span class="md-list-heading">Employee No: </span>
+                            <span class="heading_c ng-binding"> {{basic.ADM_NO}}</span>
                         </div>
                         <div class="uk-width-large-1-1 uk-width-medium-1-1 uk-align-center">
-                            <span class="md-list-heading">Category : </span>
-                            <span class="uk-text-small uk-text-muted">{{basic.CATEGORY_NAME}}</span>
+                            <span class="md-list-heading">Department: </span>
+                            <span class="heading_c ng-binding"> {{basic.DEPT_NAME}}</span>
                         </div>
                     </div>
-                    <div class="uk-width-medium-1-3">
-                        <div class="md-card">
+                    <div class="uk-width-medium-2-6">
+                        <!-- <div class="md-card"> -->
                             <div class="md-card-content">
-                                <h4 class="heading_c uk-margin-bottom">Overall Attendance Percentage</h4>
-                                <div id="c3_server_load" class="c3chart"></div>
+                                <!-- <h4 class="heading_c uk-margin-bottom">Overall Attendance Percentage</h4> -->
+                                <div id="c3_server_load" class="c3chart" style="margin-top: -50px;"></div>
                             </div>
-                        </div>
+                        <!-- </div> -->
                     </div>
                 </div>
+            </div>
+        </div>
 
-                <div>
-                    <div class="uk-overflow-container uk-margin-bottom">
-                        <div class="uk-width-medium-1-1">
-                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
-                            </div>
+        <div class="md-card">
+            <div class="md-card-content">
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-medium-1-1">
+                        <div class="uk-overflow-container uk-margin-bottom">
+                            <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>  
+                                        <th data-priority="critical">S.No</th>
+                                        <th data-priority="critical">Date</th>
+                                        <th data-priority="critical">Duration</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th data-priority="critical">S.No</th>
+                                        <th data-priority="critical">Date</th>
+                                        <th data-priority="critical">Duration</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    <tr ng-repeat="item in table_data track by $index" on-last-repeat>
+                                        <td>{{$index+1}}</td>
+                                        <td>{{item.DATE | date:'dd-MMM-yyyy'}}</td>
+                                        <td>{{item.DURATION}}</td>
+                                    </tr>                                
+                                </tbody>
+                            </table>
                         </div>
-                        <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
-                            <thead>
-                            <tr>
-                                <th data-priority="critical"></th>
-                                <th data-priority="critical">Date</th>
-                                <th data-priority="critical">Duration</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>Date</th>
-                                    <th>Duration</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr ng-repeat="item in table_data">
-                                    <td>{{$index+1}}</td>
-                                    <td>{{item.DATE | momentDate:'YYYY-MM-DD':'DD-MMM-YYYY'}}</td>
-                                    <td>{{item.DURATION}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="ts_pager">
-                        <ul class="uk-pagination ts_pager">
-                            <li data-uk-tooltip title="Select Page">
-                                <select class="ts_gotoPage ts_selectize"></select>
-                            </li>
-                            <li class="first"><a href="javascript:void(0)"><i class="uk-icon-angle-double-left"></i></a></li>
-                            <li class="prev"><a href="javascript:void(0)"><i class="uk-icon-angle-left"></i></a></li>
-                            <li><span class="pagedisplay"></span></li>
-                            <li class="next"><a href="javascript:void(0)"><i class="uk-icon-angle-right"></i></a></li>
-                            <li class="last"><a href="javascript:void(0)"><i class="uk-icon-angle-double-right"></i></a></li>
-                            <li data-uk-tooltip title="Page Size">
-                                <select class="pagesize ts_selectize">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                </select>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div ng-show="showSubject">
-                    <div class="uk-overflow-container uk-margin-bottom">
-                        <div class="uk-width-medium-1-1">
-                            <div class="uk-width-large-1-1 uk-width-medium-1-1">
-                            </div>
-                        </div>
-                        <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
-                            <thead>
-                            <tr>
-                                <th data-priority="critical"></th>
-                                <th data-priority="critical">Subject</th>
-                                <th data-priority="critical">Duration</th>
-                            </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th>Subject</th>
-                                    <th>Duration</th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr ng-repeat="item in table_data">
-                                    <td>{{$index+1}}</td>
-                                    <td ng-click="sendParams(item.SUBJECT_ID)"><a ui-sref="restricted.academics.subjectwisereport({id:{{item.PROFILE_ID}}})">{{item.SUBJECT_NAME}}</a></td>
-                                    <td>{{item.PERCENTAGE}}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="ts_pager" ng-show="table_data.length > 10">
-                        <ul class="uk-pagination ts_pager">
-                            <li data-uk-tooltip title="Select Page">
-                                <select class="ts_gotoPage ts_selectize"></select>
-                            </li>
-                            <li class="first"><a href="javascript:void(0)"><i class="uk-icon-angle-double-left"></i></a></li>
-                            <li class="prev"><a href="javascript:void(0)"><i class="uk-icon-angle-left"></i></a></li>
-                            <li><span class="pagedisplay"></span></li>
-                            <li class="next"><a href="javascript:void(0)"><i class="uk-icon-angle-right"></i></a></li>
-                            <li class="last"><a href="javascript:void(0)"><i class="uk-icon-angle-double-right"></i></a></li>
-                            <li data-uk-tooltip title="Page Size">
-                                <select class="pagesize ts_selectize">
-                                    <option value="5">5</option>
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                </select>
-                            </li>
-                        </ul>
                     </div>
                 </div>
             </div>
