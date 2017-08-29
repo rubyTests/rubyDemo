@@ -54,45 +54,13 @@ angular
                         url: $localStorage.service+'FinanceAPI/feeStructure',
                         method : 'GET',
                         headers: { 'access_token':$localStorage.access_token},
-                    }).success(function(response) {
-                        console.log(response,'success');
-                        $scope.viewData=response.message;
-                    }).error(function(data){
-                        console.log('error');
+                    }).then(function(response) {
+                        // console.log(response,'success');
+                        $scope.viewData=response.data.message;
                     });
                 }
                 $scope.refreshTable();
                 $scope.deleteFeeStructure=function($index,id){
-                    // if(id){
-                    //     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
-                    //         if(id){
-                    //             $http({
-                    //             method : "DELETE",
-                    //             url : $localStorage.service+"FinanceAPI/feeStructure",
-                    //             params : {id : id},
-                    //             headers:{'access_token':$localStorage.access_token}
-                    //             }).then(function mySucces(response) {
-                    //                 console.log('delete',response);
-                    //                 $scope.viewData.splice($index, 1);
-                    //                 UIkit.notify({
-                    //                     message : response.data.message,
-                    //                     status  : 'success',
-                    //                     timeout : 2000,
-                    //                     pos     : 'top-center'
-                    //                 });
-                    //                 $scope.refreshTable();
-                    //             },function myError(response) {
-                    //             })
-                    //         }
-                    //     },function(){
-                    //         // console.log("false");
-                    //     }, {
-                    //         labels: {
-                    //             'Ok': 'Ok'
-                    //         }
-                    //     });
-                    // }
-
 
                     if(id){
                         $http({
@@ -100,10 +68,11 @@ angular
                         url: $localStorage.service+'FinanceAPI/checkFeeStructure',
                         params : {id : id},
                         headers:{'access_token':$localStorage.access_token}
-                        }).then(function mySucces(response) {
+                    }).then(function(response){
+                        console.log(response,'response');
+                        if(response.data.status==true){
                             UIkit.modal.alert('This fee structure assigned to a student, remove the student to continue removing this fee structure');
-                        },function myError(response) {
-                            console.log(response,'error');
+                        }else{
                             UIkit.modal.confirm('Are you sure to delete ?', function(e) {
                                 if(id){
                                     $http({
@@ -111,7 +80,7 @@ angular
                                         url : $localStorage.service+"FinanceAPI/feeStructure",
                                         params : {id : id},
                                         headers:{'access_token':$localStorage.access_token}
-                                    }).then(function mySucces(response) {
+                                    }).then(function(response) {
                                         console.log('delete',response);
                                         $scope.viewData.splice($index, 1);
                                         UIkit.notify({
@@ -121,7 +90,6 @@ angular
                                             pos     : 'top-center'
                                         });
                                         $scope.refreshTable();
-                                    },function myError(response) {
                                     })
                                 }
                             },function(){
@@ -131,7 +99,40 @@ angular
                                     'Ok': 'Ok'
                                 }
                             });
-                        })
+                        }
+                    })
+                        // }).then(function mySucces(response) {
+                        //     UIkit.modal.alert('This fee structure assigned to a student, remove the student to continue removing this fee structure');
+                        // },function myError(response) {
+                        //     console.log(response,'error');
+                        //     UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        //         if(id){
+                        //             $http({
+                        //                 method : "DELETE",
+                        //                 url : $localStorage.service+"FinanceAPI/feeStructure",
+                        //                 params : {id : id},
+                        //                 headers:{'access_token':$localStorage.access_token}
+                        //             }).then(function mySucces(response) {
+                        //                 console.log('delete',response);
+                        //                 $scope.viewData.splice($index, 1);
+                        //                 UIkit.notify({
+                        //                     message : response.data.message,
+                        //                     status  : 'success',
+                        //                     timeout : 2000,
+                        //                     pos     : 'top-center'
+                        //                 });
+                        //                 $scope.refreshTable();
+                        //             },function myError(response) {
+                        //             })
+                        //         }
+                        //     },function(){
+                        //         // console.log("false");
+                        //     }, {
+                        //         labels: {
+                        //             'Ok': 'Ok'
+                        //         }
+                        //     });
+                        // })
                     }
                 }
         }

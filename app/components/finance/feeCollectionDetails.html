@@ -115,7 +115,8 @@
                             <td>{{row.ADMISSION_NO}}</td>
                             <td>{{row.COURSE_NAME}}</td>
                             <td>{{row.BATCH_NAME}}</td>
-                            <td>{{(row.Total_Amount+row.Total_Fine) - (row.Total_Paid+row.Total_Paid_Fine)}}</td>
+                           <!--  <td>{{(row.Total_Amount+row.Total_Fine) - (row.Total_Paid+row.Total_Paid_Fine)}}</td> -->
+                            <td>{{(row.total_due_amount)}}</td>
                             <td>
                                 <a class="md-btn md-btn-primary md-btn-mini md-btn-wave-light md-btn-icon" ui-sref="restricted.finance.fee.feeCollectView({student_feeid:{{row.ID}}})">
                                 <i class="uk-icon-money"></i>Pay</a>

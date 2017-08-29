@@ -237,16 +237,14 @@ angular
 
             $scope.feeBtn=false;
             $scope.changePayamount=function(Amount){
+                // console.log(test,'ss');
                 var Paidtotal = 0;
                 angular.forEach($scope.structureItems, function(value,keys){
-                    // Paidtotal+=parseInt(value1.AMOUNT1 || 0);
                     angular.forEach(value.list, function(value1,keys1){
                         Paidtotal+=parseInt(value1.AMOUNT1 || 0);
                     });
                 });
                 angular.forEach($scope.feefineItems, function(value,keys){
-                    // console.log(value1,"value1");
-                    // Paidtotal+=parseInt(value1.AMOUNT1 || 0);
                     angular.forEach(value.finelist, function(value1,keys1){
                         Paidtotal+=parseInt(value1.AMOUNT1 || 0);
                     });
@@ -257,6 +255,14 @@ angular
                 }else{
                     $scope.feeBtn=true;
                 }
+                // var _amounts=parseInt(feeAmount || 0)-parseInt(tot_paid_amount || 0);
+                // var _fineAmount=parseInt(fineAmount || 0)+parseInt(tot_fine_amount || 0);
+                // // console.log(_amounts,'testtesttest',_fineAmount);
+                // var totalVAL=_amounts+_fineAmount;
+                // console.log(totalVAL,'totalVAL');
+                // if(Amount > totalVAL){
+                    
+                // }
             }
             $scope.sendpayFeesDetail=function(){
                 console.log('$scope.feeItem',$scope.feefineItems);

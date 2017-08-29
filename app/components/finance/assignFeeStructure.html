@@ -37,62 +37,88 @@ td.editable_updated {
         </h2>
         <div class="md-card">
             <div class="md-card-content">
+
                 <div class="uk-grid" data-uk-grid-margin>
-                    <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                        <div class="parsley-row">
-                            <!-- <label for="Fee_Structure" ng-show="feestructure_id">Fee Structure<span class="req"></span></label> -->
-                            <selectize config="feestructure_config" options="feestructure_options" position="bottom" ng-model="feestructure_id"></selectize>
+                    <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-10 parsley-row">
+                                <br>
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >group_work</i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-3-10 parsley-row">
+                                <br ng-if="!feestructure_id">
+                                <div class="parsley-row">
+                                    <label ng-if="feestructure_id" style="font-size: 12px;color: #727272;">Fee Structure</label>
+                                    <selectize config="feestructure_config" options="feestructure_options" position="bottom" ng-model="feestructure_id"></selectize>
+                                </div>
+                            </div>
+
+                            <div class="uk-width-medium-1-10 parsley-row" >
+                                <br>
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >school</i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-4-10 parsley-row">
+                                <br ng-if="!course_id">
+                                <div  class="parsley-row">
+                                    <label ng-if="course_id" style="font-size: 12px;color: #727272;">Course</label>
+                                    <selectize config="course_config" options="course_options" position="bottom" ng-model="course_id"></selectize>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                        <div class="parsley-row">
-                            <!-- <br ng-show="feestructure_id">
-                            <label for="course" ng-show="course_id">Course<span class="req"></span></label> -->
-                            <selectize config="course_config" options="course_options" position="bottom" ng-model="course_id"></selectize>
-                        </div>
-                    </div>
-                    <div class="uk-width-large-1-3 uk-width-medium-1-1">
-                        <div class="parsley-row">
-                            <!-- <label for="batch" ng-show="batch_id">Batch<span class="req"></span></label> -->
-                            <selectize config="batch_config" options="batch_options" position="bottom" ng-model="batch_id"></selectize>
+                </div>
+
+                <div class="uk-grid" data-uk-grid-margin>
+                    <div class="uk-width-large-1-1 uk-width-medium-1-1">
+                        <div class="uk-grid">
+                            <div class="uk-width-medium-1-10 parsley-row">
+                                <br>
+                                <ul class="md-list md-list-addon">
+                                    <li>
+                                        <div class="md-list-addon-element">
+                                            <i class="md-list-addon-icon material-icons" >contacts</i>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="uk-width-medium-3-10 parsley-row">
+                                <br ng-if="!batch_id">
+                                <div class="parsley-row">
+                                    <label ng-if="batch_id" style="font-size: 12px;color: #727272;">Batch</label>
+                                    <selectize config="batch_config" options="batch_options" position="bottom" ng-model="batch_id"></selectize>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="md-card">
+        <div class="md-card" ng-show="course_id || batch_id">
             <div class="md-card-content">
                 <div class="uk-margin-bottom">
-                    <button class="md-btn uk-margin-right md-btn-primary" ng-click="sendStudentID()" ng-show="feestructure_id && course_id">Assign</button>
+                    <button class="md-btn uk-margin-right md-btn-primary md-btn-sm" ng-click="sendStudentID()" ng-show="feestructure_id && course_id">Assign</button>
                 </div>
                 <div class="uk-overflow-container uk-margin-bottom">
+                    <div class="uk-grid" data-uk-grid-margin>
+                        <div class="uk-width-large-2-3 uk-width-medium-1-3">
+                        </div>
+                        <div class="uk-width-large-2-1 uk-width-medium-1-3">
+                            <input data-column="all" type="search" class="search md-input" md-input placeholder="Search">
+                        </div>
+                    </div>
                     <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
-                    <!-- <tfoot>
-                        <tr>
-                          <td colspan="4">
-                            <div class="pager">
-                              <nav class="right">
-                                <ul class="uk-pagination uk-margin-medium-top">
-                                    <li><a href="javascript:void(0)">
-                                        <span class="prev">
-                                          <i class="uk-icon-angle-double-left"></i>
-                                        </span>
-                                        </a>
-                                    </li>
-                                    <li class="pagecount">
-                                    </li>
-                                    <li><a href="javascript:void(0)">
-                                        &nbsp;<span class="next">
-                                        <i class="uk-icon-angle-double-right"></i>
-                                        </span>
-                                        </a>
-                                    </li>
-                                </ul>
-                              </nav>
-                            </div>
-                          </td>
-                        </tr>
-                      </tfoot> -->
                         <thead>
                         <tr>
                             <th data-name="Select" data-priority="critical" style="width: 5% !important;"><input type="checkbox" class="ts_checkbox_all"></th>
@@ -101,85 +127,27 @@ td.editable_updated {
                             <th data-priority="critical" style="width: 45% !important;">Adminssion No</th>
                         </tr>
                         </thead>
-                        <tfoot>
-                           <!--  <tr>
-                                <th></th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Adminssion No</th>
-                            </tr> -->
-                            <tr>
-                                  <td colspan="4">
-                                    <div class="pager">
-                                        <nav class="left">
-                                        <a href="#" class="current">10</a> |
-                                        <a href="#">25</a> |
-                                        <a href="#">50</a> |
-                                        <a href="#">100</a>
-                                      </nav>
-                                      <nav class="right">
-                                        <ul class="uk-pagination uk-margin-medium-top">
-                                            <li><a href="javascript:void(0)">
-                                                <span class="prev">
-                                                  <i class="uk-icon-angle-double-left"></i>
-                                                </span>
-                                                </a>
-                                            </li>
-                                            <li class="pagecount">
-                                            </li>
-                                            <li><a href="javascript:void(0)">
-                                                &nbsp;<span class="next">
-                                                <i class="uk-icon-angle-double-right"></i>
-                                                </span>
-                                                </a>
-                                            </li>
-                                        </ul>
-                                      </nav>
-                                    </div>
-                                  </td>
-                                </tr>
-                        </tfoot>
+                        
                         <tbody>
-                            <!-- <tr>
-                                <td>
-                                    <button ng-click="addrows()">Add rows</button>
-                                </td>
-                                <td></td>
-                                <td></td>
-                                <td>
-                                    <button ng-click="removerows()">remove rows</button>
-                                </td>
-                            </tr> -->
                             <tr ng-repeat="item in viewStudentList | filter:{STATUS:'Yes'} track by $index" on-last-repeat>
                                 <td><input type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="item.selected" value="{{item.ID}}"></td>
-                                <td style="text-align: center;"><img class="md-user-image" ng-show="{{item.IMAGE}}" ng-src="{{item.IMAGE}}" alt=""/><img class="md-user-image" ng-show="{{!item.IMAGE}}" ng-src="http://www.pinetia.com/data/doctor_img/mnoimage.png"></td>
+                                <td style="text-align: center;">
+                                    <img class="md-user-image" ng-show="item.IMAGE.length > 0" ng-src="{{item.IMAGE}}" alt="no image" width="100" height="100"/>
+                                    <img class="md-user-image" ng-show="{{!item.IMAGE}}" ng-src="{{emptyImg}}" width="100" height="100"/>
+                                </td>
                                 <td>{{item.STUDENT_NAME}}</td>
                                 <td>{{item.ADMISSION_NO}}</td>
                             </tr>
-                            <tr ng-show="!viewStudentList">
-                                <td colspan="4" style="text-align:center;">No Data Found</td>
+                            <!-- {{showData}} -->
+                            <tr ng-show="showData">
+                                <td colspan="4" style="text-align:center;">Student Data Found</td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <!-- <div class="pager">
-                    <ul class="uk-pagination uk-margin-medium-top">
-                        <li><a href="javascript:void(0)">
-                            <span class="prev">
-                              <i class="uk-icon-angle-double-left"></i>
-                            </span>
-                            </a>
-                        </li>
-                        <li class="pagecount">
-                        </li>
-                        <li><a href="javascript:void(0)">
-                            &nbsp;<span class="next">
-                            <i class="uk-icon-angle-double-right"></i>
-                            </span>
-                            </a>
-                        </li>
-                    </ul> -->
-                   <!--  <ul class="uk-pagination ts_pager">
+
+                <div class="ts_pager" ng-show="viewStudentList.length > 1">
+                    <ul class="uk-pagination ts_pager">
                         <li data-uk-tooltip title="Select Page">
                             <select class="ts_gotoPage ts_selectize"></select>
                         </li>
@@ -196,8 +164,9 @@ td.editable_updated {
                                 <option value="50">50</option>
                             </select>
                         </li>
-                    </ul> -->
-                <!-- </div> -->
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>

@@ -9,18 +9,7 @@ angular
         '$resource',
         '$filter','$http','$localStorage','$state',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$http,$localStorage,$state) {
-            // $scope.addrows=function(){
-            //     $scope.viewStudentList=[
-            //                         {ID:1,IMAGE:'', ADMISSION_NO:'5465464'},
-            //                         {ID:1,IMAGE:'', ADMISSION_NO:'5465464'},
-            //                         {ID:1,IMAGE:'', ADMISSION_NO:'5465464'}
-            //                         ];
-            //     $('#ts_pager_filter').trigger("update");
-            // }
-            // $scope.removerows=function(){
-            //     $scope.viewStudentList=[];
-            //     $('#ts_pager_filter').trigger("update");
-            // }
+            $scope.emptyImg=$localStorage.imageUrl;
             $scope.table_data = '';
             $scope.markedStudent=[];
             
@@ -83,18 +72,34 @@ angular
                     method : 'GET',
                     params:{'course_id':value,'structureid':$scope.feestructure_id},
                     headers: { 'access_token':$localStorage.access_token},
-                }).success(function(response) {
-                    // console.log(response,'couyssstudentlist');
+                }).then(function(response){
+                    console.log(response.data.message,'response');
                     $scope.viewStudentList=[];
-                    if(response.status==true){
-                        $scope.viewStudentList=response.message;
+                    if(response.data.status==true){
+                        $scope.viewStudentList=response.data.message;
+                    }else{
+                        $scope.viewStudentList='';
+                    }
+
+                    if(response.data.message=='Record could not be found'){
+                        $scope.showData=true;
+                    }else{
+                        $scope.showData=false;
                     }
                     $('#ts_pager_filter').trigger("update");
-                }).error(function(data){
-                    console.log('error');
-                    $scope.viewStudentList=[];
-                    $('#ts_pager_filter').trigger("update");
-                });
+                })
+                // }).success(function(response) {
+                //     // console.log(response,'couyssstudentlist');
+                //     $scope.viewStudentList=[];
+                //     if(response.status==true){
+                //         $scope.viewStudentList=response.message;
+                //     }
+                //     $('#ts_pager_filter').trigger("update");
+                // }).error(function(data){
+                //     console.log('error');
+                //     $scope.viewStudentList=[];
+                //     $('#ts_pager_filter').trigger("update");
+                // });
             }
             $scope.getBatchdetails=function(value){
                 $http({
@@ -119,8 +124,8 @@ angular
                 maxItems: 1,
                 placeholder: 'Batch',
                 valueField: 'ID',
-                labelField: 'NAME',
-                searchField: 'NAME',
+                labelField: 'BATCH_DISPLAY_NAME',
+                searchField: 'BATCH_DISPLAY_NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
                         if(value){
@@ -154,43 +159,70 @@ angular
             $scope.sendStudentID=function(){
                 $scope.studentData=[];
                 angular.forEach($scope.viewStudentList, function(value, key) {
+                    console.log(value,'cccccccccccccc');
                     if (value.selected==true) {
+
                         $scope.studentData.push(value.PROFILE_ID);
                     }
                 });
+                console.log($scope.studentData,'studentData');
+                if($scope.studentData.length==0){
+                    UIkit.modal.alert('Select Student');
+                }else{
                 // console.log($scope.studentData,'studentData',$scope.feestructure_id,$scope.course_id,$scope.batch_id);
-                $http({
-                    url: $localStorage.service+'FinanceAPI/assignFeeStructure',
-                    method : 'POST',
-                    data:{
-                        'struc_id':$scope.feestructure_id,
-                        'course_id':$scope.course_id,
-                        'batch_id':$scope.batch_id,
-                        'student':$scope.studentData
-                    },
-                    headers: { 'access_token':$localStorage.access_token},
-                }).success(function(response) {
-                    console.log(response,'response');
-                    if(response.message.status==true){
-                        UIkit.notify({
-                            message : response.message.message,
-                            status  : 'success',
-                            timeout : 2000,
-                            pos     : 'top-center'
-                        });
-                        $state.go('restricted.finance.fee.assignedFeeStructure');
-                    }else {
-                        UIkit.notify({
-                            message : response.message.message,
-                            status  : 'danger',
-                            timeout : 2000,
-                            pos     : 'top-center'
-                        });
-                    }
-                }).error(function(data){
-                    console.log('error');
-                });
+                    $http({
+                        url: $localStorage.service+'FinanceAPI/assignFeeStructure',
+                        method : 'POST',
+                        data:{
+                            'struc_id':$scope.feestructure_id,
+                            'course_id':$scope.course_id,
+                            'batch_id':$scope.batch_id,
+                            'student':$scope.studentData
+                        },
+                        headers: { 'access_token':$localStorage.access_token},
+                    }).then(function(response){
+                        console.log(response,'response');
+                        if(response.data.status==true){
+                            UIkit.notify({
+                                message : response.data.message.message,
+                                status  : 'success',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                            $state.go('restricted.finance.fee.assignedFeeStructure');
+                        }else{
+                            UIkit.notify({
+                                message : 'Selected fee structure already assigned to selected student',
+                                status  : 'danger',
+                                timeout : 2000,
+                                pos     : 'top-center'
+                            });
+                        }
+                    })
+                }
+                // }).success(function(response) {
+                //     console.log(response,'response');
+                //     if(response.message.status==true){
+                //         UIkit.notify({
+                //             message : response.message.message,
+                //             status  : 'success',
+                //             timeout : 2000,
+                //             pos     : 'top-center'
+                //         });
+                //         $state.go('restricted.finance.fee.assignedFeeStructure');
+                //     }else {
+                //         UIkit.notify({
+                //             message : response.message.message,
+                //             status  : 'danger',
+                //             timeout : 2000,
+                //             pos     : 'top-center'
+                //         });
+                //     }
+                // }).error(function(data){
+                //     console.log('error');
+                // });
             }
+            // initialize tables
             // initialize tables
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
 
@@ -198,35 +230,6 @@ angular
                     $ts_align = $('#ts_align'),
                     $ts_customFilters = $('#ts_custom_filters'),
                     $columnSelector = $('#columnSelector');
-                 var $pager = $('.pager');
-                 $.tablesorter.customPagerControls({
-                    table          : $ts_pager_filter,                   // point at correct table (string or jQuery object)
-                    pager          : $pager,                   // pager wrapper (string or jQuery object)
-                    pageSize       : '.left a',                // container for page sizes
-                    currentPage    : '.right a',               // container for page selectors
-                    // ends           : 2,                        // number of pages to show of either end
-                    // aroundCurrent  : 1,                        // number of pages surrounding the current page
-                    link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
-                    currentClass   : 'current',                // current page class name
-                    adjacentSpacer : '<span> | </span>',       // spacer for page numbers next to each other
-                    distanceSpacer : '<span> &#133; <span>',   // spacer for page numbers away from each other (ellipsis = &#133;)
-                    addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
-                    pageKeyStep    : 10                        // page step to use for pageUp and pageDown
-                  });
-                  // $.tablesorter.customPagerControls({
-                  //   table          : $ts_pager_filter,         // point at correct table (string or jQuery object)
-                  //   pager          : $pager,                   // pager wrapper (string or jQuery object)
-                  //   pageSize       : '.left a',                // container for page sizes
-                  //   currentPage    : '.right a',               // container for page selectors
-                  //   ends           : 2,                        // number of pages to show of either end
-                  //   aroundCurrent  : 1,                        // number of pages surrounding the current page
-                  //   link           : '<a href="#">{page}</a>', // page element; use {page} to include the page number
-                  //   currentClass   : 'current',                // current page class name
-                  //   adjacentSpacer : '',                       // spacer for page numbers next to each other
-                  //   distanceSpacer : '',                       // spacer for page numbers away from each other (ellipsis = &#133;)
-                  //   addKeyboard    : true,                     // use left,right,up,down,pageUp,pageDown,home, or end to change current page
-                  //   pageKeyStep    : 10                        // page step to use for pageUp and pageDown
-                  // });
 
                 // pager + filter
                 if($(element).closest($ts_pager_filter).length) {
@@ -234,19 +237,17 @@ angular
                     // define pager options
                     var pagerOptions = {
                         // target the pager markup - see the HTML block below
-                        container: $(".pager"),
+                        container: $(".ts_pager"),
                         // output string - default is '{page}/{totalPages}'; possible variables: {page}, {totalPages}, {startRow}, {endRow} and {totalRows}
-                        output: '{startRow} - {endRow} / {filteredRows} ({totalRows})',
-                        // output: 'showing: {startRow} to {endRow} ({filteredRows})',
-                        size: 5
+                        output: '{startRow} - {endRow} of {filteredRows}',
                         // if true, the table will remain the same height no matter how many records are displayed. The space is made up by an empty
                         // table row set to a height to compensate; default is false
-                        // fixedHeight: true,
+                        fixedHeight: true,
                         // remove rows from the table to speed up the sort of large tables.
                         // setting this to false, only hides the non-visible rows; needed if you plan to add/remove rows with the pager enabled.
-                        // removeRows: false,
+                        removeRows: false,
                         // go to page selector - select dropdown that sets the current page
-                        // cssGoto: '.ts_gotoPage'
+                        cssGoto: '.ts_gotoPage'
                     };
 
                     // change popup print & close button text
@@ -264,38 +265,46 @@ angular
                         .tablesorter({
                             theme: 'altair',
                             widthFixed: true,
-                            widgets: ['zebra','print','columnSelector'],
-                            // headers: {
-                            //     0: {
-                            //         sorter: false,
-                            //         parser: false
-                            //     }
-                            // },
-                            // widgetOptions : {
-                            //     // column selector widget
-                            //     columnSelector_container : $columnSelector,
-                            //     columnSelector_name : 'data-name',
-                            //     columnSelector_layout : '<li class="padding_md"><input type="checkbox"><label class="inline-label">{name}</label></li>',
-                            //     columnSelector_saveColumns: false,
-                            //     // print widget
-                            //     print_title      : '',          // this option > caption > table id > "table"
-                            //     print_dataAttrib : 'data-name', // header attrib containing modified header name
-                            //     print_rows       : 'f',         // (a)ll, (v)isible, (f)iltered, or custom css selector
-                            //     print_columns    : 's',         // (a)ll, (v)isible or (s)elected (columnSelector widget)
-                            //     print_extraCSS   : '',          // add any extra css definitions for the popup window here
-                            //     print_styleSheet : '',          // add the url of your print stylesheet
-                            //     print_now        : true,        // Open the print dialog immediately if true
-                            //     // callback executed when processing completes - default setting is null
-                            //     print_callback   : function(config, $table, printStyle){
-                            //         // hide sidebar
-                            //         $rootScope.primarySidebarActive = false;
-                            //         $rootScope.primarySidebarOpen = false;
-                            //         $timeout(function () {
-                            //             // print the table using the following code
-                            //             $.tablesorter.printTable.printOutput( config, $table.html(), printStyle );
-                            //         }, 300);
-                            //     }
-                            // }
+                            widgets: ['zebra', "filter", 'print','columnSelector'],
+                            headers: {
+                                0: {
+                                    sorter: false,
+                                    parser: false
+                                }
+                            },
+                            widgetOptions : {
+                                // column selector widget
+                                columnSelector_container : $columnSelector,
+                                columnSelector_name : 'data-name',
+                                columnSelector_layout : '<li class="padding_md"><input type="checkbox"><label class="inline-label">{name}</label></li>',
+                                columnSelector_saveColumns: false,
+                                // print widget
+                                print_title      : '',          // this option > caption > table id > "table"
+                                print_dataAttrib : 'data-name', // header attrib containing modified header name
+                                print_rows       : 'f',         // (a)ll, (v)isible, (f)iltered, or custom css selector
+                                print_columns    : 's',         // (a)ll, (v)isible or (s)elected (columnSelector widget)
+                                print_extraCSS   : '',          // add any extra css definitions for the popup window here
+                                print_styleSheet : '',          // add the url of your print stylesheet
+                                print_now        : true,        // Open the print dialog immediately if true
+                                // callback executed when processing completes - default setting is null
+                                filter_external : '.search',
+                                // add a default type search to the first name column
+                                filter_defaultFilter: { 1 : '~{query}' },
+                                // include column filters
+                                filter_columnFilters: false,
+                                filter_placeholder: { search : 'Search...' },
+                                filter_saveFilters : true,
+                                filter_reset: '.reset',
+                                print_callback   : function(config, $table, printStyle){
+                                    // hide sidebar
+                                    $rootScope.primarySidebarActive = false;
+                                    $rootScope.primarySidebarOpen = false;
+                                    $timeout(function () {
+                                        // print the table using the following code
+                                        $.tablesorter.printTable.printOutput( config, $table.html(), printStyle );
+                                    }, 300);
+                                }
+                            }
                         })
                         // initialize the pager plugin
                         .tablesorterPager(pagerOptions)
@@ -306,6 +315,17 @@ angular
                                 selectizePage.setValue($('select.ts_gotoPage option:selected').index() + 1, false);
                             }
                         });
+                        $('button[data-column]').on('click', function(){
+                            var $this = $(this),
+                              totalColumns = $table[0].config.columns,
+                              col = $this.data('column'), // zero-based index or "all"
+                              filter = [];
+
+                            // text to add to filter
+                            filter[ col === 'all' ? totalColumns : col ] = $this.text();
+                            $table.trigger('search', [ filter ]);
+                            return false;
+                          });
 
                     // replace column selector checkboxes
                     $columnSelector.children('li').each(function(index) {
@@ -425,7 +445,6 @@ angular
                             $ts_pager_filter
                                 .find('.ts_checkbox')
                                 // check all checkboxes in table
-                                .trigger('click')
                                 .prop('checked',true)
                                 .iCheck('update')
                                 // add highlight to row
@@ -436,7 +455,6 @@ angular
                             $ts_pager_filter
                                 .find('.ts_checkbox')
                                 // uncheck all checkboxes in table
-                                .trigger('click')
                                 .prop('checked',false)
                                 .iCheck('update')
                                 // remove highlight from row
@@ -537,36 +555,36 @@ angular
 
                     var cf_selectize = $selectize[0].selectize;
 
-                    // var modal = UIkit.modal("#modal_daterange", {
-                    //     center: true
-                    // });
+                    var modal = UIkit.modal("#modal_daterange", {
+                        center: true
+                    });
 
-                    // $('.ts_cf_datepicker').on('focus',function() {
-                    //     if ( modal.isActive() ) {
-                    //         modal.hide();
-                    //     } else {
-                    //         modal.show();
-                    //     }
-                    // });
+                    $('.ts_cf_datepicker').on('focus',function() {
+                        if ( modal.isActive() ) {
+                            modal.hide();
+                        } else {
+                            modal.show();
+                        }
+                    });
 
-                    // var $dp_start = $('#ts_dp_start'),
-                    //     $dp_end = $('#ts_dp_end');
+                    var $dp_start = $('#ts_dp_start'),
+                        $dp_end = $('#ts_dp_end');
 
-                    // var start_date = UIkit.datepicker($dp_start, {
-                    //     format:'MMM D, YYYY'
-                    // });
+                    var start_date = UIkit.datepicker($dp_start, {
+                        format:'MMM D, YYYY'
+                    });
 
-                    // var end_date = UIkit.datepicker($dp_end, {
-                    //     format:'MMM D, YYYY'
-                    // });
+                    var end_date = UIkit.datepicker($dp_end, {
+                        format:'MMM D, YYYY'
+                    });
 
-                    // $dp_start.on('change',function() {
-                    //     end_date.options.minDate = $dp_start.val();
-                    // });
+                    $dp_start.on('change',function() {
+                        end_date.options.minDate = $dp_start.val();
+                    });
 
-                    // $dp_end.on('change',function() {
-                    //     start_date.options.maxDate = $dp_end.val();
-                    // });
+                    $dp_end.on('change',function() {
+                        start_date.options.maxDate = $dp_end.val();
+                    });
 
                     $('#daterangeApply').on('click', function(e){
                         e.preventDefault();

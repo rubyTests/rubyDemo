@@ -61,13 +61,13 @@ angular
         //     });
         // }
         $scope.form_dynamic = [];
-            $scope.form_dynamic.push({'Days_After':'','Fine_Value':'','mode':''});
+            $scope.form_dynamic.push({'Days_After':'','Fine_Value':''});
             $scope.form_dynamic_model = [];
 
             // clone section
             $scope.cloneSection = function($event,$index,CurrRow) {
                 console.log(CurrRow,'CurrRow');
-                if(CurrRow.DUE_DATE=='' || CurrRow.VALUE=='' || CurrRow.MODE==''){
+                if(CurrRow.DUE_DATE=='' || CurrRow.VALUE==''){
                     UIkit.notify({
                         message : 'Please Fill current form',
                         status  : 'warning',
@@ -76,7 +76,7 @@ angular
                     });
                 }else {
                     $event.preventDefault();
-                    $scope.form_dynamic.push({'DUE_DATE':'','VALUE':'','MODE':''});
+                    $scope.form_dynamic.push({'DUE_DATE':'','VALUE':''});
                 }
             };
 

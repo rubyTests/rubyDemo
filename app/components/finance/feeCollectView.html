@@ -119,9 +119,6 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- <pre>
-                            {{forms_advanced.selectize_feeStruct | json}}
-                        </pre> -->
                     </div>
                 </div>
             </div>
@@ -147,17 +144,6 @@
                             Pay Fees</th>
                         </tr>
                         </thead>
-                        <!-- <tbody ng-repeat="(keys, value) in structureItems | groupBy: 'STRUCTURE_NAME'">
-                            <tr>
-                            <td colspan="4" style="background-color: rgb(233,233,233)">{{value[0].STRUCTURE_NAME}}</td>
-                            </tr>
-                            <tr ng-repeat="(key, feeItem) in value[0].ITEMS track by $index">
-                                <td>{{feeItem.ITEM_NAME}}</td>
-                                <td class="uk-text-right">{{feeItem.AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right">{{feeItem.AMOUNT-feeItem.PAID_AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
-                            </tr>
-                        </tbody> -->
                         <tbody ng-repeat="(keys, value) in structureItems">
                             <tr>
                             <td colspan="6" style="background-color: rgb(233,233,233)">{{value.STRUCTURE_NAME}}</td>
@@ -165,83 +151,18 @@
                             <tr ng-repeat="(key, feeItem) in value.list track by $index">
                                 <td>{{feeItem.ITEM_NAME}}</td>
                                 <td class="uk-text-right">{{feeItem.AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right">{{(feeItem.TOTAL_PAID_AMOUNT*1)+(feeItem.TOTAL_PAID_FINE_AMOUNT*1) | currency:""}}</td>
-                                 <td class="uk-text-right">{{(feeItem.AMOUNT-feeItem.TOTAL_PAID_AMOUNT)+(feeItem.FINE_AMOUNT-feeItem.TOTAL_PAID_FINE_AMOUNT) | currency:""}}</td>
+                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT || 0 | currency:""}}</td>
+                                <td class="uk-text-right">{{(feeItem.TOTAL_PAID_AMOUNT*1) | currency:""}}</td>
+                                 <td class="uk-text-right">{{((feeItem.AMOUNT*1)- (feeItem.TOTAL_PAID_AMOUNT*1)) + ((feeItem.FINE_AMOUNT *1)-(feeItem.TOTAL_PAID_FINE_AMOUNT*1)) | currency:""}}</td>
                                 <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
                             </tr>
                         </tbody>
-
-                        <!-- <tbody ng-repeat="(keys, fee) in newData track by $index">
-                            <tr>
-                            <td colspan="3" style="background-color: rgb(233,233,233)">{{fee.FeeStructure_Name}}</td>
-                            </tr>
-                            <tr ng-repeat="(key, feeItem) in fee.FeeItemCount track by $index">
-                                <td>{{feeItem.Fee_Item_Name}}</td>
-                                <td class="uk-text-right">{{feeItem.Amount | currency:""}}</td>
-                                <td class="uk-text-right"><input type="text" ng-change="changePaid()" name="fee_1" id="fee_1" ng-model="feesItem[keys][key].fees"/></td>
-                            </tr>
-                        </tbody> -->
-
 
                     </table>
                 </div>
-                <!-- <div style="margin-top: 20px;"> 
-                    <h4>Fine Details</h4>
-                    <table class="uk-table">
-                        <thead>
-                            <tr>
-                                <th><i class="md-list-addon-icon material-icons">school</i> FINE NAME</th>
-                                <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
-                                AMOUNT</th>
-                                <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
-                                FINE AMOUNT</th>
-                                <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
-                                PAY FEES FINE</th>
-                            </tr>
-                        </thead>
-                        <tbody ng-repeat="(keys, value) in feefineItems | groupBy: 'STRUCTURE_NAME'"">
-                            <tr>
-                            <td colspan="4" style="background-color: rgb(233,233,233)">{{value[0].STRUCTURE_NAME}}</td>
-                            </tr>
-                            <tr ng-repeat="(key, feeItem) in feefineItems track by $index" ng-if="value[0].STRUCTURE_NAME==feeItem.STRUCTURE_NAME">
-                                <td>{{feeItem.FINE_NAME}}</td>
-                                <td class="uk-text-right">{{feeItem.VALUE | currency:""}}</td>
-                                <td class="uk-text-right">{{feeItem.VALUE-feeItem.TOTAL_PAID_FINE_AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
-                            </tr>
-                        </tbody>
-
-                        <tbody ng-repeat="(keys, value) in feefineItems">
-                            <tr>
-                            <td colspan="4" style="background-color: rgb(233,233,233)">{{value.STRUCTURE_NAME}}</td>
-                            </tr>
-                            <tr ng-repeat="(key, feeItem) in value.finelist track by $index">
-                                <td>{{feeItem.ITEM_NAME}}</td>
-                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right">{{feeItem.FINE_AMOUNT-feeItem.TOTAL_PAID_FINE_AMOUNT | currency:""}}</td>
-                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div> -->
+               
                 <div class="md-card-content">
-                    <!-- <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
-                        <div class="uk-width-medium-4-10">
-                        <span style="float: right;"><b>Total Amount :</b></span>
-                        </div>
-                        <div class="uk-width-medium-1-10">
-                            <p style="">{{(totalAmount*1)+(totalFINEAmount * 1)| currency:""}}</p>
-                        </div>
-                        <div class="uk-width-medium-3-10">
-                            <b>Total Due :</b>
-                            <span style="">{{(totalAmount*1 + totalFINEAmount*1)-(totalDueAmount*1 + totalFINEDueAmount*1) | currency:""}}</span>
-                        </div>
-                        <div class="uk-width-medium-1-5">
-                            <b>Paid Amount :</b>
-                            <span style="">{{totalPaid | currency:""}}</span>
-                        </div>
-                    </div> -->
+                    
                     <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
                         <div class="uk-width-medium-4-10">
                         <span style="float: right;"><b>Total Amount :</b></span>
@@ -274,7 +195,6 @@
                         <div class="uk-width-medium-2-6 parsley-row">
                         </div>
                         <div class="uk-width-medium-1-6 parsley-row uk-text-right">
-                            <!-- <a class="md-btn md-btn-small md-btn-primary md-btn-wave-light" ui-sref="restricted.finance.fee.receiptView" style="margin-top: 25px;">Pay Fee</a> -->
                             <button class="md-btn md-btn-small md-btn-primary md-btn-wave-light" type="submit" style="margin-top: 25px;" ng-show="feeBtn">Pay Fee</button>
                         </div>
                     </div>

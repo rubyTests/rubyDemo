@@ -205,50 +205,7 @@ angular
                 console.log('error');
             });
 
-            // var course_data = $scope.selectize_course_options = $scope.courseList;
-
-            // $scope.selectize_course_config = {
-            //     plugins: {
-            //         'remove_button': {
-            //             label     : ''
-            //         }
-            //     },
-            //     maxItems: 1,
-            //     valueField: 'COURSE_ID',
-            //     labelField: 'COUSE_NAME',
-            //     searchField: 'COUSE_NAME',
-            //     create: false,
-            //     placeholder: 'Course',
-            //     // render: {
-            //     //     option: function(course_data, escape) {
-            //     //         return  '<div class="option">' +
-            //     //             '<span class="title">' + escape(course_data.NAME) + '</span><br>' +
-            //     //             '</div>';
-            //     //     }
-            //     // },
-            //     onInitialize: function(selectize){
-            //         selectize.on('change', function(value) {
-            //             // console.log(value);
-            //             $scope.getStudentData(value);
-            //         });
-            //     }
-            // };
-
-            // $scope.getStudentData=function(courseID){
-            //     console.log(courseID,'courseID');
-            //     $http({
-            //         url: $localStorage.service+'FinanceAPI/getStudentList',
-            //         method : 'GET',
-            //         params:{'course_id':courseID},
-            //         headers: { 'access_token':$localStorage.access_token},
-            //     }).success(function(response) {
-            //         console.log(response.message,'student');
-            //         $scope.studentView=response.message;
-            //         $scope.studentCheck=true;
-            //     }).error(function(data){
-            //         console.log('error');
-            //     });
-            // }
+           
             // Advanced selects
             $scope.studentList=[];
             $http({
@@ -314,7 +271,7 @@ angular
                 console.log(ArrayD,'ArrayD');
                 if (typeof ArrayD!="undefined") {
                     ArrayD.FEE_ITEM_ID=ArrayD.FEE_ITEM_ID || {};
-                    if (ArrayD.FEE_ITEM_ID!="" && Object.keys(ArrayD.FEE_ITEM_ID).length!=0 && typeof ArrayD.AMOUNT!="undefined" && ArrayD.AMOUNT!="" && typeof ArrayD.DUE_DATE!="undefined" && ArrayD.DUE_DATE!="" && typeof ArrayD.FREQUENCY!="undefined" && ArrayD.FREQUENCY!="" && typeof ArrayD.FEE_FINE_ID!="undefined" && ArrayD.FEE_FINE_ID!="") {
+                    if (ArrayD.FEE_ITEM_ID!="" && Object.keys(ArrayD.FEE_ITEM_ID).length!=0 && typeof ArrayD.AMOUNT!="undefined" && ArrayD.AMOUNT!="" && typeof ArrayD.DUE_DATE!="undefined" && ArrayD.DUE_DATE!="" && typeof ArrayD.FREQUENCY!="undefined" && ArrayD.FREQUENCY!="") {
                         $event.preventDefault();
                         $scope.form_dynamic.push({'FEE_ITEM_ID':'','AMOUNT':'','DUE_DATE':'','FREQUENCY':'','FEE_FINE_ID':''});
                     }else{

@@ -83,13 +83,13 @@ angular
                 // Clone functionality
 
             $scope.form_dynamic = [];
-            $scope.form_dynamic.push({'Days_After':'','Fine_Value':'','mode':''});
+            $scope.form_dynamic.push({'Days_After':'','Fine_Value':''});
             $scope.form_dynamic_model = [];
 
             // clone section
             $scope.cloneSection = function($event,$index,CurrRow) {
                 console.log(CurrRow,'CurrRow');
-                if(CurrRow.Days_After=='' || CurrRow.Fine_Value=='' || CurrRow.mode==''){
+                if(CurrRow.Days_After=='' || CurrRow.Fine_Value==''){
                     UIkit.notify({
                         message : 'Please Fill current form',
                         status  : 'warning',
@@ -98,7 +98,7 @@ angular
                     });
                 }else {
                     $event.preventDefault();
-                    $scope.form_dynamic.push({'Days_After':'','Fine_Value':'','mode':''});
+                    $scope.form_dynamic.push({'Days_After':'','Fine_Value':''});
                 }
             };
 

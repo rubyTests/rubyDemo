@@ -20,7 +20,7 @@
                             <th>Name</th>
                             <th>Days After Due Date</th>
                             <th>Fine Value</th>
-                            <th>Fine Mode</th>
+                            <!-- <th>Fine Mode</th> -->
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -29,8 +29,8 @@
                             <th>Id</th>
                             <th>Name</th>
                             <th>Days After Due Date</th>
-                            <th>Fine Value</th>
-                            <th>Fine Mode</th>
+                            <th>Fine Amount</th>
+                            <!-- <th>Fine Mode</th> -->
                         </tr>
                     </tfoot>
                     <tbody>
@@ -39,7 +39,7 @@
                             <td>{{row.Fine_Name}}</td>
                             <td>{{row.Days_After_Due}}</td>
                             <td>{{row.Fine_Value}}</td>
-                            <td>{{row.Fine_Mode}}</td>
+                            <!-- <td>{{row.Fine_Mode}}</td> -->
                             <td>
                                 <a href="#" class="ts_remove_row" data-uk-modal="{target:'#modal_header_footer'}"><i class="md-icon material-icons">&#xE254;</i></a>
                                 <a href="#" class="ts_remove_row" ng-click="ts_remove_item($event,item)"><i class="md-icon material-icons">&#xE872;</i></a>

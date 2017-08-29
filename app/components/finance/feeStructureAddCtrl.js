@@ -32,10 +32,25 @@ angular
             $scope.form_dynamic_model = [];
 
             // delete section
-            $scope.deleteSection = function($event,$index) {
-                $event.preventDefault();
-                $scope.form_dynamic_model.splice($index,1);
-                $scope.form_dynamic.splice($index,1);
+            $scope.deleteSection = function($event,$index,currRow) {
+                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        $event.preventDefault();
+                        $scope.form_dynamic_model.splice($index,1);
+                        $scope.form_dynamic.splice($index,1);
+                        $scope.itemType_array.splice($index,1);
+                },function(){
+                    // console.log("false");
+                }, {
+                    labels: {
+                        'Ok': 'Ok'
+                    }
+                });
+                // else {
+                //     $event.preventDefault();
+                //     $scope.form_dynamic_model.splice($index,1);
+                //     $scope.form_dynamic.splice($index,1);
+                //     $scope.itemType_array.splice($index,1);
+                // }
             };
 
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
@@ -225,14 +240,16 @@ angular
                 console.log('yes');
             }
 
-            
+            $scope.cloneSection1=function(){
+                $scope.form_dynamic.push({'feeitem':'','amount':'','due_date':'','frequency':'','feefine':''});
+            }
 
             $scope.cloneSection = function($event,$index,ITemArray) {
                 var ArrayD=$scope.itemType_array[$index];
                 console.log(ArrayD,'ArrayD');
                 if (typeof ArrayD!="undefined") {
                     ArrayD.feeitem=ArrayD.feeitem || {};
-                    if (ArrayD.feeitem!="" && Object.keys(ArrayD.feeitem).length!=0 && typeof ArrayD.amount!="undefined" && ArrayD.amount!="" && typeof ArrayD.due_date!="undefined" && ArrayD.due_date!="" && typeof ArrayD.frequency!="undefined" && ArrayD.frequency!="" && typeof ArrayD.feefine!="undefined" && ArrayD.feefine!="") {
+                    if (ArrayD.feeitem!="" && Object.keys(ArrayD.feeitem).length!=0 && typeof ArrayD.amount!="undefined" && ArrayD.amount!="" && typeof ArrayD.due_date!="undefined" && ArrayD.due_date!="" && typeof ArrayD.frequency!="undefined" && ArrayD.frequency!="") {
                         $event.preventDefault();
                         $scope.form_dynamic.push({'feeitem':'','amount':'','due_date':'','frequency':'','feefine':''});
                     }else{
