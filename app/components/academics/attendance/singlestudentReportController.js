@@ -13,7 +13,7 @@ angular
         '$localStorage',
         function ($scope,$rootScope,$timeout,$compile,variables,$resource,$filter,$stateParams,$http,$localStorage) {
             // console.log($localStorage.courseTypes,'$localStorage.courseTypes');
-
+			// console.log($stateParams,"$stateParams");
             if($localStorage.courseTypes=='Daily'){
                 $scope.showDaily=true;
                 $scope.showSubject=false;
@@ -72,6 +72,31 @@ angular
 			// 		$scope.percentage=data.message[0].Percentage;
 					
 			// 	});
+			}else{
+				$http({
+                    method : "GET",
+                    url : $localStorage.service+"StuAttendanceAPI/studentBasicandPercentageDetails",
+                    params : {
+                        'profileid':$localStorage.userProfile_id
+                    },
+                    headers:{'access_token':$localStorage.access_token}
+                }).then(function(response1) {
+                    // console.log(response1.data.message[0],'response');
+                    $scope.basic = response1.data.message[0];
+                    $scope.AttendancePercentage = response1.data.message[0].PERCENTAGE;
+                    percen=response1.data.message[0].PERCENTAGE;
+                });
+
+				$http.get($localStorage.service+'StuAttendanceAPI/stuAttendanceReport',{params:{attendance_type:$localStorage.courseTypes,profileId:$localStorage.userProfile_id},headers:{'access_token':$localStorage.access_token}})
+				.success(function(data){
+					$scope.table_data = data.message;
+                    // console.log(data.message,'ddddddddddddd');
+                    if(data.message=='Data Not found'){
+                        $scope.tblShow=false;
+                    }else{
+                        $scope.tblShow=true;
+                    }
+				});
 			}
 			
 			$scope.AttendanceType=$localStorage.stuAttendanceType
