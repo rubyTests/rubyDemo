@@ -52,8 +52,8 @@
                         <td>{{$index+1}}</td>
                         <td>{{row.NAME}}</td>
                         <td>{{row.TermName}}</td>
-                        <td>{{row.STARTDATE | date:'dd.MM.yyyy'}}</td>
-                        <td>{{row.ENDDATE | date:'dd.MM.yyyy'}}</td>
+                        <td>{{row.STARTDATE | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}</td>
+                        <td>{{row.ENDDATE | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}</td>
                         <td>
                             <a ng-click="edit_data(row)" data-uk-modal="{target:'#modal_overflow'}"><i class="md-icon material-icons">&#xE254;</i></a>
                             <a class="ts_remove_row" ng-click="deleteExam(row.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>

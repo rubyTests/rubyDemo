@@ -372,11 +372,11 @@ angular
                 $dp_end = $('#uk_dp_end');
 
             var start_date = UIkit.datepicker($dp_start, {
-                format:'DD.MM.YYYY'
+                format:'DD-MMM-YYYY'
             });
 
             var end_date = UIkit.datepicker($dp_end, {
-                format:'DD.MM.YYYY'
+                format:'DD-MMM-YYYY'
             });
 
             $dp_start.on('change',function() {
@@ -398,8 +398,6 @@ angular
             $scope.getExamList();
             $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
             $scope.addExam=function(){
-                var strDate=$scope.dp_start.split(".");
-                var setStartDate=strDate[2]+"-"+strDate[1]+"-"+ strDate[0];
                 $http({
                     method:'POST',
                     url: $localStorage.service+'ExamAPI/setExamination',
@@ -410,7 +408,7 @@ angular
                         'exam_id':$scope.exam_id,
                         'passMark':$scope.passMark,
                         'maxMark':$scope.maxMark,
-                        'exam_date':setStartDate,
+                        'exam_date':$scope.dp_start,
                         'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
                         'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
                     },
@@ -436,7 +434,7 @@ angular
 
             $scope.editExam=function(event){
                 if (typeof event!="undefined"){
-                    $scope.dp_start= $filter('date')(new Date(event.start.split(" ")[0]), "dd.MM.yyyy");
+                    $scope.dp_start= $filter('date')(new Date(event.start.split(" ")[0]), "dd-MMM-yyyy");
                     $scope.id=event.table_id;
                     $scope.course_id=event.course_id;
                     $scope.batch_id=event.batch_id;
@@ -515,8 +513,11 @@ angular
                     } else {
                         if (start || end) {
 
+							var monthNames = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun","Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+						
                             var year=start._d.getFullYear();
-                            var month=eval(start._d.getMonth()+1);
+                            // var month=eval(start._d.getMonth()+1);
+                            var month=monthNames[start._d.getMonth()+1];
                             var day=start._d.getDate();
                             if (month<10){
                                 month="0" + month;
@@ -530,7 +531,7 @@ angular
                             };
 
                             var end_year=end._d.getFullYear();
-                            var end_month=eval(end._d.getMonth()+1);
+							var end_month=monthNames[end._d.getMonth()+1];
                             var end_day=end._d.getDate();
                             if (end_month<10){
                                 end_month="0" + end_month;
@@ -544,9 +545,9 @@ angular
                             };
 
 
-                            $scope.dp_start=dayNew + "." + month + "." + year;
+                            $scope.dp_start=dayNew + "-" + month + "-" + year;
                             end_date.options.minDate = $scope.dp_start;
-                            $scope.dp_end=end_dayNew + "." + end_month + "." + end_year;
+                            $scope.dp_end=end_dayNew + "-" + end_month + "-" + end_year;
                             $scope.addEvents={};
                             $scope.addEvents={start_date : start, end : end};
                         };
