@@ -34,9 +34,9 @@
                             <td>{{row.SUBJECT_NAME}}</td>
                             <td>{{row.COURSE_NAME}}</td>
                             <td class="uk-text-center">
-                                <a ui-sref="restricted.academics.view_syllabusDetails({id:{{row.ID}},courseid:{{row.COURSE_ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
-                                <a ui-sref="restricted.academics.syllabus_edit({id:{{row.ID}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
-                                <a class="ts_remove_row" ng-click="deleteSyllabus(row.ID,row.SUB_SYLLABUS_ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+								<a ui-sref="restricted.academics.syllabus_edit({id:{{row.subject_syllabus_id}}})" class="ts_remove_row"><i class="md-icon material-icons">&#xE254;</i></a>
+                                <a class="ts_remove_row" ng-click="deleteSyllabus(row.subject_syllabus_id,$index)"><i class="md-icon material-icons">&#xE872;</i></a>
+								<a ng-show="{{row.subject_syllabus_id!='No'}}" ui-sref="restricted.academics.view_syllabusDetails({id:{{row.subject_syllabus_id}},courseid:{{row.COURSE_ID}}})" class="ts_remove_row"><i class="material-icons md-icon">&#xE417;</i></a>
                             </td>
                         </tr>
                     </tbody>
