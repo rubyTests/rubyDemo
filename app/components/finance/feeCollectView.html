@@ -58,7 +58,7 @@
                                 <ul class="md-list md-list-addon">
                                     <li>
                                         <div class="md-list-addon-element">
-                                            <i class="md-list-addon-icon material-icons" >import_contacts</i>
+                                            <i class="md-list-addon-icon material-icons" >school</i>
                                         </div>
                                         <div class="md-list-content">
                                             <span class="md-list-heading">{{BasicDetails.COURSE_NAME}}</span>
@@ -84,7 +84,7 @@
                         <div class="uk-grid" data-uk-grid-margin>
                             <div class="uk-width-medium-1-4">
                                 <div class="uk-input-group">
-                                    <span class="uk-input-group-addon"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
+                                    <span class="uk-input-group-addon" style="font-size: 21px !important;"><i class="uk-input-group-icon uk-icon-calendar"></i></span>
                                     <label for="uk_dp_1">Payment Date</label>
                                     <input class="md-input" type="text" id="uk_dp_1" data-uk-datepicker="{format:'DD.MM.YYYY'}" md-input ng-model="payment_date">
                                 </div>
@@ -92,9 +92,9 @@
                             <div class="uk-width-medium-1-4 parsley-row">
                                 <input type="text" config="selectize_paymode_config" options="selectize_paymode_options" ng-model="selectize_paymode" required selectize />
                             </div>
-                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'Cash' || selectize_paymode == 'Others'">
+                            <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'Others'">
                                 <label for="prev_state">Reference Number<span class="req"></span></label>
-                                <input type="text" class="md-input" md-input ng-model="refence_no" ng-required="selectize_paymode == 'Cash' || selectize_paymode == 'Others'" />
+                                <input type="text" class="md-input" md-input ng-model="refence_no" ng-required="selectize_paymode == 'Others'" />
                             </div>
                             <div class="uk-width-medium-1-4 parsley-row" ng-show="selectize_paymode == 'Cheque'">
                                 <label for="prev_state">Cheque No.<span class="req"></span></label>
@@ -113,7 +113,7 @@
                             <div class="uk-width-medium-2-3 uk-margin-top">
                             <div class="uk-input-group parsley-row">
                                 <span class="uk-input-group-addon">
-                                    <i class="material-icons AdjIcon">view_list</i>
+                                    <i class="material-icons AdjIcon">group_work</i>
                                 </span>
                                 <selectize id="selec_adv_1" config="selectize_feeStruct_config" options="selectize_feeStruct_options" position="bottom" ng-model="structure_ids" required></selectize>
                                 </div>
@@ -131,30 +131,30 @@
                     <table class="uk-table">
                         <thead>
                         <tr>
-                            <th><i class="md-list-addon-icon material-icons">school</i> Fee Item</th>
+                            <th><i class="md-list-addon-icon material-icons">list</i> Fee Item</th>
                             <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
                             Amount</th>
                             <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
                             Fine Amount</th>
-                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
                             Paid Amount</th>    
-                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
                             Due Amount</th>
-                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">date_range</i>
+                            <th class="uk-text-right"><i class="md-list-addon-icon material-icons">attach_money</i>
                             Pay Fees</th>
                         </tr>
                         </thead>
                         <tbody ng-repeat="(keys, value) in structureItems">
                             <tr>
-                            <td colspan="6" style="background-color: rgb(233,233,233)">{{value.STRUCTURE_NAME}}</td>
+                            <td colspan="6" style="background-color: rgb(233,233,233)"><span style="color: #444444;">{{value.STRUCTURE_NAME}}</span></td>
                             </tr>
                             <tr ng-repeat="(key, feeItem) in value.list track by $index">
                                 <td>{{feeItem.ITEM_NAME}}</td>
                                 <td class="uk-text-right">{{feeItem.AMOUNT | currency:""}}</td>
                                 <td class="uk-text-right">{{feeItem.FINE_AMOUNT || 0 | currency:""}}</td>
                                 <td class="uk-text-right">{{(feeItem.TOTAL_PAID_AMOUNT*1) | currency:""}}</td>
-                                 <td class="uk-text-right">{{((feeItem.AMOUNT*1)- (feeItem.TOTAL_PAID_AMOUNT*1)) + ((feeItem.FINE_AMOUNT *1)-(feeItem.TOTAL_PAID_FINE_AMOUNT*1)) | currency:""}}</td>
-                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(feeItem.AMOUNT1)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1"/></td>
+                                 <td class="uk-text-right">{{duetotal = ((feeItem.AMOUNT*1)- (feeItem.TOTAL_PAID_AMOUNT*1)) + ((feeItem.FINE_AMOUNT *1)-(feeItem.TOTAL_PAID_FINE_AMOUNT*1)) | currency:""}}</td>
+                                <td class="uk-text-right"><input type="text" ng-change="changePayamount(duetotal, feeItem)" name="fee_1" id="fee_1" ng-model="feeItem.AMOUNT1" numeric-only /></td>
                             </tr>
                         </tbody>
 
@@ -164,28 +164,21 @@
                 <div class="md-card-content">
                     
                     <div class="uk-grid" data-uk-grid-margin ng-if="totalAmount != 0">
-                        <div class="uk-width-medium-4-10">
-                        <span style="float: right;"><b>Total Amount :</b></span>
-                        </div>
-                        <div class="uk-width-medium-1-10">
-                            <p style="">{{(totalAmount*1) + (totalFINEAmount*1)| currency:""}}</p>
-                        </div>
-                        <div class="uk-width-medium-3-10">
-                            <b>Total Due :</b>
-                            <span style="">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</span>
-                        </div>
-                        <div class="uk-width-medium-3-10">
-                            <b>Total Due :</b>
-                            <span style="">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</span>
-                        </div>
-                        <div class="uk-width-medium-3-10">
-                            <b>Total Due :</b>
-                            <span style="">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</span>
-                        </div>
-                        <div class="uk-width-medium-1-5">
-                            <b>Paid Amount :</b>
-                            <span style="">{{totalPaid | currency:""}}</span>
-                        </div>
+
+                        <table class="uk-table">
+                            <tbody>
+                                <tr>
+                                    <td  class="uk-text-center" style="width:10%"><b style="color: #444444;">Total </b></td>
+                                    <td  class="uk-text-center" style="width:10%"><b style="color: #444444;">{{(totalAmount*1)| currency:""}}</b></td>
+                                    <td  class="uk-text-center" style="width:10%"><b style="color: #444444;">{{totalFINEAmount | currency:""}}</b></td>
+                                    <td  class="uk-text-center" style="width:10%"><b style="color: #444444;">{{totalDueAmount | currency:""}}</b></td>
+                                    <td  class="uk-text-center" style="width:10%"><b style="color: #444444;">{{(totalAmount - totalDueAmount) + (totalFINEAmount - totalFINEPaid) | currency:""}}</b></td>
+                                    <td  class="uk-text-center" style="width:10%"><b style="color: #444444;">{{totalPaid || 0 | currency:""}}</b></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                       
                     </div>
                     <div class="uk-grid" data-uk-grid-margin>
                         <div class="uk-width-medium-3-6 parsley-row">

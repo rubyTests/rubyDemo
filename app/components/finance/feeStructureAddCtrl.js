@@ -350,11 +350,11 @@ angular
             $scope.studentCheck=false;
             $scope.studentData=[];  
             $scope.saveFeeStructure=function(){
-                // console.log($scope.itemType_array,'datadata');
-                angular.forEach($scope.itemType_array, function(value, keys){
-                    var due_date = value.due_date.split(".");
-                    value.due_date = due_date[2]+"-"+due_date[0]+"-"+due_date[1];
-                });
+                // // console.log($scope.itemType_array,'datadata');
+                // angular.forEach($scope.itemType_array, function(value, keys){
+                //     var due_date = value.due_date.split(".");
+                //     value.due_date = due_date[2]+"-"+due_date[0]+"-"+due_date[1];
+                // });
                 $http({
                     method:'POST',
                     url: $localStorage.service+'FinanceAPI/feeStructure',

@@ -1,118 +1,57 @@
 <style type="text/css">
-
-
-.tablesorter tbody > tr > td[contenteditable=true]:focus {
-  outline: #08f 1px solid;
-  background: #eee;
-  resize: none;
-}
-td.no-edit, span.no-edit {
-  background-color: rgba(230,191,153,0.5);
-}
-.focused {
-  color: blue;
-}
-td.editable_updated {
-  background-color: green;
-  color: white;
-}
+    .tablesorter tbody > tr > td[contenteditable=true]:focus {
+      outline: #08f 1px solid;
+      background: #eee;
+      resize: none;
+    }
+    td.no-edit, span.no-edit {
+      background-color: rgba(230,191,153,0.5);
+    }
+    .focused {
+      color: blue;
+    }
+    td.editable_updated {
+      background-color: green;
+      color: white;
+    }
 </style>
 <div id="page_content" ng-controller="showAssignedstudentviewCtrl as showCase">
     <div id="page_content_inner">
         <h2 class="heading_a uk-margin-bottom">
             Assigned Students
         </h2>
-<!--         <div class="md-card">
-            <div class="md-card-content"> -->
-
-                <div class="md-card uk-margin-medium-bottom">
-                    <div class="md-card-content large-padding">
-                        <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>S.No</th>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Adminssion No</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tfoot>
-                                <tr>
-                                    <th></th>
-                                    <th></th>
-                                    <th>Name</th>
-                                    <th>Adminssion No</th>
-                                    <th></th>
-                                </tr>
-                            </tfoot>
-                            <tbody>
-                                <tr ng-repeat="item in viewData track by $index">
-                                    <td>{{$index+1}}</td>
-                                    <td><img class="md-user-image" ng-show="{{item.IMAGE}}" ng-src="{{item.IMAGE}}" alt=""/><img class="md-user-image" ng-show="{{!item.IMAGE}}" ng-src="http://www.pinetia.com/data/doctor_img/mnoimage.png"></td>
-                                    <td>{{item.STUDENT_NAME}}</td>
-                                    <td>{{item.ADMISSION_NO}}</td>
-                                    <td> <a ng-click="removeStudent(item.student_fee_id,$index)"><i class="md-icon material-icons">&#xE872;</i></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- <div class="uk-overflow-container uk-margin-bottom">
-                    <table class="uk-table uk-table-align-vertical uk-table-nowrap tablesorter tablesorter-altair" id="ts_pager_filter">
-                        <thead>
+        <div class="md-card uk-margin-medium-bottom">
+            <div class="md-card-content large-padding">
+                <!-- <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%"> -->
+                <table datatable="ng" dt-options="showCase.dtOptions" dt-column-defs="showCase.dtColumnDefs" class="uk-table" cellspacing="0" width="100%">
+                    <thead>
                         <tr>
-                            <th data-priority="critical" style="width: 5% !important;">S.No</th>
-                            <th data-priority="critical" style="width: 5% !important;">Image</th>
-                            <th data-priority="critical" style="width: 45% !important;">Name</th>
-                            <th data-priority="critical" style="width: 45% !important;">Adminssion No</th>
+                            <th>S.No</th>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Adminssion No</th>
                             <th>Action</th>
                         </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th></th>
-                                <th>Image</th>
-                                <th>Name</th>
-                                <th>Adminssion No</th>
-                            </tr>
-                        </tfoot>
-                        <tbody>
-                            <tr ng-repeat="item in viewData track by $index" on-last-repeat>
-                                <td>{{$index+1}}</td>
-                                <td style="text-align: center;"><img class="md-user-image" ng-show="{{item.IMAGE}}" ng-src="{{item.IMAGE}}" alt=""/><img class="md-user-image" ng-show="{{!item.IMAGE}}" ng-src="http://www.pinetia.com/data/doctor_img/mnoimage.png"></td>
-                                <td>{{item.STUDENT_NAME}}</td>
-                                <td>{{item.ADMISSION_NO}}</td>
-                                <td> <a ng-click="removeStudent(item.ID,$index)"><i class="md-icon material-icons">&#xE872;</i></a></td>
-
-                            </tr>
-                            <tr ng-show="!viewData">
-                                <td colspan="4" style="text-align:center;">No Data Found</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="ts_pager">
-                    <ul class="uk-pagination ts_pager">
-                        <li data-uk-tooltip title="Select Page">
-                            <select class="ts_gotoPage ts_selectize"></select>
-                        </li>
-                        <li class="first"><a href="javascript:void(0)"><i class="uk-icon-angle-double-left"></i></a></li>
-                        <li class="prev"><a href="javascript:void(0)"><i class="uk-icon-angle-left"></i></a></li>
-                        <li><span class="pagedisplay"></span></li>
-                        <li class="next"><a href="javascript:void(0)"><i class="uk-icon-angle-right"></i></a></li>
-                        <li class="last"><a href="javascript:void(0)"><i class="uk-icon-angle-double-right"></i></a></li>
-                        <li data-uk-tooltip title="Page Size">
-                            <select class="pagesize ts_selectize">
-                                <option value="5">5</option>
-                                <option value="10">10</option>
-                                <option value="25">25</option>
-                                <option value="50">50</option>
-                            </select>
-                        </li>
-                    </ul>
-                </div> -->
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>Name</th>
+                            <th>Adminssion No</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr ng-repeat="item in viewData track by $index">
+                            <td>{{$index+1}}</td>
+                            <td><img class="md-user-image" ng-show="{{item.IMAGE}}" ng-src="{{item.IMAGE}}" alt=""/><img class="md-user-image" ng-show="{{!item.IMAGE}}" ng-src="http://www.pinetia.com/data/doctor_img/mnoimage.png"/></td>
+                            <td>{{item.STUDENT_NAME}}</td>
+                            <td>{{item.ADMISSION_NO}}</td>
+                            <td> <a ng-click="removeStudent(item.student_fee_id,$index)"><i class="md-icon material-icons">&#xE872;</i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

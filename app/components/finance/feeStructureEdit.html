@@ -26,7 +26,7 @@
                             </div>
                             <div class="uk-grid" data-uk-grid-margin>
                                 <div class="uk-width-medium-1-3 parsley-row">
-                                    <label for="Fee_Structure">Fee Structure Name<span class="req"></span></label>
+                                    <label for="Fee_Structure">Fee Structure Name<span class="req">*</span></label>
                                     <input type="text"  class="md-input" md-input ng-model="structure_name" required />
                                     <input type="hidden" ng-model="structure_id">
                                 </div>
@@ -43,15 +43,15 @@
                                         </div>
                                         <div class="uk-width-medium-1-2 parsley-row">
                                             <br ng-if="itemType_array[topParent].FEE_ITEM_ID.length==1"/>
-                                            <label for="prev_state">Amount<span class="req"></span></label>
+                                            <label for="prev_state">Amount<span class="req">*</span></label>
                                             <input type="text" class="md-input" required md-input ng-model="itemType_array[topParent].AMOUNT" numeric-only/>
                                         </div>
                                     </div>
                                     <div class="uk-grid" data-uk-grid-margin>
                                         <div class="uk-width-medium-1-3 parsley-row">
                                             <br ng-if="itemType_array[topParent].FREQUENCY || itemType_array[topParent].FEE_FINE_ID.length==1"/>
-                                            <label for="from_date">Due Date<span class="req"></span></label>
-                                            <input type="text" class="md-input" data-parsley-americandate data-parsley-americandate-message="This value should be a valid date (MM.DD.YYYY)" data-uk-datepicker="{format:'MM.DD.YYYY'}" required md-input ng-model="itemType_array[topParent].DUE_DATE" ng-change="checkDateValidation(itemType_array[topParent].DUE_DATE)"/>
+                                            <label for="from_date">Due Date<span class="req">*</span></label>
+                                            <input type="text" class="md-input"  data-uk-datepicker="{format:'DD-MMM-YYYY'}" required md-input ng-model="itemType_array[topParent].DUE_DATE" ng-change="checkDateValidation(itemType_array[topParent].DUE_DATE)"/>
                                         </div>
 
                                         <div class="uk-width-medium-1-3 parsley-row">
@@ -61,7 +61,7 @@
                                         </div>
                                         <div class="uk-width-medium-1-3 parsley-row">
                                             <br ng-if="itemType_array[topParent].FREQUENCY && itemType_array[topParent].FEE_FINE_ID.length!=1"/>
-                                            <label for="bacth" ng-if="itemType_array[topParent].FEE_FINE_ID.length==1" style="font-size: 12px;color: #727272;">Fee Fine <span class="req">*</span></label>
+                                            <label for="bacth" ng-if="itemType_array[topParent].FEE_FINE_ID.length==1" style="font-size: 12px;color: #727272;">Fee Fine <span class="req"></span></label>
                                             <input type="text" config="selectize_fine_config" options="selectize_fine_options" ng-model="itemType_array[topParent].FEE_FINE_ID"  selectize />
                                         </div>
                                     </div>

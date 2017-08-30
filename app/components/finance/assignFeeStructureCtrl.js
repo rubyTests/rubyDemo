@@ -77,8 +77,6 @@ angular
                     $scope.viewStudentList=[];
                     if(response.data.status==true){
                         $scope.viewStudentList=response.data.message;
-                    }else{
-                        $scope.viewStudentList='';
                     }
 
                     if(response.data.message=='Record could not be found'){
@@ -230,7 +228,7 @@ angular
                     $ts_align = $('#ts_align'),
                     $ts_customFilters = $('#ts_custom_filters'),
                     $columnSelector = $('#columnSelector');
-
+                    $($ts_pager_filter).trigger("update");
                 // pager + filter
                 if($(element).closest($ts_pager_filter).length) {
 

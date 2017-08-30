@@ -107,6 +107,7 @@ td.editable_updated {
         </div>
         <div class="md-card" ng-show="course_id || batch_id">
             <div class="md-card-content">
+                <!-- <pre>{{viewStudentList}}</pre> -->
                 <div class="uk-margin-bottom">
                     <button class="md-btn uk-margin-right md-btn-primary md-btn-sm" ng-click="sendStudentID()" ng-show="feestructure_id && course_id">Assign</button>
                 </div>
@@ -128,7 +129,7 @@ td.editable_updated {
                         </tr>
                         </thead>
                         
-                        <tbody>
+                        <tbody ng-if="viewStudentList.length > 0">
                             <tr ng-repeat="item in viewStudentList | filter:{STATUS:'Yes'} track by $index" on-last-repeat>
                                 <td><input type="checkbox" class="ts_checkbox" data-md-icheck icheck ng-model="item.selected" value="{{item.ID}}"></td>
                                 <td style="text-align: center;">
@@ -139,14 +140,19 @@ td.editable_updated {
                                 <td>{{item.ADMISSION_NO}}</td>
                             </tr>
                             <!-- {{showData}} -->
-                            <tr ng-show="showData">
+                           <!--  <tr ng-show="showData">
                                 <td colspan="4" style="text-align:center;">Student Data Found</td>
+                            </tr> -->
+                        </tbody>
+                        <tbody ng-if="viewStudentList.length == 0">
+                            <tr>
+                                <td colspan="4" class="uk-text-center"> Student Data Not Found </td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
-                <div class="ts_pager" ng-show="viewStudentList.length > 1">
+                <div class="ts_pager" ng-if="viewStudentList.length > 0">
                     <ul class="uk-pagination ts_pager">
                         <li data-uk-tooltip title="Select Page">
                             <select class="ts_gotoPage ts_selectize"></select>

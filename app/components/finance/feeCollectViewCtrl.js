@@ -236,8 +236,16 @@ angular
             };
 
             $scope.feeBtn=false;
-            $scope.changePayamount=function(Amount){
-                // console.log(test,'ss');
+            $scope.changePayamount=function(dueAmount, item){
+                var Amount = item.AMOUNT1;
+                // console.log(dueAmount, Amount,'dueAmount');
+                if (dueAmount >= Amount) {
+                    console.log("true");
+                    item.AMOUNT1 = Amount;
+                }else{
+                    item.AMOUNT1 = '';
+                    console.log("false");
+                }
                 var Paidtotal = 0;
                 angular.forEach($scope.structureItems, function(value,keys){
                     angular.forEach(value.list, function(value1,keys1){

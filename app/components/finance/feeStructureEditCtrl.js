@@ -108,16 +108,16 @@ angular
                     $scope.form_dynamic=response.message[0].fee_item;
                     $scope.itemType_array=response.message[0].fee_item;
                     // console.log($scope.form_dynamic);
-                    angular.forEach($scope.form_dynamic, function(value, keys){
-                        console.log(value, "value");
-                        var due_date = value.DUE_DATE.split("-");
-                        value.DUE_DATE = due_date[1]+"."+due_date[2]+"."+due_date[0];
-                    })
+                    // angular.forEach($scope.form_dynamic, function(value, keys){
+                    //     console.log(value, "value");
+                    //     var due_date = value.DUE_DATE.split("-");
+                    //     value.DUE_DATE = due_date[1]+"."+due_date[2]+"."+due_date[0];
+                    // })
                 },200);
                 $timeout(function(){
                     // $scope.form_dynamic=response.message[0].fee_item;
                     // $scope.itemType_array=response.message[0].fee_item;
-                    $('#form_validation').find('input').trigger('blur');
+                    // $('#form_validation').find('input').trigger('blur');
                 },1500);
             }).error(function(data){
                 console.log('error');
@@ -146,7 +146,7 @@ angular
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        $('#form_validation').parsley().validate();
+                        // $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -160,7 +160,7 @@ angular
                 placeholder: 'Frequency',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        $('#form_validation').parsley().validate();
+                        // $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -186,7 +186,7 @@ angular
                 searchField: 'NAME',
                 onInitialize: function(selectize){
                     selectize.on('change', function(value) {
-                        $('#form_validation').parsley().validate();
+                        // $('#form_validation').parsley().validate();
                     });
                 }
             };
@@ -292,9 +292,9 @@ angular
 
             $scope.checkDateValidation=function(data){
                 if(data){
-                    $timeout(function() {
-                        $('#form_validation').parsley().validate();
-                    }, 100);
+                    // $timeout(function() {
+                    //     $('#form_validation').parsley().validate();
+                    // }, 100);
                 }else {
                     console.log(data,'true');
                 }
@@ -362,10 +362,10 @@ angular
             $scope.studentData=[];  
             $scope.saveFeeStructure=function(){
                 // console.log($scope.studentData,'datadata');
-                angular.forEach($scope.itemType_array, function(value, keys){
-                    var due_date = value.DUE_DATE.split(".");
-                    value.DUE_DATE = due_date[2]+"-"+due_date[0]+"-"+due_date[1];
-                });
+                // angular.forEach($scope.itemType_array, function(value, keys){
+                //     var due_date = value.DUE_DATE.split(".");
+                //     value.DUE_DATE = due_date[2]+"-"+due_date[0]+"-"+due_date[1];
+                // });
                 $http({
                     method:'POST',
                     url: $localStorage.service+'FinanceAPI/feeStructure',

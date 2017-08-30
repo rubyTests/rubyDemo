@@ -87,6 +87,11 @@ angular
             $scope.form_dynamic_model = [];
 
             // clone section
+
+            $scope.cloneSection1=function(){
+                $scope.form_dynamic.push({'Days_After':'','Fine_Value':''});
+            }
+
             $scope.cloneSection = function($event,$index,CurrRow) {
                 console.log(CurrRow,'CurrRow');
                 if(CurrRow.Days_After=='' || CurrRow.Fine_Value==''){
@@ -104,9 +109,17 @@ angular
 
             // delete section
             $scope.deleteSection = function($event,$index) {
-                $event.preventDefault();
-                $scope.form_dynamic_model.splice($index,1);
-                $scope.form_dynamic.splice($index,1);
+                UIkit.modal.confirm('Are you sure to delete ?', function(e) {
+                        $event.preventDefault();
+                        $scope.form_dynamic_model.splice($index,1);
+                        $scope.form_dynamic.splice($index,1);
+                },function(){
+                    // console.log("false");
+                }, {
+                    labels: {
+                        'Ok': 'Ok'
+                    }
+                });
             };
 
             $scope.$on('onLastRepeat', function (scope, element, attrs) {
