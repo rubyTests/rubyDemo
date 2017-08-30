@@ -805,17 +805,18 @@ angular
                             link:'restricted.academics.studentSubjectView'
                         },
                         {
-                            title: 'Attendance',
-                            submenu: [
-                                {
-                                    title: 'Attendance Report',
-                                    link: 'restricted.academics.reportforstudent'
-                                }
+                            title: 'Attendance Report',
+							link: 'restricted.academics.reportforstudent'
+                            // submenu: [
                                 // {
-                                    // title: 'My Leaves',
-                                    // link: 'restricted.student.stuApplyLeave'
+                                    // title: 'Attendance Report',
+                                    // link: 'restricted.academics.reportforstudent'
                                 // }
-                            ]
+                                // // {
+                                    // // title: 'My Leaves',
+                                    // // link: 'restricted.student.stuApplyLeave'
+                                // // }
+                            // ]
                         },
                         {
                             title: 'Timetable',
