@@ -126,7 +126,7 @@
                             <tr ng-repeat='row in nextDueList' ng-if="(row.AMOUNT - row.PAID_AMOUNT) > 0">
                                 <td>{{$index+1}}</td>
                                 <td>{{row.ITEM_NAME}}</td>
-                                <td>{{row.DUE_DATE}}</td>
+                                <td>{{row.DUE_DATE | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}</td>
                                 <td>{{(row.AMOUNT * 1) - (row.PAID_AMOUNT *1) |  currency :''}}</td>
                                 <td><a class="md-btn md-btn-primary md-btn-mini" ng-click="payAmount(row.AMOUNT,row.PAID_AMOUNT)"> Pay</a></td>
                             </tr>
@@ -150,7 +150,7 @@
                         <tbody>
                             <tr ng-repeat="row in Payment_History">
                                 <td>{{$index+1}}</td>
-                                <td>{{row.PAYMENT_DATE}}</td>
+                                <td>{{row.PAYMENT_DATE | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}</td>
                                 <td>{{row.RECIEPT_NO}}</td>
                                 <td>{{row.TOTAL_AMOUNT}}</td>
                                 <td><a class="md-btn md-btn-primary md-btn-mini" ui-sref="restricted.student.paymenthistoryview({FEE_PAYMENT_ID:{{row.ID}}})"> View</a></td>
