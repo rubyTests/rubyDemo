@@ -62,7 +62,7 @@
                             <div ng-bind-html="teaser.CONTENT | limitTo: 60">
                                    {{ teaser.CONTENT.length > 60 ? '...' : ''  }}
                                 </div>
-                            <span class="uk-text-muted uk-text-small">{{teaser.CRT_DT}}</span>
+                            <span class="uk-text-muted uk-text-small">{{teaser.CRT_DT | momentDate:'YYYY-MM-DD HH:mm:ss':'DD-MMM-YYYY'}}</span>
                         </div>
                         <div class="blog_list_footer">
                             <!-- <div class="blog_list_footer_info">
