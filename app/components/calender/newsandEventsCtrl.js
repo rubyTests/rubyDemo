@@ -483,7 +483,8 @@ angular
                     },
                     editable: true,
                     eventLimit: true,
-                    timeFormat: '(hh:mm a)'
+                    timeFormat: '(hh:mm a)',
+                    timezone:'local'
                 }
             };
 

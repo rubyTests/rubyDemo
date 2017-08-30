@@ -37,8 +37,11 @@ angular
                 $scope.usertype=response.data.message[0].USER_TYPE;
                 $scope.title=response.data.message[0].TITLE;
                 $scope.description=response.data.message[0].DESCRIPTION;
-                $scope.dp_start=$filter('date')(new Date(response.data.message[0].STARTDATE.split(" ")[0]), "dd.MM.yyyy");
-                $scope.dp_end=$filter('date')(new Date(response.data.message[0].ENDDATE.split(" ")[0]), "dd.MM.yyyy");
+                // $scope.dp_start=$filter('date')(new Date(response.data.message[0].STARTDATE.split(" ")[0]), "dd.MM.yyyy");
+                // $scope.dp_end=$filter('date')(new Date(response.data.message[0].ENDDATE.split(" ")[0]), "dd.MM.yyyy");
+                $scope.dp_start=response.data.message[0].STARTDATE;
+                $scope.dp_end=response.data.message[0].ENDDATE;
+                
                 $scope.startTime=moment(response.data.message[0].STARTTIME, ["HH:mm A"]).format("HH:mm A");
                 $scope.endTime=moment(response.data.message[0].ENDTIME, ["HH:mm A"]).format("HH:mm A")
                 $timeout(function(){
@@ -90,7 +93,7 @@ angular
                     allCourseID.push(value.ID);
                 });
                 console.log(allCourseID.length,'allCourseID');
-                $scope.course.push([{ID:allCourseID,NAME:"All Course"}]);
+                // $scope.course.push([{ID:allCourseID,NAME:"All Course"}]);
             });
 
 
@@ -117,7 +120,7 @@ angular
                 angular.forEach(dept_data.message,function(value,key){
                     allDeptID.push(value.ID);
                 });
-                $scope.selectize_dept_options.push([{ID:allDeptID,NAME:"All Department"}]);
+                // $scope.selectize_dept_options.push([{ID:allDeptID,NAME:"All Department"}]);
             });
 
             $scope.course_config = {
@@ -143,7 +146,7 @@ angular
                     angular.forEach(batch_data.data,function(value,key){
                         allBatchID.push(value.ID);
                     });
-                    $scope.batch.push([{ID:allBatchID,NAME:"All Batch"}]);
+                    // $scope.batch.push([{ID:allBatchID,NAME:"All Batch"}]);
                 });
             }
 
@@ -189,11 +192,11 @@ angular
                 $dp_end = $('#uk_dp_end');
 
             var start_date = UIkit.datepicker($dp_start, {
-                format:'DD.MM.YYYY'
+                format:'DD-MMM-YYYY'
             });
 
             var end_date = UIkit.datepicker($dp_end, {
-                format:'DD.MM.YYYY'
+                format:'DD-MMM-YYYY'
             });
 
             $dp_start.on('change',function() {
@@ -213,10 +216,10 @@ angular
             }
             $scope.calendarColorPicker = $scope.color_picker($('<div id="calendar_colors_wrapper"></div>')).prop('outerHTML');
             $scope.editEvent=function(){
-                var strDate=$scope.dp_start.split(".");
-                var setStartDate=strDate[2]+"-"+strDate[1]+"-"+ strDate[0];
-                var endDate1=$scope.dp_end.split(".");
-                var setEndDate=endDate1[2]+"-"+endDate1[1]+"-"+ endDate1[0];
+                // var strDate=$scope.dp_start.split(".");
+                // var setStartDate=strDate[2]+"-"+strDate[1]+"-"+ strDate[0];
+                // var endDate1=$scope.dp_end.split(".");
+                // var setEndDate=endDate1[2]+"-"+endDate1[1]+"-"+ endDate1[0];
                 $http({
                     method:'POST',
                     url: $localStorage.service+'AcademicsAPI/newsandevents',
@@ -228,8 +231,8 @@ angular
                         'batch_id':$scope.batch_id,
                         'title':$scope.title,
                         'description':$scope.description,
-                        'start_date':setStartDate,
-                        'end_date':setEndDate,
+                        'start_date':$scope.dp_start,
+                        'end_date':$scope.dp_end,
                         'starttime':moment($scope.startTime, ["hh:mm A"]).format("HH:mm"),
                         'endtime':moment($scope.endTime, ["hh:mm A"]).format("HH:mm")
                     },
