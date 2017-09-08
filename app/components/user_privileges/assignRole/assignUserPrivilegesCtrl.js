@@ -124,7 +124,6 @@ angular
 	                    params:{id:id},
 	                    headers:{'access_token':$localStorage.access_token}
 	                }).then(function(data){
-	                    console.log(data.data.data);
 	                    $scope.employee_options = data.data.data;
 	                });
                 }
